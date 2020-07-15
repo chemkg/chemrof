@@ -7,6 +7,8 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 version: 0.0.1
 
 prefixes:
+  COB: http://purl.obolibrary.org/obo/COB_
+  CHEBI: http://purl.obolibrary.org/obo/CHEBI_
   chemont: http://w3id.org/chemont
   dcterms: http://purl.org/dc/terms/
   biolinkml: https://w3id.org/biolink/biolinkml/
@@ -14,6 +16,9 @@ prefixes:
 default_prefix: chemont
 default_range: string
 
+default_curi_maps:
+  - semweb_context
+  
 imports:
   - biolinkml:types
 
@@ -175,9 +180,11 @@ classes:
 types:
 
   count:
+    uri: xsd:int
     base: int
 
   number of years:
+    uri: xsd:int
     base: int
 
 slots:
@@ -215,7 +222,7 @@ slots:
     description: >-
       number of protons minus number of electrons
     domain: atom
-    range: int
+    range: integer
       
   isotope of:
     description: >-
@@ -257,6 +264,13 @@ slots:
     domain: isotope
     range: string ## TODO: ontology: α, β−, γ, IC, EC
 
+  decay product:
+    domain: isotope
+    range: isotope
+
+  decay energy:
+    domain: isotope
+    
   mode of formation:
     domain: isotope
     range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
