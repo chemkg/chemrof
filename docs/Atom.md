@@ -11,7 +11,7 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
 
 ## Parents
 
- *  is_a: [ChemicalEnitity](ChemicalEnitity.md)
+ *  is_a: [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
 
 ## Children
 

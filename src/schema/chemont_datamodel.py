@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-07-14 18:05
+# Generation date: 2020-07-14 18:42
 # Schema: chemont
 #
 # id: chemont
@@ -58,6 +58,9 @@ class NumberOfYears(int):
 
 
 class Pattern(YAMLRoot):
+    """
+    A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = OWL.Class
@@ -67,6 +70,9 @@ class Pattern(YAMLRoot):
 
 
 class ChemicalEnitity(Pattern):
+    """
+    An entity that can be described using using chemical properties.
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalEnitity
@@ -76,6 +82,9 @@ class ChemicalEnitity(Pattern):
 
 
 class SubatomicParticle(ChemicalEnitity):
+    """
+    A chemical entity below the granularity of an atom.
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.SubatomicParticle
@@ -85,6 +94,9 @@ class SubatomicParticle(ChemicalEnitity):
 
 
 class Nucleon(SubatomicParticle):
+    """
+    A neutron or proton
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.Nucleon
@@ -137,6 +149,32 @@ class Molecule(ChemicalEnitity):
         super().__post_init__(**kwargs)
 
 
+class PolyatomicIon(Molecule):
+    """
+    A molecule that has a charge
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.PolyatomicIon
+    class_class_curie: ClassVar[str] = "chemont:PolyatomicIon"
+    class_name: ClassVar[str] = "polyatomic ion"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.PolyatomicIon
+
+
+@dataclass
+class UnchargedMolecule(Molecule):
+    """
+    A molecule that in uncharged charge
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.UnchargedMolecule
+    class_class_curie: ClassVar[str] = "chemont:UnchargedMolecule"
+    class_name: ClassVar[str] = "uncharged molecule"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.UnchargedMolecule
+
+    elemental_charge: Optional[int] = None
+
 @dataclass
 class Atom(ChemicalEnitity):
     """
@@ -165,6 +203,7 @@ class GenericAtom(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = CHEMONT.GenericAtom
 
 
+@dataclass
 class UnchargedAtom(Atom):
     """
     An atom that has no charge
@@ -176,6 +215,7 @@ class UnchargedAtom(Atom):
     class_name: ClassVar[str] = "uncharged atom"
     class_model_uri: ClassVar[URIRef] = CHEMONT.UnchargedAtom
 
+    elemental_charge: Optional[int] = None
 
 class MonoatomicIon(Atom):
     """
@@ -363,6 +403,9 @@ slots.decay_energy = Slot(uri=CHEMONT.decay_energy, name="decay energy", curie=C
 
 slots.mode_of_formation = Slot(uri=CHEMONT.mode_of_formation, name="mode of formation", curie=CHEMONT.curie('mode_of_formation'),
                       model_uri=CHEMONT.mode_of_formation, domain=Isotope, range=Optional[str])
+
+slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="uncharged_elemental charge", curie=CHEMONT.curie('elemental_charge'),
+                      model_uri=CHEMONT.uncharged_elemental_charge, domain=None, range=Optional[int])
 
 slots.atom_aniom_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom aniom_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.atom_aniom_elemental_charge, domain=AtomAniom, range=Optional[int])

@@ -7,7 +7,7 @@
 URI: [chemont:ChargeState](http://w3id.org/chemontChargeState)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Uncharged],[Charged],[ChargeState]^-[Uncharged],[ChargeState]^-[Charged])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Uncharged],[Charged],[ChargeState&#124;elemental_charge:integer%20%3F]^-[Uncharged],[ChargeState]^-[Charged])
 
 ## Children
 
@@ -19,3 +19,9 @@ URI: [chemont:ChargeState](http://w3id.org/chemontChargeState)
 
 ## Attributes
 
+
+### Own
+
+ * [elemental charge](elemental_charge.md)  <sub>OPT</sub>
+    * Description: number of protons minus number of electrons
+    * range: [Integer](types/Integer.md)

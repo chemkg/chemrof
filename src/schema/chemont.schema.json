@@ -71,7 +71,12 @@
       "ChargeState": {
          "additionalProperties": false,
          "description": "",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "ChargeState",
          "type": "object"
@@ -79,7 +84,12 @@
       "Charged": {
          "additionalProperties": false,
          "description": "",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "Charged",
          "type": "object"
@@ -200,6 +210,10 @@
                "description": "number of proteins in an atom",
                "type": "integer"
             },
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
             "name": {
                "type": "string"
             },
@@ -221,7 +235,7 @@
       },
       "Nucleon": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A neutron or proton",
          "properties": {},
          "required": [],
          "title": "Nucleon",
@@ -248,6 +262,22 @@
          },
          "required": [],
          "title": "Nuclide",
+         "type": "object"
+      },
+      "PolyatomicIon": {
+         "additionalProperties": false,
+         "description": "A molecule that has a charge",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "PolyatomicIon",
          "type": "object"
       },
       "Proton": {
@@ -283,7 +313,7 @@
       },
       "SubatomicParticle": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A chemical entity below the granularity of an atom.",
          "properties": {},
          "required": [],
          "title": "SubatomicParticle",
@@ -292,7 +322,11 @@
       "Uncharged": {
          "additionalProperties": false,
          "description": "",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "Uncharged",
          "type": "object"
@@ -305,6 +339,9 @@
                "description": "number of proteins in an atom",
                "type": "integer"
             },
+            "elemental_charge": {
+               "type": "integer"
+            },
             "name": {
                "type": "string"
             },
@@ -314,6 +351,21 @@
          },
          "required": [],
          "title": "UnchargedAtom",
+         "type": "object"
+      },
+      "UnchargedMolecule": {
+         "additionalProperties": false,
+         "description": "A molecule that in uncharged charge",
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            },
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "UnchargedMolecule",
          "type": "object"
       }
    },

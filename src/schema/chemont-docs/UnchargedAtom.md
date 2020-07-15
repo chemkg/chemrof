@@ -7,11 +7,15 @@ An atom that has no charge
 URI: [chemont:UnchargedAtom](http://w3id.org/chemontUnchargedAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]^-[UnchargedAtom&#124;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]uses%20-.->[Uncharged],[Atom]^-[UnchargedAtom],[Uncharged],[Atom])
 
 ## Parents
 
  *  is_a: [Atom](Atom.md) - A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+
+## Uses Mixins
+
+ *  mixin: [Uncharged](Uncharged.md)
 
 ## Attributes
 
@@ -25,6 +29,11 @@ URI: [chemont:UnchargedAtom](http://w3id.org/chemontUnchargedAtom)
     * range: [String](types/String.md)
  * [symbol](symbol.md)  <sub>OPT</sub>
     * range: [String](types/String.md)
+
+### Mixed in from uncharged:
+
+ * [uncharged➞elemental charge](uncharged_elemental_charge.md)  <sub>OPT</sub>
+    * range: [Integer](types/Integer.md)
 
 ## Other properties
 

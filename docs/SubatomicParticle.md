@@ -2,7 +2,7 @@
 # Type: subatomic particle
 
 
-
+A chemical entity below the granularity of an atom.
 
 URI: [chemont:SubatomicParticle](http://w3id.org/chemontSubatomicParticle)
 
@@ -11,12 +11,12 @@ URI: [chemont:SubatomicParticle](http://w3id.org/chemontSubatomicParticle)
 
 ## Parents
 
- *  is_a: [ChemicalEnitity](ChemicalEnitity.md)
+ *  is_a: [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
 
 ## Children
 
  * [Electron](Electron.md)
- * [Nucleon](Nucleon.md)
+ * [Nucleon](Nucleon.md) - A neutron or proton
 
 ## Referenced by class
 

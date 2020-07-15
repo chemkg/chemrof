@@ -19,6 +19,7 @@ URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
  *  [atom aniom➞elemental charge](atom_aniom_elemental_charge.md)
  *  [atom cation➞elemental charge](atom_cation_elemental_charge.md)
  *  [atom neutral form➞elemental charge](atom_neutral_form_elemental_charge.md)
+ *  [uncharged➞elemental charge](uncharged_elemental_charge.md)
 
 ## Used by
 
@@ -26,5 +27,10 @@ URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
  * [AtomNeutralForm](AtomNeutralForm.md)
+ * [ChargeState](ChargeState.md)
+ * [Charged](Charged.md)
  * [ChargedAtom](ChargedAtom.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
+ * [MonoatomicIon](MonoatomicIon.md)
+ * [PolyatomicIon](PolyatomicIon.md)
+ * [Uncharged](Uncharged.md)

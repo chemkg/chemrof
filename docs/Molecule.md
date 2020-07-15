@@ -7,11 +7,16 @@
 URI: [chemont:Molecule](http://w3id.org/chemontMolecule)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]<has%20atoms%200..1-++[Molecule],[ChemicalEnitity]^-[Molecule],[ChemicalEnitity],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule],[PolyatomicIon],[Atom]<has%20atoms%200..1-++[Molecule],[Molecule]^-[UnchargedMolecule],[Molecule]^-[PolyatomicIon],[ChemicalEnitity]^-[Molecule],[ChemicalEnitity],[Atom])
 
 ## Parents
 
- *  is_a: [ChemicalEnitity](ChemicalEnitity.md)
+ *  is_a: [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
+
+## Children
+
+ * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge
+ * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that in uncharged charge
 
 ## Referenced by class
 

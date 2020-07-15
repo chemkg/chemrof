@@ -26,33 +26,54 @@ classes:
 
   pattern:
     abstract: true
+    description: >-
+      A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
     class_uri: owl:Class
   
   chemical enitity:
     abstract: true
+    description: >-
+      An entity that can be described using using chemical properties.
     is_a: pattern
+    mappings:
+      - CHEBI:24431
   
   subatomic particle:
     is_a: chemical enitity
+    description: >-
+      A chemical entity below the granularity of an atom.
     mappings:
       - COB:0000007
       - CHEBI:36342
 
   nucleon:
     is_a: subatomic particle
+    description: >-
+      A neutron or proton
+#    union_of:
+#      - neutron
+#      - proton
+
   neutron:
     is_a: nucleon
   proton:
     is_a: nucleon
+    
   electron:
     is_a: subatomic particle
 
   charge state:
     mixin: true
+    slots:
+      - elemental charge
 
   uncharged:
     is_a: charge state
     mixin: true
+    slot_usage:
+      elemental charge:
+        minimum_value: 0
+        maximum_value: 0
 
   charged:
     is_a: charge state
@@ -67,7 +88,21 @@ classes:
       - has atoms
     mappings:
       - COB:0000013
-    
+
+  polyatomic ion:
+    is_a: molecule
+    mixins:
+      - charged    
+    description: >-
+      A molecule that has a charge
+      
+  uncharged molecule:
+    is_a: molecule
+    mixins:
+      - uncharged   
+    description: >-
+      A molecule that in uncharged charge
+      
   atom:
     is_a: chemical enitity
     abstract: true
@@ -93,6 +128,8 @@ classes:
         
   uncharged atom:
     is_a: atom
+    mixins:
+      - uncharged   
     description: >-
       An atom that has no charge
     mappings:
@@ -100,6 +137,8 @@ classes:
 
   monoatomic ion:
     is_a: atom
+    mixins:
+      - charged   
     description: >-
       An atom that has a charge
     mappings:

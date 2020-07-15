@@ -11,7 +11,7 @@ URI: [chemont:Proton](http://w3id.org/chemontProton)
 
 ## Parents
 
- *  is_a: [Nucleon](Nucleon.md)
+ *  is_a: [Nucleon](Nucleon.md) - A neutron or proton
 
 ## Attributes
 

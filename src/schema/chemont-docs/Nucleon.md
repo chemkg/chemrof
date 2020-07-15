@@ -2,7 +2,7 @@
 # Type: nucleon
 
 
-
+A neutron or proton
 
 URI: [chemont:Nucleon](http://w3id.org/chemontNucleon)
 
@@ -11,7 +11,7 @@ URI: [chemont:Nucleon](http://w3id.org/chemontNucleon)
 
 ## Parents
 
- *  is_a: [SubatomicParticle](SubatomicParticle.md)
+ *  is_a: [SubatomicParticle](SubatomicParticle.md) - A chemical entity below the granularity of an atom.
 
 ## Children
 

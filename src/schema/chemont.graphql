@@ -39,10 +39,12 @@ type AtomNeutralForm
 
 interface ChargeState
   {
+    elementalCharge: Integer
   }
 
 interface Charged
   {
+    elementalCharge: Integer
   }
 
 type ChargedAtom
@@ -93,11 +95,12 @@ interface Molecule
     hasAtoms: Atom
   }
 
-type MonoatomicIon
+type MonoatomicIon implements Charged
   {
     atomicNumber: Count
     symbol: String
     name: String
+    elementalCharge: Integer
   }
 
 type Neutron
@@ -120,6 +123,12 @@ interface Pattern
   {
   }
 
+type PolyatomicIon implements Charged
+  {
+    hasAtoms: Atom
+    elementalCharge: Integer
+  }
+
 type Proton
   {
   }
@@ -138,13 +147,21 @@ type SubatomicParticle
 
 interface Uncharged
   {
+    elementalCharge: Integer
   }
 
-type UnchargedAtom
+type UnchargedAtom implements Uncharged
   {
     atomicNumber: Count
     symbol: String
     name: String
+    elementalCharge: Integer
+  }
+
+type UnchargedMolecule implements Uncharged
+  {
+    hasAtoms: Atom
+    elementalCharge: Integer
   }
 
 

@@ -8,8 +8,8 @@ A data model describing metaclasses for chemical ontology classes
 ### Classes
 
  * [GenericAtom](GenericAtom.md) - generic form of an atom, with unspecified neutron or charge
- * [Pattern](Pattern.md)
-    * [ChemicalEnitity](ChemicalEnitity.md)
+ * [Pattern](Pattern.md) - A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
+    * [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
        * [Atom](Atom.md) - A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
           * [AtomIonicForm](AtomIonicForm.md)
              * [AtomNeutralForm](AtomNeutralForm.md)
@@ -23,9 +23,11 @@ A data model describing metaclasses for chemical ontology classes
              * [Radionuclide](Radionuclide.md) - an atom that has excess nuclear energy, making it unstable
           * [UnchargedAtom](UnchargedAtom.md) - An atom that has no charge
        * [Molecule](Molecule.md)
-       * [SubatomicParticle](SubatomicParticle.md)
+          * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge
+          * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that in uncharged charge
+       * [SubatomicParticle](SubatomicParticle.md) - A chemical entity below the granularity of an atom.
           * [Electron](Electron.md)
-          * [Nucleon](Nucleon.md)
+          * [Nucleon](Nucleon.md) - A neutron or proton
              * [Neutron](Neutron.md)
              * [Proton](Proton.md)
 
@@ -47,6 +49,7 @@ A data model describing metaclasses for chemical ontology classes
     * [atom aniom➞elemental charge](atom_aniom_elemental_charge.md)
     * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
     * [atom neutral form➞elemental charge](atom_neutral_form_elemental_charge.md)
+    * [uncharged➞elemental charge](uncharged_elemental_charge.md)
  * [energy level](energy_level.md) - e.g. ground, stable
  * [half life](half_life.md)
  * [has atoms](has_atoms.md)
