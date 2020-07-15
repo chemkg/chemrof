@@ -1,0 +1,258 @@
+id: chemont
+title: chemical ontology metaclasses
+description: >-
+  A data model describing metaclasses for chemical ontology classes
+
+license: https://creativecommons.org/publicdomain/zero/1.0/
+version: 0.0.1
+
+prefixes:
+  chemont: http://w3id.org/chemont
+  dcterms: http://purl.org/dc/terms/
+  biolinkml: https://w3id.org/biolink/biolinkml/
+  
+default_prefix: chemont
+default_range: string
+
+imports:
+  - biolinkml:types
+
+classes:
+
+  pattern:
+    abstract: true
+    class_uri: owl:Class
+  
+  chemical enitity:
+    abstract: true
+    is_a: pattern
+  
+  subatomic particle:
+    is_a: chemical enitity
+    mappings:
+      - COB:0000007
+      - CHEBI:36342
+
+  nucleon:
+    is_a: subatomic particle
+  neutron:
+    is_a: nucleon
+  proton:
+    is_a: nucleon
+  electron:
+    is_a: subatomic particle
+
+  charge state:
+    mixin: true
+
+  uncharged:
+    is_a: charge state
+    mixin: true
+
+  charged:
+    is_a: charge state
+    mixin: true
+
+  molecule:
+    is_a: chemical enitity
+    aliases:
+      - molecular entity
+    abstract: true
+    slots:
+      - has atoms
+  mappings:
+    - COB:0000013
+    
+  atom:
+    is_a: chemical enitity
+    abstract: true
+    aliases:
+      - atomic species
+    description: >-
+      A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+    slots:
+      - atomic number
+      - symbol
+      - name
+    defining slots:
+      - atomic number
+    mappings:
+      - COB:0000011
+        
+  generic atom:
+    description: >-
+      generic form of an atom, with unspecified neutron or charge
+    examples:
+      - value: carbon
+      - value: nickel
+        
+  uncharged atom:
+    is_a: atom
+    description: >-
+      An atom that has no charge
+    mappings:
+      - COB:0000043
+
+  monoatomic ion:
+    is_a: atom
+    description: >-
+      An atom that has a charge
+    mappings:
+      - COB:0000042
+      - CHEBI:24867
+
+  isotope:
+    is_a: atom
+    description: >-
+      A specific subtype of an atom with a specified neutron number
+    slots:
+      - neutron number
+      - isotope of
+      - half life
+      - decay product
+      - decay mode
+      - decay energy
+      - mode of formation
+    defining slots:
+      - neutron number
+
+  nuclide:
+    aliases:
+      - nucleide
+      - nuclear species
+    is_a: atom
+    slots:
+      - energy level
+    description: >-
+      an atomic species characterized by the specific constitution of its nucleus
+    examples:
+      - value: https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m
+
+  radionuclide:
+    aliases:
+      - radioactive nuclide
+      - radioactive isotope
+    is_a: nuclide
+    description: >-
+      an atom that has excess nuclear energy, making it unstable
+    examples:
+      - value: radioactive isotope
+      
+      
+  atom ionic form:
+    abstract: true
+    is_a: atom
+    slots:
+      - elemental charge
+
+  charged atom:
+    is_a: atom ionic form
+    
+  atom aniom:
+    is_a: charged atom
+    slot_usage:
+      elemental charge:
+        maximum_value: -1
+
+  atom cation:
+    is_a: charged atom
+    slot_usage:
+      elemental charge:
+        minimum_value: 1
+
+  atom neutral form:
+    is_a: atom ionic form
+    slot_usage:
+      elemental charge:
+        minimum_value: 0
+        maximum_value: 0
+
+  fully specified atom:
+    is_a: atom
+    slots:
+      - elemental charge
+      - neutron number
+  
+types:
+
+  count:
+    base: int
+
+  number of years:
+    is_a: count
+    base: int
+
+slots:
+  atomic number:
+    aliases:
+      - proton number
+      - Z
+    description: >-
+      number of proteins in an atom
+    domain: atom
+    range: count
+    
+  neutron number:
+    aliases:
+      - N
+    description: >-
+      number of neutrons in an atom
+    domain: atom
+    range: count
+    
+  nucleon number:
+    description: >-
+      number of nucleons in an atom. proton number plus neutral number.
+    domain: atom
+    range: count
+      
+  elemental charge:
+    description: >-
+      number of protons minus number of electrons
+    domain: atom
+    range: int
+      
+  isotope of:
+    description: >-
+      relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number.
+    domain: isotope
+    range: isotope
+      
+  isotone of:
+    description: >-
+      relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number.
+    domain: isotope
+    range: isotope
+      
+  nuclear isomer of:
+    description: >-
+      relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states
+    domain: isotope
+    range: isotope
+      
+  isobar of:
+    description: >-
+      equal mass number (Z1 + N1 = Z2 + N2)
+
+  energy level:
+    aliases:
+      - energy state
+    description: >-
+      e.g. ground, stable
+      
+  has atoms:
+    domain: molecule
+    range: atom
+      
+  half life:
+    domain: isotope
+    range: number of years
+
+  decay mode:
+    domain: isotope
+    range: string ## TODO: ontology: α, β−, γ, IC, EC
+
+  mode of formation:
+    domain: isotope
+    range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
+    
