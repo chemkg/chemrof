@@ -2,9 +2,17 @@
    "$id": "chemont",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "definitions": {
-      "AtomAniom": {
+      "AnionState": {
          "additionalProperties": false,
          "description": "",
+         "properties": {},
+         "required": [],
+         "title": "AnionState",
+         "type": "object"
+      },
+      "AtomAnion": {
+         "additionalProperties": false,
+         "description": "A charged atom that is negative",
          "properties": {
             "atomic_number": {
                "description": "number of proteins in an atom",
@@ -14,19 +22,21 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
          "required": [],
-         "title": "AtomAniom",
+         "title": "AtomAnion",
          "type": "object"
       },
       "AtomCation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A charged atom that is positive",
          "properties": {
             "atomic_number": {
                "description": "number of proteins in an atom",
@@ -36,9 +46,11 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -58,14 +70,24 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
          "required": [],
          "title": "AtomNeutralForm",
+         "type": "object"
+      },
+      "CationState": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {},
+         "required": [],
+         "title": "CationState",
          "type": "object"
       },
       "ChargeState": {
@@ -107,9 +129,11 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -138,6 +162,7 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "neutron_number": {
@@ -145,6 +170,7 @@
                "type": "integer"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -188,6 +214,7 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "neutron_number": {
@@ -195,11 +222,56 @@
                "type": "integer"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
          "required": [],
          "title": "Isotope",
+         "type": "object"
+      },
+      "MolecularAnion": {
+         "additionalProperties": false,
+         "description": "A polyatomic ion that is negative",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "MolecularAnion",
+         "type": "object"
+      },
+      "MolecularCation": {
+         "additionalProperties": false,
+         "description": "A polyatomic ion that is positive",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "MolecularCation",
+         "type": "object"
+      },
+      "MolecularSpecies": {
+         "additionalProperties": false,
+         "description": "A molecule in which the units are identical. Example: methyl",
+         "properties": {
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "MolecularSpecies",
          "type": "object"
       },
       "MonoatomicIon": {
@@ -215,9 +287,11 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -231,6 +305,18 @@
          "properties": {},
          "required": [],
          "title": "Neutron",
+         "type": "object"
+      },
+      "NonSpeciesMolecule": {
+         "additionalProperties": false,
+         "description": "A molecule in which the units are not identical. Example: sodium chloride",
+         "properties": {
+            "has_atoms": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
+         "required": [],
+         "title": "NonSpeciesMolecule",
          "type": "object"
       },
       "Nucleon": {
@@ -254,9 +340,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -266,7 +354,7 @@
       },
       "PolyatomicIon": {
          "additionalProperties": false,
-         "description": "A molecule that has a charge",
+         "description": "A molecule that has a charge. For example, nitrate (NO3-).",
          "properties": {
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
@@ -301,9 +389,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },
@@ -343,9 +433,11 @@
                "type": "integer"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
                "type": "string"
             }
          },

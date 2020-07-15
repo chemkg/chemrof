@@ -67,6 +67,18 @@ classes:
     slots:
       - elemental charge
 
+  anion state:
+    mixin: true
+    slot_usage:
+      elemental charge:
+        maximum_value: -1
+
+  cation state:
+    mixin: true
+    slot_usage:
+      elemental charge:
+        minimum_value: 1
+
   uncharged:
     is_a: charge state
     mixin: true
@@ -89,12 +101,40 @@ classes:
     mappings:
       - COB:0000013
 
+  molecular species:
+    is_a: molecule
+    description: >-
+      A molecule in which the units are identical. Example: methyl
+
+  non species molecule:
+    is_a: molecule
+    description: >-
+      A molecule in which the units are not identical. Example: sodium chloride
+
   polyatomic ion:
     is_a: molecule
     mixins:
       - charged    
     description: >-
-      A molecule that has a charge
+      A molecule that has a charge. For example, nitrate (NO3-).
+
+  molecular cation:
+    is_a: polyatomic ion
+    mixins:
+      - cation state
+    defining_slots:
+      - elemental charge
+    description: >-
+      A polyatomic ion that is positive
+      
+  molecular anion:
+    is_a: polyatomic ion
+    mixins:
+      - anion state
+    defining_slots:
+      - elemental charge
+    description: >-
+      A polyatomic ion that is negative
       
   uncharged molecule:
     is_a: molecule
@@ -184,24 +224,42 @@ classes:
       
   atom ionic form:
     abstract: true
+    aliases:
+      - atom ionic species
+    description: >-
+      an atom type in which charge state is specified. Also known as (atom) ionic species
     is_a: atom
     slots:
       - elemental charge
+    examples:
+      - value: "chloride Cl-"
 
   charged atom:
     is_a: atom ionic form
     
-  atom aniom:
+  atom anion:
     is_a: charged atom
+    mixins:
+      - anion state
     slot_usage:
       elemental charge:
         maximum_value: -1
+    defining_slots:
+      - elemental charge
+    description: >-
+      A charged atom that is negative
 
   atom cation:
     is_a: charged atom
+    mixins:
+      - cation state
     slot_usage:
       elemental charge:
         minimum_value: 1
+    defining_slots:
+      - elemental charge
+    description: >-
+      A charged atom that is positive
 
   atom neutral form:
     is_a: atom ionic form
@@ -230,9 +288,13 @@ slots:
 
   name:
     range: string
+    description: >-
+      name of chemical entity. E.g. nickel, carbon-16
   
   symbol:
     range: string
+    description: >-
+      short symbol for chemical entity, e.g. K, C-16
   
   atomic number:
     aliases:

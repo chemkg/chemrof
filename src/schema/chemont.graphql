@@ -1,3 +1,7 @@
+interface AnionState
+  {
+  }
+
 interface Atom
   {
     atomicNumber: Count
@@ -5,7 +9,7 @@ interface Atom
     name: String
   }
 
-type AtomAniom
+type AtomAnion implements AnionState
   {
     atomicNumber: Count
     symbol: String
@@ -13,7 +17,7 @@ type AtomAniom
     elementalCharge: Integer
   }
 
-type AtomCation
+type AtomCation implements CationState
   {
     atomicNumber: Count
     symbol: String
@@ -35,6 +39,10 @@ type AtomNeutralForm
     symbol: String
     name: String
     elementalCharge: Integer
+  }
+
+interface CationState
+  {
   }
 
 interface ChargeState
@@ -90,6 +98,23 @@ type Isotope
     modeOfFormation: String
   }
 
+type MolecularAnion implements AnionState
+  {
+    hasAtoms: Atom
+    elementalCharge: Integer
+  }
+
+type MolecularCation implements CationState
+  {
+    hasAtoms: Atom
+    elementalCharge: Integer
+  }
+
+type MolecularSpecies
+  {
+    hasAtoms: Atom
+  }
+
 interface Molecule
   {
     hasAtoms: Atom
@@ -105,6 +130,11 @@ type MonoatomicIon implements Charged
 
 type Neutron
   {
+  }
+
+type NonSpeciesMolecule
+  {
+    hasAtoms: Atom
   }
 
 type Nucleon

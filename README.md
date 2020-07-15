@@ -52,6 +52,8 @@ issue](https://github.com/INCATools/dead_simple_owl_design_patterns/issues/51)
 
 Browse the schema here: [http://cmungall.github.io/chemistry-ontology](http://cmungall.github.io/chemistry-ontology)
 
+Realist pedants be advised to assume the suffix 'species', 'class', or 'type' on the end of these (meta)class names
+
 See the [src/schema/](src/schema/) folder
 
 The source is in YAML (biolinkml)
@@ -62,8 +64,14 @@ Currently the main derived artefacts of interest are:
  - [ShEx](src/schema/chemont.shex)
  - [Python dataclasses](src/schema/chemont_datamodel.py)
 
+With care, you also see:
+
+ - [OWL](src/schema/chemont.owl) -- note this should be read as a meta-ontology by OBO people
+
 ## TODO
 
+ - map slots to wikidata properties
  - Python code to saturate metaclass instances based on chemical database (e.g. Wikidata)
  - align with chebi
+ - Add logical rules
  - Compilation down from biolinkml yaml to DOSDP or ROBOT - or custom OWLGen, e.g. using [funowl](https://github.com/hsolbrig/funowl)

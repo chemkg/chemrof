@@ -16,7 +16,7 @@ URI: [chemont:Charged](http://w3id.org/chemontCharged)
 ## Mixin for
 
  * [MonoatomicIon](MonoatomicIon.md) (mixin)  - An atom that has a charge
- * [PolyatomicIon](PolyatomicIon.md) (mixin)  - A molecule that has a charge
+ * [PolyatomicIon](PolyatomicIon.md) (mixin)  - A molecule that has a charge. For example, nitrate (NO3-).
 
 ## Referenced by class
 

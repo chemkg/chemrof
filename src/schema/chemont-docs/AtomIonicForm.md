@@ -2,7 +2,7 @@
 # Type: atom ionic form
 
 
-
+an atom type in which charge state is specified. Also known as (atom) ionic species
 
 URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
 
@@ -36,6 +36,16 @@ URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
     * Description: number of proteins in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
+    * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
  * [symbol](symbol.md)  <sub>OPT</sub>
+    * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | atom ionic species |
+| **Examples:** | | Example(value='chloride Cl-', description=None) |
+

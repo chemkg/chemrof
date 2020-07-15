@@ -2,7 +2,7 @@
 # Type: name
 
 
-
+name of chemical entity. E.g. nickel, carbon-16
 
 URI: [chemont:name](http://w3id.org/chemontname)
 
@@ -20,7 +20,7 @@ None ->  <sub>OPT</sub> [String](types/String.md)
 ## Used by
 
  * [Atom](Atom.md)
- * [AtomAniom](AtomAniom.md)
+ * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
  * [AtomNeutralForm](AtomNeutralForm.md)

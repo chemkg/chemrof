@@ -1,17 +1,21 @@
 
-# Type: atom aniom
+# Type: atom anion
 
 
+A charged atom that is negative
+
+URI: [chemont:AtomAnion](http://w3id.org/chemontAtomAnion)
 
 
-URI: [chemont:AtomAniom](http://w3id.org/chemontAtomAniom)
-
-
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChargedAtom],[ChargedAtom]^-[AtomAniom&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChargedAtom],[AtomAnion&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]uses%20-.->[AnionState],[ChargedAtom]^-[AtomAnion],[AnionState])
 
 ## Parents
 
  *  is_a: [ChargedAtom](ChargedAtom.md)
+
+## Uses Mixins
+
+ *  mixin: [AnionState](AnionState.md)
 
 ## Referenced by class
 
@@ -21,7 +25,7 @@ URI: [chemont:AtomAniom](http://w3id.org/chemontAtomAniom)
 
 ### Own
 
- * [atom aniom➞elemental charge](atom_aniom_elemental_charge.md)  <sub>OPT</sub>
+ * [atom anion➞elemental charge](atom_anion_elemental_charge.md)  <sub>OPT</sub>
     * range: [Integer](types/Integer.md)
 
 ### Inherited from charged atom:

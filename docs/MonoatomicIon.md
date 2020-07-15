@@ -26,8 +26,10 @@ URI: [chemont:MonoatomicIon](http://w3id.org/chemontMonoatomicIon)
     * Description: number of proteins in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
+    * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
  * [symbol](symbol.md)  <sub>OPT</sub>
+    * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 
 ### Mixed in from charge state:

@@ -2,7 +2,7 @@
 # Type: symbol
 
 
-
+short symbol for chemical entity, e.g. K, C-16
 
 URI: [chemont:symbol](http://w3id.org/chemontsymbol)
 
@@ -20,7 +20,7 @@ None ->  <sub>OPT</sub> [String](types/String.md)
 ## Used by
 
  * [Atom](Atom.md)
- * [AtomAniom](AtomAniom.md)
+ * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
  * [AtomNeutralForm](AtomNeutralForm.md)

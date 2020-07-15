@@ -20,7 +20,7 @@ URI: [chemont:atomic_number](http://w3id.org/chemontatomic_number)
 ## Used by
 
  * [Atom](Atom.md)
- * [AtomAniom](AtomAniom.md)
+ * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
  * [AtomNeutralForm](AtomNeutralForm.md)

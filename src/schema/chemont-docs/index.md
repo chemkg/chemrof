@@ -11,11 +11,11 @@ A data model describing metaclasses for chemical ontology classes
  * [Pattern](Pattern.md) - A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
     * [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
        * [Atom](Atom.md) - A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
-          * [AtomIonicForm](AtomIonicForm.md)
+          * [AtomIonicForm](AtomIonicForm.md) - an atom type in which charge state is specified. Also known as (atom) ionic species
              * [AtomNeutralForm](AtomNeutralForm.md)
              * [ChargedAtom](ChargedAtom.md)
-                * [AtomAniom](AtomAniom.md)
-                * [AtomCation](AtomCation.md)
+                * [AtomAnion](AtomAnion.md) - A charged atom that is negative
+                * [AtomCation](AtomCation.md) - A charged atom that is positive
           * [FullySpecifiedAtom](FullySpecifiedAtom.md)
           * [Isotope](Isotope.md) - A specific subtype of an atom with a specified neutron number
           * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
@@ -23,7 +23,11 @@ A data model describing metaclasses for chemical ontology classes
              * [Radionuclide](Radionuclide.md) - an atom that has excess nuclear energy, making it unstable
           * [UnchargedAtom](UnchargedAtom.md) - An atom that has no charge
        * [Molecule](Molecule.md)
-          * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge
+          * [MolecularSpecies](MolecularSpecies.md) - A molecule in which the units are identical. Example: methyl
+          * [NonSpeciesMolecule](NonSpeciesMolecule.md) - A molecule in which the units are not identical. Example: sodium chloride
+          * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge. For example, nitrate (NO3-).
+             * [MolecularAnion](MolecularAnion.md) - A polyatomic ion that is negative
+             * [MolecularCation](MolecularCation.md) - A polyatomic ion that is positive
           * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that in uncharged charge
        * [SubatomicParticle](SubatomicParticle.md) - A chemical entity below the granularity of an atom.
           * [Electron](Electron.md)
@@ -33,6 +37,8 @@ A data model describing metaclasses for chemical ontology classes
 
 ### Mixins
 
+ * [AnionState](AnionState.md)
+ * [CationState](CationState.md)
  * [ChargeState](ChargeState.md)
     * [Charged](Charged.md)
     * [Uncharged](Uncharged.md)
@@ -46,9 +52,11 @@ A data model describing metaclasses for chemical ontology classes
  * [decay mode](decay_mode.md)
  * [decay product](decay_product.md)
  * [elemental charge](elemental_charge.md) - number of protons minus number of electrons
-    * [atom aniom➞elemental charge](atom_aniom_elemental_charge.md)
+    * [anion state➞elemental charge](anion_state_elemental_charge.md)
+    * [atom anion➞elemental charge](atom_anion_elemental_charge.md)
     * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
     * [atom neutral form➞elemental charge](atom_neutral_form_elemental_charge.md)
+    * [cation state➞elemental charge](cation_state_elemental_charge.md)
     * [uncharged➞elemental charge](uncharged_elemental_charge.md)
  * [energy level](energy_level.md) - e.g. ground, stable
  * [half life](half_life.md)
@@ -57,11 +65,11 @@ A data model describing metaclasses for chemical ontology classes
  * [isotone of](isotone_of.md) - relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number.
  * [isotope of](isotope_of.md) - relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number.
  * [mode of formation](mode_of_formation.md)
- * [name](name.md)
+ * [name](name.md) - name of chemical entity. E.g. nickel, carbon-16
  * [neutron number](neutron_number.md) - number of neutrons in an atom
  * [nuclear isomer of](nuclear_isomer_of.md) - relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states
  * [nucleon number](nucleon_number.md) - number of nucleons in an atom. proton number plus neutral number.
- * [symbol](symbol.md)
+ * [symbol](symbol.md) - short symbol for chemical entity, e.g. K, C-16
 
 ### Types
 

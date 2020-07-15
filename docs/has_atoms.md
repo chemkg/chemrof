@@ -19,6 +19,10 @@ URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
 
 ## Used by
 
+ * [MolecularAnion](MolecularAnion.md)
+ * [MolecularCation](MolecularCation.md)
+ * [MolecularSpecies](MolecularSpecies.md)
  * [Molecule](Molecule.md)
+ * [NonSpeciesMolecule](NonSpeciesMolecule.md)
  * [PolyatomicIon](PolyatomicIon.md)
  * [UnchargedMolecule](UnchargedMolecule.md)

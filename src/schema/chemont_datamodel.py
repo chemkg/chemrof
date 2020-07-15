@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-07-14 18:42
+# Generation date: 2020-07-14 19:03
 # Schema: chemont
 #
 # id: chemont
@@ -149,9 +149,33 @@ class Molecule(ChemicalEnitity):
         super().__post_init__(**kwargs)
 
 
+class MolecularSpecies(Molecule):
+    """
+    A molecule in which the units are identical. Example: methyl
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularSpecies
+    class_class_curie: ClassVar[str] = "chemont:MolecularSpecies"
+    class_name: ClassVar[str] = "molecular species"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularSpecies
+
+
+class NonSpeciesMolecule(Molecule):
+    """
+    A molecule in which the units are not identical. Example: sodium chloride
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.NonSpeciesMolecule
+    class_class_curie: ClassVar[str] = "chemont:NonSpeciesMolecule"
+    class_name: ClassVar[str] = "non species molecule"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.NonSpeciesMolecule
+
+
 class PolyatomicIon(Molecule):
     """
-    A molecule that has a charge
+    A molecule that has a charge. For example, nitrate (NO3-).
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -159,6 +183,30 @@ class PolyatomicIon(Molecule):
     class_class_curie: ClassVar[str] = "chemont:PolyatomicIon"
     class_name: ClassVar[str] = "polyatomic ion"
     class_model_uri: ClassVar[URIRef] = CHEMONT.PolyatomicIon
+
+
+class MolecularCation(PolyatomicIon):
+    """
+    A polyatomic ion that is positive
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularCation
+    class_class_curie: ClassVar[str] = "chemont:MolecularCation"
+    class_name: ClassVar[str] = "molecular cation"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularCation
+
+
+class MolecularAnion(PolyatomicIon):
+    """
+    A polyatomic ion that is negative
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularAnion
+    class_class_curie: ClassVar[str] = "chemont:MolecularAnion"
+    class_name: ClassVar[str] = "molecular anion"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularAnion
 
 
 @dataclass
@@ -285,6 +333,9 @@ class Radionuclide(Nuclide):
 
 @dataclass
 class AtomIonicForm(Atom):
+    """
+    an atom type in which charge state is specified. Also known as (atom) ionic species
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.AtomIonicForm
@@ -304,18 +355,24 @@ class ChargedAtom(AtomIonicForm):
 
 
 @dataclass
-class AtomAniom(ChargedAtom):
+class AtomAnion(ChargedAtom):
+    """
+    A charged atom that is negative
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomAniom
-    class_class_curie: ClassVar[str] = "chemont:AtomAniom"
-    class_name: ClassVar[str] = "atom aniom"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomAniom
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomAnion
+    class_class_curie: ClassVar[str] = "chemont:AtomAnion"
+    class_name: ClassVar[str] = "atom anion"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomAnion
 
     elemental_charge: Optional[int] = None
 
 @dataclass
 class AtomCation(ChargedAtom):
+    """
+    A charged atom that is positive
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.AtomCation
@@ -404,11 +461,17 @@ slots.decay_energy = Slot(uri=CHEMONT.decay_energy, name="decay energy", curie=C
 slots.mode_of_formation = Slot(uri=CHEMONT.mode_of_formation, name="mode of formation", curie=CHEMONT.curie('mode_of_formation'),
                       model_uri=CHEMONT.mode_of_formation, domain=Isotope, range=Optional[str])
 
+slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
+                      model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
+
+slots.cation_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="cation state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
+                      model_uri=CHEMONT.cation_state_elemental_charge, domain=None, range=Optional[int])
+
 slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="uncharged_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.uncharged_elemental_charge, domain=None, range=Optional[int])
 
-slots.atom_aniom_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom aniom_elemental charge", curie=CHEMONT.curie('elemental_charge'),
-                      model_uri=CHEMONT.atom_aniom_elemental_charge, domain=AtomAniom, range=Optional[int])
+slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom anion_elemental charge", curie=CHEMONT.curie('elemental_charge'),
+                      model_uri=CHEMONT.atom_anion_elemental_charge, domain=AtomAnion, range=Optional[int])
 
 slots.atom_cation_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom cation_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.atom_cation_elemental_charge, domain=AtomCation, range=Optional[int])

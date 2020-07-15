@@ -15,7 +15,7 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
 
 ## Children
 
- * [AtomIonicForm](AtomIonicForm.md)
+ * [AtomIonicForm](AtomIonicForm.md) - an atom type in which charge state is specified. Also known as (atom) ionic species
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
  * [Isotope](Isotope.md) - A specific subtype of an atom with a specified neutron number
  * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
@@ -35,8 +35,10 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
     * Description: number of proteins in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
+    * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
  * [symbol](symbol.md)  <sub>OPT</sub>
+    * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 
 ## Other properties
