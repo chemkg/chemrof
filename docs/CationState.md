@@ -19,3 +19,11 @@ URI: [chemont:CationState](http://w3id.org/chemontCationState)
 
 ## Attributes
 
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | positively charged state |
+| **Mappings:** | | CHEMINF:000402 |
+

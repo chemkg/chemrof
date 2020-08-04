@@ -19,3 +19,11 @@ URI: [chemont:AnionState](http://w3id.org/chemontAnionState)
 
 ## Attributes
 
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | negatively charged state |
+| **Mappings:** | | CHEMINF:000403 |
+

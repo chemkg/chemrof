@@ -7,11 +7,11 @@ A chemical entity below the granularity of an atom.
 URI: [chemont:SubatomicParticle](http://w3id.org/chemontSubatomicParticle)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle]^-[Nucleon],[SubatomicParticle]^-[Electron],[ChemicalEnitity]^-[SubatomicParticle],[Nucleon],[Electron],[ChemicalEnitity])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle]^-[Nucleon],[SubatomicParticle]^-[Electron],[ChemicalEntity]^-[SubatomicParticle],[Nucleon],[Electron],[ChemicalEntity])
 
 ## Parents
 
- *  is_a: [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
+ *  is_a: [ChemicalEntity](ChemicalEntity.md) - An entity that can be described using using chemical properties.
 
 ## Children
 

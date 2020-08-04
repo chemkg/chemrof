@@ -7,7 +7,7 @@ A polyatomic ion that is positive
 URI: [chemont:MolecularCation](http://w3id.org/chemontMolecularCation)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon],[MolecularCation&#124;elemental_charge(i):integer%20%3F]uses%20-.->[CationState],[PolyatomicIon]^-[MolecularCation],[CationState],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon],[MolecularCation&#124;elemental_charge(i):integer%20%3F]uses%20-.->[CationState],[PolyatomicIon]^-[MolecularCation],[CationState],[AtomicBond],[AtomOccurrence])
 
 ## Parents
 
@@ -22,5 +22,7 @@ URI: [chemont:MolecularCation](http://w3id.org/chemontMolecularCation)
 
 ### Inherited from polyatomic ion:
 
- * [has atoms](has_atoms.md)  <sub>OPT</sub>
-    * range: [Atom](Atom.md)
+ * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
+    * range: [AtomOccurrence](AtomOccurrence.md)
+ * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
+    * range: [AtomicBond](AtomicBond.md)

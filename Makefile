@@ -23,3 +23,4 @@ src/schema/%-docs: src/schema/%.yaml
 
 deploy-docs:
 	cp src/schema/chemont-docs/*md docs/
+

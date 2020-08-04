@@ -10,11 +10,11 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     dcterms:title "chemical ontology metaclasses" ;
     skos:definition "A data model describing metaclasses for chemical ontology classes" ;
-    meta:generation_date "2020-07-14 19:03" ;
+    meta:generation_date "2020-07-28 01:41" ;
     meta:metamodel_version "1.5.1" ;
     meta:source_file "chemont.yaml" ;
-    meta:source_file_date "Tue Jul 14 19:03:05 2020" ;
-    meta:source_file_size 7856 .
+    meta:source_file_date "Mon Jul 27 09:58:40 2020" ;
+    meta:source_file_size 14126 .
 
 <http://w3id.org/chemontElectron> a owl:Class,
         meta:ClassDefinition ;
@@ -26,20 +26,27 @@
     rdfs:label "fully specified atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
-            owl:onProperty <http://w3id.org/chemontelemental_charge> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <http://w3id.org/chemontCount> ;
             owl:onProperty <http://w3id.org/chemontneutron_number> ],
-        <http://w3id.org/chemontAtom> .
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+            owl:onProperty <http://w3id.org/chemontelemental_charge> ],
+        <http://w3id.org/chemontAtom> ;
+    skos:definition "An atom (class) that has subatomic particle counts specified" .
 
 <http://w3id.org/chemontGenericAtom> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "generic atom" ;
+    rdfs:subClassOf <http://w3id.org/chemontAtom> ;
     skos:definition "generic form of an atom, with unspecified neutron or charge" ;
     meta:examples "Example(value='carbon', description=None)",
         "Example(value='nickel', description=None)" .
+
+<http://w3id.org/chemontGroupingClass> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "grouping class" ;
+    skos:definition "A non-specific entity. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" .
 
 <http://w3id.org/chemontMolecularAnion> a owl:Class,
         meta:ClassDefinition ;
@@ -66,7 +73,7 @@
     rdfs:label "monoatomic ion" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontAtom>,
         <http://w3id.org/chemontCharged> ;
@@ -100,7 +107,7 @@
     rdfs:label "uncharged atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontAtom>,
         <http://w3id.org/chemontUncharged> ;
@@ -111,7 +118,7 @@
     rdfs:label "uncharged molecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontMolecule>,
         <http://w3id.org/chemontUncharged> ;
@@ -124,10 +131,55 @@
     rdfs:range <http://w3id.org/chemontCount> ;
     skos:definition "number of proteins in an atom" .
 
+<http://w3id.org/chemontatomically_connected_to> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "atomically connected to" ;
+    rdfs:domain <http://w3id.org/chemontAtomOccurrence> ;
+    rdfs:range <http://w3id.org/chemontAtomOccurrence> .
+
+<http://w3id.org/chemontbond_energy> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "bond energy" ;
+    rdfs:domain <http://w3id.org/chemontAtomicBond> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+    skos:definition "the measure of bond strength in a chemical bond." .
+
+<http://w3id.org/chemontbond_length> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "bond length" ;
+    rdfs:domain <http://w3id.org/chemontAtomicBond> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+    skos:definition "the average distance between nuclei of two bonded atoms in a molecule" .
+
+<http://w3id.org/chemontempirical_formula> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "empirical formula" ;
+    rdfs:domain <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:range <http://w3id.org/chemontChemicalEncoding> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontchemical_formula> ;
+    skos:definition "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose" .
+
+<http://w3id.org/chemontenantiomer_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "enantiomer of" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontMolecule> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontstereoisomer_of> ;
+    skos:definition "a stereoisomer relationship where the two forms are mirror images of one another" .
+
+<http://w3id.org/chemonthas_cyclic_structure> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has cyclic structure" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
+    skos:definition "true if the molecule possesses a cycle in the atom connectivity graph" .
+
 <http://w3id.org/chemontisobar_of> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "isobar of" ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> ;
+    rdfs:domain <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:range <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontalternate_form_of> ;
     skos:definition "equal mass number (Z1 + N1 = Z2 + N2)" .
 
 <http://w3id.org/chemontisotone_of> a owl:ObjectProperty,
@@ -135,13 +187,31 @@
     rdfs:label "isotone of" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
     rdfs:range <http://w3id.org/chemontIsotope> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontalternate_form_of> ;
     skos:definition "relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number." .
+
+<http://w3id.org/chemontmolecular_formula> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "molecular formula" ;
+    rdfs:domain <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:range <http://w3id.org/chemontChemicalEncoding> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontchemical_formula> ;
+    skos:definition "A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose" .
+
+<http://w3id.org/chemontnext_in_homologous_series_from> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "next in homologous series from" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontMolecule> ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Homologous_series" ;
+    skos:definition "Next in a sequence of compounds with the same functional group and similar chemical properties in which the members of the series can be branched or unbranched. E.g.  ethane (C2H6) next in homologous series from methane (CH4)" .
 
 <http://w3id.org/chemontnuclear_isomer_of> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "nuclear isomer of" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
     rdfs:range <http://w3id.org/chemontIsotope> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontalternate_form_of> ;
     skos:definition "relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states" .
 
 <http://w3id.org/chemontnucleon_number> a owl:ObjectProperty,
@@ -151,6 +221,14 @@
     rdfs:range <http://w3id.org/chemontCount> ;
     skos:definition "number of nucleons in an atom. proton number plus neutral number." .
 
+<http://w3id.org/chemontstructural_isomer_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "structural isomer of" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontMolecule> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontchemical_isomer_of> ;
+    skos:definition "a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different orientations" .
+
 meta:SubsetDefinition a owl:Class ;
     rdfs:label "subset_definition" ;
     skos:definition "the name and description of a subset" .
@@ -159,54 +237,102 @@ meta:anion_state_elemental_charge a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "anion state_elemental charge" ;
     rdfs:domain <http://w3id.org/chemontAnionState> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
 
 meta:atom_anion_elemental_charge a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "atom anion_elemental charge" ;
     rdfs:domain <http://w3id.org/chemontAtomAnion> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
 
 meta:atom_cation_elemental_charge a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "atom cation_elemental charge" ;
     rdfs:domain <http://w3id.org/chemontAtomCation> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
 
 meta:atom_neutral_form_elemental_charge a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "atom neutral form_elemental charge" ;
     rdfs:domain <http://w3id.org/chemontAtomNeutralForm> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
+
+meta:atomic_bond_has_atom_occurrences a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "atomic bond_has atom occurrences" ;
+    rdfs:domain <http://w3id.org/chemontAtomicBond> ;
+    rdfs:range <http://w3id.org/chemontAtomOccurrence> ;
+    rdfs:subPropertyOf <http://w3id.org/chemonthas_atom_occurrences> .
+
+meta:bond_type a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "bond type" ;
+    rdfs:domain <http://w3id.org/chemontAtomicBond> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
 
 meta:cation_state_elemental_charge a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "cation state_elemental charge" ;
     rdfs:domain <http://w3id.org/chemontCationState> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
 
-meta:uncharged_elemental_charge a owl:ObjectProperty,
+meta:configuration a owl:ObjectProperty,
         meta:SlotDefinition ;
-    rdfs:label "uncharged_elemental charge" ;
-    rdfs:domain <http://w3id.org/chemontUncharged> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:label "configuration" ;
+    rdfs:domain <http://w3id.org/chemontEnantiomer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
+
+meta:enantiomer_form_of a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "enantiomer form of" ;
+    rdfs:domain <http://w3id.org/chemontEnantiomer> ;
+    rdfs:range <http://w3id.org/chemontMolecule> .
+
+meta:has_left_enantiomer a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has left enantiomer" ;
+    rdfs:domain <http://w3id.org/chemontRacemicMixture> ;
+    rdfs:range <http://w3id.org/chemontEnantiomer> .
+
+meta:has_right_enantiomer a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has right enantiomer" ;
+    rdfs:domain <http://w3id.org/chemontRacemicMixture> ;
+    rdfs:range <http://w3id.org/chemontEnantiomer> .
+
+meta:molecule_has_atom_occurrences a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "molecule_has atom occurrences" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontAtomOccurrence> ;
+    rdfs:subPropertyOf <http://w3id.org/chemonthas_atom_occurrences> .
+
+meta:molecule_has_bonds a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "molecule_has bonds" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontAtomicBond> ;
+    rdfs:subPropertyOf <http://w3id.org/chemonthas_bonds> .
+
+meta:of_atom a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "of atom" ;
+    rdfs:domain <http://w3id.org/chemontAtomOccurrence> ;
+    rdfs:range <http://w3id.org/chemontAtom> .
+
+meta:salt_elemental_charge a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "salt_elemental charge" ;
+    rdfs:domain <http://w3id.org/chemontSalt> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
 
-<https://w3id.org/biolink/biolinkml/type/Boolean> a owl:Class,
-        meta:TypeDefinition ;
-    rdfs:label "boolean" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:boolean ;
-            owl:onProperty meta:topValue ;
-            owl:qualifiedCardinality 1 ] ;
-    skos:definition "A binary (true or false) value" .
-
-<https://w3id.org/biolink/biolinkml/type/Date> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Date> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "date" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -216,7 +342,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     skos:definition "a date (year, month and day) in an idealized calendar" ;
     skos:editorialNote "URI is dateTime because OWL reasoners don't work with straight date or time" .
 
-<https://w3id.org/biolink/biolinkml/type/Datetime> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Datetime> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "datetime" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -225,7 +351,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "The combination of a date and time" .
 
-<https://w3id.org/biolink/biolinkml/type/Double> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Double> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "double" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -234,16 +360,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A real number that conforms to the xsd:double specification" .
 
-<https://w3id.org/biolink/biolinkml/type/Float> a owl:Class,
-        meta:TypeDefinition ;
-    rdfs:label "float" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:float ;
-            owl:onProperty meta:topValue ;
-            owl:qualifiedCardinality 1 ] ;
-    skos:definition "A real number that conforms to the xsd:float specification" .
-
-<https://w3id.org/biolink/biolinkml/type/Ncname> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Ncname> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "ncname" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -252,7 +369,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "Prefix part of CURIE" .
 
-<https://w3id.org/biolink/biolinkml/type/Nodeidentifier> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Nodeidentifier> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "nodeidentifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -261,7 +378,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A URI, CURIE or BNODE that represents a node in a model." .
 
-<https://w3id.org/biolink/biolinkml/type/Objectidentifier> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Objectidentifier> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "objectidentifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -271,7 +388,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     skos:definition "A URI or CURIE that represents an object in the model." ;
     skos:note "Used for inheritence and type checking" .
 
-<https://w3id.org/biolink/biolinkml/type/Time> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Time> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "time" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -281,7 +398,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
     skos:editorialNote "URI is dateTime because OWL reasoners don't work with straight date or time" .
 
-<https://w3id.org/biolink/biolinkml/type/Uri> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Uri> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "uri" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -290,7 +407,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "a complete URI" .
 
-<https://w3id.org/biolink/biolinkml/type/Uriorcurie> a owl:Class,
+<https://w3id.org/biolink/biolinkml/meta/types/Uriorcurie> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "uriorcurie" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -299,12 +416,28 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "a URI or a CURIE" .
 
+meta:uncharged_elemental_charge a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "uncharged_elemental charge" ;
+    rdfs:domain <http://w3id.org/chemontUncharged> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontelemental_charge> .
+
+<http://w3id.org/chemontAcid> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "acid" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+            owl:onProperty <http://w3id.org/chemontacidity> ],
+        <http://w3id.org/chemontMolecule> .
+
 <http://w3id.org/chemontAtomAnion> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "atom anion" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontAnionState>,
         <http://w3id.org/chemontChargedAtom> ;
@@ -315,7 +448,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "atom cation" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontCationState>,
         <http://w3id.org/chemontChargedAtom> ;
@@ -326,7 +459,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "atom neutral form" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontAtomIonicForm> .
 
@@ -335,28 +468,42 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "nuclide" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <http://w3id.org/chemontenergy_level> ],
         <http://w3id.org/chemontAtom> ;
     skos:definition "an atomic species characterized by the specific constitution of its nucleus" ;
     meta:examples "Example(value='https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m', description=None)" .
 
-<http://w3id.org/chemontPattern> a owl:Class,
+<http://w3id.org/chemontSalt> a owl:Class,
         meta:ClassDefinition ;
-    rdfs:label "pattern" ;
-    skos:definition "A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework" .
+    rdfs:label "salt" ;
+    rdfs:subClassOf <http://w3id.org/chemontChemicalEntity> ;
+    skos:definition "a chemical compound consisting of an ionic assembly of cations and anions." .
+
+<http://w3id.org/chemontacidity> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "acidity" ;
+    rdfs:domain <http://w3id.org/chemontAcid> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Float> .
+
+<http://w3id.org/chemontbond_order> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "bond order" ;
+    rdfs:domain <http://w3id.org/chemontAtomicBond> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+    skos:definition "the number of electron pairs (bonds) between a pair of atoms" .
 
 <http://w3id.org/chemontdecay_energy> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "decay energy" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> .
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
 
 <http://w3id.org/chemontdecay_mode> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "decay mode" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> .
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
 
 <http://w3id.org/chemontdecay_product> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -367,7 +514,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
 <http://w3id.org/chemontenergy_level> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "energy level" ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
     skos:definition "e.g. ground, stable" .
 
 <http://w3id.org/chemonthalf_life> a owl:ObjectProperty,
@@ -376,29 +523,24 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:domain <http://w3id.org/chemontIsotope> ;
     rdfs:range <http://w3id.org/chemontNumberOfYears> .
 
-<http://w3id.org/chemonthas_atoms> a owl:ObjectProperty,
-        meta:SlotDefinition ;
-    rdfs:label "has atoms" ;
-    rdfs:domain <http://w3id.org/chemontMolecule> ;
-    rdfs:range <http://w3id.org/chemontAtom> .
-
 <http://w3id.org/chemontisotope_of> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "isotope of" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
     rdfs:range <http://w3id.org/chemontIsotope> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontalternate_form_of> ;
     skos:definition "relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number." .
 
 <http://w3id.org/chemontmode_of_formation> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "mode of formation" ;
     rdfs:domain <http://w3id.org/chemontIsotope> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> .
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
 
 <http://w3id.org/chemontname> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "name" ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
     skos:definition "name of chemical entity. E.g. nickel, carbon-16" .
 
 <http://w3id.org/chemontneutron_number> a owl:ObjectProperty,
@@ -408,18 +550,35 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:range <http://w3id.org/chemontCount> ;
     skos:definition "number of neutrons in an atom" .
 
+<http://w3id.org/chemontstereoisomer_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "stereoisomer of" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontMolecule> ;
+    rdfs:subPropertyOf <http://w3id.org/chemontchemical_isomer_of> ;
+    skos:definition "a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds" .
+
 <http://w3id.org/chemontsymbol> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "symbol" ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/String> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
     skos:definition "short symbol for chemical entity, e.g. K, C-16" .
+
+<https://w3id.org/biolink/biolinkml/meta/types/Boolean> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "boolean" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A binary (true or false) value" .
 
 <http://w3id.org/chemontAtomIonicForm> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "atom ionic form" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontAtom> ;
     skos:definition "an atom type in which charge state is specified. Also known as (atom) ionic species" ;
@@ -430,9 +589,10 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "charge state" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
-        meta:mixin .
+        meta:mixin ;
+    skos:definition "Applies to entities that have a charge state, which may be positive, negative, or neutral" .
 
 <http://w3id.org/chemontCharged> a owl:Class,
         meta:ClassDefinition ;
@@ -464,17 +624,44 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "polyatomic ion" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontCharged>,
         <http://w3id.org/chemontMolecule> ;
     skos:definition "A molecule that has a charge. For example, nitrate (NO3-)." .
 
+<http://w3id.org/chemontRacemicMixture> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "racemic mixture" ;
+    rdfs:subClassOf <http://w3id.org/chemontChemicalEntity> ;
+    skos:definition "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide" .
+
 <http://w3id.org/chemontSubatomicParticle> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "subatomic particle" ;
-    rdfs:subClassOf <http://w3id.org/chemontChemicalEnitity> ;
+    rdfs:subClassOf <http://w3id.org/chemontChemicalEntity> ;
     skos:definition "A chemical entity below the granularity of an atom." .
+
+<http://w3id.org/chemontchemical_formula> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "chemical formula" ;
+    rdfs:domain <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:range <http://w3id.org/chemontChemicalEncoding> .
+
+<http://w3id.org/chemontchemical_isomer_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "chemical isomer of" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontMolecule> ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Isomer" ;
+    rdfs:subPropertyOf <http://w3id.org/chemontalternate_form_of> ;
+    skos:definition "a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but distinct arrangements of atoms in space" .
+
+<http://w3id.org/chemonthas_bonds> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has bonds" ;
+    rdfs:domain <http://w3id.org/chemontMolecule> ;
+    rdfs:range <http://w3id.org/chemontAtomicBond> .
 
 <http://w3id.org/chemontAnionState> a owl:Class,
         meta:ClassDefinition ;
@@ -486,18 +673,25 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "cation state" ;
     rdfs:subClassOf meta:mixin .
 
-<http://w3id.org/chemontChemicalEnitity> a owl:Class,
+<http://w3id.org/chemontChemicalEncoding> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "chemical encoding" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] .
+
+<http://w3id.org/chemontPattern> a owl:Class,
         meta:ClassDefinition ;
-    rdfs:label "chemical enitity" ;
-    rdfs:subClassOf <http://w3id.org/chemontPattern> ;
-    skos:definition "An entity that can be described using using chemical properties." .
+    rdfs:label "pattern" ;
+    skos:definition "A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework" .
 
 <http://w3id.org/chemontUncharged> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "uncharged" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/Integer> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty <http://w3id.org/chemontelemental_charge> ],
         <http://w3id.org/chemontChargeState>,
         meta:mixin .
@@ -510,30 +704,103 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:onProperty meta:topValue ;
             owl:qualifiedCardinality 1 ] .
 
-<http://w3id.org/chemontMolecule> a owl:Class,
+<http://w3id.org/chemontEnantiomer> a owl:Class,
         meta:ClassDefinition ;
-    rdfs:label "molecule" ;
+    rdfs:label "enantiomer" ;
+    rdfs:subClassOf <http://w3id.org/chemontMolecule> ;
+    skos:definition "one of two stereoisomers that are mirror images. Example: R-thalidomide" .
+
+<http://w3id.org/chemonthas_atom_occurrences> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has atom occurrences" ;
+    rdfs:range <http://w3id.org/chemontAtomOccurrence> .
+
+<https://w3id.org/biolink/biolinkml/meta/types/Float> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "float" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:float ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A real number that conforms to the xsd:float specification" .
+
+<http://w3id.org/chemontalternate_form_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "alternate form of" ;
+    rdfs:domain <http://w3id.org/chemontChemicalEntity> ;
+    rdfs:range <http://w3id.org/chemontChemicalEntity> ;
+    skos:definition "A relationship between two entities of the same type" .
+
+<http://w3id.org/chemontAtomOccurrence> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "atom occurrence" ;
+    rdfs:subClassOf <http://w3id.org/chemontPattern> ;
+    skos:definition "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate" .
+
+<http://w3id.org/chemontAtomicBond> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "atomic bond" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <http://w3id.org/chemontAtomOccurrence> ;
+            owl:onProperty <http://w3id.org/chemonthas_atom_occurrences> ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://w3id.org/chemontAtom> ;
-            owl:onProperty <http://w3id.org/chemonthas_atoms> ],
-        <http://w3id.org/chemontChemicalEnitity> .
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+            owl:onProperty <http://w3id.org/chemontbond_order> ],
+        <http://w3id.org/chemontPattern> ;
+    skos:definition "A connection between two atoms. Note this is the reified form of 'atomically connected to'" .
 
 <http://w3id.org/chemontAtom> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <http://w3id.org/chemontsymbol> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <http://w3id.org/chemontname> ],
-        <http://w3id.org/chemontChemicalEnitity> ;
+        <http://w3id.org/chemontChemicalEntity> ;
     skos:definition "A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it." .
 
-<https://w3id.org/biolink/biolinkml/type/String> a owl:Class,
+<http://w3id.org/chemontChemicalEntity> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "chemical entity" ;
+    rdfs:subClassOf <http://w3id.org/chemontPattern> ;
+    skos:definition "An entity that can be described using using chemical properties." .
+
+<http://w3id.org/chemontIsotope> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "isotope" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <http://w3id.org/chemontmode_of_formation> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <http://w3id.org/chemontdecay_mode> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <http://w3id.org/chemontIsotope> ;
+            owl:onProperty <http://w3id.org/chemontisotope_of> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <http://w3id.org/chemontdecay_energy> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <http://w3id.org/chemontNumberOfYears> ;
+            owl:onProperty <http://w3id.org/chemonthalf_life> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <http://w3id.org/chemontIsotope> ;
+            owl:onProperty <http://w3id.org/chemontdecay_product> ],
+        <http://w3id.org/chemontAtom> ;
+    skos:definition "A specific subtype of an atom with a specified neutron number" .
+
+<https://w3id.org/biolink/biolinkml/meta/types/String> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "string" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -541,36 +808,6 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
             owl:onProperty meta:topValue ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A character string" .
-
-<http://w3id.org/chemontIsotope> a owl:Class,
-        meta:ClassDefinition ;
-    rdfs:label "isotope" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
-            owl:onProperty <http://w3id.org/chemontmode_of_formation> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://w3id.org/chemontIsotope> ;
-            owl:onProperty <http://w3id.org/chemontisotope_of> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
-            owl:onProperty <http://w3id.org/chemontdecay_energy> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://w3id.org/chemontIsotope> ;
-            owl:onProperty <http://w3id.org/chemontdecay_product> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://w3id.org/chemontNumberOfYears> ;
-            owl:onProperty <http://w3id.org/chemonthalf_life> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/type/String> ;
-            owl:onProperty <http://w3id.org/chemontdecay_mode> ],
-        <http://w3id.org/chemontAtom> ;
-    skos:definition "A specific subtype of an atom with a specified neutron number" .
 
 meta:TypeDefinition a owl:Class ;
     rdfs:label "type_definition" ;
@@ -583,10 +820,22 @@ meta:topValue a owl:DatatypeProperty ;
         meta:SlotDefinition ;
     rdfs:label "elemental charge" ;
     rdfs:domain <http://w3id.org/chemontAtom> ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/type/Integer> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     skos:definition "number of protons minus number of electrons" .
 
-<https://w3id.org/biolink/biolinkml/type/Integer> a owl:Class,
+<http://w3id.org/chemontMolecule> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "molecule" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <http://w3id.org/chemontAtomicBond> ;
+            owl:onProperty <http://w3id.org/chemonthas_bonds> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <http://w3id.org/chemontAtomOccurrence> ;
+            owl:onProperty <http://w3id.org/chemonthas_atom_occurrences> ],
+        <http://w3id.org/chemontChemicalEntity> ;
+    skos:definition "A chemical entity that consists of two or more atoms where all atoms are connected via bonds" .
+
+<https://w3id.org/biolink/biolinkml/meta/types/Integer> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "integer" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -595,13 +844,13 @@ meta:topValue a owl:DatatypeProperty ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "An integer" .
 
-meta:SlotDefinition a owl:Class ;
-    rdfs:label "slot_definition" ;
-    skos:definition "the definition of a property or a slot" .
-
 meta:ClassDefinition a owl:Class ;
     rdfs:label "class_definition" ;
     skos:definition "the definition of a class or interface" .
+
+meta:SlotDefinition a owl:Class ;
+    rdfs:label "slot_definition" ;
+    skos:definition "the definition of a property or a slot" .
 
 
 

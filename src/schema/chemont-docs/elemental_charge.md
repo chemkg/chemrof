@@ -21,6 +21,7 @@ URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
  *  [atom cation➞elemental charge](atom_cation_elemental_charge.md)
  *  [atom neutral form➞elemental charge](atom_neutral_form_elemental_charge.md)
  *  [cation state➞elemental charge](cation_state_elemental_charge.md)
+ *  [salt➞elemental charge](salt_elemental_charge.md)
  *  [uncharged➞elemental charge](uncharged_elemental_charge.md)
 
 ## Used by
@@ -39,4 +40,12 @@ URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
  * [MolecularCation](MolecularCation.md)
  * [MonoatomicIon](MonoatomicIon.md)
  * [PolyatomicIon](PolyatomicIon.md)
+ * [Salt](Salt.md)
  * [Uncharged](Uncharged.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Mappings:** | | CHEMINF:000120 |
+

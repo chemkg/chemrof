@@ -7,11 +7,13 @@ A pattern observed in nature. Instances of this class may be owl classes in a re
 URI: [chemont:Pattern](http://w3id.org/chemontPattern)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern]^-[ChemicalEnitity],[ChemicalEnitity])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern]^-[ChemicalEntity],[Pattern]^-[AtomicBond],[Pattern]^-[AtomOccurrence],[ChemicalEntity],[AtomicBond],[AtomOccurrence])
 
 ## Children
 
- * [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
+ * [AtomOccurrence](AtomOccurrence.md) - An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
+ * [AtomicBond](AtomicBond.md) - A connection between two atoms. Note this is the reified form of 'atomically connected to'
+ * [ChemicalEntity](ChemicalEntity.md) - An entity that can be described using using chemical properties.
 
 ## Referenced by class
 

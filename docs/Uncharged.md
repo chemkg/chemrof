@@ -11,7 +11,7 @@ URI: [chemont:Uncharged](http://w3id.org/chemontUncharged)
 
 ## Parents
 
- *  is_a: [ChargeState](ChargeState.md)
+ *  is_a: [ChargeState](ChargeState.md) - Applies to entities that have a charge state, which may be positive, negative, or neutral
 
 ## Mixin for
 
@@ -28,3 +28,11 @@ URI: [chemont:Uncharged](http://w3id.org/chemontUncharged)
 
  * [uncharged➞elemental charge](uncharged_elemental_charge.md)  <sub>OPT</sub>
     * range: [Integer](types/Integer.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | neutral charge |
+| **Mappings:** | | CHEMINF:000401 |
+

@@ -2,7 +2,7 @@
 # Type: charge state
 
 
-
+Applies to entities that have a charge state, which may be positive, negative, or neutral
 
 URI: [chemont:ChargeState](http://w3id.org/chemontChargeState)
 
@@ -25,3 +25,10 @@ URI: [chemont:ChargeState](http://w3id.org/chemontChargeState)
  * [elemental charge](elemental_charge.md)  <sub>OPT</sub>
     * Description: number of protons minus number of electrons
     * range: [Integer](types/Integer.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Mappings:** | | CHEMINF:000120 |
+

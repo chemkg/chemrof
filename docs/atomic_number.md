@@ -26,6 +26,7 @@ URI: [chemont:atomic_number](http://w3id.org/chemontatomic_number)
  * [AtomNeutralForm](AtomNeutralForm.md)
  * [ChargedAtom](ChargedAtom.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
+ * [GenericAtom](GenericAtom.md)
  * [Isotope](Isotope.md)
  * [MonoatomicIon](MonoatomicIon.md)
  * [Nuclide](Nuclide.md)
@@ -38,4 +39,5 @@ URI: [chemont:atomic_number](http://w3id.org/chemontatomic_number)
 | --- | --- | --- |
 | **Aliases:** | | proton number |
 |  | | Z |
+| **Mappings:** | | CHEMINF:000079 |
 

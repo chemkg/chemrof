@@ -13,6 +13,7 @@ URI: [chemont:isotope_of](http://w3id.org/chemontisotope_of)
 
 ## Parents
 
+ *  is_a: [alternate form of](alternate_form_of.md)
 
 ## Children
 

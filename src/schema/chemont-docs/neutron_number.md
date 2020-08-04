@@ -27,4 +27,5 @@ URI: [chemont:neutron_number](http://w3id.org/chemontneutron_number)
 |  |  |  |
 | --- | --- | --- |
 | **Aliases:** | | N |
+| **Mappings:** | | CHEMINF:000078 |
 

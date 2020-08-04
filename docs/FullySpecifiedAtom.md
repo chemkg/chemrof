@@ -2,7 +2,7 @@
 # Type: fully specified atom
 
 
-
+An atom (class) that has subatomic particle counts specified
 
 URI: [chemont:FullySpecifiedAtom](http://w3id.org/chemontFullySpecifiedAtom)
 

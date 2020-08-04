@@ -1,3 +1,10 @@
+type Acid
+  {
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    acidity: Float
+  }
+
 interface AnionState
   {
   }
@@ -41,6 +48,16 @@ type AtomNeutralForm
     elementalCharge: Integer
   }
 
+type AtomOccurrence
+  {
+  }
+
+type AtomicBond
+  {
+    hasAtomOccurrences: [AtomOccurrence]
+    bondOrder: Integer
+  }
+
 interface CationState
   {
   }
@@ -63,12 +80,18 @@ type ChargedAtom
     elementalCharge: Integer
   }
 
-interface ChemicalEnitity
+interface ChemicalEntity
   {
   }
 
 type Electron
   {
+  }
+
+type Enantiomer
+  {
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
   }
 
 type FullySpecifiedAtom
@@ -81,6 +104,13 @@ type FullySpecifiedAtom
   }
 
 type GenericAtom
+  {
+    atomicNumber: Count
+    symbol: String
+    name: String
+  }
+
+interface GroupingClass
   {
   }
 
@@ -100,24 +130,28 @@ type Isotope
 
 type MolecularAnion implements AnionState
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
     elementalCharge: Integer
   }
 
 type MolecularCation implements CationState
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
     elementalCharge: Integer
   }
 
 type MolecularSpecies
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
   }
 
 interface Molecule
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
   }
 
 type MonoatomicIon implements Charged
@@ -134,7 +168,8 @@ type Neutron
 
 type NonSpeciesMolecule
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
   }
 
 type Nucleon
@@ -155,11 +190,16 @@ interface Pattern
 
 type PolyatomicIon implements Charged
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
     elementalCharge: Integer
   }
 
 type Proton
+  {
+  }
+
+type RacemicMixture
   {
   }
 
@@ -169,6 +209,10 @@ type Radionuclide
     symbol: String
     name: String
     energyLevel: String
+  }
+
+type Salt
+  {
   }
 
 type SubatomicParticle
@@ -190,7 +234,8 @@ type UnchargedAtom implements Uncharged
 
 type UnchargedMolecule implements Uncharged
   {
-    hasAtoms: Atom
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
     elementalCharge: Integer
   }
 

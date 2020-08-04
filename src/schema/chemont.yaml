@@ -9,6 +9,7 @@ version: 0.0.1
 prefixes:
   COB: http://purl.obolibrary.org/obo/COB_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  CHEMINF: http://semanticscience.org/resource/CHEMINF_
   chemont: http://w3id.org/chemont
   dcterms: http://purl.org/dc/terms/
   biolinkml: https://w3id.org/biolink/biolinkml/
@@ -29,17 +30,23 @@ classes:
     description: >-
       A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
     class_uri: owl:Class
+
+  grouping class:
+    abstract: true
+    description: >-
+      A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
   
-  chemical enitity:
+  chemical entity:
     abstract: true
     description: >-
       An entity that can be described using using chemical properties.
     is_a: pattern
     mappings:
       - CHEBI:24431
+      - CHEMINF:000000
   
   subatomic particle:
-    is_a: chemical enitity
+    is_a: chemical entity
     description: >-
       A chemical entity below the granularity of an atom.
     mappings:
@@ -64,40 +71,73 @@ classes:
 
   charge state:
     mixin: true
+    description: >-
+      Applies to entities that have a charge state, which may be positive, negative, or neutral
     slots:
       - elemental charge
+    mappings:
+      - CHEMINF:000120
+    union_of:
+      - uncharged
+      - charged
 
   anion state:
     mixin: true
+    aliases:
+      - negatively charged state
     slot_usage:
       elemental charge:
         maximum_value: -1
+    mappings:
+      - CHEMINF:000403
 
   cation state:
     mixin: true
+    aliases:
+      - positively charged state
     slot_usage:
       elemental charge:
         minimum_value: 1
+    mappings:
+      - CHEMINF:000402
 
   uncharged:
-    is_a: charge state
     mixin: true
+    aliases:
+      - neutral charge
+    is_a: charge state
     slot_usage:
       elemental charge:
         minimum_value: 0
         maximum_value: 0
+    mappings:
+      - CHEMINF:000401
 
   charged:
-    is_a: charge state
     mixin: true
+    aliases:
+      - ion
+      - ionic state
+    is_a: charge state
+    union_of:
+      - anion state
+      - cation state
 
   molecule:
-    is_a: chemical enitity
+    is_a: chemical entity
     aliases:
       - molecular entity
+    description: >-
+      A chemical entity that consists of two or more atoms where all atoms are connected via bonds
     abstract: true
     slots:
-      - has atoms
+      - has atom occurrences
+      - has bonds
+    slot_usage:
+      has atom occurrences:
+        minimum_value: 2
+      has bonds:
+        minimum_value: 1
     mappings:
       - COB:0000013
 
@@ -144,7 +184,7 @@ classes:
       A molecule that in uncharged charge
       
   atom:
-    is_a: chemical enitity
+    is_a: chemical entity
     abstract: true
     aliases:
       - atomic species
@@ -160,6 +200,10 @@ classes:
       - COB:0000011
         
   generic atom:
+    is_a: atom
+    aliases:
+      - element
+      - chemical element
     description: >-
       generic form of an atom, with unspecified neutron or charge
     examples:
@@ -269,20 +313,104 @@ classes:
         maximum_value: 0
 
   fully specified atom:
+    description: >-
+      An atom (class) that has subatomic particle counts specified
     is_a: atom
     slots:
       - elemental charge
       - neutron number
-  
+
+  atomic bond:
+    aliases:
+      - bond
+      - chemical bond
+    is_a: pattern
+    description: >-
+      A connection between two atoms. Note this is the reified form of 'atomically connected to'
+    slots:
+      - has atom occurrences
+      - bond order
+    slot_usage:
+      has atom occurrences:
+        minimum_value: 2
+        maximum_value: 2
+      bond type:
+        description: >-
+          E.g. covalent, ionic
+        range: string
+    mappings:
+      - CHEMINF:000063
+
+  atom occurrence:
+    is_a: pattern
+    description: >-
+      An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
+    slot_usage:
+      of atom:
+        range: atom
+
+  acid:
+    is_a: molecule
+    mappings:
+      - CHEBI:50906
+    slots:
+      - acidity
+
+  salt:
+    is_a: chemical entity
+    description: >-
+      a chemical compound consisting of an ionic assembly of cations and anions.
+    slot_usage:
+      elemental charge:
+        minimum_value: 0
+        maximum_value: 0
+
+  enantiomer:
+    is_a: molecule
+    description: >-
+      one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
+    slot_usage:
+      relative configuration:
+        range: string  # L or D
+      optical configuration:
+        range: string  # + or -
+      absolute configuration:
+        range: string  # R or S
+        see_also:
+          - https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules
+      enantiomer form of:
+        range: molecule
+        description: >-
+          Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
+      
+  racemic mixture:
+    is_a: chemical entity
+    description: >-
+      a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
+    slot_usage:
+      has left enantiomer:
+        required: true
+        range: enantiomer
+      has right enantiomer:
+        required: true
+        range: enantiomer
+      
+      
 types:
 
   count:
     uri: xsd:int
     base: int
+    mappings:
+      - CHEMINF:000209
 
   number of years:
     uri: xsd:int
     base: int
+
+  chemical encoding:
+    uri: xsd:string
+    base: str
 
 slots:
 
@@ -304,6 +432,8 @@ slots:
       number of proteins in an atom
     domain: atom
     range: count
+    mappings:
+      - CHEMINF:000079
     
   neutron number:
     aliases:
@@ -312,6 +442,8 @@ slots:
       number of neutrons in an atom
     domain: atom
     range: count
+    mappings:
+      - CHEMINF:000078
     
   nucleon number:
     description: >-
@@ -324,26 +456,39 @@ slots:
       number of protons minus number of electrons
     domain: atom
     range: integer
+    mappings:
+      - CHEMINF:000120
+
+  alternate form of:
+    description: >-
+      A relationship between two entities of the same type
+    abstract: true
+    domain: chemical entity
+    range: chemical entity
       
   isotope of:
+    is_a: alternate form of
     description: >-
       relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number.
     domain: isotope
     range: isotope
       
   isotone of:
+    is_a: alternate form of
     description: >-
       relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number.
     domain: isotope
     range: isotope
       
   nuclear isomer of:
+    is_a: alternate form of
     description: >-
       relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states
     domain: isotope
     range: isotope
       
   isobar of:
+    is_a: alternate form of
     description: >-
       equal mass number (Z1 + N1 = Z2 + N2)
 
@@ -353,9 +498,14 @@ slots:
     description: >-
       e.g. ground, stable
       
-  has atoms:
+  has atom occurrences:
+    range: atom occurrence
+    multivalued: true
+      
+  has bonds:
     domain: molecule
-    range: atom
+    range: atomic bond
+    multivalued: true
       
   half life:
     domain: isotope
@@ -375,4 +525,139 @@ slots:
   mode of formation:
     domain: isotope
     range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
+
+  has cyclic structure:
+    description: >-
+      true if the molecule possesses a cycle in the atom connectivity graph
+    domain: molecule
+    range: boolean
+    mappings:
+      - CHEMINF:000067
+
+  chemical formula:
+    domain: chemical entity
+    range: chemical encoding
+
+  molecular formula:
+    is_a: chemical formula
+    description: >-
+      A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose
+    mappings:
+      - CHEMINF:000042
+
+  empirical formula:
+    is_a: chemical formula
+    description: >-
+      A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+
+  smiles string:
+    is_a: chemical formula
+    description: >-
+      A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
+    multivalued: true
+
+  atomically connected to:
+    domain: atom occurrence
+    range: atom occurrence
+    multivalued: true
+
+  acidity:
+    domain: acid
+    range: float
+
+  next in homologous series from:
+    description: >-
+      Next in a sequence of compounds with the same functional group and similar chemical properties in which the members of the series can be branched or unbranched. E.g.  ethane (C2H6) next in homologous series from methane (CH4)
+    domain: molecule
+    range: molecule
+    see_also:
+      - https://en.wikipedia.org/wiki/Homologous_series
+    
+  chemical isomer of:
+    aliases:
+      - isomer of
+    is_a: alternate form of
+    description: >-
+      a relationship that holds between two forms of a parent molecule with identical chemical formulas but distinct arrangements of atoms in space
+    domain: molecule
+    range: molecule
+    see_also:
+      - https://en.wikipedia.org/wiki/Isomer
+    multivalued: true
+    
+  structural isomer of:
+    aliases:
+      - constitutional isomer
+    is_a: chemical isomer of
+    description: >-
+      a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonding patterns
+    multivalued: true
+    see_also:
+      - https://en.wikipedia.org/wiki/Structural_isomer
+      - https://goldbook.iupac.org/terms/view/C01285
+
+  skeletal isomer of:
+    aliases:
+      - chain isomer of
+    is_a: structural isomer of
+    description: >-
+      components of the (usually carbon) skeleton are distinctly re-ordered to create different structures.
+      Pentane exists as three isomers: n-pentane (often called simply "pentane"), isopentane (2-methylbutane) and neopentane (dimethylpropane).
+      
+  position isomer of:
+    aliases:
+      - regioisomerism isomer of
+    is_a: structural isomer of
+    description: >-
+      a functional group or other substituent changes position on a parent structure.
+      
+  functional isomer of:
+    aliases:
+      - functional group isomer of
+    is_a: structural isomer of
+    description: >-
+      structural isomers that have the same molecular formula (that is, the same number of atoms of the same elements), but the atoms are connected in different ways so that the groupings are dissimilar.
+      
+  tautomer of:
+    is_a: structural isomer of
+    description: >-
+       structural isomers (constitutional isomers) of chemical compounds that readily interconvert. Examples: a neutral amino acid and its zwitterion
+      
+  stereoisomer of:
+    aliases:
+      - spatial isomer of
+    is_a: chemical isomer of
+    description: >-
+      a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds
+    multivalued: true
+    
+  enantiomer of:
+    aliases:
+      - enantiomorph of
+    is_a: stereoisomer of
+    description: >-
+      a stereoisomer relationship where the two forms are mirror images of one another
+    multivalued: true
+    
+  bond order:
+    description: >-
+      the number of electron pairs (bonds) between a pair of atoms
+    domain: atomic bond
+    range: integer
+
+  bond length:
+    description: >-
+      the average distance between nuclei of two bonded atoms in a molecule
+    domain: atomic bond
+    range: float
+
+  bond energy:
+    aliases:
+      - average bond enthalpy
+      - mean bond enthalpy
+    description: >-
+       the measure of bond strength in a chemical bond.
+    domain: atomic bond
+    range: float
+    
     

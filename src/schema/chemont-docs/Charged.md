@@ -11,7 +11,7 @@ URI: [chemont:Charged](http://w3id.org/chemontCharged)
 
 ## Parents
 
- *  is_a: [ChargeState](ChargeState.md)
+ *  is_a: [ChargeState](ChargeState.md) - Applies to entities that have a charge state, which may be positive, negative, or neutral
 
 ## Mixin for
 
@@ -29,3 +29,11 @@ URI: [chemont:Charged](http://w3id.org/chemontCharged)
  * [elemental charge](elemental_charge.md)  <sub>OPT</sub>
     * Description: number of protons minus number of electrons
     * range: [Integer](types/Integer.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | ion |
+|  | | ionic state |
+

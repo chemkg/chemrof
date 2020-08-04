@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-07-14 19:03
+# Generation date: 2020-07-28 01:41
 # Schema: chemont
 #
 # id: chemont
@@ -20,7 +20,8 @@ else:
 from biolinkml.utils.formatutils import camelcase, underscore, sfx
 from rdflib import Namespace, URIRef
 from biolinkml.utils.curienamespace import CurieNamespace
-from includes.types import Integer, String
+from biolinkml.utils.metamodelcore import Bool
+from includes.types import Boolean, Float, Integer, String
 
 metamodel_version = "1.5.1"
 
@@ -29,6 +30,7 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 
 # Namespaces
 CHEBI = CurieNamespace('CHEBI', 'http://purl.obolibrary.org/obo/CHEBI_')
+CHEMINF = CurieNamespace('CHEMINF', 'http://semanticscience.org/resource/CHEMINF_')
 COB = CurieNamespace('COB', 'http://purl.obolibrary.org/obo/COB_')
 BIOLINKML = CurieNamespace('biolinkml', 'https://w3id.org/biolink/biolinkml/')
 CHEMONT = CurieNamespace('chemont', 'http://w3id.org/chemont')
@@ -53,6 +55,13 @@ class NumberOfYears(int):
     type_model_uri = CHEMONT.NumberOfYears
 
 
+class ChemicalEncoding(str):
+    type_class_uri = XSD.string
+    type_class_curie = "xsd:string"
+    type_name = "chemical encoding"
+    type_model_uri = CHEMONT.ChemicalEncoding
+
+
 # Class references
 
 
@@ -69,19 +78,32 @@ class Pattern(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = CHEMONT.Pattern
 
 
-class ChemicalEnitity(Pattern):
+class GroupingClass(YAMLRoot):
+    """
+    A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for
+    nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.GroupingClass
+    class_class_curie: ClassVar[str] = "chemont:GroupingClass"
+    class_name: ClassVar[str] = "grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.GroupingClass
+
+
+class ChemicalEntity(Pattern):
     """
     An entity that can be described using using chemical properties.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalEnitity
-    class_class_curie: ClassVar[str] = "chemont:ChemicalEnitity"
-    class_name: ClassVar[str] = "chemical enitity"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalEnitity
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalEntity
+    class_class_curie: ClassVar[str] = "chemont:ChemicalEntity"
+    class_name: ClassVar[str] = "chemical entity"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalEntity
 
 
-class SubatomicParticle(ChemicalEnitity):
+class SubatomicParticle(ChemicalEntity):
     """
     A chemical entity below the granularity of an atom.
     """
@@ -133,7 +155,10 @@ class Electron(SubatomicParticle):
 
 
 @dataclass
-class Molecule(ChemicalEnitity):
+class Molecule(ChemicalEntity):
+    """
+    A chemical entity that consists of two or more atoms where all atoms are connected via bonds
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.Molecule
@@ -141,11 +166,14 @@ class Molecule(ChemicalEnitity):
     class_name: ClassVar[str] = "molecule"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Molecule
 
-    has_atoms: Optional[Union[dict, "Atom"]] = None
+    has_atom_occurrences: List[Union[dict, "AtomOccurrence"]] = empty_list()
+    has_bonds: List[Union[dict, "AtomicBond"]] = empty_list()
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
-        if self.has_atoms is not None and not isinstance(self.has_atoms, Atom):
-            self.has_atoms = Atom(**self.has_atoms)
+        self.has_atom_occurrences = [v if isinstance(v, AtomOccurrence)
+                                     else AtomOccurrence(**v) for v in self.has_atom_occurrences]
+        self.has_bonds = [v if isinstance(v, AtomicBond)
+                          else AtomicBond(**v) for v in self.has_bonds]
         super().__post_init__(**kwargs)
 
 
@@ -224,7 +252,7 @@ class UnchargedMolecule(Molecule):
     elemental_charge: Optional[int] = None
 
 @dataclass
-class Atom(ChemicalEnitity):
+class Atom(ChemicalEntity):
     """
     A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
     """
@@ -239,7 +267,7 @@ class Atom(ChemicalEnitity):
     symbol: Optional[str] = None
     name: Optional[str] = None
 
-class GenericAtom(YAMLRoot):
+class GenericAtom(Atom):
     """
     generic form of an atom, with unspecified neutron or charge
     """
@@ -395,6 +423,9 @@ class AtomNeutralForm(AtomIonicForm):
 
 @dataclass
 class FullySpecifiedAtom(Atom):
+    """
+    An atom (class) that has subatomic particle counts specified
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.FullySpecifiedAtom
@@ -404,6 +435,88 @@ class FullySpecifiedAtom(Atom):
 
     elemental_charge: Optional[int] = None
     neutron_number: Optional[int] = None
+
+@dataclass
+class AtomicBond(Pattern):
+    """
+    A connection between two atoms. Note this is the reified form of 'atomically connected to'
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomicBond
+    class_class_curie: ClassVar[str] = "chemont:AtomicBond"
+    class_name: ClassVar[str] = "atomic bond"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomicBond
+
+    has_atom_occurrences: List[Union[dict, "AtomOccurrence"]] = empty_list()
+    bond_order: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        self.has_atom_occurrences = [v if isinstance(v, AtomOccurrence)
+                                     else AtomOccurrence(**v) for v in self.has_atom_occurrences]
+        super().__post_init__(**kwargs)
+
+
+class AtomOccurrence(Pattern):
+    """
+    An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in
+    nitrate
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomOccurrence
+    class_class_curie: ClassVar[str] = "chemont:AtomOccurrence"
+    class_name: ClassVar[str] = "atom occurrence"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomOccurrence
+
+
+@dataclass
+class Acid(Molecule):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Acid
+    class_class_curie: ClassVar[str] = "chemont:Acid"
+    class_name: ClassVar[str] = "acid"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Acid
+
+    acidity: Optional[float] = None
+
+class Salt(ChemicalEntity):
+    """
+    a chemical compound consisting of an ionic assembly of cations and anions.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Salt
+    class_class_curie: ClassVar[str] = "chemont:Salt"
+    class_name: ClassVar[str] = "salt"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Salt
+
+
+class Enantiomer(Molecule):
+    """
+    one of two stereoisomers that are mirror images. Example: R-thalidomide
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Enantiomer
+    class_class_curie: ClassVar[str] = "chemont:Enantiomer"
+    class_name: ClassVar[str] = "enantiomer"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Enantiomer
+
+
+class RacemicMixture(ChemicalEntity):
+    """
+    a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example
+    is Thalidomide
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.RacemicMixture
+    class_class_curie: ClassVar[str] = "chemont:RacemicMixture"
+    class_name: ClassVar[str] = "racemic mixture"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.RacemicMixture
+
 
 
 # Slots
@@ -417,16 +530,19 @@ slots.symbol = Slot(uri=CHEMONT.symbol, name="symbol", curie=CHEMONT.curie('symb
                       model_uri=CHEMONT.symbol, domain=None, range=Optional[str])
 
 slots.atomic_number = Slot(uri=CHEMONT.atomic_number, name="atomic number", curie=CHEMONT.curie('atomic_number'),
-                      model_uri=CHEMONT.atomic_number, domain=Atom, range=Optional[int])
+                      model_uri=CHEMONT.atomic_number, domain=Atom, range=Optional[int], mappings = [CHEMINF["000079"]])
 
 slots.neutron_number = Slot(uri=CHEMONT.neutron_number, name="neutron number", curie=CHEMONT.curie('neutron_number'),
-                      model_uri=CHEMONT.neutron_number, domain=Atom, range=Optional[int])
+                      model_uri=CHEMONT.neutron_number, domain=Atom, range=Optional[int], mappings = [CHEMINF["000078"]])
 
 slots.nucleon_number = Slot(uri=CHEMONT.nucleon_number, name="nucleon number", curie=CHEMONT.curie('nucleon_number'),
                       model_uri=CHEMONT.nucleon_number, domain=Atom, range=Optional[int])
 
 slots.elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="elemental charge", curie=CHEMONT.curie('elemental_charge'),
-                      model_uri=CHEMONT.elemental_charge, domain=Atom, range=Optional[int])
+                      model_uri=CHEMONT.elemental_charge, domain=Atom, range=Optional[int], mappings = [CHEMINF["000120"]])
+
+slots.alternate_form_of = Slot(uri=CHEMONT.alternate_form_of, name="alternate form of", curie=CHEMONT.curie('alternate_form_of'),
+                      model_uri=CHEMONT.alternate_form_of, domain=ChemicalEntity, range=Optional[Union[dict, "ChemicalEntity"]])
 
 slots.isotope_of = Slot(uri=CHEMONT.isotope_of, name="isotope of", curie=CHEMONT.curie('isotope_of'),
                       model_uri=CHEMONT.isotope_of, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
@@ -438,13 +554,16 @@ slots.nuclear_isomer_of = Slot(uri=CHEMONT.nuclear_isomer_of, name="nuclear isom
                       model_uri=CHEMONT.nuclear_isomer_of, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
 
 slots.isobar_of = Slot(uri=CHEMONT.isobar_of, name="isobar of", curie=CHEMONT.curie('isobar_of'),
-                      model_uri=CHEMONT.isobar_of, domain=None, range=Optional[str])
+                      model_uri=CHEMONT.isobar_of, domain=ChemicalEntity, range=Optional[Union[dict, "ChemicalEntity"]])
 
 slots.energy_level = Slot(uri=CHEMONT.energy_level, name="energy level", curie=CHEMONT.curie('energy_level'),
                       model_uri=CHEMONT.energy_level, domain=None, range=Optional[str])
 
-slots.has_atoms = Slot(uri=CHEMONT.has_atoms, name="has atoms", curie=CHEMONT.curie('has_atoms'),
-                      model_uri=CHEMONT.has_atoms, domain=Molecule, range=Optional[Union[dict, "Atom"]])
+slots.has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
+                      model_uri=CHEMONT.has_atom_occurrences, domain=None, range=List[Union[dict, AtomOccurrence]])
+
+slots.has_bonds = Slot(uri=CHEMONT.has_bonds, name="has bonds", curie=CHEMONT.curie('has_bonds'),
+                      model_uri=CHEMONT.has_bonds, domain=Molecule, range=List[Union[dict, "AtomicBond"]])
 
 slots.half_life = Slot(uri=CHEMONT.half_life, name="half life", curie=CHEMONT.curie('half_life'),
                       model_uri=CHEMONT.half_life, domain=Isotope, range=Optional[int])
@@ -461,6 +580,48 @@ slots.decay_energy = Slot(uri=CHEMONT.decay_energy, name="decay energy", curie=C
 slots.mode_of_formation = Slot(uri=CHEMONT.mode_of_formation, name="mode of formation", curie=CHEMONT.curie('mode_of_formation'),
                       model_uri=CHEMONT.mode_of_formation, domain=Isotope, range=Optional[str])
 
+slots.has_cyclic_structure = Slot(uri=CHEMONT.has_cyclic_structure, name="has cyclic structure", curie=CHEMONT.curie('has_cyclic_structure'),
+                      model_uri=CHEMONT.has_cyclic_structure, domain=Molecule, range=Optional[Bool], mappings = [CHEMINF["000067"]])
+
+slots.chemical_formula = Slot(uri=CHEMONT.chemical_formula, name="chemical formula", curie=CHEMONT.curie('chemical_formula'),
+                      model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str])
+
+slots.molecular_formula = Slot(uri=CHEMONT.molecular_formula, name="molecular formula", curie=CHEMONT.curie('molecular_formula'),
+                      model_uri=CHEMONT.molecular_formula, domain=ChemicalEntity, range=Optional[str], mappings = [CHEMINF["000042"]])
+
+slots.empirical_formula = Slot(uri=CHEMONT.empirical_formula, name="empirical formula", curie=CHEMONT.curie('empirical_formula'),
+                      model_uri=CHEMONT.empirical_formula, domain=ChemicalEntity, range=Optional[str])
+
+slots.atomically_connected_to = Slot(uri=CHEMONT.atomically_connected_to, name="atomically connected to", curie=CHEMONT.curie('atomically_connected_to'),
+                      model_uri=CHEMONT.atomically_connected_to, domain=AtomOccurrence, range=Optional[Union[dict, "AtomOccurrence"]])
+
+slots.acidity = Slot(uri=CHEMONT.acidity, name="acidity", curie=CHEMONT.curie('acidity'),
+                      model_uri=CHEMONT.acidity, domain=Acid, range=Optional[float])
+
+slots.next_in_homologous_series_from = Slot(uri=CHEMONT.next_in_homologous_series_from, name="next in homologous series from", curie=CHEMONT.curie('next_in_homologous_series_from'),
+                      model_uri=CHEMONT.next_in_homologous_series_from, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+
+slots.chemical_isomer_of = Slot(uri=CHEMONT.chemical_isomer_of, name="chemical isomer of", curie=CHEMONT.curie('chemical_isomer_of'),
+                      model_uri=CHEMONT.chemical_isomer_of, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+
+slots.structural_isomer_of = Slot(uri=CHEMONT.structural_isomer_of, name="structural isomer of", curie=CHEMONT.curie('structural_isomer_of'),
+                      model_uri=CHEMONT.structural_isomer_of, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+
+slots.stereoisomer_of = Slot(uri=CHEMONT.stereoisomer_of, name="stereoisomer of", curie=CHEMONT.curie('stereoisomer_of'),
+                      model_uri=CHEMONT.stereoisomer_of, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+
+slots.enantiomer_of = Slot(uri=CHEMONT.enantiomer_of, name="enantiomer of", curie=CHEMONT.curie('enantiomer_of'),
+                      model_uri=CHEMONT.enantiomer_of, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+
+slots.bond_order = Slot(uri=CHEMONT.bond_order, name="bond order", curie=CHEMONT.curie('bond_order'),
+                      model_uri=CHEMONT.bond_order, domain=AtomicBond, range=Optional[int])
+
+slots.bond_length = Slot(uri=CHEMONT.bond_length, name="bond length", curie=CHEMONT.curie('bond_length'),
+                      model_uri=CHEMONT.bond_length, domain=AtomicBond, range=Optional[float])
+
+slots.bond_energy = Slot(uri=CHEMONT.bond_energy, name="bond energy", curie=CHEMONT.curie('bond_energy'),
+                      model_uri=CHEMONT.bond_energy, domain=AtomicBond, range=Optional[float])
+
 slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
 
@@ -470,6 +631,12 @@ slots.cation_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="c
 slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="uncharged_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.uncharged_elemental_charge, domain=None, range=Optional[int])
 
+slots.molecule_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="molecule_has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
+                      model_uri=CHEMONT.molecule_has_atom_occurrences, domain=Molecule, range=List[Union[dict, "AtomOccurrence"]])
+
+slots.molecule_has_bonds = Slot(uri=CHEMONT.has_bonds, name="molecule_has bonds", curie=CHEMONT.curie('has_bonds'),
+                      model_uri=CHEMONT.molecule_has_bonds, domain=Molecule, range=List[Union[dict, "AtomicBond"]])
+
 slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom anion_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.atom_anion_elemental_charge, domain=AtomAnion, range=Optional[int])
 
@@ -478,3 +645,27 @@ slots.atom_cation_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="at
 
 slots.atom_neutral_form_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom neutral form_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.atom_neutral_form_elemental_charge, domain=AtomNeutralForm, range=Optional[int])
+
+slots.atomic_bond_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="atomic bond_has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
+                      model_uri=CHEMONT.atomic_bond_has_atom_occurrences, domain=AtomicBond, range=List[Union[dict, "AtomOccurrence"]])
+
+slots.bond_type = Slot(uri=CHEMONT.bond_type, name="bond type", curie=CHEMONT.curie('bond_type'),
+                      model_uri=CHEMONT.bond_type, domain=AtomicBond, range=Optional[str])
+
+slots.of_atom = Slot(uri=CHEMONT.of_atom, name="of atom", curie=CHEMONT.curie('of_atom'),
+                      model_uri=CHEMONT.of_atom, domain=AtomOccurrence, range=Optional[Union[dict, Atom]])
+
+slots.salt_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="salt_elemental charge", curie=CHEMONT.curie('elemental_charge'),
+                      model_uri=CHEMONT.salt_elemental_charge, domain=Salt, range=Optional[int])
+
+slots.configuration = Slot(uri=CHEMONT.configuration, name="configuration", curie=CHEMONT.curie('configuration'),
+                      model_uri=CHEMONT.configuration, domain=Enantiomer, range=Optional[str])
+
+slots.enantiomer_form_of = Slot(uri=CHEMONT.enantiomer_form_of, name="enantiomer form of", curie=CHEMONT.curie('enantiomer_form_of'),
+                      model_uri=CHEMONT.enantiomer_form_of, domain=Enantiomer, range=Optional[Union[dict, Molecule]])
+
+slots.has_left_enantiomer = Slot(uri=CHEMONT.has_left_enantiomer, name="has left enantiomer", curie=CHEMONT.curie('has_left_enantiomer'),
+                      model_uri=CHEMONT.has_left_enantiomer, domain=RacemicMixture, range=Union[dict, Enantiomer])
+
+slots.has_right_enantiomer = Slot(uri=CHEMONT.has_right_enantiomer, name="has right enantiomer", curie=CHEMONT.curie('has_right_enantiomer'),
+                      model_uri=CHEMONT.has_right_enantiomer, domain=RacemicMixture, range=Union[dict, Enantiomer])

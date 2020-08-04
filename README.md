@@ -7,6 +7,7 @@ Instances of the classes in the data model are chemical ontology classes, e.g.
  - nickel atom
  - nickel anion
  - carbon 14
+ - mitrate
 
 Preliminary slides showing the idea:
 

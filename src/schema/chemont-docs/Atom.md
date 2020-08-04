@@ -7,16 +7,17 @@ A material entity consisting of exactly one atomic nucleus and the electron(s) o
 URI: [chemont:Atom](http://w3id.org/chemontAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[Nuclide],[MonoatomicIon],[Molecule],[Isotope],[FullySpecifiedAtom],[ChemicalEnitity],[AtomIonicForm],[Molecule]++-%20has%20atoms%200..1>[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;name:string%20%3F],[Atom]^-[UnchargedAtom],[Atom]^-[Nuclide],[Atom]^-[MonoatomicIon],[Atom]^-[Isotope],[Atom]^-[FullySpecifiedAtom],[Atom]^-[AtomIonicForm],[ChemicalEnitity]^-[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[Nuclide],[MonoatomicIon],[Isotope],[GenericAtom],[FullySpecifiedAtom],[ChemicalEntity],[AtomOccurrence],[AtomIonicForm],[AtomOccurrence]++-%20of%20atom(i)%200..1>[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;name:string%20%3F],[Atom]^-[UnchargedAtom],[Atom]^-[Nuclide],[Atom]^-[MonoatomicIon],[Atom]^-[Isotope],[Atom]^-[GenericAtom],[Atom]^-[FullySpecifiedAtom],[Atom]^-[AtomIonicForm],[ChemicalEntity]^-[Atom])
 
 ## Parents
 
- *  is_a: [ChemicalEnitity](ChemicalEnitity.md) - An entity that can be described using using chemical properties.
+ *  is_a: [ChemicalEntity](ChemicalEntity.md) - An entity that can be described using using chemical properties.
 
 ## Children
 
  * [AtomIonicForm](AtomIonicForm.md) - an atom type in which charge state is specified. Also known as (atom) ionic species
- * [FullySpecifiedAtom](FullySpecifiedAtom.md)
+ * [FullySpecifiedAtom](FullySpecifiedAtom.md) - An atom (class) that has subatomic particle counts specified
+ * [GenericAtom](GenericAtom.md) - generic form of an atom, with unspecified neutron or charge
  * [Isotope](Isotope.md) - A specific subtype of an atom with a specified neutron number
  * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
  * [Nuclide](Nuclide.md) - an atomic species characterized by the specific constitution of its nucleus
@@ -24,7 +25,7 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
 
 ## Referenced by class
 
- *  **[Molecule](Molecule.md)** *[has atoms](has_atoms.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
+ *  **[AtomOccurrence](AtomOccurrence.md)** *[of atom](of_atom.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
 
 ## Attributes
 
