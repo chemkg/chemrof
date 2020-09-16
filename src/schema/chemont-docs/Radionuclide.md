@@ -7,7 +7,7 @@ an atom that has excess nuclear energy, making it unstable
 URI: [chemont:Radionuclide](http://w3id.org/chemontRadionuclide)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Nuclide]^-[Radionuclide&#124;energy_level(i):string%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F],[Nuclide])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Nuclide]^-[Radionuclide&#124;energy_level(i):string%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string],[Nuclide])
 
 ## Parents
 
@@ -23,6 +23,8 @@ URI: [chemont:Radionuclide](http://w3id.org/chemontRadionuclide)
     * range: [Count](types/Count.md)
  * [energy level](energy_level.md)  <sub>OPT</sub>
     * Description: e.g. ground, stable
+    * range: [String](types/String.md)
+ * [id](id.md)  <sub>REQ</sub>
     * range: [String](types/String.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16

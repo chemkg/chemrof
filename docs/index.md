@@ -14,13 +14,13 @@ A data model describing metaclasses for chemical ontology classes
     * [ChemicalEntity](ChemicalEntity.md) - An entity that can be described using using chemical properties.
        * [Atom](Atom.md) - A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
           * [AtomIonicForm](AtomIonicForm.md) - an atom type in which charge state is specified. Also known as (atom) ionic species
+             * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
+                * [AtomAnion](AtomAnion.md) - A monoatomic ion that is negative
+                * [AtomCation](AtomCation.md) - A monoatomic ion that is positive
              * [UnchargedAtom](UnchargedAtom.md) - An atom that has no charge
           * [FullySpecifiedAtom](FullySpecifiedAtom.md) - An atom (class) that has subatomic particle counts specified
           * [GenericAtom](GenericAtom.md) - generic form of an atom, with unspecified neutron or charge
           * [Isotope](Isotope.md) - A specific subtype of an atom with a specified neutron number
-          * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
-             * [AtomAnion](AtomAnion.md) - A monoatomic ion that is negative
-             * [AtomCation](AtomCation.md) - A monoatomic ion that is positive
           * [Nuclide](Nuclide.md) - an atomic species characterized by the specific constitution of its nucleus
              * [Radionuclide](Radionuclide.md) - an atom that has excess nuclear energy, making it unstable
        * [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via bonds
@@ -75,7 +75,7 @@ A data model describing metaclasses for chemical ontology classes
  * [bond order](bond_order.md) - the number of electron pairs (bonds) between a pair of atoms
  * [bond type](bond_type.md) - E.g. covalent, ionic
     * [atomic bond➞bond type](atomic_bond_bond_type.md)
- * [chemical formula](chemical_formula.md)
+ * [chemical formula](chemical_formula.md) - A generic grouping for miolecular formulae and empirican formulae
     * [empirical formula](empirical_formula.md) - A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
     * [molecular formula](molecular_formula.md) - A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose
     * [smiles string](smiles_string.md) - A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
@@ -102,10 +102,13 @@ A data model describing metaclasses for chemical ontology classes
  * [has left enantiomer](has_left_enantiomer.md)
     * [racemic mixture➞has left enantiomer](racemic_mixture_has_left_enantiomer.md)
  * [has part](has_part.md) - basic parthood relations
-    * [has atom](has_atom.md) - Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
-    * [has group](has_group.md) - Relation between a molecule and the groups it contains
+    * [has atoms](has_atoms.md) - Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
+    * [has submolecules](has_submolecules.md) - Relation between a molecule and the molecules it is made from.
+       * [has group](has_group.md) - Relation between a molecule and the groups it contains
+    * [molecule➞has part](molecule_has_part.md)
  * [has right enantiomer](has_right_enantiomer.md)
     * [racemic mixture➞has right enantiomer](racemic_mixture_has_right_enantiomer.md)
+ * [id](id.md)
  * [mode of formation](mode_of_formation.md)
  * [name](name.md) - name of chemical entity. E.g. nickel, carbon-16
  * [neutron number](neutron_number.md) - number of neutrons in an atom

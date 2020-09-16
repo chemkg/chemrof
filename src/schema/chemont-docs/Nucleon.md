@@ -7,7 +7,7 @@ A neutron or proton
 URI: [chemont:Nucleon](http://w3id.org/chemontNucleon)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[Proton],[Nucleon]^-[Proton],[Nucleon]^-[Neutron],[SubatomicParticle]^-[Nucleon],[Neutron])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[Proton],[Nucleon&#124;id(i):string]^-[Proton],[Nucleon]^-[Neutron],[SubatomicParticle]^-[Nucleon],[Neutron])
 
 ## Parents
 
@@ -23,3 +23,8 @@ URI: [chemont:Nucleon](http://w3id.org/chemontNucleon)
 
 ## Attributes
 
+
+### Inherited from subatomic particle:
+
+ * [id](id.md)  <sub>REQ</sub>
+    * range: [String](types/String.md)

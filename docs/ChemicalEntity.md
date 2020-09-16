@@ -7,7 +7,7 @@ An entity that can be described using using chemical properties.
 URI: [chemont:ChemicalEntity](http://w3id.org/chemontChemicalEntity)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[Salt],[RacemicMixture],[Pattern],[Molecule],[ChemicalEntity]^-[SubatomicParticle],[ChemicalEntity]^-[Salt],[ChemicalEntity]^-[RacemicMixture],[ChemicalEntity]^-[Molecule],[ChemicalEntity]^-[Atom],[Pattern]^-[ChemicalEntity],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[Salt],[RacemicMixture],[Pattern],[Molecule],[ChemicalEntity&#124;id:string]^-[SubatomicParticle],[ChemicalEntity]^-[Salt],[ChemicalEntity]^-[RacemicMixture],[ChemicalEntity]^-[Molecule],[ChemicalEntity]^-[Atom],[Pattern]^-[ChemicalEntity],[Atom])
 
 ## Parents
 
@@ -28,6 +28,11 @@ URI: [chemont:ChemicalEntity](http://w3id.org/chemontChemicalEntity)
 
 ## Attributes
 
+
+### Own
+
+ * [id](id.md)  <sub>REQ</sub>
+    * range: [String](types/String.md)
 
 ## Other properties
 

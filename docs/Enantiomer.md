@@ -7,7 +7,7 @@ one of two stereoisomers of a chiral molecule that are mirror images. Example: R
 URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[RacemicMixture],[Molecule],[Molecule]<enantiomer%20form%20of%200..1-++[Enantiomer&#124;relative_configuration:string%20%3F;optical_configuration:string%20%3F;absolute_configuration:string%20%3F],[RacemicMixture]++-%20has%20left%20enantiomer%201..1>[Enantiomer],[RacemicMixture]++-%20has%20right%20enantiomer%201..1>[Enantiomer],[Molecule]^-[Enantiomer],[AtomicBond],[AtomOccurrence])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[RacemicMixture],[Molecule],[Molecule]<enantiomer%20form%20of%200..1-%20[Enantiomer&#124;relative_configuration:string%20%3F;optical_configuration:string%20%3F;absolute_configuration:string%20%3F;has_part(i):string%20%3F;id(i):string],[RacemicMixture]-%20has%20left%20enantiomer%201..1>[Enantiomer],[RacemicMixture]-%20has%20right%20enantiomer%201..1>[Enantiomer],[Molecule]^-[Enantiomer],[AtomicBond],[AtomOccurrence],[Atom])
 
 ## Parents
 
@@ -37,7 +37,17 @@ URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
 
 ### Inherited from molecule:
 
+ * [has atoms](has_atoms.md)  <sub>0..*</sub>
+    * Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
+    * range: [Atom](Atom.md)
+ * [has submolecules](has_submolecules.md)  <sub>0..*</sub>
+    * Description: Relation between a molecule and the molecules it is made from.
+    * range: [Molecule](Molecule.md)
+ * [id](id.md)  <sub>REQ</sub>
+    * range: [String](types/String.md)
  * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
     * range: [AtomOccurrence](AtomOccurrence.md)
  * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
     * range: [AtomicBond](AtomicBond.md)
+ * [molecule➞has part](molecule_has_part.md)  <sub>OPT</sub>
+    * range: [String](types/String.md)

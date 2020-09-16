@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-09-15 19:13
+# Generation date: 2020-09-15 19:26
 # Schema: chemont
 #
 # id: chemont
@@ -66,7 +66,116 @@ class ChemicalEncoding(str):
 
 
 # Class references
+class ChemicalEntityId(extended_str):
+    pass
 
+
+class SubatomicParticleId(ChemicalEntityId):
+    pass
+
+
+class NucleonId(SubatomicParticleId):
+    pass
+
+
+class NeutronId(NucleonId):
+    pass
+
+
+class ProtonId(NucleonId):
+    pass
+
+
+class ElectronId(SubatomicParticleId):
+    pass
+
+
+class MoleculeId(ChemicalEntityId):
+    pass
+
+
+class MolecularSpeciesId(MoleculeId):
+    pass
+
+
+class NonSpeciesMoleculeId(MoleculeId):
+    pass
+
+
+class PolyatomicIonId(MoleculeId):
+    pass
+
+
+class MolecularCationId(PolyatomicIonId):
+    pass
+
+
+class MolecularAnionId(PolyatomicIonId):
+    pass
+
+
+class UnchargedMoleculeId(MoleculeId):
+    pass
+
+
+class AtomId(ChemicalEntityId):
+    pass
+
+
+class GenericAtomId(AtomId):
+    pass
+
+
+class IsotopeId(AtomId):
+    pass
+
+
+class NuclideId(AtomId):
+    pass
+
+
+class RadionuclideId(NuclideId):
+    pass
+
+
+class AtomIonicFormId(AtomId):
+    pass
+
+
+class UnchargedAtomId(AtomIonicFormId):
+    pass
+
+
+class MonoatomicIonId(AtomIonicFormId):
+    pass
+
+
+class AtomAnionId(MonoatomicIonId):
+    pass
+
+
+class AtomCationId(MonoatomicIonId):
+    pass
+
+
+class FullySpecifiedAtomId(AtomId):
+    pass
+
+
+class AcidId(MoleculeId):
+    pass
+
+
+class SaltId(ChemicalEntityId):
+    pass
+
+
+class EnantiomerId(MoleculeId):
+    pass
+
+
+class RacemicMixtureId(ChemicalEntityId):
+    pass
 
 
 class Pattern(YAMLRoot):
@@ -94,6 +203,7 @@ class GroupingClass(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = CHEMONT.GroupingClass
 
 
+@dataclass
 class ChemicalEntity(Pattern):
     """
     An entity that can be described using using chemical properties.
@@ -105,7 +215,17 @@ class ChemicalEntity(Pattern):
     class_name: ClassVar[str] = "chemical entity"
     class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalEntity
 
+    id: Union[str, ChemicalEntityId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, ChemicalEntityId):
+            self.id = ChemicalEntityId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class SubatomicParticle(ChemicalEntity):
     """
     A chemical entity below the granularity of an atom.
@@ -117,7 +237,17 @@ class SubatomicParticle(ChemicalEntity):
     class_name: ClassVar[str] = "subatomic particle"
     class_model_uri: ClassVar[URIRef] = CHEMONT.SubatomicParticle
 
+    id: Union[str, SubatomicParticleId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, SubatomicParticleId):
+            self.id = SubatomicParticleId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Nucleon(SubatomicParticle):
     """
     A neutron or proton
@@ -129,7 +259,17 @@ class Nucleon(SubatomicParticle):
     class_name: ClassVar[str] = "nucleon"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Nucleon
 
+    id: Union[str, NucleonId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, NucleonId):
+            self.id = NucleonId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Neutron(Nucleon):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -138,7 +278,17 @@ class Neutron(Nucleon):
     class_name: ClassVar[str] = "neutron"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Neutron
 
+    id: Union[str, NeutronId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, NeutronId):
+            self.id = NeutronId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Proton(Nucleon):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -147,7 +297,17 @@ class Proton(Nucleon):
     class_name: ClassVar[str] = "proton"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Proton
 
+    id: Union[str, ProtonId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, ProtonId):
+            self.id = ProtonId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Electron(SubatomicParticle):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -155,6 +315,15 @@ class Electron(SubatomicParticle):
     class_class_curie: ClassVar[str] = "chemont:Electron"
     class_name: ClassVar[str] = "electron"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Electron
+
+    id: Union[str, ElectronId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, ElectronId):
+            self.id = ElectronId(self.id)
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -169,8 +338,12 @@ class Molecule(ChemicalEntity):
     class_name: ClassVar[str] = "molecule"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Molecule
 
+    id: Union[str, MoleculeId] = None
     has_atom_occurrences: List[Union[dict, "AtomOccurrence"]] = empty_list()
     has_bonds: List[Union[dict, "AtomicBond"]] = empty_list()
+    has_submolecules: List[Union[str, MoleculeId]] = empty_list()
+    has_atoms: List[Union[str, AtomId]] = empty_list()
+    has_part: Optional[str] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
         self.has_atom_occurrences = [AtomOccurrence(*e) for e in self.has_atom_occurrences.items()] if isinstance(self.has_atom_occurrences, dict) \
@@ -179,9 +352,14 @@ class Molecule(ChemicalEntity):
         self.has_bonds = [AtomicBond(*e) for e in self.has_bonds.items()] if isinstance(self.has_bonds, dict) \
                           else [v if isinstance(v, AtomicBond) else AtomicBond(**v)
                                 for v in ([self.has_bonds] if isinstance(self.has_bonds, str) else self.has_bonds)]
+        self.has_submolecules = [v if isinstance(v, MoleculeId)
+                                 else MoleculeId(v) for v in ([self.has_submolecules] if isinstance(self.has_submolecules, str) else self.has_submolecules)]
+        self.has_atoms = [v if isinstance(v, AtomId)
+                          else AtomId(v) for v in ([self.has_atoms] if isinstance(self.has_atoms, str) else self.has_atoms)]
         super().__post_init__(**kwargs)
 
 
+@dataclass
 class MolecularSpecies(Molecule):
     """
     A molecule in which the units are identical. Example: methyl
@@ -193,7 +371,17 @@ class MolecularSpecies(Molecule):
     class_name: ClassVar[str] = "molecular species"
     class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularSpecies
 
+    id: Union[str, MolecularSpeciesId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, MolecularSpeciesId):
+            self.id = MolecularSpeciesId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class NonSpeciesMolecule(Molecule):
     """
     A molecule in which the units are not identical. Example: sodium chloride
@@ -205,7 +393,17 @@ class NonSpeciesMolecule(Molecule):
     class_name: ClassVar[str] = "non species molecule"
     class_model_uri: ClassVar[URIRef] = CHEMONT.NonSpeciesMolecule
 
+    id: Union[str, NonSpeciesMoleculeId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, NonSpeciesMoleculeId):
+            self.id = NonSpeciesMoleculeId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class PolyatomicIon(Molecule):
     """
     A molecule that has a charge. For example, nitrate (NO3-).
@@ -217,7 +415,17 @@ class PolyatomicIon(Molecule):
     class_name: ClassVar[str] = "polyatomic ion"
     class_model_uri: ClassVar[URIRef] = CHEMONT.PolyatomicIon
 
+    id: Union[str, PolyatomicIonId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, PolyatomicIonId):
+            self.id = PolyatomicIonId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class MolecularCation(PolyatomicIon):
     """
     A polyatomic ion that is positive
@@ -229,7 +437,17 @@ class MolecularCation(PolyatomicIon):
     class_name: ClassVar[str] = "molecular cation"
     class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularCation
 
+    id: Union[str, MolecularCationId] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, MolecularCationId):
+            self.id = MolecularCationId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class MolecularAnion(PolyatomicIon):
     """
     A polyatomic ion that is negative
@@ -240,6 +458,15 @@ class MolecularAnion(PolyatomicIon):
     class_class_curie: ClassVar[str] = "chemont:MolecularAnion"
     class_name: ClassVar[str] = "molecular anion"
     class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularAnion
+
+    id: Union[str, MolecularAnionId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, MolecularAnionId):
+            self.id = MolecularAnionId(self.id)
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -254,7 +481,16 @@ class UnchargedMolecule(Molecule):
     class_name: ClassVar[str] = "uncharged molecule"
     class_model_uri: ClassVar[URIRef] = CHEMONT.UnchargedMolecule
 
+    id: Union[str, UnchargedMoleculeId] = None
     elemental_charge: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, UnchargedMoleculeId):
+            self.id = UnchargedMoleculeId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class Atom(ChemicalEntity):
@@ -268,10 +504,12 @@ class Atom(ChemicalEntity):
     class_name: ClassVar[str] = "atom"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Atom
 
+    id: Union[str, AtomId] = None
     atomic_number: Optional[int] = None
     symbol: Optional[str] = None
     name: Optional[str] = None
 
+@dataclass
 class GenericAtom(Atom):
     """
     generic form of an atom, with unspecified neutron or charge
@@ -282,6 +520,15 @@ class GenericAtom(Atom):
     class_class_curie: ClassVar[str] = "chemont:GenericAtom"
     class_name: ClassVar[str] = "generic atom"
     class_model_uri: ClassVar[URIRef] = CHEMONT.GenericAtom
+
+    id: Union[str, GenericAtomId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, GenericAtomId):
+            self.id = GenericAtomId(self.id)
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -296,19 +543,24 @@ class Isotope(Atom):
     class_name: ClassVar[str] = "isotope"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Isotope
 
+    id: Union[str, IsotopeId] = None
     neutron_number: Optional[int] = None
-    isotope_of: Optional[Union[dict, "Isotope"]] = None
+    isotope_of: Optional[Union[str, IsotopeId]] = None
     half_life: Optional[int] = None
-    decay_product: Optional[Union[dict, "Isotope"]] = None
+    decay_product: Optional[Union[str, IsotopeId]] = None
     decay_mode: Optional[str] = None
     decay_energy: Optional[str] = None
     mode_of_formation: Optional[str] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
-        if self.isotope_of is not None and not isinstance(self.isotope_of, Isotope):
-            self.isotope_of = Isotope(**self.isotope_of)
-        if self.decay_product is not None and not isinstance(self.decay_product, Isotope):
-            self.decay_product = Isotope(**self.decay_product)
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, IsotopeId):
+            self.id = IsotopeId(self.id)
+        if self.isotope_of is not None and not isinstance(self.isotope_of, IsotopeId):
+            self.isotope_of = IsotopeId(self.isotope_of)
+        if self.decay_product is not None and not isinstance(self.decay_product, IsotopeId):
+            self.decay_product = IsotopeId(self.decay_product)
         super().__post_init__(**kwargs)
 
 
@@ -324,8 +576,18 @@ class Nuclide(Atom):
     class_name: ClassVar[str] = "nuclide"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Nuclide
 
+    id: Union[str, NuclideId] = None
     energy_level: Optional[str] = None
 
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, NuclideId):
+            self.id = NuclideId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Radionuclide(Nuclide):
     """
     an atom that has excess nuclear energy, making it unstable
@@ -336,6 +598,15 @@ class Radionuclide(Nuclide):
     class_class_curie: ClassVar[str] = "chemont:Radionuclide"
     class_name: ClassVar[str] = "radionuclide"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Radionuclide
+
+    id: Union[str, RadionuclideId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, RadionuclideId):
+            self.id = RadionuclideId(self.id)
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -350,8 +621,10 @@ class AtomIonicForm(Atom):
     class_name: ClassVar[str] = "atom ionic form"
     class_model_uri: ClassVar[URIRef] = CHEMONT.AtomIonicForm
 
+    id: Union[str, AtomIonicFormId] = None
     elemental_charge: Optional[int] = None
 
+@dataclass
 class UnchargedAtom(AtomIonicForm):
     """
     An atom that has no charge
@@ -363,8 +636,18 @@ class UnchargedAtom(AtomIonicForm):
     class_name: ClassVar[str] = "uncharged atom"
     class_model_uri: ClassVar[URIRef] = CHEMONT.UnchargedAtom
 
+    id: Union[str, UnchargedAtomId] = None
 
-class MonoatomicIon(Atom):
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, UnchargedAtomId):
+            self.id = UnchargedAtomId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class MonoatomicIon(AtomIonicForm):
     """
     An atom that has a charge
     """
@@ -374,6 +657,15 @@ class MonoatomicIon(Atom):
     class_class_curie: ClassVar[str] = "chemont:MonoatomicIon"
     class_name: ClassVar[str] = "monoatomic ion"
     class_model_uri: ClassVar[URIRef] = CHEMONT.MonoatomicIon
+
+    id: Union[str, MonoatomicIonId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, MonoatomicIonId):
+            self.id = MonoatomicIonId(self.id)
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -388,7 +680,16 @@ class AtomAnion(MonoatomicIon):
     class_name: ClassVar[str] = "atom anion"
     class_model_uri: ClassVar[URIRef] = CHEMONT.AtomAnion
 
+    id: Union[str, AtomAnionId] = None
     elemental_charge: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, AtomAnionId):
+            self.id = AtomAnionId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class AtomCation(MonoatomicIon):
@@ -402,7 +703,16 @@ class AtomCation(MonoatomicIon):
     class_name: ClassVar[str] = "atom cation"
     class_model_uri: ClassVar[URIRef] = CHEMONT.AtomCation
 
+    id: Union[str, AtomCationId] = None
     elemental_charge: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, AtomCationId):
+            self.id = AtomCationId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class FullySpecifiedAtom(Atom):
@@ -416,8 +726,17 @@ class FullySpecifiedAtom(Atom):
     class_name: ClassVar[str] = "fully specified atom"
     class_model_uri: ClassVar[URIRef] = CHEMONT.FullySpecifiedAtom
 
+    id: Union[str, FullySpecifiedAtomId] = None
     elemental_charge: Optional[int] = None
     neutron_number: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, FullySpecifiedAtomId):
+            self.id = FullySpecifiedAtomId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class AtomicBond(Pattern):
@@ -455,11 +774,11 @@ class AtomOccurrence(Pattern):
     class_name: ClassVar[str] = "atom occurrence"
     class_model_uri: ClassVar[URIRef] = CHEMONT.AtomOccurrence
 
-    of_atom: Optional[Union[dict, Atom]] = None
+    of_atom: Optional[Union[str, AtomId]] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
-        if self.of_atom is not None and not isinstance(self.of_atom, Atom):
-            self.of_atom = Atom(**self.of_atom)
+        if self.of_atom is not None and not isinstance(self.of_atom, AtomId):
+            self.of_atom = AtomId(self.of_atom)
         super().__post_init__(**kwargs)
 
 
@@ -472,7 +791,16 @@ class Acid(Molecule):
     class_name: ClassVar[str] = "acid"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Acid
 
+    id: Union[str, AcidId] = None
     acidity: Optional[float] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, AcidId):
+            self.id = AcidId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class Salt(ChemicalEntity):
@@ -486,7 +814,16 @@ class Salt(ChemicalEntity):
     class_name: ClassVar[str] = "salt"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Salt
 
+    id: Union[str, SaltId] = None
     elemental_charge: Optional[int] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, SaltId):
+            self.id = SaltId(self.id)
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class Enantiomer(Molecule):
@@ -500,14 +837,19 @@ class Enantiomer(Molecule):
     class_name: ClassVar[str] = "enantiomer"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Enantiomer
 
+    id: Union[str, EnantiomerId] = None
     relative_configuration: Optional[str] = None
     optical_configuration: Optional[str] = None
     absolute_configuration: Optional[str] = None
-    enantiomer_form_of: Optional[Union[dict, Molecule]] = None
+    enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
-        if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, Molecule):
-            self.enantiomer_form_of = Molecule(**self.enantiomer_form_of)
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, EnantiomerId):
+            self.id = EnantiomerId(self.id)
+        if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, MoleculeId):
+            self.enantiomer_form_of = MoleculeId(self.enantiomer_form_of)
         super().__post_init__(**kwargs)
 
 
@@ -524,18 +866,23 @@ class RacemicMixture(ChemicalEntity):
     class_name: ClassVar[str] = "racemic mixture"
     class_model_uri: ClassVar[URIRef] = CHEMONT.RacemicMixture
 
-    has_left_enantiomer: Union[dict, Enantiomer] = None
-    has_right_enantiomer: Union[dict, Enantiomer] = None
+    id: Union[str, RacemicMixtureId] = None
+    has_left_enantiomer: Union[str, EnantiomerId] = None
+    has_right_enantiomer: Union[str, EnantiomerId] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, RacemicMixtureId):
+            self.id = RacemicMixtureId(self.id)
         if self.has_left_enantiomer is None:
             raise ValueError(f"has_left_enantiomer must be supplied")
-        if not isinstance(self.has_left_enantiomer, Enantiomer):
-            self.has_left_enantiomer = Enantiomer(**self.has_left_enantiomer)
+        if not isinstance(self.has_left_enantiomer, EnantiomerId):
+            self.has_left_enantiomer = EnantiomerId(self.has_left_enantiomer)
         if self.has_right_enantiomer is None:
             raise ValueError(f"has_right_enantiomer must be supplied")
-        if not isinstance(self.has_right_enantiomer, Enantiomer):
-            self.has_right_enantiomer = Enantiomer(**self.has_right_enantiomer)
+        if not isinstance(self.has_right_enantiomer, EnantiomerId):
+            self.has_right_enantiomer = EnantiomerId(self.has_right_enantiomer)
         super().__post_init__(**kwargs)
 
 
@@ -543,6 +890,9 @@ class RacemicMixture(ChemicalEntity):
 # Slots
 class slots:
     pass
+
+slots.id = Slot(uri=CHEMONT.id, name="id", curie=CHEMONT.curie('id'),
+                      model_uri=CHEMONT.id, domain=None, range=URIRef)
 
 slots.name = Slot(uri=CHEMONT.name, name="name", curie=CHEMONT.curie('name'),
                       model_uri=CHEMONT.name, domain=None, range=Optional[str])
@@ -563,28 +913,31 @@ slots.elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="elemental char
                       model_uri=CHEMONT.elemental_charge, domain=Atom, range=Optional[int], mappings = [CHEMINF["000120"]])
 
 slots.alternate_form_of = Slot(uri=CHEMONT.alternate_form_of, name="alternate form of", curie=CHEMONT.curie('alternate_form_of'),
-                      model_uri=CHEMONT.alternate_form_of, domain=ChemicalEntity, range=Optional[Union[dict, "ChemicalEntity"]])
+                      model_uri=CHEMONT.alternate_form_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
 
 slots.isotope_of = Slot(uri=CHEMONT.isotope_of, name="isotope of", curie=CHEMONT.curie('isotope_of'),
-                      model_uri=CHEMONT.isotope_of, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
+                      model_uri=CHEMONT.isotope_of, domain=Isotope, range=Optional[Union[str, IsotopeId]])
 
 slots.isotone_of = Slot(uri=CHEMONT.isotone_of, name="isotone of", curie=CHEMONT.curie('isotone_of'),
-                      model_uri=CHEMONT.isotone_of, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
+                      model_uri=CHEMONT.isotone_of, domain=Isotope, range=Optional[Union[str, IsotopeId]])
 
 slots.nuclear_isomer_of = Slot(uri=CHEMONT.nuclear_isomer_of, name="nuclear isomer of", curie=CHEMONT.curie('nuclear_isomer_of'),
-                      model_uri=CHEMONT.nuclear_isomer_of, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
+                      model_uri=CHEMONT.nuclear_isomer_of, domain=Isotope, range=Optional[Union[str, IsotopeId]])
 
 slots.isobar_of = Slot(uri=CHEMONT.isobar_of, name="isobar of", curie=CHEMONT.curie('isobar_of'),
-                      model_uri=CHEMONT.isobar_of, domain=ChemicalEntity, range=Optional[Union[dict, "ChemicalEntity"]])
+                      model_uri=CHEMONT.isobar_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
 
 slots.has_part = Slot(uri=CHEMONT.has_part, name="has part", curie=CHEMONT.curie('has_part'),
-                      model_uri=CHEMONT.has_part, domain=None, range=Optional[str], mappings = [BFO["0000050"]])
+                      model_uri=CHEMONT.has_part, domain=None, range=Optional[str], mappings = [BFO["0000050"], SCHEMA.hasBioChemEntityPart])
 
-slots.has_atom = Slot(uri=CHEMONT.has_atom, name="has atom", curie=CHEMONT.curie('has_atom'),
-                      model_uri=CHEMONT.has_atom, domain=Molecule, range=Optional[Union[dict, "Atom"]])
+slots.has_atoms = Slot(uri=CHEMONT.has_atoms, name="has atoms", curie=CHEMONT.curie('has_atoms'),
+                      model_uri=CHEMONT.has_atoms, domain=Molecule, range=List[Union[str, AtomId]])
+
+slots.has_submolecules = Slot(uri=CHEMONT.has_submolecules, name="has submolecules", curie=CHEMONT.curie('has_submolecules'),
+                      model_uri=CHEMONT.has_submolecules, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.has_group = Slot(uri=CHEMONT.has_group, name="has group", curie=CHEMONT.curie('has_group'),
-                      model_uri=CHEMONT.has_group, domain=Atom, range=Optional[str])
+                      model_uri=CHEMONT.has_group, domain=Atom, range=List[Union[str, MoleculeId]])
 
 slots.energy_level = Slot(uri=CHEMONT.energy_level, name="energy level", curie=CHEMONT.curie('energy_level'),
                       model_uri=CHEMONT.energy_level, domain=None, range=Optional[str])
@@ -602,7 +955,7 @@ slots.decay_mode = Slot(uri=CHEMONT.decay_mode, name="decay mode", curie=CHEMONT
                       model_uri=CHEMONT.decay_mode, domain=Isotope, range=Optional[str])
 
 slots.decay_product = Slot(uri=CHEMONT.decay_product, name="decay product", curie=CHEMONT.curie('decay_product'),
-                      model_uri=CHEMONT.decay_product, domain=Isotope, range=Optional[Union[dict, "Isotope"]])
+                      model_uri=CHEMONT.decay_product, domain=Isotope, range=Optional[Union[str, IsotopeId]])
 
 slots.decay_energy = Slot(uri=CHEMONT.decay_energy, name="decay energy", curie=CHEMONT.curie('decay_energy'),
                       model_uri=CHEMONT.decay_energy, domain=Isotope, range=Optional[str])
@@ -614,7 +967,7 @@ slots.has_cyclic_structure = Slot(uri=CHEMONT.has_cyclic_structure, name="has cy
                       model_uri=CHEMONT.has_cyclic_structure, domain=Molecule, range=Optional[Bool], mappings = [CHEMINF["000067"]])
 
 slots.chemical_formula = Slot(uri=CHEMONT.chemical_formula, name="chemical formula", curie=CHEMONT.curie('chemical_formula'),
-                      model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str])
+                      model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str], mappings = [SCHEMA.hasRepresentation])
 
 slots.molecular_formula = Slot(uri=CHEMONT.molecular_formula, name="molecular formula", curie=CHEMONT.curie('molecular_formula'),
                       model_uri=CHEMONT.molecular_formula, domain=ChemicalEntity, range=Optional[str], mappings = [CHEMINF["000042"]])
@@ -632,31 +985,31 @@ slots.acidity = Slot(uri=CHEMONT.acidity, name="acidity", curie=CHEMONT.curie('a
                       model_uri=CHEMONT.acidity, domain=Acid, range=Optional[float])
 
 slots.next_in_homologous_series_from = Slot(uri=CHEMONT.next_in_homologous_series_from, name="next in homologous series from", curie=CHEMONT.curie('next_in_homologous_series_from'),
-                      model_uri=CHEMONT.next_in_homologous_series_from, domain=Molecule, range=Optional[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.next_in_homologous_series_from, domain=Molecule, range=Optional[Union[str, MoleculeId]])
 
 slots.chemical_isomer_of = Slot(uri=CHEMONT.chemical_isomer_of, name="chemical isomer of", curie=CHEMONT.curie('chemical_isomer_of'),
-                      model_uri=CHEMONT.chemical_isomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.chemical_isomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.structural_isomer_of = Slot(uri=CHEMONT.structural_isomer_of, name="structural isomer of", curie=CHEMONT.curie('structural_isomer_of'),
-                      model_uri=CHEMONT.structural_isomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.structural_isomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.skeletal_isomer_of = Slot(uri=CHEMONT.skeletal_isomer_of, name="skeletal isomer of", curie=CHEMONT.curie('skeletal_isomer_of'),
-                      model_uri=CHEMONT.skeletal_isomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.skeletal_isomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.position_isomer_of = Slot(uri=CHEMONT.position_isomer_of, name="position isomer of", curie=CHEMONT.curie('position_isomer_of'),
-                      model_uri=CHEMONT.position_isomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.position_isomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.functional_isomer_of = Slot(uri=CHEMONT.functional_isomer_of, name="functional isomer of", curie=CHEMONT.curie('functional_isomer_of'),
-                      model_uri=CHEMONT.functional_isomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.functional_isomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.tautomer_of = Slot(uri=CHEMONT.tautomer_of, name="tautomer of", curie=CHEMONT.curie('tautomer_of'),
-                      model_uri=CHEMONT.tautomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.tautomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.stereoisomer_of = Slot(uri=CHEMONT.stereoisomer_of, name="stereoisomer of", curie=CHEMONT.curie('stereoisomer_of'),
-                      model_uri=CHEMONT.stereoisomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.stereoisomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.enantiomer_of = Slot(uri=CHEMONT.enantiomer_of, name="enantiomer of", curie=CHEMONT.curie('enantiomer_of'),
-                      model_uri=CHEMONT.enantiomer_of, domain=Molecule, range=List[Union[dict, "Molecule"]])
+                      model_uri=CHEMONT.enantiomer_of, domain=Molecule, range=List[Union[str, MoleculeId]])
 
 slots.bond_order = Slot(uri=CHEMONT.bond_order, name="bond order", curie=CHEMONT.curie('bond_order'),
                       model_uri=CHEMONT.bond_order, domain=AtomicBond, range=Optional[int])
@@ -671,7 +1024,7 @@ slots.bond_type = Slot(uri=CHEMONT.bond_type, name="bond type", curie=CHEMONT.cu
                       model_uri=CHEMONT.bond_type, domain=None, range=Optional[str])
 
 slots.of_atom = Slot(uri=CHEMONT.of_atom, name="of atom", curie=CHEMONT.curie('of_atom'),
-                      model_uri=CHEMONT.of_atom, domain=None, range=Optional[Union[dict, Atom]])
+                      model_uri=CHEMONT.of_atom, domain=None, range=Optional[Union[str, AtomId]])
 
 slots.relative_configuration = Slot(uri=CHEMONT.relative_configuration, name="relative configuration", curie=CHEMONT.curie('relative_configuration'),
                       model_uri=CHEMONT.relative_configuration, domain=None, range=Optional[str])
@@ -683,13 +1036,13 @@ slots.absolute_configuration = Slot(uri=CHEMONT.absolute_configuration, name="ab
                       model_uri=CHEMONT.absolute_configuration, domain=None, range=Optional[str])
 
 slots.enantiomer_form_of = Slot(uri=CHEMONT.enantiomer_form_of, name="enantiomer form of", curie=CHEMONT.curie('enantiomer_form_of'),
-                      model_uri=CHEMONT.enantiomer_form_of, domain=None, range=Optional[Union[dict, Molecule]])
+                      model_uri=CHEMONT.enantiomer_form_of, domain=None, range=Optional[Union[str, MoleculeId]])
 
 slots.has_left_enantiomer = Slot(uri=CHEMONT.has_left_enantiomer, name="has left enantiomer", curie=CHEMONT.curie('has_left_enantiomer'),
-                      model_uri=CHEMONT.has_left_enantiomer, domain=None, range=Union[dict, Enantiomer])
+                      model_uri=CHEMONT.has_left_enantiomer, domain=None, range=Union[str, EnantiomerId])
 
 slots.has_right_enantiomer = Slot(uri=CHEMONT.has_right_enantiomer, name="has right enantiomer", curie=CHEMONT.curie('has_right_enantiomer'),
-                      model_uri=CHEMONT.has_right_enantiomer, domain=None, range=Union[dict, Enantiomer])
+                      model_uri=CHEMONT.has_right_enantiomer, domain=None, range=Union[str, EnantiomerId])
 
 slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
@@ -706,6 +1059,9 @@ slots.molecule_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, nam
 slots.molecule_has_bonds = Slot(uri=CHEMONT.has_bonds, name="molecule_has bonds", curie=CHEMONT.curie('has_bonds'),
                       model_uri=CHEMONT.molecule_has_bonds, domain=Molecule, range=List[Union[dict, "AtomicBond"]])
 
+slots.molecule_has_part = Slot(uri=CHEMONT.has_part, name="molecule_has part", curie=CHEMONT.curie('has_part'),
+                      model_uri=CHEMONT.molecule_has_part, domain=Molecule, range=Optional[str])
+
 slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom anion_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.atom_anion_elemental_charge, domain=AtomAnion, range=Optional[int])
 
@@ -719,7 +1075,7 @@ slots.atomic_bond_bond_type = Slot(uri=CHEMONT.bond_type, name="atomic bond_bond
                       model_uri=CHEMONT.atomic_bond_bond_type, domain=AtomicBond, range=Optional[str])
 
 slots.atom_occurrence_of_atom = Slot(uri=CHEMONT.of_atom, name="atom occurrence_of atom", curie=CHEMONT.curie('of_atom'),
-                      model_uri=CHEMONT.atom_occurrence_of_atom, domain=AtomOccurrence, range=Optional[Union[dict, Atom]])
+                      model_uri=CHEMONT.atom_occurrence_of_atom, domain=AtomOccurrence, range=Optional[Union[str, AtomId]])
 
 slots.salt_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="salt_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.salt_elemental_charge, domain=Salt, range=Optional[int])
@@ -734,10 +1090,10 @@ slots.enantiomer_absolute_configuration = Slot(uri=CHEMONT.absolute_configuratio
                       model_uri=CHEMONT.enantiomer_absolute_configuration, domain=Enantiomer, range=Optional[str])
 
 slots.enantiomer_enantiomer_form_of = Slot(uri=CHEMONT.enantiomer_form_of, name="enantiomer_enantiomer form of", curie=CHEMONT.curie('enantiomer_form_of'),
-                      model_uri=CHEMONT.enantiomer_enantiomer_form_of, domain=Enantiomer, range=Optional[Union[dict, Molecule]])
+                      model_uri=CHEMONT.enantiomer_enantiomer_form_of, domain=Enantiomer, range=Optional[Union[str, MoleculeId]])
 
 slots.racemic_mixture_has_left_enantiomer = Slot(uri=CHEMONT.has_left_enantiomer, name="racemic mixture_has left enantiomer", curie=CHEMONT.curie('has_left_enantiomer'),
-                      model_uri=CHEMONT.racemic_mixture_has_left_enantiomer, domain=RacemicMixture, range=Union[dict, Enantiomer])
+                      model_uri=CHEMONT.racemic_mixture_has_left_enantiomer, domain=RacemicMixture, range=Union[str, EnantiomerId])
 
 slots.racemic_mixture_has_right_enantiomer = Slot(uri=CHEMONT.has_right_enantiomer, name="racemic mixture_has right enantiomer", curie=CHEMONT.curie('has_right_enantiomer'),
-                      model_uri=CHEMONT.racemic_mixture_has_right_enantiomer, domain=RacemicMixture, range=Union[dict, Enantiomer])
+                      model_uri=CHEMONT.racemic_mixture_has_right_enantiomer, domain=RacemicMixture, range=Union[str, EnantiomerId])

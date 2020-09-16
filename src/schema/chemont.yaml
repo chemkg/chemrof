@@ -44,6 +44,8 @@ classes:
     description: >-
       An entity that can be described using using chemical properties.
     is_a: pattern
+    slots:
+      - id
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -136,10 +138,14 @@ classes:
     slots:
       - has atom occurrences
       - has bonds
+      - has submolecules
+      - has atoms
     slot_usage:
       has atom occurrences:
         minimum_value: 2
       has bonds:
+        minimum_value: 1
+      has part:
         minimum_value: 1
     mappings:
       - COB:0000013
@@ -273,7 +279,7 @@ classes:
 
   monoatomic ion:
     aliases: ['charged atom']
-    is_a: atom
+    is_a: atom ionic form
     mixins:
       - charged   
     description: >-
@@ -409,6 +415,11 @@ types:
 
 slots:
 
+  id:
+    identifier: true
+    mappings:
+      - schema:identifier
+
   ## metadata
   
   name:
@@ -500,19 +511,29 @@ slots:
       basic parthood relations
     mappings:
       - BFO:0000050
+      - schema:hasBioChemEntityPart
 
-  has atom:
+  has atoms:
     description: >-
       Relation between a molecule and the atoms it contains.
       Note that this is a shortcut relation: for granular representations go via atom occurrences
     is_a: has part
     domain: molecule
     range: atom
+    multivalued: true
+      
+  has submolecules:
+    description: >-
+      Relation between a molecule and the molecules it is made from.
+    is_a: has part
+    domain: molecule
+    range: molecule
+    multivalued: true
       
   has group:
     description: >-
       Relation between a molecule and the groups it contains
-    is_a: has part
+    is_a: has submolecules
     domain: atom
       
   ## other slots
@@ -560,8 +581,13 @@ slots:
       - CHEMINF:000067
       
   chemical formula:
+    abstract: true
+    description: >-
+      A generic grouping for miolecular formulae and empirican formulae
     domain: chemical entity
     range: chemical encoding
+    mappings:
+      - schema:hasRepresentation
 
   molecular formula:
     is_a: chemical formula

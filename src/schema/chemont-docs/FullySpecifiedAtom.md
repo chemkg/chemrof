@@ -7,7 +7,7 @@ An atom (class) that has subatomic particle counts specified
 URI: [chemont:FullySpecifiedAtom](http://w3id.org/chemontFullySpecifiedAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]^-[FullySpecifiedAtom&#124;elemental_charge:integer%20%3F;neutron_number:count%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]^-[FullySpecifiedAtom&#124;elemental_charge:integer%20%3F;neutron_number:count%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string],[Atom])
 
 ## Parents
 
@@ -30,6 +30,8 @@ URI: [chemont:FullySpecifiedAtom](http://w3id.org/chemontFullySpecifiedAtom)
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
     * Description: number of protons in an atom
     * range: [Count](types/Count.md)
+ * [id](id.md)  <sub>REQ</sub>
+    * range: [String](types/String.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)

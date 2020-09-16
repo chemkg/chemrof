@@ -7,7 +7,7 @@ generic form of an atom, with unspecified neutron or charge
 URI: [chemont:GenericAtom](http://w3id.org/chemontGenericAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]^-[GenericAtom&#124;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Atom]^-[GenericAtom&#124;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string],[Atom])
 
 ## Parents
 
@@ -21,6 +21,8 @@ URI: [chemont:GenericAtom](http://w3id.org/chemontGenericAtom)
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
     * Description: number of protons in an atom
     * range: [Count](types/Count.md)
+ * [id](id.md)  <sub>REQ</sub>
+    * range: [String](types/String.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)

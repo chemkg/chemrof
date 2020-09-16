@@ -7,7 +7,7 @@ An occurrence of an atom in the context of a particular molecule. For example, o
 URI: [chemont:AtomOccurrence](http://w3id.org/chemontAtomOccurrence)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern],[Molecule],[AtomicBond],[Atom]<of%20atom%200..1-++[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Pattern]^-[AtomOccurrence],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern],[Molecule],[AtomicBond],[Atom]<of%20atom%200..1-%20[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Pattern]^-[AtomOccurrence],[Atom])
 
 ## Parents
 

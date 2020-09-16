@@ -1,15 +1,15 @@
 
-# Type: has atoms
+# Type: molecule_has part
 
 
-Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
 
-URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
+
+URI: [chemont:molecule_has_part](http://w3id.org/chemontmolecule_has_part)
 
 
 ## Domain and Range
 
-[Molecule](Molecule.md) ->  <sub>0..*</sub> [Atom](Atom.md)
+[Molecule](Molecule.md) ->  <sub>OPT</sub> [String](types/String.md)
 
 ## Parents
 

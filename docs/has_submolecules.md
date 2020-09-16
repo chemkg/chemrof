@@ -1,15 +1,15 @@
 
-# Type: has atoms
+# Type: has submolecules
 
 
-Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
+Relation between a molecule and the molecules it is made from.
 
-URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
+URI: [chemont:has_submolecules](http://w3id.org/chemonthas_submolecules)
 
 
 ## Domain and Range
 
-[Molecule](Molecule.md) ->  <sub>0..*</sub> [Atom](Atom.md)
+[Molecule](Molecule.md) ->  <sub>0..*</sub> [Molecule](Molecule.md)
 
 ## Parents
 
@@ -17,6 +17,7 @@ URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
 
 ## Children
 
+ *  [has group](has_group.md)
 
 ## Used by
 
