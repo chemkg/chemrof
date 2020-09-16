@@ -47,3 +47,10 @@ None ->  <sub>REQ</sub> [String](types/String.md)
  * [SubatomicParticle](SubatomicParticle.md)
  * [UnchargedAtom](UnchargedAtom.md)
  * [UnchargedMolecule](UnchargedMolecule.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Mappings:** | | schema:identifier |
+

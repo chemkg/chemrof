@@ -9,7 +9,7 @@ URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
 
 ## Domain and Range
 
-[Atom](Atom.md) ->  <sub>OPT</sub> [Integer](types/Integer.md)
+[ChemicalEntity](ChemicalEntity.md) ->  <sub>OPT</sub> [Integer](types/Integer.md)
 
 ## Parents
 

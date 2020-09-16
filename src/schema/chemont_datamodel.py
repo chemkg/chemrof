@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-09-15 19:26
+# Generation date: 2020-09-16 11:29
 # Schema: chemont
 #
 # id: chemont
@@ -892,7 +892,7 @@ class slots:
     pass
 
 slots.id = Slot(uri=CHEMONT.id, name="id", curie=CHEMONT.curie('id'),
-                      model_uri=CHEMONT.id, domain=None, range=URIRef)
+                      model_uri=CHEMONT.id, domain=None, range=URIRef, mappings = [SCHEMA.identifier])
 
 slots.name = Slot(uri=CHEMONT.name, name="name", curie=CHEMONT.curie('name'),
                       model_uri=CHEMONT.name, domain=None, range=Optional[str])
@@ -910,7 +910,7 @@ slots.nucleon_number = Slot(uri=CHEMONT.nucleon_number, name="nucleon number", c
                       model_uri=CHEMONT.nucleon_number, domain=Atom, range=Optional[int])
 
 slots.elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="elemental charge", curie=CHEMONT.curie('elemental_charge'),
-                      model_uri=CHEMONT.elemental_charge, domain=Atom, range=Optional[int], mappings = [CHEMINF["000120"]])
+                      model_uri=CHEMONT.elemental_charge, domain=ChemicalEntity, range=Optional[int], mappings = [CHEMINF["000120"]])
 
 slots.alternate_form_of = Slot(uri=CHEMONT.alternate_form_of, name="alternate form of", curie=CHEMONT.curie('alternate_form_of'),
                       model_uri=CHEMONT.alternate_form_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
