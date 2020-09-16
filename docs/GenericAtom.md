@@ -19,7 +19,7 @@ URI: [chemont:GenericAtom](http://w3id.org/chemontGenericAtom)
 ### Inherited from atom:
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
@@ -32,7 +32,8 @@ URI: [chemont:GenericAtom](http://w3id.org/chemontGenericAtom)
 
 |  |  |  |
 | --- | --- | --- |
-| **Aliases:** | | chemical element |
+| **Aliases:** | | element |
+|  | | chemical element |
 | **Examples:** | | Example(value='carbon', description=None) |
 |  | | Example(value='nickel', description=None) |
 

@@ -13,7 +13,7 @@ URI: [chemont:atom_anion_elemental_charge](http://w3id.org/chemontatom_anion_ele
 
 ## Parents
 
- *  is_a: [elemental charge](elemental_charge.md)
+ *  is_a: [anion state➞elemental charge](anion_state_elemental_charge.md)
 
 ## Children
 

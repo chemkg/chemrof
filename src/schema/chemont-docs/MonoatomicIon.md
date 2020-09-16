@@ -7,7 +7,7 @@ An atom that has a charge
 URI: [chemont:MonoatomicIon](http://w3id.org/chemontMonoatomicIon)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]uses%20-.->[Charged],[Atom]^-[MonoatomicIon],[Charged],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]uses%20-.->[Charged],[MonoatomicIon]^-[AtomCation],[MonoatomicIon]^-[AtomAnion],[Atom]^-[MonoatomicIon],[Charged],[AtomCation],[AtomAnion],[Atom])
 
 ## Parents
 
@@ -17,13 +17,21 @@ URI: [chemont:MonoatomicIon](http://w3id.org/chemontMonoatomicIon)
 
  *  mixin: [Charged](Charged.md)
 
+## Children
+
+ * [AtomAnion](AtomAnion.md) - A monoatomic ion that is negative
+ * [AtomCation](AtomCation.md) - A monoatomic ion that is positive
+
+## Referenced by class
+
+
 ## Attributes
 
 
 ### Inherited from atom:
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
@@ -42,6 +50,7 @@ URI: [chemont:MonoatomicIon](http://w3id.org/chemontMonoatomicIon)
 
 |  |  |  |
 | --- | --- | --- |
+| **Aliases:** | | charged atom |
 | **Mappings:** | | COB:0000042 |
 |  | | CHEBI:24867 |
 

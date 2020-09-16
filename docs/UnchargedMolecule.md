@@ -2,7 +2,7 @@
 # Type: uncharged molecule
 
 
-A molecule that in uncharged charge
+A molecule that has no charge
 
 URI: [chemont:UnchargedMolecule](http://w3id.org/chemontUnchargedMolecule)
 

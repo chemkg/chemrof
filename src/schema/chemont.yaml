@@ -8,8 +8,11 @@ version: 0.0.1
 
 prefixes:
   COB: http://purl.obolibrary.org/obo/COB_
+  BFO: http://purl.obolibrary.org/obo/BFO_
+  RO: http://purl.obolibrary.org/obo/RO_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
   CHEMINF: http://semanticscience.org/resource/CHEMINF_
+  schema: http://schema.org/
   chemont: http://w3id.org/chemont
   dcterms: http://purl.org/dc/terms/
   biolinkml: https://w3id.org/biolink/biolinkml/
@@ -181,7 +184,7 @@ classes:
     mixins:
       - uncharged   
     description: >-
-      A molecule that in uncharged charge
+      A molecule that has no charge
       
   atom:
     is_a: chemical entity
@@ -211,23 +214,13 @@ classes:
       - value: nickel
         
   uncharged atom:
-    is_a: atom
+    is_a: atom ionic form
     mixins:
       - uncharged   
     description: >-
       An atom that has no charge
     mappings:
       - COB:0000043
-
-  monoatomic ion:
-    is_a: atom
-    mixins:
-      - charged   
-    description: >-
-      An atom that has a charge
-    mappings:
-      - COB:0000042
-      - CHEBI:24867
 
   isotope:
     is_a: atom
@@ -278,11 +271,19 @@ classes:
     examples:
       - value: "chloride Cl-"
 
-  charged atom:
-    is_a: atom ionic form
-    
+  monoatomic ion:
+    aliases: ['charged atom']
+    is_a: atom
+    mixins:
+      - charged   
+    description: >-
+      An atom that has a charge
+    mappings:
+      - COB:0000042
+      - CHEBI:24867
+        
   atom anion:
-    is_a: charged atom
+    is_a: monoatomic ion
     mixins:
       - anion state
     slot_usage:
@@ -291,10 +292,10 @@ classes:
     defining_slots:
       - elemental charge
     description: >-
-      A charged atom that is negative
+      A monoatomic ion that is negative
 
   atom cation:
-    is_a: charged atom
+    is_a: monoatomic ion
     mixins:
       - cation state
     slot_usage:
@@ -303,14 +304,8 @@ classes:
     defining_slots:
       - elemental charge
     description: >-
-      A charged atom that is positive
+      A monoatomic ion that is positive
 
-  atom neutral form:
-    is_a: atom ionic form
-    slot_usage:
-      elemental charge:
-        minimum_value: 0
-        maximum_value: 0
 
   fully specified atom:
     description: >-
@@ -414,6 +409,8 @@ types:
 
 slots:
 
+  ## metadata
+  
   name:
     range: string
     description: >-
@@ -424,12 +421,14 @@ slots:
     description: >-
       short symbol for chemical entity, e.g. K, C-16
   
+  ## numeric properties of atoms
+  
   atomic number:
     aliases:
       - proton number
       - Z
     description: >-
-      number of proteins in an atom
+      number of protons in an atom
     domain: atom
     range: count
     mappings:
@@ -459,6 +458,8 @@ slots:
     mappings:
       - CHEMINF:000120
 
+  ## alternate form relations
+  
   alternate form of:
     description: >-
       A relationship between two entities of the same type
@@ -492,6 +493,30 @@ slots:
     description: >-
       equal mass number (Z1 + N1 = Z2 + N2)
 
+  ## other relations
+
+  has part:
+    description: >-
+      basic parthood relations
+    mappings:
+      - BFO:0000050
+
+  has atom:
+    description: >-
+      Relation between a molecule and the atoms it contains.
+      Note that this is a shortcut relation: for granular representations go via atom occurrences
+    is_a: has part
+    domain: molecule
+    range: atom
+      
+  has group:
+    description: >-
+      Relation between a molecule and the groups it contains
+    is_a: has part
+    domain: atom
+      
+  ## other slots
+  
   energy level:
     aliases:
       - energy state
@@ -533,7 +558,7 @@ slots:
     range: boolean
     mappings:
       - CHEMINF:000067
-
+      
   chemical formula:
     domain: chemical entity
     range: chemical encoding

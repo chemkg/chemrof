@@ -2,7 +2,7 @@
 # Type: grouping class
 
 
-A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin
+A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
 
 URI: [chemont:GroupingClass](http://w3id.org/chemontGroupingClass)
 

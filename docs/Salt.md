@@ -7,7 +7,7 @@ a chemical compound consisting of an ionic assembly of cations and anions.
 URI: [chemont:Salt](http://w3id.org/chemontSalt)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChemicalEntity]^-[Salt],[ChemicalEntity])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChemicalEntity]^-[Salt&#124;elemental_charge:integer%20%3F],[ChemicalEntity])
 
 ## Parents
 
@@ -18,3 +18,8 @@ URI: [chemont:Salt](http://w3id.org/chemontSalt)
 
 ## Attributes
 
+
+### Own
+
+ * [salt➞elemental charge](salt_elemental_charge.md)  <sub>OPT</sub>
+    * range: [Integer](types/Integer.md)

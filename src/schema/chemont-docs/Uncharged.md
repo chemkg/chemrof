@@ -16,7 +16,7 @@ URI: [chemont:Uncharged](http://w3id.org/chemontUncharged)
 ## Mixin for
 
  * [UnchargedAtom](UnchargedAtom.md) (mixin)  - An atom that has no charge
- * [UnchargedMolecule](UnchargedMolecule.md) (mixin)  - A molecule that in uncharged charge
+ * [UnchargedMolecule](UnchargedMolecule.md) (mixin)  - A molecule that has no charge
 
 ## Referenced by class
 

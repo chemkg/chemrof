@@ -7,7 +7,7 @@ A material entity consisting of exactly one atomic nucleus and the electron(s) o
 URI: [chemont:Atom](http://w3id.org/chemontAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[Nuclide],[MonoatomicIon],[Isotope],[GenericAtom],[FullySpecifiedAtom],[ChemicalEntity],[AtomOccurrence],[AtomIonicForm],[AtomOccurrence]++-%20of%20atom(i)%200..1>[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;name:string%20%3F],[Atom]^-[UnchargedAtom],[Atom]^-[Nuclide],[Atom]^-[MonoatomicIon],[Atom]^-[Isotope],[Atom]^-[GenericAtom],[Atom]^-[FullySpecifiedAtom],[Atom]^-[AtomIonicForm],[ChemicalEntity]^-[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Nuclide],[MonoatomicIon],[Molecule],[Isotope],[GenericAtom],[FullySpecifiedAtom],[ChemicalEntity],[AtomOccurrence],[AtomIonicForm],[AtomOccurrence]++-%20of%20atom%200..1>[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;name:string%20%3F],[Atom]^-[Nuclide],[Atom]^-[MonoatomicIon],[Atom]^-[Isotope],[Atom]^-[GenericAtom],[Atom]^-[FullySpecifiedAtom],[Atom]^-[AtomIonicForm],[ChemicalEntity]^-[Atom])
 
 ## Parents
 
@@ -21,11 +21,12 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
  * [Isotope](Isotope.md) - A specific subtype of an atom with a specified neutron number
  * [MonoatomicIon](MonoatomicIon.md) - An atom that has a charge
  * [Nuclide](Nuclide.md) - an atomic species characterized by the specific constitution of its nucleus
- * [UnchargedAtom](UnchargedAtom.md) - An atom that has no charge
 
 ## Referenced by class
 
- *  **[AtomOccurrence](AtomOccurrence.md)** *[of atom](of_atom.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
+ *  **[AtomOccurrence](AtomOccurrence.md)** *[atom occurrence➞of atom](atom_occurrence_of_atom.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
+ *  **[Molecule](Molecule.md)** *[has atom](has_atom.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
+ *  **None** *[of atom](of_atom.md)*  <sub>OPT</sub>  **[Atom](Atom.md)**
 
 ## Attributes
 
@@ -33,7 +34,7 @@ URI: [chemont:Atom](http://w3id.org/chemontAtom)
 ### Own
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16

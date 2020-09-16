@@ -29,17 +29,21 @@
       "AnionState": {
          "additionalProperties": false,
          "description": "",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "AnionState",
          "type": "object"
       },
       "AtomAnion": {
          "additionalProperties": false,
-         "description": "A charged atom that is negative",
+         "description": "A monoatomic ion that is negative",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "elemental_charge": {
@@ -60,10 +64,10 @@
       },
       "AtomCation": {
          "additionalProperties": false,
-         "description": "A charged atom that is positive",
+         "description": "A monoatomic ion that is positive",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "elemental_charge": {
@@ -82,34 +86,14 @@
          "title": "AtomCation",
          "type": "object"
       },
-      "AtomNeutralForm": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "atomic_number": {
-               "description": "number of proteins in an atom",
-               "type": "integer"
-            },
-            "elemental_charge": {
-               "type": "integer"
-            },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
-               "type": "string"
-            },
-            "symbol": {
-               "description": "short symbol for chemical entity, e.g. K, C-16",
-               "type": "string"
-            }
-         },
-         "required": [],
-         "title": "AtomNeutralForm",
-         "type": "object"
-      },
       "AtomOccurrence": {
          "additionalProperties": false,
          "description": "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate",
-         "properties": {},
+         "properties": {
+            "of_atom": {
+               "$ref": "#/definitions/Atom"
+            }
+         },
          "required": [],
          "title": "AtomOccurrence",
          "type": "object"
@@ -121,6 +105,10 @@
             "bond_order": {
                "description": "the number of electron pairs (bonds) between a pair of atoms",
                "type": "integer"
+            },
+            "bond_type": {
+               "description": "E.g. covalent, ionic",
+               "type": "string"
             },
             "has_atom_occurrences": {
                "items": {
@@ -136,7 +124,11 @@
       "CationState": {
          "additionalProperties": false,
          "description": "",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "CationState",
          "type": "object"
@@ -167,31 +159,6 @@
          "title": "Charged",
          "type": "object"
       },
-      "ChargedAtom": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "atomic_number": {
-               "description": "number of proteins in an atom",
-               "type": "integer"
-            },
-            "elemental_charge": {
-               "description": "number of protons minus number of electrons",
-               "type": "integer"
-            },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
-               "type": "string"
-            },
-            "symbol": {
-               "description": "short symbol for chemical entity, e.g. K, C-16",
-               "type": "string"
-            }
-         },
-         "required": [],
-         "title": "ChargedAtom",
-         "type": "object"
-      },
       "Electron": {
          "additionalProperties": false,
          "description": "",
@@ -202,8 +169,15 @@
       },
       "Enantiomer": {
          "additionalProperties": false,
-         "description": "one of two stereoisomers that are mirror images. Example: R-thalidomide",
+         "description": "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide",
          "properties": {
+            "absolute_configuration": {
+               "type": "string"
+            },
+            "enantiomer_form_of": {
+               "$ref": "#/definitions/Molecule",
+               "description": "Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione"
+            },
             "has_atom_occurrences": {
                "items": {
                   "$ref": "#/definitions/AtomOccurrence"
@@ -215,6 +189,12 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "optical_configuration": {
+               "type": "string"
+            },
+            "relative_configuration": {
+               "type": "string"
             }
          },
          "required": [],
@@ -226,7 +206,7 @@
          "description": "An atom (class) that has subatomic particle counts specified",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "elemental_charge": {
@@ -255,7 +235,7 @@
          "description": "generic form of an atom, with unspecified neutron or charge",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "name": {
@@ -276,7 +256,7 @@
          "description": "A specific subtype of an atom with a specified neutron number",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "decay_energy": {
@@ -391,7 +371,7 @@
          "description": "An atom that has a charge",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "elemental_charge": {
@@ -453,7 +433,7 @@
          "description": "an atomic species characterized by the specific constitution of its nucleus",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "energy_level": {
@@ -509,8 +489,18 @@
       "RacemicMixture": {
          "additionalProperties": false,
          "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
-         "properties": {},
-         "required": [],
+         "properties": {
+            "has_left_enantiomer": {
+               "$ref": "#/definitions/Enantiomer"
+            },
+            "has_right_enantiomer": {
+               "$ref": "#/definitions/Enantiomer"
+            }
+         },
+         "required": [
+            "has_left_enantiomer",
+            "has_right_enantiomer"
+         ],
          "title": "RacemicMixture",
          "type": "object"
       },
@@ -519,7 +509,7 @@
          "description": "an atom that has excess nuclear energy, making it unstable",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "energy_level": {
@@ -542,7 +532,11 @@
       "Salt": {
          "additionalProperties": false,
          "description": "a chemical compound consisting of an ionic assembly of cations and anions.",
-         "properties": {},
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            }
+         },
          "required": [],
          "title": "Salt",
          "type": "object"
@@ -572,10 +566,11 @@
          "description": "An atom that has no charge",
          "properties": {
             "atomic_number": {
-               "description": "number of proteins in an atom",
+               "description": "number of protons in an atom",
                "type": "integer"
             },
             "elemental_charge": {
+               "description": "number of protons minus number of electrons",
                "type": "integer"
             },
             "name": {
@@ -593,7 +588,7 @@
       },
       "UnchargedMolecule": {
          "additionalProperties": false,
-         "description": "A molecule that in uncharged charge",
+         "description": "A molecule that has no charge",
          "properties": {
             "elemental_charge": {
                "type": "integer"

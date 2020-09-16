@@ -7,7 +7,7 @@ a chemical compound that has equal amounts of left- and right-handed enantiomers
 URI: [chemont:RacemicMixture](http://w3id.org/chemontRacemicMixture)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChemicalEntity]^-[RacemicMixture],[ChemicalEntity])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Enantiomer]<has%20right%20enantiomer%201..1-++[RacemicMixture],[Enantiomer]<has%20left%20enantiomer%201..1-++[RacemicMixture],[ChemicalEntity]^-[RacemicMixture],[Enantiomer],[ChemicalEntity])
 
 ## Parents
 
@@ -18,3 +18,10 @@ URI: [chemont:RacemicMixture](http://w3id.org/chemontRacemicMixture)
 
 ## Attributes
 
+
+### Own
+
+ * [racemic mixture➞has left enantiomer](racemic_mixture_has_left_enantiomer.md)  <sub>REQ</sub>
+    * range: [Enantiomer](Enantiomer.md)
+ * [racemic mixture➞has right enantiomer](racemic_mixture_has_right_enantiomer.md)  <sub>REQ</sub>
+    * range: [Enantiomer](Enantiomer.md)

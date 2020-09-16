@@ -2,12 +2,12 @@
 # Type: enantiomer
 
 
-one of two stereoisomers that are mirror images. Example: R-thalidomide
+one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
 
 URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[RacemicMixture],[Molecule],[RacemicMixture]++-%20has%20left%20enantiomer(i)%201..1>[Enantiomer],[RacemicMixture]++-%20has%20right%20enantiomer(i)%201..1>[Enantiomer],[Molecule]^-[Enantiomer],[AtomicBond],[AtomOccurrence])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[RacemicMixture],[Molecule],[Molecule]<enantiomer%20form%20of%200..1-++[Enantiomer&#124;relative_configuration:string%20%3F;optical_configuration:string%20%3F;absolute_configuration:string%20%3F],[RacemicMixture]++-%20has%20left%20enantiomer%201..1>[Enantiomer],[RacemicMixture]++-%20has%20right%20enantiomer%201..1>[Enantiomer],[Molecule]^-[Enantiomer],[AtomicBond],[AtomOccurrence])
 
 ## Parents
 
@@ -15,11 +15,25 @@ URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
 
 ## Referenced by class
 
- *  **[RacemicMixture](RacemicMixture.md)** *[has left enantiomer](has_left_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
- *  **[RacemicMixture](RacemicMixture.md)** *[has right enantiomer](has_right_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
+ *  **None** *[has left enantiomer](has_left_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
+ *  **None** *[has right enantiomer](has_right_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
+ *  **[RacemicMixture](RacemicMixture.md)** *[racemic mixture➞has left enantiomer](racemic_mixture_has_left_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
+ *  **[RacemicMixture](RacemicMixture.md)** *[racemic mixture➞has right enantiomer](racemic_mixture_has_right_enantiomer.md)*  <sub>REQ</sub>  **[Enantiomer](Enantiomer.md)**
 
 ## Attributes
 
+
+### Own
+
+ * [enantiomer➞absolute configuration](enantiomer_absolute_configuration.md)  <sub>OPT</sub>
+    * range: [String](types/String.md)
+ * [enantiomer➞enantiomer form of](enantiomer_enantiomer_form_of.md)  <sub>OPT</sub>
+    * Description: Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
+    * range: [Molecule](Molecule.md)
+ * [enantiomer➞optical configuration](enantiomer_optical_configuration.md)  <sub>OPT</sub>
+    * range: [String](types/String.md)
+ * [enantiomer➞relative configuration](enantiomer_relative_configuration.md)  <sub>OPT</sub>
+    * range: [String](types/String.md)
 
 ### Inherited from molecule:
 

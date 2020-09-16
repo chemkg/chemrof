@@ -7,7 +7,7 @@ an atom type in which charge state is specified. Also known as (atom) ionic spec
 URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ChargedAtom],[AtomNeutralForm],[AtomIonicForm&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]^-[ChargedAtom],[AtomIonicForm]^-[AtomNeutralForm],[Atom]^-[AtomIonicForm],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[AtomIonicForm&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F]^-[UnchargedAtom],[Atom]^-[AtomIonicForm],[Atom])
 
 ## Parents
 
@@ -15,8 +15,7 @@ URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
 
 ## Children
 
- * [AtomNeutralForm](AtomNeutralForm.md)
- * [ChargedAtom](ChargedAtom.md)
+ * [UnchargedAtom](UnchargedAtom.md) - An atom that has no charge
 
 ## Referenced by class
 
@@ -33,7 +32,7 @@ URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
 ### Inherited from atom:
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16

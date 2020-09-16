@@ -7,6 +7,7 @@ type Acid
 
 interface AnionState
   {
+    elementalCharge: Integer
   }
 
 interface Atom
@@ -40,26 +41,21 @@ interface AtomIonicForm
     elementalCharge: Integer
   }
 
-type AtomNeutralForm
-  {
-    atomicNumber: Count
-    symbol: String
-    name: String
-    elementalCharge: Integer
-  }
-
 type AtomOccurrence
   {
+    ofAtom: Atom
   }
 
 type AtomicBond
   {
     hasAtomOccurrences: [AtomOccurrence]
     bondOrder: Integer
+    bondType: String
   }
 
 interface CationState
   {
+    elementalCharge: Integer
   }
 
 interface ChargeState
@@ -69,14 +65,6 @@ interface ChargeState
 
 interface Charged
   {
-    elementalCharge: Integer
-  }
-
-type ChargedAtom
-  {
-    atomicNumber: Count
-    symbol: String
-    name: String
     elementalCharge: Integer
   }
 
@@ -92,6 +80,10 @@ type Enantiomer
   {
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
+    relativeConfiguration: String
+    opticalConfiguration: String
+    absoluteConfiguration: String
+    enantiomerFormOf: Molecule
   }
 
 type FullySpecifiedAtom
@@ -201,6 +193,8 @@ type Proton
 
 type RacemicMixture
   {
+    hasLeftEnantiomer: Enantiomer!
+    hasRightEnantiomer: Enantiomer!
   }
 
 type Radionuclide
@@ -213,6 +207,7 @@ type Radionuclide
 
 type Salt
   {
+    elementalCharge: Integer
   }
 
 type SubatomicParticle

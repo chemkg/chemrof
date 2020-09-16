@@ -28,7 +28,7 @@ URI: [chemont:FullySpecifiedAtom](http://w3id.org/chemontFullySpecifiedAtom)
 ### Inherited from atom:
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16

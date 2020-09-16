@@ -4,7 +4,7 @@
 
 
 
-URI: [http://w3id.org/chemont/Count](http://w3id.org/chemont/Count)
+URI: [chemont:Count](http://w3id.org/chemontCount)
 
 |  |  |  |
 | --- | --- | --- |

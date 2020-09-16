@@ -7,11 +7,11 @@
 URI: [chemont:AnionState](http://w3id.org/chemontAnionState)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularAnion]uses%20-.->[AnionState],[AtomAnion]uses%20-.->[AnionState],[MolecularAnion],[AtomAnion])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularAnion]uses%20-.->[AnionState&#124;elemental_charge:integer%20%3F],[AtomAnion]uses%20-.->[AnionState],[MolecularAnion],[AtomAnion])
 
 ## Mixin for
 
- * [AtomAnion](AtomAnion.md) (mixin)  - A charged atom that is negative
+ * [AtomAnion](AtomAnion.md) (mixin)  - A monoatomic ion that is negative
  * [MolecularAnion](MolecularAnion.md) (mixin)  - A polyatomic ion that is negative
 
 ## Referenced by class
@@ -19,6 +19,11 @@ URI: [chemont:AnionState](http://w3id.org/chemontAnionState)
 
 ## Attributes
 
+
+### Own
+
+ * [anion state➞elemental charge](anion_state_elemental_charge.md)  <sub>OPT</sub>
+    * range: [Integer](types/Integer.md)
 
 ## Other properties
 

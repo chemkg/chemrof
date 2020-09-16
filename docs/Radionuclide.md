@@ -19,7 +19,7 @@ URI: [chemont:Radionuclide](http://w3id.org/chemontRadionuclide)
 ### Inherited from nuclide:
 
  * [atomic number](atomic_number.md)  <sub>OPT</sub>
-    * Description: number of proteins in an atom
+    * Description: number of protons in an atom
     * range: [Count](types/Count.md)
  * [energy level](energy_level.md)  <sub>OPT</sub>
     * Description: e.g. ground, stable

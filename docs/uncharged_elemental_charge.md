@@ -21,5 +21,4 @@ URI: [chemont:uncharged_elemental_charge](http://w3id.org/chemontuncharged_eleme
 ## Used by
 
  * [Uncharged](Uncharged.md)
- * [UnchargedAtom](UnchargedAtom.md)
  * [UnchargedMolecule](UnchargedMolecule.md)
