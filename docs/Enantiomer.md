@@ -4,14 +4,14 @@
 
 one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
 
-URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
+URI: [chemont:Enantiomer](https://w3id.org/chemont/Enantiomer)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[RacemicMixture],[Molecule],[Molecule]<enantiomer%20form%20of%200..1-%20[Enantiomer&#124;relative_configuration:string%20%3F;optical_configuration:string%20%3F;absolute_configuration:string%20%3F;has_part(i):string%20%3F;id(i):string],[RacemicMixture]-%20has%20left%20enantiomer%201..1>[Enantiomer],[RacemicMixture]-%20has%20right%20enantiomer%201..1>[Enantiomer],[Molecule]^-[Enantiomer],[AtomicBond],[AtomOccurrence],[Atom])
 
 ## Parents
 
- *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via bonds
+ *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
 
 ## Referenced by class
 
@@ -48,6 +48,7 @@ URI: [chemont:Enantiomer](http://w3id.org/chemontEnantiomer)
  * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
     * range: [AtomOccurrence](AtomOccurrence.md)
  * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
+    * Description: The set of all bonds connecting atoms in a molecule
     * range: [AtomicBond](AtomicBond.md)
  * [molecule➞has part](molecule_has_part.md)  <sub>OPT</sub>
     * range: [String](types/String.md)

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:NumberOfYears](http://w3id.org/chemontNumberOfYears)
+URI: [chemont:NumberOfYears](https://w3id.org/chemont/NumberOfYears)
 
 |  |  |  |
 | --- | --- | --- |

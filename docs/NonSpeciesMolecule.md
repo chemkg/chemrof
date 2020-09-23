@@ -4,14 +4,14 @@
 
 A molecule in which the units are not identical. Example: sodium chloride
 
-URI: [chemont:NonSpeciesMolecule](http://w3id.org/chemontNonSpeciesMolecule)
+URI: [chemont:NonSpeciesMolecule](https://w3id.org/chemont/NonSpeciesMolecule)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Molecule]^-[NonSpeciesMolecule&#124;has_part(i):string%20%3F;id(i):string],[Molecule],[AtomicBond],[AtomOccurrence],[Atom])
 
 ## Parents
 
- *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via bonds
+ *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
 
 ## Attributes
 
@@ -29,6 +29,7 @@ URI: [chemont:NonSpeciesMolecule](http://w3id.org/chemontNonSpeciesMolecule)
  * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
     * range: [AtomOccurrence](AtomOccurrence.md)
  * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
+    * Description: The set of all bonds connecting atoms in a molecule
     * range: [AtomicBond](AtomicBond.md)
  * [molecule➞has part](molecule_has_part.md)  <sub>OPT</sub>
     * range: [String](types/String.md)

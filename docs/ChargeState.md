@@ -4,7 +4,7 @@
 
 Applies to entities that have a charge state, which may be positive, negative, or neutral
 
-URI: [chemont:ChargeState](http://w3id.org/chemontChargeState)
+URI: [chemont:ChargeState](https://w3id.org/chemont/ChargeState)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Uncharged],[Charged],[ChargeState&#124;elemental_charge:integer%20%3F]^-[Uncharged],[ChargeState]^-[Charged])

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:AnionState](http://w3id.org/chemontAnionState)
+URI: [chemont:AnionState](https://w3id.org/chemont/AnionState)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularAnion]uses%20-.->[AnionState&#124;elemental_charge:integer%20%3F],[AtomAnion]uses%20-.->[AnionState],[MolecularAnion],[AtomAnion])

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:molecule_has_part](http://w3id.org/chemontmolecule_has_part)
+URI: [chemont:molecule_has_part](https://w3id.org/chemont/molecule_has_part)
 
 
 ## Domain and Range
@@ -21,6 +21,7 @@ URI: [chemont:molecule_has_part](http://w3id.org/chemontmolecule_has_part)
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)

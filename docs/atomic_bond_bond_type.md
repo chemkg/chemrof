@@ -2,9 +2,9 @@
 # Type: atomic bond_bond type
 
 
-E.g. covalent, ionic
+E.g. covalent, ionic, polycentric, metal-metal, salt bridge
 
-URI: [chemont:atomic_bond_bond_type](http://w3id.org/chemontatomic_bond_bond_type)
+URI: [chemont:atomic_bond_bond_type](https://w3id.org/chemont/atomic_bond_bond_type)
 
 
 ## Domain and Range

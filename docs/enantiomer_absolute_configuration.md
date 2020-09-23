@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:enantiomer_absolute_configuration](http://w3id.org/chemontenantiomer_absolute_configuration)
+URI: [chemont:enantiomer_absolute_configuration](https://w3id.org/chemont/enantiomer_absolute_configuration)
 
 
 ## Domain and Range

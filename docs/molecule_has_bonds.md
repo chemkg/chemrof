@@ -2,9 +2,9 @@
 # Type: molecule_has bonds
 
 
+The set of all bonds connecting atoms in a molecule
 
-
-URI: [chemont:molecule_has_bonds](http://w3id.org/chemontmolecule_has_bonds)
+URI: [chemont:molecule_has_bonds](https://w3id.org/chemont/molecule_has_bonds)
 
 
 ## Domain and Range
@@ -21,6 +21,7 @@ URI: [chemont:molecule_has_bonds](http://w3id.org/chemontmolecule_has_bonds)
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)
@@ -29,3 +30,10 @@ URI: [chemont:molecule_has_bonds](http://w3id.org/chemontmolecule_has_bonds)
  * [NonSpeciesMolecule](NonSpeciesMolecule.md)
  * [PolyatomicIon](PolyatomicIon.md)
  * [UnchargedMolecule](UnchargedMolecule.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Aliases:** | | adjacency matrix |
+

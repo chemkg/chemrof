@@ -4,7 +4,7 @@
 
 number of protons in an atom
 
-URI: [chemont:atomic_number](http://w3id.org/chemontatomic_number)
+URI: [chemont:atomic_number](https://w3id.org/chemont/atomic_number)
 
 
 ## Domain and Range
@@ -23,8 +23,8 @@ URI: [chemont:atomic_number](http://w3id.org/chemontatomic_number)
  * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
+ * [ChemicalElement](ChemicalElement.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
- * [GenericAtom](GenericAtom.md)
  * [Isotope](Isotope.md)
  * [MonoatomicIon](MonoatomicIon.md)
  * [Nuclide](Nuclide.md)

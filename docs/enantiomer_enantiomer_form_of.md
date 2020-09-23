@@ -4,7 +4,7 @@
 
 Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
 
-URI: [chemont:enantiomer_enantiomer_form_of](http://w3id.org/chemontenantiomer_enantiomer_form_of)
+URI: [chemont:enantiomer_enantiomer_form_of](https://w3id.org/chemont/enantiomer_enantiomer_form_of)
 
 
 ## Domain and Range

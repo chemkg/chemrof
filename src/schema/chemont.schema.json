@@ -23,6 +23,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -46,6 +47,59 @@
             "id"
          ],
          "title": "Acid",
+         "type": "object"
+      },
+      "Allotrope": {
+         "additionalProperties": false,
+         "description": "A molecule consisting of atoms of the same element",
+         "properties": {
+            "allotrope_of": {
+               "type": "string"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonding_structure": {
+               "description": "The pattern in which the atoms are bonded; e.g. hexagonal lattice, sheets, etc",
+               "type": "string"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id",
+            "allotrope_of",
+            "has_bonding_structure"
+         ],
+         "title": "Allotrope",
          "type": "object"
       },
       "AnionState": {
@@ -84,7 +138,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "AtomAnion",
          "type": "object"
@@ -113,7 +168,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "AtomCation",
          "type": "object"
@@ -122,8 +178,11 @@
          "additionalProperties": false,
          "description": "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate",
          "properties": {
-            "of_atom": {
+            "has_atom": {
                "type": "string"
+            },
+            "valence": {
+               "type": "integer"
             }
          },
          "required": [],
@@ -132,14 +191,21 @@
       },
       "AtomicBond": {
          "additionalProperties": false,
-         "description": "A connection between two atoms. Note this is the reified form of 'atomically connected to'",
+         "description": "A connection between two atoms. Note this is the reified form of 'atomically connected to'.",
          "properties": {
+            "bond_angle": {
+               "type": "number"
+            },
+            "bond_length_in_angstroms": {
+               "description": "the average distance between nuclei of two bonded atoms in a molecule. It is a transferable property of a bond between atoms of fixed types, relatively independent of the rest of the molecule.",
+               "type": "number"
+            },
             "bond_order": {
                "description": "the number of electron pairs (bonds) between a pair of atoms",
                "type": "integer"
             },
             "bond_type": {
-               "description": "E.g. covalent, ionic",
+               "description": "E.g. covalent, ionic, polycentric, metal-metal, salt bridge",
                "type": "string"
             },
             "has_atom_occurrences": {
@@ -147,6 +213,9 @@
                   "$ref": "#/definitions/AtomOccurrence"
                },
                "type": "array"
+            },
+            "torsional_angle": {
+               "type": "number"
             }
          },
          "required": [],
@@ -191,6 +260,53 @@
          "title": "Charged",
          "type": "object"
       },
+      "ChemicalElement": {
+         "additionalProperties": false,
+         "description": "generic form of an atom, with unspecified neutron or charge",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "boiling_point_in_celcius": {
+               "type": "number"
+            },
+            "electron_configuration": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "melting_point_in_celcius": {
+               "type": "number"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "periodic_table_block": {
+               "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in",
+               "type": "string"
+            },
+            "periodic_table_group": {
+               "description": "which number in periodic table column",
+               "type": "string"
+            },
+            "standard_atomic_weight": {
+               "type": "number"
+            },
+            "symbol": {
+               "description": "E.g. O, K, Ge",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id",
+            "symbol"
+         ],
+         "title": "ChemicalElement",
+         "type": "object"
+      },
       "Electron": {
          "additionalProperties": false,
          "description": "",
@@ -230,6 +346,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -290,35 +407,27 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "FullySpecifiedAtom",
          "type": "object"
       },
-      "GenericAtom": {
+      "FunctionalGroup": {
          "additionalProperties": false,
-         "description": "generic form of an atom, with unspecified neutron or charge",
+         "description": "",
          "properties": {
-            "atomic_number": {
-               "description": "number of protons in an atom",
-               "type": "integer"
-            },
             "id": {
                "type": "string"
             },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
-               "type": "string"
-            },
-            "symbol": {
-               "description": "short symbol for chemical entity, e.g. K, C-16",
+            "is_substitutent_group_from": {
                "type": "string"
             }
          },
          "required": [
             "id"
          ],
-         "title": "GenericAtom",
+         "title": "FunctionalGroup",
          "type": "object"
       },
       "Isotope": {
@@ -365,9 +474,38 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "Isotope",
+         "type": "object"
+      },
+      "Macromolecule": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Macromolecule",
+         "type": "object"
+      },
+      "Moiety": {
+         "additionalProperties": false,
+         "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Moiety",
          "type": "object"
       },
       "MolecularAnion": {
@@ -392,6 +530,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -439,6 +578,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -482,6 +622,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -505,6 +646,32 @@
             "id"
          ],
          "title": "MolecularSpecies",
+         "type": "object"
+      },
+      "MoleculeGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "MoleculeGroupingClass",
+         "type": "object"
+      },
+      "MoleculePart": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MoleculePart",
          "type": "object"
       },
       "MonoatomicIon": {
@@ -532,7 +699,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "MonoatomicIon",
          "type": "object"
@@ -569,6 +737,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -633,9 +802,24 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "Nuclide",
+         "type": "object"
+      },
+      "Peptide": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Peptide",
          "type": "object"
       },
       "PolyatomicIon": {
@@ -660,6 +844,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },
@@ -683,6 +868,37 @@
             "id"
          ],
          "title": "PolyatomicIon",
+         "type": "object"
+      },
+      "Polymer": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_part": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Polymer",
+         "type": "object"
+      },
+      "Protein": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Protein",
          "type": "object"
       },
       "Proton": {
@@ -746,9 +962,72 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "Radionuclide",
+         "type": "object"
+      },
+      "Reaction": {
+         "additionalProperties": false,
+         "description": "reaction",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "direction": {
+               "description": "One of l->r, r->l, bidirectional, neutral",
+               "type": "string"
+            },
+            "is_balanced": {
+               "type": "boolean"
+            },
+            "is_fully_characterized": {
+               "description": "False if includes R-groups",
+               "type": "boolean"
+            },
+            "is_stereo": {
+               "type": "boolean"
+            },
+            "is_transport": {
+               "type": "boolean"
+            },
+            "left_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "reaction_center": {
+               "type": "string"
+            },
+            "right_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "smarts_string": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Reaction",
+         "type": "object"
+      },
+      "ReactionParticipant": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "chemical": {
+               "type": "string"
+            },
+            "stoichiometry": {
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "ReactionParticipant",
          "type": "object"
       },
       "Salt": {
@@ -819,7 +1098,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "symbol"
          ],
          "title": "UnchargedAtom",
          "type": "object"
@@ -845,6 +1125,7 @@
                "type": "array"
             },
             "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
                   "$ref": "#/definitions/AtomicBond"
                },

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:molecule_has_atom_occurrences](http://w3id.org/chemontmolecule_has_atom_occurrences)
+URI: [chemont:molecule_has_atom_occurrences](https://w3id.org/chemont/molecule_has_atom_occurrences)
 
 
 ## Domain and Range
@@ -21,6 +21,7 @@ URI: [chemont:molecule_has_atom_occurrences](http://w3id.org/chemontmolecule_has
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)

@@ -1,10 +1,10 @@
 
-# Type: nucleon
+# Type: nucleon _(deprecated)_
 
 
 A neutron or proton
 
-URI: [chemont:Nucleon](http://w3id.org/chemontNucleon)
+URI: [chemont:Nucleon](https://w3id.org/chemont/Nucleon)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[Proton],[Nucleon&#124;id(i):string]^-[Proton],[Nucleon]^-[Neutron],[SubatomicParticle]^-[Nucleon],[Neutron])

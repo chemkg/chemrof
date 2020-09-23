@@ -4,7 +4,7 @@
 
 Relation between a molecule and the molecules it is made from.
 
-URI: [chemont:has_submolecules](http://w3id.org/chemonthas_submolecules)
+URI: [chemont:has_submolecules](https://w3id.org/chemont/has_submolecules)
 
 
 ## Domain and Range
@@ -22,6 +22,7 @@ URI: [chemont:has_submolecules](http://w3id.org/chemonthas_submolecules)
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)

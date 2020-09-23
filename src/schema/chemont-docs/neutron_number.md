@@ -4,7 +4,7 @@
 
 number of neutrons in an atom
 
-URI: [chemont:neutron_number](http://w3id.org/chemontneutron_number)
+URI: [chemont:neutron_number](https://w3id.org/chemont/neutron_number)
 
 
 ## Domain and Range

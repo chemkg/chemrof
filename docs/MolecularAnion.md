@@ -4,7 +4,7 @@
 
 A polyatomic ion that is negative
 
-URI: [chemont:MolecularAnion](http://w3id.org/chemontMolecularAnion)
+URI: [chemont:MolecularAnion](https://w3id.org/chemont/MolecularAnion)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon],[Molecule],[MolecularAnion&#124;elemental_charge(i):integer%20%3F;has_part(i):string%20%3F;id(i):string]uses%20-.->[AnionState],[PolyatomicIon]^-[MolecularAnion],[AtomicBond],[AtomOccurrence],[Atom],[AnionState])
@@ -33,6 +33,7 @@ URI: [chemont:MolecularAnion](http://w3id.org/chemontMolecularAnion)
  * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
     * range: [AtomOccurrence](AtomOccurrence.md)
  * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
+    * Description: The set of all bonds connecting atoms in a molecule
     * range: [AtomicBond](AtomicBond.md)
  * [molecule➞has part](molecule_has_part.md)  <sub>OPT</sub>
     * range: [String](types/String.md)

@@ -4,10 +4,10 @@
 
 An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
 
-URI: [chemont:AtomOccurrence](http://w3id.org/chemontAtomOccurrence)
+URI: [chemont:AtomOccurrence](https://w3id.org/chemont/AtomOccurrence)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern],[Molecule],[AtomicBond],[Atom]<of%20atom%200..1-%20[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Pattern]^-[AtomOccurrence],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Pattern],[Molecule],[AtomicBond],[Atom]<has%20atom%200..1-%20[AtomOccurrence&#124;valence:integer%20%3F],[AtomicBond]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[AtomicBond]++-%20has%20atom%20occurrences(i)%200..*>[AtomOccurrence],[Molecule]++-%20has%20atom%20occurrences%200..*>[AtomOccurrence],[Pattern]^-[AtomOccurrence],[Atom])
 
 ## Parents
 
@@ -25,5 +25,7 @@ URI: [chemont:AtomOccurrence](http://w3id.org/chemontAtomOccurrence)
 
 ### Own
 
- * [atom occurrence➞of atom](atom_occurrence_of_atom.md)  <sub>OPT</sub>
+ * [atom occurrence➞has atom](atom_occurrence_has_atom.md)  <sub>OPT</sub>
     * range: [Atom](Atom.md)
+ * [atom occurrence➞valence](atom_occurrence_valence.md)  <sub>OPT</sub>
+    * range: [Integer](types/Integer.md)

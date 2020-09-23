@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:enantiomer_optical_configuration](http://w3id.org/chemontenantiomer_optical_configuration)
+URI: [chemont:enantiomer_optical_configuration](https://w3id.org/chemont/enantiomer_optical_configuration)
 
 
 ## Domain and Range

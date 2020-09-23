@@ -4,7 +4,7 @@
 
 number of protons minus number of electrons
 
-URI: [chemont:elemental_charge](http://w3id.org/chemontelemental_charge)
+URI: [chemont:elemental_charge](https://w3id.org/chemont/elemental_charge)
 
 
 ## Domain and Range

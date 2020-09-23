@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:half_life](http://w3id.org/chemonthalf_life)
+URI: [chemont:half_life](https://w3id.org/chemont/half_life)
 
 
 ## Domain and Range

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:anion_state_elemental_charge](http://w3id.org/chemontanion_state_elemental_charge)
+URI: [chemont:anion_state_elemental_charge](https://w3id.org/chemont/anion_state_elemental_charge)
 
 
 ## Domain and Range

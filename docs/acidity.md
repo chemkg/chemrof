@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:acidity](http://w3id.org/chemontacidity)
+URI: [chemont:acidity](https://w3id.org/chemont/acidity)
 
 
 ## Domain and Range

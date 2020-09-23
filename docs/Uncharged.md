@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:Uncharged](http://w3id.org/chemontUncharged)
+URI: [chemont:Uncharged](https://w3id.org/chemont/Uncharged)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule]uses%20-.->[Uncharged&#124;elemental_charge:integer%20%3F],[UnchargedAtom]uses%20-.->[Uncharged],[ChargeState]^-[Uncharged],[UnchargedMolecule],[UnchargedAtom],[ChargeState])

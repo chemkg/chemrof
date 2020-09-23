@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:decay_energy](http://w3id.org/chemontdecay_energy)
+URI: [chemont:decay_energy](https://w3id.org/chemont/decay_energy)
 
 
 ## Domain and Range

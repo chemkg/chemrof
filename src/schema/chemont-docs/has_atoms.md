@@ -4,7 +4,7 @@
 
 Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
 
-URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
+URI: [chemont:has_atoms](https://w3id.org/chemont/has_atoms)
 
 
 ## Domain and Range
@@ -21,6 +21,7 @@ URI: [chemont:has_atoms](http://w3id.org/chemonthas_atoms)
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)

@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:enantiomer_relative_configuration](http://w3id.org/chemontenantiomer_relative_configuration)
+URI: [chemont:enantiomer_relative_configuration](https://w3id.org/chemont/enantiomer_relative_configuration)
 
 
 ## Domain and Range

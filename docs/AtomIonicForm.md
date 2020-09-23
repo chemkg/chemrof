@@ -4,10 +4,10 @@
 
 an atom type in which charge state is specified. Also known as (atom) ionic species
 
-URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
+URI: [chemont:AtomIonicForm](https://w3id.org/chemont/AtomIonicForm)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[MonoatomicIon],[AtomIonicForm&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string]^-[UnchargedAtom],[AtomIonicForm]^-[MonoatomicIon],[Atom]^-[AtomIonicForm],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom],[MonoatomicIon],[AtomIonicForm&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string]^-[UnchargedAtom],[AtomIonicForm]^-[MonoatomicIon],[Atom]^-[AtomIonicForm],[Atom])
 
 ## Parents
 
@@ -40,7 +40,7 @@ URI: [chemont:AtomIonicForm](http://w3id.org/chemontAtomIonicForm)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>OPT</sub>
+ * [symbol](symbol.md)  <sub>REQ</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 

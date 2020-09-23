@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:decay_mode](http://w3id.org/chemontdecay_mode)
+URI: [chemont:decay_mode](https://w3id.org/chemont/decay_mode)
 
 
 ## Domain and Range

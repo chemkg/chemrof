@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:racemic_mixture_has_left_enantiomer](http://w3id.org/chemontracemic_mixture_has_left_enantiomer)
+URI: [chemont:racemic_mixture_has_left_enantiomer](https://w3id.org/chemont/racemic_mixture_has_left_enantiomer)
 
 
 ## Domain and Range

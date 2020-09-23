@@ -4,14 +4,14 @@
 
 A molecule that has no charge
 
-URI: [chemont:UnchargedMolecule](http://w3id.org/chemontUnchargedMolecule)
+URI: [chemont:UnchargedMolecule](https://w3id.org/chemont/UnchargedMolecule)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule&#124;elemental_charge:integer%20%3F;has_part(i):string%20%3F;id(i):string]uses%20-.->[Uncharged],[Molecule]^-[UnchargedMolecule],[Uncharged],[Molecule],[AtomicBond],[AtomOccurrence],[Atom])
 
 ## Parents
 
- *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via bonds
+ *  is_a: [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
 
 ## Uses Mixins
 
@@ -33,6 +33,7 @@ URI: [chemont:UnchargedMolecule](http://w3id.org/chemontUnchargedMolecule)
  * [molecule➞has atom occurrences](molecule_has_atom_occurrences.md)  <sub>0..*</sub>
     * range: [AtomOccurrence](AtomOccurrence.md)
  * [molecule➞has bonds](molecule_has_bonds.md)  <sub>0..*</sub>
+    * Description: The set of all bonds connecting atoms in a molecule
     * range: [AtomicBond](AtomicBond.md)
  * [molecule➞has part](molecule_has_part.md)  <sub>OPT</sub>
     * range: [String](types/String.md)

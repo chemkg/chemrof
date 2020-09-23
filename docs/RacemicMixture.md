@@ -4,7 +4,7 @@
 
 a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
 
-URI: [chemont:RacemicMixture](http://w3id.org/chemontRacemicMixture)
+URI: [chemont:RacemicMixture](https://w3id.org/chemont/RacemicMixture)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Enantiomer]<has%20right%20enantiomer%201..1-%20[RacemicMixture&#124;id(i):string],[Enantiomer]<has%20left%20enantiomer%201..1-%20[RacemicMixture],[ChemicalEntity]^-[RacemicMixture],[Enantiomer],[ChemicalEntity])

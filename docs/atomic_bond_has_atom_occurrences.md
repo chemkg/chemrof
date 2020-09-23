@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:atomic_bond_has_atom_occurrences](http://w3id.org/chemontatomic_bond_has_atom_occurrences)
+URI: [chemont:atomic_bond_has_atom_occurrences](https://w3id.org/chemont/atomic_bond_has_atom_occurrences)
 
 
 ## Domain and Range

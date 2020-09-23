@@ -9,6 +9,18 @@ type Acid
     acidity: Float
   }
 
+type Allotrope
+  {
+    id: String!
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
+    allotropeOf: ChemicalElement!
+    hasBondingStructure: String!
+  }
+
 interface AnionState
   {
     elementalCharge: Integer
@@ -18,7 +30,7 @@ interface Atom
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
   }
 
@@ -26,7 +38,7 @@ type AtomAnion implements AnionState
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
   }
@@ -35,7 +47,7 @@ type AtomCation implements CationState
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
   }
@@ -44,14 +56,15 @@ interface AtomIonicForm
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
   }
 
 type AtomOccurrence
   {
-    ofAtom: Atom
+    hasAtom: Atom
+    valence: Integer
   }
 
 type AtomicBond
@@ -59,6 +72,9 @@ type AtomicBond
     hasAtomOccurrences: [AtomOccurrence]
     bondOrder: Integer
     bondType: String
+    bondLengthInAngstroms: Float
+    bondAngle: Float
+    torsionalAngle: Float
   }
 
 interface CationState
@@ -74,6 +90,20 @@ interface ChargeState
 interface Charged
   {
     elementalCharge: Integer
+  }
+
+type ChemicalElement
+  {
+    id: String!
+    atomicNumber: Count
+    name: String
+    symbol: String!
+    periodicTableGroup: String
+    periodicTableBlock: String
+    boilingPointInCelcius: Float
+    meltingPointInCelcius: Float
+    standardAtomicWeight: Float
+    electronConfiguration: String
   }
 
 interface ChemicalEntity
@@ -104,18 +134,16 @@ type FullySpecifiedAtom
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
     neutronNumber: Count
   }
 
-type GenericAtom
+type FunctionalGroup
   {
     id: String!
-    atomicNumber: Count
-    symbol: String
-    name: String
+    isSubstitutentGroupFrom: Molecule
   }
 
 interface GroupingClass
@@ -126,7 +154,7 @@ type Isotope
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     neutronNumber: Count
     isotopeOf: Isotope
@@ -135,6 +163,16 @@ type Isotope
     decayMode: String
     decayEnergy: String
     modeOfFormation: String
+  }
+
+type Macromolecule
+  {
+    id: String!
+  }
+
+type Moiety
+  {
+    id: String!
   }
 
 type MolecularAnion implements AnionState
@@ -179,11 +217,21 @@ interface Molecule
     hasPart: String
   }
 
+type MoleculeGroupingClass
+  {
+    classifies: Molecule
+  }
+
+type MoleculePart
+  {
+    id: String!
+  }
+
 type MonoatomicIon implements Charged
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
   }
@@ -212,13 +260,23 @@ type Nuclide
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     energyLevel: String
   }
 
 interface Pattern
   {
+  }
+
+type Peptide
+  {
+    id: String!
+  }
+
+interface PolyatomicEntity
+  {
+    id: String!
   }
 
 type PolyatomicIon implements Charged
@@ -230,6 +288,17 @@ type PolyatomicIon implements Charged
     hasAtoms: [Atom]
     hasPart: String
     elementalCharge: Integer
+  }
+
+type Polymer
+  {
+    id: String!
+    hasPart: Macromolecule
+  }
+
+type Protein
+  {
+    id: String!
   }
 
 type Proton
@@ -248,9 +317,29 @@ type Radionuclide
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     energyLevel: String
+  }
+
+type Reaction
+  {
+    leftParticipants: [ReactionParticipant]
+    rightParticipants: [ReactionParticipant]
+    direction: String
+    smartsString: String
+    isStereo: Boolean
+    isBalanced: Boolean
+    isTransport: Boolean
+    isFullyCharacterized: Boolean
+    reactionCenter: String
+    description: String
+  }
+
+type ReactionParticipant
+  {
+    chemical: ChemicalEntity
+    stoichiometry: Integer
   }
 
 type Salt
@@ -273,7 +362,7 @@ type UnchargedAtom implements Uncharged
   {
     id: String!
     atomicNumber: Count
-    symbol: String
+    symbol: String!
     name: String
     elementalCharge: Integer
   }

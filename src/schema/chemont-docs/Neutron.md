@@ -1,10 +1,10 @@
 
-# Type: neutron
+# Type: neutron _(deprecated)_
 
 
 
 
-URI: [chemont:Neutron](http://w3id.org/chemontNeutron)
+URI: [chemont:Neutron](https://w3id.org/chemont/Neutron)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Nucleon],[Nucleon]^-[Neutron&#124;id(i):string])

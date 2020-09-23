@@ -1,10 +1,10 @@
 
-# Type: electron
+# Type: electron _(deprecated)_
 
 
 
 
-URI: [chemont:Electron](http://w3id.org/chemontElectron)
+URI: [chemont:Electron](https://w3id.org/chemont/Electron)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[SubatomicParticle]^-[Electron&#124;id(i):string])

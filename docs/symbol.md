@@ -4,18 +4,19 @@
 
 short symbol for chemical entity, e.g. K, C-16
 
-URI: [chemont:symbol](http://w3id.org/chemontsymbol)
+URI: [chemont:symbol](https://w3id.org/chemont/symbol)
 
 
 ## Domain and Range
 
-None ->  <sub>OPT</sub> [String](types/String.md)
+None ->  <sub>REQ</sub> [String](types/String.md)
 
 ## Parents
 
 
 ## Children
 
+ *  [chemical element➞symbol](chemical_element_symbol.md)
 
 ## Used by
 
@@ -23,8 +24,8 @@ None ->  <sub>OPT</sub> [String](types/String.md)
  * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
+ * [ChemicalElement](ChemicalElement.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
- * [GenericAtom](GenericAtom.md)
  * [Isotope](Isotope.md)
  * [MonoatomicIon](MonoatomicIon.md)
  * [Nuclide](Nuclide.md)

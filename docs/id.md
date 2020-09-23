@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:id](http://w3id.org/chemontid)
+URI: [chemont:id](https://w3id.org/chemont/id)
 
 
 ## Domain and Range
@@ -20,26 +20,35 @@ None ->  <sub>REQ</sub> [String](types/String.md)
 ## Used by
 
  * [Acid](Acid.md)
+ * [Allotrope](Allotrope.md)
  * [Atom](Atom.md)
  * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
+ * [ChemicalElement](ChemicalElement.md)
  * [ChemicalEntity](ChemicalEntity.md)
  * [Electron](Electron.md)
  * [Enantiomer](Enantiomer.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
- * [GenericAtom](GenericAtom.md)
+ * [FunctionalGroup](FunctionalGroup.md)
  * [Isotope](Isotope.md)
+ * [Macromolecule](Macromolecule.md)
+ * [Moiety](Moiety.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)
  * [MolecularSpecies](MolecularSpecies.md)
  * [Molecule](Molecule.md)
+ * [MoleculePart](MoleculePart.md)
  * [MonoatomicIon](MonoatomicIon.md)
  * [Neutron](Neutron.md)
  * [NonSpeciesMolecule](NonSpeciesMolecule.md)
  * [Nucleon](Nucleon.md)
  * [Nuclide](Nuclide.md)
+ * [Peptide](Peptide.md)
+ * [PolyatomicEntity](PolyatomicEntity.md)
  * [PolyatomicIon](PolyatomicIon.md)
+ * [Polymer](Polymer.md)
+ * [Protein](Protein.md)
  * [Proton](Proton.md)
  * [RacemicMixture](RacemicMixture.md)
  * [Radionuclide](Radionuclide.md)

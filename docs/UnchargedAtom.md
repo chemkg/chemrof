@@ -4,10 +4,10 @@
 
 An atom that has no charge
 
-URI: [chemont:UnchargedAtom](http://w3id.org/chemontUnchargedAtom)
+URI: [chemont:UnchargedAtom](https://w3id.org/chemont/UnchargedAtom)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom&#124;elemental_charge(i):integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string]uses%20-.->[Uncharged],[AtomIonicForm]^-[UnchargedAtom],[Uncharged],[AtomIonicForm])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedAtom&#124;elemental_charge(i):integer%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string]uses%20-.->[Uncharged],[AtomIonicForm]^-[UnchargedAtom],[Uncharged],[AtomIonicForm])
 
 ## Parents
 
@@ -33,7 +33,7 @@ URI: [chemont:UnchargedAtom](http://w3id.org/chemontUnchargedAtom)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>OPT</sub>
+ * [symbol](symbol.md)  <sub>REQ</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 

@@ -4,7 +4,7 @@
 
 A chemical entity below the granularity of an atom.
 
-URI: [chemont:SubatomicParticle](http://w3id.org/chemontSubatomicParticle)
+URI: [chemont:SubatomicParticle](https://w3id.org/chemont/SubatomicParticle)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle&#124;id(i):string]^-[Nucleon],[SubatomicParticle]^-[Electron],[ChemicalEntity]^-[SubatomicParticle],[Nucleon],[Electron],[ChemicalEntity])

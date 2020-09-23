@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:Charged](http://w3id.org/chemontCharged)
+URI: [chemont:Charged](https://w3id.org/chemont/Charged)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon]uses%20-.->[Charged&#124;elemental_charge(i):integer%20%3F],[MonoatomicIon]uses%20-.->[Charged],[ChargeState]^-[Charged],[PolyatomicIon],[MonoatomicIon],[ChargeState])

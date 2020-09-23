@@ -1,10 +1,10 @@
 
-# Type: proton
+# Type: proton _(deprecated)_
 
 
 
 
-URI: [chemont:Proton](http://w3id.org/chemontProton)
+URI: [chemont:Proton](https://w3id.org/chemont/Proton)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Nucleon]^-[Proton&#124;id(i):string],[Nucleon])

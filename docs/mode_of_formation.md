@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:mode_of_formation](http://w3id.org/chemontmode_of_formation)
+URI: [chemont:mode_of_formation](https://w3id.org/chemont/mode_of_formation)
 
 
 ## Domain and Range

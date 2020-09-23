@@ -4,7 +4,7 @@
 
 
 
-URI: [chemont:CationState](http://w3id.org/chemontCationState)
+URI: [chemont:CationState](https://w3id.org/chemont/CationState)
 
 
 ![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularCation]uses%20-.->[CationState&#124;elemental_charge:integer%20%3F],[AtomCation]uses%20-.->[CationState],[MolecularCation],[AtomCation])

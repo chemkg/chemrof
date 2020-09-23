@@ -4,7 +4,7 @@
 
 e.g. ground, stable
 
-URI: [chemont:energy_level](http://w3id.org/chemontenergy_level)
+URI: [chemont:energy_level](https://w3id.org/chemont/energy_level)
 
 
 ## Domain and Range

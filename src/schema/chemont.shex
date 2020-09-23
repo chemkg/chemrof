@@ -1,15 +1,15 @@
-BASE <http://w3id.org/chemont/>
+BASE <https://w3id.org/chemont/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX metatype: <https://w3id.org/biolink/biolinkml/meta/types/>
 
 
-<http://w3id.org/chemontCount> xsd:int
+<Count> xsd:int
 
-<http://w3id.org/chemontNumberOfYears> xsd:int
+<NumberOfYears> xsd:int
 
-<http://w3id.org/chemontChemicalEncoding> xsd:string
+<ChemicalEncoding> xsd:string
 
 metatype:String xsd:string
 
@@ -37,377 +37,504 @@ metatype:Objectidentifier IRI
 
 metatype:Nodeidentifier NONLITERAL
 
-<http://w3id.org/chemontAcid> CLOSED {
-    (  $<http://w3id.org/chemontAcid_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-          rdf:type [ <http://w3id.org/chemontMolecule> ] ? ;
-          <http://w3id.org/chemontacidity> @metatype:Float ?
+<Acid> CLOSED {
+    (  $<Acid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <acidity> @metatype:Float ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAcid> ]
+       rdf:type [ <Acid> ]
     )
 }
 
-<http://w3id.org/chemontAnionState> {
-    (  $<http://w3id.org/chemontAnionState_tes> <http://w3id.org/chemontelemental_charge> @metatype:Integer ? ;
-       rdf:type [ <http://w3id.org/chemontAnionState> ] ?
+<Allotrope> CLOSED {
+    (  $<Allotrope_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <allotrope_of> @<ChemicalElement> ;
+          <has_bonding_structure> @metatype:String
+       ) ;
+       rdf:type [ <Allotrope> ]
     )
 }
 
-<http://w3id.org/chemontAtom>  (
-    @<http://w3id.org/chemontAtomIonicForm> OR @<http://w3id.org/chemontFullySpecifiedAtom> OR
-    @<http://w3id.org/chemontGenericAtom> OR @<http://w3id.org/chemontIsotope> OR @<http://w3id.org/chemontNuclide>
+<AnionState> {
+    (  $<AnionState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <AnionState> ] ?
+    )
+}
+
+<Atom>  (
+    @<AtomIonicForm> OR @<ChemicalElement> OR @<FullySpecifiedAtom> OR @<Isotope> OR @<Nuclide>
 )
 
-<http://w3id.org/chemontAtom_struct> {
-    (  $<http://w3id.org/chemontAtom_tes> (  &<http://w3id.org/chemontChemicalEntity_tes> ;
-          rdf:type [ <http://w3id.org/chemontChemicalEntity> ] ? ;
-          <http://w3id.org/chemontatomic_number> @<http://w3id.org/chemontCount> ? ;
-          <http://w3id.org/chemontsymbol> @metatype:String ? ;
-          <http://w3id.org/chemontname> @metatype:String ?
+<Atom_struct> {
+    (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <atomic_number> @<Count> ? ;
+          <symbol> @metatype:String ;
+          <name> @metatype:String ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtom> ]
+       rdf:type [ <Atom> ]
     )
 }
 
-<http://w3id.org/chemontAtomAnion> CLOSED {
-    (  $<http://w3id.org/chemontAtomAnion_tes> (  &<http://w3id.org/chemontMonoatomicIon_tes> ;
-          rdf:type [ <http://w3id.org/chemontMonoatomicIon> ] ? ;
-          &<http://w3id.org/chemontAnionState_tes> ;
-          rdf:type [ <http://w3id.org/chemontAnionState> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
+<AtomAnion> CLOSED {
+    (  $<AtomAnion_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtomAnion> ]
+       rdf:type [ <AtomAnion> ]
     )
 }
 
-<http://w3id.org/chemontAtomCation> CLOSED {
-    (  $<http://w3id.org/chemontAtomCation_tes> (  &<http://w3id.org/chemontMonoatomicIon_tes> ;
-          rdf:type [ <http://w3id.org/chemontMonoatomicIon> ] ? ;
-          &<http://w3id.org/chemontCationState_tes> ;
-          rdf:type [ <http://w3id.org/chemontCationState> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
+<AtomCation> CLOSED {
+    (  $<AtomCation_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtomCation> ]
+       rdf:type [ <AtomCation> ]
     )
 }
 
-<http://w3id.org/chemontAtomIonicForm>  (
-    @<http://w3id.org/chemontMonoatomicIon> OR @<http://w3id.org/chemontUnchargedAtom>
+<AtomIonicForm>  (
+    @<MonoatomicIon> OR @<UnchargedAtom>
 )
 
-<http://w3id.org/chemontAtomIonicForm_struct> {
-    (  $<http://w3id.org/chemontAtomIonicForm_tes> (  &<http://w3id.org/chemontAtom_tes> ;
-          rdf:type [ <http://w3id.org/chemontAtom> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
+<AtomIonicForm_struct> {
+    (  $<AtomIonicForm_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <elemental_charge> @metatype:Integer ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtomIonicForm> ]
+       rdf:type [ <AtomIonicForm> ]
     )
 }
 
-<http://w3id.org/chemontAtomOccurrence> CLOSED {
-    (  $<http://w3id.org/chemontAtomOccurrence_tes> (  &<http://w3id.org/chemontPattern_tes> ;
+<AtomOccurrence> CLOSED {
+    (  $<AtomOccurrence_tes> (  &<Pattern_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <http://w3id.org/chemontof_atom> @<http://w3id.org/chemontAtom> ?
+          <has_atom> @<Atom> ? ;
+          <valence> @metatype:Integer ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtomOccurrence> ] ?
+       rdf:type [ <AtomOccurrence> ] ?
     )
 }
 
-<http://w3id.org/chemontAtomicBond> CLOSED {
-    (  $<http://w3id.org/chemontAtomicBond_tes> (  &<http://w3id.org/chemontPattern_tes> ;
+<AtomicBond> CLOSED {
+    (  $<AtomicBond_tes> (  &<Pattern_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <http://w3id.org/chemonthas_atom_occurrences> @<http://w3id.org/chemontAtomOccurrence> * ;
-          <http://w3id.org/chemontbond_order> @metatype:Integer ? ;
-          <http://w3id.org/chemontbond_type> @metatype:String ?
+          <has_atom_occurrences> @<AtomOccurrence> * ;
+          <bond_order> @metatype:Integer ? ;
+          <bond_type> @metatype:String ? ;
+          <bond_length_in_angstroms> @metatype:Float ? ;
+          <bond_angle> @metatype:Float ? ;
+          <torsional_angle> @metatype:Float ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontAtomicBond> ] ?
+       rdf:type [ <AtomicBond> ] ?
     )
 }
 
-<http://w3id.org/chemontCationState> {
-    (  $<http://w3id.org/chemontCationState_tes> <http://w3id.org/chemontelemental_charge> @metatype:Integer ? ;
-       rdf:type [ <http://w3id.org/chemontCationState> ] ?
+<CationState> {
+    (  $<CationState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <CationState> ] ?
     )
 }
 
-<http://w3id.org/chemontChargeState>  (
+<ChargeState>  (
     {
-       (  $<http://w3id.org/chemontChargeState_tes> <http://w3id.org/chemontelemental_charge> @metatype:Integer ? ;
-          rdf:type [ <http://w3id.org/chemontChargeState> ] ?
+       (  $<ChargeState_tes> <elemental_charge> @metatype:Integer ? ;
+          rdf:type [ <ChargeState> ] ?
        )
-    } OR @<http://w3id.org/chemontCharged> OR @<http://w3id.org/chemontUncharged>
+    } OR @<Charged> OR @<Uncharged>
 )
 
-<http://w3id.org/chemontCharged> {
-    (  $<http://w3id.org/chemontCharged_tes> (  &<http://w3id.org/chemontChargeState_tes> ;
-          rdf:type [ <http://w3id.org/chemontChargeState> ] ?
+<Charged> {
+    (  $<Charged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontCharged> ] ?
+       rdf:type [ <Charged> ] ?
     )
 }
 
-<http://w3id.org/chemontChemicalEntity>  (
-    @<http://w3id.org/chemontAtom> OR @<http://w3id.org/chemontMolecule> OR @<http://w3id.org/chemontRacemicMixture> OR
-    @<http://w3id.org/chemontSalt> OR @<http://w3id.org/chemontSubatomicParticle>
+<ChemicalElement> CLOSED {
+    (  $<ChemicalElement_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <symbol> @metatype:String ;
+          <periodic_table_group> @metatype:String ? ;
+          <periodic_table_block> @metatype:String ? ;
+          <boiling_point_in_celcius> @metatype:Float ? ;
+          <melting_point_in_celcius> @metatype:Float ? ;
+          <standard_atomic_weight> @metatype:Float ? ;
+          <electron_configuration> @metatype:String ?
+       ) ;
+       rdf:type [ <ChemicalElement> ]
+    )
+}
+
+<ChemicalEntity>  (
+    @<Atom> OR @<Macromolecule> OR @<PolyatomicEntity> OR @<Polymer> OR @<RacemicMixture> OR @<SubatomicParticle>
 )
 
-<http://w3id.org/chemontChemicalEntity_struct> {
-    (  $<http://w3id.org/chemontChemicalEntity_tes> (  &<http://w3id.org/chemontPattern_tes> ;
+<ChemicalEntity_struct> {
+    (  $<ChemicalEntity_tes> (  &<Pattern_tes> ;
           rdf:type [ owl:Class ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontChemicalEntity> ]
+       rdf:type [ <ChemicalEntity> ]
     )
 }
 
-<http://w3id.org/chemontElectron> CLOSED {
-    (  $<http://w3id.org/chemontElectron_tes> (  &<http://w3id.org/chemontSubatomicParticle_tes> ;
-          rdf:type [ <http://w3id.org/chemontSubatomicParticle> ] ?
+<Electron> CLOSED {
+    (  $<Electron_tes> (  &<SubatomicParticle_tes> ;
+          rdf:type [ <SubatomicParticle> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontElectron> ]
+       rdf:type [ <Electron> ]
     )
 }
 
-<http://w3id.org/chemontEnantiomer> CLOSED {
-    (  $<http://w3id.org/chemontEnantiomer_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-          rdf:type [ <http://w3id.org/chemontMolecule> ] ? ;
-          <http://w3id.org/chemontrelative_configuration> @metatype:String ? ;
-          <http://w3id.org/chemontoptical_configuration> @metatype:String ? ;
-          <http://w3id.org/chemontabsolute_configuration> @metatype:String ? ;
-          <http://w3id.org/chemontenantiomer_form_of> @<http://w3id.org/chemontMolecule> ?
+<Enantiomer> CLOSED {
+    (  $<Enantiomer_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <relative_configuration> @metatype:String ? ;
+          <optical_configuration> @metatype:String ? ;
+          <absolute_configuration> @metatype:String ? ;
+          <enantiomer_form_of> @<Molecule> ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontEnantiomer> ]
+       rdf:type [ <Enantiomer> ]
     )
 }
 
-<http://w3id.org/chemontFullySpecifiedAtom> CLOSED {
-    (  $<http://w3id.org/chemontFullySpecifiedAtom_tes> (  &<http://w3id.org/chemontAtom_tes> ;
-          rdf:type [ <http://w3id.org/chemontAtom> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ? ;
-          <http://w3id.org/chemontneutron_number> @<http://w3id.org/chemontCount> ?
+<FullySpecifiedAtom> CLOSED {
+    (  $<FullySpecifiedAtom_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <elemental_charge> @metatype:Integer ? ;
+          <neutron_number> @<Count> ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontFullySpecifiedAtom> ]
+       rdf:type [ <FullySpecifiedAtom> ]
     )
 }
 
-<http://w3id.org/chemontGenericAtom> CLOSED {
-    (  $<http://w3id.org/chemontGenericAtom_tes> (  &<http://w3id.org/chemontAtom_tes> ;
-          rdf:type [ <http://w3id.org/chemontAtom> ] ?
+<FunctionalGroup> CLOSED {
+    (  $<FunctionalGroup_tes> (  &<MoleculePart_tes> ;
+          rdf:type [ <MoleculePart> ] ? ;
+          <is_substitutent_group_from> @<Molecule> ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontGenericAtom> ]
+       rdf:type [ <FunctionalGroup> ]
     )
 }
 
-<http://w3id.org/chemontGroupingClass> {
-    (  $<http://w3id.org/chemontGroupingClass_tes> rdf:type . * ;
-       rdf:type [ <http://w3id.org/chemontGroupingClass> ] ?
-    )
-}
-
-<http://w3id.org/chemontIsotope> CLOSED {
-    (  $<http://w3id.org/chemontIsotope_tes> (  &<http://w3id.org/chemontAtom_tes> ;
-          rdf:type [ <http://w3id.org/chemontAtom> ] ? ;
-          <http://w3id.org/chemontneutron_number> @<http://w3id.org/chemontCount> ? ;
-          <http://w3id.org/chemontisotope_of> @<http://w3id.org/chemontIsotope> ? ;
-          <http://w3id.org/chemonthalf_life> @<http://w3id.org/chemontNumberOfYears> ? ;
-          <http://w3id.org/chemontdecay_product> @<http://w3id.org/chemontIsotope> ? ;
-          <http://w3id.org/chemontdecay_mode> @metatype:String ? ;
-          <http://w3id.org/chemontdecay_energy> @metatype:String ? ;
-          <http://w3id.org/chemontmode_of_formation> @metatype:String ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontIsotope> ]
-    )
-}
-
-<http://w3id.org/chemontMolecularAnion> CLOSED {
-    (  $<http://w3id.org/chemontMolecularAnion_tes> (  &<http://w3id.org/chemontPolyatomicIon_tes> ;
-          rdf:type [ <http://w3id.org/chemontPolyatomicIon> ] ? ;
-          &<http://w3id.org/chemontAnionState_tes> ;
-          rdf:type [ <http://w3id.org/chemontAnionState> ] ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontMolecularAnion> ]
-    )
-}
-
-<http://w3id.org/chemontMolecularCation> CLOSED {
-    (  $<http://w3id.org/chemontMolecularCation_tes> (  &<http://w3id.org/chemontPolyatomicIon_tes> ;
-          rdf:type [ <http://w3id.org/chemontPolyatomicIon> ] ? ;
-          &<http://w3id.org/chemontCationState_tes> ;
-          rdf:type [ <http://w3id.org/chemontCationState> ] ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontMolecularCation> ]
-    )
-}
-
-<http://w3id.org/chemontMolecularSpecies> CLOSED {
-    (  $<http://w3id.org/chemontMolecularSpecies_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-          rdf:type [ <http://w3id.org/chemontMolecule> ] ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontMolecularSpecies> ]
-    )
-}
-
-<http://w3id.org/chemontMolecule>  (
-    @<http://w3id.org/chemontAcid> OR @<http://w3id.org/chemontEnantiomer> OR @<http://w3id.org/chemontMolecularSpecies> OR
-    @<http://w3id.org/chemontNonSpeciesMolecule> OR @<http://w3id.org/chemontPolyatomicIon> OR
-    @<http://w3id.org/chemontUnchargedMolecule>
-)
-
-<http://w3id.org/chemontMolecule_struct> {
-    (  $<http://w3id.org/chemontMolecule_tes> (  &<http://w3id.org/chemontChemicalEntity_tes> ;
-          rdf:type [ <http://w3id.org/chemontChemicalEntity> ] ? ;
-          <http://w3id.org/chemonthas_atom_occurrences> @<http://w3id.org/chemontAtomOccurrence> * ;
-          <http://w3id.org/chemonthas_bonds> @<http://w3id.org/chemontAtomicBond> * ;
-          <http://w3id.org/chemonthas_submolecules> @<http://w3id.org/chemontMolecule> * ;
-          <http://w3id.org/chemonthas_atoms> @<http://w3id.org/chemontAtom> * ;
-          <http://w3id.org/chemonthas_part> @metatype:String ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontMolecule> ]
-    )
-}
-
-<http://w3id.org/chemontMonoatomicIon>  (
-    CLOSED {
-       (  $<http://w3id.org/chemontMonoatomicIon_tes> (  &<http://w3id.org/chemontAtomIonicForm_tes> ;
-             rdf:type [ <http://w3id.org/chemontAtomIonicForm> ] ? ;
-             &<http://w3id.org/chemontCharged_tes> ;
-             rdf:type [ <http://w3id.org/chemontCharged> ] ?
-          ) ;
-          rdf:type [ <http://w3id.org/chemontMonoatomicIon> ]
+<GroupingClass>  (
+    {
+       (  $<GroupingClass_tes> rdf:type . * ;
+          rdf:type [ <GroupingClass> ] ?
        )
-    } OR @<http://w3id.org/chemontAtomAnion> OR @<http://w3id.org/chemontAtomCation>
+    } OR @<MoleculeGroupingClass>
 )
 
-<http://w3id.org/chemontNeutron> CLOSED {
-    (  $<http://w3id.org/chemontNeutron_tes> (  &<http://w3id.org/chemontNucleon_tes> ;
-          rdf:type [ <http://w3id.org/chemontNucleon> ] ?
+<Isotope> CLOSED {
+    (  $<Isotope_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <neutron_number> @<Count> ? ;
+          <isotope_of> @<Isotope> ? ;
+          <half_life> @<NumberOfYears> ? ;
+          <decay_product> @<Isotope> ? ;
+          <decay_mode> @metatype:String ? ;
+          <decay_energy> @metatype:String ? ;
+          <mode_of_formation> @metatype:String ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontNeutron> ]
+       rdf:type [ <Isotope> ]
     )
 }
 
-<http://w3id.org/chemontNonSpeciesMolecule> CLOSED {
-    (  $<http://w3id.org/chemontNonSpeciesMolecule_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-          rdf:type [ <http://w3id.org/chemontMolecule> ] ?
+<Macromolecule>  (
+    CLOSED {
+       (  $<Macromolecule_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ?
+          ) ;
+          rdf:type [ <Macromolecule> ]
+       )
+    } OR @<Peptide> OR @<Protein>
+)
+
+<Moiety> CLOSED {
+    (  $<Moiety_tes> (  &<MoleculePart_tes> ;
+          rdf:type [ <MoleculePart> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontNonSpeciesMolecule> ]
+       rdf:type [ <Moiety> ]
     )
 }
 
-<http://w3id.org/chemontNucleon>  (
+<MolecularAnion> CLOSED {
+    (  $<MolecularAnion_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ?
+       ) ;
+       rdf:type [ <MolecularAnion> ]
+    )
+}
+
+<MolecularCation> CLOSED {
+    (  $<MolecularCation_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ?
+       ) ;
+       rdf:type [ <MolecularCation> ]
+    )
+}
+
+<MolecularSpecies> CLOSED {
+    (  $<MolecularSpecies_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <MolecularSpecies> ]
+    )
+}
+
+<Molecule>  (
+    @<Acid> OR @<Allotrope> OR @<Enantiomer> OR @<MolecularSpecies> OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR
+    @<UnchargedMolecule>
+)
+
+<Molecule_struct> {
+    (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ? ;
+          <has_atom_occurrences> @<AtomOccurrence> * ;
+          <has_bonds> @<AtomicBond> * ;
+          <has_submolecules> @<Molecule> * ;
+          <has_atoms> @<Atom> * ;
+          <has_part> @metatype:String ?
+       ) ;
+       rdf:type [ <Molecule> ]
+    )
+}
+
+<MoleculeGroupingClass> CLOSED {
+    (  $<MoleculeGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <classifies> @<Molecule> ?
+       ) ;
+       rdf:type [ <MoleculeGroupingClass> ] ?
+    )
+}
+
+<MoleculePart>  (
     CLOSED {
-       (  $<http://w3id.org/chemontNucleon_tes> (  &<http://w3id.org/chemontSubatomicParticle_tes> ;
-             rdf:type [ <http://w3id.org/chemontSubatomicParticle> ] ?
+       (  $<MoleculePart_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ?
           ) ;
-          rdf:type [ <http://w3id.org/chemontNucleon> ]
+          rdf:type [ <MoleculePart> ]
        )
-    } OR @<http://w3id.org/chemontNeutron> OR @<http://w3id.org/chemontProton>
+    } OR @<FunctionalGroup> OR @<Moiety>
 )
 
-<http://w3id.org/chemontNuclide>  (
+<MonoatomicIon>  (
     CLOSED {
-       (  $<http://w3id.org/chemontNuclide_tes> (  &<http://w3id.org/chemontAtom_tes> ;
-             rdf:type [ <http://w3id.org/chemontAtom> ] ? ;
-             <http://w3id.org/chemontenergy_level> @metatype:String ?
+       (  $<MonoatomicIon_tes> (  &<AtomIonicForm_tes> ;
+             rdf:type [ <AtomIonicForm> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ?
           ) ;
-          rdf:type [ <http://w3id.org/chemontNuclide> ]
+          rdf:type [ <MonoatomicIon> ]
        )
-    } OR @<http://w3id.org/chemontRadionuclide>
+    } OR @<AtomAnion> OR @<AtomCation>
 )
 
-<http://w3id.org/chemontPattern>  (
-    @<http://w3id.org/chemontAtomOccurrence> OR @<http://w3id.org/chemontAtomicBond> OR @<http://w3id.org/chemontChemicalEntity>
+<Neutron> CLOSED {
+    (  $<Neutron_tes> (  &<Nucleon_tes> ;
+          rdf:type [ <Nucleon> ] ?
+       ) ;
+       rdf:type [ <Neutron> ]
+    )
+}
+
+<NonSpeciesMolecule> CLOSED {
+    (  $<NonSpeciesMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <NonSpeciesMolecule> ]
+    )
+}
+
+<Nucleon>  (
+    CLOSED {
+       (  $<Nucleon_tes> (  &<SubatomicParticle_tes> ;
+             rdf:type [ <SubatomicParticle> ] ?
+          ) ;
+          rdf:type [ <Nucleon> ]
+       )
+    } OR @<Neutron> OR @<Proton>
 )
 
-<http://w3id.org/chemontPattern_struct> {
-    (  $<http://w3id.org/chemontPattern_tes> rdf:type . * ;
+<Nuclide>  (
+    CLOSED {
+       (  $<Nuclide_tes> (  &<Atom_tes> ;
+             rdf:type [ <Atom> ] ? ;
+             <energy_level> @metatype:String ?
+          ) ;
+          rdf:type [ <Nuclide> ]
+       )
+    } OR @<Radionuclide>
+)
+
+<Pattern>  (
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalEntity>
+)
+
+<Pattern_struct> {
+    (  $<Pattern_tes> rdf:type . * ;
        rdf:type [ owl:Class ] ?
     )
 }
 
-<http://w3id.org/chemontPolyatomicIon>  (
-    CLOSED {
-       (  $<http://w3id.org/chemontPolyatomicIon_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-             rdf:type [ <http://w3id.org/chemontMolecule> ] ? ;
-             &<http://w3id.org/chemontCharged_tes> ;
-             rdf:type [ <http://w3id.org/chemontCharged> ] ? ;
-             <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
-          ) ;
-          rdf:type [ <http://w3id.org/chemontPolyatomicIon> ]
-       )
-    } OR @<http://w3id.org/chemontMolecularAnion> OR @<http://w3id.org/chemontMolecularCation>
+<Peptide> CLOSED {
+    (  $<Peptide_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Peptide> ]
+    )
+}
+
+<PolyatomicEntity>  (
+    @<Molecule> OR @<MoleculePart> OR @<Salt>
 )
 
-<http://w3id.org/chemontProton> CLOSED {
-    (  $<http://w3id.org/chemontProton_tes> (  &<http://w3id.org/chemontNucleon_tes> ;
-          rdf:type [ <http://w3id.org/chemontNucleon> ] ?
+<PolyatomicEntity_struct> {
+    (  $<PolyatomicEntity_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontProton> ]
+       rdf:type [ <PolyatomicEntity> ]
     )
 }
 
-<http://w3id.org/chemontRacemicMixture> CLOSED {
-    (  $<http://w3id.org/chemontRacemicMixture_tes> (  &<http://w3id.org/chemontChemicalEntity_tes> ;
-          rdf:type [ <http://w3id.org/chemontChemicalEntity> ] ? ;
-          <http://w3id.org/chemonthas_left_enantiomer> @<http://w3id.org/chemontEnantiomer> ;
-          <http://w3id.org/chemonthas_right_enantiomer> @<http://w3id.org/chemontEnantiomer>
-       ) ;
-       rdf:type [ <http://w3id.org/chemontRacemicMixture> ]
-    )
-}
-
-<http://w3id.org/chemontRadionuclide> CLOSED {
-    (  $<http://w3id.org/chemontRadionuclide_tes> (  &<http://w3id.org/chemontNuclide_tes> ;
-          rdf:type [ <http://w3id.org/chemontNuclide> ] ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontRadionuclide> ]
-    )
-}
-
-<http://w3id.org/chemontSalt> CLOSED {
-    (  $<http://w3id.org/chemontSalt_tes> (  &<http://w3id.org/chemontChemicalEntity_tes> ;
-          rdf:type [ <http://w3id.org/chemontChemicalEntity> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
-       ) ;
-       rdf:type [ <http://w3id.org/chemontSalt> ]
-    )
-}
-
-<http://w3id.org/chemontSubatomicParticle>  (
+<PolyatomicIon>  (
     CLOSED {
-       (  $<http://w3id.org/chemontSubatomicParticle_tes> (  &<http://w3id.org/chemontChemicalEntity_tes> ;
-             rdf:type [ <http://w3id.org/chemontChemicalEntity> ] ?
+       (  $<PolyatomicIon_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ? ;
+             <elemental_charge> @metatype:Integer ?
           ) ;
-          rdf:type [ <http://w3id.org/chemontSubatomicParticle> ]
+          rdf:type [ <PolyatomicIon> ]
        )
-    } OR @<http://w3id.org/chemontElectron> OR @<http://w3id.org/chemontNucleon>
+    } OR @<MolecularAnion> OR @<MolecularCation>
 )
 
-<http://w3id.org/chemontUncharged> {
-    (  $<http://w3id.org/chemontUncharged_tes> (  &<http://w3id.org/chemontChargeState_tes> ;
-          rdf:type [ <http://w3id.org/chemontChargeState> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
+<Polymer> CLOSED {
+    (  $<Polymer_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <has_part> @<Macromolecule> ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontUncharged> ] ?
+       rdf:type [ <Polymer> ]
     )
 }
 
-<http://w3id.org/chemontUnchargedAtom> CLOSED {
-    (  $<http://w3id.org/chemontUnchargedAtom_tes> (  &<http://w3id.org/chemontAtomIonicForm_tes> ;
-          rdf:type [ <http://w3id.org/chemontAtomIonicForm> ] ? ;
-          &<http://w3id.org/chemontUncharged_tes> ;
-          rdf:type [ <http://w3id.org/chemontUncharged> ] ?
+<Protein> CLOSED {
+    (  $<Protein_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontUnchargedAtom> ]
+       rdf:type [ <Protein> ]
     )
 }
 
-<http://w3id.org/chemontUnchargedMolecule> CLOSED {
-    (  $<http://w3id.org/chemontUnchargedMolecule_tes> (  &<http://w3id.org/chemontMolecule_tes> ;
-          rdf:type [ <http://w3id.org/chemontMolecule> ] ? ;
-          &<http://w3id.org/chemontUncharged_tes> ;
-          rdf:type [ <http://w3id.org/chemontUncharged> ] ? ;
-          <http://w3id.org/chemontelemental_charge> @metatype:Integer ?
+<Proton> CLOSED {
+    (  $<Proton_tes> (  &<Nucleon_tes> ;
+          rdf:type [ <Nucleon> ] ?
        ) ;
-       rdf:type [ <http://w3id.org/chemontUnchargedMolecule> ]
+       rdf:type [ <Proton> ]
+    )
+}
+
+<RacemicMixture> CLOSED {
+    (  $<RacemicMixture_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <has_left_enantiomer> @<Enantiomer> ;
+          <has_right_enantiomer> @<Enantiomer>
+       ) ;
+       rdf:type [ <RacemicMixture> ]
+    )
+}
+
+<Radionuclide> CLOSED {
+    (  $<Radionuclide_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ?
+       ) ;
+       rdf:type [ <Radionuclide> ]
+    )
+}
+
+<Reaction> CLOSED {
+    (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
+          <right_participants> @<ReactionParticipant> * ;
+          <direction> @metatype:String ? ;
+          <smarts_string> @metatype:String ? ;
+          <is_stereo> @metatype:Boolean ? ;
+          <is_balanced> @metatype:Boolean ? ;
+          <is_transport> @metatype:Boolean ? ;
+          <is_fully_characterized> @metatype:Boolean ? ;
+          <reaction_center> @metatype:String ? ;
+          <description> @metatype:String ?
+       ) ;
+       rdf:type [ <Reaction> ] ?
+    )
+}
+
+<ReactionParticipant> CLOSED {
+    (  $<ReactionParticipant_tes> (  <chemical> @<ChemicalEntity> ? ;
+          <stoichiometry> @metatype:Integer ?
+       ) ;
+       rdf:type [ <ReactionParticipant> ] ?
+    )
+}
+
+<Salt> CLOSED {
+    (  $<Salt_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <Salt> ]
+    )
+}
+
+<SubatomicParticle>  (
+    CLOSED {
+       (  $<SubatomicParticle_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ?
+          ) ;
+          rdf:type [ <SubatomicParticle> ]
+       )
+    } OR @<Electron> OR @<Nucleon>
+)
+
+<Uncharged> {
+    (  $<Uncharged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <Uncharged> ] ?
+    )
+}
+
+<UnchargedAtom> CLOSED {
+    (  $<UnchargedAtom_tes> (  &<AtomIonicForm_tes> ;
+          rdf:type [ <AtomIonicForm> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ?
+       ) ;
+       rdf:type [ <UnchargedAtom> ]
+    )
+}
+
+<UnchargedMolecule> CLOSED {
+    (  $<UnchargedMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <UnchargedMolecule> ]
     )
 }
 
