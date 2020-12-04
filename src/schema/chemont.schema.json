@@ -2,12 +2,13 @@
    "$id": "chemont",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "definitions": {
-      "Acid": {
+      "AcidFormOfConjugatedAcid": {
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "acidity": {
-               "type": "number"
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
             },
             "has_atom_occurrences": {
                "items": {
@@ -46,7 +47,7 @@
          "required": [
             "id"
          ],
-         "title": "Acid",
+         "title": "AcidFormOfConjugatedAcid",
          "type": "object"
       },
       "Allotrope": {
@@ -222,6 +223,50 @@
          "title": "AtomicBond",
          "type": "object"
       },
+      "BaseFormOfConjugatedAcid": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "BaseFormOfConjugatedAcid",
+         "type": "object"
+      },
       "CationState": {
          "additionalProperties": false,
          "description": "",
@@ -305,6 +350,73 @@
             "symbol"
          ],
          "title": "ChemicalElement",
+         "type": "object"
+      },
+      "ConjugatedAcid": {
+         "additionalProperties": false,
+         "description": "Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine",
+         "properties": {
+            "acidity": {
+               "type": "number"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "ConjugatedAcid",
+         "type": "object"
+      },
+      "Copolymer": {
+         "additionalProperties": false,
+         "description": "a polymer derived from more than one species of monomer",
+         "properties": {
+            "has_part": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Copolymer",
          "type": "object"
       },
       "Electron": {
@@ -428,6 +540,20 @@
             "id"
          ],
          "title": "FunctionalGroup",
+         "type": "object"
+      },
+      "Glycan": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Glycan",
          "type": "object"
       },
       "Isotope": {
@@ -660,6 +786,24 @@
          "title": "MoleculeGroupingClass",
          "type": "object"
       },
+      "MoleculePairwiseSimilarity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "left_molecule": {
+               "type": "string"
+            },
+            "right_molecule": {
+               "type": "string"
+            },
+            "score": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "MoleculePairwiseSimilarity",
+         "type": "object"
+      },
       "MoleculePart": {
          "additionalProperties": false,
          "description": "",
@@ -703,6 +847,50 @@
             "symbol"
          ],
          "title": "MonoatomicIon",
+         "type": "object"
+      },
+      "NaturalProduct": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "NaturalProduct",
          "type": "object"
       },
       "Neutron": {
@@ -982,6 +1170,9 @@
             "is_balanced": {
                "type": "boolean"
             },
+            "is_diastereoselective": {
+               "type": "boolean"
+            },
             "is_fully_characterized": {
                "description": "False if includes R-groups",
                "type": "boolean"
@@ -1059,6 +1250,24 @@
             "id"
          ],
          "title": "SubatomicParticle",
+         "type": "object"
+      },
+      "TanimotoSimilarity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "left_molecule": {
+               "type": "string"
+            },
+            "right_molecule": {
+               "type": "string"
+            },
+            "score": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "TanimotoSimilarity",
          "type": "object"
       },
       "Uncharged": {

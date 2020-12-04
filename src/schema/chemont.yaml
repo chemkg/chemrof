@@ -163,12 +163,28 @@ classes:
   protein:
     is_a: macromolecule
       
+  glycan:
+    is_a: macromolecule
+    id_prefixes:
+      - KEGG.GLYCAN
+      
   polymer:
     is_a: chemical entity
     slot_usage:
       has part:
         range: macromolecule
       
+  copolymer:
+    is_a: polymer
+    description: >-
+      a polymer derived from more than one species of monomer
+    slot_usage:
+      has part:
+        range: macromolecule
+        multivalued: 2
+    examples:
+      - value: PEVA
+    
   molecule:
     is_a: polyatomic entity
     aliases:
@@ -200,6 +216,9 @@ classes:
 
   molecule part:
     is_a: polyatomic entity
+
+  natural product:
+    is_a: molecule
     
   moiety:
     is_a: molecule part
@@ -329,6 +348,10 @@ classes:
       - mode of formation
     defining_slots:
       - neutron number
+    examples:
+      - value: 1H (protium)
+      - value: 2H (deuterium)
+      - value: https://en.wikipedia.org/wiki/Carbon-12
 
   nuclide:
     aliases:
@@ -398,6 +421,7 @@ classes:
       - elemental charge
     description: >-
       A monoatomic ion that is positive
+    ## TODO: do both hydron and proton go here?
 
 
   fully specified atom:
@@ -459,12 +483,21 @@ classes:
       valence:
         range: integer
 
-  acid:
+  conjugated acid:
     is_a: molecule
+    description: >-
+      Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
+    slot_usage:
+      acidity:
+        range: float
     mappings:
       - CHEBI:50906
-    slots:
-      - acidity
+
+  acid form of conjugated acid:
+    is_a: polyatomic ion
+
+  base form of conjugated acid:
+    is_a: molecule
 
   # TODO
   salt:
@@ -549,6 +582,8 @@ classes:
           One of l->r, r->l, bidirectional, neutral
       smarts string:
         range: string
+      is diastereoselective:
+        range: boolean
       is stereo:
         range: boolean
       is balanced:
@@ -569,6 +604,27 @@ classes:
         range: chemical entity
       stoichiometry:
         range: integer
+
+  molecule pairwise similarity:
+    slot_usage:
+      left molecule:
+        range: molecule
+      right molecule:
+        range: molecule
+      score: {}
+    see_also:
+      - https://en.wikipedia.org/wiki/Chemical_similarity
+
+  tanimoto similarity:
+    aliases:
+      - Jaccard similarity
+      - Tanimoto coefficient
+    is_a: molecule pairwise similarity
+    slot_usage:
+      score:
+        range: float
+        minimum_value: 1.0
+        maximum_value: 1.0
         
 types:
 
@@ -769,6 +825,7 @@ slots:
     range: chemical encoding
     mappings:
       - schema:hasRepresentation
+      - edam:data_0846
 
   molecular formula:
     is_a: chemical formula
@@ -789,6 +846,14 @@ slots:
       
   smarts string:
     is_a: chemical formula
+    examples:
+      - value: "[#1,#6:60][C@@:6]12[CX4:7][CX4H2,CX4H0:8]([CX4H3,CX4H2,#1:80])([CX4H3,CX4H2,#1:81])[CX3:9](=[CX3H2:10])[C@@:11]1([C:1](=[O:2])[CX4,c:4][CX4,c:3][CX4,c,O,NX3!r3:5]2)[C:99]#[N:97]>>[C:10]#[C:9][*:8]([*:80])([*:81])[C:7][C@@:6]1([*:60])[*:5][*:3][*:4][C:1](=[O:2])[C:11]1[C:99]#[N:97]"
+    
+  lychi string:
+    is_a: chemical formula
+    key: true
+    see_also:
+      - https://github.com/ncats/lychi
     
   inchi string:
     is_a: chemical formula
@@ -827,9 +892,6 @@ slots:
     range: atom occurrence
     multivalued: true
 
-  acidity:
-    domain: acid
-    range: float
 
   next in homologous series from:
     description: >-

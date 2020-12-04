@@ -9,6 +9,8 @@ A data model describing metaclasses for chemical ontology classes
 
  * [GroupingClass](GroupingClass.md) - A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
     * [MoleculeGroupingClass](MoleculeGroupingClass.md) - A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)
+ * [MoleculePairwiseSimilarity](MoleculePairwiseSimilarity.md)
+    * [TanimotoSimilarity](TanimotoSimilarity.md)
  * [Pattern](Pattern.md) - A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
     * [AtomOccurrence](AtomOccurrence.md) - An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
     * [AtomicBond](AtomicBond.md) - A connection between two atoms. Note this is the reified form of 'atomically connected to'. 
@@ -25,16 +27,20 @@ A data model describing metaclasses for chemical ontology classes
           * [Nuclide](Nuclide.md) - an atomic species characterized by the specific constitution of its nucleus
              * [Radionuclide](Radionuclide.md) - an atom that has excess nuclear energy, making it unstable
        * [Macromolecule](Macromolecule.md)
+          * [Glycan](Glycan.md)
           * [Peptide](Peptide.md)
           * [Protein](Protein.md)
        * [PolyatomicEntity](PolyatomicEntity.md) - Any chemical entity consisting of more than one atom.
           * [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
-             * [Acid](Acid.md)
              * [Allotrope](Allotrope.md) - A molecule consisting of atoms of the same element
+             * [BaseFormOfConjugatedAcid](BaseFormOfConjugatedAcid.md)
+             * [ConjugatedAcid](ConjugatedAcid.md) - Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
              * [Enantiomer](Enantiomer.md) - one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
              * [MolecularSpecies](MolecularSpecies.md) - A molecule in which the units are identical. Example: methyl
+             * [NaturalProduct](NaturalProduct.md)
              * [NonSpeciesMolecule](NonSpeciesMolecule.md) - A molecule in which the units are not identical. Example: sodium chloride
              * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge. For example, nitrate (NO3-).
+                * [AcidFormOfConjugatedAcid](AcidFormOfConjugatedAcid.md)
                 * [MolecularAnion](MolecularAnion.md) - A polyatomic ion that is negative
                 * [MolecularCation](MolecularCation.md) - A polyatomic ion that is positive
              * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that has no charge
@@ -43,6 +49,7 @@ A data model describing metaclasses for chemical ontology classes
              * [Moiety](Moiety.md) - a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
           * [Salt](Salt.md) - a chemical compound consisting of an ionic assembly of cations and anions.
        * [Polymer](Polymer.md)
+          * [Copolymer](Copolymer.md) - a polymer derived from more than one species of monomer
        * [RacemicMixture](RacemicMixture.md) - a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
        * [SubatomicParticle](SubatomicParticle.md) - A chemical entity below the granularity of an atom.
           * [Electron](Electron.md)
@@ -67,6 +74,7 @@ A data model describing metaclasses for chemical ontology classes
  * [absolute configuration](absolute_configuration.md)
     * [enantiomer➞absolute configuration](enantiomer_absolute_configuration.md)
  * [acidity](acidity.md)
+    * [conjugated acid➞acidity](conjugated_acid_acidity.md)
  * [allotrope of](allotrope_of.md)
     * [allotrope➞allotrope of](allotrope_allotrope_of.md)
  * [alternate form of](alternate_form_of.md) - A relationship between two entities of the same type
@@ -103,6 +111,7 @@ A data model describing metaclasses for chemical ontology classes
     * [generalized empirical formula](generalized_empirical_formula.md) - A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane
     * [inchi key string](inchi_key_string.md)
     * [inchi string](inchi_string.md)
+    * [lychi string](lychi_string.md)
     * [molecular formula](molecular_formula.md) - A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose
     * [smarts string](smarts_string.md)
        * [reaction➞smarts string](reaction_smarts_string.md)
@@ -123,9 +132,9 @@ A data model describing metaclasses for chemical ontology classes
     * [chemical element➞electron configuration](chemical_element_electron_configuration.md)
  * [elemental charge](elemental_charge.md) - number of protons minus number of electrons
     * [anion state➞elemental charge](anion_state_elemental_charge.md)
-       * [atom anion➞elemental charge](atom_anion_elemental_charge.md)
+    * [atom anion➞elemental charge](atom_anion_elemental_charge.md)
+    * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
     * [cation state➞elemental charge](cation_state_elemental_charge.md)
-       * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
     * [salt➞elemental charge](salt_elemental_charge.md)
     * [uncharged➞elemental charge](uncharged_elemental_charge.md)
  * [enantiomer form of](enantiomer_form_of.md) - Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
@@ -150,11 +159,14 @@ A data model describing metaclasses for chemical ontology classes
        * [has group](has_group.md) - Relation between a molecule and the groups it contains
     * [molecule➞has part](molecule_has_part.md)
     * [polymer➞has part](polymer_has_part.md)
+       * [copolymer➞has part](copolymer_has_part.md)
  * [has right enantiomer](has_right_enantiomer.md)
     * [racemic mixture➞has right enantiomer](racemic_mixture_has_right_enantiomer.md)
  * [id](id.md)
  * [is balanced](is_balanced.md)
     * [reaction➞is balanced](reaction_is_balanced.md)
+ * [is diastereoselective](is_diastereoselective.md)
+    * [reaction➞is diastereoselective](reaction_is_diastereoselective.md)
  * [is fully characterized](is_fully_characterized.md) - False if includes R-groups
     * [reaction➞is fully characterized](reaction_is_fully_characterized.md)
  * [is stereo](is_stereo.md)
@@ -163,6 +175,8 @@ A data model describing metaclasses for chemical ontology classes
     * [functional group➞is substitutent group from](functional_group_is_substitutent_group_from.md)
  * [is transport](is_transport.md)
     * [reaction➞is transport](reaction_is_transport.md)
+ * [left molecule](left_molecule.md)
+    * [molecule pairwise similarity➞left molecule](molecule_pairwise_similarity_left_molecule.md)
  * [left participants](left_participants.md)
     * [reaction➞left participants](reaction_left_participants.md)
  * [melting point in celcius](melting_point_in_celcius.md)
@@ -182,8 +196,13 @@ A data model describing metaclasses for chemical ontology classes
     * [reaction➞reaction center](reaction_reaction_center.md)
  * [relative configuration](relative_configuration.md)
     * [enantiomer➞relative configuration](enantiomer_relative_configuration.md)
+ * [right molecule](right_molecule.md)
+    * [molecule pairwise similarity➞right molecule](molecule_pairwise_similarity_right_molecule.md)
  * [right participants](right_participants.md)
     * [reaction➞right participants](reaction_right_participants.md)
+ * [score](score.md)
+    * [molecule pairwise similarity➞score](molecule_pairwise_similarity_score.md)
+       * [tanimoto similarity➞score](tanimoto_similarity_score.md)
  * [standard atomic weight](standard_atomic_weight.md)
     * [chemical element➞standard atomic weight](chemical_element_standard_atomic_weight.md)
  * [stoichiometry](stoichiometry.md)

@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.4.0
-# Generation date: 2020-09-22 19:20
+# Generation date: 2020-12-04 11:42
 # Schema: chemont
 #
 # id: chemont
@@ -41,6 +41,7 @@ HMDB = CurieNamespace('HMDB', 'http://identifiers.org/hmdb/')
 INCHI = CurieNamespace('INCHI', 'http://identifiers.org/inchi/')
 INCHIKEY = CurieNamespace('INCHIKEY', 'http://identifiers.org/inchikey/')
 KEGG = CurieNamespace('KEGG', 'http://identifiers.org/kegg/')
+KEGG_GLYCAN = CurieNamespace('KEGG_GLYCAN', 'http://identifiers.org/kegg.glycan/')
 KEGG_REACTION = CurieNamespace('KEGG_REACTION', 'http://identifiers.org/kegg.reaction/')
 LANL_ELEMENT = CurieNamespace('LANL_ELEMENT', 'https://periodic.lanl.gov/')
 MESH = CurieNamespace('MESH', 'http://identifiers.org/mesh/')
@@ -57,6 +58,7 @@ UNII = CurieNamespace('UNII', 'http://identifiers.org/unii/')
 BIOLINKML = CurieNamespace('biolinkml', 'https://w3id.org/biolink/biolinkml/')
 CHEMONT = CurieNamespace('chemont', 'https://w3id.org/chemont/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
+EDAM = CurieNamespace('edam', 'http://example.org/UNKNOWN/edam/')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
@@ -126,7 +128,15 @@ class ProteinId(MacromoleculeId):
     pass
 
 
+class GlycanId(MacromoleculeId):
+    pass
+
+
 class PolymerId(ChemicalEntityId):
+    pass
+
+
+class CopolymerId(PolymerId):
     pass
 
 
@@ -135,6 +145,10 @@ class MoleculeId(PolyatomicEntityId):
 
 
 class MoleculePartId(PolyatomicEntityId):
+    pass
+
+
+class NaturalProductId(MoleculeId):
     pass
 
 
@@ -214,7 +228,15 @@ class FullySpecifiedAtomId(AtomId):
     pass
 
 
-class AcidId(MoleculeId):
+class ConjugatedAcidId(MoleculeId):
+    pass
+
+
+class AcidFormOfConjugatedAcidId(PolyatomicIonId):
+    pass
+
+
+class BaseFormOfConjugatedAcidId(MoleculeId):
     pass
 
 
@@ -454,6 +476,25 @@ class Protein(Macromolecule):
 
 
 @dataclass
+class Glycan(Macromolecule):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Glycan
+    class_class_curie: ClassVar[str] = "chemont:Glycan"
+    class_name: ClassVar[str] = "glycan"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Glycan
+
+    id: Union[str, GlycanId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, GlycanId):
+            self.id = GlycanId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Polymer(ChemicalEntity):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -472,6 +513,31 @@ class Polymer(ChemicalEntity):
             self.id = PolymerId(self.id)
         if self.has_part is not None and not isinstance(self.has_part, MacromoleculeId):
             self.has_part = MacromoleculeId(self.has_part)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Copolymer(Polymer):
+    """
+    a polymer derived from more than one species of monomer
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Copolymer
+    class_class_curie: ClassVar[str] = "chemont:Copolymer"
+    class_name: ClassVar[str] = "copolymer"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Copolymer
+
+    id: Union[str, CopolymerId] = None
+    has_part: List[Union[str, MacromoleculeId]] = empty_list()
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, CopolymerId):
+            self.id = CopolymerId(self.id)
+        self.has_part = [v if isinstance(v, MacromoleculeId)
+                         else MacromoleculeId(v) for v in ([self.has_part] if isinstance(self.has_part, str) else self.has_part)]
         super().__post_init__(**kwargs)
 
 
@@ -524,6 +590,25 @@ class MoleculePart(PolyatomicEntity):
             raise ValueError(f"id must be supplied")
         if not isinstance(self.id, MoleculePartId):
             self.id = MoleculePartId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class NaturalProduct(Molecule):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.NaturalProduct
+    class_class_curie: ClassVar[str] = "chemont:NaturalProduct"
+    class_name: ClassVar[str] = "natural product"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.NaturalProduct
+
+    id: Union[str, NaturalProductId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, NaturalProductId):
+            self.id = NaturalProductId(self.id)
         super().__post_init__(**kwargs)
 
 
@@ -1069,22 +1154,63 @@ class AtomOccurrence(Pattern):
 
 
 @dataclass
-class Acid(Molecule):
+class ConjugatedAcid(Molecule):
+    """
+    Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.Acid
-    class_class_curie: ClassVar[str] = "chemont:Acid"
-    class_name: ClassVar[str] = "acid"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.Acid
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ConjugatedAcid
+    class_class_curie: ClassVar[str] = "chemont:ConjugatedAcid"
+    class_name: ClassVar[str] = "conjugated acid"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ConjugatedAcid
 
-    id: Union[str, AcidId] = None
+    id: Union[str, ConjugatedAcidId] = None
     acidity: Optional[float] = None
 
     def __post_init__(self, **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError(f"id must be supplied")
-        if not isinstance(self.id, AcidId):
-            self.id = AcidId(self.id)
+        if not isinstance(self.id, ConjugatedAcidId):
+            self.id = ConjugatedAcidId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class AcidFormOfConjugatedAcid(PolyatomicIon):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AcidFormOfConjugatedAcid
+    class_class_curie: ClassVar[str] = "chemont:AcidFormOfConjugatedAcid"
+    class_name: ClassVar[str] = "acid form of conjugated acid"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AcidFormOfConjugatedAcid
+
+    id: Union[str, AcidFormOfConjugatedAcidId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, AcidFormOfConjugatedAcidId):
+            self.id = AcidFormOfConjugatedAcidId(self.id)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class BaseFormOfConjugatedAcid(Molecule):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.BaseFormOfConjugatedAcid
+    class_class_curie: ClassVar[str] = "chemont:BaseFormOfConjugatedAcid"
+    class_name: ClassVar[str] = "base form of conjugated acid"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.BaseFormOfConjugatedAcid
+
+    id: Union[str, BaseFormOfConjugatedAcidId] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError(f"id must be supplied")
+        if not isinstance(self.id, BaseFormOfConjugatedAcidId):
+            self.id = BaseFormOfConjugatedAcidId(self.id)
         super().__post_init__(**kwargs)
 
 
@@ -1218,6 +1344,7 @@ class Reaction(YAMLRoot):
     right_participants: List[Union[dict, "ReactionParticipant"]] = empty_list()
     direction: Optional[str] = None
     smarts_string: Optional[str] = None
+    is_diastereoselective: Optional[Bool] = None
     is_stereo: Optional[Bool] = None
     is_balanced: Optional[Bool] = None
     is_transport: Optional[Bool] = None
@@ -1252,6 +1379,38 @@ class ReactionParticipant(YAMLRoot):
             self.chemical = ChemicalEntityId(self.chemical)
         super().__post_init__(**kwargs)
 
+
+@dataclass
+class MoleculePairwiseSimilarity(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculePairwiseSimilarity
+    class_class_curie: ClassVar[str] = "chemont:MoleculePairwiseSimilarity"
+    class_name: ClassVar[str] = "molecule pairwise similarity"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculePairwiseSimilarity
+
+    left_molecule: Optional[Union[str, MoleculeId]] = None
+    right_molecule: Optional[Union[str, MoleculeId]] = None
+    score: Optional[str] = None
+
+    def __post_init__(self, **kwargs: Dict[str, Any]):
+        if self.left_molecule is not None and not isinstance(self.left_molecule, MoleculeId):
+            self.left_molecule = MoleculeId(self.left_molecule)
+        if self.right_molecule is not None and not isinstance(self.right_molecule, MoleculeId):
+            self.right_molecule = MoleculeId(self.right_molecule)
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TanimotoSimilarity(MoleculePairwiseSimilarity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.TanimotoSimilarity
+    class_class_curie: ClassVar[str] = "chemont:TanimotoSimilarity"
+    class_name: ClassVar[str] = "tanimoto similarity"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.TanimotoSimilarity
+
+    score: Optional[float] = None
 
 
 # Slots
@@ -1337,7 +1496,7 @@ slots.has_cyclic_structure = Slot(uri=CHEMONT.has_cyclic_structure, name="has cy
                       model_uri=CHEMONT.has_cyclic_structure, domain=Molecule, range=Optional[Bool], mappings = [CHEMINF["000067"]])
 
 slots.chemical_formula = Slot(uri=CHEMONT.chemical_formula, name="chemical formula", curie=CHEMONT.curie('chemical_formula'),
-                      model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str], mappings = [SCHEMA.hasRepresentation])
+                      model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str], mappings = [SCHEMA.hasRepresentation, EDAM.data_0846])
 
 slots.molecular_formula = Slot(uri=CHEMONT.molecular_formula, name="molecular formula", curie=CHEMONT.curie('molecular_formula'),
                       model_uri=CHEMONT.molecular_formula, domain=ChemicalEntity, range=Optional[str], mappings = [CHEMINF["000042"]])
@@ -1350,6 +1509,9 @@ slots.generalized_empirical_formula = Slot(uri=CHEMONT.generalized_empirical_for
 
 slots.smarts_string = Slot(uri=CHEMONT.smarts_string, name="smarts string", curie=CHEMONT.curie('smarts_string'),
                       model_uri=CHEMONT.smarts_string, domain=ChemicalEntity, range=Optional[str])
+
+slots.lychi_string = Slot(uri=CHEMONT.lychi_string, name="lychi string", curie=CHEMONT.curie('lychi_string'),
+                      model_uri=CHEMONT.lychi_string, domain=ChemicalEntity, range=Union[str, ChemicalEntityId])
 
 slots.inchi_string = Slot(uri=CHEMONT.inchi_string, name="inchi string", curie=CHEMONT.curie('inchi_string'),
                       model_uri=CHEMONT.inchi_string, domain=ChemicalEntity, range=Union[str, ChemicalEntityId])
@@ -1371,9 +1533,6 @@ slots.canonical_smiles_string = Slot(uri=CHEMONT.canonical_smiles_string, name="
 
 slots.atomically_connected_to = Slot(uri=CHEMONT.atomically_connected_to, name="atomically connected to", curie=CHEMONT.curie('atomically_connected_to'),
                       model_uri=CHEMONT.atomically_connected_to, domain=AtomOccurrence, range=List[Union[dict, "AtomOccurrence"]])
-
-slots.acidity = Slot(uri=CHEMONT.acidity, name="acidity", curie=CHEMONT.curie('acidity'),
-                      model_uri=CHEMONT.acidity, domain=Acid, range=Optional[float])
 
 slots.next_in_homologous_series_from = Slot(uri=CHEMONT.next_in_homologous_series_from, name="next in homologous series from", curie=CHEMONT.curie('next_in_homologous_series_from'),
                       model_uri=CHEMONT.next_in_homologous_series_from, domain=Molecule, range=Optional[Union[str, MoleculeId]])
@@ -1453,6 +1612,9 @@ slots.has_atom = Slot(uri=CHEMONT.has_atom, name="has atom", curie=CHEMONT.curie
 slots.valence = Slot(uri=CHEMONT.valence, name="valence", curie=CHEMONT.curie('valence'),
                       model_uri=CHEMONT.valence, domain=None, range=Optional[int])
 
+slots.acidity = Slot(uri=CHEMONT.acidity, name="acidity", curie=CHEMONT.curie('acidity'),
+                      model_uri=CHEMONT.acidity, domain=None, range=Optional[float])
+
 slots.relative_configuration = Slot(uri=CHEMONT.relative_configuration, name="relative configuration", curie=CHEMONT.curie('relative_configuration'),
                       model_uri=CHEMONT.relative_configuration, domain=None, range=Optional[str])
 
@@ -1486,6 +1648,9 @@ slots.right_participants = Slot(uri=CHEMONT.right_participants, name="right part
 slots.direction = Slot(uri=CHEMONT.direction, name="direction", curie=CHEMONT.curie('direction'),
                       model_uri=CHEMONT.direction, domain=None, range=Optional[str])
 
+slots.is_diastereoselective = Slot(uri=CHEMONT.is_diastereoselective, name="is diastereoselective", curie=CHEMONT.curie('is_diastereoselective'),
+                      model_uri=CHEMONT.is_diastereoselective, domain=None, range=Optional[Bool])
+
 slots.is_stereo = Slot(uri=CHEMONT.is_stereo, name="is stereo", curie=CHEMONT.curie('is_stereo'),
                       model_uri=CHEMONT.is_stereo, domain=None, range=Optional[Bool])
 
@@ -1510,6 +1675,15 @@ slots.chemical = Slot(uri=CHEMONT.chemical, name="chemical", curie=CHEMONT.curie
 slots.stoichiometry = Slot(uri=CHEMONT.stoichiometry, name="stoichiometry", curie=CHEMONT.curie('stoichiometry'),
                       model_uri=CHEMONT.stoichiometry, domain=None, range=Optional[int])
 
+slots.left_molecule = Slot(uri=CHEMONT.left_molecule, name="left molecule", curie=CHEMONT.curie('left_molecule'),
+                      model_uri=CHEMONT.left_molecule, domain=None, range=Optional[Union[str, MoleculeId]])
+
+slots.right_molecule = Slot(uri=CHEMONT.right_molecule, name="right molecule", curie=CHEMONT.curie('right_molecule'),
+                      model_uri=CHEMONT.right_molecule, domain=None, range=Optional[Union[str, MoleculeId]])
+
+slots.score = Slot(uri=CHEMONT.score, name="score", curie=CHEMONT.curie('score'),
+                      model_uri=CHEMONT.score, domain=None, range=Optional[str])
+
 slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
 
@@ -1521,6 +1695,9 @@ slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="unch
 
 slots.polymer_has_part = Slot(uri=CHEMONT.has_part, name="polymer_has part", curie=CHEMONT.curie('has_part'),
                       model_uri=CHEMONT.polymer_has_part, domain=Polymer, range=Optional[Union[str, MacromoleculeId]])
+
+slots.copolymer_has_part = Slot(uri=CHEMONT.has_part, name="copolymer_has part", curie=CHEMONT.curie('has_part'),
+                      model_uri=CHEMONT.copolymer_has_part, domain=Copolymer, range=List[Union[str, MacromoleculeId]])
 
 slots.molecule_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="molecule_has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
                       model_uri=CHEMONT.molecule_has_atom_occurrences, domain=Molecule, range=List[Union[dict, "AtomOccurrence"]])
@@ -1585,6 +1762,9 @@ slots.atom_occurrence_has_atom = Slot(uri=CHEMONT.has_atom, name="atom occurrenc
 slots.atom_occurrence_valence = Slot(uri=CHEMONT.valence, name="atom occurrence_valence", curie=CHEMONT.curie('valence'),
                       model_uri=CHEMONT.atom_occurrence_valence, domain=AtomOccurrence, range=Optional[int])
 
+slots.conjugated_acid_acidity = Slot(uri=CHEMONT.acidity, name="conjugated acid_acidity", curie=CHEMONT.curie('acidity'),
+                      model_uri=CHEMONT.conjugated_acid_acidity, domain=ConjugatedAcid, range=Optional[float])
+
 slots.salt_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="salt_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                       model_uri=CHEMONT.salt_elemental_charge, domain=Salt, range=Optional[int])
 
@@ -1624,6 +1804,9 @@ slots.reaction_direction = Slot(uri=CHEMONT.direction, name="reaction_direction"
 slots.reaction_smarts_string = Slot(uri=CHEMONT.smarts_string, name="reaction_smarts string", curie=CHEMONT.curie('smarts_string'),
                       model_uri=CHEMONT.reaction_smarts_string, domain=Reaction, range=Optional[str])
 
+slots.reaction_is_diastereoselective = Slot(uri=CHEMONT.is_diastereoselective, name="reaction_is diastereoselective", curie=CHEMONT.curie('is_diastereoselective'),
+                      model_uri=CHEMONT.reaction_is_diastereoselective, domain=Reaction, range=Optional[Bool])
+
 slots.reaction_is_stereo = Slot(uri=CHEMONT.is_stereo, name="reaction_is stereo", curie=CHEMONT.curie('is_stereo'),
                       model_uri=CHEMONT.reaction_is_stereo, domain=Reaction, range=Optional[Bool])
 
@@ -1647,3 +1830,15 @@ slots.reaction_participant_chemical = Slot(uri=CHEMONT.chemical, name="reaction 
 
 slots.reaction_participant_stoichiometry = Slot(uri=CHEMONT.stoichiometry, name="reaction participant_stoichiometry", curie=CHEMONT.curie('stoichiometry'),
                       model_uri=CHEMONT.reaction_participant_stoichiometry, domain=ReactionParticipant, range=Optional[int])
+
+slots.molecule_pairwise_similarity_left_molecule = Slot(uri=CHEMONT.left_molecule, name="molecule pairwise similarity_left molecule", curie=CHEMONT.curie('left_molecule'),
+                      model_uri=CHEMONT.molecule_pairwise_similarity_left_molecule, domain=MoleculePairwiseSimilarity, range=Optional[Union[str, MoleculeId]])
+
+slots.molecule_pairwise_similarity_right_molecule = Slot(uri=CHEMONT.right_molecule, name="molecule pairwise similarity_right molecule", curie=CHEMONT.curie('right_molecule'),
+                      model_uri=CHEMONT.molecule_pairwise_similarity_right_molecule, domain=MoleculePairwiseSimilarity, range=Optional[Union[str, MoleculeId]])
+
+slots.molecule_pairwise_similarity_score = Slot(uri=CHEMONT.score, name="molecule pairwise similarity_score", curie=CHEMONT.curie('score'),
+                      model_uri=CHEMONT.molecule_pairwise_similarity_score, domain=MoleculePairwiseSimilarity, range=Optional[str])
+
+slots.tanimoto_similarity_score = Slot(uri=CHEMONT.score, name="tanimoto similarity_score", curie=CHEMONT.curie('score'),
+                      model_uri=CHEMONT.tanimoto_similarity_score, domain=TanimotoSimilarity, range=Optional[float])

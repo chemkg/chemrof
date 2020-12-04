@@ -17,7 +17,6 @@ URI: [chemont:cation_state_elemental_charge](https://w3id.org/chemont/cation_sta
 
 ## Children
 
- *  [atom cation➞elemental charge](atom_cation_elemental_charge.md)
 
 ## Used by
 

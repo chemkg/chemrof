@@ -7,7 +7,7 @@ A molecule that has a charge. For example, nitrate (NO3-).
 URI: [chemont:PolyatomicIon](https://w3id.org/chemont/PolyatomicIon)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon&#124;elemental_charge:integer%20%3F;has_part(i):string%20%3F;id(i):string]uses%20-.->[Charged],[PolyatomicIon]^-[MolecularCation],[PolyatomicIon]^-[MolecularAnion],[Molecule]^-[PolyatomicIon],[Molecule],[MolecularCation],[MolecularAnion],[Charged],[AtomicBond],[AtomOccurrence],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[PolyatomicIon&#124;elemental_charge:integer%20%3F;has_part(i):string%20%3F;id(i):string]uses%20-.->[Charged],[PolyatomicIon]^-[MolecularCation],[PolyatomicIon]^-[MolecularAnion],[PolyatomicIon]^-[AcidFormOfConjugatedAcid],[Molecule]^-[PolyatomicIon],[Molecule],[MolecularCation],[MolecularAnion],[Charged],[AtomicBond],[AtomOccurrence],[Atom],[AcidFormOfConjugatedAcid])
 
 ## Parents
 
@@ -19,6 +19,7 @@ URI: [chemont:PolyatomicIon](https://w3id.org/chemont/PolyatomicIon)
 
 ## Children
 
+ * [AcidFormOfConjugatedAcid](AcidFormOfConjugatedAcid.md)
  * [MolecularAnion](MolecularAnion.md) - A polyatomic ion that is negative
  * [MolecularCation](MolecularCation.md) - A polyatomic ion that is positive
 

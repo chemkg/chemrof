@@ -7,7 +7,7 @@ reaction
 URI: [chemont:Reaction](https://w3id.org/chemont/Reaction)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ReactionParticipant],[ReactionParticipant]<right%20participants%200..*-++[Reaction&#124;direction:string%20%3F;smarts_string:string%20%3F;is_stereo:boolean%20%3F;is_balanced:boolean%20%3F;is_transport:boolean%20%3F;is_fully_characterized:boolean%20%3F;reaction_center:string%20%3F;description:string%20%3F],[ReactionParticipant]<left%20participants%200..*-++[Reaction])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[ReactionParticipant],[ReactionParticipant]<right%20participants%200..*-++[Reaction&#124;direction:string%20%3F;smarts_string:string%20%3F;is_diastereoselective:boolean%20%3F;is_stereo:boolean%20%3F;is_balanced:boolean%20%3F;is_transport:boolean%20%3F;is_fully_characterized:boolean%20%3F;reaction_center:string%20%3F;description:string%20%3F],[ReactionParticipant]<left%20participants%200..*-++[Reaction])
 
 ## Referenced by class
 
@@ -23,6 +23,8 @@ URI: [chemont:Reaction](https://w3id.org/chemont/Reaction)
     * Description: One of l->r, r->l, bidirectional, neutral
     * range: [String](types/String.md)
  * [reaction➞is balanced](reaction_is_balanced.md)  <sub>OPT</sub>
+    * range: [Boolean](types/Boolean.md)
+ * [reaction➞is diastereoselective](reaction_is_diastereoselective.md)  <sub>OPT</sub>
     * range: [Boolean](types/Boolean.md)
  * [reaction➞is fully characterized](reaction_is_fully_characterized.md)  <sub>OPT</sub>
     * Description: False if includes R-groups

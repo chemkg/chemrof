@@ -17,7 +17,6 @@ URI: [chemont:anion_state_elemental_charge](https://w3id.org/chemont/anion_state
 
 ## Children
 
- *  [atom anion➞elemental charge](atom_anion_elemental_charge.md)
 
 ## Used by
 

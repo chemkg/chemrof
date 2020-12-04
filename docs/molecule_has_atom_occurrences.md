@@ -20,13 +20,16 @@ URI: [chemont:molecule_has_atom_occurrences](https://w3id.org/chemont/molecule_h
 
 ## Used by
 
- * [Acid](Acid.md)
+ * [AcidFormOfConjugatedAcid](AcidFormOfConjugatedAcid.md)
  * [Allotrope](Allotrope.md)
+ * [BaseFormOfConjugatedAcid](BaseFormOfConjugatedAcid.md)
+ * [ConjugatedAcid](ConjugatedAcid.md)
  * [Enantiomer](Enantiomer.md)
  * [MolecularAnion](MolecularAnion.md)
  * [MolecularCation](MolecularCation.md)
  * [MolecularSpecies](MolecularSpecies.md)
  * [Molecule](Molecule.md)
+ * [NaturalProduct](NaturalProduct.md)
  * [NonSpeciesMolecule](NonSpeciesMolecule.md)
  * [PolyatomicIon](PolyatomicIon.md)
  * [UnchargedMolecule](UnchargedMolecule.md)

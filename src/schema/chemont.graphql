@@ -1,4 +1,4 @@
-type Acid
+type AcidFormOfConjugatedAcid
   {
     id: String!
     hasAtomOccurrences: [AtomOccurrence]
@@ -6,7 +6,7 @@ type Acid
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
     hasPart: String
-    acidity: Float
+    elementalCharge: Integer
   }
 
 type Allotrope
@@ -77,6 +77,16 @@ type AtomicBond
     torsionalAngle: Float
   }
 
+type BaseFormOfConjugatedAcid
+  {
+    id: String!
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
+  }
+
 interface CationState
   {
     elementalCharge: Integer
@@ -109,6 +119,23 @@ type ChemicalElement
 interface ChemicalEntity
   {
     id: String!
+  }
+
+type ConjugatedAcid
+  {
+    id: String!
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
+    acidity: Float
+  }
+
+type Copolymer
+  {
+    id: String!
+    hasPart: [Macromolecule]
   }
 
 type Electron
@@ -144,6 +171,11 @@ type FunctionalGroup
   {
     id: String!
     isSubstitutentGroupFrom: Molecule
+  }
+
+type Glycan
+  {
+    id: String!
   }
 
 interface GroupingClass
@@ -222,6 +254,13 @@ type MoleculeGroupingClass
     classifies: Molecule
   }
 
+type MoleculePairwiseSimilarity
+  {
+    leftMolecule: Molecule
+    rightMolecule: Molecule
+    score: String
+  }
+
 type MoleculePart
   {
     id: String!
@@ -234,6 +273,16 @@ type MonoatomicIon implements Charged
     symbol: String!
     name: String
     elementalCharge: Integer
+  }
+
+type NaturalProduct
+  {
+    id: String!
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
   }
 
 type Neutron
@@ -328,6 +377,7 @@ type Reaction
     rightParticipants: [ReactionParticipant]
     direction: String
     smartsString: String
+    isDiastereoselective: Boolean
     isStereo: Boolean
     isBalanced: Boolean
     isTransport: Boolean
@@ -351,6 +401,13 @@ type Salt
 type SubatomicParticle
   {
     id: String!
+  }
+
+type TanimotoSimilarity
+  {
+    leftMolecule: Molecule
+    rightMolecule: Molecule
+    score: Float
   }
 
 interface Uncharged

@@ -17,12 +17,15 @@ URI: [chemont:elemental_charge](https://w3id.org/chemont/elemental_charge)
 ## Children
 
  *  [anion state➞elemental charge](anion_state_elemental_charge.md)
+ *  [atom anion➞elemental charge](atom_anion_elemental_charge.md)
+ *  [atom cation➞elemental charge](atom_cation_elemental_charge.md)
  *  [cation state➞elemental charge](cation_state_elemental_charge.md)
  *  [salt➞elemental charge](salt_elemental_charge.md)
  *  [uncharged➞elemental charge](uncharged_elemental_charge.md)
 
 ## Used by
 
+ * [AcidFormOfConjugatedAcid](AcidFormOfConjugatedAcid.md)
  * [AnionState](AnionState.md)
  * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)

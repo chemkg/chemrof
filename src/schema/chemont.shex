@@ -37,12 +37,11 @@ metatype:Objectidentifier IRI
 
 metatype:Nodeidentifier NONLITERAL
 
-<Acid> CLOSED {
-    (  $<Acid_tes> (  &<Molecule_tes> ;
-          rdf:type [ <Molecule> ] ? ;
-          <acidity> @metatype:Float ?
+<AcidFormOfConjugatedAcid> CLOSED {
+    (  $<AcidFormOfConjugatedAcid_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ?
        ) ;
-       rdf:type [ <Acid> ]
+       rdf:type [ <AcidFormOfConjugatedAcid> ]
     )
 }
 
@@ -136,6 +135,14 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<BaseFormOfConjugatedAcid> CLOSED {
+    (  $<BaseFormOfConjugatedAcid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <BaseFormOfConjugatedAcid> ]
+    )
+}
+
 <CationState> {
     (  $<CationState_tes> <elemental_charge> @metatype:Integer ? ;
        rdf:type [ <CationState> ] ?
@@ -185,6 +192,24 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<ConjugatedAcid> CLOSED {
+    (  $<ConjugatedAcid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <acidity> @metatype:Float ?
+       ) ;
+       rdf:type [ <ConjugatedAcid> ]
+    )
+}
+
+<Copolymer> CLOSED {
+    (  $<Copolymer_tes> (  &<Polymer_tes> ;
+          rdf:type [ <Polymer> ] ? ;
+          <has_part> @<Macromolecule> *
+       ) ;
+       rdf:type [ <Copolymer> ]
+    )
+}
+
 <Electron> CLOSED {
     (  $<Electron_tes> (  &<SubatomicParticle_tes> ;
           rdf:type [ <SubatomicParticle> ] ?
@@ -224,6 +249,14 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<Glycan> CLOSED {
+    (  $<Glycan_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Glycan> ]
+    )
+}
+
 <GroupingClass>  (
     {
        (  $<GroupingClass_tes> rdf:type . * ;
@@ -254,7 +287,7 @@ metatype:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <Macromolecule> ]
        )
-    } OR @<Peptide> OR @<Protein>
+    } OR @<Glycan> OR @<Peptide> OR @<Protein>
 )
 
 <Moiety> CLOSED {
@@ -294,8 +327,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <Molecule>  (
-    @<Acid> OR @<Allotrope> OR @<Enantiomer> OR @<MolecularSpecies> OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR
-    @<UnchargedMolecule>
+    @<Allotrope> OR @<BaseFormOfConjugatedAcid> OR @<ConjugatedAcid> OR @<Enantiomer> OR @<MolecularSpecies> OR @<NaturalProduct>
+    OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<UnchargedMolecule>
 )
 
 <Molecule_struct> {
@@ -320,6 +353,17 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<MoleculePairwiseSimilarity>  (
+    CLOSED {
+       (  $<MoleculePairwiseSimilarity_tes> (  <left_molecule> @<Molecule> ? ;
+             <right_molecule> @<Molecule> ? ;
+             <score> @metatype:String ?
+          ) ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ?
+       )
+    } OR @<TanimotoSimilarity>
+)
+
 <MoleculePart>  (
     CLOSED {
        (  $<MoleculePart_tes> (  &<PolyatomicEntity_tes> ;
@@ -341,6 +385,14 @@ metatype:Nodeidentifier NONLITERAL
        )
     } OR @<AtomAnion> OR @<AtomCation>
 )
+
+<NaturalProduct> CLOSED {
+    (  $<NaturalProduct_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <NaturalProduct> ]
+    )
+}
 
 <Neutron> CLOSED {
     (  $<Neutron_tes> (  &<Nucleon_tes> ;
@@ -419,17 +471,19 @@ metatype:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <PolyatomicIon> ]
        )
-    } OR @<MolecularAnion> OR @<MolecularCation>
+    } OR @<AcidFormOfConjugatedAcid> OR @<MolecularAnion> OR @<MolecularCation>
 )
 
-<Polymer> CLOSED {
-    (  $<Polymer_tes> (  &<ChemicalEntity_tes> ;
-          rdf:type [ <ChemicalEntity> ] ? ;
-          <has_part> @<Macromolecule> ?
-       ) ;
-       rdf:type [ <Polymer> ]
-    )
-}
+<Polymer>  (
+    CLOSED {
+       (  $<Polymer_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ? ;
+             <has_part> @<Macromolecule> ?
+          ) ;
+          rdf:type [ <Polymer> ]
+       )
+    } OR @<Copolymer>
+)
 
 <Protein> CLOSED {
     (  $<Protein_tes> (  &<Macromolecule_tes> ;
@@ -470,6 +524,7 @@ metatype:Nodeidentifier NONLITERAL
           <right_participants> @<ReactionParticipant> * ;
           <direction> @metatype:String ? ;
           <smarts_string> @metatype:String ? ;
+          <is_diastereoselective> @metatype:Boolean ? ;
           <is_stereo> @metatype:Boolean ? ;
           <is_balanced> @metatype:Boolean ? ;
           <is_transport> @metatype:Boolean ? ;
@@ -507,6 +562,15 @@ metatype:Nodeidentifier NONLITERAL
        )
     } OR @<Electron> OR @<Nucleon>
 )
+
+<TanimotoSimilarity> CLOSED {
+    (  $<TanimotoSimilarity_tes> (  &<MoleculePairwiseSimilarity_tes> ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ? ;
+          <score> @metatype:Float ?
+       ) ;
+       rdf:type [ <TanimotoSimilarity> ] ?
+    )
+}
 
 <Uncharged> {
     (  $<Uncharged_tes> (  &<ChargeState_tes> ;

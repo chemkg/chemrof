@@ -55,3 +55,12 @@ URI: [chemont:Isotope](https://w3id.org/chemont/Isotope)
  * [symbol](symbol.md)  <sub>REQ</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
+
+## Other properties
+
+|  |  |  |
+| --- | --- | --- |
+| **Examples:** | | Example(value='1H (protium)', description=None) |
+|  | | Example(value='2H (deuterium)', description=None) |
+|  | | Example(value='https://en.wikipedia.org/wiki/Carbon-12', description=None) |
+

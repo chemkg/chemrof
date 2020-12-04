@@ -17,6 +17,7 @@ URI: [chemont:polymer_has_part](https://w3id.org/chemont/polymer_has_part)
 
 ## Children
 
+ *  [copolymer➞has part](copolymer_has_part.md)
 
 ## Used by
 
