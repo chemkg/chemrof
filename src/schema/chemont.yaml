@@ -494,6 +494,28 @@ classes:
           - "example:  In in ammonia, nitrogen has a valence of 3, each each hydrogen has a valency of 1"
           - "todo: determine if this is in CHEBI and how to map"
         range: integer
+      oxidation number:
+        aliases:
+          - oxidation
+        description: >-
+          The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons
+          being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number.
+          [https://doi.org/10.1021%2Fed083p791]
+        range: integer
+      formal charge:
+        aliases:
+          - charge
+        description: >-
+          The charge remaining on an atom when all ligands are removed homolytically.
+          [https://doi.org/10.1021%2Fed083p791]
+        range: integer
+      coordination number:
+        aliases:
+          - coordination
+        description: >-
+          The number of atoms bonded to the atom of interest.
+          [https://doi.org/10.1021%2Fed083p791]
+        range: integer
 
   conjugated acid:
     is_a: molecule
@@ -611,6 +633,8 @@ classes:
         string_serialization: "{left participants} {direction} {right participants}"
 
   reaction participant:
+    description: >-
+      Instances of this link a reaction to a chemical entity participant
     slot_usage:
       chemical:
         range: chemical entity
@@ -879,7 +903,7 @@ slots:
     is_a: chemical formula
     description: >-
       A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
-    comments:
+<    comments:
       - a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see “Limitations of molecular graph representations” section), such as organometallic compounds and ionic salts.
     multivalued: true
     key: true
