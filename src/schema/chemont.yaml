@@ -319,6 +319,9 @@ classes:
         range: float
       electron configuration:
         range: string
+      has stereocenter:
+        range: stereocenter
+        multivalued: true
     examples:
       - value: carbon
       - value: nickel
@@ -442,8 +445,19 @@ classes:
     slot_usage:
       classifies:
         range: molecule
-    
+        
+  stereocenter:
+    aliases:
+      - stereogenic center
+    is_a: pattern
+    description: >-
+      a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer
       
+  chirality center:
+    is_a: stereocenter
+    description: >-
+       a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
+    
   atomic bond:
     aliases:
       - bond
@@ -631,6 +645,12 @@ classes:
       reaction center: {}
       description:
         string_serialization: "{left participants} {direction} {right participants}"
+
+  isomerase reaction:
+    is_a: reaction
+    description: >-
+      A reaction that converts a molecule from one isomer to another.
+      TODO: create rules for this
 
   reaction participant:
     description: >-
@@ -995,6 +1015,20 @@ slots:
       a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds
     multivalued: true
     
+  diastereoisomers of:
+    aliases:
+      - diastereomers of
+    is_a: stereoisomer of
+    description: >-
+      A stereoisomer non-mirror image non-identical stereoisomers
+    comments:
+      - Diastereomers differ from enantiomers in that the latter are pairs of stereoisomers that differ in all stereocenters and are therefore mirror images of one another
+    
+  epimer of:
+    is_a: diastereoisomers of
+    description: >-
+      A diastereoisomer of relationship in which the isomers differ at only one stereocenter
+      
   enantiomer of:
     aliases:
       - enantiomorph of
@@ -1023,5 +1057,4 @@ slots:
        the measure of bond strength in a chemical bond.
     domain: atomic bond
     range: float
-    
     
