@@ -103,18 +103,6 @@
          "title": "Allotrope",
          "type": "object"
       },
-      "AnionState": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "elemental_charge": {
-               "type": "integer"
-            }
-         },
-         "required": [],
-         "title": "AnionState",
-         "type": "object"
-      },
       "AtomAnion": {
          "additionalProperties": false,
          "description": "A monoatomic ion that is negative",
@@ -139,8 +127,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "AtomAnion",
          "type": "object"
@@ -169,8 +156,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "AtomCation",
          "type": "object"
@@ -179,10 +165,23 @@
          "additionalProperties": false,
          "description": "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate",
          "properties": {
+            "coordination_number": {
+               "description": "The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
+            "formal_charge": {
+               "description": "The charge remaining on an atom when all ligands are removed homolytically. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
             "has_atom": {
                "type": "string"
             },
+            "oxidation_number": {
+               "description": "The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
             "valence": {
+               "description": "the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]",
                "type": "integer"
             }
          },
@@ -267,44 +266,6 @@
          "title": "BaseFormOfConjugatedAcid",
          "type": "object"
       },
-      "CationState": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "elemental_charge": {
-               "type": "integer"
-            }
-         },
-         "required": [],
-         "title": "CationState",
-         "type": "object"
-      },
-      "ChargeState": {
-         "additionalProperties": false,
-         "description": "Applies to entities that have a charge state, which may be positive, negative, or neutral",
-         "properties": {
-            "elemental_charge": {
-               "description": "number of protons minus number of electrons",
-               "type": "integer"
-            }
-         },
-         "required": [],
-         "title": "ChargeState",
-         "type": "object"
-      },
-      "Charged": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "elemental_charge": {
-               "description": "number of protons minus number of electrons",
-               "type": "integer"
-            }
-         },
-         "required": [],
-         "title": "Charged",
-         "type": "object"
-      },
       "ChemicalElement": {
          "additionalProperties": false,
          "description": "generic form of an atom, with unspecified neutron or charge",
@@ -318,6 +279,12 @@
             },
             "electron_configuration": {
                "type": "string"
+            },
+            "has_stereocenter": {
+               "items": {
+                  "$ref": "#/definitions/Stereocenter"
+               },
+               "type": "array"
             },
             "id": {
                "type": "string"
@@ -346,10 +313,17 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "ChemicalElement",
+         "type": "object"
+      },
+      "ChiralityCenter": {
+         "additionalProperties": false,
+         "description": "a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image.",
+         "properties": {},
+         "required": [],
+         "title": "ChiralityCenter",
          "type": "object"
       },
       "ConjugatedAcid": {
@@ -519,8 +493,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "FullySpecifiedAtom",
          "type": "object"
@@ -554,6 +527,56 @@
             "id"
          ],
          "title": "Glycan",
+         "type": "object"
+      },
+      "IsomeraseReaction": {
+         "additionalProperties": false,
+         "description": "A reaction that converts a molecule from one isomer to another. TODO: create rules for this",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "direction": {
+               "description": "One of l->r, r->l, bidirectional, neutral",
+               "type": "string"
+            },
+            "is_balanced": {
+               "type": "boolean"
+            },
+            "is_diastereoselective": {
+               "type": "boolean"
+            },
+            "is_fully_characterized": {
+               "description": "False if includes R-groups",
+               "type": "boolean"
+            },
+            "is_stereo": {
+               "type": "boolean"
+            },
+            "is_transport": {
+               "type": "boolean"
+            },
+            "left_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "reaction_center": {
+               "type": "string"
+            },
+            "right_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "smarts_string": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "IsomeraseReaction",
          "type": "object"
       },
       "Isotope": {
@@ -600,8 +623,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "Isotope",
          "type": "object"
@@ -843,8 +865,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "MonoatomicIon",
          "type": "object"
@@ -990,8 +1011,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "Nuclide",
          "type": "object"
@@ -1150,8 +1170,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "Radionuclide",
          "type": "object"
@@ -1208,7 +1227,7 @@
       },
       "ReactionParticipant": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Instances of this link a reaction to a chemical entity participant",
          "properties": {
             "chemical": {
                "type": "string"
@@ -1236,6 +1255,14 @@
             "id"
          ],
          "title": "Salt",
+         "type": "object"
+      },
+      "Stereocenter": {
+         "additionalProperties": false,
+         "description": "a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer",
+         "properties": {},
+         "required": [],
+         "title": "Stereocenter",
          "type": "object"
       },
       "SubatomicParticle": {
@@ -1270,18 +1297,6 @@
          "title": "TanimotoSimilarity",
          "type": "object"
       },
-      "Uncharged": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "elemental_charge": {
-               "type": "integer"
-            }
-         },
-         "required": [],
-         "title": "Uncharged",
-         "type": "object"
-      },
       "UnchargedAtom": {
          "additionalProperties": false,
          "description": "An atom that has no charge",
@@ -1307,8 +1322,7 @@
             }
          },
          "required": [
-            "id",
-            "symbol"
+            "id"
          ],
          "title": "UnchargedAtom",
          "type": "object"

@@ -21,6 +21,8 @@ metatype:Float xsd:float
 
 metatype:Double xsd:double
 
+metatype:Decimal xsd:decimal
+
 metatype:Time xsd:dateTime
 
 metatype:Date xsd:date
@@ -69,7 +71,7 @@ metatype:Nodeidentifier NONLITERAL
     (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
           rdf:type [ <ChemicalEntity> ] ? ;
           <atomic_number> @<Count> ? ;
-          <symbol> @metatype:String ;
+          <symbol> @metatype:String ? ;
           <name> @metatype:String ?
        ) ;
        rdf:type [ <Atom> ]
@@ -115,7 +117,10 @@ metatype:Nodeidentifier NONLITERAL
     (  $<AtomOccurrence_tes> (  &<Pattern_tes> ;
           rdf:type [ owl:Class ] ? ;
           <has_atom> @<Atom> ? ;
-          <valence> @metatype:Integer ?
+          <valence> @metatype:Integer ? ;
+          <oxidation_number> @metatype:Integer ? ;
+          <formal_charge> @metatype:Integer ? ;
+          <coordination_number> @metatype:Integer ?
        ) ;
        rdf:type [ <AtomOccurrence> ] ?
     )
@@ -150,12 +155,14 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <ChargeState>  (
-    {
-       (  $<ChargeState_tes> <elemental_charge> @metatype:Integer ? ;
-          rdf:type [ <ChargeState> ] ?
-       )
-    } OR @<Charged> OR @<Uncharged>
+    @<Charged> OR @<Uncharged>
 )
+
+<ChargeState_struct> {
+    (  $<ChargeState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <ChargeState> ] ?
+    )
+}
 
 <Charged> {
     (  $<Charged_tes> (  &<ChargeState_tes> ;
@@ -168,13 +175,14 @@ metatype:Nodeidentifier NONLITERAL
 <ChemicalElement> CLOSED {
     (  $<ChemicalElement_tes> (  &<Atom_tes> ;
           rdf:type [ <Atom> ] ? ;
-          <symbol> @metatype:String ;
+          <symbol> @metatype:String ? ;
           <periodic_table_group> @metatype:String ? ;
           <periodic_table_block> @metatype:String ? ;
           <boiling_point_in_celcius> @metatype:Float ? ;
           <melting_point_in_celcius> @metatype:Float ? ;
           <standard_atomic_weight> @metatype:Float ? ;
-          <electron_configuration> @metatype:String ?
+          <electron_configuration> @metatype:String ? ;
+          <has_stereocenter> @<Stereocenter> *
        ) ;
        rdf:type [ <ChemicalElement> ]
     )
@@ -189,6 +197,14 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ owl:Class ] ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
+    )
+}
+
+<ChiralityCenter> CLOSED {
+    (  $<ChiralityCenter_tes> (  &<Stereocenter_tes> ;
+          rdf:type [ <Stereocenter> ] ?
+       ) ;
+       rdf:type [ <ChiralityCenter> ] ?
     )
 }
 
@@ -264,6 +280,14 @@ metatype:Nodeidentifier NONLITERAL
        )
     } OR @<MoleculeGroupingClass>
 )
+
+<IsomeraseReaction> CLOSED {
+    (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
+          rdf:type [ <Reaction> ] ?
+       ) ;
+       rdf:type [ <IsomeraseReaction> ] ?
+    )
+}
 
 <Isotope> CLOSED {
     (  $<Isotope_tes> (  &<Atom_tes> ;
@@ -432,7 +456,7 @@ metatype:Nodeidentifier NONLITERAL
 )
 
 <Pattern>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalEntity>
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalEntity> OR @<Stereocenter>
 )
 
 <Pattern_struct> {
@@ -519,22 +543,24 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
-<Reaction> CLOSED {
-    (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
-          <right_participants> @<ReactionParticipant> * ;
-          <direction> @metatype:String ? ;
-          <smarts_string> @metatype:String ? ;
-          <is_diastereoselective> @metatype:Boolean ? ;
-          <is_stereo> @metatype:Boolean ? ;
-          <is_balanced> @metatype:Boolean ? ;
-          <is_transport> @metatype:Boolean ? ;
-          <is_fully_characterized> @metatype:Boolean ? ;
-          <reaction_center> @metatype:String ? ;
-          <description> @metatype:String ?
-       ) ;
-       rdf:type [ <Reaction> ] ?
-    )
-}
+<Reaction>  (
+    CLOSED {
+       (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
+             <right_participants> @<ReactionParticipant> * ;
+             <direction> @metatype:String ? ;
+             <smarts_string> @metatype:String ? ;
+             <is_diastereoselective> @metatype:Boolean ? ;
+             <is_stereo> @metatype:Boolean ? ;
+             <is_balanced> @metatype:Boolean ? ;
+             <is_transport> @metatype:Boolean ? ;
+             <is_fully_characterized> @metatype:Boolean ? ;
+             <reaction_center> @metatype:String ? ;
+             <description> @metatype:String ?
+          ) ;
+          rdf:type [ <Reaction> ] ?
+       )
+    } OR @<IsomeraseReaction>
+)
 
 <ReactionParticipant> CLOSED {
     (  $<ReactionParticipant_tes> (  <chemical> @<ChemicalEntity> ? ;
@@ -552,6 +578,16 @@ metatype:Nodeidentifier NONLITERAL
        rdf:type [ <Salt> ]
     )
 }
+
+<Stereocenter>  (
+    CLOSED {
+       (  $<Stereocenter_tes> (  &<Pattern_tes> ;
+             rdf:type [ owl:Class ] ?
+          ) ;
+          rdf:type [ <Stereocenter> ] ?
+       )
+    } OR @<ChiralityCenter>
+)
 
 <SubatomicParticle>  (
     CLOSED {

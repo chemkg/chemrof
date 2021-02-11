@@ -7,7 +7,7 @@ A monoatomic ion that is positive
 URI: [chemont:AtomCation](https://w3id.org/chemont/AtomCation)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon],[CationState],[AtomCation&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string]uses%20-.->[CationState],[MonoatomicIon]^-[AtomCation])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon],[CationState],[AtomCation&#124;elemental_charge:integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string]uses%20-.->[CationState],[MonoatomicIon]^-[AtomCation])
 
 ## Parents
 
@@ -38,6 +38,6 @@ URI: [chemont:AtomCation](https://w3id.org/chemont/AtomCation)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>REQ</sub>
+ * [symbol](symbol.md)  <sub>OPT</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)

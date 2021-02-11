@@ -29,9 +29,11 @@ URI: [chemont:Molecule](https://w3id.org/chemont/Molecule)
 
  *  **[Molecule](Molecule.md)** *[chemical isomer of](chemical_isomer_of.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**
  *  **None** *[classifies](classifies.md)*  <sub>OPT</sub>  **[Molecule](Molecule.md)**
+ *  **[Molecule](Molecule.md)** *[diastereoisomers of](diastereoisomers_of.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**
  *  **None** *[enantiomer form of](enantiomer_form_of.md)*  <sub>OPT</sub>  **[Molecule](Molecule.md)**
  *  **[Molecule](Molecule.md)** *[enantiomer of](enantiomer_of.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**
  *  **[Enantiomer](Enantiomer.md)** *[enantiomer➞enantiomer form of](enantiomer_enantiomer_form_of.md)*  <sub>OPT</sub>  **[Molecule](Molecule.md)**
+ *  **[Molecule](Molecule.md)** *[epimer of](epimer_of.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**
  *  **[FunctionalGroup](FunctionalGroup.md)** *[functional group➞is substitutent group from](functional_group_is_substitutent_group_from.md)*  <sub>OPT</sub>  **[Molecule](Molecule.md)**
  *  **[Molecule](Molecule.md)** *[functional isomer of](functional_isomer_of.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**
  *  **[Atom](Atom.md)** *[has group](has_group.md)*  <sub>0..*</sub>  **[Molecule](Molecule.md)**

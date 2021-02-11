@@ -7,7 +7,7 @@ A specific subtype of an atom with a specified neutron number
 URI: [chemont:Isotope](https://w3id.org/chemont/Isotope)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Isotope]<decay%20product%200..1-%20[Isotope&#124;neutron_number:count%20%3F;half_life:number_of_years%20%3F;decay_mode:string%20%3F;decay_energy:string%20%3F;mode_of_formation:string%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string],[Isotope]<isotope%20of%200..1-%20[Isotope],[Atom]^-[Isotope],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Isotope]<decay%20product%200..1-%20[Isotope&#124;neutron_number:count%20%3F;half_life:number_of_years%20%3F;decay_mode:string%20%3F;decay_energy:string%20%3F;mode_of_formation:string%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string],[Isotope]<isotope%20of%200..1-%20[Isotope],[Atom]^-[Isotope],[Atom])
 
 ## Parents
 
@@ -52,7 +52,7 @@ URI: [chemont:Isotope](https://w3id.org/chemont/Isotope)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>REQ</sub>
+ * [symbol](symbol.md)  <sub>OPT</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 

@@ -7,7 +7,7 @@ An atom that has a charge
 URI: [chemont:MonoatomicIon](https://w3id.org/chemont/MonoatomicIon)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon&#124;elemental_charge(i):integer%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string]uses%20-.->[Charged],[MonoatomicIon]^-[AtomCation],[MonoatomicIon]^-[AtomAnion],[AtomIonicForm]^-[MonoatomicIon],[Charged],[AtomIonicForm],[AtomCation],[AtomAnion])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[MonoatomicIon&#124;elemental_charge(i):integer%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string]uses%20-.->[Charged],[MonoatomicIon]^-[AtomCation],[MonoatomicIon]^-[AtomAnion],[AtomIonicForm]^-[MonoatomicIon],[Charged],[AtomIonicForm],[AtomCation],[AtomAnion])
 
 ## Parents
 
@@ -41,7 +41,7 @@ URI: [chemont:MonoatomicIon](https://w3id.org/chemont/MonoatomicIon)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>REQ</sub>
+ * [symbol](symbol.md)  <sub>OPT</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 

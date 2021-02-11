@@ -30,7 +30,7 @@ interface Atom
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
   }
 
@@ -38,7 +38,7 @@ type AtomAnion implements AnionState
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
   }
@@ -47,7 +47,7 @@ type AtomCation implements CationState
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
   }
@@ -56,7 +56,7 @@ interface AtomIonicForm
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
   }
@@ -65,6 +65,9 @@ type AtomOccurrence
   {
     hasAtom: Atom
     valence: Integer
+    oxidationNumber: Integer
+    formalCharge: Integer
+    coordinationNumber: Integer
   }
 
 type AtomicBond
@@ -107,18 +110,23 @@ type ChemicalElement
     id: String!
     atomicNumber: Count
     name: String
-    symbol: String!
+    symbol: String
     periodicTableGroup: String
     periodicTableBlock: String
     boilingPointInCelcius: Float
     meltingPointInCelcius: Float
     standardAtomicWeight: Float
     electronConfiguration: String
+    hasStereocenter: [Stereocenter]
   }
 
 interface ChemicalEntity
   {
     id: String!
+  }
+
+type ChiralityCenter
+  {
   }
 
 type ConjugatedAcid
@@ -161,7 +169,7 @@ type FullySpecifiedAtom
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
     neutronNumber: Count
@@ -182,11 +190,26 @@ interface GroupingClass
   {
   }
 
+type IsomeraseReaction
+  {
+    leftParticipants: [ReactionParticipant]
+    rightParticipants: [ReactionParticipant]
+    direction: String
+    smartsString: String
+    isDiastereoselective: Boolean
+    isStereo: Boolean
+    isBalanced: Boolean
+    isTransport: Boolean
+    isFullyCharacterized: Boolean
+    reactionCenter: String
+    description: String
+  }
+
 type Isotope
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     neutronNumber: Count
     isotopeOf: Isotope
@@ -270,7 +293,7 @@ type MonoatomicIon implements Charged
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
   }
@@ -309,7 +332,7 @@ type Nuclide
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     energyLevel: String
   }
@@ -366,7 +389,7 @@ type Radionuclide
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     energyLevel: String
   }
@@ -398,6 +421,10 @@ type Salt
     elementalCharge: Integer
   }
 
+type Stereocenter
+  {
+  }
+
 type SubatomicParticle
   {
     id: String!
@@ -419,7 +446,7 @@ type UnchargedAtom implements Uncharged
   {
     id: String!
     atomicNumber: Count
-    symbol: String!
+    symbol: String
     name: String
     elementalCharge: Integer
   }

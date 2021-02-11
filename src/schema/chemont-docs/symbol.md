@@ -9,7 +9,7 @@ URI: [chemont:symbol](https://w3id.org/chemont/symbol)
 
 ## Domain and Range
 
-None ->  <sub>REQ</sub> [String](types/String.md)
+None ->  <sub>OPT</sub> [String](types/String.md)
 
 ## Parents
 
@@ -24,7 +24,6 @@ None ->  <sub>REQ</sub> [String](types/String.md)
  * [AtomAnion](AtomAnion.md)
  * [AtomCation](AtomCation.md)
  * [AtomIonicForm](AtomIonicForm.md)
- * [ChemicalElement](ChemicalElement.md)
  * [FullySpecifiedAtom](FullySpecifiedAtom.md)
  * [Isotope](Isotope.md)
  * [MonoatomicIon](MonoatomicIon.md)

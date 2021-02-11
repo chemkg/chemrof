@@ -56,8 +56,11 @@ A data model describing metaclasses for chemical ontology classes
           * [Nucleon](Nucleon.md) - A neutron or proton
              * [Neutron](Neutron.md)
              * [Proton](Proton.md)
+    * [Stereocenter](Stereocenter.md) - a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer
+       * [ChiralityCenter](ChiralityCenter.md) - a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
  * [Reaction](Reaction.md) - reaction
- * [ReactionParticipant](ReactionParticipant.md)
+    * [IsomeraseReaction](IsomeraseReaction.md) - A reaction that converts a molecule from one isomer to another. TODO: create rules for this
+ * [ReactionParticipant](ReactionParticipant.md) - Instances of this link a reaction to a chemical entity participant
 
 ### Mixins
 
@@ -81,6 +84,8 @@ A data model describing metaclasses for chemical ontology classes
     * [allotropic analog of](allotropic_analog_of.md) - relationship that holds between two allotropes, where both allotropes are allotropes of the same element
     * [chemical isomer of](chemical_isomer_of.md) - a relationship that holds between two forms of a parent molecule with identical chemical formulas but distinct arrangements of atoms in space
        * [stereoisomer of](stereoisomer_of.md) - a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds
+          * [diastereoisomers of](diastereoisomers_of.md) - A stereoisomer non-mirror image non-identical stereoisomers
+             * [epimer of](epimer_of.md) - A diastereoisomer of relationship in which the isomers differ at only one stereocenter
           * [enantiomer of](enantiomer_of.md) - a stereoisomer relationship where the two forms are mirror images of one another
        * [structural isomer of](structural_isomer_of.md) - a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonding patterns
           * [functional isomer of](functional_isomer_of.md) - structural isomers that have the same molecular formula (that is, the same number of atoms of the same elements), but the atoms are connected in different ways so that the groupings are dissimilar.
@@ -121,6 +126,8 @@ A data model describing metaclasses for chemical ontology classes
        * [isomeric smiles string](isomeric_smiles_string.md)
  * [classifies](classifies.md)
     * [molecule grouping class➞classifies](molecule_grouping_class_classifies.md)
+ * [coordination number](coordination_number.md) - The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]
+    * [atom occurrence➞coordination number](atom_occurrence_coordination_number.md)
  * [decay energy](decay_energy.md)
  * [decay mode](decay_mode.md)
  * [decay product](decay_product.md)
@@ -132,14 +139,16 @@ A data model describing metaclasses for chemical ontology classes
     * [chemical element➞electron configuration](chemical_element_electron_configuration.md)
  * [elemental charge](elemental_charge.md) - number of protons minus number of electrons
     * [anion state➞elemental charge](anion_state_elemental_charge.md)
-    * [atom anion➞elemental charge](atom_anion_elemental_charge.md)
-    * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
+       * [atom anion➞elemental charge](atom_anion_elemental_charge.md)
     * [cation state➞elemental charge](cation_state_elemental_charge.md)
+       * [atom cation➞elemental charge](atom_cation_elemental_charge.md)
     * [salt➞elemental charge](salt_elemental_charge.md)
     * [uncharged➞elemental charge](uncharged_elemental_charge.md)
  * [enantiomer form of](enantiomer_form_of.md) - Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
     * [enantiomer➞enantiomer form of](enantiomer_enantiomer_form_of.md)
  * [energy level](energy_level.md) - e.g. ground, stable
+ * [formal charge](formal_charge.md) - The charge remaining on an atom when all ligands are removed homolytically. [https://doi.org/10.1021%2Fed083p791]
+    * [atom occurrence➞formal charge](atom_occurrence_formal_charge.md)
  * [half life](half_life.md)
  * [has atom](has_atom.md)
     * [atom occurrence➞has atom](atom_occurrence_has_atom.md)
@@ -162,6 +171,8 @@ A data model describing metaclasses for chemical ontology classes
        * [copolymer➞has part](copolymer_has_part.md)
  * [has right enantiomer](has_right_enantiomer.md)
     * [racemic mixture➞has right enantiomer](racemic_mixture_has_right_enantiomer.md)
+ * [has stereocenter](has_stereocenter.md)
+    * [chemical element➞has stereocenter](chemical_element_has_stereocenter.md)
  * [id](id.md)
  * [is balanced](is_balanced.md)
     * [reaction➞is balanced](reaction_is_balanced.md)
@@ -188,6 +199,8 @@ A data model describing metaclasses for chemical ontology classes
  * [nucleon number](nucleon_number.md) - number of nucleons in an atom. proton number plus neutral number.
  * [optical configuration](optical_configuration.md)
     * [enantiomer➞optical configuration](enantiomer_optical_configuration.md)
+ * [oxidation number](oxidation_number.md) - The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]
+    * [atom occurrence➞oxidation number](atom_occurrence_oxidation_number.md)
  * [periodic table block](periodic_table_block.md) - block of periodic table unified by the orbitals their valence electrons or vacancies lie in
     * [chemical element➞periodic table block](chemical_element_periodic_table_block.md)
  * [periodic table group](periodic_table_group.md) - which number in periodic table column
@@ -211,7 +224,7 @@ A data model describing metaclasses for chemical ontology classes
     * [chemical element➞symbol](chemical_element_symbol.md) - E.g. O, K, Ge
  * [torsional angle](torsional_angle.md)
     * [atomic bond➞torsional angle](atomic_bond_torsional_angle.md)
- * [valence](valence.md)
+ * [valence](valence.md) - the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]
     * [atom occurrence➞valence](atom_occurrence_valence.md)
 
 ### Types
@@ -220,6 +233,7 @@ A data model describing metaclasses for chemical ontology classes
 #### Built in
 
  * **Bool**
+ * **Decimal**
  * **ElementIdentifier**
  * **NCName**
  * **NodeIdentifier**
@@ -239,6 +253,7 @@ A data model describing metaclasses for chemical ontology classes
  * [Count](types/Count.md)  (**int**) 
  * [Date](types/Date.md)  (**XSDDate**)  - a date (year, month and day) in an idealized calendar
  * [Datetime](types/Datetime.md)  (**XSDDateTime**)  - The combination of a date and time
+ * [Decimal](types/Decimal.md)  (**Decimal**)  - A real number with arbitrary precision that conforms to the xsd:decimal specification
  * [Double](types/Double.md)  (**float**)  - A real number that conforms to the xsd:double specification
  * [Float](types/Float.md)  (**float**)  - A real number that conforms to the xsd:float specification
  * [Integer](types/Integer.md)  (**int**)  - An integer

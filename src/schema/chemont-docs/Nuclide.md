@@ -7,7 +7,7 @@ an atomic species characterized by the specific constitution of its nucleus
 URI: [chemont:Nuclide](https://w3id.org/chemont/Nuclide)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Radionuclide],[Nuclide&#124;energy_level:string%20%3F;atomic_number(i):count%20%3F;symbol(pk)(i):string;name(i):string%20%3F;id(i):string]^-[Radionuclide],[Atom]^-[Nuclide],[Atom])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[Radionuclide],[Nuclide&#124;energy_level:string%20%3F;atomic_number(i):count%20%3F;symbol(i):string%20%3F;name(i):string%20%3F;id(i):string]^-[Radionuclide],[Atom]^-[Nuclide],[Atom])
 
 ## Parents
 
@@ -39,7 +39,7 @@ URI: [chemont:Nuclide](https://w3id.org/chemont/Nuclide)
  * [name](name.md)  <sub>OPT</sub>
     * Description: name of chemical entity. E.g. nickel, carbon-16
     * range: [String](types/String.md)
- * [symbol](symbol.md)  <sub>REQ</sub>
+ * [symbol](symbol.md)  <sub>OPT</sub>
     * Description: short symbol for chemical entity, e.g. K, C-16
     * range: [String](types/String.md)
 
