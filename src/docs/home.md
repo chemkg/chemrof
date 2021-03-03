@@ -1,4 +1,4 @@
-# Chemical Ontology Metaclasses
+# Chem: Schema for chemistry data models and ontologies
 
 This repo includes schema/datamodel for a chemical ontology
 
@@ -17,7 +17,7 @@ For driving use case and why we need aan alternatibe to existing chebi atom / si
 
  - https://github.com/EnvironmentOntology/envo/issues/989
 
-Schema: [chemistry-ontology](http://cmungall.github.io/chemistry-ontology)
+Schema: [chem-schema](http://cmungall.github.io/chem-schema)
 
 ## Basic idea
 
@@ -51,7 +51,7 @@ issue](https://github.com/INCATools/dead_simple_owl_design_patterns/issues/51)
 
 ## Schema
 
-Browse the schema here: [http://cmungall.github.io/chemistry-ontology](http://cmungall.github.io/chemistry-ontology)
+Browse the schema here: [http://cmungall.github.io/chem-schema](http://cmungall.github.io/chem-schema)
 
 Realist pedants be advised to assume the suffix 'species', 'class', or 'type' on the end of these (meta)class names
 
@@ -61,13 +61,13 @@ The source is in YAML (biolinkml)
 
 Currently the main derived artefacts of interest are:
 
- - [JSON Schema](src/schema/chemont.schema.json)
- - [ShEx](src/schema/chemont.shex)
- - [Python dataclasses](src/schema/chemont_datamodel.py)
+ - [JSON Schema](https://github.com/cmungall/chem-schema/tree/master/jsonschem)
+ - [ShEx](https://github.com/cmungall/chem-schema/tree/master/shex)
+ - [Python dataclasses](https://github.com/cmungall/chem-schema/tree/master/python)
 
 With care, you also see:
 
- - [OWL](src/schema/chemont.owl) -- note this should be read as a meta-ontology by OBO people
+ - [OWL](https://github.com/cmungall/chem-schema/tree/master/owl) -- note this should be read as a meta-ontology by OBO people
 
 ## TODO
 
