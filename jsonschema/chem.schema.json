@@ -1,0 +1,1426 @@
+{
+   "$id": "chemont",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "definitions": {
+      "AcidFormOfConjugatedAcid": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "AcidFormOfConjugatedAcid",
+         "type": "object"
+      },
+      "Allotrope": {
+         "additionalProperties": false,
+         "description": "A molecule consisting of atoms of the same element",
+         "properties": {
+            "allotrope_of": {
+               "type": "string"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonding_structure": {
+               "description": "The pattern in which the atoms are bonded; e.g. hexagonal lattice, sheets, etc",
+               "type": "string"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id",
+            "allotrope_of",
+            "has_bonding_structure"
+         ],
+         "title": "Allotrope",
+         "type": "object"
+      },
+      "AtomAnion": {
+         "additionalProperties": false,
+         "description": "A monoatomic ion that is negative",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "elemental_charge": {
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "AtomAnion",
+         "type": "object"
+      },
+      "AtomCation": {
+         "additionalProperties": false,
+         "description": "A monoatomic ion that is positive",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "elemental_charge": {
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "AtomCation",
+         "type": "object"
+      },
+      "AtomOccurrence": {
+         "additionalProperties": false,
+         "description": "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate",
+         "properties": {
+            "coordination_number": {
+               "description": "The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
+            "formal_charge": {
+               "description": "The charge remaining on an atom when all ligands are removed homolytically. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
+            "has_atom": {
+               "type": "string"
+            },
+            "oxidation_number": {
+               "description": "The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            },
+            "valence": {
+               "description": "the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]",
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "AtomOccurrence",
+         "type": "object"
+      },
+      "AtomicBond": {
+         "additionalProperties": false,
+         "description": "A connection between two atoms. Note this is the reified form of 'atomically connected to'.",
+         "properties": {
+            "bond_angle": {
+               "type": "number"
+            },
+            "bond_length_in_angstroms": {
+               "description": "the average distance between nuclei of two bonded atoms in a molecule. It is a transferable property of a bond between atoms of fixed types, relatively independent of the rest of the molecule.",
+               "type": "number"
+            },
+            "bond_order": {
+               "description": "the number of electron pairs (bonds) between a pair of atoms",
+               "type": "integer"
+            },
+            "bond_type": {
+               "description": "E.g. covalent, ionic, polycentric, metal-metal, salt bridge",
+               "type": "string"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "torsional_angle": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "AtomicBond",
+         "type": "object"
+      },
+      "BaseFormOfConjugatedAcid": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "BaseFormOfConjugatedAcid",
+         "type": "object"
+      },
+      "ChemicalElement": {
+         "additionalProperties": false,
+         "description": "generic form of an atom, with unspecified neutron or charge",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "boiling_point_in_celcius": {
+               "type": "number"
+            },
+            "electron_configuration": {
+               "type": "string"
+            },
+            "has_stereocenter": {
+               "items": {
+                  "$ref": "#/definitions/Stereocenter"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            },
+            "melting_point_in_celcius": {
+               "type": "number"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "periodic_table_block": {
+               "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in",
+               "type": "string"
+            },
+            "periodic_table_group": {
+               "description": "which number in periodic table column",
+               "type": "string"
+            },
+            "standard_atomic_weight": {
+               "type": "number"
+            },
+            "symbol": {
+               "description": "E.g. O, K, Ge",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "ChemicalElement",
+         "type": "object"
+      },
+      "ChiralityCenter": {
+         "additionalProperties": false,
+         "description": "a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image.",
+         "properties": {},
+         "required": [],
+         "title": "ChiralityCenter",
+         "type": "object"
+      },
+      "ConjugatedAcid": {
+         "additionalProperties": false,
+         "description": "Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine",
+         "properties": {
+            "acidity": {
+               "type": "number"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "ConjugatedAcid",
+         "type": "object"
+      },
+      "Copolymer": {
+         "additionalProperties": false,
+         "description": "a polymer derived from more than one species of monomer",
+         "properties": {
+            "has_part": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Copolymer",
+         "type": "object"
+      },
+      "Electron": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Electron",
+         "type": "object"
+      },
+      "Enantiomer": {
+         "additionalProperties": false,
+         "description": "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide",
+         "properties": {
+            "absolute_configuration": {
+               "type": "string"
+            },
+            "enantiomer_form_of": {
+               "description": "Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione",
+               "type": "string"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            },
+            "optical_configuration": {
+               "type": "string"
+            },
+            "relative_configuration": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Enantiomer",
+         "type": "object"
+      },
+      "FullySpecifiedAtom": {
+         "additionalProperties": false,
+         "description": "An atom (class) that has subatomic particle counts specified",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "neutron_number": {
+               "description": "number of neutrons in an atom",
+               "type": "integer"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "FullySpecifiedAtom",
+         "type": "object"
+      },
+      "FunctionalGroup": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "is_substitutent_group_from": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "FunctionalGroup",
+         "type": "object"
+      },
+      "Glycan": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Glycan",
+         "type": "object"
+      },
+      "IsomeraseReaction": {
+         "additionalProperties": false,
+         "description": "A reaction that converts a molecule from one isomer to another. TODO: create rules for this",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "direction": {
+               "description": "One of l->r, r->l, bidirectional, neutral",
+               "type": "string"
+            },
+            "is_balanced": {
+               "type": "boolean"
+            },
+            "is_diastereoselective": {
+               "type": "boolean"
+            },
+            "is_fully_characterized": {
+               "description": "False if includes R-groups",
+               "type": "boolean"
+            },
+            "is_stereo": {
+               "type": "boolean"
+            },
+            "is_transport": {
+               "type": "boolean"
+            },
+            "left_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "reaction_center": {
+               "type": "string"
+            },
+            "right_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "smarts_string": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "IsomeraseReaction",
+         "type": "object"
+      },
+      "Isotope": {
+         "additionalProperties": false,
+         "description": "A specific subtype of an atom with a specified neutron number",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "decay_energy": {
+               "type": "string"
+            },
+            "decay_mode": {
+               "type": "string"
+            },
+            "decay_product": {
+               "type": "string"
+            },
+            "half_life": {
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "isotope_of": {
+               "description": "relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number.",
+               "type": "string"
+            },
+            "mode_of_formation": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "neutron_number": {
+               "description": "number of neutrons in an atom",
+               "type": "integer"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Isotope",
+         "type": "object"
+      },
+      "Macromolecule": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Macromolecule",
+         "type": "object"
+      },
+      "Moiety": {
+         "additionalProperties": false,
+         "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Moiety",
+         "type": "object"
+      },
+      "MolecularAnion": {
+         "additionalProperties": false,
+         "description": "A polyatomic ion that is negative",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularAnion",
+         "type": "object"
+      },
+      "MolecularCation": {
+         "additionalProperties": false,
+         "description": "A polyatomic ion that is positive",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularCation",
+         "type": "object"
+      },
+      "MolecularSpecies": {
+         "additionalProperties": false,
+         "description": "A molecule in which the units are identical. Example: methyl",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularSpecies",
+         "type": "object"
+      },
+      "MoleculeGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "MoleculeGroupingClass",
+         "type": "object"
+      },
+      "MoleculePairwiseSimilarity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "left_molecule": {
+               "type": "string"
+            },
+            "right_molecule": {
+               "type": "string"
+            },
+            "score": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "MoleculePairwiseSimilarity",
+         "type": "object"
+      },
+      "MoleculePart": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MoleculePart",
+         "type": "object"
+      },
+      "MonoatomicIon": {
+         "additionalProperties": false,
+         "description": "An atom that has a charge",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MonoatomicIon",
+         "type": "object"
+      },
+      "NaturalProduct": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "NaturalProduct",
+         "type": "object"
+      },
+      "Neutron": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Neutron",
+         "type": "object"
+      },
+      "NonSpeciesMolecule": {
+         "additionalProperties": false,
+         "description": "A molecule in which the units are not identical. Example: sodium chloride",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "NonSpeciesMolecule",
+         "type": "object"
+      },
+      "Nucleon": {
+         "additionalProperties": false,
+         "description": "A neutron or proton",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Nucleon",
+         "type": "object"
+      },
+      "Nuclide": {
+         "additionalProperties": false,
+         "description": "an atomic species characterized by the specific constitution of its nucleus",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "energy_level": {
+               "description": "e.g. ground, stable",
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Nuclide",
+         "type": "object"
+      },
+      "Peptide": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Peptide",
+         "type": "object"
+      },
+      "PolyatomicIon": {
+         "additionalProperties": false,
+         "description": "A molecule that has a charge. For example, nitrate (NO3-).",
+         "properties": {
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "PolyatomicIon",
+         "type": "object"
+      },
+      "Polymer": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_part": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Polymer",
+         "type": "object"
+      },
+      "Protein": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Protein",
+         "type": "object"
+      },
+      "Proton": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Proton",
+         "type": "object"
+      },
+      "RacemicMixture": {
+         "additionalProperties": false,
+         "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
+         "properties": {
+            "has_left_enantiomer": {
+               "type": "string"
+            },
+            "has_right_enantiomer": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id",
+            "has_left_enantiomer",
+            "has_right_enantiomer"
+         ],
+         "title": "RacemicMixture",
+         "type": "object"
+      },
+      "Radionuclide": {
+         "additionalProperties": false,
+         "description": "an atom that has excess nuclear energy, making it unstable",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "energy_level": {
+               "description": "e.g. ground, stable",
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Radionuclide",
+         "type": "object"
+      },
+      "Reaction": {
+         "additionalProperties": false,
+         "description": "reaction",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "direction": {
+               "description": "One of l->r, r->l, bidirectional, neutral",
+               "type": "string"
+            },
+            "is_balanced": {
+               "type": "boolean"
+            },
+            "is_diastereoselective": {
+               "type": "boolean"
+            },
+            "is_fully_characterized": {
+               "description": "False if includes R-groups",
+               "type": "boolean"
+            },
+            "is_stereo": {
+               "type": "boolean"
+            },
+            "is_transport": {
+               "type": "boolean"
+            },
+            "left_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "reaction_center": {
+               "type": "string"
+            },
+            "right_participants": {
+               "items": {
+                  "$ref": "#/definitions/ReactionParticipant"
+               },
+               "type": "array"
+            },
+            "smarts_string": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Reaction",
+         "type": "object"
+      },
+      "ReactionParticipant": {
+         "additionalProperties": false,
+         "description": "Instances of this link a reaction to a chemical entity participant",
+         "properties": {
+            "chemical": {
+               "type": "string"
+            },
+            "stoichiometry": {
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "ReactionParticipant",
+         "type": "object"
+      },
+      "Salt": {
+         "additionalProperties": false,
+         "description": "a chemical compound consisting of an ionic assembly of cations and anions.",
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Salt",
+         "type": "object"
+      },
+      "Stereocenter": {
+         "additionalProperties": false,
+         "description": "a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer",
+         "properties": {},
+         "required": [],
+         "title": "Stereocenter",
+         "type": "object"
+      },
+      "Stereoisomer": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Stereoisomer",
+         "type": "object"
+      },
+      "SubatomicParticle": {
+         "additionalProperties": false,
+         "description": "A chemical entity below the granularity of an atom.",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "SubatomicParticle",
+         "type": "object"
+      },
+      "TanimotoSimilarity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "left_molecule": {
+               "type": "string"
+            },
+            "right_molecule": {
+               "type": "string"
+            },
+            "score": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "TanimotoSimilarity",
+         "type": "object"
+      },
+      "UnchargedAtom": {
+         "additionalProperties": false,
+         "description": "An atom that has no charge",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "type": "integer"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "UnchargedAtom",
+         "type": "object"
+      },
+      "UnchargedMolecule": {
+         "additionalProperties": false,
+         "description": "A molecule that has no charge",
+         "properties": {
+            "elemental_charge": {
+               "type": "integer"
+            },
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "UnchargedMolecule",
+         "type": "object"
+      }
+   },
+   "properties": {},
+   "title": "chemont",
+   "type": "object"
+}
+

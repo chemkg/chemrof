@@ -1,0 +1,652 @@
+BASE <https://w3id.org/chemont/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX metatype: <https://w3id.org/biolink/biolinkml/meta/types/>
+
+
+<Count> xsd:int
+
+<NumberOfYears> xsd:int
+
+<ChemicalEncoding> xsd:string
+
+metatype:String xsd:string
+
+metatype:Integer xsd:integer
+
+metatype:Boolean xsd:boolean
+
+metatype:Float xsd:float
+
+metatype:Double xsd:double
+
+metatype:Decimal xsd:decimal
+
+metatype:Time xsd:dateTime
+
+metatype:Date xsd:date
+
+metatype:Datetime xsd:dateTime
+
+metatype:Uriorcurie IRI
+
+metatype:Uri IRI
+
+metatype:Ncname xsd:string
+
+metatype:Objectidentifier IRI
+
+metatype:Nodeidentifier NONLITERAL
+
+<AcidFormOfConjugatedAcid> CLOSED {
+    (  $<AcidFormOfConjugatedAcid_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ?
+       ) ;
+       rdf:type [ <AcidFormOfConjugatedAcid> ]
+    )
+}
+
+<Allotrope> CLOSED {
+    (  $<Allotrope_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <allotrope_of> @<ChemicalElement> ;
+          <has_bonding_structure> @metatype:String
+       ) ;
+       rdf:type [ <Allotrope> ]
+    )
+}
+
+<AnionState> {
+    (  $<AnionState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <AnionState> ] ?
+    )
+}
+
+<Atom>  (
+    @<AtomIonicForm> OR @<ChemicalElement> OR @<FullySpecifiedAtom> OR @<Isotope> OR @<Nuclide>
+)
+
+<Atom_struct> {
+    (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <atomic_number> @<Count> ? ;
+          <symbol> @metatype:String ? ;
+          <name> @metatype:String ?
+       ) ;
+       rdf:type [ <Atom> ]
+    )
+}
+
+<AtomAnion> CLOSED {
+    (  $<AtomAnion_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <AtomAnion> ]
+    )
+}
+
+<AtomCation> CLOSED {
+    (  $<AtomCation_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <AtomCation> ]
+    )
+}
+
+<AtomIonicForm>  (
+    @<MonoatomicIon> OR @<UnchargedAtom>
+)
+
+<AtomIonicForm_struct> {
+    (  $<AtomIonicForm_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <AtomIonicForm> ]
+    )
+}
+
+<AtomOccurrence> CLOSED {
+    (  $<AtomOccurrence_tes> (  &<Pattern_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <has_atom> @<Atom> ? ;
+          <valence> @metatype:Integer ? ;
+          <oxidation_number> @metatype:Integer ? ;
+          <formal_charge> @metatype:Integer ? ;
+          <coordination_number> @metatype:Integer ?
+       ) ;
+       rdf:type [ <AtomOccurrence> ] ?
+    )
+}
+
+<AtomicBond> CLOSED {
+    (  $<AtomicBond_tes> (  &<Pattern_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <has_atom_occurrences> @<AtomOccurrence> * ;
+          <bond_order> @metatype:Integer ? ;
+          <bond_type> @metatype:String ? ;
+          <bond_length_in_angstroms> @metatype:Float ? ;
+          <bond_angle> @metatype:Float ? ;
+          <torsional_angle> @metatype:Float ?
+       ) ;
+       rdf:type [ <AtomicBond> ] ?
+    )
+}
+
+<BaseFormOfConjugatedAcid> CLOSED {
+    (  $<BaseFormOfConjugatedAcid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <BaseFormOfConjugatedAcid> ]
+    )
+}
+
+<CationState> {
+    (  $<CationState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <CationState> ] ?
+    )
+}
+
+<ChargeState>  (
+    @<Charged> OR @<Uncharged>
+)
+
+<ChargeState_struct> {
+    (  $<ChargeState_tes> <elemental_charge> @metatype:Integer ? ;
+       rdf:type [ <ChargeState> ] ?
+    )
+}
+
+<Charged> {
+    (  $<Charged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ?
+       ) ;
+       rdf:type [ <Charged> ] ?
+    )
+}
+
+<ChemicalElement> CLOSED {
+    (  $<ChemicalElement_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <symbol> @metatype:String ? ;
+          <periodic_table_group> @metatype:String ? ;
+          <periodic_table_block> @metatype:String ? ;
+          <boiling_point_in_celcius> @metatype:Float ? ;
+          <melting_point_in_celcius> @metatype:Float ? ;
+          <standard_atomic_weight> @metatype:Float ? ;
+          <electron_configuration> @metatype:String ? ;
+          <has_stereocenter> @<Stereocenter> *
+       ) ;
+       rdf:type [ <ChemicalElement> ]
+    )
+}
+
+<ChemicalEntity>  (
+    @<Atom> OR @<Macromolecule> OR @<PolyatomicEntity> OR @<Polymer> OR @<RacemicMixture> OR @<SubatomicParticle>
+)
+
+<ChemicalEntity_struct> {
+    (  $<ChemicalEntity_tes> (  &<Pattern_tes> ;
+          rdf:type [ owl:Class ] ?
+       ) ;
+       rdf:type [ <ChemicalEntity> ]
+    )
+}
+
+<ChiralityCenter> CLOSED {
+    (  $<ChiralityCenter_tes> (  &<Stereocenter_tes> ;
+          rdf:type [ <Stereocenter> ] ?
+       ) ;
+       rdf:type [ <ChiralityCenter> ] ?
+    )
+}
+
+<ConjugatedAcid> CLOSED {
+    (  $<ConjugatedAcid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <acidity> @metatype:Float ?
+       ) ;
+       rdf:type [ <ConjugatedAcid> ]
+    )
+}
+
+<Copolymer> CLOSED {
+    (  $<Copolymer_tes> (  &<Polymer_tes> ;
+          rdf:type [ <Polymer> ] ? ;
+          <has_part> @<Macromolecule> *
+       ) ;
+       rdf:type [ <Copolymer> ]
+    )
+}
+
+<Electron> CLOSED {
+    (  $<Electron_tes> (  &<SubatomicParticle_tes> ;
+          rdf:type [ <SubatomicParticle> ] ?
+       ) ;
+       rdf:type [ <Electron> ]
+    )
+}
+
+<Enantiomer> CLOSED {
+    (  $<Enantiomer_tes> (  &<Stereoisomer_tes> ;
+          rdf:type [ <Stereoisomer> ] ? ;
+          <relative_configuration> @metatype:String ? ;
+          <optical_configuration> @metatype:String ? ;
+          <absolute_configuration> @metatype:String ? ;
+          <enantiomer_form_of> @<Molecule> ?
+       ) ;
+       rdf:type [ <Enantiomer> ]
+    )
+}
+
+<FullySpecifiedAtom> CLOSED {
+    (  $<FullySpecifiedAtom_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <elemental_charge> @metatype:Integer ? ;
+          <neutron_number> @<Count> ?
+       ) ;
+       rdf:type [ <FullySpecifiedAtom> ]
+    )
+}
+
+<FunctionalGroup> CLOSED {
+    (  $<FunctionalGroup_tes> (  &<MoleculePart_tes> ;
+          rdf:type [ <MoleculePart> ] ? ;
+          <is_substitutent_group_from> @<Molecule> ?
+       ) ;
+       rdf:type [ <FunctionalGroup> ]
+    )
+}
+
+<Glycan> CLOSED {
+    (  $<Glycan_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Glycan> ]
+    )
+}
+
+<GroupingClass>  (
+    {
+       (  $<GroupingClass_tes> rdf:type . * ;
+          rdf:type [ <GroupingClass> ] ?
+       )
+    } OR @<MoleculeGroupingClass>
+)
+
+<IsomeraseReaction> CLOSED {
+    (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
+          rdf:type [ <Reaction> ] ?
+       ) ;
+       rdf:type [ <IsomeraseReaction> ] ?
+    )
+}
+
+<Isotope> CLOSED {
+    (  $<Isotope_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <neutron_number> @<Count> ? ;
+          <isotope_of> @<Isotope> ? ;
+          <half_life> @<NumberOfYears> ? ;
+          <decay_product> @<Isotope> ? ;
+          <decay_mode> @metatype:String ? ;
+          <decay_energy> @metatype:String ? ;
+          <mode_of_formation> @metatype:String ?
+       ) ;
+       rdf:type [ <Isotope> ]
+    )
+}
+
+<Macromolecule>  (
+    CLOSED {
+       (  $<Macromolecule_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ?
+          ) ;
+          rdf:type [ <Macromolecule> ]
+       )
+    } OR @<Glycan> OR @<Peptide> OR @<Protein>
+)
+
+<Moiety> CLOSED {
+    (  $<Moiety_tes> (  &<MoleculePart_tes> ;
+          rdf:type [ <MoleculePart> ] ?
+       ) ;
+       rdf:type [ <Moiety> ]
+    )
+}
+
+<MolecularAnion> CLOSED {
+    (  $<MolecularAnion_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ?
+       ) ;
+       rdf:type [ <MolecularAnion> ]
+    )
+}
+
+<MolecularCation> CLOSED {
+    (  $<MolecularCation_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ?
+       ) ;
+       rdf:type [ <MolecularCation> ]
+    )
+}
+
+<MolecularSpecies> CLOSED {
+    (  $<MolecularSpecies_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <MolecularSpecies> ]
+    )
+}
+
+<Molecule>  (
+    @<Allotrope> OR @<BaseFormOfConjugatedAcid> OR @<ConjugatedAcid> OR @<MolecularSpecies> OR @<NaturalProduct> OR
+    @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<Stereoisomer> OR @<UnchargedMolecule>
+)
+
+<Molecule_struct> {
+    (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ? ;
+          <has_atom_occurrences> @<AtomOccurrence> * ;
+          <has_bonds> @<AtomicBond> * ;
+          <has_submolecules> @<Molecule> * ;
+          <has_atoms> @<Atom> * ;
+          <has_part> @metatype:String ?
+       ) ;
+       rdf:type [ <Molecule> ]
+    )
+}
+
+<MoleculeGroupingClass> CLOSED {
+    (  $<MoleculeGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <classifies> @<Molecule> ?
+       ) ;
+       rdf:type [ <MoleculeGroupingClass> ] ?
+    )
+}
+
+<MoleculePairwiseSimilarity>  (
+    CLOSED {
+       (  $<MoleculePairwiseSimilarity_tes> (  <left_molecule> @<Molecule> ? ;
+             <right_molecule> @<Molecule> ? ;
+             <score> @metatype:String ?
+          ) ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ?
+       )
+    } OR @<TanimotoSimilarity>
+)
+
+<MoleculePart>  (
+    CLOSED {
+       (  $<MoleculePart_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ?
+          ) ;
+          rdf:type [ <MoleculePart> ]
+       )
+    } OR @<FunctionalGroup> OR @<Moiety>
+)
+
+<MonoatomicIon>  (
+    CLOSED {
+       (  $<MonoatomicIon_tes> (  &<AtomIonicForm_tes> ;
+             rdf:type [ <AtomIonicForm> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ?
+          ) ;
+          rdf:type [ <MonoatomicIon> ]
+       )
+    } OR @<AtomAnion> OR @<AtomCation>
+)
+
+<NaturalProduct> CLOSED {
+    (  $<NaturalProduct_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <NaturalProduct> ]
+    )
+}
+
+<Neutron> CLOSED {
+    (  $<Neutron_tes> (  &<Nucleon_tes> ;
+          rdf:type [ <Nucleon> ] ?
+       ) ;
+       rdf:type [ <Neutron> ]
+    )
+}
+
+<NonSpeciesMolecule> CLOSED {
+    (  $<NonSpeciesMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <NonSpeciesMolecule> ]
+    )
+}
+
+<Nucleon>  (
+    CLOSED {
+       (  $<Nucleon_tes> (  &<SubatomicParticle_tes> ;
+             rdf:type [ <SubatomicParticle> ] ?
+          ) ;
+          rdf:type [ <Nucleon> ]
+       )
+    } OR @<Neutron> OR @<Proton>
+)
+
+<Nuclide>  (
+    CLOSED {
+       (  $<Nuclide_tes> (  &<Atom_tes> ;
+             rdf:type [ <Atom> ] ? ;
+             <energy_level> @metatype:String ?
+          ) ;
+          rdf:type [ <Nuclide> ]
+       )
+    } OR @<Radionuclide>
+)
+
+<Pattern>  (
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalEntity> OR @<Stereocenter>
+)
+
+<Pattern_struct> {
+    (  $<Pattern_tes> rdf:type . * ;
+       rdf:type [ owl:Class ] ?
+    )
+}
+
+<Peptide> CLOSED {
+    (  $<Peptide_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Peptide> ]
+    )
+}
+
+<PolyatomicEntity>  (
+    @<Molecule> OR @<MoleculePart> OR @<Salt>
+)
+
+<PolyatomicEntity_struct> {
+    (  $<PolyatomicEntity_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ?
+       ) ;
+       rdf:type [ <PolyatomicEntity> ]
+    )
+}
+
+<PolyatomicIon>  (
+    CLOSED {
+       (  $<PolyatomicIon_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ? ;
+             <elemental_charge> @metatype:Integer ?
+          ) ;
+          rdf:type [ <PolyatomicIon> ]
+       )
+    } OR @<AcidFormOfConjugatedAcid> OR @<MolecularAnion> OR @<MolecularCation>
+)
+
+<Polymer>  (
+    CLOSED {
+       (  $<Polymer_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ? ;
+             <has_part> @<Macromolecule> ?
+          ) ;
+          rdf:type [ <Polymer> ]
+       )
+    } OR @<Copolymer>
+)
+
+<Protein> CLOSED {
+    (  $<Protein_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Protein> ]
+    )
+}
+
+<Proton> CLOSED {
+    (  $<Proton_tes> (  &<Nucleon_tes> ;
+          rdf:type [ <Nucleon> ] ?
+       ) ;
+       rdf:type [ <Proton> ]
+    )
+}
+
+<RacemicMixture> CLOSED {
+    (  $<RacemicMixture_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <has_left_enantiomer> @<Enantiomer> ;
+          <has_right_enantiomer> @<Enantiomer>
+       ) ;
+       rdf:type [ <RacemicMixture> ]
+    )
+}
+
+<Radionuclide> CLOSED {
+    (  $<Radionuclide_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ?
+       ) ;
+       rdf:type [ <Radionuclide> ]
+    )
+}
+
+<Reaction>  (
+    CLOSED {
+       (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
+             <right_participants> @<ReactionParticipant> * ;
+             <direction> @metatype:String ? ;
+             <smarts_string> @metatype:String ? ;
+             <is_diastereoselective> @metatype:Boolean ? ;
+             <is_stereo> @metatype:Boolean ? ;
+             <is_balanced> @metatype:Boolean ? ;
+             <is_transport> @metatype:Boolean ? ;
+             <is_fully_characterized> @metatype:Boolean ? ;
+             <reaction_center> @metatype:String ? ;
+             <description> @metatype:String ?
+          ) ;
+          rdf:type [ <Reaction> ] ?
+       )
+    } OR @<IsomeraseReaction>
+)
+
+<ReactionParticipant> CLOSED {
+    (  $<ReactionParticipant_tes> (  <chemical> @<ChemicalEntity> ? ;
+          <stoichiometry> @metatype:Integer ?
+       ) ;
+       rdf:type [ <ReactionParticipant> ] ?
+    )
+}
+
+<Salt> CLOSED {
+    (  $<Salt_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <Salt> ]
+    )
+}
+
+<Stereocenter>  (
+    CLOSED {
+       (  $<Stereocenter_tes> (  &<Pattern_tes> ;
+             rdf:type [ owl:Class ] ?
+          ) ;
+          rdf:type [ <Stereocenter> ] ?
+       )
+    } OR @<ChiralityCenter>
+)
+
+<Stereoisomer>  (
+    CLOSED {
+       (  $<Stereoisomer_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ?
+          ) ;
+          rdf:type [ <Stereoisomer> ]
+       )
+    } OR @<Enantiomer>
+)
+
+<SubatomicParticle>  (
+    CLOSED {
+       (  $<SubatomicParticle_tes> (  &<ChemicalEntity_tes> ;
+             rdf:type [ <ChemicalEntity> ] ?
+          ) ;
+          rdf:type [ <SubatomicParticle> ]
+       )
+    } OR @<Electron> OR @<Nucleon>
+)
+
+<TanimotoSimilarity> CLOSED {
+    (  $<TanimotoSimilarity_tes> (  &<MoleculePairwiseSimilarity_tes> ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ? ;
+          <score> @metatype:Float ?
+       ) ;
+       rdf:type [ <TanimotoSimilarity> ] ?
+    )
+}
+
+<Uncharged> {
+    (  $<Uncharged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <Uncharged> ] ?
+    )
+}
+
+<UnchargedAtom> CLOSED {
+    (  $<UnchargedAtom_tes> (  &<AtomIonicForm_tes> ;
+          rdf:type [ <AtomIonicForm> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ?
+       ) ;
+       rdf:type [ <UnchargedAtom> ]
+    )
+}
+
+<UnchargedMolecule> CLOSED {
+    (  $<UnchargedMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
+       rdf:type [ <UnchargedMolecule> ]
+    )
+}
+
+
+
