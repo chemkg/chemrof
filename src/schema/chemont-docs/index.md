@@ -31,11 +31,10 @@ A data model describing metaclasses for chemical ontology classes
           * [Peptide](Peptide.md)
           * [Protein](Protein.md)
        * [PolyatomicEntity](PolyatomicEntity.md) - Any chemical entity consisting of more than one atom.
-          * [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
+          * [Molecule](Molecule.md) - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
              * [Allotrope](Allotrope.md) - A molecule consisting of atoms of the same element
              * [BaseFormOfConjugatedAcid](BaseFormOfConjugatedAcid.md)
              * [ConjugatedAcid](ConjugatedAcid.md) - Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
-             * [Enantiomer](Enantiomer.md) - one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
              * [MolecularSpecies](MolecularSpecies.md) - A molecule in which the units are identical. Example: methyl
              * [NaturalProduct](NaturalProduct.md)
              * [NonSpeciesMolecule](NonSpeciesMolecule.md) - A molecule in which the units are not identical. Example: sodium chloride
@@ -43,6 +42,8 @@ A data model describing metaclasses for chemical ontology classes
                 * [AcidFormOfConjugatedAcid](AcidFormOfConjugatedAcid.md)
                 * [MolecularAnion](MolecularAnion.md) - A polyatomic ion that is negative
                 * [MolecularCation](MolecularCation.md) - A polyatomic ion that is positive
+             * [Stereoisomer](Stereoisomer.md)
+                * [Enantiomer](Enantiomer.md) - one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
              * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that has no charge
           * [MoleculePart](MoleculePart.md)
              * [FunctionalGroup](FunctionalGroup.md)

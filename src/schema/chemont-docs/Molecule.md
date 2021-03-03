@@ -2,12 +2,12 @@
 # Type: molecule
 
 
-A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
+A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
 
 URI: [chemont:Molecule](https://w3id.org/chemont/Molecule)
 
 
-![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule],[PolyatomicIon],[PolyatomicEntity],[NonSpeciesMolecule],[NaturalProduct],[MoleculePairwiseSimilarity],[MoleculeGroupingClass],[Atom]<has%20atoms%200..*-%20[Molecule&#124;has_part:string%20%3F;id(i):string],[Molecule]<has%20submolecules%200..*-%20[Molecule],[AtomicBond]<has%20bonds%200..*-++[Molecule],[AtomOccurrence]<has%20atom%20occurrences%200..*-++[Molecule],[Enantiomer]-%20enantiomer%20form%20of%200..1>[Molecule],[FunctionalGroup]-%20is%20substitutent%20group%20from%200..1>[Molecule],[MoleculeGroupingClass]-%20classifies%200..1>[Molecule],[MoleculePairwiseSimilarity]-%20left%20molecule%200..1>[Molecule],[MoleculePairwiseSimilarity]-%20right%20molecule%200..1>[Molecule],[Molecule]^-[UnchargedMolecule],[Molecule]^-[PolyatomicIon],[Molecule]^-[NonSpeciesMolecule],[Molecule]^-[NaturalProduct],[Molecule]^-[MolecularSpecies],[Molecule]^-[Enantiomer],[Molecule]^-[ConjugatedAcid],[Molecule]^-[BaseFormOfConjugatedAcid],[Molecule]^-[Allotrope],[PolyatomicEntity]^-[Molecule],[MolecularSpecies],[FunctionalGroup],[Enantiomer],[ConjugatedAcid],[BaseFormOfConjugatedAcid],[AtomicBond],[AtomOccurrence],[Atom],[Allotrope])
+![img](http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule],[Stereoisomer],[PolyatomicIon],[PolyatomicEntity],[NonSpeciesMolecule],[NaturalProduct],[MoleculePairwiseSimilarity],[MoleculeGroupingClass],[Atom]<has%20atoms%200..*-%20[Molecule&#124;has_part:string%20%3F;id(i):string],[Molecule]<has%20submolecules%200..*-%20[Molecule],[AtomicBond]<has%20bonds%200..*-++[Molecule],[AtomOccurrence]<has%20atom%20occurrences%200..*-++[Molecule],[Enantiomer]-%20enantiomer%20form%20of%200..1>[Molecule],[FunctionalGroup]-%20is%20substitutent%20group%20from%200..1>[Molecule],[MoleculeGroupingClass]-%20classifies%200..1>[Molecule],[MoleculePairwiseSimilarity]-%20left%20molecule%200..1>[Molecule],[MoleculePairwiseSimilarity]-%20right%20molecule%200..1>[Molecule],[Molecule]^-[UnchargedMolecule],[Molecule]^-[Stereoisomer],[Molecule]^-[PolyatomicIon],[Molecule]^-[NonSpeciesMolecule],[Molecule]^-[NaturalProduct],[Molecule]^-[MolecularSpecies],[Molecule]^-[ConjugatedAcid],[Molecule]^-[BaseFormOfConjugatedAcid],[Molecule]^-[Allotrope],[PolyatomicEntity]^-[Molecule],[MolecularSpecies],[FunctionalGroup],[Enantiomer],[ConjugatedAcid],[BaseFormOfConjugatedAcid],[AtomicBond],[AtomOccurrence],[Atom],[Allotrope])
 
 ## Parents
 
@@ -18,11 +18,11 @@ URI: [chemont:Molecule](https://w3id.org/chemont/Molecule)
  * [Allotrope](Allotrope.md) - A molecule consisting of atoms of the same element
  * [BaseFormOfConjugatedAcid](BaseFormOfConjugatedAcid.md)
  * [ConjugatedAcid](ConjugatedAcid.md) - Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
- * [Enantiomer](Enantiomer.md) - one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
  * [MolecularSpecies](MolecularSpecies.md) - A molecule in which the units are identical. Example: methyl
  * [NaturalProduct](NaturalProduct.md)
  * [NonSpeciesMolecule](NonSpeciesMolecule.md) - A molecule in which the units are not identical. Example: sodium chloride
  * [PolyatomicIon](PolyatomicIon.md) - A molecule that has a charge. For example, nitrate (NO3-).
+ * [Stereoisomer](Stereoisomer.md)
  * [UnchargedMolecule](UnchargedMolecule.md) - A molecule that has no charge
 
 ## Referenced by class
@@ -84,4 +84,5 @@ URI: [chemont:Molecule](https://w3id.org/chemont/Molecule)
 | **Examples:** | | Example(value='dioxygen', description=None) |
 |  | | Example(value='cysteine', description=None) |
 |  | | Example(value='phosphene', description=None) |
+| **Exact Mappings:** | | SIO:011125 |
 

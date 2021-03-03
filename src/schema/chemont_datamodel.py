@@ -1,5 +1,5 @@
 # Auto generated from chemont.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-02-11 13:27
+# Generation date: 2021-02-12 14:12
 # Schema: chemont
 #
 # id: chemont
@@ -58,6 +58,7 @@ RHEA = CurieNamespace('RHEA', 'http://identifiers.org/rhea/')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
 RETRORULES = CurieNamespace('RetroRules', 'http://example.org/UNKNOWN/RetroRules/')
 SEED = CurieNamespace('SEED', 'http://identifiers.org/seed/')
+SIO = CurieNamespace('SIO', 'http://semanticscience.org/resource/SIO_')
 UNII = CurieNamespace('UNII', 'http://identifiers.org/unii/')
 BIOLINKML = CurieNamespace('biolinkml', 'https://w3id.org/biolink/biolinkml/')
 CHEMONT = CurieNamespace('chemont', 'https://w3id.org/chemont/')
@@ -248,7 +249,11 @@ class SaltId(PolyatomicEntityId):
     pass
 
 
-class EnantiomerId(MoleculeId):
+class StereoisomerId(MoleculeId):
+    pass
+
+
+class EnantiomerId(StereoisomerId):
     pass
 
 
@@ -649,7 +654,7 @@ class Copolymer(Polymer):
 @dataclass
 class Molecule(PolyatomicEntity):
     """
-    A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
+    A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1492,7 +1497,27 @@ class Salt(PolyatomicEntity):
 
 
 @dataclass
-class Enantiomer(Molecule):
+class Stereoisomer(Molecule):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Stereoisomer
+    class_class_curie: ClassVar[str] = "chemont:Stereoisomer"
+    class_name: ClassVar[str] = "stereoisomer"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Stereoisomer
+
+    id: Union[str, StereoisomerId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, StereoisomerId):
+            self.id = StereoisomerId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Enantiomer(Stereoisomer):
     """
     one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
     """

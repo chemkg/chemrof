@@ -12,6 +12,7 @@ prefixes:
   RO: http://purl.obolibrary.org/obo/RO_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
   CHEMINF: http://semanticscience.org/resource/CHEMINF_
+  SIO: http://semanticscience.org/resource/SIO_
   PUBCHEM.ELEMENT: https://pubchem.ncbi.nlm.nih.gov/element/
   LANL.ELEMENT: https://periodic.lanl.gov/
   schema: http://schema.org/
@@ -190,7 +191,7 @@ classes:
     aliases:
       - molecular entity
     description: >-
-      A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds
+      A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
     abstract: true
     slots:
       - has atom occurrences
@@ -209,6 +210,8 @@ classes:
         minimum_value: 1
     mappings:
       - COB:0000013
+    exact_mappings:
+      - SIO:011125
     examples:
       - value: dioxygen
       - value: cysteine
@@ -552,13 +555,20 @@ classes:
     is_a: polyatomic entity
     description: >-
       a chemical compound consisting of an ionic assembly of cations and anions.
+    comments:
+      - in SIO falls under molecular complex?
     slot_usage:
       elemental charge:
         minimum_value: 0
         maximum_value: 0
 
-  enantiomer:
+  stereoisomer:
     is_a: molecule
+    exact_mappings:
+      - SIO:010775
+
+  enantiomer:
+    is_a: stereoisomer
     description: >-
       one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
     slot_usage:
@@ -574,6 +584,8 @@ classes:
         range: molecule
         description: >-
           Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
+    exact_mappings:
+      - SIO:010777
       
   racemic mixture:
     is_a: chemical entity

@@ -235,8 +235,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <Enantiomer> CLOSED {
-    (  $<Enantiomer_tes> (  &<Molecule_tes> ;
-          rdf:type [ <Molecule> ] ? ;
+    (  $<Enantiomer_tes> (  &<Stereoisomer_tes> ;
+          rdf:type [ <Stereoisomer> ] ? ;
           <relative_configuration> @metatype:String ? ;
           <optical_configuration> @metatype:String ? ;
           <absolute_configuration> @metatype:String ? ;
@@ -351,8 +351,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <Molecule>  (
-    @<Allotrope> OR @<BaseFormOfConjugatedAcid> OR @<ConjugatedAcid> OR @<Enantiomer> OR @<MolecularSpecies> OR @<NaturalProduct>
-    OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<UnchargedMolecule>
+    @<Allotrope> OR @<BaseFormOfConjugatedAcid> OR @<ConjugatedAcid> OR @<MolecularSpecies> OR @<NaturalProduct> OR
+    @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<Stereoisomer> OR @<UnchargedMolecule>
 )
 
 <Molecule_struct> {
@@ -587,6 +587,16 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <Stereocenter> ] ?
        )
     } OR @<ChiralityCenter>
+)
+
+<Stereoisomer>  (
+    CLOSED {
+       (  $<Stereoisomer_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ?
+          ) ;
+          rdf:type [ <Stereoisomer> ]
+       )
+    } OR @<Enantiomer>
 )
 
 <SubatomicParticle>  (
