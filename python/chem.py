@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-03-03 09:55
+# Generation date: 2021-03-04 18:42
 # Schema: chemont
 #
 # id: chemont
@@ -42,6 +42,7 @@ DRUGBANK = CurieNamespace('DRUGBANK', 'http://identifiers.org/drugbank/')
 EC = CurieNamespace('EC', 'http://example.org/UNKNOWN/EC/')
 GO = CurieNamespace('GO', 'http://identifiers.org/go/')
 HMDB = CurieNamespace('HMDB', 'http://identifiers.org/hmdb/')
+IAO = CurieNamespace('IAO', 'http://identifiers.org/iao/')
 INCHI = CurieNamespace('INCHI', 'http://identifiers.org/inchi/')
 INCHIKEY = CurieNamespace('INCHIKEY', 'http://identifiers.org/inchikey/')
 KEGG = CurieNamespace('KEGG', 'http://identifiers.org/kegg/')
@@ -66,6 +67,7 @@ DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EDAM = CurieNamespace('edam', 'http://identifiers.org/edam/')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
+WD = CurieNamespace('wd', 'http://example.org/UNKNOWN/wd/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = CHEMONT
 
@@ -121,7 +123,7 @@ class PolyatomicEntityId(ChemicalEntityId):
     pass
 
 
-class MacromoleculeId(ChemicalEntityId):
+class MacromoleculeId(PolyatomicEntityId):
     pass
 
 
@@ -137,11 +139,31 @@ class GlycanId(MacromoleculeId):
     pass
 
 
-class PolymerId(ChemicalEntityId):
+class PolymerId(MacromoleculeId):
     pass
 
 
 class CopolymerId(PolymerId):
+    pass
+
+
+class MolecularComponentId(PolyatomicEntityId):
+    pass
+
+
+class PolymerPartId(MolecularComponentId):
+    pass
+
+
+class MonomerId(PolymerPartId):
+    pass
+
+
+class MolecularSubsequenceId(PolymerPartId):
+    pass
+
+
+class ChemicalGroupId(MolecularComponentId):
     pass
 
 
@@ -265,18 +287,19 @@ class AllotropeId(MoleculeId):
     pass
 
 
-class Pattern(YAMLRoot):
+class OwlClass(YAMLRoot):
     """
-    A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
+    instances of this class mixin are OWL Classes
     """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = OWL.Class
     class_class_curie: ClassVar[str] = "owl:Class"
-    class_name: ClassVar[str] = "pattern"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.Pattern
+    class_name: ClassVar[str] = "owl class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.OwlClass
 
 
+@dataclass
 class GroupingClass(YAMLRoot):
     """
     A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for
@@ -289,9 +312,77 @@ class GroupingClass(YAMLRoot):
     class_name: ClassVar[str] = "grouping class"
     class_model_uri: ClassVar[URIRef] = CHEMONT.GroupingClass
 
+    subtype_of: Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.subtype_of is None:
+            self.subtype_of = []
+        if not isinstance(self.subtype_of, list):
+            self.subtype_of = [self.subtype_of]
+        self.subtype_of = [v if isinstance(v, MoleculeGroupingClass) else MoleculeGroupingClass(**v) for v in self.subtype_of]
+
+        super().__post_init__(**kwargs)
+
 
 @dataclass
-class ChemicalEntity(Pattern):
+class MoleculeGroupingClass(GroupingClass):
+    """
+    A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide,
+    alkane(?)
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:MoleculeGroupingClass"
+    class_name: ClassVar[str] = "molecule grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClass
+
+    subtype_of: Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]] = empty_list()
+    classifies: Optional[Union[str, MoleculeId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.subtype_of is None:
+            self.subtype_of = []
+        if not isinstance(self.subtype_of, list):
+            self.subtype_of = [self.subtype_of]
+        self.subtype_of = [v if isinstance(v, MoleculeGroupingClass) else MoleculeGroupingClass(**v) for v in self.subtype_of]
+
+        if self.classifies is not None and not isinstance(self.classifies, MoleculeId):
+            self.classifies = MoleculeId(self.classifies)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class AtomGroupingClass(GroupingClass):
+    """
+    A grouping class that classifies atoms. For example, metal atom
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:AtomGroupingClass"
+    class_name: ClassVar[str] = "atom grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingClass
+
+    subtype_of: Optional[Union[Union[dict, MoleculeGroupingClass], List[Union[dict, MoleculeGroupingClass]]]] = empty_list()
+    classifies: Optional[Union[str, AtomId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.subtype_of is None:
+            self.subtype_of = []
+        if not isinstance(self.subtype_of, list):
+            self.subtype_of = [self.subtype_of]
+        self.subtype_of = [v if isinstance(v, MoleculeGroupingClass) else MoleculeGroupingClass(**v) for v in self.subtype_of]
+
+        if self.classifies is not None and not isinstance(self.classifies, AtomId):
+            self.classifies = AtomId(self.classifies)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalEntity(YAMLRoot):
     """
     An entity that can be described using using chemical properties.
     """
@@ -419,8 +510,17 @@ class Electron(SubatomicParticle):
         super().__post_init__(**kwargs)
 
 
+class State(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.State
+    class_class_curie: ClassVar[str] = "chemont:State"
+    class_name: ClassVar[str] = "state"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.State
+
+
 @dataclass
-class ChargeState(YAMLRoot):
+class ChargeState(State):
     """
     Applies to entities that have a charge state, which may be positive, negative, or neutral
     """
@@ -441,7 +541,7 @@ class ChargeState(YAMLRoot):
 
 
 @dataclass
-class AnionState(YAMLRoot):
+class AnionState(State):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.AnionState
@@ -518,7 +618,7 @@ class PolyatomicEntity(ChemicalEntity):
     id: Union[str, PolyatomicEntityId] = None
 
 @dataclass
-class Macromolecule(ChemicalEntity):
+class Macromolecule(PolyatomicEntity):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.Macromolecule
@@ -598,7 +698,7 @@ class Glycan(Macromolecule):
 
 
 @dataclass
-class Polymer(ChemicalEntity):
+class Polymer(Macromolecule):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.Polymer
@@ -607,7 +707,7 @@ class Polymer(ChemicalEntity):
     class_model_uri: ClassVar[URIRef] = CHEMONT.Polymer
 
     id: Union[str, PolymerId] = None
-    has_part: Optional[Union[str, MacromoleculeId]] = None
+    polymer_of: Optional[Union[str, MacromoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
@@ -615,8 +715,8 @@ class Polymer(ChemicalEntity):
         if not isinstance(self.id, PolymerId):
             self.id = PolymerId(self.id)
 
-        if self.has_part is not None and not isinstance(self.has_part, MacromoleculeId):
-            self.has_part = MacromoleculeId(self.has_part)
+        if self.polymer_of is not None and not isinstance(self.polymer_of, MacromoleculeId):
+            self.polymer_of = MacromoleculeId(self.polymer_of)
 
         super().__post_init__(**kwargs)
 
@@ -652,6 +752,109 @@ class Copolymer(Polymer):
 
 
 @dataclass
+class MolecularComponent(PolyatomicEntity):
+    """
+    A proper part of a molecule that is larger than an atom
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularComponent
+    class_class_curie: ClassVar[str] = "chemont:MolecularComponent"
+    class_name: ClassVar[str] = "molecular component"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularComponent
+
+    id: Union[str, MolecularComponentId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, MolecularComponentId):
+            self.id = MolecularComponentId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class PolymerPart(MolecularComponent):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.PolymerPart
+    class_class_curie: ClassVar[str] = "chemont:PolymerPart"
+    class_name: ClassVar[str] = "polymer part"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.PolymerPart
+
+    id: Union[str, PolymerPartId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, PolymerPartId):
+            self.id = PolymerPartId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Monomer(PolymerPart):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Monomer
+    class_class_curie: ClassVar[str] = "chemont:Monomer"
+    class_name: ClassVar[str] = "monomer"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Monomer
+
+    id: Union[str, MonomerId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, MonomerId):
+            self.id = MonomerId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class MolecularSubsequence(PolymerPart):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularSubsequence
+    class_class_curie: ClassVar[str] = "chemont:MolecularSubsequence"
+    class_name: ClassVar[str] = "molecular subsequence"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularSubsequence
+
+    id: Union[str, MolecularSubsequenceId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, MolecularSubsequenceId):
+            self.id = MolecularSubsequenceId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalGroup(MolecularComponent):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalGroup
+    class_class_curie: ClassVar[str] = "chemont:ChemicalGroup"
+    class_name: ClassVar[str] = "chemical group"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalGroup
+
+    id: Union[str, ChemicalGroupId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, ChemicalGroupId):
+            self.id = ChemicalGroupId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Molecule(PolyatomicEntity):
     """
     A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
@@ -675,7 +878,7 @@ class Molecule(PolyatomicEntity):
             self.has_atom_occurrences = []
         if not isinstance(self.has_atom_occurrences, list):
             self.has_atom_occurrences = [self.has_atom_occurrences]
-        self.has_atom_occurrences = [v if isinstance(v, AtomOccurrence) else AtomOccurrence(**v) for v in self.has_atom_occurrences]
+        self._normalize_inlined_slot(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", inlined_as_list=True, keyed=False)
 
         if self.has_bonds is None:
             self.has_bonds = []
@@ -947,6 +1150,7 @@ class Atom(ChemicalEntity):
     atomic_number: Optional[int] = None
     symbol: Optional[str] = None
     name: Optional[str] = None
+    has_part: Optional[Union[str, SubatomicParticleId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.atomic_number is not None and not isinstance(self.atomic_number, int):
@@ -957,6 +1161,9 @@ class Atom(ChemicalEntity):
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
+
+        if self.has_part is not None and not isinstance(self.has_part, SubatomicParticleId):
+            self.has_part = SubatomicParticleId(self.has_part)
 
         super().__post_init__(**kwargs)
 
@@ -1273,28 +1480,7 @@ class FullySpecifiedAtom(Atom):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class MoleculeGroupingClass(GroupingClass):
-    """
-    A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClass
-    class_class_curie: ClassVar[str] = "chemont:MoleculeGroupingClass"
-    class_name: ClassVar[str] = "molecule grouping class"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClass
-
-    classifies: Optional[Union[str, MoleculeId]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.classifies is not None and not isinstance(self.classifies, MoleculeId):
-            self.classifies = MoleculeId(self.classifies)
-
-        super().__post_init__(**kwargs)
-
-
-class Stereocenter(Pattern):
+class Stereocenter(YAMLRoot):
     """
     a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such
     that interchanging any two substituents leads to a stereoisomer
@@ -1321,7 +1507,7 @@ class ChiralityCenter(Stereocenter):
 
 
 @dataclass
-class AtomicBond(Pattern):
+class AtomicBond(YAMLRoot):
     """
     A connection between two atoms. Note this is the reified form of 'atomically connected to'.
     """
@@ -1334,7 +1520,7 @@ class AtomicBond(Pattern):
 
     has_atom_occurrences: Optional[Union[Union[dict, "AtomOccurrence"], List[Union[dict, "AtomOccurrence"]]]] = empty_list()
     bond_order: Optional[int] = None
-    bond_type: Optional[str] = None
+    bond_type: Optional[Union[str, "BondTypeEnum"]] = None
     bond_length_in_angstroms: Optional[float] = None
     bond_angle: Optional[float] = None
     torsional_angle: Optional[float] = None
@@ -1344,13 +1530,13 @@ class AtomicBond(Pattern):
             self.has_atom_occurrences = []
         if not isinstance(self.has_atom_occurrences, list):
             self.has_atom_occurrences = [self.has_atom_occurrences]
-        self.has_atom_occurrences = [v if isinstance(v, AtomOccurrence) else AtomOccurrence(**v) for v in self.has_atom_occurrences]
+        self._normalize_inlined_slot(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", inlined_as_list=True, keyed=False)
 
         if self.bond_order is not None and not isinstance(self.bond_order, int):
             self.bond_order = int(self.bond_order)
 
-        if self.bond_type is not None and not isinstance(self.bond_type, str):
-            self.bond_type = str(self.bond_type)
+        if self.bond_type is not None and not isinstance(self.bond_type, BondTypeEnum):
+            self.bond_type = BondTypeEnum(self.bond_type)
 
         if self.bond_length_in_angstroms is not None and not isinstance(self.bond_length_in_angstroms, float):
             self.bond_length_in_angstroms = float(self.bond_length_in_angstroms)
@@ -1365,7 +1551,7 @@ class AtomicBond(Pattern):
 
 
 @dataclass
-class AtomOccurrence(Pattern):
+class AtomOccurrence(YAMLRoot):
     """
     An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in
     nitrate
@@ -1377,15 +1563,17 @@ class AtomOccurrence(Pattern):
     class_name: ClassVar[str] = "atom occurrence"
     class_model_uri: ClassVar[URIRef] = CHEMONT.AtomOccurrence
 
-    has_atom: Optional[Union[str, AtomId]] = None
+    occurrence_of: Union[str, AtomId] = None
     valence: Optional[int] = None
     oxidation_number: Optional[int] = None
     formal_charge: Optional[int] = None
     coordination_number: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.has_atom is not None and not isinstance(self.has_atom, AtomId):
-            self.has_atom = AtomId(self.has_atom)
+        if self.occurrence_of is None:
+            raise ValueError("occurrence_of must be supplied")
+        if not isinstance(self.occurrence_of, AtomId):
+            self.occurrence_of = AtomId(self.occurrence_of)
 
         if self.valence is not None and not isinstance(self.valence, int):
             self.valence = int(self.valence)
@@ -1730,8 +1918,20 @@ class ReactionParticipant(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+class Measure(YAMLRoot):
+    """
+    todo
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Measure
+    class_class_curie: ClassVar[str] = "chemont:Measure"
+    class_name: ClassVar[str] = "measure"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Measure
+
+
 @dataclass
-class MoleculePairwiseSimilarity(YAMLRoot):
+class MoleculePairwiseSimilarity(Measure):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculePairwiseSimilarity
@@ -1775,7 +1975,22 @@ class TanimotoSimilarity(MoleculePairwiseSimilarity):
 
 
 # Enumerations
+class BondTypeEnum(EnumDefinitionImpl):
 
+    covalent = PermissibleValue(text="covalent")
+    ionic = PermissibleValue(text="ionic")
+    polycentric = PermissibleValue(text="polycentric")
+
+    _defn = EnumDefinition(
+        name="BondTypeEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "metal-metal",
+                PermissibleValue(text="metal-metal") )
+        setattr(cls, "salt bridge",
+                PermissibleValue(text="salt bridge") )
 
 # Slots
 class slots:
@@ -1856,8 +2071,20 @@ slots.decay_energy = Slot(uri=CHEMONT.decay_energy, name="decay energy", curie=C
 slots.mode_of_formation = Slot(uri=CHEMONT.mode_of_formation, name="mode of formation", curie=CHEMONT.curie('mode_of_formation'),
                    model_uri=CHEMONT.mode_of_formation, domain=Isotope, range=Optional[str])
 
+slots.thermophysical_property = Slot(uri=CHEMONT.thermophysical_property, name="thermophysical property", curie=CHEMONT.curie('thermophysical_property'),
+                   model_uri=CHEMONT.thermophysical_property, domain=None, range=Optional[str])
+
+slots.molar_value = Slot(uri=CHEMONT.molar_value, name="molar value", curie=CHEMONT.curie('molar_value'),
+                   model_uri=CHEMONT.molar_value, domain=None, range=Optional[str])
+
+slots.molar_cohesive_energy = Slot(uri=CHEMONT.molar_cohesive_energy, name="molar cohesive energy", curie=CHEMONT.curie('molar_cohesive_energy'),
+                   model_uri=CHEMONT.molar_cohesive_energy, domain=None, range=Optional[str])
+
 slots.has_cyclic_structure = Slot(uri=CHEMONT.has_cyclic_structure, name="has cyclic structure", curie=CHEMONT.curie('has_cyclic_structure'),
                    model_uri=CHEMONT.has_cyclic_structure, domain=Molecule, range=Optional[Union[bool, Bool]], mappings = [CHEMINF["000067"]])
+
+slots.information_entity = Slot(uri=CHEMONT.information_entity, name="information entity", curie=CHEMONT.curie('information_entity'),
+                   model_uri=CHEMONT.information_entity, domain=None, range=Optional[str], mappings = [IAO["0000030"]])
 
 slots.chemical_formula = Slot(uri=CHEMONT.chemical_formula, name="chemical formula", curie=CHEMONT.curie('chemical_formula'),
                    model_uri=CHEMONT.chemical_formula, domain=ChemicalEntity, range=Optional[str], mappings = [SCHEMA.hasRepresentation, EDAM.data_0846])
@@ -1885,6 +2112,9 @@ slots.inchi_key_string = Slot(uri=CHEMONT.inchi_key_string, name="inchi key stri
 
 slots.smiles_string = Slot(uri=CHEMONT.smiles_string, name="smiles string", curie=CHEMONT.curie('smiles_string'),
                    model_uri=CHEMONT.smiles_string, domain=ChemicalEntity, range=Union[Union[str, ChemicalEntityId], List[Union[str, ChemicalEntityId]]])
+
+slots.curly_smiles_string = Slot(uri=CHEMONT.curly_smiles_string, name="curly smiles string", curie=CHEMONT.curie('curly_smiles_string'),
+                   model_uri=CHEMONT.curly_smiles_string, domain=ChemicalEntity, range=Optional[str])
 
 slots.isomeric_smiles_string = Slot(uri=CHEMONT.isomeric_smiles_string, name="isomeric smiles string", curie=CHEMONT.curie('isomeric_smiles_string'),
                    model_uri=CHEMONT.isomeric_smiles_string, domain=ChemicalEntity, range=Union[Union[str, ChemicalEntityId], List[Union[str, ChemicalEntityId]]])
@@ -1940,6 +2170,21 @@ slots.bond_length = Slot(uri=CHEMONT.bond_length, name="bond length", curie=CHEM
 slots.bond_energy = Slot(uri=CHEMONT.bond_energy, name="bond energy", curie=CHEMONT.curie('bond_energy'),
                    model_uri=CHEMONT.bond_energy, domain=AtomicBond, range=Optional[float])
 
+slots.subtype_of = Slot(uri=CHEMONT.subtype_of, name="subtype of", curie=CHEMONT.curie('subtype_of'),
+                   model_uri=CHEMONT.subtype_of, domain=None, range=Optional[Union[Union[dict, "OwlClass"], List[Union[dict, "OwlClass"]]]])
+
+slots.has_subtype = Slot(uri=CHEMONT.has_subtype, name="has subtype", curie=CHEMONT.curie('has_subtype'),
+                   model_uri=CHEMONT.has_subtype, domain=None, range=Optional[Union[dict, OwlClass]])
+
+slots.classified_by = Slot(uri=CHEMONT.classified_by, name="classified by", curie=CHEMONT.curie('classified_by'),
+                   model_uri=CHEMONT.classified_by, domain=None, range=Optional[Union[dict, "OwlClass"]])
+
+slots.classifies = Slot(uri=CHEMONT.classifies, name="classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.classifies, domain=None, range=Optional[Union[dict, OwlClass]])
+
+slots.polymer_of = Slot(uri=CHEMONT.polymer_of, name="polymer of", curie=CHEMONT.curie('polymer_of'),
+                   model_uri=CHEMONT.polymer_of, domain=None, range=Optional[Union[str, MacromoleculeId]], mappings = [WD.P4600])
+
 slots.is_substitutent_group_from = Slot(uri=CHEMONT.is_substitutent_group_from, name="is substitutent group from", curie=CHEMONT.curie('is_substitutent_group_from'),
                    model_uri=CHEMONT.is_substitutent_group_from, domain=None, range=Optional[Union[str, MoleculeId]])
 
@@ -1964,11 +2209,8 @@ slots.electron_configuration = Slot(uri=CHEMONT.electron_configuration, name="el
 slots.has_stereocenter = Slot(uri=CHEMONT.has_stereocenter, name="has stereocenter", curie=CHEMONT.curie('has_stereocenter'),
                    model_uri=CHEMONT.has_stereocenter, domain=None, range=Optional[Union[Union[dict, Stereocenter], List[Union[dict, Stereocenter]]]])
 
-slots.classifies = Slot(uri=CHEMONT.classifies, name="classifies", curie=CHEMONT.curie('classifies'),
-                   model_uri=CHEMONT.classifies, domain=None, range=Optional[Union[str, MoleculeId]])
-
 slots.bond_type = Slot(uri=CHEMONT.bond_type, name="bond type", curie=CHEMONT.curie('bond_type'),
-                   model_uri=CHEMONT.bond_type, domain=None, range=Optional[str])
+                   model_uri=CHEMONT.bond_type, domain=None, range=Optional[Union[str, "BondTypeEnum"]])
 
 slots.bond_length_in_angstroms = Slot(uri=CHEMONT.bond_length_in_angstroms, name="bond length in angstroms", curie=CHEMONT.curie('bond_length_in_angstroms'),
                    model_uri=CHEMONT.bond_length_in_angstroms, domain=None, range=Optional[float])
@@ -1979,8 +2221,8 @@ slots.bond_angle = Slot(uri=CHEMONT.bond_angle, name="bond angle", curie=CHEMONT
 slots.torsional_angle = Slot(uri=CHEMONT.torsional_angle, name="torsional angle", curie=CHEMONT.curie('torsional_angle'),
                    model_uri=CHEMONT.torsional_angle, domain=None, range=Optional[float])
 
-slots.has_atom = Slot(uri=CHEMONT.has_atom, name="has atom", curie=CHEMONT.curie('has_atom'),
-                   model_uri=CHEMONT.has_atom, domain=None, range=Optional[Union[str, AtomId]])
+slots.occurrence_of = Slot(uri=CHEMONT.occurrence_of, name="occurrence of", curie=CHEMONT.curie('occurrence_of'),
+                   model_uri=CHEMONT.occurrence_of, domain=None, range=Union[str, AtomId])
 
 slots.valence = Slot(uri=CHEMONT.valence, name="valence", curie=CHEMONT.curie('valence'),
                    model_uri=CHEMONT.valence, domain=None, range=Optional[int])
@@ -2066,6 +2308,21 @@ slots.right_molecule = Slot(uri=CHEMONT.right_molecule, name="right molecule", c
 slots.score = Slot(uri=CHEMONT.score, name="score", curie=CHEMONT.curie('score'),
                    model_uri=CHEMONT.score, domain=None, range=Optional[str])
 
+slots.grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="grouping class_subtype of", curie=CHEMONT.curie('subtype_of'),
+                   model_uri=CHEMONT.grouping_class_subtype_of, domain=GroupingClass, range=Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]])
+
+slots.molecule_grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="molecule grouping class_subtype of", curie=CHEMONT.curie('subtype_of'),
+                   model_uri=CHEMONT.molecule_grouping_class_subtype_of, domain=MoleculeGroupingClass, range=Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]])
+
+slots.molecule_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="molecule grouping class_classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.molecule_grouping_class_classifies, domain=MoleculeGroupingClass, range=Optional[Union[str, MoleculeId]])
+
+slots.atom_grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="atom grouping class_subtype of", curie=CHEMONT.curie('subtype_of'),
+                   model_uri=CHEMONT.atom_grouping_class_subtype_of, domain=AtomGroupingClass, range=Optional[Union[Union[dict, MoleculeGroupingClass], List[Union[dict, MoleculeGroupingClass]]]])
+
+slots.atom_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="atom grouping class_classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.atom_grouping_class_classifies, domain=AtomGroupingClass, range=Optional[Union[str, AtomId]])
+
 slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
 
@@ -2075,8 +2332,8 @@ slots.cation_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="c
 slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="uncharged_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.uncharged_elemental_charge, domain=None, range=Optional[int])
 
-slots.polymer_has_part = Slot(uri=CHEMONT.has_part, name="polymer_has part", curie=CHEMONT.curie('has_part'),
-                   model_uri=CHEMONT.polymer_has_part, domain=Polymer, range=Optional[Union[str, MacromoleculeId]])
+slots.polymer_polymer_of = Slot(uri=CHEMONT.polymer_of, name="polymer_polymer of", curie=CHEMONT.curie('polymer_of'),
+                   model_uri=CHEMONT.polymer_polymer_of, domain=Polymer, range=Optional[Union[str, MacromoleculeId]], mappings = [WD.P4600])
 
 slots.copolymer_has_part = Slot(uri=CHEMONT.has_part, name="copolymer_has part", curie=CHEMONT.curie('has_part'),
                    model_uri=CHEMONT.copolymer_has_part, domain=Copolymer, range=Optional[Union[Union[str, MacromoleculeId], List[Union[str, MacromoleculeId]]]])
@@ -2092,6 +2349,9 @@ slots.molecule_has_part = Slot(uri=CHEMONT.has_part, name="molecule_has part", c
 
 slots.functional_group_is_substitutent_group_from = Slot(uri=CHEMONT.is_substitutent_group_from, name="functional group_is substitutent group from", curie=CHEMONT.curie('is_substitutent_group_from'),
                    model_uri=CHEMONT.functional_group_is_substitutent_group_from, domain=FunctionalGroup, range=Optional[Union[str, MoleculeId]])
+
+slots.atom_has_part = Slot(uri=CHEMONT.has_part, name="atom_has part", curie=CHEMONT.curie('has_part'),
+                   model_uri=CHEMONT.atom_has_part, domain=Atom, range=Optional[Union[str, SubatomicParticleId]])
 
 slots.chemical_element_symbol = Slot(uri=CHEMONT.symbol, name="chemical element_symbol", curie=CHEMONT.curie('symbol'),
                    model_uri=CHEMONT.chemical_element_symbol, domain=ChemicalElement, range=Optional[str],
@@ -2124,14 +2384,11 @@ slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="ato
 slots.atom_cation_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom cation_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.atom_cation_elemental_charge, domain=AtomCation, range=Optional[int])
 
-slots.molecule_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="molecule grouping class_classifies", curie=CHEMONT.curie('classifies'),
-                   model_uri=CHEMONT.molecule_grouping_class_classifies, domain=MoleculeGroupingClass, range=Optional[Union[str, MoleculeId]])
-
 slots.atomic_bond_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="atomic bond_has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
                    model_uri=CHEMONT.atomic_bond_has_atom_occurrences, domain=AtomicBond, range=Optional[Union[Union[dict, "AtomOccurrence"], List[Union[dict, "AtomOccurrence"]]]])
 
 slots.atomic_bond_bond_type = Slot(uri=CHEMONT.bond_type, name="atomic bond_bond type", curie=CHEMONT.curie('bond_type'),
-                   model_uri=CHEMONT.atomic_bond_bond_type, domain=AtomicBond, range=Optional[str])
+                   model_uri=CHEMONT.atomic_bond_bond_type, domain=AtomicBond, range=Optional[Union[str, "BondTypeEnum"]])
 
 slots.atomic_bond_bond_length_in_angstroms = Slot(uri=CHEMONT.bond_length_in_angstroms, name="atomic bond_bond length in angstroms", curie=CHEMONT.curie('bond_length_in_angstroms'),
                    model_uri=CHEMONT.atomic_bond_bond_length_in_angstroms, domain=AtomicBond, range=Optional[float])
@@ -2142,8 +2399,8 @@ slots.atomic_bond_bond_angle = Slot(uri=CHEMONT.bond_angle, name="atomic bond_bo
 slots.atomic_bond_torsional_angle = Slot(uri=CHEMONT.torsional_angle, name="atomic bond_torsional angle", curie=CHEMONT.curie('torsional_angle'),
                    model_uri=CHEMONT.atomic_bond_torsional_angle, domain=AtomicBond, range=Optional[float])
 
-slots.atom_occurrence_has_atom = Slot(uri=CHEMONT.has_atom, name="atom occurrence_has atom", curie=CHEMONT.curie('has_atom'),
-                   model_uri=CHEMONT.atom_occurrence_has_atom, domain=AtomOccurrence, range=Optional[Union[str, AtomId]])
+slots.atom_occurrence_occurrence_of = Slot(uri=CHEMONT.occurrence_of, name="atom occurrence_occurrence of", curie=CHEMONT.curie('occurrence_of'),
+                   model_uri=CHEMONT.atom_occurrence_occurrence_of, domain=AtomOccurrence, range=Union[str, AtomId])
 
 slots.atom_occurrence_valence = Slot(uri=CHEMONT.valence, name="atom occurrence_valence", curie=CHEMONT.curie('valence'),
                    model_uri=CHEMONT.atom_occurrence_valence, domain=AtomOccurrence, range=Optional[int])

@@ -32,27 +32,63 @@ imports:
 
 classes:
 
-  pattern:
-    abstract: true
+  owl class:
+    aliases:
+      - species
+    mixin: true
     description: >-
-      A pattern observed in nature. Instances of this class may be owl classes in a realist/OBO framework
+      instances of this class mixin are OWL Classes
     class_uri: owl:Class
 
   grouping class:
     abstract: true
+    mixins:
+      - owl class
     description: >-
       A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
-  
+    slot_usage:
+      subtype of:
+        range: molecule grouping class
+
+  molecule grouping class:
+    is_a: grouping class
+    description: >-
+      A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide, alkane(?)
+    comments:
+      -  Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
+      -  TODO: decide if alkane which has a generic formula belongs here
+    slot_usage:
+      subtype of:
+        range: molecule grouping class
+      classifies:
+        range: molecule
+        description: >-
+          inverse of subtype_of
+          
+        
+  atom grouping class:
+    is_a: grouping class
+    description: >-
+      A grouping class that classifies atoms. For example, metal atom
+    slot_usage:
+      subtype of:
+        range: molecule grouping class
+      classifies:
+        range: atom
+      
   chemical entity:
     abstract: true
     description: >-
       An entity that can be described using using chemical properties.
-    is_a: pattern
+    mixins:
+      - owl class
     slots:
       - id
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
+    exact_mappings:    
+      - SIO:010004
     id_prefixes:
       - CHEBI
       - CHEMBL.COMPOUND
@@ -95,8 +131,13 @@ classes:
     deprecated: should be represented as an instance
     is_a: subatomic particle
 
+  state:
+    mixin: true
+    abstract: true
+    
   charge state:
     mixin: true
+    is_a: state
     description: >-
       Applies to entities that have a charge state, which may be positive, negative, or neutral
     slots:
@@ -109,6 +150,7 @@ classes:
 
   anion state:
     mixin: true
+    is_a: state
     aliases:
       - negatively charged state
     slot_usage:
@@ -156,7 +198,7 @@ classes:
       Any chemical entity consisting of more than one atom.
 
   macromolecule:
-    is_a: chemical entity
+    is_a: polyatomic entity
 
   peptide:
     is_a: macromolecule
@@ -170,10 +212,13 @@ classes:
       - KEGG.GLYCAN
       
   polymer:
-    is_a: chemical entity
+    is_a: macromolecule
     slot_usage:
-      has part:
+      polymer of:
+        is_a: has part
         range: macromolecule
+        mappings:
+          - wd:P4600
       
   copolymer:
     is_a: polymer
@@ -186,6 +231,33 @@ classes:
     examples:
       - value: PEVA
     
+  molecular component:
+    aliases:
+      - molecular part
+      - submolecule
+    is_a: polyatomic entity
+    description: >-
+      A proper part of a molecule that is larger than an atom
+
+  
+  polymer part:
+    is_a: molecular component
+  
+  monomer:
+    aliases:
+      - momomer species
+    is_a: polymer part
+      
+  molecular subsequence:
+    is_a: polymer part
+      
+  chemical group:
+    aliases:
+      - group
+      - functional group
+      - chemical functional group
+    is_a: molecular component
+      
   molecule:
     is_a: polyatomic entity
     aliases:
@@ -287,11 +359,13 @@ classes:
       - atomic number
       - symbol
       - name
-    defining_slots:
-      - atomic number
+    slot_usage:
+      has part:
+        range: subatomic particle
     mappings:
       - COB:0000011
-        
+      - SIO:010044
+          
   chemical element:
     is_a: atom
     aliases:
@@ -438,21 +512,12 @@ classes:
       - elemental charge
       - neutron number
 
-  molecule grouping class:
-    is_a: grouping class
-    description: >-
-      A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)
-    comments:
-      -  Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
-      -  TODO: decide if alkane which has a generic formula belongs here
-    slot_usage:
-      classifies:
-        range: molecule
         
   stereocenter:
     aliases:
       - stereogenic center
-    is_a: pattern
+    mixins:
+      - owl class
     description: >-
       a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer
       
@@ -465,7 +530,8 @@ classes:
     aliases:
       - bond
       - chemical bond
-    is_a: pattern
+    mixins:
+      - owl class
     description: >-
       A connection between two atoms. Note this is the reified form of 'atomically connected to'. 
     slots:
@@ -476,9 +542,7 @@ classes:
         minimum_value: 2
         maximum_value: 2
       bond type:
-        description: >-
-          E.g. covalent, ionic, polycentric, metal-metal, salt bridge
-        range: string
+        range: bond_type_enum
       bond length in angstroms:
         description: >-
           the average distance between nuclei of two bonded atoms in a molecule. It is a transferable property of a bond between atoms of fixed types, relatively independent of the rest of the molecule.
@@ -491,12 +555,14 @@ classes:
       - CHEMINF:000063
 
   atom occurrence:
-    is_a: pattern
+    mixins:
+      - owl class
     description: >-
       An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
     slot_usage:
-      has atom:
+      occurrence of:
         range: atom
+        required: true
       valence:
         aliases:
           - atom valency
@@ -673,7 +739,12 @@ classes:
       stoichiometry:
         range: integer
 
+  measure:
+    description:
+      todo
+    
   molecule pairwise similarity:
+    is_a: measure
     slot_usage:
       left molecule:
         range: molecule
@@ -877,6 +948,15 @@ slots:
     domain: isotope
     range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
 
+  thermophysical property:
+    abstract: true
+
+  molar value:
+    is_a: thermophysical property
+
+  molar cohesive energy:
+    is_a: thermophysical property
+    
   has cyclic structure:
     description: >-
       true if the molecule possesses a cycle in the atom connectivity graph
@@ -885,8 +965,13 @@ slots:
     mappings:
       - CHEMINF:000067
       
-  chemical formula:
+  information entity:
     abstract: true
+    mappings:
+      - IAO:0000030
+      
+  chemical formula:
+    is_a: information entity
     description: >-
       A generic grouping for miolecular formulae and empirican formulae
     domain: chemical entity
@@ -940,6 +1025,15 @@ slots:
     multivalued: true
     key: true
 
+  curly smiles string:
+    description: >-
+      CurlySMILES is a chemical line notation which extends SMILES with annotations for storage, retrieval and modeling of interlinked, coordinated, assembled and adsorbed molecules in supramolecular structures and nanodevices. https://jcheminf.biomedcentral.com/articles/10.1186/1758-2946-3-1
+    aliases:
+      - CurlySMILES
+    is_a: chemical formula
+    see_also:
+      - http://www.axeleratio.com/csm/proj/main.htm
+    
   isomeric smiles string:
     is_a: smiles string
 
@@ -1069,4 +1163,33 @@ slots:
        the measure of bond strength in a chemical bond.
     domain: atomic bond
     range: float
-    
+
+  subtype of:
+    domain: owl class
+    range: owl class
+    required: false
+    multivalued: true
+    narrow_mappings:
+      - rdfs:subClassOf
+      
+  has subtype:
+    inverse: subtype of
+      
+  classified by:
+    domain: owl class
+    range: owl class
+    exact_mappings:
+      - rdf:type
+
+  classifies:
+    inverse: classified by
+
+enums:
+  bond_type_enum:
+    permissible_values:
+      covalent:
+      ionic:
+      polycentric:
+      metal-metal:
+      salt bridge:
+      

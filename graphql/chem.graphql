@@ -32,6 +32,7 @@ interface Atom
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
   }
 
 type AtomAnion implements AnionState
@@ -40,6 +41,7 @@ type AtomAnion implements AnionState
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
   }
 
@@ -49,7 +51,14 @@ type AtomCation implements CationState
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
+  }
+
+type AtomGroupingClass
+  {
+    subtypeOf: [MoleculeGroupingClass]
+    classifies: Atom
   }
 
 interface AtomIonicForm
@@ -58,23 +67,24 @@ interface AtomIonicForm
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
   }
 
-type AtomOccurrence
+type AtomOccurrence implements OwlClass
   {
-    hasAtom: Atom
+    occurrenceOf: Atom!
     valence: Integer
     oxidationNumber: Integer
     formalCharge: Integer
     coordinationNumber: Integer
   }
 
-type AtomicBond
+type AtomicBond implements OwlClass
   {
     hasAtomOccurrences: [AtomOccurrence]
     bondOrder: Integer
-    bondType: String
+    bondType: BondTypeEnum
     bondLengthInAngstroms: Float
     bondAngle: Float
     torsionalAngle: Float
@@ -110,6 +120,7 @@ type ChemicalElement
     id: String!
     atomicNumber: Count
     name: String
+    hasPart: SubatomicParticle
     symbol: String
     periodicTableGroup: String
     periodicTableBlock: String
@@ -120,7 +131,12 @@ type ChemicalElement
     hasStereocenter: [Stereocenter]
   }
 
-interface ChemicalEntity
+type ChemicalEntity implements OwlClass
+  {
+    id: String!
+  }
+
+type ChemicalGroup
   {
     id: String!
   }
@@ -143,6 +159,7 @@ type ConjugatedAcid
 type Copolymer
   {
     id: String!
+    polymerOf: Macromolecule
     hasPart: [Macromolecule]
   }
 
@@ -171,6 +188,7 @@ type FullySpecifiedAtom
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
     neutronNumber: Count
   }
@@ -186,8 +204,9 @@ type Glycan
     id: String!
   }
 
-interface GroupingClass
+type GroupingClass implements OwlClass
   {
+    subtypeOf: [MoleculeGroupingClass]
   }
 
 type IsomeraseReaction
@@ -211,6 +230,7 @@ type Isotope
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     neutronNumber: Count
     isotopeOf: Isotope
     halfLife: NumberOfYears
@@ -223,6 +243,10 @@ type Isotope
 type Macromolecule
   {
     id: String!
+  }
+
+type Measure
+  {
   }
 
 type Moiety
@@ -252,6 +276,11 @@ type MolecularCation implements CationState
     elementalCharge: Integer
   }
 
+type MolecularComponent
+  {
+    id: String!
+  }
+
 type MolecularSpecies
   {
     id: String!
@@ -260,6 +289,11 @@ type MolecularSpecies
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
     hasPart: String
+  }
+
+type MolecularSubsequence
+  {
+    id: String!
   }
 
 interface Molecule
@@ -274,6 +308,7 @@ interface Molecule
 
 type MoleculeGroupingClass
   {
+    subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
 
@@ -295,7 +330,13 @@ type MonoatomicIon implements Charged
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
+  }
+
+type Monomer
+  {
+    id: String!
   }
 
 type NaturalProduct
@@ -334,10 +375,11 @@ type Nuclide
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     energyLevel: String
   }
 
-interface Pattern
+interface OwlClass
   {
   }
 
@@ -365,7 +407,12 @@ type PolyatomicIon implements Charged
 type Polymer
   {
     id: String!
-    hasPart: Macromolecule
+    polymerOf: Macromolecule
+  }
+
+type PolymerPart
+  {
+    id: String!
   }
 
 type Protein
@@ -391,6 +438,7 @@ type Radionuclide
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     energyLevel: String
   }
 
@@ -421,7 +469,11 @@ type Salt
     elementalCharge: Integer
   }
 
-type Stereocenter
+interface State
+  {
+  }
+
+type Stereocenter implements OwlClass
   {
   }
 
@@ -458,6 +510,7 @@ type UnchargedAtom implements Uncharged
     atomicNumber: Count
     symbol: String
     name: String
+    hasPart: SubatomicParticle
     elementalCharge: Integer
   }
 

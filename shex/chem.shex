@@ -58,7 +58,10 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <AnionState> {
-    (  $<AnionState_tes> <elemental_charge> @metatype:Integer ? ;
+    (  $<AnionState_tes> (  &<State_tes> ;
+          rdf:type [ <State> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
        rdf:type [ <AnionState> ] ?
     )
 }
@@ -72,7 +75,8 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <ChemicalEntity> ] ? ;
           <atomic_number> @<Count> ? ;
           <symbol> @metatype:String ? ;
-          <name> @metatype:String ?
+          <name> @metatype:String ? ;
+          <has_part> @<SubatomicParticle> ?
        ) ;
        rdf:type [ <Atom> ]
     )
@@ -100,6 +104,16 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<AtomGroupingClass> CLOSED {
+    (  $<AtomGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<MoleculeGroupingClass> * ;
+          <classifies> @<Atom> ?
+       ) ;
+       rdf:type [ <AtomGroupingClass> ] ?
+    )
+}
+
 <AtomIonicForm>  (
     @<MonoatomicIon> OR @<UnchargedAtom>
 )
@@ -114,9 +128,9 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <AtomOccurrence> CLOSED {
-    (  $<AtomOccurrence_tes> (  &<Pattern_tes> ;
+    (  $<AtomOccurrence_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <has_atom> @<Atom> ? ;
+          <occurrence_of> @<Atom> ;
           <valence> @metatype:Integer ? ;
           <oxidation_number> @metatype:Integer ? ;
           <formal_charge> @metatype:Integer ? ;
@@ -127,11 +141,11 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <AtomicBond> CLOSED {
-    (  $<AtomicBond_tes> (  &<Pattern_tes> ;
+    (  $<AtomicBond_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
           <has_atom_occurrences> @<AtomOccurrence> * ;
           <bond_order> @metatype:Integer ? ;
-          <bond_type> @metatype:String ? ;
+          <bond_type> @<BondTypeEnum> ? ;
           <bond_length_in_angstroms> @metatype:Float ? ;
           <bond_angle> @metatype:Float ? ;
           <torsional_angle> @metatype:Float ?
@@ -159,7 +173,10 @@ metatype:Nodeidentifier NONLITERAL
 )
 
 <ChargeState_struct> {
-    (  $<ChargeState_tes> <elemental_charge> @metatype:Integer ? ;
+    (  $<ChargeState_tes> (  &<State_tes> ;
+          rdf:type [ <State> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
        rdf:type [ <ChargeState> ] ?
     )
 }
@@ -189,14 +206,22 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <ChemicalEntity>  (
-    @<Atom> OR @<Macromolecule> OR @<PolyatomicEntity> OR @<Polymer> OR @<RacemicMixture> OR @<SubatomicParticle>
+    @<Atom> OR @<PolyatomicEntity> OR @<RacemicMixture> OR @<SubatomicParticle>
 )
 
 <ChemicalEntity_struct> {
-    (  $<ChemicalEntity_tes> (  &<Pattern_tes> ;
+    (  $<ChemicalEntity_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
+    )
+}
+
+<ChemicalGroup> CLOSED {
+    (  $<ChemicalGroup_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ?
+       ) ;
+       rdf:type [ <ChemicalGroup> ]
     )
 }
 
@@ -274,12 +299,17 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <GroupingClass>  (
-    {
-       (  $<GroupingClass_tes> rdf:type . * ;
-          rdf:type [ <GroupingClass> ] ?
-       )
-    } OR @<MoleculeGroupingClass>
+    @<AtomGroupingClass> OR @<MoleculeGroupingClass>
 )
+
+<GroupingClass_struct> {
+    (  $<GroupingClass_tes> (  &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <subtype_of> @<MoleculeGroupingClass> *
+       ) ;
+       rdf:type [ <GroupingClass> ] ?
+    )
+}
 
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
@@ -306,12 +336,20 @@ metatype:Nodeidentifier NONLITERAL
 
 <Macromolecule>  (
     CLOSED {
-       (  $<Macromolecule_tes> (  &<ChemicalEntity_tes> ;
-             rdf:type [ <ChemicalEntity> ] ?
+       (  $<Macromolecule_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ?
           ) ;
           rdf:type [ <Macromolecule> ]
        )
-    } OR @<Glycan> OR @<Peptide> OR @<Protein>
+    } OR @<Glycan> OR @<Peptide> OR @<Polymer> OR @<Protein>
+)
+
+<Measure>  (
+    CLOSED {
+       (  $<Measure_tes> rdf:type . * ;
+          rdf:type [ <Measure> ] ?
+       )
+    } OR @<MoleculePairwiseSimilarity>
 )
 
 <Moiety> CLOSED {
@@ -342,11 +380,29 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<MolecularComponent>  (
+    CLOSED {
+       (  $<MolecularComponent_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ?
+          ) ;
+          rdf:type [ <MolecularComponent> ]
+       )
+    } OR @<ChemicalGroup> OR @<PolymerPart>
+)
+
 <MolecularSpecies> CLOSED {
     (  $<MolecularSpecies_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ?
        ) ;
        rdf:type [ <MolecularSpecies> ]
+    )
+}
+
+<MolecularSubsequence> CLOSED {
+    (  $<MolecularSubsequence_tes> (  &<PolymerPart_tes> ;
+          rdf:type [ <PolymerPart> ] ?
+       ) ;
+       rdf:type [ <MolecularSubsequence> ]
     )
 }
 
@@ -371,6 +427,7 @@ metatype:Nodeidentifier NONLITERAL
 <MoleculeGroupingClass> CLOSED {
     (  $<MoleculeGroupingClass_tes> (  &<GroupingClass_tes> ;
           rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<MoleculeGroupingClass> * ;
           <classifies> @<Molecule> ?
        ) ;
        rdf:type [ <MoleculeGroupingClass> ] ?
@@ -379,7 +436,9 @@ metatype:Nodeidentifier NONLITERAL
 
 <MoleculePairwiseSimilarity>  (
     CLOSED {
-       (  $<MoleculePairwiseSimilarity_tes> (  <left_molecule> @<Molecule> ? ;
+       (  $<MoleculePairwiseSimilarity_tes> (  &<Measure_tes> ;
+             rdf:type [ <Measure> ] ? ;
+             <left_molecule> @<Molecule> ? ;
              <right_molecule> @<Molecule> ? ;
              <score> @metatype:String ?
           ) ;
@@ -409,6 +468,14 @@ metatype:Nodeidentifier NONLITERAL
        )
     } OR @<AtomAnion> OR @<AtomCation>
 )
+
+<Monomer> CLOSED {
+    (  $<Monomer_tes> (  &<PolymerPart_tes> ;
+          rdf:type [ <PolymerPart> ] ?
+       ) ;
+       rdf:type [ <Monomer> ]
+    )
+}
 
 <NaturalProduct> CLOSED {
     (  $<NaturalProduct_tes> (  &<Molecule_tes> ;
@@ -455,12 +522,8 @@ metatype:Nodeidentifier NONLITERAL
     } OR @<Radionuclide>
 )
 
-<Pattern>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalEntity> OR @<Stereocenter>
-)
-
-<Pattern_struct> {
-    (  $<Pattern_tes> rdf:type . * ;
+<OwlClass> {
+    (  $<OwlClass_tes> rdf:type . * ;
        rdf:type [ owl:Class ] ?
     )
 }
@@ -474,7 +537,7 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <PolyatomicEntity>  (
-    @<Molecule> OR @<MoleculePart> OR @<Salt>
+    @<Macromolecule> OR @<MolecularComponent> OR @<Molecule> OR @<MoleculePart> OR @<Salt>
 )
 
 <PolyatomicEntity_struct> {
@@ -500,13 +563,23 @@ metatype:Nodeidentifier NONLITERAL
 
 <Polymer>  (
     CLOSED {
-       (  $<Polymer_tes> (  &<ChemicalEntity_tes> ;
-             rdf:type [ <ChemicalEntity> ] ? ;
-             <has_part> @<Macromolecule> ?
+       (  $<Polymer_tes> (  &<Macromolecule_tes> ;
+             rdf:type [ <Macromolecule> ] ? ;
+             <polymer_of> @<Macromolecule> ?
           ) ;
           rdf:type [ <Polymer> ]
        )
     } OR @<Copolymer>
+)
+
+<PolymerPart>  (
+    CLOSED {
+       (  $<PolymerPart_tes> (  &<MolecularComponent_tes> ;
+             rdf:type [ <MolecularComponent> ] ?
+          ) ;
+          rdf:type [ <PolymerPart> ]
+       )
+    } OR @<MolecularSubsequence> OR @<Monomer>
 )
 
 <Protein> CLOSED {
@@ -579,9 +652,19 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<State>  (
+    @<AnionState> OR @<ChargeState>
+)
+
+<State_struct> {
+    (  $<State_tes> rdf:type . * ;
+       rdf:type [ <State> ] ?
+    )
+}
+
 <Stereocenter>  (
     CLOSED {
-       (  $<Stereocenter_tes> (  &<Pattern_tes> ;
+       (  $<Stereocenter_tes> (  &<OwlClass_tes> ;
              rdf:type [ owl:Class ] ?
           ) ;
           rdf:type [ <Stereocenter> ] ?

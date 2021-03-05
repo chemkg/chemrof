@@ -114,6 +114,9 @@
             "elemental_charge": {
                "type": "integer"
             },
+            "has_part": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -143,6 +146,9 @@
             "elemental_charge": {
                "type": "integer"
             },
+            "has_part": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -161,6 +167,24 @@
          "title": "AtomCation",
          "type": "object"
       },
+      "AtomGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class that classifies atoms. For example, metal atom",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AtomGroupingClass",
+         "type": "object"
+      },
       "AtomOccurrence": {
          "additionalProperties": false,
          "description": "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate",
@@ -173,7 +197,7 @@
                "description": "The charge remaining on an atom when all ligands are removed homolytically. [https://doi.org/10.1021%2Fed083p791]",
                "type": "integer"
             },
-            "has_atom": {
+            "occurrence_of": {
                "type": "string"
             },
             "oxidation_number": {
@@ -185,7 +209,9 @@
                "type": "integer"
             }
          },
-         "required": [],
+         "required": [
+            "occurrence_of"
+         ],
          "title": "AtomOccurrence",
          "type": "object"
       },
@@ -205,7 +231,6 @@
                "type": "integer"
             },
             "bond_type": {
-               "description": "E.g. covalent, ionic, polycentric, metal-metal, salt bridge",
                "type": "string"
             },
             "has_atom_occurrences": {
@@ -280,6 +305,9 @@
             "electron_configuration": {
                "type": "string"
             },
+            "has_part": {
+               "type": "string"
+            },
             "has_stereocenter": {
                "items": {
                   "$ref": "#/definitions/Stereocenter"
@@ -316,6 +344,20 @@
             "id"
          ],
          "title": "ChemicalElement",
+         "type": "object"
+      },
+      "ChemicalGroup": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "ChemicalGroup",
          "type": "object"
       },
       "ChiralityCenter": {
@@ -384,6 +426,9 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "polymer_of": {
                "type": "string"
             }
          },
@@ -475,6 +520,9 @@
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_part": {
+               "type": "string"
             },
             "id": {
                "type": "string"
@@ -599,6 +647,9 @@
             "half_life": {
                "type": "integer"
             },
+            "has_part": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -640,6 +691,14 @@
             "id"
          ],
          "title": "Macromolecule",
+         "type": "object"
+      },
+      "Measure": {
+         "additionalProperties": false,
+         "description": "todo",
+         "properties": {},
+         "required": [],
+         "title": "Measure",
          "type": "object"
       },
       "Moiety": {
@@ -752,6 +811,20 @@
          "title": "MolecularCation",
          "type": "object"
       },
+      "MolecularComponent": {
+         "additionalProperties": false,
+         "description": "A proper part of a molecule that is larger than an atom",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularComponent",
+         "type": "object"
+      },
       "MolecularSpecies": {
          "additionalProperties": false,
          "description": "A molecule in which the units are identical. Example: methyl",
@@ -796,12 +869,33 @@
          "title": "MolecularSpecies",
          "type": "object"
       },
+      "MolecularSubsequence": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularSubsequence",
+         "type": "object"
+      },
       "MoleculeGroupingClass": {
          "additionalProperties": false,
-         "description": "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, alkane(?)",
+         "description": "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide, alkane(?)",
          "properties": {
             "classifies": {
+               "description": "inverse of subtype_of",
                "type": "string"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
             }
          },
          "required": [],
@@ -852,6 +946,9 @@
                "description": "number of protons minus number of electrons",
                "type": "integer"
             },
+            "has_part": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -868,6 +965,20 @@
             "id"
          ],
          "title": "MonoatomicIon",
+         "type": "object"
+      },
+      "Monomer": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Monomer",
          "type": "object"
       },
       "NaturalProduct": {
@@ -998,6 +1109,9 @@
                "description": "e.g. ground, stable",
                "type": "string"
             },
+            "has_part": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -1082,10 +1196,10 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_part": {
+            "id": {
                "type": "string"
             },
-            "id": {
+            "polymer_of": {
                "type": "string"
             }
          },
@@ -1093,6 +1207,20 @@
             "id"
          ],
          "title": "Polymer",
+         "type": "object"
+      },
+      "PolymerPart": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "PolymerPart",
          "type": "object"
       },
       "Protein": {
@@ -1155,6 +1283,9 @@
             },
             "energy_level": {
                "description": "e.g. ground, stable",
+               "type": "string"
+            },
+            "has_part": {
                "type": "string"
             },
             "id": {
@@ -1352,6 +1483,9 @@
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_part": {
+               "type": "string"
             },
             "id": {
                "type": "string"
