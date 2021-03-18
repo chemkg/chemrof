@@ -94,7 +94,7 @@
                 <h1 id="class-chemicalentity">Class: ChemicalEntity</h1>
 <p>An entity that can be described using using chemical properties.</p>
 <p>URI: <a href="https://w3id.org/chemont/ChemicalEntity">chemont:ChemicalEntity</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[ReactionParticipant],[RacemicMixture],[PolyatomicEntity],[OwlClass],[ReactionParticipant]-%20chemical%200..1&gt;[ChemicalEntity&#124;id:string],[ChemicalEntity]uses%20-.-&gt;[OwlClass],[ChemicalEntity]^-[SubatomicParticle],[ChemicalEntity]^-[RacemicMixture],[ChemicalEntity]^-[PolyatomicEntity],[ChemicalEntity]^-[Atom],[Atom]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[ReactionParticipant],[RacemicMixture],[PolyatomicEntity],[OwlClass],[GroupingClass],[GroupingClass]-%20classifies%200..1&gt;[ChemicalEntity&#124;id:string;is_radical:boolean%20%3F],[ReactionParticipant]-%20participant%200..1&gt;[ChemicalEntity],[ChemicalEntity]uses%20-.-&gt;[OwlClass],[ChemicalEntity]^-[SubatomicParticle],[ChemicalEntity]^-[RacemicMixture],[ChemicalEntity]^-[PolyatomicEntity],[ChemicalEntity]^-[Atom],[Atom]" /></p>
 <h2 id="identifier-prefixes">Identifier prefixes</h2>
 <ul>
 <li>CHEBI</li>
@@ -124,15 +124,28 @@
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong><a href="./">ChemicalEntity</a></strong> <em><a href="../alternate_form_of/">alternate form of</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
-<li><strong>None</strong> <em><a href="../chemical/">chemical</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
+<li><strong><a href="../GroupingClass/">GroupingClass</a></strong> <em><a href="../grouping_class_classifies/">grouping class➞classifies</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
 <li><strong><a href="./">ChemicalEntity</a></strong> <em><a href="../isobar_of/">isobar of</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
-<li><strong><a href="../ReactionParticipant/">ReactionParticipant</a></strong> <em><a href="../reaction_participant_chemical/">reaction participant➞chemical</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
+<li><strong>None</strong> <em><a href="../participant/">participant</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
+<li><strong><a href="../ReactionParticipant/">ReactionParticipant</a></strong> <em><a href="../reaction_participant_participant/">reaction participant➞participant</a></em>  <sub>OPT</sub>  <strong><a href="./">ChemicalEntity</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+<li><a href="../is_radical/">is radical</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/Boolean/">Boolean</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="mixed-in-from-owl-class">Mixed in from owl class:</h3>
+<ul>
+<li><a href="../owl_subclass_of/">owl subclass of</a>  <sub>OPT</sub><ul>
+<li>Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent <em>groupings</em> or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)</li>
+<li>range: <a href="../OwlClass/">OwlClass</a></li>
 </ul>
 </li>
 </ul>
@@ -147,6 +160,21 @@
 </thead>
 <tbody>
 <tr>
+<td><strong>Aliases:</strong></td>
+<td></td>
+<td>specific chemical entity</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>chemical</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>chemical species</td>
+</tr>
+<tr>
 <td><strong>Mappings:</strong></td>
 <td></td>
 <td>CHEBI:24431</td>
@@ -155,6 +183,11 @@
 <td></td>
 <td></td>
 <td>CHEMINF:000000</td>
+</tr>
+<tr>
+<td><strong>Comments:</strong></td>
+<td></td>
+<td>In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]</td>
 </tr>
 <tr>
 <td><strong>Exact Mappings:</strong></td>

@@ -93,15 +93,42 @@
               
                 <h1 id="class-peptide">Class: Peptide</h1>
 <p>URI: <a href="https://w3id.org/chemont/Peptide">chemont:Peptide</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Macromolecule]^-[Peptide&#124;id(i):string],[Macromolecule]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Macromolecule]^-[Peptide&#124;has_part(i):string%20%3F;id(i):string;is_radical(i):boolean%20%3F],[OwlClass],[Molecule],[Macromolecule],[AtomicBond],[AtomOccurrence],[Atom]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../Macromolecule/">Macromolecule</a></li>
+<li>is_a: <a href="../Macromolecule/">Macromolecule</a> - A large molecule, such as a polymer, lipid, or macrocycle</li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="inherited-from-macromolecule">Inherited from macromolecule:</h3>
 <ul>
+<li><a href="../has_atoms/">has atoms</a>  <sub>0..*</sub><ul>
+<li>Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences</li>
+<li>range: <a href="../Atom/">Atom</a></li>
+</ul>
+</li>
+<li><a href="../has_submolecules/">has submolecules</a>  <sub>0..*</sub><ul>
+<li>Description: Relation between a molecule and the molecules it is made from.</li>
+<li>range: <a href="../Molecule/">Molecule</a></li>
+</ul>
+</li>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+<li><a href="../is_radical/">is radical</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/Boolean/">Boolean</a></li>
+</ul>
+</li>
+<li><a href="../molecule_has_atom_occurrences/">molecule➞has atom occurrences</a>  <sub>0..*</sub><ul>
+<li>range: <a href="../AtomOccurrence/">AtomOccurrence</a></li>
+</ul>
+</li>
+<li><a href="../molecule_has_bonds/">molecule➞has bonds</a>  <sub>0..*</sub><ul>
+<li>Description: The set of all bonds connecting atoms in a molecule</li>
+<li>range: <a href="../AtomicBond/">AtomicBond</a></li>
+</ul>
+</li>
+<li><a href="../molecule_has_part/">molecule➞has part</a>  <sub>OPT</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>

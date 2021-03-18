@@ -92,33 +92,78 @@
             <div class="section">
               
                 <h1 id="class-macromolecule">Class: Macromolecule</h1>
+<p>A large molecule, such as a polymer, lipid, or macrocycle</p>
 <p>URI: <a href="https://w3id.org/chemont/Macromolecule">chemont:Macromolecule</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Protein],[Polymer],[PolyatomicEntity],[Peptide],[Copolymer]-%20has%20part%200..*&gt;[Macromolecule&#124;id(i):string],[Polymer]-%20polymer%20of%200..1&gt;[Macromolecule],[Macromolecule]^-[Protein],[Macromolecule]^-[Polymer],[Macromolecule]^-[Peptide],[Macromolecule]^-[Glycan],[PolyatomicEntity]^-[Macromolecule],[Glycan],[Copolymer]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Protein],[Peptide],[OwlClass],[MonomolecularPolymer],[Molecule],[Copolymer]-%20has%20part%200..*&gt;[Macromolecule&#124;has_part(i):string%20%3F;id(i):string;is_radical(i):boolean%20%3F],[MonomolecularPolymer]-%20polymer%20of%200..1&gt;[Macromolecule],[Macromolecule]^-[Protein],[Macromolecule]^-[Peptide],[Macromolecule]^-[MonomolecularPolymer],[Macromolecule]^-[Glycan],[Molecule]^-[Macromolecule],[Glycan],[Copolymer],[AtomicBond],[AtomOccurrence],[Atom]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../PolyatomicEntity/">PolyatomicEntity</a> - Any chemical entity consisting of more than one atom.</li>
+<li>is_a: <a href="../Molecule/">Molecule</a> - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.</li>
 </ul>
 <h2 id="children">Children</h2>
 <ul>
 <li><a href="../Glycan/">Glycan</a></li>
+<li><a href="../MonomolecularPolymer/">MonomolecularPolymer</a> - A macromolecule composed of repeating subunits. Examples: cellulose</li>
 <li><a href="../Peptide/">Peptide</a></li>
-<li><a href="../Polymer/">Polymer</a></li>
 <li><a href="../Protein/">Protein</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong><a href="../Copolymer/">Copolymer</a></strong> <em><a href="../copolymer_has_part/">copolymer➞has part</a></em>  <sub>0..<em></sub>  </em><em><a href="./">Macromolecule</a></em>*</li>
+<li><strong><a href="../MonomolecularPolymer/">MonomolecularPolymer</a></strong> <em><a href="../monomolecular_polymer_polymer_of/">monomolecular polymer➞polymer of</a></em>  <sub>OPT</sub>  <strong><a href="./">Macromolecule</a></strong></li>
 <li><strong>None</strong> <em><a href="../polymer_of/">polymer of</a></em>  <sub>OPT</sub>  <strong><a href="./">Macromolecule</a></strong></li>
-<li><strong><a href="../Polymer/">Polymer</a></strong> <em><a href="../polymer_polymer_of/">polymer➞polymer of</a></em>  <sub>OPT</sub>  <strong><a href="./">Macromolecule</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
-<h3 id="inherited-from-polyatomic-entity">Inherited from polyatomic entity:</h3>
+<h3 id="inherited-from-molecule">Inherited from molecule:</h3>
 <ul>
+<li><a href="../has_atoms/">has atoms</a>  <sub>0..*</sub><ul>
+<li>Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences</li>
+<li>range: <a href="../Atom/">Atom</a></li>
+</ul>
+</li>
+<li><a href="../has_submolecules/">has submolecules</a>  <sub>0..*</sub><ul>
+<li>Description: Relation between a molecule and the molecules it is made from.</li>
+<li>range: <a href="../Molecule/">Molecule</a></li>
+</ul>
+</li>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
+<li><a href="../is_radical/">is radical</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/Boolean/">Boolean</a></li>
 </ul>
+</li>
+<li><a href="../molecule_has_atom_occurrences/">molecule➞has atom occurrences</a>  <sub>0..*</sub><ul>
+<li>range: <a href="../AtomOccurrence/">AtomOccurrence</a></li>
+</ul>
+</li>
+<li><a href="../molecule_has_bonds/">molecule➞has bonds</a>  <sub>0..*</sub><ul>
+<li>Description: The set of all bonds connecting atoms in a molecule</li>
+<li>range: <a href="../AtomicBond/">AtomicBond</a></li>
+</ul>
+</li>
+<li><a href="../molecule_has_part/">molecule➞has part</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="other-properties">Other properties</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exact Mappings:</strong></td>
+<td></td>
+<td>Wikipedia:Macromolecule</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>

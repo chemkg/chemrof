@@ -92,28 +92,31 @@
             <div class="section">
               
                 <h1 id="class-moleculegroupingclass">Class: MoleculeGroupingClass</h1>
-<p>A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide, alkane(?)</p>
+<p>A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide</p>
 <p>URI: <a href="https://w3id.org/chemont/MoleculeGroupingClass">chemont:MoleculeGroupingClass</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Molecule]&lt;classifies%200..1-%20[MoleculeGroupingClass],[MoleculeGroupingClass]&lt;subtype%20of%200..*-++[MoleculeGroupingClass],[AtomGroupingClass]++-%20subtype%20of%200..*&gt;[MoleculeGroupingClass],[GroupingClass]++-%20subtype%20of%200..*&gt;[MoleculeGroupingClass],[GroupingClass]^-[MoleculeGroupingClass],[Molecule],[GroupingClass],[AtomGroupingClass]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OwlClass],[Molecule]&lt;classifies%200..1-%20[MoleculeGroupingClass],[MoleculeGroupingClass]&lt;subtype%20of%200..*-++[MoleculeGroupingClass],[AtomGroupingClass]++-%20subtype%20of%200..*&gt;[MoleculeGroupingClass],[MoleculeGroupingClass]^-[GeneralizedMolecularStructure],[GroupingClass]^-[MoleculeGroupingClass],[Molecule],[GroupingClass],[GeneralizedMolecularStructure],[AtomGroupingClass]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../GroupingClass/">GroupingClass</a> - A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc</li>
 </ul>
+<h2 id="children">Children</h2>
+<ul>
+<li><a href="../GeneralizedMolecularStructure/">GeneralizedMolecularStructure</a> - A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n&gt;3). An example is alkane; CnH2n+2, which groups specific molecules such as methane</li>
+</ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong><a href="../AtomGroupingClass/">AtomGroupingClass</a></strong> <em><a href="../atom_grouping_class_subtype_of/">atom grouping class➞subtype of</a></em>  <sub>0..<em></sub>  </em><em><a href="./">MoleculeGroupingClass</a></em>*</li>
-<li><strong><a href="../GroupingClass/">GroupingClass</a></strong> <em><a href="../grouping_class_subtype_of/">grouping class➞subtype of</a></em>  <sub>0..<em></sub>  </em><em><a href="./">MoleculeGroupingClass</a></em>*</li>
 <li><strong><a href="./">MoleculeGroupingClass</a></strong> <em><a href="../molecule_grouping_class_subtype_of/">molecule grouping class➞subtype of</a></em>  <sub>0..<em></sub>  </em><em><a href="./">MoleculeGroupingClass</a></em>*</li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
 <li><a href="../molecule_grouping_class_classifies/">molecule grouping class➞classifies</a>  <sub>OPT</sub><ul>
-<li>Description: inverse of subtype_of</li>
 <li>range: <a href="../Molecule/">Molecule</a></li>
 </ul>
 </li>
 <li><a href="../molecule_grouping_class_subtype_of/">molecule grouping class➞subtype of</a>  <sub>0..*</sub><ul>
+<li>Description: grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes</li>
 <li>range: <a href="./">MoleculeGroupingClass</a></li>
 </ul>
 </li>
@@ -132,11 +135,6 @@
 <td><strong>Comments:</strong></td>
 <td></td>
 <td>Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>{'TODO': 'decide if alkane which has a generic formula belongs here'}</td>
 </tr>
 </tbody>
 </table>
