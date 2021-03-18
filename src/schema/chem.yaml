@@ -15,9 +15,11 @@ prefixes:
   SIO: http://semanticscience.org/resource/SIO_
   PUBCHEM.ELEMENT: https://pubchem.ncbi.nlm.nih.gov/element/
   LANL.ELEMENT: https://periodic.lanl.gov/
+  bioptop: "http://purl.org/biotop/biotop.owl#"
   schema: http://schema.org/
   chemont: https://w3id.org/chemont/
   dcterms: http://purl.org/dc/terms/
+  biolink: https://w3id.org/biolink/
   biolinkml: https://w3id.org/biolink/biolinkml/
   
 default_prefix: chemont
@@ -35,10 +37,15 @@ classes:
   owl class:
     aliases:
       - species
+      - metaclass
     mixin: true
     description: >-
       instances of this class mixin are OWL Classes
     class_uri: owl:Class
+    close_mappings:
+      - skos:Concept
+    slots:
+      - owl subclass of
 
   grouping class:
     abstract: true
@@ -48,23 +55,29 @@ classes:
       A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
     slot_usage:
       subtype of:
-        range: molecule grouping class
+        range: grouping class
+      classifies:
+        range: chemical entity
 
   molecule grouping class:
     is_a: grouping class
     description: >-
-      A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide, alkane(?)
+      A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide
     comments:
       -  Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
-      -  TODO: decide if alkane which has a generic formula belongs here
     slot_usage:
       subtype of:
         range: molecule grouping class
+        description: >-
+          grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes
       classifies:
         range: molecule
-        description: >-
-          inverse of subtype_of
           
+  generalized molecular structure:
+    is_a: molecule grouping class
+    description: >-
+      A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
+      
         
   atom grouping class:
     is_a: grouping class
@@ -77,13 +90,20 @@ classes:
         range: atom
       
   chemical entity:
+    aliases:
+      - specific chemical entity
+      - chemical
+      - chemical species
     abstract: true
     description: >-
       An entity that can be described using using chemical properties.
+    comments:
+      - In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]
     mixins:
       - owl class
     slots:
       - id
+      - is radical
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -198,8 +218,28 @@ classes:
       Any chemical entity consisting of more than one atom.
 
   macromolecule:
-    is_a: polyatomic entity
+    is_a: molecule
+    description: >-
+      A large molecule, such as a polymer, lipid, or macrocycle
+    exact_mappings:
+      - Wikipedia:Macromolecule
 
+  molecular complex:
+    aliases:
+      - poly molecular composite entity
+      - complex of molecular entities
+      - molecule complex ## biotop
+    is_a: polyatomic entity
+    description: >-
+      A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex
+    comments:
+      - In bioptop, molecule complex is a sibling of structured biological entity under poly molecular composite entity
+      - In SIO, molecular complex is an only child of chemical complex, which is under chemical substance
+    exact_mappings:
+      - biotop:MoleculeComplex
+      - SIO:010506
+      - COB:0000080
+      
   peptide:
     is_a: macromolecule
 
@@ -210,18 +250,31 @@ classes:
     is_a: macromolecule
     id_prefixes:
       - KEGG.GLYCAN
-      
-  polymer:
+
+  monomolecular polymer:
     is_a: macromolecule
+    aliases:
+      - polymer
+      - oligo or polymer
+    description: >-
+      A macromolecule composed of repeating subunits. Examples: cellulose
     slot_usage:
       polymer of:
         is_a: has part
         range: macromolecule
-        mappings:
+        exact_mappings:
           - wd:P4600
+          - CHEBI:60027
       
+  supramolecular polymer:
+    is_a: molecular complex
+    description: >-
+      polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds
+    exact_mappings:
+      - Wikipedia:Supramolecular_polymer
+    
   copolymer:
-    is_a: polymer
+    is_a: monomolecular polymer
     description: >-
       a polymer derived from more than one species of monomer
     slot_usage:
@@ -262,6 +315,7 @@ classes:
     is_a: polyatomic entity
     aliases:
       - molecular entity
+      - monomolecular entity
     description: >-
       A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
     abstract: true
@@ -284,6 +338,7 @@ classes:
       - COB:0000013
     exact_mappings:
       - SIO:011125
+      - biotop:MonoMolecularEntity
     examples:
       - value: dioxygen
       - value: cysteine
@@ -299,6 +354,11 @@ classes:
     is_a: molecule part
     description: >-
       a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
+
+  sequence of elements:
+    is_a: molecule part
+    description: >-
+      a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence
 
   functional group:
     is_a: molecule part
@@ -317,11 +377,13 @@ classes:
       A molecule in which the units are not identical. Example: sodium chloride
 
   polyatomic ion:
+    aliases:
+      - polyatomic ion species
     is_a: molecule
     mixins:
       - charged    
     description: >-
-      A molecule that has a charge. For example, nitrate (NO3-).
+      A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
 
   molecular cation:
     is_a: polyatomic ion
@@ -353,8 +415,11 @@ classes:
     abstract: true
     aliases:
       - atomic species
+      - chemical species of an element
     description: >-
       A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+    comments:
+      - chemical species of an element: Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859
     slots:
       - atomic number
       - symbol
@@ -460,7 +525,7 @@ classes:
     aliases:
       - atom ionic species
     description: >-
-      an atom type in which charge state is specified. Also known as (atom) ionic species
+      an atom type in which charge state is specified. Also known as (atom) ionic species. For example, chloride is an atom ionic species; its formula is Cl−.
     is_a: atom
     slots:
       - elemental charge
@@ -507,13 +572,31 @@ classes:
   fully specified atom:
     description: >-
       An atom (class) that has subatomic particle counts specified
+    aliases:
+      - atomic species
+      - chemical species of an element
+    comments:
+      - chemical species of an element: Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859
     is_a: atom
     slots:
       - elemental charge
       - neutron number
 
-        
+
+  relational chemical entity:
+    mixins:
+      - owl class
+    description: >-
+      A reified relationship
+    close_mappings:
+      - biolink:Association
+
+  location:
+    mixins:
+      - owl class
+      
   stereocenter:
+    is_a: location
     aliases:
       - stereogenic center
     mixins:
@@ -527,6 +610,7 @@ classes:
        a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
     
   atomic bond:
+    is_a: relational chemical entity
     aliases:
       - bond
       - chemical bond
@@ -555,6 +639,7 @@ classes:
       - CHEMINF:000063
 
   atom occurrence:
+    is_a: relational chemical entity
     mixins:
       - owl class
     description: >-
@@ -607,14 +692,20 @@ classes:
     slot_usage:
       acidity:
         range: float
+      hard or soft:
+        range: hard_or_soft_enum
+        
     mappings:
       - CHEBI:50906
 
   acid form of conjugated acid:
     is_a: polyatomic ion
+    description: >-
+      A molecule capable of donating a proton. Example: carboxylic acid is an organic acid that contains a carboxyl group (C(=O)OH)[1] attached to an R-group
 
   base form of conjugated acid:
     is_a: molecule
+    
 
   # TODO
   salt:
@@ -670,7 +761,7 @@ classes:
     description: >-
       A molecule consisting of atoms of the same element
     slot_usage:
-      allotrope of:
+      allotropic analog of:
         range: chemical element
         multivalued: false
         required: true
@@ -731,15 +822,17 @@ classes:
       TODO: create rules for this
 
   reaction participant:
+    is_a: relational chemical entity
     description: >-
       Instances of this link a reaction to a chemical entity participant
     slot_usage:
-      chemical:
+      participant:
         range: chemical entity
       stoichiometry:
         range: integer
 
   measure:
+    is_a: relational chemical entity
     description:
       todo
     
@@ -783,7 +876,17 @@ types:
 
 slots:
 
+  chemical to chemical relationship:
+    abstract: true
+  
+  chemical property:
+    abstract: true
+  
+  information property:
+    abstract: true
+  
   id:
+    is_a: information property
     identifier: true
     mappings:
       - schema:identifier
@@ -791,19 +894,31 @@ slots:
   ## metadata
   
   name:
+    is_a: information property
     range: string
     description: >-
       name of chemical entity. E.g. nickel, carbon-16
   
   symbol:
+    is_a: information property
     range: string
     #key: true
     description: >-
       short symbol for chemical entity, e.g. K, C-16
   
   ## numeric properties of atoms
+
+  property of atom:
+    abstract: true
+    is_a: chemical property
+    domain: atom
+
+  subatomic particle count:
+    abstract: true
+    is_a: property of atom
   
   atomic number:
+    is_a: subatomic particle count
     aliases:
       - proton number
       - Z
@@ -815,6 +930,7 @@ slots:
       - CHEMINF:000079
     
   neutron number:
+    is_a: subatomic particle count
     aliases:
       - N
     description: >-
@@ -825,12 +941,14 @@ slots:
       - CHEMINF:000078
     
   nucleon number:
+    is_a: subatomic particle count
     description: >-
       number of nucleons in an atom. proton number plus neutral number.
     domain: atom
     range: count
       
   elemental charge:
+    is_a: property of atom
     description: >-
       number of protons minus number of electrons
     domain: chemical entity
@@ -841,6 +959,7 @@ slots:
   ## alternate form relations
   
   alternate form of:
+    is_a: chemical to chemical relationship
     description: >-
       A relationship between two entities of the same type
     abstract: true
@@ -883,6 +1002,7 @@ slots:
   ## other relations
 
   has part:
+    is_a: chemical to chemical relationship
     description: >-
       basic parthood relations
     mappings:
@@ -930,25 +1050,31 @@ slots:
     multivalued: true
       
   half life:
+    is_a: chemical property
     domain: isotope
     range: number of years
 
   decay mode:
+    is_a: chemical property
     domain: isotope
     range: string ## TODO: ontology: α, β−, γ, IC, EC
 
   decay product:
+    is_a: chemical property
     domain: isotope
     range: isotope
 
   decay energy:
+    is_a: chemical property
     domain: isotope
     
   mode of formation:
+    is_a: chemical property
     domain: isotope
     range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
 
   thermophysical property:
+    is_a: chemical property
     abstract: true
 
   molar value:
@@ -958,6 +1084,7 @@ slots:
     is_a: thermophysical property
     
   has cyclic structure:
+    is_a: chemical property
     description: >-
       true if the molecule possesses a cycle in the atom connectivity graph
     domain: molecule
@@ -965,13 +1092,8 @@ slots:
     mappings:
       - CHEMINF:000067
       
-  information entity:
-    abstract: true
-    mappings:
-      - IAO:0000030
-      
   chemical formula:
-    is_a: information entity
+    is_a: information property
     description: >-
       A generic grouping for miolecular formulae and empirican formulae
     domain: chemical entity
@@ -1054,6 +1176,9 @@ slots:
     range: atom occurrence
     multivalued: true
 
+  is radical:
+    domain: chemical entity
+    range: boolean
 
   next in homologous series from:
     description: >-
@@ -1112,6 +1237,8 @@ slots:
     is_a: structural isomer of
     description: >-
        structural isomers (constitutional isomers) of chemical compounds that readily interconvert. Examples: a neutral amino acid and its zwitterion
+    todos:
+      - subtypes such as  keto-enol tautomerism
       
   stereoisomer of:
     aliases:
@@ -1164,7 +1291,23 @@ slots:
     domain: atomic bond
     range: float
 
+  owl subclass of:
+    aliases:
+      - is a
+    mixin: true
+    description: >-
+      Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
+    domain: owl class
+    range: owl class
+    exact_mappings:
+      - rdfs:subClassOf
+    
   subtype of:
+    is_a: chemical to chemical relationship
+    mixins:
+      - owl subclass of
+    description: >-
+      A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class
     domain: owl class
     range: owl class
     required: false
@@ -1173,15 +1316,22 @@ slots:
       - rdfs:subClassOf
       
   has subtype:
+    is_a: chemical to chemical relationship
     inverse: subtype of
       
   classified by:
+    is_a: chemical to chemical relationship
+    mixins:
+      - owl subclass of
+    description: >-
+      A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
     domain: owl class
     range: owl class
     exact_mappings:
       - rdf:type
 
   classifies:
+    is_a: chemical to chemical relationship
     inverse: classified by
 
 enums:
@@ -1192,4 +1342,9 @@ enums:
       polycentric:
       metal-metal:
       salt bridge:
-      
+  hard_or_soft_enum:
+    permissible_values:
+      hard:
+      soft:
+      borderline:
+    

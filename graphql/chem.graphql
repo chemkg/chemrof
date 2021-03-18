@@ -1,6 +1,8 @@
 type AcidFormOfConjugatedAcid
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -12,12 +14,14 @@ type AcidFormOfConjugatedAcid
 type Allotrope
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
     hasPart: String
-    allotropeOf: ChemicalElement!
+    allotropicAnalogOf: ChemicalElement!
     hasBondingStructure: String!
   }
 
@@ -29,6 +33,8 @@ interface AnionState
 interface Atom
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -38,6 +44,8 @@ interface Atom
 type AtomAnion implements AnionState
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -48,6 +56,8 @@ type AtomAnion implements AnionState
 type AtomCation implements CationState
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -57,6 +67,7 @@ type AtomCation implements CationState
 
 type AtomGroupingClass
   {
+    owlSubclassOf: OwlClass
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -64,6 +75,8 @@ type AtomGroupingClass
 interface AtomIonicForm
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -73,6 +86,7 @@ interface AtomIonicForm
 
 type AtomOccurrence implements OwlClass
   {
+    owlSubclassOf: OwlClass
     occurrenceOf: Atom!
     valence: Integer
     oxidationNumber: Integer
@@ -82,6 +96,7 @@ type AtomOccurrence implements OwlClass
 
 type AtomicBond implements OwlClass
   {
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     bondOrder: Integer
     bondType: BondTypeEnum
@@ -93,6 +108,8 @@ type AtomicBond implements OwlClass
 type BaseFormOfConjugatedAcid
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -118,6 +135,8 @@ interface Charged
 type ChemicalElement
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     name: String
     hasPart: SubatomicParticle
@@ -134,31 +153,45 @@ type ChemicalElement
 type ChemicalEntity implements OwlClass
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type ChemicalGroup
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type ChiralityCenter
   {
+    owlSubclassOf: OwlClass
   }
 
 type ConjugatedAcid
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
     hasPart: String
     acidity: Float
+    hardOrSoft: HardOrSoftEnum
   }
 
 type Copolymer
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
     polymerOf: Macromolecule
     hasPart: [Macromolecule]
   }
@@ -166,11 +199,15 @@ type Copolymer
 type Electron
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type Enantiomer
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -185,6 +222,8 @@ type Enantiomer
 type FullySpecifiedAtom
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -196,17 +235,35 @@ type FullySpecifiedAtom
 type FunctionalGroup
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     isSubstitutentGroupFrom: Molecule
+  }
+
+type GeneralizedMolecularStructure
+  {
+    owlSubclassOf: OwlClass
+    subtypeOf: [MoleculeGroupingClass]
+    classifies: Molecule
   }
 
 type Glycan
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
   }
 
 type GroupingClass implements OwlClass
   {
-    subtypeOf: [MoleculeGroupingClass]
+    subtypeOf: [GroupingClass]
+    classifies: ChemicalEntity
+    owlSubclassOf: OwlClass
   }
 
 type IsomeraseReaction
@@ -227,6 +284,8 @@ type IsomeraseReaction
 type Isotope
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -240,23 +299,40 @@ type Isotope
     modeOfFormation: String
   }
 
+type Location implements OwlClass
+  {
+    owlSubclassOf: OwlClass
+  }
+
 type Macromolecule
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
   }
 
 type Measure
   {
+    owlSubclassOf: OwlClass
   }
 
 type Moiety
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type MolecularAnion implements AnionState
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -268,6 +344,8 @@ type MolecularAnion implements AnionState
 type MolecularCation implements CationState
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -276,14 +354,25 @@ type MolecularCation implements CationState
     elementalCharge: Integer
   }
 
+type MolecularComplex
+  {
+    id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+  }
+
 type MolecularComponent
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type MolecularSpecies
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -294,11 +383,15 @@ type MolecularSpecies
 type MolecularSubsequence
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 interface Molecule
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -308,12 +401,14 @@ interface Molecule
 
 type MoleculeGroupingClass
   {
+    owlSubclassOf: OwlClass
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
 
 type MoleculePairwiseSimilarity
   {
+    owlSubclassOf: OwlClass
     leftMolecule: Molecule
     rightMolecule: Molecule
     score: String
@@ -322,11 +417,15 @@ type MoleculePairwiseSimilarity
 type MoleculePart
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type MonoatomicIon implements Charged
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -337,11 +436,28 @@ type MonoatomicIon implements Charged
 type Monomer
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+  }
+
+type MonomolecularPolymer
+  {
+    id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
+    polymerOf: Macromolecule
   }
 
 type NaturalProduct
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -352,11 +468,15 @@ type NaturalProduct
 type Neutron
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type NonSpeciesMolecule
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -367,11 +487,15 @@ type NonSpeciesMolecule
 type Nucleon
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type Nuclide
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -381,21 +505,33 @@ type Nuclide
 
 interface OwlClass
   {
+    owlSubclassOf: OwlClass
   }
 
 type Peptide
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
   }
 
 interface PolyatomicEntity
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type PolyatomicIon implements Charged
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -404,30 +540,37 @@ type PolyatomicIon implements Charged
     elementalCharge: Integer
   }
 
-type Polymer
-  {
-    id: String!
-    polymerOf: Macromolecule
-  }
-
 type PolymerPart
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type Protein
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
   }
 
 type Proton
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type RacemicMixture
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasLeftEnantiomer: Enantiomer!
     hasRightEnantiomer: Enantiomer!
   }
@@ -435,6 +578,8 @@ type RacemicMixture
 type Radionuclide
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -459,14 +604,29 @@ type Reaction
 
 type ReactionParticipant
   {
-    chemical: ChemicalEntity
+    owlSubclassOf: OwlClass
+    participant: ChemicalEntity
     stoichiometry: Integer
+  }
+
+type RelationalChemicalEntity implements OwlClass
+  {
+    owlSubclassOf: OwlClass
   }
 
 type Salt
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     elementalCharge: Integer
+  }
+
+type SequenceOfElements
+  {
+    id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 interface State
@@ -475,11 +635,14 @@ interface State
 
 type Stereocenter implements OwlClass
   {
+    owlSubclassOf: OwlClass
   }
 
 type Stereoisomer
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
@@ -490,10 +653,20 @@ type Stereoisomer
 type SubatomicParticle
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
+  }
+
+type SupramolecularPolymer
+  {
+    id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
   }
 
 type TanimotoSimilarity
   {
+    owlSubclassOf: OwlClass
     leftMolecule: Molecule
     rightMolecule: Molecule
     score: Float
@@ -507,6 +680,8 @@ interface Uncharged
 type UnchargedAtom implements Uncharged
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
@@ -517,6 +692,8 @@ type UnchargedAtom implements Uncharged
 type UnchargedMolecule implements Uncharged
   {
     id: String!
+    isRadical: Boolean
+    owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]

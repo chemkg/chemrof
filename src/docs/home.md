@@ -1,5 +1,7 @@
 # Chem: Schema for chemistry data models and ontologies
 
+GitHub: [cmungall/chem-schema](https://github.com/cmungall/chem-schema)
+
 This repo includes schema/datamodel for a chemical ontology
 
 Instances of the classes in the data model are chemical ontology classes, e.g.
@@ -23,7 +25,7 @@ Schema: [chem-schema](http://cmungall.github.io/chem-schema)
 
 We need an alternative classification of chemical atoms and elements
 that is different than the existing CHEBI. There are deep problems
-with classification of atms and molecular entities in CHEBI. These
+with classification of atoms and molecular entities in CHEBI. These
 problems arise from a basic confusion about classes and
 metaclasses. Sources like IUPAC represent chemical *species*,
 instances of which are chemical *elements*, __NOT__ instances in the
@@ -55,13 +57,13 @@ Browse the schema here: [http://cmungall.github.io/chem-schema](http://cmungall.
 
 Realist pedants be advised to assume the suffix 'species', 'class', or 'type' on the end of these (meta)class names
 
-See the [src/schema/](src/schema/) folder
+See the [src/schema/](https://github.com/cmungall/chem-schema/tree/master/src/schema) folder
 
 The source is in YAML (biolinkml)
 
 Currently the main derived artefacts of interest are:
 
- - [JSON Schema](https://github.com/cmungall/chem-schema/tree/master/jsonschem)
+ - [JSON Schema](https://github.com/cmungall/chem-schema/tree/master/jsonschema)
  - [ShEx](https://github.com/cmungall/chem-schema/tree/master/shex)
  - [Python dataclasses](https://github.com/cmungall/chem-schema/tree/master/python)
 
