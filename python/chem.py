@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-03-17 17:26
+# Generation date: 2021-03-19 12:19
 # Schema: chemont
 #
 # id: chemont
@@ -51,6 +51,7 @@ LANL_ELEMENT = CurieNamespace('LANL_ELEMENT', 'https://periodic.lanl.gov/')
 MESH = CurieNamespace('MESH', 'http://identifiers.org/mesh/')
 METACYC = CurieNamespace('MetaCyc', 'http://example.org/UNKNOWN/MetaCyc/')
 METANETX = CurieNamespace('MetaNetX', 'http://example.org/UNKNOWN/MetaNetX/')
+PR = CurieNamespace('PR', 'http://identifiers.org/pr/')
 PUBCHEM_COMPOUND = CurieNamespace('PUBCHEM_COMPOUND', 'http://identifiers.org/pubchem.compound/')
 PUBCHEM_ELEMENT = CurieNamespace('PUBCHEM_ELEMENT', 'https://pubchem.ncbi.nlm.nih.gov/element/')
 REACT = CurieNamespace('REACT', 'http://example.org/UNKNOWN/REACT/')
@@ -60,6 +61,7 @@ RETRORULES = CurieNamespace('RetroRules', 'http://example.org/UNKNOWN/RetroRules
 SEED = CurieNamespace('SEED', 'http://identifiers.org/seed/')
 SIO = CurieNamespace('SIO', 'http://semanticscience.org/resource/SIO_')
 UNII = CurieNamespace('UNII', 'http://identifiers.org/unii/')
+UNIPROTKB = CurieNamespace('UniProtKB', 'http://example.org/UNKNOWN/UniProtKB/')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 BIOLINKML = CurieNamespace('biolinkml', 'https://w3id.org/biolink/biolinkml/')
 BIOPTOP = CurieNamespace('bioptop', 'http://purl.org/biotop/biotop.owl#')
@@ -68,6 +70,7 @@ DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EDAM = CurieNamespace('edam', 'http://identifiers.org/edam/')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
+WD = CurieNamespace('wd', 'http://www.wikidata.org/entity/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = CHEMONT
 
@@ -591,42 +594,6 @@ class ChargeState(State):
 
 
 @dataclass
-class AnionState(State):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMONT.AnionState
-    class_class_curie: ClassVar[str] = "chemont:AnionState"
-    class_name: ClassVar[str] = "anion state"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.AnionState
-
-    elemental_charge: Optional[int] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
-            self.elemental_charge = int(self.elemental_charge)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class CationState(YAMLRoot):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMONT.CationState
-    class_class_curie: ClassVar[str] = "chemont:CationState"
-    class_name: ClassVar[str] = "cation state"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.CationState
-
-    elemental_charge: Optional[int] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
-            self.elemental_charge = int(self.elemental_charge)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class Uncharged(ChargeState):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -651,6 +618,48 @@ class Charged(ChargeState):
     class_class_curie: ClassVar[str] = "chemont:Charged"
     class_name: ClassVar[str] = "charged"
     class_model_uri: ClassVar[URIRef] = CHEMONT.Charged
+
+
+@dataclass
+class AnionState(Charged):
+    """
+    This mixin is applied on an entity (atom or molecule) that is negatively charged
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AnionState
+    class_class_curie: ClassVar[str] = "chemont:AnionState"
+    class_name: ClassVar[str] = "anion state"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AnionState
+
+    elemental_charge: Optional[int] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
+            self.elemental_charge = int(self.elemental_charge)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class CationState(Charged):
+    """
+    This mixin is applied on an entity (atom or molecule) that is positively charged
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.CationState
+    class_class_curie: ClassVar[str] = "chemont:CationState"
+    class_name: ClassVar[str] = "cation state"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.CationState
+
+    elemental_charge: Optional[int] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
+            self.elemental_charge = int(self.elemental_charge)
+
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -881,12 +890,19 @@ class Macromolecule(Molecule):
     class_model_uri: ClassVar[URIRef] = CHEMONT.Macromolecule
 
     id: Union[str, MacromoleculeId] = None
+    has_submolecules: Optional[Union[Union[str, MoleculeId], List[Union[str, MoleculeId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
         if not isinstance(self.id, MacromoleculeId):
             self.id = MacromoleculeId(self.id)
+
+        if self.has_submolecules is None:
+            self.has_submolecules = []
+        if not isinstance(self.has_submolecules, list):
+            self.has_submolecules = [self.has_submolecules]
+        self.has_submolecules = [v if isinstance(v, MoleculeId) else MoleculeId(v) for v in self.has_submolecules]
 
         super().__post_init__(**kwargs)
 
@@ -1470,10 +1486,14 @@ class AtomIonicForm(Atom):
 
     id: Union[str, AtomIonicFormId] = None
     elemental_charge: Optional[int] = None
+    elemental_change: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
             self.elemental_charge = int(self.elemental_charge)
+
+        if self.elemental_change is not None and not isinstance(self.elemental_change, str):
+            self.elemental_change = str(self.elemental_change)
 
         super().__post_init__(**kwargs)
 
@@ -2430,6 +2450,9 @@ slots.electron_configuration = Slot(uri=CHEMONT.electron_configuration, name="el
 slots.has_stereocenter = Slot(uri=CHEMONT.has_stereocenter, name="has stereocenter", curie=CHEMONT.curie('has_stereocenter'),
                    model_uri=CHEMONT.has_stereocenter, domain=None, range=Optional[Union[Union[dict, Stereocenter], List[Union[dict, Stereocenter]]]])
 
+slots.elemental_change = Slot(uri=CHEMONT.elemental_change, name="elemental change", curie=CHEMONT.curie('elemental_change'),
+                   model_uri=CHEMONT.elemental_change, domain=None, range=Optional[str])
+
 slots.bond_type = Slot(uri=CHEMONT.bond_type, name="bond type", curie=CHEMONT.curie('bond_type'),
                    model_uri=CHEMONT.bond_type, domain=None, range=Optional[Union[str, "BondTypeEnum"]])
 
@@ -2556,6 +2579,9 @@ slots.cation_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="c
 slots.uncharged_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="uncharged_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.uncharged_elemental_charge, domain=None, range=Optional[int])
 
+slots.macromolecule_has_submolecules = Slot(uri=CHEMONT.has_submolecules, name="macromolecule_has submolecules", curie=CHEMONT.curie('has_submolecules'),
+                   model_uri=CHEMONT.macromolecule_has_submolecules, domain=Macromolecule, range=Optional[Union[Union[str, MoleculeId], List[Union[str, MoleculeId]]]])
+
 slots.monomolecular_polymer_polymer_of = Slot(uri=CHEMONT.polymer_of, name="monomolecular polymer_polymer of", curie=CHEMONT.curie('polymer_of'),
                    model_uri=CHEMONT.monomolecular_polymer_polymer_of, domain=MonomolecularPolymer, range=Optional[Union[str, MacromoleculeId]])
 
@@ -2601,6 +2627,9 @@ slots.chemical_element_electron_configuration = Slot(uri=CHEMONT.electron_config
 
 slots.chemical_element_has_stereocenter = Slot(uri=CHEMONT.has_stereocenter, name="chemical element_has stereocenter", curie=CHEMONT.curie('has_stereocenter'),
                    model_uri=CHEMONT.chemical_element_has_stereocenter, domain=ChemicalElement, range=Optional[Union[Union[dict, "Stereocenter"], List[Union[dict, "Stereocenter"]]]])
+
+slots.atom_ionic_form_elemental_change = Slot(uri=CHEMONT.elemental_change, name="atom ionic form_elemental change", curie=CHEMONT.curie('elemental_change'),
+                   model_uri=CHEMONT.atom_ionic_form_elemental_change, domain=AtomIonicForm, range=Optional[str])
 
 slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom anion_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.atom_anion_elemental_charge, domain=AtomAnion, range=Optional[int])

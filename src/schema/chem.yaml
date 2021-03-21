@@ -21,6 +21,7 @@ prefixes:
   dcterms: http://purl.org/dc/terms/
   biolink: https://w3id.org/biolink/
   biolinkml: https://w3id.org/biolink/biolinkml/
+  wd: http://www.wikidata.org/entity/  
   
 default_prefix: chemont
 default_range: string
@@ -38,12 +39,15 @@ classes:
     aliases:
       - species
       - metaclass
+      - second order class
     mixin: true
     description: >-
       instances of this class mixin are OWL Classes
     class_uri: owl:Class
     close_mappings:
       - skos:Concept
+    exact_mappings:
+      - wd:Q24017414 ## second-order class
     slots:
       - owl subclass of
 
@@ -170,9 +174,11 @@ classes:
 
   anion state:
     mixin: true
-    is_a: state
+    is_a: charged
     aliases:
       - negatively charged state
+    description: >-
+      This mixin is applied on an entity (atom or molecule) that is negatively charged
     slot_usage:
       elemental charge:
         maximum_value: -1
@@ -181,8 +187,11 @@ classes:
 
   cation state:
     mixin: true
+    is_a: charged
     aliases:
       - positively charged state
+    description: >-
+      This mixin is applied on an entity (atom or molecule) that is positively charged
     slot_usage:
       elemental charge:
         minimum_value: 1
@@ -223,6 +232,10 @@ classes:
       A large molecule, such as a polymer, lipid, or macrocycle
     exact_mappings:
       - Wikipedia:Macromolecule
+    slot_usage:
+      has submolecules:
+        range: molecule
+      
 
   molecular complex:
     aliases:
@@ -245,6 +258,9 @@ classes:
 
   protein:
     is_a: macromolecule
+    id_prefixes:
+      - UniProtKB
+      - PR
       
   glycan:
     is_a: macromolecule
@@ -469,6 +485,8 @@ classes:
       - value: nickel
     see_also:
       - https://en.wikipedia.org/wiki/Chemical_element
+    exact_mappings:
+      - wd:Q11344
         
   uncharged atom:
     is_a: atom ionic form
@@ -483,6 +501,8 @@ classes:
     is_a: atom
     description: >-
       A specific subtype of an atom with a specified neutron number
+    comments:
+      Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances.
     slots:
       - neutron number
       - isotope of
@@ -497,6 +517,8 @@ classes:
       - value: 1H (protium)
       - value: 2H (deuterium)
       - value: https://en.wikipedia.org/wiki/Carbon-12
+    exact_mappings:
+      - wd:Q25276
 
   nuclide:
     aliases:
@@ -529,6 +551,10 @@ classes:
     is_a: atom
     slots:
       - elemental charge
+    slot_usage:
+      elemental change:
+        todos:
+          - decide whether to permit this to have magnitude be unspecified, or whether to use a grouping class for this
     examples:
       - value: "chloride Cl-"
 
@@ -1304,6 +1330,8 @@ slots:
     
   subtype of:
     is_a: chemical to chemical relationship
+    aliases:
+      - metasubclass of ## wikidata
     mixins:
       - owl subclass of
     description: >-
@@ -1314,6 +1342,8 @@ slots:
     multivalued: true
     narrow_mappings:
       - rdfs:subClassOf
+    exact_mappings:
+      - wd:P2445 ## metasubclass of
       
   has subtype:
     is_a: chemical to chemical relationship

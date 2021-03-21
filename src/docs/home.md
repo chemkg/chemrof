@@ -9,17 +9,12 @@ Instances of the classes in the data model are chemical ontology classes, e.g.
  - nickel atom
  - nickel anion
  - carbon 14
- - mitrate
+ - nitrate
+ - L-serine
 
 Preliminary slides showing the idea:
 
- - https://docs.google.com/presentation/d/1xCHnJqGp_8jb8Btf6-JX5M_pt5j1NFiYhQFMASFanGM/edit
-
-For driving use case and why we need aan alternatibe to existing chebi atom / simple molecule representation see:
-
- - https://github.com/EnvironmentOntology/envo/issues/989
-
-Schema: [chem-schema](http://cmungall.github.io/chem-schema)
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTtQv4MLicg0nW1ehl7v9-ga3OCDB8Cr4Pf7M8B-YkvEoaUypuOYRSqqDCavADIr28KlZ6TwatcqQV_/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ## Basic idea
 
@@ -70,6 +65,16 @@ Currently the main derived artefacts of interest are:
 With care, you also see:
 
  - [OWL](https://github.com/cmungall/chem-schema/tree/master/owl) -- note this should be read as a meta-ontology by OBO people
+
+## Motivation
+
+For driving use case and why we need aan alternatibe to existing chebi atom / simple molecule representation see:
+
+ - https://github.com/EnvironmentOntology/envo/issues/989
+
+Schema: [chem-schema](http://cmungall.github.io/chem-schema)
+
+
 
 ## TODO
 

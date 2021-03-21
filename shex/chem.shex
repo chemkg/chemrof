@@ -58,8 +58,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <AnionState> {
-    (  $<AnionState_tes> (  &<State_tes> ;
-          rdf:type [ <State> ] ? ;
+    (  $<AnionState_tes> (  &<Charged_tes> ;
+          rdf:type [ <Charged> ] ? ;
           <elemental_charge> @metatype:Integer ?
        ) ;
        rdf:type [ <AnionState> ] ?
@@ -121,7 +121,8 @@ metatype:Nodeidentifier NONLITERAL
 <AtomIonicForm_struct> {
     (  $<AtomIonicForm_tes> (  &<Atom_tes> ;
           rdf:type [ <Atom> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @metatype:Integer ? ;
+          <elemental_change> @metatype:String ?
        ) ;
        rdf:type [ <AtomIonicForm> ]
     )
@@ -167,7 +168,10 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <CationState> {
-    (  $<CationState_tes> <elemental_charge> @metatype:Integer ? ;
+    (  $<CationState_tes> (  &<Charged_tes> ;
+          rdf:type [ <Charged> ] ? ;
+          <elemental_charge> @metatype:Integer ?
+       ) ;
        rdf:type [ <CationState> ] ?
     )
 }
@@ -185,7 +189,11 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
-<Charged> {
+<Charged>  (
+    @<AnionState> OR @<CationState>
+)
+
+<Charged_struct> {
     (  $<Charged_tes> (  &<ChargeState_tes> ;
           rdf:type [ <ChargeState> ] ?
        ) ;
@@ -362,7 +370,8 @@ metatype:Nodeidentifier NONLITERAL
 <Macromolecule>  (
     CLOSED {
        (  $<Macromolecule_tes> (  &<Molecule_tes> ;
-             rdf:type [ <Molecule> ] ?
+             rdf:type [ <Molecule> ] ? ;
+             <has_submolecules> @<Molecule> *
           ) ;
           rdf:type [ <Macromolecule> ]
        )
@@ -712,14 +721,12 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <State>  (
-    @<AnionState> OR @<ChargeState>
+    {
+       (  $<State_tes> rdf:type . * ;
+          rdf:type [ <State> ] ?
+       )
+    } OR @<ChargeState>
 )
-
-<State_struct> {
-    (  $<State_tes> rdf:type . * ;
-       rdf:type [ <State> ] ?
-    )
-}
 
 <Stereocenter>  (
     CLOSED {
