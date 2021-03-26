@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-03-19 12:19
+# Generation date: 2021-03-23 08:34
 # Schema: chemont
 #
 # id: chemont
@@ -182,23 +182,19 @@ class CopolymerId(MonomolecularPolymerId):
     pass
 
 
-class MoleculePartId(PolyatomicEntityId):
-    pass
-
-
 class NaturalProductId(MoleculeId):
     pass
 
 
-class MoietyId(MoleculePartId):
+class MoietyId(MolecularComponentId):
     pass
 
 
-class SequenceOfElementsId(MoleculePartId):
+class SequenceOfElementsId(MolecularComponentId):
     pass
 
 
-class FunctionalGroupId(MoleculePartId):
+class FunctionalGroupId(MolecularComponentId):
     pass
 
 
@@ -440,6 +436,7 @@ class ChemicalEntity(YAMLRoot):
 
     id: Union[str, ChemicalEntityId] = None
     is_radical: Optional[Union[bool, Bool]] = None
+    has_standard_inchi_object: Optional[Union[dict, "StandardInchiObject"]] = None
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -450,6 +447,9 @@ class ChemicalEntity(YAMLRoot):
 
         if self.is_radical is not None and not isinstance(self.is_radical, Bool):
             self.is_radical = Bool(self.is_radical)
+
+        if self.has_standard_inchi_object is not None and not isinstance(self.has_standard_inchi_object, StandardInchiObject):
+            self.has_standard_inchi_object = StandardInchiObject(**self.has_standard_inchi_object)
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**self.owl_subclass_of)
@@ -1025,26 +1025,6 @@ class Copolymer(MonomolecularPolymer):
 
 
 @dataclass
-class MoleculePart(PolyatomicEntity):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculePart
-    class_class_curie: ClassVar[str] = "chemont:MoleculePart"
-    class_name: ClassVar[str] = "molecule part"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculePart
-
-    id: Union[str, MoleculePartId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
-        if not isinstance(self.id, MoleculePartId):
-            self.id = MoleculePartId(self.id)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class NaturalProduct(Molecule):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1065,7 +1045,7 @@ class NaturalProduct(Molecule):
 
 
 @dataclass
-class Moiety(MoleculePart):
+class Moiety(MolecularComponent):
     """
     a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional
     groups
@@ -1089,7 +1069,7 @@ class Moiety(MoleculePart):
 
 
 @dataclass
-class SequenceOfElements(MoleculePart):
+class SequenceOfElements(MolecularComponent):
     """
     a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide
     sequence
@@ -1113,7 +1093,7 @@ class SequenceOfElements(MoleculePart):
 
 
 @dataclass
-class FunctionalGroup(MoleculePart):
+class FunctionalGroup(MolecularComponent):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMONT.FunctionalGroup
@@ -1625,6 +1605,82 @@ class FullySpecifiedAtom(Atom):
 
         if self.neutron_number is not None and not isinstance(self.neutron_number, int):
             self.neutron_number = int(self.neutron_number)
+
+        super().__post_init__(**kwargs)
+
+
+class InformationalChemicalEntity(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.InformationalChemicalEntity
+    class_class_curie: ClassVar[str] = "chemont:InformationalChemicalEntity"
+    class_name: ClassVar[str] = "informational chemical entity"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.InformationalChemicalEntity
+
+
+class InchiObject(InformationalChemicalEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.InchiObject
+    class_class_curie: ClassVar[str] = "chemont:InchiObject"
+    class_name: ClassVar[str] = "inchi object"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.InchiObject
+
+
+@dataclass
+class StandardInchiObject(InchiObject):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.StandardInchiObject
+    class_class_curie: ClassVar[str] = "chemont:StandardInchiObject"
+    class_name: ClassVar[str] = "standard inchi object"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.StandardInchiObject
+
+    inchi_version_string: str = None
+    inchi_chemical_sublayer: str = None
+    inchi_atom_connections_sublayer: Optional[str] = None
+    inchi_hydrogen_connections_sublayer: Optional[str] = None
+    inchi_charge_sublayer: Optional[str] = None
+    inchi_proton_sublayer: Optional[str] = None
+    inchi_stereochemical_double_bond_sublayer: Optional[str] = None
+    inchi_tetrahedral_stereochemical_sublayer: Optional[str] = None
+    inchi_stereochemical_type_sublayer: Optional[str] = None
+    inchi_isotopic_layer: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.inchi_version_string is None:
+            raise ValueError("inchi_version_string must be supplied")
+        if not isinstance(self.inchi_version_string, str):
+            self.inchi_version_string = str(self.inchi_version_string)
+
+        if self.inchi_chemical_sublayer is None:
+            raise ValueError("inchi_chemical_sublayer must be supplied")
+        if not isinstance(self.inchi_chemical_sublayer, str):
+            self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
+
+        if self.inchi_atom_connections_sublayer is not None and not isinstance(self.inchi_atom_connections_sublayer, str):
+            self.inchi_atom_connections_sublayer = str(self.inchi_atom_connections_sublayer)
+
+        if self.inchi_hydrogen_connections_sublayer is not None and not isinstance(self.inchi_hydrogen_connections_sublayer, str):
+            self.inchi_hydrogen_connections_sublayer = str(self.inchi_hydrogen_connections_sublayer)
+
+        if self.inchi_charge_sublayer is not None and not isinstance(self.inchi_charge_sublayer, str):
+            self.inchi_charge_sublayer = str(self.inchi_charge_sublayer)
+
+        if self.inchi_proton_sublayer is not None and not isinstance(self.inchi_proton_sublayer, str):
+            self.inchi_proton_sublayer = str(self.inchi_proton_sublayer)
+
+        if self.inchi_stereochemical_double_bond_sublayer is not None and not isinstance(self.inchi_stereochemical_double_bond_sublayer, str):
+            self.inchi_stereochemical_double_bond_sublayer = str(self.inchi_stereochemical_double_bond_sublayer)
+
+        if self.inchi_tetrahedral_stereochemical_sublayer is not None and not isinstance(self.inchi_tetrahedral_stereochemical_sublayer, str):
+            self.inchi_tetrahedral_stereochemical_sublayer = str(self.inchi_tetrahedral_stereochemical_sublayer)
+
+        if self.inchi_stereochemical_type_sublayer is not None and not isinstance(self.inchi_stereochemical_type_sublayer, str):
+            self.inchi_stereochemical_type_sublayer = str(self.inchi_stereochemical_type_sublayer)
+
+        if self.inchi_isotopic_layer is not None and not isinstance(self.inchi_isotopic_layer, str):
+            self.inchi_isotopic_layer = str(self.inchi_isotopic_layer)
 
         super().__post_init__(**kwargs)
 
@@ -2360,6 +2416,61 @@ slots.extended_smiles_string = Slot(uri=CHEMONT.extended_smiles_string, name="ex
 slots.canonical_smiles_string = Slot(uri=CHEMONT.canonical_smiles_string, name="canonical smiles string", curie=CHEMONT.curie('canonical_smiles_string'),
                    model_uri=CHEMONT.canonical_smiles_string, domain=ChemicalEntity, range=Union[str, ChemicalEntityId])
 
+slots.has_standard_inchi_object = Slot(uri=CHEMONT.has_standard_inchi_object, name="has standard inchi object", curie=CHEMONT.curie('has_standard_inchi_object'),
+                   model_uri=CHEMONT.has_standard_inchi_object, domain=None, range=Optional[Union[dict, StandardInchiObject]])
+
+slots.inchi_component = Slot(uri=CHEMONT.inchi_component, name="inchi component", curie=CHEMONT.curie('inchi_component'),
+                   model_uri=CHEMONT.inchi_component, domain=None, range=Optional[str])
+
+slots.inchi_sublayer = Slot(uri=CHEMONT.inchi_sublayer, name="inchi sublayer", curie=CHEMONT.curie('inchi_sublayer'),
+                   model_uri=CHEMONT.inchi_sublayer, domain=InchiObject, range=Optional[str])
+
+slots.inchi_version_string = Slot(uri=CHEMONT.inchi_version_string, name="inchi version string", curie=CHEMONT.curie('inchi_version_string'),
+                   model_uri=CHEMONT.inchi_version_string, domain=None, range=str,
+                   pattern=re.compile(r'^1[S]'))
+
+slots.inchi_chemical_sublayer = Slot(uri=CHEMONT.inchi_chemical_sublayer, name="inchi chemical sublayer", curie=CHEMONT.curie('inchi_chemical_sublayer'),
+                   model_uri=CHEMONT.inchi_chemical_sublayer, domain=InchiObject, range=str,
+                   pattern=re.compile(r'^[A-Z0-9\.]+$'))
+
+slots.inchi_atom_connections_sublayer = Slot(uri=CHEMONT.inchi_atom_connections_sublayer, name="inchi atom connections sublayer", curie=CHEMONT.curie('inchi_atom_connections_sublayer'),
+                   model_uri=CHEMONT.inchi_atom_connections_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^c.*'))
+
+slots.inchi_hydrogen_connections_sublayer = Slot(uri=CHEMONT.inchi_hydrogen_connections_sublayer, name="inchi hydrogen connections sublayer", curie=CHEMONT.curie('inchi_hydrogen_connections_sublayer'),
+                   model_uri=CHEMONT.inchi_hydrogen_connections_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^h.*'))
+
+slots.inchi_charge_sublayer = Slot(uri=CHEMONT.inchi_charge_sublayer, name="inchi charge sublayer", curie=CHEMONT.curie('inchi_charge_sublayer'),
+                   model_uri=CHEMONT.inchi_charge_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^q.*'))
+
+slots.inchi_proton_sublayer = Slot(uri=CHEMONT.inchi_proton_sublayer, name="inchi proton sublayer", curie=CHEMONT.curie('inchi_proton_sublayer'),
+                   model_uri=CHEMONT.inchi_proton_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^p[\-]\d+'))
+
+slots.inchi_stereochemical_double_bond_sublayer = Slot(uri=CHEMONT.inchi_stereochemical_double_bond_sublayer, name="inchi stereochemical double bond sublayer", curie=CHEMONT.curie('inchi_stereochemical_double_bond_sublayer'),
+                   model_uri=CHEMONT.inchi_stereochemical_double_bond_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^b.*'))
+
+slots.inchi_tetrahedral_stereochemical_sublayer = Slot(uri=CHEMONT.inchi_tetrahedral_stereochemical_sublayer, name="inchi tetrahedral stereochemical sublayer", curie=CHEMONT.curie('inchi_tetrahedral_stereochemical_sublayer'),
+                   model_uri=CHEMONT.inchi_tetrahedral_stereochemical_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^[tm].*'))
+
+slots.inchi_stereochemical_type_sublayer = Slot(uri=CHEMONT.inchi_stereochemical_type_sublayer, name="inchi stereochemical type sublayer", curie=CHEMONT.curie('inchi_stereochemical_type_sublayer'),
+                   model_uri=CHEMONT.inchi_stereochemical_type_sublayer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^s.*'))
+
+slots.inchi_isotopic_layer = Slot(uri=CHEMONT.inchi_isotopic_layer, name="inchi isotopic layer", curie=CHEMONT.curie('inchi_isotopic_layer'),
+                   model_uri=CHEMONT.inchi_isotopic_layer, domain=InchiObject, range=Optional[str],
+                   pattern=re.compile(r'^[ih].*'))
+
+slots.inchi_fixed_H_layer = Slot(uri=CHEMONT.inchi_fixed_H_layer, name="inchi fixed H layer", curie=CHEMONT.curie('inchi_fixed_H_layer'),
+                   model_uri=CHEMONT.inchi_fixed_H_layer, domain=InchiObject, range=Optional[str])
+
+slots.inchi_reconnected_layer = Slot(uri=CHEMONT.inchi_reconnected_layer, name="inchi reconnected layer", curie=CHEMONT.curie('inchi_reconnected_layer'),
+                   model_uri=CHEMONT.inchi_reconnected_layer, domain=InchiObject, range=Optional[str])
+
 slots.atomically_connected_to = Slot(uri=CHEMONT.atomically_connected_to, name="atomically connected to", curie=CHEMONT.curie('atomically_connected_to'),
                    model_uri=CHEMONT.atomically_connected_to, domain=AtomOccurrence, range=Optional[Union[Union[dict, "AtomOccurrence"], List[Union[dict, "AtomOccurrence"]]]])
 
@@ -2636,6 +2747,10 @@ slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="ato
 
 slots.atom_cation_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom cation_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.atom_cation_elemental_charge, domain=AtomCation, range=Optional[int])
+
+slots.standard_inchi_object_inchi_version_string = Slot(uri=CHEMONT.inchi_version_string, name="standard inchi object_inchi version string", curie=CHEMONT.curie('inchi_version_string'),
+                   model_uri=CHEMONT.standard_inchi_object_inchi_version_string, domain=StandardInchiObject, range=str,
+                   pattern=re.compile(r'^1S$'))
 
 slots.atomic_bond_has_atom_occurrences = Slot(uri=CHEMONT.has_atom_occurrences, name="atomic bond_has atom occurrences", curie=CHEMONT.curie('has_atom_occurrences'),
                    model_uri=CHEMONT.atomic_bond_has_atom_occurrences, domain=AtomicBond, range=Optional[Union[Union[dict, "AtomOccurrence"], List[Union[dict, "AtomOccurrence"]]]])

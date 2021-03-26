@@ -10,11 +10,11 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     dcterms:title "chemical ontology metaclasses" ;
     skos:definition "A data model describing metaclasses for chemical ontology classes" ;
-    meta:generation_date "2021-03-19 12:19" ;
+    meta:generation_date "2021-03-23 08:34" ;
     meta:metamodel_version "1.7.0" ;
     meta:source_file "chem.yaml" ;
-    meta:source_file_date "Fri Mar 19 12:18:48 2021" ;
-    meta:source_file_size 38092 .
+    meta:source_file_date "Tue Mar 23 08:34:26 2021" ;
+    meta:source_file_size 40510 .
 
 meta:SubsetDefinition a owl:Class ;
     rdfs:label "subset_definition" ;
@@ -453,6 +453,13 @@ meta:salt_elemental_charge a owl:ObjectProperty,
     rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
     rdfs:subPropertyOf <https://w3id.org/chemont/elemental_charge> .
 
+meta:standard_inchi_object_inchi_version_string a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "standard inchi object_inchi version string" ;
+    rdfs:domain <https://w3id.org/chemont/StandardInchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_version_string> .
+
 meta:tanimoto_similarity_score a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "tanimoto similarity_score" ;
@@ -595,12 +602,12 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "fully specified atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty <https://w3id.org/chemont/elemental_charge> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/Count> ;
             owl:onProperty <https://w3id.org/chemont/neutron_number> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+            owl:onProperty <https://w3id.org/chemont/elemental_charge> ],
         <https://w3id.org/chemont/Atom> ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
@@ -629,7 +636,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
 <https://w3id.org/chemont/Moiety> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "moiety" ;
-    rdfs:subClassOf <https://w3id.org/chemont/MoleculePart> ;
+    rdfs:subClassOf <https://w3id.org/chemont/MolecularComponent> ;
     skos:definition "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups" .
 
 <https://w3id.org/chemont/MolecularAnion> a owl:Class,
@@ -706,7 +713,7 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
 <https://w3id.org/chemont/SequenceOfElements> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "sequence of elements" ;
-    rdfs:subClassOf <https://w3id.org/chemont/MoleculePart> ;
+    rdfs:subClassOf <https://w3id.org/chemont/MolecularComponent> ;
     skos:definition "a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence" .
 
 <https://w3id.org/chemont/SupramolecularPolymer> a owl:Class,
@@ -834,12 +841,26 @@ meta:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemont/has_submolecules> ;
     skos:definition "Relation between a molecule and the groups it contains" .
 
+<https://w3id.org/chemont/inchi_fixed_H_layer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi fixed H layer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
 <https://w3id.org/chemont/inchi_key_string> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "inchi key string" ;
     rdfs:domain <https://w3id.org/chemont/ChemicalEntity> ;
     rdfs:range <https://w3id.org/chemont/ChemicalEncoding> ;
     rdfs:subPropertyOf <https://w3id.org/chemont/chemical_formula> .
+
+<https://w3id.org/chemont/inchi_reconnected_layer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi reconnected layer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
 
 <https://w3id.org/chemont/inchi_string> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -1013,7 +1034,11 @@ meta:polymer_of a owl:ObjectProperty,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/Molecule> ;
             owl:onProperty meta:is_substitutent_group_from ],
-        <https://w3id.org/chemont/MoleculePart> .
+        <https://w3id.org/chemont/MolecularComponent> .
+
+<https://w3id.org/chemont/InformationalChemicalEntity> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "informational chemical entity" .
 
 <https://w3id.org/chemont/Location> a owl:Class,
         meta:ClassDefinition ;
@@ -1162,6 +1187,12 @@ meta:polymer_of a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemont/has_part> ;
     skos:definition "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences" .
 
+<https://w3id.org/chemont/has_standard_inchi_object> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has standard inchi object" ;
+    rdfs:range <https://w3id.org/chemont/StandardInchiObject> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/information_property> .
+
 <https://w3id.org/chemont/has_subtype> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "has subtype" ;
@@ -1175,6 +1206,72 @@ meta:polymer_of a owl:ObjectProperty,
     rdfs:label "id" ;
     rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
     rdfs:subPropertyOf <https://w3id.org/chemont/information_property> .
+
+<https://w3id.org/chemont/inchi_atom_connections_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi atom connections sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> ;
+    skos:definition "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones." .
+
+<https://w3id.org/chemont/inchi_charge_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi charge sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
+<https://w3id.org/chemont/inchi_chemical_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi chemical sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> ;
+    skos:definition "the main chemical formula" .
+
+<https://w3id.org/chemont/inchi_hydrogen_connections_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi hydrogen connections sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> ;
+    skos:definition "Describes how many hydrogen atoms are connected to each of the other atoms." .
+
+<https://w3id.org/chemont/inchi_isotopic_layer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi isotopic layer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
+<https://w3id.org/chemont/inchi_proton_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi proton sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
+<https://w3id.org/chemont/inchi_stereochemical_double_bond_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi stereochemical double bond sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
+<https://w3id.org/chemont/inchi_stereochemical_type_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi stereochemical type sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
+
+<https://w3id.org/chemont/inchi_tetrahedral_stereochemical_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi tetrahedral stereochemical sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_sublayer> .
 
 <https://w3id.org/chemont/is_radical> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -1452,12 +1549,12 @@ meta:valence a owl:ObjectProperty,
         meta:ClassDefinition ;
     rdfs:label "atom grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemont/MoleculeGroupingClass> ;
-            owl:onProperty <https://w3id.org/chemont/subtype_of> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/Atom> ;
             owl:onProperty <https://w3id.org/chemont/classifies> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemont/MoleculeGroupingClass> ;
+            owl:onProperty <https://w3id.org/chemont/subtype_of> ],
         <https://w3id.org/chemont/GroupingClass> ;
     skos:definition "A grouping class that classifies atoms. For example, metal atom" .
 
@@ -1478,23 +1575,15 @@ meta:valence a owl:ObjectProperty,
     rdfs:label "conjugated acid" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/hard_or_soft_enum> ;
-            owl:onProperty meta:hard_or_soft ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
             owl:onProperty meta:acidity ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <http://UNKNOWN.org/hard_or_soft_enum> ;
+            owl:onProperty meta:hard_or_soft ],
         <https://w3id.org/chemont/Molecule> ;
     skos:definition "Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine" ;
     skos:exactMatch <http://purl.obolibrary.org/obo/CHEBI_50906> .
-
-<https://w3id.org/chemont/MolecularComponent> a owl:Class,
-        meta:ClassDefinition ;
-    rdfs:label "molecular component" ;
-    rdfs:subClassOf <https://w3id.org/chemont/PolyatomicEntity> ;
-    skos:altLabel "molecular part",
-        "submolecule" ;
-    skos:definition "A proper part of a molecule that is larger than an atom" .
 
 <https://w3id.org/chemont/MonoatomicIon> a owl:Class,
         meta:ClassDefinition ;
@@ -1542,11 +1631,11 @@ meta:valence a owl:ObjectProperty,
     rdfs:label "racemic mixture" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass <https://w3id.org/chemont/Enantiomer> ;
-            owl:onProperty meta:has_left_enantiomer ;
+            owl:onProperty meta:has_right_enantiomer ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/chemont/Enantiomer> ;
-            owl:onProperty meta:has_right_enantiomer ;
+            owl:onProperty meta:has_left_enantiomer ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/chemont/ChemicalEntity> ;
     skos:definition "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide" .
@@ -1573,6 +1662,18 @@ meta:valence a owl:ObjectProperty,
     rdfs:label "has bonds" ;
     rdfs:domain <https://w3id.org/chemont/Molecule> ;
     rdfs:range <https://w3id.org/chemont/AtomicBond> .
+
+<https://w3id.org/chemont/inchi_component> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi component" ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/information_property> .
+
+<https://w3id.org/chemont/inchi_version_string> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi version string" ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_component> .
 
 <https://w3id.org/chemont/property_of_atom> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -1626,12 +1727,12 @@ meta:score a owl:ObjectProperty,
     rdfs:label "atom ionic form" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty <https://w3id.org/chemont/elemental_charge> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty meta:elemental_change ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+            owl:onProperty <https://w3id.org/chemont/elemental_charge> ],
         <https://w3id.org/chemont/Atom> ;
     skos:altLabel "atom ionic species" ;
     skos:definition "an atom type in which charge state is specified. Also known as (atom) ionic species. For example, chloride is an atom ionic species; its formula is Cl−." ;
@@ -1650,11 +1751,6 @@ meta:score a owl:ObjectProperty,
     skos:definition "This mixin is applied on an entity (atom or molecule) that is positively charged" ;
     skos:exactMatch <http://semanticscience.org/resource/CHEMINF_000402> .
 
-<https://w3id.org/chemont/MoleculePart> a owl:Class,
-        meta:ClassDefinition ;
-    rdfs:label "molecule part" ;
-    rdfs:subClassOf <https://w3id.org/chemont/PolyatomicEntity> .
-
 <https://w3id.org/chemont/PolyatomicIon> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "polyatomic ion" ;
@@ -1666,6 +1762,52 @@ meta:score a owl:ObjectProperty,
         <https://w3id.org/chemont/Molecule> ;
     skos:altLabel "polyatomic ion species" ;
     skos:definition "A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-)." .
+
+<https://w3id.org/chemont/StandardInchiObject> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "standard inchi object" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/International_Chemical_Identifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_isotopic_layer> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_chemical_sublayer> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_atom_connections_sublayer> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_version_string> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_stereochemical_double_bond_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_proton_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_stereochemical_type_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_charge_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_hydrogen_connections_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/inchi_tetrahedral_stereochemical_sublayer> ],
+        <https://w3id.org/chemont/InchiObject> .
 
 <https://w3id.org/chemont/Uncharged> a owl:Class,
         meta:ClassDefinition ;
@@ -1737,12 +1879,18 @@ meta:score a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/Molecule> ;
-            owl:onProperty meta:left_molecule ],
+            owl:onProperty meta:right_molecule ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/Molecule> ;
-            owl:onProperty meta:right_molecule ],
+            owl:onProperty meta:left_molecule ],
         <https://w3id.org/chemont/Measure> .
+
+<https://w3id.org/chemont/PolyatomicEntity> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "polyatomic entity" ;
+    rdfs:subClassOf <https://w3id.org/chemont/ChemicalEntity> ;
+    skos:definition "Any chemical entity consisting of more than one atom." .
 
 <https://w3id.org/chemont/RelationalChemicalEntity> a owl:Class,
         meta:ClassDefinition ;
@@ -1783,11 +1931,6 @@ meta:score a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemont/has_part> ;
     skos:definition "Relation between a molecule and the molecules it is made from." .
 
-<https://w3id.org/chemont/information_property> a owl:ObjectProperty,
-        meta:SlotDefinition ;
-    rdfs:label "information property" ;
-    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
-
 <https://w3id.org/chemont/structural_isomer_of> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "structural isomer of" ;
@@ -1806,11 +1949,13 @@ meta:score a owl:ObjectProperty,
             owl:onProperty meta:topValue ;
             owl:qualifiedCardinality 1 ] .
 
-<https://w3id.org/chemont/PolyatomicEntity> a owl:Class,
+<https://w3id.org/chemont/MolecularComponent> a owl:Class,
         meta:ClassDefinition ;
-    rdfs:label "polyatomic entity" ;
-    rdfs:subClassOf <https://w3id.org/chemont/ChemicalEntity> ;
-    skos:definition "Any chemical entity consisting of more than one atom." .
+    rdfs:label "molecular component" ;
+    rdfs:subClassOf <https://w3id.org/chemont/PolyatomicEntity> ;
+    skos:altLabel "molecular part",
+        "submolecule" ;
+    skos:definition "A proper part of a molecule that is larger than an atom" .
 
 <https://w3id.org/chemont/classifies> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -1835,15 +1980,15 @@ meta:score a owl:ObjectProperty,
     rdfs:label "grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/ChemicalEntity> ;
-            owl:onProperty <https://w3id.org/chemont/classifies> ],
+            owl:onClass <https://w3id.org/chemont/OwlClass> ;
+            owl:onProperty <https://w3id.org/chemont/owl_subclass_of> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemont/GroupingClass> ;
             owl:onProperty <https://w3id.org/chemont/subtype_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/OwlClass> ;
-            owl:onProperty <https://w3id.org/chemont/owl_subclass_of> ],
+            owl:onClass <https://w3id.org/chemont/ChemicalEntity> ;
+            owl:onProperty <https://w3id.org/chemont/classifies> ],
         <https://w3id.org/chemont/OwlClass> ;
     skos:definition "A non-specific entity. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" .
 
@@ -1858,6 +2003,11 @@ meta:score a owl:ObjectProperty,
 <https://w3id.org/chemont/chemical_to_chemical_relationship> a owl:ObjectProperty,
         meta:SlotDefinition ;
     rdfs:label "chemical to chemical relationship" ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
+
+<https://w3id.org/chemont/information_property> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "information property" ;
     rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> .
 
 <https://w3id.org/chemont/MoleculeGroupingClass> a owl:Class,
@@ -1886,12 +2036,12 @@ meta:score a owl:ObjectProperty,
     rdfs:label "reaction participant" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/ChemicalEntity> ;
-            owl:onProperty meta:participant ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
             owl:onProperty meta:stoichiometry ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemont/ChemicalEntity> ;
+            owl:onProperty meta:participant ],
         <https://w3id.org/chemont/RelationalChemicalEntity> ;
     skos:definition "Instances of this link a reaction to a chemical entity participant" .
 
@@ -1915,18 +2065,26 @@ meta:score a owl:ObjectProperty,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
-            owl:onProperty meta:boiling_point_in_celcius ],
+            owl:onProperty meta:melting_point_in_celcius ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:electron_configuration ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+            owl:onProperty meta:standard_atomic_weight ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemont/Stereocenter> ;
             owl:onProperty meta:has_stereocenter ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty meta:periodic_table_group ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <https://w3id.org/chemont/symbol> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+            owl:onProperty meta:boiling_point_in_celcius ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
@@ -1934,15 +2092,7 @@ meta:score a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:periodic_table_group ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
-            owl:onProperty meta:melting_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
-            owl:onProperty meta:standard_atomic_weight ],
+            owl:onProperty meta:electron_configuration ],
         <https://w3id.org/chemont/Atom> ;
     skos:altLabel "element",
         "generic atom" ;
@@ -1955,8 +2105,8 @@ meta:score a owl:ObjectProperty,
     rdfs:label "enantiomer" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:relative_configuration ],
+            owl:onClass <https://w3id.org/chemont/Molecule> ;
+            owl:onProperty meta:enantiomer_form_of ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
@@ -1964,11 +2114,11 @@ meta:score a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:optical_configuration ],
+            owl:onProperty meta:relative_configuration ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/Molecule> ;
-            owl:onProperty meta:enantiomer_form_of ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty meta:optical_configuration ],
         <https://w3id.org/chemont/Stereoisomer> ;
     skos:definition "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide" .
 
@@ -1993,27 +2143,27 @@ meta:score a owl:ObjectProperty,
     rdfs:label "atomic bond" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty <https://w3id.org/chemont/bond_order> ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
+            owl:onProperty meta:bond_angle ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <http://UNKNOWN.org/bond_type_enum> ;
+            owl:onProperty meta:bond_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemont/AtomOccurrence> ;
             owl:onProperty <https://w3id.org/chemont/has_atom_occurrences> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
-            owl:onProperty meta:bond_angle ],
+            owl:onProperty meta:torsional_angle ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
             owl:onProperty meta:bond_length_in_angstroms ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Float> ;
-            owl:onProperty meta:torsional_angle ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/bond_type_enum> ;
-            owl:onProperty meta:bond_type ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
+            owl:onProperty <https://w3id.org/chemont/bond_order> ],
         <https://w3id.org/chemont/OwlClass>,
         <https://w3id.org/chemont/RelationalChemicalEntity> ;
     skos:altLabel "bond",
@@ -2021,13 +2171,20 @@ meta:score a owl:ObjectProperty,
     skos:definition "A connection between two atoms. Note this is the reified form of 'atomically connected to'. " ;
     skos:exactMatch <http://semanticscience.org/resource/CHEMINF_000063> .
 
+<https://w3id.org/chemont/inchi_sublayer> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "inchi sublayer" ;
+    rdfs:domain <https://w3id.org/chemont/InchiObject> ;
+    rdfs:range <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+    rdfs:subPropertyOf <https://w3id.org/chemont/inchi_component> .
+
 <https://w3id.org/chemont/AtomOccurrence> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "atom occurrence" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty meta:valence ],
+            owl:onProperty meta:oxidation_number ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/chemont/Atom> ;
             owl:onProperty meta:occurrence_of ;
@@ -2035,11 +2192,11 @@ meta:score a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty meta:oxidation_number ],
+            owl:onProperty meta:formal_charge ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
-            owl:onProperty meta:formal_charge ],
+            owl:onProperty meta:valence ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Integer> ;
@@ -2053,15 +2210,31 @@ meta:score a owl:ObjectProperty,
     rdfs:label "reaction" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
+            owl:onProperty meta:is_diastereoselective ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty meta:reaction_center ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/smarts_string> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
+            owl:onProperty meta:is_fully_characterized ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty meta:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemont/ReactionParticipant> ;
             owl:onProperty meta:left_participants ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:direction ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
+            owl:onProperty meta:is_stereo ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
@@ -2072,27 +2245,11 @@ meta:score a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
-            owl:onProperty meta:is_stereo ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
-            owl:onProperty meta:is_fully_characterized ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty <https://w3id.org/chemont/smarts_string> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
             owl:onProperty meta:is_transport ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty meta:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
-            owl:onProperty meta:is_diastereoselective ] ;
+            owl:onProperty meta:direction ] ;
     skos:definition "reaction" .
 
 <https://w3id.org/chemont/ChemicalEncoding> a owl:Class,
@@ -2103,33 +2260,39 @@ meta:score a owl:ObjectProperty,
             owl:onProperty meta:topValue ;
             owl:qualifiedCardinality 1 ] .
 
+<https://w3id.org/chemont/InchiObject> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "inchi object" ;
+    rdfs:seeAlso "https://doi.org/10.1186/s13321-015-0068-4" ;
+    rdfs:subClassOf <https://w3id.org/chemont/InformationalChemicalEntity> .
+
 <https://w3id.org/chemont/Isotope> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "isotope" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/Isotope> ;
-            owl:onProperty <https://w3id.org/chemont/isotope_of> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/Isotope> ;
-            owl:onProperty <https://w3id.org/chemont/decay_product> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty <https://w3id.org/chemont/mode_of_formation> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/NumberOfYears> ;
             owl:onProperty <https://w3id.org/chemont/half_life> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty <https://w3id.org/chemont/decay_mode> ],
+            owl:onProperty <https://w3id.org/chemont/decay_energy> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty <https://w3id.org/chemont/decay_energy> ],
+            owl:onProperty <https://w3id.org/chemont/mode_of_formation> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemont/Isotope> ;
+            owl:onProperty <https://w3id.org/chemont/decay_product> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemont/Isotope> ;
+            owl:onProperty <https://w3id.org/chemont/isotope_of> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/decay_mode> ],
         <https://w3id.org/chemont/Atom> ;
     skos:definition "A specific subtype of an atom with a specified neutron number" ;
     skos:note "Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances." ;
@@ -2166,20 +2329,20 @@ meta:topValue a owl:DatatypeProperty ;
     rdfs:label "atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/Count> ;
-            owl:onProperty <https://w3id.org/chemont/atomic_number> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
-            owl:onProperty <https://w3id.org/chemont/name> ],
+            owl:onClass <https://w3id.org/chemont/SubatomicParticle> ;
+            owl:onProperty <https://w3id.org/chemont/has_part> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <https://w3id.org/chemont/symbol> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemont/SubatomicParticle> ;
-            owl:onProperty <https://w3id.org/chemont/has_part> ],
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
+            owl:onProperty <https://w3id.org/chemont/name> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemont/Count> ;
+            owl:onProperty <https://w3id.org/chemont/atomic_number> ],
         <https://w3id.org/chemont/ChemicalEntity> ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
@@ -2215,10 +2378,6 @@ meta:topValue a owl:DatatypeProperty ;
         meta:ClassDefinition ;
     rdfs:label "chemical entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
-            owl:onProperty <https://w3id.org/chemont/is_radical> ],
-        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <https://w3id.org/chemont/id> ;
             owl:qualifiedCardinality 1 ],
@@ -2226,6 +2385,14 @@ meta:topValue a owl:DatatypeProperty ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemont/OwlClass> ;
             owl:onProperty <https://w3id.org/chemont/owl_subclass_of> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/Boolean> ;
+            owl:onProperty <https://w3id.org/chemont/is_radical> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemont/StandardInchiObject> ;
+            owl:onProperty <https://w3id.org/chemont/has_standard_inchi_object> ],
         <https://w3id.org/chemont/OwlClass> ;
     skos:altLabel "chemical",
         "chemical species",
@@ -2251,18 +2418,18 @@ meta:topValue a owl:DatatypeProperty ;
             owl:allValuesFrom <https://w3id.org/chemont/Molecule> ;
             owl:onProperty <https://w3id.org/chemont/has_submolecules> ],
         [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemont/AtomicBond> ;
+            owl:onProperty <https://w3id.org/chemont/has_bonds> ],
+        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemont/Atom> ;
             owl:onProperty <https://w3id.org/chemont/has_atoms> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemont/AtomOccurrence> ;
-            owl:onProperty <https://w3id.org/chemont/has_atom_occurrences> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/biolink/biolinkml/meta/types/String> ;
             owl:onProperty <https://w3id.org/chemont/has_part> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemont/AtomicBond> ;
-            owl:onProperty <https://w3id.org/chemont/has_bonds> ],
+            owl:allValuesFrom <https://w3id.org/chemont/AtomOccurrence> ;
+            owl:onProperty <https://w3id.org/chemont/has_atom_occurrences> ],
         <https://w3id.org/chemont/PolyatomicEntity> ;
     skos:altLabel "molecular entity",
         "monomolecular entity" ;
@@ -2272,6 +2439,10 @@ meta:topValue a owl:DatatypeProperty ;
         "Example(value='dioxygen', description=None)",
         "Example(value='phosphene', description=None)" .
 
+meta:ClassDefinition a owl:Class ;
+    rdfs:label "class_definition" ;
+    skos:definition "the definition of a class or interface" .
+
 <https://w3id.org/biolink/biolinkml/meta/types/String> a owl:Class,
         meta:TypeDefinition ;
     rdfs:label "string" ;
@@ -2280,10 +2451,6 @@ meta:topValue a owl:DatatypeProperty ;
             owl:onProperty meta:topValue ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A character string" .
-
-meta:ClassDefinition a owl:Class ;
-    rdfs:label "class_definition" ;
-    skos:definition "the definition of a class or interface" .
 
 meta:SlotDefinition a owl:Class ;
     rdfs:label "slot_definition" ;

@@ -4,13 +4,14 @@ GitHub: [cmungall/chem-schema](https://github.com/cmungall/chem-schema)
 
 This repo includes schema/datamodel for a chemical ontology
 
-Instances of the classes in the data model are chemical ontology classes, e.g.
+Instances of the classes in the data model are CHEBI classes, e.g.
 
  - nickel atom
  - nickel anion
  - carbon 14
  - nitrate
  - L-serine
+ - imatinib
 
 Preliminary slides showing the idea:
 

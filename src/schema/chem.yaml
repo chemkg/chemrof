@@ -107,7 +107,9 @@ classes:
       - owl class
     slots:
       - id
+      - name
       - is radical
+      - has standard inchi object
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -360,24 +362,21 @@ classes:
       - value: cysteine
       - value: phosphene
 
-  molecule part:
-    is_a: polyatomic entity
-
   natural product:
     is_a: molecule
     
   moiety:
-    is_a: molecule part
+    is_a: molecular component
     description: >-
       a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
 
   sequence of elements:
-    is_a: molecule part
+    is_a: molecular component
     description: >-
       a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence
 
   functional group:
-    is_a: molecule part
+    is_a: molecular component
     slot_usage:
       is substitutent group from:
         range: molecule
@@ -609,6 +608,34 @@ classes:
       - neutron number
 
 
+  informational chemical entity:
+    abstract: true
+
+  inchi object:
+    is_a: informational chemical entity
+    abstract: true
+    see_also:
+      - https://doi.org/10.1186/s13321-015-0068-4
+    
+  standard inchi object:
+    is_a: inchi object
+    see_also:
+      - https://en.wikipedia.org/wiki/International_Chemical_Identifier
+    slots:
+      - inchi version string
+      - inchi chemical sublayer
+      - inchi atom connections sublayer
+      - inchi hydrogen connections sublayer
+      - inchi charge sublayer
+      - inchi proton sublayer
+      - inchi stereochemical double bond sublayer
+      - inchi tetrahedral stereochemical sublayer
+      - inchi stereochemical type sublayer
+      - inchi isotopic layer
+    slot_usage:
+      inchi version string:
+        pattern: "^1S$"
+    
   relational chemical entity:
     mixins:
       - owl class
@@ -738,8 +765,10 @@ classes:
     is_a: polyatomic entity
     description: >-
       a chemical compound consisting of an ionic assembly of cations and anions.
+    examples:
+      - value: sodium carbonate CHEBI:29377
     comments:
-      - in SIO falls under molecular complex?
+      - in SIO falls under molecular complex? Also in biolink
     slot_usage:
       elemental charge:
         minimum_value: 0
@@ -760,27 +789,36 @@ classes:
       optical configuration:
         range: string  # + or -
       absolute configuration:
-        range: string  # R or S
+        range: string  # R or S (Right/Left)
         see_also:
           - https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules
       enantiomer form of:
         range: molecule
+        is_a: owl subclass of
         description: >-
           Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
+    comments:
+      - "key= (enantiomer form of, absolute configuration)"
+      - "key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)"
     exact_mappings:
       - SIO:010777
       
   racemic mixture:
+    aliases:
+      - racemate
     is_a: chemical entity
     description: >-
       a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
     slot_usage:
+      # TODO: map this to +/-
       has left enantiomer:
         required: true
         range: enantiomer
       has right enantiomer:
         required: true
         range: enantiomer
+    exact_mappings:
+      - CHEBI:60911
 
   allotrope:
     is_a: molecule
@@ -1119,6 +1157,7 @@ slots:
       - CHEMINF:000067
       
   chemical formula:
+    abstract: true
     is_a: information property
     description: >-
       A generic grouping for miolecular formulae and empirican formulae
@@ -1196,7 +1235,76 @@ slots:
     multivalued: false
     description: >-
       A deterministic SMILES string. Note there is no unique system for canonical smiles strings
+
+  has standard inchi object:
+    is_a: information property
+    range: standard inchi object
+    required: false
+    multivalued: false
     
+  inchi component:
+    is_a: information property
+    
+  inchi sublayer:
+    is_a: inchi component
+    domain: inchi object
+    abstract: true
+
+  inchi version string:
+    is_a: inchi component
+    pattern: "^1[S]"
+    required: true
+
+  inchi chemical sublayer:
+    is_a: inchi sublayer
+    pattern: "^[A-Z0-9\\.]+$"
+    required: true
+    description: >-
+      the main chemical formula
+
+  inchi atom connections sublayer:
+    is_a: inchi sublayer
+    pattern: "^c.*"
+    description: >-
+      The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
+
+  inchi hydrogen connections sublayer:
+    is_a: inchi sublayer
+    pattern: "^h.*"
+    description: >-
+      Describes how many hydrogen atoms are connected to each of the other atoms.
+
+  inchi charge sublayer:
+    is_a: inchi sublayer
+    pattern: "^q.*"
+
+  inchi proton sublayer:
+    is_a: inchi sublayer
+    pattern: "^p[\\-]\\d+"
+
+  inchi stereochemical double bond sublayer:
+    is_a: inchi sublayer
+    pattern: "^b.*"
+
+  inchi tetrahedral stereochemical sublayer:
+    is_a: inchi sublayer
+    pattern: "^[tm].*"  ## TODO
+
+  inchi stereochemical type sublayer:
+    is_a: inchi sublayer
+    pattern: "^s.*"
+
+  inchi isotopic layer:
+    is_a: inchi sublayer
+    pattern: "^[ih].*"  ## TODO
+
+  inchi fixed H layer:
+    is_a: inchi sublayer
+
+  inchi reconnected layer:
+    is_a: inchi sublayer
+
+      
   atomically connected to:
     domain: atom occurrence
     range: atom occurrence

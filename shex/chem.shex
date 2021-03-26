@@ -224,7 +224,8 @@ metatype:Nodeidentifier NONLITERAL
 <ChemicalEntity_struct> {
     (  $<ChemicalEntity_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <is_radical> @metatype:Boolean ?
+          <is_radical> @metatype:Boolean ? ;
+          <has_standard_inchi_object> @<StandardInchiObject> ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
     )
@@ -296,8 +297,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <FunctionalGroup> CLOSED {
-    (  $<FunctionalGroup_tes> (  &<MoleculePart_tes> ;
-          rdf:type [ <MoleculePart> ] ? ;
+    (  $<FunctionalGroup_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ? ;
           <is_substitutent_group_from> @<Molecule> ?
        ) ;
        rdf:type [ <FunctionalGroup> ]
@@ -333,6 +334,24 @@ metatype:Nodeidentifier NONLITERAL
        rdf:type [ <GroupingClass> ] ?
     )
 }
+
+<InchiObject>  (
+    {
+       (  $<InchiObject_tes> (  &<InformationalChemicalEntity_tes> ;
+             rdf:type [ <InformationalChemicalEntity> ] ?
+          ) ;
+          rdf:type [ <InchiObject> ] ?
+       )
+    } OR @<StandardInchiObject>
+)
+
+<InformationalChemicalEntity>  (
+    {
+       (  $<InformationalChemicalEntity_tes> rdf:type . * ;
+          rdf:type [ <InformationalChemicalEntity> ] ?
+       )
+    } OR @<InchiObject>
+)
 
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
@@ -389,8 +408,8 @@ metatype:Nodeidentifier NONLITERAL
 )
 
 <Moiety> CLOSED {
-    (  $<Moiety_tes> (  &<MoleculePart_tes> ;
-          rdf:type [ <MoleculePart> ] ?
+    (  $<Moiety_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ?
        ) ;
        rdf:type [ <Moiety> ]
     )
@@ -433,7 +452,7 @@ metatype:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <MolecularComponent> ]
        )
-    } OR @<ChemicalGroup> OR @<PolymerPart>
+    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<PolymerPart> OR @<SequenceOfElements>
 )
 
 <MolecularSpecies> CLOSED {
@@ -493,16 +512,6 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <MoleculePairwiseSimilarity> ] ?
        )
     } OR @<TanimotoSimilarity>
-)
-
-<MoleculePart>  (
-    CLOSED {
-       (  $<MoleculePart_tes> (  &<PolyatomicEntity_tes> ;
-             rdf:type [ <PolyatomicEntity> ] ?
-          ) ;
-          rdf:type [ <MoleculePart> ]
-       )
-    } OR @<FunctionalGroup> OR @<Moiety> OR @<SequenceOfElements>
 )
 
 <MonoatomicIon>  (
@@ -596,7 +605,7 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <PolyatomicEntity>  (
-    @<MolecularComplex> OR @<MolecularComponent> OR @<Molecule> OR @<MoleculePart> OR @<Salt>
+    @<MolecularComplex> OR @<MolecularComponent> OR @<Molecule> OR @<Salt>
 )
 
 <PolyatomicEntity_struct> {
@@ -713,10 +722,28 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <SequenceOfElements> CLOSED {
-    (  $<SequenceOfElements_tes> (  &<MoleculePart_tes> ;
-          rdf:type [ <MoleculePart> ] ?
+    (  $<SequenceOfElements_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ?
        ) ;
        rdf:type [ <SequenceOfElements> ]
+    )
+}
+
+<StandardInchiObject> CLOSED {
+    (  $<StandardInchiObject_tes> (  &<InchiObject_tes> ;
+          rdf:type [ <InchiObject> ] ? ;
+          <inchi_version_string> @metatype:String ;
+          <inchi_chemical_sublayer> @metatype:String ;
+          <inchi_atom_connections_sublayer> @metatype:String ? ;
+          <inchi_hydrogen_connections_sublayer> @metatype:String ? ;
+          <inchi_charge_sublayer> @metatype:String ? ;
+          <inchi_proton_sublayer> @metatype:String ? ;
+          <inchi_stereochemical_double_bond_sublayer> @metatype:String ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @metatype:String ? ;
+          <inchi_stereochemical_type_sublayer> @metatype:String ? ;
+          <inchi_isotopic_layer> @metatype:String ?
+       ) ;
+       rdf:type [ <StandardInchiObject> ] ?
     )
 }
 
