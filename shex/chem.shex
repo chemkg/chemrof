@@ -1,8 +1,8 @@
 BASE <https://w3id.org/chemont/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX metatype: <https://w3id.org/biolink/biolinkml/meta/types/>
 
 
 <Count> xsd:int
@@ -11,33 +11,39 @@ PREFIX metatype: <https://w3id.org/biolink/biolinkml/meta/types/>
 
 <ChemicalEncoding> xsd:string
 
-metatype:String xsd:string
+<SequenceString> xsd:string
 
-metatype:Integer xsd:integer
+<AminoAcidSequenceString> xsd:string
 
-metatype:Boolean xsd:boolean
+<DNASequenceString> xsd:string
 
-metatype:Float xsd:float
+linkml:String xsd:string
 
-metatype:Double xsd:double
+linkml:Integer xsd:integer
 
-metatype:Decimal xsd:decimal
+linkml:Boolean xsd:boolean
 
-metatype:Time xsd:dateTime
+linkml:Float xsd:float
 
-metatype:Date xsd:date
+linkml:Double xsd:double
 
-metatype:Datetime xsd:dateTime
+linkml:Decimal xsd:decimal
 
-metatype:Uriorcurie IRI
+linkml:Time xsd:dateTime
 
-metatype:Uri IRI
+linkml:Date xsd:date
 
-metatype:Ncname xsd:string
+linkml:Datetime xsd:dateTime
 
-metatype:Objectidentifier IRI
+linkml:Uriorcurie IRI
 
-metatype:Nodeidentifier NONLITERAL
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
 
 <AcidFormOfConjugatedAcid> CLOSED {
     (  $<AcidFormOfConjugatedAcid_tes> (  &<PolyatomicIon_tes> ;
@@ -51,16 +57,25 @@ metatype:Nodeidentifier NONLITERAL
     (  $<Allotrope_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
           <allotropic_analog_of> @<ChemicalElement> ;
-          <has_bonding_structure> @metatype:String
+          <has_bonding_structure> @linkml:String
        ) ;
        rdf:type [ <Allotrope> ]
+    )
+}
+
+<AminoAcidSequenceInterval> CLOSED {
+    (  $<AminoAcidSequenceInterval_tes> (  &<SequenceInterval_tes> ;
+          rdf:type [ <SequenceInterval> ] ? ;
+          <has_sequence_representation> @<AminoAcidSequenceString> ?
+       ) ;
+       rdf:type [ <AminoAcidSequenceInterval> ]
     )
 }
 
 <AnionState> {
     (  $<AnionState_tes> (  &<Charged_tes> ;
           rdf:type [ <Charged> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <AnionState> ] ?
     )
@@ -74,8 +89,7 @@ metatype:Nodeidentifier NONLITERAL
     (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
           rdf:type [ <ChemicalEntity> ] ? ;
           <atomic_number> @<Count> ? ;
-          <symbol> @metatype:String ? ;
-          <name> @metatype:String ? ;
+          <symbol> @linkml:String ? ;
           <has_part> @<SubatomicParticle> ?
        ) ;
        rdf:type [ <Atom> ]
@@ -87,7 +101,7 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <MonoatomicIon> ] ? ;
           &<AnionState_tes> ;
           rdf:type [ <AnionState> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <AtomAnion> ]
     )
@@ -98,7 +112,7 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <MonoatomicIon> ] ? ;
           &<CationState_tes> ;
           rdf:type [ <CationState> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <AtomCation> ]
     )
@@ -121,8 +135,8 @@ metatype:Nodeidentifier NONLITERAL
 <AtomIonicForm_struct> {
     (  $<AtomIonicForm_tes> (  &<Atom_tes> ;
           rdf:type [ <Atom> ] ? ;
-          <elemental_charge> @metatype:Integer ? ;
-          <elemental_change> @metatype:String ?
+          <elemental_charge> @linkml:Integer ? ;
+          <elemental_change> @linkml:String ?
        ) ;
        rdf:type [ <AtomIonicForm> ]
     )
@@ -134,10 +148,10 @@ metatype:Nodeidentifier NONLITERAL
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
           <occurrence_of> @<Atom> ;
-          <valence> @metatype:Integer ? ;
-          <oxidation_number> @metatype:Integer ? ;
-          <formal_charge> @metatype:Integer ? ;
-          <coordination_number> @metatype:Integer ?
+          <valence> @linkml:Integer ? ;
+          <oxidation_number> @linkml:Integer ? ;
+          <formal_charge> @linkml:Integer ? ;
+          <coordination_number> @linkml:Integer ?
        ) ;
        rdf:type [ <AtomOccurrence> ] ?
     )
@@ -149,11 +163,11 @@ metatype:Nodeidentifier NONLITERAL
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
           <has_atom_occurrences> @<AtomOccurrence> * ;
-          <bond_order> @metatype:Integer ? ;
+          <bond_order> @linkml:Integer ? ;
           <bond_type> @<BondTypeEnum> ? ;
-          <bond_length_in_angstroms> @metatype:Float ? ;
-          <bond_angle> @metatype:Float ? ;
-          <torsional_angle> @metatype:Float ?
+          <bond_length_in_angstroms> @linkml:Float ? ;
+          <bond_angle> @linkml:Float ? ;
+          <torsional_angle> @linkml:Float ?
        ) ;
        rdf:type [ <AtomicBond> ] ?
     )
@@ -170,7 +184,7 @@ metatype:Nodeidentifier NONLITERAL
 <CationState> {
     (  $<CationState_tes> (  &<Charged_tes> ;
           rdf:type [ <Charged> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <CationState> ] ?
     )
@@ -183,7 +197,7 @@ metatype:Nodeidentifier NONLITERAL
 <ChargeState_struct> {
     (  $<ChargeState_tes> (  &<State_tes> ;
           rdf:type [ <State> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <ChargeState> ] ?
     )
@@ -204,13 +218,13 @@ metatype:Nodeidentifier NONLITERAL
 <ChemicalElement> CLOSED {
     (  $<ChemicalElement_tes> (  &<Atom_tes> ;
           rdf:type [ <Atom> ] ? ;
-          <symbol> @metatype:String ? ;
-          <periodic_table_group> @metatype:String ? ;
-          <periodic_table_block> @metatype:String ? ;
-          <boiling_point_in_celcius> @metatype:Float ? ;
-          <melting_point_in_celcius> @metatype:Float ? ;
-          <standard_atomic_weight> @metatype:Float ? ;
-          <electron_configuration> @metatype:String ? ;
+          <symbol> @linkml:String ? ;
+          <periodic_table_group> @linkml:String ? ;
+          <periodic_table_block> @linkml:String ? ;
+          <boiling_point_in_celcius> @linkml:Float ? ;
+          <melting_point_in_celcius> @linkml:Float ? ;
+          <standard_atomic_weight> @linkml:Float ? ;
+          <electron_configuration> @linkml:String ? ;
           <has_stereocenter> @<Stereocenter> *
        ) ;
        rdf:type [ <ChemicalElement> ]
@@ -218,13 +232,14 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <ChemicalEntity>  (
-    @<Atom> OR @<PolyatomicEntity> OR @<RacemicMixture> OR @<SubatomicParticle>
+    @<Atom> OR @<PolyatomicEntity> OR @<SubatomicParticle>
 )
 
 <ChemicalEntity_struct> {
     (  $<ChemicalEntity_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <is_radical> @metatype:Boolean ? ;
+          <name> @linkml:String ? ;
+          <is_radical> @linkml:Boolean ? ;
           <has_standard_inchi_object> @<StandardInchiObject> ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
@@ -239,6 +254,27 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<ChemicalMixture>  (
+    @<ImpreciseChemicalMixture> OR @<PreciseChemicalMixture>
+)
+
+<ChemicalMixture_struct> {
+    (  $<ChemicalMixture_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ?
+       ) ;
+       rdf:type [ <ChemicalMixture> ]
+    )
+}
+
+<ChemicalSalt> CLOSED {
+    (  $<ChemicalSalt_tes> (  &<PreciseChemicalMixture_tes> ;
+          rdf:type [ <PreciseChemicalMixture> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <ChemicalSalt> ]
+    )
+}
+
 <ChiralityCenter> CLOSED {
     (  $<ChiralityCenter_tes> (  &<Stereocenter_tes> ;
           rdf:type [ <Stereocenter> ] ?
@@ -250,10 +286,20 @@ metatype:Nodeidentifier NONLITERAL
 <ConjugatedAcid> CLOSED {
     (  $<ConjugatedAcid_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
-          <acidity> @metatype:Float ? ;
+          <acidity> @linkml:Float ? ;
           <hard_or_soft> @<HardOrSoftEnum> ?
        ) ;
        rdf:type [ <ConjugatedAcid> ]
+    )
+}
+
+<Connectivity>  (
+    @<FullyCovalentlyBonded> OR @<WeaklyBonded>
+)
+
+<Connectivity_struct> {
+    (  $<Connectivity_tes> rdf:type . * ;
+       rdf:type [ <Connectivity> ] ?
     )
 }
 
@@ -263,6 +309,14 @@ metatype:Nodeidentifier NONLITERAL
           <has_part> @<Macromolecule> *
        ) ;
        rdf:type [ <Copolymer> ]
+    )
+}
+
+<DNASequenceInterval> CLOSED {
+    (  $<DNASequenceInterval_tes> (  &<NucleotideSequenceInterval_tes> ;
+          rdf:type [ <NucleotideSequenceInterval> ] ?
+       ) ;
+       rdf:type [ <DNASequenceInterval> ]
     )
 }
 
@@ -277,19 +331,27 @@ metatype:Nodeidentifier NONLITERAL
 <Enantiomer> CLOSED {
     (  $<Enantiomer_tes> (  &<Stereoisomer_tes> ;
           rdf:type [ <Stereoisomer> ] ? ;
-          <relative_configuration> @metatype:String ? ;
-          <optical_configuration> @metatype:String ? ;
-          <absolute_configuration> @metatype:String ? ;
+          <relative_configuration> @linkml:String ? ;
+          <optical_configuration> @linkml:String ? ;
+          <absolute_configuration> @linkml:String ? ;
           <enantiomer_form_of> @<Molecule> ?
        ) ;
        rdf:type [ <Enantiomer> ]
     )
 }
 
+<FullyCovalentlyBonded> CLOSED {
+    (  $<FullyCovalentlyBonded_tes> (  &<Connectivity_tes> ;
+          rdf:type [ <Connectivity> ] ?
+       ) ;
+       rdf:type [ <FullyCovalentlyBonded> ] ?
+    )
+}
+
 <FullySpecifiedAtom> CLOSED {
     (  $<FullySpecifiedAtom_tes> (  &<Atom_tes> ;
           rdf:type [ <Atom> ] ? ;
-          <elemental_charge> @metatype:Integer ? ;
+          <elemental_charge> @linkml:Integer ? ;
           <neutron_number> @<Count> ?
        ) ;
        rdf:type [ <FullySpecifiedAtom> ]
@@ -335,6 +397,15 @@ metatype:Nodeidentifier NONLITERAL
     )
 }
 
+<ImpreciseChemicalMixture> CLOSED {
+    (  $<ImpreciseChemicalMixture_tes> (  &<ChemicalMixture_tes> ;
+          rdf:type [ <ChemicalMixture> ] ? ;
+          <has_proportional_parts> @<ProportionalPart> ?
+       ) ;
+       rdf:type [ <ImpreciseChemicalMixture> ]
+    )
+}
+
 <InchiObject>  (
     {
        (  $<InchiObject_tes> (  &<InformationalChemicalEntity_tes> ;
@@ -353,6 +424,32 @@ metatype:Nodeidentifier NONLITERAL
     } OR @<InchiObject>
 )
 
+<IsPart> CLOSED {
+    (  $<IsPart_tes> (  &<IsPartOrWhole_tes> ;
+          rdf:type [ <IsPartOrWhole> ] ?
+       ) ;
+       rdf:type [ <IsPart> ] ?
+    )
+}
+
+<IsPartOrWhole>  (
+    @<IsPart> OR @<IsWhole>
+)
+
+<IsPartOrWhole_struct> {
+    (  $<IsPartOrWhole_tes> rdf:type . * ;
+       rdf:type [ <IsPartOrWhole> ] ?
+    )
+}
+
+<IsWhole> CLOSED {
+    (  $<IsWhole_tes> (  &<IsPartOrWhole_tes> ;
+          rdf:type [ <IsPartOrWhole> ] ?
+       ) ;
+       rdf:type [ <IsWhole> ] ?
+    )
+}
+
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
           rdf:type [ <Reaction> ] ?
@@ -368,9 +465,9 @@ metatype:Nodeidentifier NONLITERAL
           <isotope_of> @<Isotope> ? ;
           <half_life> @<NumberOfYears> ? ;
           <decay_product> @<Isotope> ? ;
-          <decay_mode> @metatype:String ? ;
-          <decay_energy> @metatype:String ? ;
-          <mode_of_formation> @metatype:String ?
+          <decay_mode> @linkml:String ? ;
+          <decay_energy> @linkml:String ? ;
+          <mode_of_formation> @linkml:String ?
        ) ;
        rdf:type [ <Isotope> ]
     )
@@ -437,8 +534,8 @@ metatype:Nodeidentifier NONLITERAL
 
 <MolecularComplex>  (
     CLOSED {
-       (  $<MolecularComplex_tes> (  &<PolyatomicEntity_tes> ;
-             rdf:type [ <PolyatomicEntity> ] ?
+       (  $<MolecularComplex_tes> (  &<PreciseChemicalMixture_tes> ;
+             rdf:type [ <PreciseChemicalMixture> ] ?
           ) ;
           rdf:type [ <MolecularComplex> ]
        )
@@ -452,7 +549,7 @@ metatype:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <MolecularComponent> ]
        )
-    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<PolymerPart> OR @<SequenceOfElements>
+    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<PolymerPart> OR @<SequenceInterval>
 )
 
 <MolecularSpecies> CLOSED {
@@ -473,17 +570,20 @@ metatype:Nodeidentifier NONLITERAL
 
 <Molecule>  (
     @<Allotrope> OR @<BaseFormOfConjugatedAcid> OR @<ConjugatedAcid> OR @<Macromolecule> OR @<MolecularSpecies> OR
-    @<NaturalProduct> OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<Stereoisomer> OR @<UnchargedMolecule>
+    @<NaturalProduct> OR @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<SmallMolecule> OR @<Stereoisomer> OR @<UnchargedMolecule>
 )
 
 <Molecule_struct> {
     (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
           rdf:type [ <PolyatomicEntity> ] ? ;
+          &<FullyCovalentlyBonded_tes> ;
+          rdf:type [ <FullyCovalentlyBonded> ] ? ;
           <has_atom_occurrences> @<AtomOccurrence> * ;
           <has_bonds> @<AtomicBond> * ;
           <has_submolecules> @<Molecule> * ;
           <has_atoms> @<Atom> * ;
-          <has_part> @metatype:String ?
+          <is_organic> @linkml:Boolean ? ;
+          <has_part> @linkml:String ?
        ) ;
        rdf:type [ <Molecule> ]
     )
@@ -507,7 +607,7 @@ metatype:Nodeidentifier NONLITERAL
              rdf:type [ <Measure> ] ? ;
              <left_molecule> @<Molecule> ? ;
              <right_molecule> @<Molecule> ? ;
-             <score> @metatype:String ?
+             <score> @linkml:String ?
           ) ;
           rdf:type [ <MoleculePairwiseSimilarity> ] ?
        )
@@ -579,11 +679,22 @@ metatype:Nodeidentifier NONLITERAL
     } OR @<Neutron> OR @<Proton>
 )
 
+<NucleotideSequenceInterval>  (
+    CLOSED {
+       (  $<NucleotideSequenceInterval_tes> (  &<SequenceInterval_tes> ;
+             rdf:type [ <SequenceInterval> ] ? ;
+             <has_sequence_representation> @<DNASequenceString> ?
+          ) ;
+          rdf:type [ <NucleotideSequenceInterval> ]
+       )
+    } OR @<DNASequenceInterval> OR @<RNASequenceInterval>
+)
+
 <Nuclide>  (
     CLOSED {
        (  $<Nuclide_tes> (  &<Atom_tes> ;
              rdf:type [ <Atom> ] ? ;
-             <energy_level> @metatype:String ?
+             <energy_level> @linkml:String ?
           ) ;
           rdf:type [ <Nuclide> ]
        )
@@ -605,7 +716,7 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <PolyatomicEntity>  (
-    @<MolecularComplex> OR @<MolecularComponent> OR @<Molecule> OR @<Salt>
+    @<ChemicalMixture> OR @<MolecularComponent> OR @<Molecule>
 )
 
 <PolyatomicEntity_struct> {
@@ -622,7 +733,7 @@ metatype:Nodeidentifier NONLITERAL
              rdf:type [ <Molecule> ] ? ;
              &<Charged_tes> ;
              rdf:type [ <Charged> ] ? ;
-             <elemental_charge> @metatype:Integer ?
+             <elemental_charge> @linkml:Integer ?
           ) ;
           rdf:type [ <PolyatomicIon> ]
        )
@@ -638,6 +749,31 @@ metatype:Nodeidentifier NONLITERAL
        )
     } OR @<MolecularSubsequence> OR @<Monomer>
 )
+
+<PreciseChemicalMixture>  (
+    @<ChemicalSalt> OR @<MolecularComplex> OR @<RacemicMixture>
+)
+
+<PreciseChemicalMixture_struct> {
+    (  $<PreciseChemicalMixture_tes> (  &<ChemicalMixture_tes> ;
+          rdf:type [ <ChemicalMixture> ] ? ;
+          &<WeaklyBonded_tes> ;
+          rdf:type [ <WeaklyBonded> ] ?
+       ) ;
+       rdf:type [ <PreciseChemicalMixture> ]
+    )
+}
+
+<ProportionalPart> CLOSED {
+    (  $<ProportionalPart_tes> (  &<RelationalChemicalEntity_tes> ;
+          rdf:type [ <RelationalChemicalEntity> ] ? ;
+          <composed_of> @<ChemicalEntity> ? ;
+          <minimal_percentage> @linkml:Float ? ;
+          <maximum_percentage> @linkml:Float ?
+       ) ;
+       rdf:type [ <ProportionalPart> ] ?
+    )
+}
 
 <Protein> CLOSED {
     (  $<Protein_tes> (  &<Macromolecule_tes> ;
@@ -656,8 +792,8 @@ metatype:Nodeidentifier NONLITERAL
 }
 
 <RacemicMixture> CLOSED {
-    (  $<RacemicMixture_tes> (  &<ChemicalEntity_tes> ;
-          rdf:type [ <ChemicalEntity> ] ? ;
+    (  $<RacemicMixture_tes> (  &<PreciseChemicalMixture_tes> ;
+          rdf:type [ <PreciseChemicalMixture> ] ? ;
           <has_left_enantiomer> @<Enantiomer> ;
           <has_right_enantiomer> @<Enantiomer>
        ) ;
@@ -677,15 +813,15 @@ metatype:Nodeidentifier NONLITERAL
     CLOSED {
        (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
-             <direction> @metatype:String ? ;
-             <smarts_string> @metatype:String ? ;
-             <is_diastereoselective> @metatype:Boolean ? ;
-             <is_stereo> @metatype:Boolean ? ;
-             <is_balanced> @metatype:Boolean ? ;
-             <is_transport> @metatype:Boolean ? ;
-             <is_fully_characterized> @metatype:Boolean ? ;
-             <reaction_center> @metatype:String ? ;
-             <description> @metatype:String ?
+             <direction> @linkml:String ? ;
+             <smarts_string> @linkml:String ? ;
+             <is_diastereoselective> @linkml:Boolean ? ;
+             <is_stereo> @linkml:Boolean ? ;
+             <is_balanced> @linkml:Boolean ? ;
+             <is_transport> @linkml:Boolean ? ;
+             <is_fully_characterized> @linkml:Boolean ? ;
+             <reaction_center> @linkml:String ? ;
+             <description> @linkml:String ?
           ) ;
           rdf:type [ <Reaction> ] ?
        )
@@ -696,7 +832,7 @@ metatype:Nodeidentifier NONLITERAL
     (  $<ReactionParticipant_tes> (  &<RelationalChemicalEntity_tes> ;
           rdf:type [ <RelationalChemicalEntity> ] ? ;
           <participant> @<ChemicalEntity> ? ;
-          <stoichiometry> @metatype:Integer ?
+          <stoichiometry> @linkml:Integer ?
        ) ;
        rdf:type [ <ReactionParticipant> ] ?
     )
@@ -709,39 +845,51 @@ metatype:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <RelationalChemicalEntity> ] ?
        )
-    } OR @<AtomOccurrence> OR @<AtomicBond> OR @<Measure> OR @<ReactionParticipant>
+    } OR @<AtomOccurrence> OR @<AtomicBond> OR @<Measure> OR @<ProportionalPart> OR @<ReactionParticipant>
 )
 
-<Salt> CLOSED {
-    (  $<Salt_tes> (  &<PolyatomicEntity_tes> ;
-          rdf:type [ <PolyatomicEntity> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+<RNASequenceInterval> CLOSED {
+    (  $<RNASequenceInterval_tes> (  &<NucleotideSequenceInterval_tes> ;
+          rdf:type [ <NucleotideSequenceInterval> ] ?
        ) ;
-       rdf:type [ <Salt> ]
+       rdf:type [ <RNASequenceInterval> ]
     )
 }
 
-<SequenceOfElements> CLOSED {
-    (  $<SequenceOfElements_tes> (  &<MolecularComponent_tes> ;
-          rdf:type [ <MolecularComponent> ] ?
+<SequenceInterval>  (
+    @<AminoAcidSequenceInterval> OR @<NucleotideSequenceInterval>
+)
+
+<SequenceInterval_struct> {
+    (  $<SequenceInterval_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ? ;
+          <has_sequence_representation> @<SequenceString> ?
        ) ;
-       rdf:type [ <SequenceOfElements> ]
+       rdf:type [ <SequenceInterval> ]
+    )
+}
+
+<SmallMolecule> CLOSED {
+    (  $<SmallMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <SmallMolecule> ]
     )
 }
 
 <StandardInchiObject> CLOSED {
     (  $<StandardInchiObject_tes> (  &<InchiObject_tes> ;
           rdf:type [ <InchiObject> ] ? ;
-          <inchi_version_string> @metatype:String ;
-          <inchi_chemical_sublayer> @metatype:String ;
-          <inchi_atom_connections_sublayer> @metatype:String ? ;
-          <inchi_hydrogen_connections_sublayer> @metatype:String ? ;
-          <inchi_charge_sublayer> @metatype:String ? ;
-          <inchi_proton_sublayer> @metatype:String ? ;
-          <inchi_stereochemical_double_bond_sublayer> @metatype:String ? ;
-          <inchi_tetrahedral_stereochemical_sublayer> @metatype:String ? ;
-          <inchi_stereochemical_type_sublayer> @metatype:String ? ;
-          <inchi_isotopic_layer> @metatype:String ?
+          <inchi_version_string> @linkml:String ;
+          <inchi_chemical_sublayer> @linkml:String ;
+          <inchi_atom_connections_sublayer> @linkml:String ? ;
+          <inchi_hydrogen_connections_sublayer> @linkml:String ? ;
+          <inchi_charge_sublayer> @linkml:String ? ;
+          <inchi_proton_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_double_bond_sublayer> @linkml:String ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_type_sublayer> @linkml:String ? ;
+          <inchi_isotopic_layer> @linkml:String ?
        ) ;
        rdf:type [ <StandardInchiObject> ] ?
     )
@@ -798,7 +946,7 @@ metatype:Nodeidentifier NONLITERAL
 <TanimotoSimilarity> CLOSED {
     (  $<TanimotoSimilarity_tes> (  &<MoleculePairwiseSimilarity_tes> ;
           rdf:type [ <MoleculePairwiseSimilarity> ] ? ;
-          <score> @metatype:Float ?
+          <score> @linkml:Float ?
        ) ;
        rdf:type [ <TanimotoSimilarity> ] ?
     )
@@ -807,7 +955,7 @@ metatype:Nodeidentifier NONLITERAL
 <Uncharged> {
     (  $<Uncharged_tes> (  &<ChargeState_tes> ;
           rdf:type [ <ChargeState> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <Uncharged> ] ?
     )
@@ -828,9 +976,17 @@ metatype:Nodeidentifier NONLITERAL
           rdf:type [ <Molecule> ] ? ;
           &<Uncharged_tes> ;
           rdf:type [ <Uncharged> ] ? ;
-          <elemental_charge> @metatype:Integer ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <UnchargedMolecule> ]
+    )
+}
+
+<WeaklyBonded> CLOSED {
+    (  $<WeaklyBonded_tes> (  &<Connectivity_tes> ;
+          rdf:type [ <Connectivity> ] ?
+       ) ;
+       rdf:type [ <WeaklyBonded> ] ?
     )
 }
 

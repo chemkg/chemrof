@@ -1,6 +1,7 @@
 type AcidFormOfConjugatedAcid
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -8,6 +9,7 @@ type AcidFormOfConjugatedAcid
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     elementalCharge: Integer
   }
@@ -15,6 +17,7 @@ type AcidFormOfConjugatedAcid
 type Allotrope
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -22,9 +25,20 @@ type Allotrope
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     allotropicAnalogOf: ChemicalElement!
     hasBondingStructure: String!
+  }
+
+type AminoAcidSequenceInterval
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    hasSequenceRepresentation: AminoAcidSequenceString
   }
 
 interface AnionState
@@ -117,6 +131,7 @@ type AtomicBond implements OwlClass
 type BaseFormOfConjugatedAcid
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -124,6 +139,7 @@ type BaseFormOfConjugatedAcid
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
@@ -164,6 +180,7 @@ type ChemicalElement
 type ChemicalEntity implements OwlClass
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -172,9 +189,29 @@ type ChemicalEntity implements OwlClass
 type ChemicalGroup
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
+  }
+
+interface ChemicalMixture
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+  }
+
+type ChemicalSalt
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    elementalCharge: Integer
   }
 
 type ChiralityCenter
@@ -185,6 +222,7 @@ type ChiralityCenter
 type ConjugatedAcid
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -192,28 +230,46 @@ type ConjugatedAcid
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     acidity: Float
     hardOrSoft: HardOrSoftEnum
   }
 
+interface Connectivity
+  {
+  }
+
 type Copolymer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasSubmolecules: [Molecule]
     polymerOf: Macromolecule
     hasPart: [Macromolecule]
   }
 
+type DNASequenceInterval
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    hasSequenceRepresentation: DNASequenceString
+  }
+
 type Electron
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -222,6 +278,7 @@ type Electron
 type Enantiomer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -229,11 +286,16 @@ type Enantiomer
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     relativeConfiguration: String
     opticalConfiguration: String
     absoluteConfiguration: String
     enantiomerFormOf: Molecule
+  }
+
+type FullyCovalentlyBonded
+  {
   }
 
 type FullySpecifiedAtom
@@ -253,6 +315,7 @@ type FullySpecifiedAtom
 type FunctionalGroup
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -269,12 +332,14 @@ type GeneralizedMolecularStructure
 type Glycan
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     hasSubmolecules: [Molecule]
   }
@@ -286,11 +351,33 @@ type GroupingClass implements OwlClass
     owlSubclassOf: OwlClass
   }
 
+type ImpreciseChemicalMixture
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    hasProportionalParts: ProportionalPart
+  }
+
 interface InchiObject
   {
   }
 
 interface InformationalChemicalEntity
+  {
+  }
+
+type IsPart
+  {
+  }
+
+interface IsPartOrWhole
+  {
+  }
+
+type IsWhole
   {
   }
 
@@ -336,12 +423,14 @@ type Location implements OwlClass
 type Macromolecule
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     hasSubmolecules: [Molecule]
   }
@@ -354,6 +443,7 @@ type Measure
 type Moiety
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -362,6 +452,7 @@ type Moiety
 type MolecularAnion implements AnionState
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -369,6 +460,7 @@ type MolecularAnion implements AnionState
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     elementalCharge: Integer
   }
@@ -376,6 +468,7 @@ type MolecularAnion implements AnionState
 type MolecularCation implements CationState
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -383,6 +476,7 @@ type MolecularCation implements CationState
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     elementalCharge: Integer
   }
@@ -390,6 +484,7 @@ type MolecularCation implements CationState
 type MolecularComplex
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -398,6 +493,7 @@ type MolecularComplex
 type MolecularComponent
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -406,6 +502,7 @@ type MolecularComponent
 type MolecularSpecies
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -413,20 +510,23 @@ type MolecularSpecies
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
 type MolecularSubsequence
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
   }
 
-interface Molecule
+type Molecule implements FullyCovalentlyBonded
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -434,6 +534,7 @@ interface Molecule
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
@@ -469,6 +570,7 @@ type MonoatomicIon implements Charged
 type Monomer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -477,12 +579,14 @@ type Monomer
 type MonomolecularPolymer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     hasSubmolecules: [Molecule]
     polymerOf: Macromolecule
@@ -491,6 +595,7 @@ type MonomolecularPolymer
 type NaturalProduct
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -498,12 +603,14 @@ type NaturalProduct
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
 type Neutron
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -512,6 +619,7 @@ type Neutron
 type NonSpeciesMolecule
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -519,15 +627,27 @@ type NonSpeciesMolecule
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
 type Nucleon
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
+  }
+
+type NucleotideSequenceInterval
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    hasSequenceRepresentation: DNASequenceString
   }
 
 type Nuclide
@@ -551,12 +671,14 @@ interface OwlClass
 type Peptide
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     hasSubmolecules: [Molecule]
   }
@@ -564,6 +686,7 @@ type Peptide
 interface PolyatomicEntity
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -572,6 +695,7 @@ interface PolyatomicEntity
 type PolyatomicIon implements Charged
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -579,6 +703,7 @@ type PolyatomicIon implements Charged
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     elementalCharge: Integer
   }
@@ -586,20 +711,40 @@ type PolyatomicIon implements Charged
 type PolymerPart
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
   }
 
+type PreciseChemicalMixture implements WeaklyBonded
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+  }
+
+type ProportionalPart
+  {
+    owlSubclassOf: OwlClass
+    composedOf: ChemicalEntity
+    minimalPercentage: Float
+    maximumPercentage: Float
+  }
+
 type Protein
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
     hasAtomOccurrences: [AtomOccurrence]
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     hasSubmolecules: [Molecule]
   }
@@ -607,6 +752,7 @@ type Protein
 type Proton
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -615,6 +761,7 @@ type Proton
 type RacemicMixture
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -662,21 +809,39 @@ type RelationalChemicalEntity implements OwlClass
     owlSubclassOf: OwlClass
   }
 
-type Salt
+type RNASequenceInterval
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
-    elementalCharge: Integer
+    hasSequenceRepresentation: DNASequenceString
   }
 
-type SequenceOfElements
+interface SequenceInterval
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
+    hasSequenceRepresentation: SequenceString
+  }
+
+type SmallMolecule
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    owlSubclassOf: OwlClass
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    isOrganic: Boolean
+    hasPart: String
   }
 
 type StandardInchiObject
@@ -705,6 +870,7 @@ type Stereocenter implements OwlClass
 type Stereoisomer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -712,12 +878,14 @@ type Stereoisomer
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
   }
 
 type SubatomicParticle
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -726,6 +894,7 @@ type SubatomicParticle
 type SupramolecularPolymer
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -761,6 +930,7 @@ type UnchargedAtom implements Uncharged
 type UnchargedMolecule implements Uncharged
   {
     id: String!
+    name: String
     isRadical: Boolean
     hasStandardInchiObject: StandardInchiObject
     owlSubclassOf: OwlClass
@@ -768,8 +938,13 @@ type UnchargedMolecule implements Uncharged
     hasBonds: [AtomicBond]
     hasSubmolecules: [Molecule]
     hasAtoms: [Atom]
+    isOrganic: Boolean
     hasPart: String
     elementalCharge: Integer
+  }
+
+type WeaklyBonded
+  {
   }
 
 

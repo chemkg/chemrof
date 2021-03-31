@@ -20,7 +20,7 @@ prefixes:
   chemont: https://w3id.org/chemont/
   dcterms: http://purl.org/dc/terms/
   biolink: https://w3id.org/biolink/
-  biolinkml: https://w3id.org/biolink/biolinkml/
+  linkml: https://w3id.org/linkml/
   wd: http://www.wikidata.org/entity/  
   
 default_prefix: chemont
@@ -31,7 +31,7 @@ default_curi_maps:
   - idot_context
   
 imports:
-  - biolinkml:types
+  - linkml:types
 
 classes:
 
@@ -81,6 +81,8 @@ classes:
     is_a: molecule grouping class
     description: >-
       A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
+    examples:
+      - value: monosaccharide
       
         
   atom grouping class:
@@ -102,6 +104,8 @@ classes:
     description: >-
       An entity that can be described using using chemical properties.
     comments:
+      - Encompasses subatomic particles through to macromolecular structures.
+      - Does not encompass chemical grouping classes, such as "amino acid". Use the class ChemicalGrouping for this.
       - In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]
     mixins:
       - owl class
@@ -157,6 +161,30 @@ classes:
     deprecated: should be represented as an instance
     is_a: subatomic particle
 
+  is part or whole:
+    mixin: true
+    abstract: true
+
+  is part:
+    is_a: is part or whole
+
+  is whole:
+    is_a: is part or whole
+
+  connectivity:
+    mixin: true
+    abstract: true
+
+  fully covalently bonded:
+    is_a: connectivity
+    description: >-
+      All pairs of atoms in this entity are transitively connected via covalent bonds
+    
+  weakly bonded:
+    is_a: connectivity
+    description: >-
+      Not covalently bonded
+    
   state:
     mixin: true
     abstract: true
@@ -228,6 +256,11 @@ classes:
     description: >-
       Any chemical entity consisting of more than one atom.
 
+  small molecule:
+    is_a: molecule
+    description: >-
+      A molecule characterized by availability in small-molecule databases
+      
   macromolecule:
     is_a: molecule
     description: >-
@@ -238,18 +271,17 @@ classes:
       has submolecules:
         range: molecule
       
-
   molecular complex:
     aliases:
       - poly molecular composite entity
       - complex of molecular entities
       - molecule complex ## biotop
-    is_a: polyatomic entity
+    is_a: precise chemical mixture
     description: >-
       A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex
     comments:
       - In bioptop, molecule complex is a sibling of structured biological entity under poly molecular composite entity
-      - In SIO, molecular complex is an only child of chemical complex, which is under chemical substance
+      - In SIO, molecular complex is an only child of chemical complex, which is under chemical substance. chemical complex is defined as A chemical complex is a chemical substance composed of a weakly connected molecules and ions in a known stoichiometry.
     exact_mappings:
       - biotop:MoleculeComplex
       - SIO:010506
@@ -328,9 +360,46 @@ classes:
       - functional group
       - chemical functional group
     is_a: molecular component
+
+  chemical mixture:
+    abstract: true
+    is_a: polyatomic entity
+    description: >-
+      A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry
+    exact_mappings:
+      - CHEBI:60004
+    
+  precise chemical mixture:
+    aliases:
+      - chemical substance (SIO)
+    abstract: true
+    is_a: chemical mixture
+    mixins:
+      - weakly bonded
+    description: >-
+      A polyatomic entity that consists of two or more parts that are weakly bound, and of known stoichiometry
+    exact_mappings:
+      - SIO:011126
+      
+  imprecise chemical mixture:
+    aliases:
+      - portion of matter
+    is_a: chemical mixture
+    description: >-
+      A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste
+    comments:
+      - although the stoichiometry is not known rough percentage parts can be provided
+    slots:
+      - has proportional parts
+    see_also:
+      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
+    examples:
+      - toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )
       
   molecule:
     is_a: polyatomic entity
+    mixins:
+      - fully covalently bonded
     aliases:
       - molecular entity
       - monomolecular entity
@@ -342,6 +411,7 @@ classes:
       - has bonds
       - has submolecules
       - has atoms
+      - is organic
     slot_usage:
       has atom occurrences:
         minimum_value: 2
@@ -370,11 +440,37 @@ classes:
     description: >-
       a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
 
-  sequence of elements:
+  sequence interval:
     is_a: molecular component
+    abstract: true
+    slots:
+      - has sequence representation
     description: >-
-      a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence
+      a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence.
+    comments: >-
+      - includes an interval corresponding to the whole molecule as an edge case
 
+  amino acid sequence interval:
+    is_a: sequence interval
+    slot_usage:
+      has sequence representation:
+        range: amino acid sequence string
+
+  nucleotide sequence interval:
+    is_a: sequence interval
+    slot_usage:
+      has sequence representation:
+        range: DNA sequence string
+        description: >-
+          By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence
+      
+  DNA sequence interval:
+    is_a: nucleotide sequence interval
+      
+  RNA sequence interval:
+    is_a: nucleotide sequence interval
+      
+      
   functional group:
     is_a: molecular component
     slot_usage:
@@ -761,8 +857,8 @@ classes:
     
 
   # TODO
-  salt:
-    is_a: polyatomic entity
+  chemical salt:
+    is_a: precise chemical mixture
     description: >-
       a chemical compound consisting of an ionic assembly of cations and anions.
     examples:
@@ -770,9 +866,14 @@ classes:
     comments:
       - in SIO falls under molecular complex? Also in biolink
     slot_usage:
+      # TODO: strong/weak
       elemental charge:
         minimum_value: 0
         maximum_value: 0
+    exact_mappings:
+      - SIO:001422
+    see_also:
+      - https://github.com/MaastrichtU-IDS/semanticscience/issues/96
 
   stereoisomer:
     is_a: molecule
@@ -806,7 +907,7 @@ classes:
   racemic mixture:
     aliases:
       - racemate
-    is_a: chemical entity
+    is_a: precise chemical mixture
     description: >-
       a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
     slot_usage:
@@ -895,6 +996,20 @@ classes:
       stoichiometry:
         range: integer
 
+  proportional part:
+    is_a: relational chemical entity
+    description: >-
+      A part of a complex mixture that is of uniform composition
+    slot_usage:
+      has role:
+        range: ingredient_role_enum
+      composed of:
+        range: chemical entity
+      minimal percentage:
+        range: float
+      maximum percentage:
+        range: float
+
   measure:
     is_a: relational chemical entity
     description:
@@ -937,6 +1052,19 @@ types:
   chemical encoding:
     uri: xsd:string
     base: str
+
+  sequence string:
+    uri: xsd:string
+    base: str
+
+  amino acid sequence string:
+    uri: xsd:string
+    base: str
+
+  DNA sequence string:
+    uri: xsd:string
+    base: str
+    
 
 slots:
 
@@ -1089,13 +1217,22 @@ slots:
     domain: molecule
     range: molecule
     multivalued: true
-      
+
   has group:
     description: >-
       Relation between a molecule and the groups it contains
     is_a: has submolecules
     domain: atom
-      
+
+  has proportional parts:
+    aliases:
+      - has ingredients
+    description: >-
+      Relationship between a complex mixture and its parts
+    domain: imprecise chemical mixture
+    range: proportional part
+    multivalued: true
+  
   ## other slots
   
   energy level:
@@ -1155,7 +1292,11 @@ slots:
     range: boolean
     mappings:
       - CHEMINF:000067
-      
+
+  has sequence representation:
+    is_a: information property
+    range: sequence string
+  
   chemical formula:
     abstract: true
     is_a: information property
@@ -1309,6 +1450,13 @@ slots:
     domain: atom occurrence
     range: atom occurrence
     multivalued: true
+
+  is organic:
+    domain: chemical entity
+    range: boolean
+    description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
+    close_mappings:
+      SIO:010072
 
   is radical:
     domain: chemical entity
@@ -1467,15 +1615,26 @@ slots:
     range: owl class
     exact_mappings:
       - rdf:type
+    examples:
+      - description: glucose classified by monosaccharide
 
   classifies:
     is_a: chemical to chemical relationship
     inverse: classified by
 
 enums:
+  ingredient_role_enum:
+    permissible_values:
+      active ingredient:
+      inactive ingredient:
+      excipient:
+      solvent:
+        
   bond_type_enum:
     permissible_values:
       covalent:
+        description: >-
+          A covalent bond is a chemical bond that involves the sharing of pairs of electrons between atoms. This sharing results in a stable balance of attractive and repulsive forces between those atoms.
       ionic:
       polycentric:
       metal-metal:
