@@ -98,10 +98,14 @@
                 <h1 id="class-molecule">Class: Molecule</h1>
 <p>A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.</p>
 <p>URI: <a href="https://w3id.org/chemont/Molecule">chemont:Molecule</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule],[Stereoisomer],[StandardInchiObject],[PolyatomicIon],[PolyatomicEntity],[OwlClass],[NonSpeciesMolecule],[NaturalProduct],[MoleculePairwiseSimilarity],[MoleculeGroupingClass],[Atom]&lt;has%20atoms%200..*-%20[Molecule&#124;has_part:string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F],[Molecule]&lt;has%20submolecules%200..*-%20[Molecule],[AtomicBond]&lt;has%20bonds%200..*-++[Molecule],[AtomOccurrence]&lt;has%20atom%20occurrences%200..*-++[Molecule],[Enantiomer]-%20enantiomer%20form%20of%200..1&gt;[Molecule],[FunctionalGroup]-%20is%20substitutent%20group%20from%200..1&gt;[Molecule],[Macromolecule]-%20has%20submolecules%200..*&gt;[Molecule],[MoleculeGroupingClass]-%20classifies%200..1&gt;[Molecule],[MoleculePairwiseSimilarity]-%20left%20molecule%200..1&gt;[Molecule],[MoleculePairwiseSimilarity]-%20right%20molecule%200..1&gt;[Molecule],[Molecule]^-[UnchargedMolecule],[Molecule]^-[Stereoisomer],[Molecule]^-[PolyatomicIon],[Molecule]^-[NonSpeciesMolecule],[Molecule]^-[NaturalProduct],[Molecule]^-[MolecularSpecies],[Molecule]^-[Macromolecule],[Molecule]^-[ConjugatedAcid],[Molecule]^-[BaseFormOfConjugatedAcid],[Molecule]^-[Allotrope],[PolyatomicEntity]^-[Molecule],[MolecularSpecies],[Macromolecule],[FunctionalGroup],[Enantiomer],[ConjugatedAcid],[BaseFormOfConjugatedAcid],[AtomicBond],[AtomOccurrence],[Atom],[Allotrope]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[UnchargedMolecule],[Stereoisomer],[StandardInchiObject],[SmallMolecule],[PolyatomicIon],[PolyatomicEntity],[OwlClass],[NonSpeciesMolecule],[NaturalProduct],[MoleculePairwiseSimilarity],[MoleculeGroupingClass],[Atom]&lt;has%20atoms%200..*-%20[Molecule&#124;is_organic:boolean%20%3F;has_part:string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F],[Molecule]&lt;has%20submolecules%200..*-%20[Molecule],[AtomicBond]&lt;has%20bonds%200..*-++[Molecule],[AtomOccurrence]&lt;has%20atom%20occurrences%200..*-++[Molecule],[Enantiomer]-%20enantiomer%20form%20of%200..1&gt;[Molecule],[FunctionalGroup]-%20is%20substitutent%20group%20from%200..1&gt;[Molecule],[Macromolecule]-%20has%20submolecules%200..*&gt;[Molecule],[MoleculeGroupingClass]-%20classifies%200..1&gt;[Molecule],[MoleculePairwiseSimilarity]-%20left%20molecule%200..1&gt;[Molecule],[MoleculePairwiseSimilarity]-%20right%20molecule%200..1&gt;[Molecule],[Molecule]uses%20-.-&gt;[FullyCovalentlyBonded],[Molecule]^-[UnchargedMolecule],[Molecule]^-[Stereoisomer],[Molecule]^-[SmallMolecule],[Molecule]^-[PolyatomicIon],[Molecule]^-[NonSpeciesMolecule],[Molecule]^-[NaturalProduct],[Molecule]^-[MolecularSpecies],[Molecule]^-[Macromolecule],[Molecule]^-[ConjugatedAcid],[Molecule]^-[BaseFormOfConjugatedAcid],[Molecule]^-[Allotrope],[PolyatomicEntity]^-[Molecule],[MolecularSpecies],[Macromolecule],[FunctionalGroup],[FullyCovalentlyBonded],[Enantiomer],[ConjugatedAcid],[BaseFormOfConjugatedAcid],[AtomicBond],[AtomOccurrence],[Atom],[Allotrope]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../PolyatomicEntity/">PolyatomicEntity</a> - Any chemical entity consisting of more than one atom.</li>
+</ul>
+<h2 id="uses-mixins">Uses Mixins</h2>
+<ul>
+<li>mixin: <a href="../FullyCovalentlyBonded/">FullyCovalentlyBonded</a> - All pairs of atoms in this entity are transitively connected via covalent bonds</li>
 </ul>
 <h2 id="children">Children</h2>
 <ul>
@@ -113,6 +117,7 @@
 <li><a href="../NaturalProduct/">NaturalProduct</a></li>
 <li><a href="../NonSpeciesMolecule/">NonSpeciesMolecule</a> - A molecule in which the units are not identical. Example: sodium chloride</li>
 <li><a href="../PolyatomicIon/">PolyatomicIon</a> - A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).</li>
+<li><a href="../SmallMolecule/">SmallMolecule</a> - A molecule characterized by availability in small-molecule databases</li>
 <li><a href="../Stereoisomer/">Stereoisomer</a></li>
 <li><a href="../UnchargedMolecule/">UnchargedMolecule</a> - A molecule that has no charge</li>
 </ul>
@@ -153,6 +158,11 @@
 <li><a href="../has_submolecules/">has submolecules</a>  <sub>0..*</sub><ul>
 <li>Description: Relation between a molecule and the molecules it is made from.</li>
 <li>range: <a href="./">Molecule</a></li>
+</ul>
+</li>
+<li><a href="../is_organic/">is organic</a>  <sub>OPT</sub><ul>
+<li>Description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]</li>
+<li>range: <a href="../types/Boolean/">Boolean</a></li>
 </ul>
 </li>
 <li><a href="../molecule_has_atom_occurrences/">molecule➞has atom occurrences</a>  <sub>0..*</sub><ul>
