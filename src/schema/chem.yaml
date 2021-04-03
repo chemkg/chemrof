@@ -68,7 +68,8 @@ classes:
     description: >-
       A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide
     comments:
-      -  Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
+      - Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
+      - Molecular grouping classes are typically defined by elemental composition and structure as well as chemical properties
     slot_usage:
       subtype of:
         range: molecule grouping class
@@ -76,14 +77,152 @@ classes:
           grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes
       classifies:
         range: molecule
+    examples:
+      - value: nucleobase
           
-  generalized molecular structure:
+  molecular component grouping class:
+    is_a: grouping class
+    description: >-
+      A grouping class that classifies molecular components. Example: inorganic anion group
+    slot_usage:
+      subtype of:
+        range: molecular component grouping class
+      classifies:
+        range: molecular component
+          
+  molecular derivative grouping class:
+    is_a: molecule grouping class
+    description: A grouping class defined as a derivative of another molecule or molecular grouping class
+    slots:
+      - derivative of
+    slot_usage:
+      name:
+        string_serialization: "{derivative_of.label} derivative"
+      classifies:
+        range: molecule
+    defining_slots:
+      - derivative of
+    examples:
+      - value: oxoacid derivative
+      - value: D-ornithine derivative
+          
+  molecule grouping class defined by components:
+    is_a: molecule grouping class
+    description: A grouping class defined as an exhaustive list of components
+    slots:
+      - has part
+    slot_usage:
+      has part:
+        range: chemical entity or grouping
+    defining_slots:
+      - has part
+    examples:
+      - value: nucleoside
+        description: A nucleoside consists of a nucleobase and a five-carbon sugar (ribose or 2-deoxyribose)
+      - value: nucleotide
+        description: a nucleotide is composed of a nucleobase, a five-carbon sugar, and one or more phosphate groups
+          
+  molecule grouping class defined by addition of a group:
+    is_a: molecule grouping class
+    description: A grouping class defined in terms of a derivative of a molecule and the addition of a group
+    slot_usage:
+      has group:
+        range: chemical group
+      derivative of:
+        range: polyatomic entity
+    defining_slots:
+      - has group
+      - derivative of
+    examples:
+      - value: acetyl xylan
+          
+  chemical salt grouping class:
+    is_a: molecule grouping class
+    description: A grouping class for a chemical salt
+    slots:
+      - has anionic component
+      - has cationic component
+    slot_usage:
+      name:
+        string_serialization: "{has cationic component} {has anionic component}"
+      classifies:
+        range: chemical salt
+    defining_slots:
+      - has anionic component
+      - has cationic component
+    examples:
+      - value: sodium chloride
+          
+  chemical salt by cation:
+    is_a: chemical salt grouping class
+    description: A grouping class for a chemical salt named by cation
+    slots:
+      - has cationic component
+    slot_usage:
+      name:
+        string_serialization: "{has cationic component} salt"
+    defining_slots:
+      - has cationic component
+    examples:
+      - value: sodium salt
+          
+  chemical salt by anion:
+    is_a: chemical salt grouping class
+    description: A grouping class for a chemical salt named by anion
+    slots:
+      - has anionic component
+    slot_usage:
+      name:
+        string_serialization: "{has anionic component} salt"
+    defining_slots:
+      - has anionic component
+    examples:
+      - value: chloride salt
+          
+  generalized molecular structure class:
     is_a: molecule grouping class
     description: >-
       A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
     examples:
       - value: monosaccharide
       
+  grouping class for acids or bases:
+    abstract: true
+    is_a: molecule grouping class
+    slots:
+      - conjugate base of
+      - conjugate acid of
+    
+  acid anion grouping class:
+    is_a: grouping class for acids or bases
+    description: >-
+      A molecule grouping class that groups the different ion forms of the base of an acid
+    slot_usage:
+      name:
+        pattern: "ate$"
+    defining_slots:
+      - conjugate base of
+    examples:
+      - value: citrate
+      - value: pimelate
+        
+  general acid base grouping class:
+    is_a: grouping class for acids or bases
+    description: >-
+      A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    examples:
+      - value: tricarboxylic acid/tricarboxylic acid anion
+    
+  acid base conflation class:
+    is_a: grouping class for acids or bases
+    description: >-
+      A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    examples:
+      - value: citrate/citric acid
+    slot_usage:
+      has physiological base:
+        description: >-
+          The base which defs this conflation class
         
   atom grouping class:
     is_a: grouping class
@@ -94,7 +233,61 @@ classes:
         range: molecule grouping class
       classifies:
         range: atom
-      
+
+  atom grouping by periodic table placement:
+    is_a: atom grouping class
+    abstract: true
+
+  atom grouping by periodic table group:
+    description: >-
+      Example: p-block atom
+    is_a: atom grouping by periodic table placement
+    slots:
+      - in periodic table group
+    defining_slots:
+      - in periodic table group
+
+  atom grouping by periodic table block:
+    description: >-
+      Example: group 13 atom
+    is_a: atom grouping by periodic table placement
+    slots:
+      - in periodic table block
+    defining_slots:
+      - in periodic table block
+
+  atom grouping by property:
+    is_a: atom grouping class
+    description: >-
+      Example: metal atom
+
+  material:
+    description: >-
+      A substance composed of one or more chemical entities
+    slots:
+      - has part
+    slot_usage:
+      has part:
+        range: chemical entity
+
+  nanostructure:
+    is_a: material
+    description: >-
+      A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale.
+    defining_slots:
+      - has part
+      - has morphological category
+    slot_usage:
+      has morphological category:
+        range: nanostructure_morphology_enum
+        description: >-
+          e.g. rod, sheet
+    examples:
+      - value: Zinc oxide (ZnO) nanorod
+        description: A nanostructure that has rod morphology and is composed of zinc oxide
+      - value: platinum copper nanoparticle
+        description: A nanostructure that is made from platinum and copper atoms
+        
   chemical entity:
     aliases:
       - specific chemical entity
@@ -114,6 +307,7 @@ classes:
       - name
       - is radical
       - has standard inchi object
+      - has characteristic
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -161,6 +355,13 @@ classes:
     deprecated: should be represented as an instance
     is_a: subatomic particle
 
+
+  chemical entity or grouping:
+    mixin: true
+    union_of:
+      - chemical entity
+      - chemical entity grouping class
+      
   is part or whole:
     mixin: true
     abstract: true
@@ -394,7 +595,7 @@ classes:
     see_also:
       - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
     examples:
-      - toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )
+      - value: toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )
       
   molecule:
     is_a: polyatomic entity
@@ -485,14 +686,17 @@ classes:
   non species molecule:
     is_a: molecule
     description: >-
-      A molecule in which the units are not identical. Example: sodium chloride
+      A molecule in which the units are not identical. TODO: move this higher
 
   polyatomic ion:
     aliases:
       - polyatomic ion species
     is_a: molecule
     mixins:
-      - charged    
+      - charged
+    slots:
+      - conjugate base of
+      - conjugate acid of
     description: >-
       A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
 
@@ -528,7 +732,7 @@ classes:
       - atomic species
       - chemical species of an element
     description: >-
-      A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+      A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
     comments:
       - chemical species of an element: Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859
     slots:
@@ -558,12 +762,14 @@ classes:
         description: >-
           E.g. O, K, Ge
         pattern: "^[A-Z][a-z]*"
-      periodic table group:
+      in periodic table group:
         description: >-
           which number in periodic table column
-      periodic table block:
+        range: periodic table group
+      in periodic table block:
         description: >-
           block of periodic table unified by the orbitals their valence electrons or vacancies lie in
+        range: periodic table block
       boiling point in celcius:
         range: float
       melting point in celcius:
@@ -588,7 +794,7 @@ classes:
     mixins:
       - uncharged   
     description: >-
-      An atom that has no charge
+      An atom type that has no charge
     mappings:
       - COB:0000043
 
@@ -642,7 +848,7 @@ classes:
     aliases:
       - atom ionic species
     description: >-
-      an atom type in which charge state is specified. Also known as (atom) ionic species. For example, chloride is an atom ionic species; its formula is Cl−.
+      an atom type in which charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−.
     is_a: atom
     slots:
       - elemental charge
@@ -659,7 +865,7 @@ classes:
     mixins:
       - charged   
     description: >-
-      An atom that has a charge
+      An atom type that has a charge
     mappings:
       - COB:0000042
       - CHEBI:24867
@@ -692,7 +898,7 @@ classes:
 
   fully specified atom:
     description: >-
-      An atom (class) that has subatomic particle counts specified
+      An atom type that has atomic number, charge, and neutron number stated
     aliases:
       - atomic species
       - chemical species of an element
@@ -707,6 +913,21 @@ classes:
   informational chemical entity:
     abstract: true
 
+  periodic table placement:
+    abstract: true
+    is_a: informational chemical entity
+
+  periodic table block:
+    is_a: periodic table placement
+    description: >-
+      A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in
+    slot_usage:
+      type:
+        range: periodic_table_block_enum
+      
+
+    
+    
   inchi object:
     is_a: informational chemical entity
     abstract: true
@@ -733,6 +954,7 @@ classes:
         pattern: "^1S$"
     
   relational chemical entity:
+    abstract: true
     mixins:
       - owl class
     description: >-
@@ -740,6 +962,13 @@ classes:
     close_mappings:
       - biolink:Association
 
+  chemical characteristic:
+    aliases:
+      - role
+    description: >-
+      A reified property of a chemical entity.
+      
+      
   location:
     mixins:
       - owl class
@@ -834,26 +1063,27 @@ classes:
           [https://doi.org/10.1021%2Fed083p791]
         range: integer
 
-  conjugated acid:
+  Bronsted acid:
     is_a: molecule
     description: >-
-      Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
+      A molecule capable of donating a hydron to an acceptor. Example: citric acid
     slot_usage:
       acidity:
         range: float
       hard or soft:
         range: hard_or_soft_enum
-        
-    mappings:
-      - CHEBI:50906
+      acid form of:
+        range: acid base
+    exact_mappings:
+      - CHEBI:39141
 
-  acid form of conjugated acid:
-    is_a: polyatomic ion
+  acid base:
+    is_a: molecular anion
     description: >-
-      A molecule capable of donating a proton. Example: carboxylic acid is an organic acid that contains a carboxyl group (C(=O)OH)[1] attached to an R-group
-
-  base form of conjugated acid:
-    is_a: molecule
+      A conugate base of an acid with charge specified. Example: citrate(3-)
+    slot_usage:
+      has acid form:
+        range: Bronsted acid
     
 
   # TODO
@@ -870,11 +1100,29 @@ classes:
       elemental charge:
         minimum_value: 0
         maximum_value: 0
+      has cationic component:
+        range: cation state
+      has anionic component:
+        range: anion state
     exact_mappings:
       - SIO:001422
     see_also:
       - https://github.com/MaastrichtU-IDS/semanticscience/issues/96
 
+  ester:
+    is_a: molecule
+    description: >-
+      An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group
+    slot_usage:
+      has parent alcohol:
+        range: chemical entity
+      has parent acid:
+        range: Bronsted acid
+    examples:
+      - value: butyl ethanoate
+        description: has parent alcohol butanol and has parent acid acetic acid
+          
+      
   stereoisomer:
     is_a: molecule
     exact_mappings:
@@ -1039,6 +1287,10 @@ classes:
         
 types:
 
+  periodic table group:
+    uri: xsd:int
+    base: int
+  
   count:
     uri: xsd:int
     base: int
@@ -1076,7 +1328,13 @@ slots:
   
   information property:
     abstract: true
-  
+
+  in periodic table group:
+    range: periodic table group
+    
+  in periodic table block:
+    range: periodic table block
+    
   id:
     is_a: information property
     identifier: true
@@ -1191,8 +1449,59 @@ slots:
     description: >-
       equal mass number (Z1 + N1 = Z2 + N2)
 
+  derivative of:
+    is_a: alternate form of
+    
+  has derivative:
+    is_a: alternate form of
+    inverse: derivative of
+    
+  conjugate base of:
+    aliases:
+      - is conjugate base of (chebi)
+    is_a: derivative of
+    description: >-
+      connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)
+    see_also:
+      - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
+
+  conjugate acid of:
+    aliases:
+      - is conjugate acid of (chebi)
+    is_a: has derivative
+    inverse: conjugate base of
+    see_also:
+      - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
+    todos:
+      - decide on domain/range. in chebi, daidzein monosulfate is conjugate acid of daidzein monosulfate(1-), yet it is an acid derivative, not an acid
+
+  acid form of:
+    is_a: conjugate acid of
+    description: >-
+      connects an acid to any of the the base anions. E.g. citric acid acid form of citrate(1-),citrate(2-),citrate(3-)
+    multivalued: true
+    domain: Bronsted acid
+    range: acid base  ## TODO - grouping class
+      
+  has physiological base:
+    is_a: acid form of
+    description: >-
+      connects an acid to the base that is stable at physiological pH. E.g. citric acid has physiological base citrate(3-)
+    multivalued: false
+      
+  has acid form:
+    is_a: conjugate base of
+    description: >-
+      connects a base to the acid form. E.g. citrate(3-) has acid form citric acid
+    multivalued: false
+    domain: acid base
+    range: Bronsted acid
+      
   ## other relations
 
+  has characteristic:
+    range: chemical characteristic
+  
   has part:
     is_a: chemical to chemical relationship
     description: >-
@@ -1218,6 +1527,16 @@ slots:
     range: molecule
     multivalued: true
 
+  has ionic component:
+    abstract: true
+    is_a: has part
+
+  has cationic component:
+    is_a: has ionic component
+
+  has anionic component:
+    is_a: has ionic component
+    
   has group:
     description: >-
       Relation between a molecule and the groups it contains
@@ -1551,6 +1870,8 @@ slots:
     description: >-
       a stereoisomer relationship where the two forms are mirror images of one another
     multivalued: true
+
+    
     
   bond order:
     description: >-
@@ -1623,6 +1944,38 @@ slots:
     inverse: classified by
 
 enums:
+
+  nanostructure_morphology_enum:
+    permissible_values:
+      nanotube:
+        meaning: CHEBI:50796
+      nanoparticle:
+        meaning: CHEBI:50803
+      nanorod:
+        meaning: CHEBI:50805
+      nanotubosome:
+        meaning: CHEBI:50806
+      quantum dot:
+        meaning: CHEBI:50853
+      nanofibre:
+        meaning: CHEBI:52518
+      nanocrystal:
+        meaning: CHEBI:52529
+      nanoribbon:
+        meaning: CHEBI:52530
+      nanosheet:
+        meaning: CHEBI:52531
+      nanowire:
+        meaning: CHEBI:52593
+    
+  periodic_table_block_enum:
+    permissible_values:
+      s-block:
+      p-block:
+      d-block:
+      f-block:
+      g-block:    
+  
   ingredient_role_enum:
     permissible_values:
       active ingredient:

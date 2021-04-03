@@ -2,13 +2,56 @@
    "$id": "chemont",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "definitions": {
-      "AcidFormOfConjugatedAcid": {
+      "AcidAnionGroupingClass": {
          "additionalProperties": false,
-         "description": "A molecule capable of donating a proton. Example: carboxylic acid is an organic acid that contains a carboxyl group (C(=O)OH)[1] attached to an R-group",
+         "description": "A molecule grouping class that groups the different ion forms of the base of an acid",
          "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AcidAnionGroupingClass",
+         "type": "object"
+      },
+      "AcidBase": {
+         "additionalProperties": false,
+         "description": "A conugate base of an acid with charge specified. Example: citrate(3-)",
+         "properties": {
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_acid_form": {
+               "type": "string"
             },
             "has_atom_occurrences": {
                "items": {
@@ -29,6 +72,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -65,7 +111,41 @@
          "required": [
             "id"
          ],
-         "title": "AcidFormOfConjugatedAcid",
+         "title": "AcidBase",
+         "type": "object"
+      },
+      "AcidBaseConflationClass": {
+         "additionalProperties": false,
+         "description": "A molecule grouping class that can groups an acid together with all its conjugate bases. physiological",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
+            "has_physiological_base": {
+               "description": "The base which defs this conflation class",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AcidBaseConflationClass",
          "type": "object"
       },
       "Allotrope": {
@@ -98,6 +178,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -143,6 +226,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_sequence_representation": {
                "type": "string"
             },
@@ -183,6 +269,9 @@
             },
             "elemental_charge": {
                "type": "integer"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -229,6 +318,9 @@
             "elemental_charge": {
                "type": "integer"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -258,6 +350,78 @@
             "id"
          ],
          "title": "AtomCation",
+         "type": "object"
+      },
+      "AtomGroupingByPeriodicTableBlock": {
+         "additionalProperties": false,
+         "description": "Example: group 13 atom",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "in_periodic_table_block": {
+               "$ref": "#/definitions/PeriodicTableBlock"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AtomGroupingByPeriodicTableBlock",
+         "type": "object"
+      },
+      "AtomGroupingByPeriodicTableGroup": {
+         "additionalProperties": false,
+         "description": "Example: p-block atom",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "in_periodic_table_group": {
+               "type": "integer"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AtomGroupingByPeriodicTableGroup",
+         "type": "object"
+      },
+      "AtomGroupingByProperty": {
+         "additionalProperties": false,
+         "description": "Example: metal atom",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AtomGroupingByProperty",
          "type": "object"
       },
       "AtomGroupingClass": {
@@ -352,10 +516,22 @@
          "title": "AtomicBond",
          "type": "object"
       },
-      "BaseFormOfConjugatedAcid": {
+      "BronstedAcid": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A molecule capable of donating a hydron to an acceptor. Example: citric acid",
          "properties": {
+            "acid_form_of": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "acidity": {
+               "type": "number"
+            },
+            "hard_or_soft": {
+               "type": "string"
+            },
             "has_atom_occurrences": {
                "items": {
                   "$ref": "#/definitions/AtomOccurrence"
@@ -375,6 +551,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -411,7 +590,15 @@
          "required": [
             "id"
          ],
-         "title": "BaseFormOfConjugatedAcid",
+         "title": "BronstedAcid",
+         "type": "object"
+      },
+      "ChemicalCharacteristic": {
+         "additionalProperties": false,
+         "description": "A property of a chemical entity",
+         "properties": {},
+         "required": [],
+         "title": "ChemicalCharacteristic",
          "type": "object"
       },
       "ChemicalElement": {
@@ -428,6 +615,9 @@
             "electron_configuration": {
                "type": "string"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -443,6 +633,14 @@
             "id": {
                "type": "string"
             },
+            "in_periodic_table_block": {
+               "$ref": "#/definitions/PeriodicTableBlock",
+               "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in"
+            },
+            "in_periodic_table_group": {
+               "description": "which number in periodic table column",
+               "type": "integer"
+            },
             "is_radical": {
                "type": "boolean"
             },
@@ -456,14 +654,6 @@
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            },
-            "periodic_table_block": {
-               "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in",
-               "type": "string"
-            },
-            "periodic_table_group": {
-               "description": "which number in periodic table column",
-               "type": "string"
             },
             "standard_atomic_weight": {
                "type": "number"
@@ -483,6 +673,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -514,6 +707,15 @@
             "elemental_charge": {
                "type": "integer"
             },
+            "has_anionic_component": {
+               "$ref": "#/definitions/AnionState"
+            },
+            "has_cationic_component": {
+               "$ref": "#/definitions/CationState"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -538,6 +740,102 @@
          "title": "ChemicalSalt",
          "type": "object"
       },
+      "ChemicalSaltByAnion": {
+         "additionalProperties": false,
+         "description": "A grouping class for a chemical salt named by anion",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "has_anionic_component": {
+               "type": "string"
+            },
+            "has_cationic_component": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "ChemicalSaltByAnion",
+         "type": "object"
+      },
+      "ChemicalSaltByCation": {
+         "additionalProperties": false,
+         "description": "A grouping class for a chemical salt named by cation",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "has_anionic_component": {
+               "type": "string"
+            },
+            "has_cationic_component": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "ChemicalSaltByCation",
+         "type": "object"
+      },
+      "ChemicalSaltGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class for a chemical salt",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "has_anionic_component": {
+               "type": "string"
+            },
+            "has_cationic_component": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "ChemicalSaltGroupingClass",
+         "type": "object"
+      },
       "ChiralityCenter": {
          "additionalProperties": false,
          "description": "a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image.",
@@ -549,74 +847,6 @@
          },
          "required": [],
          "title": "ChiralityCenter",
-         "type": "object"
-      },
-      "ConjugatedAcid": {
-         "additionalProperties": false,
-         "description": "Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine",
-         "properties": {
-            "acidity": {
-               "type": "number"
-            },
-            "hard_or_soft": {
-               "type": "string"
-            },
-            "has_atom_occurrences": {
-               "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
-               },
-               "type": "array"
-            },
-            "has_atoms": {
-               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
-            },
-            "has_bonds": {
-               "description": "The set of all bonds connecting atoms in a molecule",
-               "items": {
-                  "$ref": "#/definitions/AtomicBond"
-               },
-               "type": "array"
-            },
-            "has_part": {
-               "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
-            "has_submolecules": {
-               "description": "Relation between a molecule and the molecules it is made from.",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
-            },
-            "id": {
-               "type": "string"
-            },
-            "is_organic": {
-               "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
-               "type": "boolean"
-            },
-            "is_radical": {
-               "type": "boolean"
-            },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
-               "type": "string"
-            },
-            "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
-               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            }
-         },
-         "required": [
-            "id"
-         ],
-         "title": "ConjugatedAcid",
          "type": "object"
       },
       "Copolymer": {
@@ -642,6 +872,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "items": {
@@ -690,6 +923,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
                "type": "string"
@@ -722,6 +958,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -777,6 +1016,9 @@
                },
                "type": "array"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -821,6 +1063,77 @@
          "title": "Enantiomer",
          "type": "object"
       },
+      "Ester": {
+         "additionalProperties": false,
+         "description": "An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one \u2013OH hydroxyl group is replaced by an \u2013O\u2013 alkyl (alkoxy) group",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/definitions/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/definitions/AtomicBond"
+               },
+               "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
+            "has_parent_acid": {
+               "type": "string"
+            },
+            "has_parent_alcohol": {
+               "type": "string"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_standard_inchi_object": {
+               "$ref": "#/definitions/StandardInchiObject"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            },
+            "is_organic": {
+               "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
+               "type": "boolean"
+            },
+            "is_radical": {
+               "type": "boolean"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Ester",
+         "type": "object"
+      },
       "FullyCovalentlyBonded": {
          "additionalProperties": false,
          "description": "All pairs of atoms in this entity are transitively connected via covalent bonds",
@@ -831,7 +1144,7 @@
       },
       "FullySpecifiedAtom": {
          "additionalProperties": false,
-         "description": "An atom (class) that has subatomic particle counts specified",
+         "description": "An atom type that has atomic number, charge, and neutron number stated",
          "properties": {
             "atomic_number": {
                "description": "number of protons in an atom",
@@ -840,6 +1153,9 @@
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -880,6 +1196,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -907,7 +1226,37 @@
          "title": "FunctionalGroup",
          "type": "object"
       },
-      "GeneralizedMolecularStructure": {
+      "GeneralAcidBaseGroupingClass": {
+         "additionalProperties": false,
+         "description": "A molecule grouping class that can groups an acid together with all its conjugate bases. physiological",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "GeneralAcidBaseGroupingClass",
+         "type": "object"
+      },
+      "GeneralizedMolecularStructureClass": {
          "additionalProperties": false,
          "description": "A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane",
          "properties": {
@@ -927,7 +1276,7 @@
             }
          },
          "required": [],
-         "title": "GeneralizedMolecularStructure",
+         "title": "GeneralizedMolecularStructureClass",
          "type": "object"
       },
       "Glycan": {
@@ -953,6 +1302,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -993,11 +1345,17 @@
       },
       "ImpreciseChemicalMixture": {
          "additionalProperties": false,
-         "description": "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified. Examples include coal, tea tree oil",
+         "description": "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_proportional_parts": {
-               "$ref": "#/definitions/ProportionalPart",
-               "description": "Relationship between a complex mixture and its parts"
+               "description": "Relationship between a complex mixture and its parts",
+               "items": {
+                  "$ref": "#/definitions/ProportionalPart"
+               },
+               "type": "array"
             },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
@@ -1109,6 +1467,9 @@
             "half_life": {
                "type": "integer"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -1188,6 +1549,9 @@
                },
                "type": "array"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -1225,6 +1589,18 @@
          "title": "Macromolecule",
          "type": "object"
       },
+      "Material": {
+         "additionalProperties": false,
+         "description": "A substance composed of one or more chemical entities",
+         "properties": {
+            "has_part": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Material",
+         "type": "object"
+      },
       "Measure": {
          "additionalProperties": false,
          "description": "todo",
@@ -1242,6 +1618,9 @@
          "additionalProperties": false,
          "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1270,6 +1649,13 @@
          "additionalProperties": false,
          "description": "A polyatomic ion that is negative",
          "properties": {
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
@@ -1293,6 +1679,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1336,6 +1725,13 @@
          "additionalProperties": false,
          "description": "A polyatomic ion that is positive",
          "properties": {
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
@@ -1359,6 +1755,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1402,6 +1801,9 @@
          "additionalProperties": false,
          "description": "A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1430,6 +1832,9 @@
          "additionalProperties": false,
          "description": "A proper part of a molecule that is larger than an atom",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1452,6 +1857,57 @@
             "id"
          ],
          "title": "MolecularComponent",
+         "type": "object"
+      },
+      "MolecularComponentGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class that classifies molecular components. Example: inorganic anion group",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "items": {
+                  "$ref": "#/definitions/MolecularComponentGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "MolecularComponentGroupingClass",
+         "type": "object"
+      },
+      "MolecularDerivativeGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class defined as a derivative of another molecule or molecular grouping class",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "derivative_of": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "MolecularDerivativeGroupingClass",
          "type": "object"
       },
       "MolecularSpecies": {
@@ -1477,6 +1933,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1520,6 +1979,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1567,6 +2029,64 @@
          "title": "MoleculeGroupingClass",
          "type": "object"
       },
+      "MoleculeGroupingClassDefinedByAdditionOfAGroup": {
+         "additionalProperties": false,
+         "description": "A grouping class defined in terms of a derivative of a molecule and the addition of a group",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "derivative_of": {
+               "type": "string"
+            },
+            "has_group": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "MoleculeGroupingClassDefinedByAdditionOfAGroup",
+         "type": "object"
+      },
+      "MoleculeGroupingClassDefinedByComponents": {
+         "additionalProperties": false,
+         "description": "A grouping class defined as an exhaustive list of components",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "has_part": {
+               "$ref": "#/definitions/ChemicalEntityOrGrouping"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "MoleculeGroupingClassDefinedByComponents",
+         "type": "object"
+      },
       "MoleculePairwiseSimilarity": {
          "additionalProperties": false,
          "description": "",
@@ -1591,7 +2111,7 @@
       },
       "MonoatomicIon": {
          "additionalProperties": false,
-         "description": "An atom that has a charge",
+         "description": "An atom type that has a charge",
          "properties": {
             "atomic_number": {
                "description": "number of protons in an atom",
@@ -1603,6 +2123,9 @@
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1639,6 +2162,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1687,6 +2213,9 @@
                },
                "type": "array"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -1727,6 +2256,22 @@
          "title": "MonomolecularPolymer",
          "type": "object"
       },
+      "Nanostructure": {
+         "additionalProperties": false,
+         "description": "A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale.",
+         "properties": {
+            "has_morphological_category": {
+               "description": "e.g. rod, sheet",
+               "type": "string"
+            },
+            "has_part": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Nanostructure",
+         "type": "object"
+      },
       "NaturalProduct": {
          "additionalProperties": false,
          "description": "",
@@ -1750,6 +2295,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1793,6 +2341,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1819,7 +2370,7 @@
       },
       "NonSpeciesMolecule": {
          "additionalProperties": false,
-         "description": "A molecule in which the units are not identical. Example: sodium chloride",
+         "description": "A molecule in which the units are not identical. TODO: move this higher",
          "properties": {
             "has_atom_occurrences": {
                "items": {
@@ -1840,6 +2391,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -1883,6 +2437,9 @@
          "additionalProperties": false,
          "description": "A neutron or proton",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -1911,6 +2468,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
                "type": "string"
@@ -1950,6 +2510,9 @@
             "energy_level": {
                "description": "e.g. ground, stable",
                "type": "string"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2006,6 +2569,9 @@
                },
                "type": "array"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -2043,10 +2609,29 @@
          "title": "Peptide",
          "type": "object"
       },
+      "PeriodicTableBlock": {
+         "additionalProperties": false,
+         "description": "A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in",
+         "properties": {
+            "type": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "PeriodicTableBlock",
+         "type": "object"
+      },
       "PolyatomicIon": {
          "additionalProperties": false,
          "description": "A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).",
          "properties": {
+            "conjugate_acid_of": {
+               "type": "string"
+            },
+            "conjugate_base_of": {
+               "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+               "type": "string"
+            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
@@ -2070,6 +2655,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2113,6 +2701,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -2142,6 +2733,9 @@
          "description": "A part of a complex mixture that is of uniform composition",
          "properties": {
             "composed_of": {
+               "type": "string"
+            },
+            "has_role": {
                "type": "string"
             },
             "maximum_percentage": {
@@ -2182,6 +2776,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2224,6 +2821,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -2252,6 +2852,9 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
                "type": "string"
@@ -2284,6 +2887,9 @@
          "additionalProperties": false,
          "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_left_enantiomer": {
                "type": "string"
             },
@@ -2327,6 +2933,9 @@
             "energy_level": {
                "description": "e.g. ground, stable",
                "type": "string"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2428,19 +3037,6 @@
          "title": "ReactionParticipant",
          "type": "object"
       },
-      "RelationalChemicalEntity": {
-         "additionalProperties": false,
-         "description": "A reified relationship",
-         "properties": {
-            "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
-               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            }
-         },
-         "required": [],
-         "title": "RelationalChemicalEntity",
-         "type": "object"
-      },
       "SmallMolecule": {
          "additionalProperties": false,
          "description": "A molecule characterized by availability in small-molecule databases",
@@ -2464,6 +3060,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2585,6 +3184,9 @@
                },
                "type": "array"
             },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_part": {
                "type": "string"
             },
@@ -2627,6 +3229,9 @@
          "additionalProperties": false,
          "description": "A chemical entity below the granularity of an atom.",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -2655,6 +3260,9 @@
          "additionalProperties": false,
          "description": "polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions\u2013that is, non-covalent bonds",
          "properties": {
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
             "has_standard_inchi_object": {
                "$ref": "#/definitions/StandardInchiObject"
             },
@@ -2703,7 +3311,7 @@
       },
       "UnchargedAtom": {
          "additionalProperties": false,
-         "description": "An atom that has no charge",
+         "description": "An atom type that has no charge",
          "properties": {
             "atomic_number": {
                "description": "number of protons in an atom",
@@ -2715,6 +3323,9 @@
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"
@@ -2773,6 +3384,9 @@
                   "$ref": "#/definitions/AtomicBond"
                },
                "type": "array"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
             },
             "has_part": {
                "type": "string"

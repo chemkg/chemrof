@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-03-30 18:35
+# Generation date: 2021-04-02 17:32
 # Schema: chemont
 #
 # id: chemont
@@ -73,6 +73,13 @@ DEFAULT_ = CHEMONT
 
 
 # Types
+class PeriodicTableGroup(int):
+    type_class_uri = XSD.int
+    type_class_curie = "xsd:int"
+    type_name = "periodic table group"
+    type_model_uri = CHEMONT.PeriodicTableGroup
+
+
 class Count(int):
     type_class_uri = XSD.int
     type_class_curie = "xsd:int"
@@ -316,19 +323,19 @@ class FullySpecifiedAtomId(AtomId):
     pass
 
 
-class ConjugatedAcidId(MoleculeId):
+class BronstedAcidId(MoleculeId):
     pass
 
 
-class AcidFormOfConjugatedAcidId(PolyatomicIonId):
-    pass
-
-
-class BaseFormOfConjugatedAcidId(MoleculeId):
+class AcidBaseId(MolecularAnionId):
     pass
 
 
 class ChemicalSaltId(PreciseChemicalMixtureId):
+    pass
+
+
+class EsterId(MoleculeId):
     pass
 
 
@@ -430,7 +437,196 @@ class MoleculeGroupingClass(GroupingClass):
         super().__post_init__(**kwargs)
 
 
-class GeneralizedMolecularStructure(MoleculeGroupingClass):
+@dataclass
+class MolecularComponentGroupingClass(GroupingClass):
+    """
+    A grouping class that classifies molecular components. Example: inorganic anion group
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularComponentGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:MolecularComponentGroupingClass"
+    class_name: ClassVar[str] = "molecular component grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularComponentGroupingClass
+
+    subtype_of: Optional[Union[Union[dict, "MolecularComponentGroupingClass"], List[Union[dict, "MolecularComponentGroupingClass"]]]] = empty_list()
+    classifies: Optional[Union[str, MolecularComponentId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.subtype_of is None:
+            self.subtype_of = []
+        if not isinstance(self.subtype_of, list):
+            self.subtype_of = [self.subtype_of]
+        self.subtype_of = [v if isinstance(v, MolecularComponentGroupingClass) else MolecularComponentGroupingClass(**v) for v in self.subtype_of]
+
+        if self.classifies is not None and not isinstance(self.classifies, MolecularComponentId):
+            self.classifies = MolecularComponentId(self.classifies)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class MolecularDerivativeGroupingClass(MoleculeGroupingClass):
+    """
+    A grouping class defined as a derivative of another molecule or molecular grouping class
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MolecularDerivativeGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:MolecularDerivativeGroupingClass"
+    class_name: ClassVar[str] = "molecular derivative grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MolecularDerivativeGroupingClass
+
+    derivative_of: Optional[Union[str, ChemicalEntityId]] = None
+    name: Optional[str] = None
+    classifies: Optional[Union[str, MoleculeId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.derivative_of is not None and not isinstance(self.derivative_of, ChemicalEntityId):
+            self.derivative_of = ChemicalEntityId(self.derivative_of)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.classifies is not None and not isinstance(self.classifies, MoleculeId):
+            self.classifies = MoleculeId(self.classifies)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class MoleculeGroupingClassDefinedByComponents(MoleculeGroupingClass):
+    """
+    A grouping class defined as an exhaustive list of components
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClassDefinedByComponents
+    class_class_curie: ClassVar[str] = "chemont:MoleculeGroupingClassDefinedByComponents"
+    class_name: ClassVar[str] = "molecule grouping class defined by components"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClassDefinedByComponents
+
+    has_part: Optional[Union[dict, "ChemicalEntityOrGrouping"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_part is not None and not isinstance(self.has_part, ChemicalEntityOrGrouping):
+            self.has_part = ChemicalEntityOrGrouping()
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class MoleculeGroupingClassDefinedByAdditionOfAGroup(MoleculeGroupingClass):
+    """
+    A grouping class defined in terms of a derivative of a molecule and the addition of a group
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClassDefinedByAdditionOfAGroup
+    class_class_curie: ClassVar[str] = "chemont:MoleculeGroupingClassDefinedByAdditionOfAGroup"
+    class_name: ClassVar[str] = "molecule grouping class defined by addition of a group"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.MoleculeGroupingClassDefinedByAdditionOfAGroup
+
+    has_group: Optional[Union[Union[str, ChemicalGroupId], List[Union[str, ChemicalGroupId]]]] = empty_list()
+    derivative_of: Optional[Union[str, PolyatomicEntityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_group is None:
+            self.has_group = []
+        if not isinstance(self.has_group, list):
+            self.has_group = [self.has_group]
+        self.has_group = [v if isinstance(v, ChemicalGroupId) else ChemicalGroupId(v) for v in self.has_group]
+
+        if self.derivative_of is not None and not isinstance(self.derivative_of, PolyatomicEntityId):
+            self.derivative_of = PolyatomicEntityId(self.derivative_of)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalSaltGroupingClass(MoleculeGroupingClass):
+    """
+    A grouping class for a chemical salt
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:ChemicalSaltGroupingClass"
+    class_name: ClassVar[str] = "chemical salt grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltGroupingClass
+
+    has_anionic_component: Optional[str] = None
+    has_cationic_component: Optional[str] = None
+    name: Optional[str] = None
+    classifies: Optional[Union[str, ChemicalSaltId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_anionic_component is not None and not isinstance(self.has_anionic_component, str):
+            self.has_anionic_component = str(self.has_anionic_component)
+
+        if self.has_cationic_component is not None and not isinstance(self.has_cationic_component, str):
+            self.has_cationic_component = str(self.has_cationic_component)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.classifies is not None and not isinstance(self.classifies, ChemicalSaltId):
+            self.classifies = ChemicalSaltId(self.classifies)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalSaltByCation(ChemicalSaltGroupingClass):
+    """
+    A grouping class for a chemical salt named by cation
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltByCation
+    class_class_curie: ClassVar[str] = "chemont:ChemicalSaltByCation"
+    class_name: ClassVar[str] = "chemical salt by cation"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltByCation
+
+    has_cationic_component: Optional[str] = None
+    name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_cationic_component is not None and not isinstance(self.has_cationic_component, str):
+            self.has_cationic_component = str(self.has_cationic_component)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalSaltByAnion(ChemicalSaltGroupingClass):
+    """
+    A grouping class for a chemical salt named by anion
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltByAnion
+    class_class_curie: ClassVar[str] = "chemont:ChemicalSaltByAnion"
+    class_name: ClassVar[str] = "chemical salt by anion"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalSaltByAnion
+
+    has_anionic_component: Optional[str] = None
+    name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_anionic_component is not None and not isinstance(self.has_anionic_component, str):
+            self.has_anionic_component = str(self.has_anionic_component)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+class GeneralizedMolecularStructureClass(MoleculeGroupingClass):
     """
     A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic
     expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is
@@ -438,10 +634,86 @@ class GeneralizedMolecularStructure(MoleculeGroupingClass):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.GeneralizedMolecularStructure
-    class_class_curie: ClassVar[str] = "chemont:GeneralizedMolecularStructure"
-    class_name: ClassVar[str] = "generalized molecular structure"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.GeneralizedMolecularStructure
+    class_class_uri: ClassVar[URIRef] = CHEMONT.GeneralizedMolecularStructureClass
+    class_class_curie: ClassVar[str] = "chemont:GeneralizedMolecularStructureClass"
+    class_name: ClassVar[str] = "generalized molecular structure class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.GeneralizedMolecularStructureClass
+
+
+@dataclass
+class GroupingClassForAcidsOrBases(MoleculeGroupingClass):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.GroupingClassForAcidsOrBases
+    class_class_curie: ClassVar[str] = "chemont:GroupingClassForAcidsOrBases"
+    class_name: ClassVar[str] = "grouping class for acids or bases"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.GroupingClassForAcidsOrBases
+
+    conjugate_base_of: Optional[Union[str, ChemicalEntityId]] = None
+    conjugate_acid_of: Optional[Union[str, ChemicalEntityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.conjugate_base_of is not None and not isinstance(self.conjugate_base_of, ChemicalEntityId):
+            self.conjugate_base_of = ChemicalEntityId(self.conjugate_base_of)
+
+        if self.conjugate_acid_of is not None and not isinstance(self.conjugate_acid_of, ChemicalEntityId):
+            self.conjugate_acid_of = ChemicalEntityId(self.conjugate_acid_of)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class AcidAnionGroupingClass(GroupingClassForAcidsOrBases):
+    """
+    A molecule grouping class that groups the different ion forms of the base of an acid
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AcidAnionGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:AcidAnionGroupingClass"
+    class_name: ClassVar[str] = "acid anion grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AcidAnionGroupingClass
+
+    name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+class GeneralAcidBaseGroupingClass(GroupingClassForAcidsOrBases):
+    """
+    A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.GeneralAcidBaseGroupingClass
+    class_class_curie: ClassVar[str] = "chemont:GeneralAcidBaseGroupingClass"
+    class_name: ClassVar[str] = "general acid base grouping class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.GeneralAcidBaseGroupingClass
+
+
+@dataclass
+class AcidBaseConflationClass(GroupingClassForAcidsOrBases):
+    """
+    A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AcidBaseConflationClass
+    class_class_curie: ClassVar[str] = "chemont:AcidBaseConflationClass"
+    class_name: ClassVar[str] = "acid base conflation class"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AcidBaseConflationClass
+
+    has_physiological_base: Optional[Union[str, AcidBaseId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_physiological_base is not None and not isinstance(self.has_physiological_base, AcidBaseId):
+            self.has_physiological_base = AcidBaseId(self.has_physiological_base)
+
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -472,6 +744,112 @@ class AtomGroupingClass(GroupingClass):
         super().__post_init__(**kwargs)
 
 
+class AtomGroupingByPeriodicTablePlacement(AtomGroupingClass):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTablePlacement
+    class_class_curie: ClassVar[str] = "chemont:AtomGroupingByPeriodicTablePlacement"
+    class_name: ClassVar[str] = "atom grouping by periodic table placement"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTablePlacement
+
+
+@dataclass
+class AtomGroupingByPeriodicTableGroup(AtomGroupingByPeriodicTablePlacement):
+    """
+    Example: p-block atom
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTableGroup
+    class_class_curie: ClassVar[str] = "chemont:AtomGroupingByPeriodicTableGroup"
+    class_name: ClassVar[str] = "atom grouping by periodic table group"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTableGroup
+
+    in_periodic_table_group: Optional[int] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.in_periodic_table_group is not None and not isinstance(self.in_periodic_table_group, int):
+            self.in_periodic_table_group = int(self.in_periodic_table_group)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class AtomGroupingByPeriodicTableBlock(AtomGroupingByPeriodicTablePlacement):
+    """
+    Example: group 13 atom
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTableBlock
+    class_class_curie: ClassVar[str] = "chemont:AtomGroupingByPeriodicTableBlock"
+    class_name: ClassVar[str] = "atom grouping by periodic table block"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByPeriodicTableBlock
+
+    in_periodic_table_block: Optional[Union[dict, "PeriodicTableBlock"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.in_periodic_table_block is not None and not isinstance(self.in_periodic_table_block, PeriodicTableBlock):
+            self.in_periodic_table_block = PeriodicTableBlock(**self.in_periodic_table_block)
+
+        super().__post_init__(**kwargs)
+
+
+class AtomGroupingByProperty(AtomGroupingClass):
+    """
+    Example: metal atom
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByProperty
+    class_class_curie: ClassVar[str] = "chemont:AtomGroupingByProperty"
+    class_name: ClassVar[str] = "atom grouping by property"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AtomGroupingByProperty
+
+
+@dataclass
+class Material(YAMLRoot):
+    """
+    A substance composed of one or more chemical entities
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Material
+    class_class_curie: ClassVar[str] = "chemont:Material"
+    class_name: ClassVar[str] = "material"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Material
+
+    has_part: Optional[Union[str, ChemicalEntityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_part is not None and not isinstance(self.has_part, ChemicalEntityId):
+            self.has_part = ChemicalEntityId(self.has_part)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Nanostructure(Material):
+    """
+    A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural
+    detail is microstructure at nanoscale.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Nanostructure
+    class_class_curie: ClassVar[str] = "chemont:Nanostructure"
+    class_name: ClassVar[str] = "nanostructure"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Nanostructure
+
+    has_morphological_category: Optional[Union[str, "NanostructureMorphologyEnum"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_morphological_category is not None and not isinstance(self.has_morphological_category, NanostructureMorphologyEnum):
+            self.has_morphological_category = NanostructureMorphologyEnum(self.has_morphological_category)
+
+        super().__post_init__(**kwargs)
+
+
 @dataclass
 class ChemicalEntity(YAMLRoot):
     """
@@ -488,6 +866,7 @@ class ChemicalEntity(YAMLRoot):
     name: Optional[str] = None
     is_radical: Optional[Union[bool, Bool]] = None
     has_standard_inchi_object: Optional[Union[dict, "StandardInchiObject"]] = None
+    has_characteristic: Optional[Union[dict, "ChemicalCharacteristic"]] = None
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -504,6 +883,9 @@ class ChemicalEntity(YAMLRoot):
 
         if self.has_standard_inchi_object is not None and not isinstance(self.has_standard_inchi_object, StandardInchiObject):
             self.has_standard_inchi_object = StandardInchiObject(**self.has_standard_inchi_object)
+
+        if self.has_characteristic is not None and not isinstance(self.has_characteristic, ChemicalCharacteristic):
+            self.has_characteristic = ChemicalCharacteristic()
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**self.owl_subclass_of)
@@ -615,6 +997,15 @@ class Electron(SubatomicParticle):
             self.id = ElectronId(self.id)
 
         super().__post_init__(**kwargs)
+
+
+class ChemicalEntityOrGrouping(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalEntityOrGrouping
+    class_class_curie: ClassVar[str] = "chemont:ChemicalEntityOrGrouping"
+    class_name: ClassVar[str] = "chemical entity or grouping"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalEntityOrGrouping
 
 
 class IsPartOrWhole(YAMLRoot):
@@ -974,7 +1365,8 @@ class SupramolecularPolymer(MolecularComplex):
 class ImpreciseChemicalMixture(ChemicalMixture):
     """
     A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not
-    specified. Examples include coal, tea tree oil
+    specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil,
+    toothpaste
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -984,7 +1376,7 @@ class ImpreciseChemicalMixture(ChemicalMixture):
     class_model_uri: ClassVar[URIRef] = CHEMONT.ImpreciseChemicalMixture
 
     id: Union[str, ImpreciseChemicalMixtureId] = None
-    has_proportional_parts: Optional[Union[dict, "ProportionalPart"]] = None
+    has_proportional_parts: Optional[Union[Union[dict, "ProportionalPart"], List[Union[dict, "ProportionalPart"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
@@ -992,8 +1384,11 @@ class ImpreciseChemicalMixture(ChemicalMixture):
         if not isinstance(self.id, ImpreciseChemicalMixtureId):
             self.id = ImpreciseChemicalMixtureId(self.id)
 
-        if self.has_proportional_parts is not None and not isinstance(self.has_proportional_parts, ProportionalPart):
-            self.has_proportional_parts = ProportionalPart(**self.has_proportional_parts)
+        if self.has_proportional_parts is None:
+            self.has_proportional_parts = []
+        if not isinstance(self.has_proportional_parts, list):
+            self.has_proportional_parts = [self.has_proportional_parts]
+        self.has_proportional_parts = [v if isinstance(v, ProportionalPart) else ProportionalPart(**v) for v in self.has_proportional_parts]
 
         super().__post_init__(**kwargs)
 
@@ -1427,7 +1822,7 @@ class MolecularSpecies(Molecule):
 @dataclass
 class NonSpeciesMolecule(Molecule):
     """
-    A molecule in which the units are not identical. Example: sodium chloride
+    A molecule in which the units are not identical. TODO: move this higher
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1460,12 +1855,20 @@ class PolyatomicIon(Molecule):
     class_model_uri: ClassVar[URIRef] = CHEMONT.PolyatomicIon
 
     id: Union[str, PolyatomicIonId] = None
+    conjugate_base_of: Optional[Union[str, ChemicalEntityId]] = None
+    conjugate_acid_of: Optional[Union[str, ChemicalEntityId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
         if not isinstance(self.id, PolyatomicIonId):
             self.id = PolyatomicIonId(self.id)
+
+        if self.conjugate_base_of is not None and not isinstance(self.conjugate_base_of, ChemicalEntityId):
+            self.conjugate_base_of = ChemicalEntityId(self.conjugate_base_of)
+
+        if self.conjugate_acid_of is not None and not isinstance(self.conjugate_acid_of, ChemicalEntityId):
+            self.conjugate_acid_of = ChemicalEntityId(self.conjugate_acid_of)
 
         super().__post_init__(**kwargs)
 
@@ -1546,7 +1949,7 @@ class UnchargedMolecule(Molecule):
 @dataclass
 class Atom(ChemicalEntity):
     """
-    A material entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+    A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1591,8 +1994,8 @@ class ChemicalElement(Atom):
 
     id: Union[str, ChemicalElementId] = None
     symbol: Optional[str] = None
-    periodic_table_group: Optional[str] = None
-    periodic_table_block: Optional[str] = None
+    in_periodic_table_group: Optional[int] = None
+    in_periodic_table_block: Optional[Union[dict, "PeriodicTableBlock"]] = None
     boiling_point_in_celcius: Optional[float] = None
     melting_point_in_celcius: Optional[float] = None
     standard_atomic_weight: Optional[float] = None
@@ -1608,11 +2011,11 @@ class ChemicalElement(Atom):
         if self.symbol is not None and not isinstance(self.symbol, str):
             self.symbol = str(self.symbol)
 
-        if self.periodic_table_group is not None and not isinstance(self.periodic_table_group, str):
-            self.periodic_table_group = str(self.periodic_table_group)
+        if self.in_periodic_table_group is not None and not isinstance(self.in_periodic_table_group, int):
+            self.in_periodic_table_group = int(self.in_periodic_table_group)
 
-        if self.periodic_table_block is not None and not isinstance(self.periodic_table_block, str):
-            self.periodic_table_block = str(self.periodic_table_block)
+        if self.in_periodic_table_block is not None and not isinstance(self.in_periodic_table_block, PeriodicTableBlock):
+            self.in_periodic_table_block = PeriodicTableBlock(**self.in_periodic_table_block)
 
         if self.boiling_point_in_celcius is not None and not isinstance(self.boiling_point_in_celcius, float):
             self.boiling_point_in_celcius = float(self.boiling_point_in_celcius)
@@ -1739,8 +2142,7 @@ class Radionuclide(Nuclide):
 @dataclass
 class AtomIonicForm(Atom):
     """
-    an atom type in which charge state is specified. Also known as (atom) ionic species. For example, chloride is an
-    atom ionic species; its formula is Cl−.
+    an atom type in which charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1766,7 +2168,7 @@ class AtomIonicForm(Atom):
 @dataclass
 class UnchargedAtom(AtomIonicForm):
     """
-    An atom that has no charge
+    An atom type that has no charge
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1789,7 +2191,7 @@ class UnchargedAtom(AtomIonicForm):
 @dataclass
 class MonoatomicIon(AtomIonicForm):
     """
-    An atom that has a charge
+    An atom type that has a charge
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1866,7 +2268,7 @@ class AtomCation(MonoatomicIon):
 @dataclass
 class FullySpecifiedAtom(Atom):
     """
-    An atom (class) that has subatomic particle counts specified
+    An atom type that has atomic number, charge, and neutron number stated
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1901,6 +2303,37 @@ class InformationalChemicalEntity(YAMLRoot):
     class_class_curie: ClassVar[str] = "chemont:InformationalChemicalEntity"
     class_name: ClassVar[str] = "informational chemical entity"
     class_model_uri: ClassVar[URIRef] = CHEMONT.InformationalChemicalEntity
+
+
+class PeriodicTablePlacement(InformationalChemicalEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.PeriodicTablePlacement
+    class_class_curie: ClassVar[str] = "chemont:PeriodicTablePlacement"
+    class_name: ClassVar[str] = "periodic table placement"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.PeriodicTablePlacement
+
+
+@dataclass
+class PeriodicTableBlock(PeriodicTablePlacement):
+    """
+    A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies
+    lie in
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.PeriodicTableBlock
+    class_class_curie: ClassVar[str] = "chemont:PeriodicTableBlock"
+    class_name: ClassVar[str] = "periodic table block"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.PeriodicTableBlock
+
+    type: Optional[Union[str, "PeriodicTableBlockEnum"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.type is not None and not isinstance(self.type, PeriodicTableBlockEnum):
+            self.type = PeriodicTableBlockEnum(self.type)
+
+        super().__post_init__(**kwargs)
 
 
 class InchiObject(InformationalChemicalEntity):
@@ -1989,6 +2422,18 @@ class RelationalChemicalEntity(YAMLRoot):
             self.owl_subclass_of = OwlClass(**self.owl_subclass_of)
 
         super().__post_init__(**kwargs)
+
+
+class ChemicalCharacteristic(YAMLRoot):
+    """
+    A property of a chemical entity
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.ChemicalCharacteristic
+    class_class_curie: ClassVar[str] = "chemont:ChemicalCharacteristic"
+    class_name: ClassVar[str] = "chemical characteristic"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.ChemicalCharacteristic
 
 
 @dataclass
@@ -2137,26 +2582,27 @@ class AtomOccurrence(RelationalChemicalEntity):
 
 
 @dataclass
-class ConjugatedAcid(Molecule):
+class BronstedAcid(Molecule):
     """
-    Represents a group of a conjugate acid and its bases. Examples: citrate/citric acid (MetaCyc:CIT), serine
+    A molecule capable of donating a hydron to an acceptor. Example: citric acid
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.ConjugatedAcid
-    class_class_curie: ClassVar[str] = "chemont:ConjugatedAcid"
-    class_name: ClassVar[str] = "conjugated acid"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.ConjugatedAcid
+    class_class_uri: ClassVar[URIRef] = CHEMONT.BronstedAcid
+    class_class_curie: ClassVar[str] = "chemont:BronstedAcid"
+    class_name: ClassVar[str] = "Bronsted acid"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.BronstedAcid
 
-    id: Union[str, ConjugatedAcidId] = None
+    id: Union[str, BronstedAcidId] = None
     acidity: Optional[float] = None
     hard_or_soft: Optional[Union[str, "HardOrSoftEnum"]] = None
+    acid_form_of: Optional[Union[Union[str, AcidBaseId], List[Union[str, AcidBaseId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
-        if not isinstance(self.id, ConjugatedAcidId):
-            self.id = ConjugatedAcidId(self.id)
+        if not isinstance(self.id, BronstedAcidId):
+            self.id = BronstedAcidId(self.id)
 
         if self.acidity is not None and not isinstance(self.acidity, float):
             self.acidity = float(self.acidity)
@@ -2164,49 +2610,38 @@ class ConjugatedAcid(Molecule):
         if self.hard_or_soft is not None and not isinstance(self.hard_or_soft, HardOrSoftEnum):
             self.hard_or_soft = HardOrSoftEnum(self.hard_or_soft)
 
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class AcidFormOfConjugatedAcid(PolyatomicIon):
-    """
-    A molecule capable of donating a proton. Example: carboxylic acid is an organic acid that contains a carboxyl
-    group (C(=O)OH)[1] attached to an R-group
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMONT.AcidFormOfConjugatedAcid
-    class_class_curie: ClassVar[str] = "chemont:AcidFormOfConjugatedAcid"
-    class_name: ClassVar[str] = "acid form of conjugated acid"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.AcidFormOfConjugatedAcid
-
-    id: Union[str, AcidFormOfConjugatedAcidId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
-        if not isinstance(self.id, AcidFormOfConjugatedAcidId):
-            self.id = AcidFormOfConjugatedAcidId(self.id)
+        if self.acid_form_of is None:
+            self.acid_form_of = []
+        if not isinstance(self.acid_form_of, list):
+            self.acid_form_of = [self.acid_form_of]
+        self.acid_form_of = [v if isinstance(v, AcidBaseId) else AcidBaseId(v) for v in self.acid_form_of]
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class BaseFormOfConjugatedAcid(Molecule):
+class AcidBase(MolecularAnion):
+    """
+    A conugate base of an acid with charge specified. Example: citrate(3-)
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMONT.BaseFormOfConjugatedAcid
-    class_class_curie: ClassVar[str] = "chemont:BaseFormOfConjugatedAcid"
-    class_name: ClassVar[str] = "base form of conjugated acid"
-    class_model_uri: ClassVar[URIRef] = CHEMONT.BaseFormOfConjugatedAcid
+    class_class_uri: ClassVar[URIRef] = CHEMONT.AcidBase
+    class_class_curie: ClassVar[str] = "chemont:AcidBase"
+    class_name: ClassVar[str] = "acid base"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.AcidBase
 
-    id: Union[str, BaseFormOfConjugatedAcidId] = None
+    id: Union[str, AcidBaseId] = None
+    has_acid_form: Optional[Union[str, BronstedAcidId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
-        if not isinstance(self.id, BaseFormOfConjugatedAcidId):
-            self.id = BaseFormOfConjugatedAcidId(self.id)
+        if not isinstance(self.id, AcidBaseId):
+            self.id = AcidBaseId(self.id)
+
+        if self.has_acid_form is not None and not isinstance(self.has_acid_form, BronstedAcidId):
+            self.has_acid_form = BronstedAcidId(self.has_acid_form)
 
         super().__post_init__(**kwargs)
 
@@ -2225,6 +2660,8 @@ class ChemicalSalt(PreciseChemicalMixture):
 
     id: Union[str, ChemicalSaltId] = None
     elemental_charge: Optional[int] = None
+    has_cationic_component: Optional[Union[dict, CationState]] = None
+    has_anionic_component: Optional[Union[dict, AnionState]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
@@ -2234,6 +2671,44 @@ class ChemicalSalt(PreciseChemicalMixture):
 
         if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
             self.elemental_charge = int(self.elemental_charge)
+
+        if self.has_cationic_component is not None and not isinstance(self.has_cationic_component, CationState):
+            self.has_cationic_component = CationState(**self.has_cationic_component)
+
+        if self.has_anionic_component is not None and not isinstance(self.has_anionic_component, AnionState):
+            self.has_anionic_component = AnionState(**self.has_anionic_component)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Ester(Molecule):
+    """
+    An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl
+    group is replaced by an –O– alkyl (alkoxy) group
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMONT.Ester
+    class_class_curie: ClassVar[str] = "chemont:Ester"
+    class_name: ClassVar[str] = "ester"
+    class_model_uri: ClassVar[URIRef] = CHEMONT.Ester
+
+    id: Union[str, EsterId] = None
+    has_parent_alcohol: Optional[Union[str, ChemicalEntityId]] = None
+    has_parent_acid: Optional[Union[str, BronstedAcidId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, EsterId):
+            self.id = EsterId(self.id)
+
+        if self.has_parent_alcohol is not None and not isinstance(self.has_parent_alcohol, ChemicalEntityId):
+            self.has_parent_alcohol = ChemicalEntityId(self.has_parent_alcohol)
+
+        if self.has_parent_acid is not None and not isinstance(self.has_parent_acid, BronstedAcidId):
+            self.has_parent_acid = BronstedAcidId(self.has_parent_acid)
 
         super().__post_init__(**kwargs)
 
@@ -2484,11 +2959,15 @@ class ProportionalPart(RelationalChemicalEntity):
     class_name: ClassVar[str] = "proportional part"
     class_model_uri: ClassVar[URIRef] = CHEMONT.ProportionalPart
 
+    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
     composed_of: Optional[Union[str, ChemicalEntityId]] = None
     minimal_percentage: Optional[float] = None
     maximum_percentage: Optional[float] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_role is not None and not isinstance(self.has_role, IngredientRoleEnum):
+            self.has_role = IngredientRoleEnum(self.has_role)
+
         if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
             self.composed_of = ChemicalEntityId(self.composed_of)
 
@@ -2558,6 +3037,72 @@ class TanimotoSimilarity(MoleculePairwiseSimilarity):
 
 
 # Enumerations
+class NanostructureMorphologyEnum(EnumDefinitionImpl):
+
+    nanotube = PermissibleValue(text="nanotube",
+                                       meaning=CHEBI["50796"])
+    nanoparticle = PermissibleValue(text="nanoparticle",
+                                               meaning=CHEBI["50803"])
+    nanorod = PermissibleValue(text="nanorod",
+                                     meaning=CHEBI["50805"])
+    nanotubosome = PermissibleValue(text="nanotubosome",
+                                               meaning=CHEBI["50806"])
+    nanofibre = PermissibleValue(text="nanofibre",
+                                         meaning=CHEBI["52518"])
+    nanocrystal = PermissibleValue(text="nanocrystal",
+                                             meaning=CHEBI["52529"])
+    nanoribbon = PermissibleValue(text="nanoribbon",
+                                           meaning=CHEBI["52530"])
+    nanosheet = PermissibleValue(text="nanosheet",
+                                         meaning=CHEBI["52531"])
+    nanowire = PermissibleValue(text="nanowire",
+                                       meaning=CHEBI["52593"])
+
+    _defn = EnumDefinition(
+        name="NanostructureMorphologyEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "quantum dot",
+                PermissibleValue(text="quantum dot",
+                                 meaning=CHEBI["50853"]) )
+
+class PeriodicTableBlockEnum(EnumDefinitionImpl):
+
+    _defn = EnumDefinition(
+        name="PeriodicTableBlockEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "s-block",
+                PermissibleValue(text="s-block") )
+        setattr(cls, "p-block",
+                PermissibleValue(text="p-block") )
+        setattr(cls, "d-block",
+                PermissibleValue(text="d-block") )
+        setattr(cls, "f-block",
+                PermissibleValue(text="f-block") )
+        setattr(cls, "g-block",
+                PermissibleValue(text="g-block") )
+
+class IngredientRoleEnum(EnumDefinitionImpl):
+
+    excipient = PermissibleValue(text="excipient")
+    solvent = PermissibleValue(text="solvent")
+
+    _defn = EnumDefinition(
+        name="IngredientRoleEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "active ingredient",
+                PermissibleValue(text="active ingredient") )
+        setattr(cls, "inactive ingredient",
+                PermissibleValue(text="inactive ingredient") )
+
 class BondTypeEnum(EnumDefinitionImpl):
 
     covalent = PermissibleValue(text="covalent",
@@ -2598,6 +3143,12 @@ slots.chemical_property = Slot(uri=CHEMONT.chemical_property, name="chemical pro
 
 slots.information_property = Slot(uri=CHEMONT.information_property, name="information property", curie=CHEMONT.curie('information_property'),
                    model_uri=CHEMONT.information_property, domain=None, range=Optional[str])
+
+slots.in_periodic_table_group = Slot(uri=CHEMONT.in_periodic_table_group, name="in periodic table group", curie=CHEMONT.curie('in_periodic_table_group'),
+                   model_uri=CHEMONT.in_periodic_table_group, domain=None, range=Optional[int])
+
+slots.in_periodic_table_block = Slot(uri=CHEMONT.in_periodic_table_block, name="in periodic table block", curie=CHEMONT.curie('in_periodic_table_block'),
+                   model_uri=CHEMONT.in_periodic_table_block, domain=None, range=Optional[Union[dict, PeriodicTableBlock]])
 
 slots.id = Slot(uri=CHEMONT.id, name="id", curie=CHEMONT.curie('id'),
                    model_uri=CHEMONT.id, domain=None, range=URIRef, mappings = [SCHEMA.identifier])
@@ -2644,6 +3195,30 @@ slots.nuclear_isomer_of = Slot(uri=CHEMONT.nuclear_isomer_of, name="nuclear isom
 slots.isobar_of = Slot(uri=CHEMONT.isobar_of, name="isobar of", curie=CHEMONT.curie('isobar_of'),
                    model_uri=CHEMONT.isobar_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
 
+slots.derivative_of = Slot(uri=CHEMONT.derivative_of, name="derivative of", curie=CHEMONT.curie('derivative_of'),
+                   model_uri=CHEMONT.derivative_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.has_derivative = Slot(uri=CHEMONT.has_derivative, name="has derivative", curie=CHEMONT.curie('has_derivative'),
+                   model_uri=CHEMONT.has_derivative, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.conjugate_base_of = Slot(uri=CHEMONT.conjugate_base_of, name="conjugate base of", curie=CHEMONT.curie('conjugate_base_of'),
+                   model_uri=CHEMONT.conjugate_base_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.conjugate_acid_of = Slot(uri=CHEMONT.conjugate_acid_of, name="conjugate acid of", curie=CHEMONT.curie('conjugate_acid_of'),
+                   model_uri=CHEMONT.conjugate_acid_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.acid_form_of = Slot(uri=CHEMONT.acid_form_of, name="acid form of", curie=CHEMONT.curie('acid_form_of'),
+                   model_uri=CHEMONT.acid_form_of, domain=BronstedAcid, range=Optional[Union[Union[str, AcidBaseId], List[Union[str, AcidBaseId]]]])
+
+slots.has_physiological_base = Slot(uri=CHEMONT.has_physiological_base, name="has physiological base", curie=CHEMONT.curie('has_physiological_base'),
+                   model_uri=CHEMONT.has_physiological_base, domain=BronstedAcid, range=Optional[Union[str, AcidBaseId]])
+
+slots.has_acid_form = Slot(uri=CHEMONT.has_acid_form, name="has acid form", curie=CHEMONT.curie('has_acid_form'),
+                   model_uri=CHEMONT.has_acid_form, domain=AcidBase, range=Optional[Union[str, BronstedAcidId]])
+
+slots.has_characteristic = Slot(uri=CHEMONT.has_characteristic, name="has characteristic", curie=CHEMONT.curie('has_characteristic'),
+                   model_uri=CHEMONT.has_characteristic, domain=None, range=Optional[Union[dict, ChemicalCharacteristic]])
+
 slots.has_part = Slot(uri=CHEMONT.has_part, name="has part", curie=CHEMONT.curie('has_part'),
                    model_uri=CHEMONT.has_part, domain=None, range=Optional[str], mappings = [BFO["0000050"], SCHEMA.hasBioChemEntityPart])
 
@@ -2653,11 +3228,20 @@ slots.has_atoms = Slot(uri=CHEMONT.has_atoms, name="has atoms", curie=CHEMONT.cu
 slots.has_submolecules = Slot(uri=CHEMONT.has_submolecules, name="has submolecules", curie=CHEMONT.curie('has_submolecules'),
                    model_uri=CHEMONT.has_submolecules, domain=Molecule, range=Optional[Union[Union[str, MoleculeId], List[Union[str, MoleculeId]]]])
 
+slots.has_ionic_component = Slot(uri=CHEMONT.has_ionic_component, name="has ionic component", curie=CHEMONT.curie('has_ionic_component'),
+                   model_uri=CHEMONT.has_ionic_component, domain=None, range=Optional[str])
+
+slots.has_cationic_component = Slot(uri=CHEMONT.has_cationic_component, name="has cationic component", curie=CHEMONT.curie('has_cationic_component'),
+                   model_uri=CHEMONT.has_cationic_component, domain=None, range=Optional[str])
+
+slots.has_anionic_component = Slot(uri=CHEMONT.has_anionic_component, name="has anionic component", curie=CHEMONT.curie('has_anionic_component'),
+                   model_uri=CHEMONT.has_anionic_component, domain=None, range=Optional[str])
+
 slots.has_group = Slot(uri=CHEMONT.has_group, name="has group", curie=CHEMONT.curie('has_group'),
                    model_uri=CHEMONT.has_group, domain=Atom, range=Optional[Union[Union[str, MoleculeId], List[Union[str, MoleculeId]]]])
 
 slots.has_proportional_parts = Slot(uri=CHEMONT.has_proportional_parts, name="has proportional parts", curie=CHEMONT.curie('has_proportional_parts'),
-                   model_uri=CHEMONT.has_proportional_parts, domain=ImpreciseChemicalMixture, range=Optional[Union[dict, "ProportionalPart"]])
+                   model_uri=CHEMONT.has_proportional_parts, domain=ImpreciseChemicalMixture, range=Optional[Union[Union[dict, "ProportionalPart"], List[Union[dict, "ProportionalPart"]]]])
 
 slots.energy_level = Slot(uri=CHEMONT.energy_level, name="energy level", curie=CHEMONT.curie('energy_level'),
                    model_uri=CHEMONT.energy_level, domain=None, range=Optional[str])
@@ -2858,17 +3442,14 @@ slots.classified_by = Slot(uri=CHEMONT.classified_by, name="classified by", curi
 slots.classifies = Slot(uri=CHEMONT.classifies, name="classifies", curie=CHEMONT.curie('classifies'),
                    model_uri=CHEMONT.classifies, domain=None, range=Optional[str])
 
+slots.has_morphological_category = Slot(uri=CHEMONT.has_morphological_category, name="has morphological category", curie=CHEMONT.curie('has_morphological_category'),
+                   model_uri=CHEMONT.has_morphological_category, domain=None, range=Optional[Union[str, "NanostructureMorphologyEnum"]])
+
 slots.polymer_of = Slot(uri=CHEMONT.polymer_of, name="polymer of", curie=CHEMONT.curie('polymer_of'),
                    model_uri=CHEMONT.polymer_of, domain=None, range=Optional[Union[str, MacromoleculeId]])
 
 slots.is_substitutent_group_from = Slot(uri=CHEMONT.is_substitutent_group_from, name="is substitutent group from", curie=CHEMONT.curie('is_substitutent_group_from'),
                    model_uri=CHEMONT.is_substitutent_group_from, domain=None, range=Optional[Union[str, MoleculeId]])
-
-slots.periodic_table_group = Slot(uri=CHEMONT.periodic_table_group, name="periodic table group", curie=CHEMONT.curie('periodic_table_group'),
-                   model_uri=CHEMONT.periodic_table_group, domain=None, range=Optional[str])
-
-slots.periodic_table_block = Slot(uri=CHEMONT.periodic_table_block, name="periodic table block", curie=CHEMONT.curie('periodic_table_block'),
-                   model_uri=CHEMONT.periodic_table_block, domain=None, range=Optional[str])
 
 slots.boiling_point_in_celcius = Slot(uri=CHEMONT.boiling_point_in_celcius, name="boiling point in celcius", curie=CHEMONT.curie('boiling_point_in_celcius'),
                    model_uri=CHEMONT.boiling_point_in_celcius, domain=None, range=Optional[float])
@@ -2887,6 +3468,9 @@ slots.has_stereocenter = Slot(uri=CHEMONT.has_stereocenter, name="has stereocent
 
 slots.elemental_change = Slot(uri=CHEMONT.elemental_change, name="elemental change", curie=CHEMONT.curie('elemental_change'),
                    model_uri=CHEMONT.elemental_change, domain=None, range=Optional[str])
+
+slots.type = Slot(uri=CHEMONT.type, name="type", curie=CHEMONT.curie('type'),
+                   model_uri=CHEMONT.type, domain=None, range=Optional[Union[str, "PeriodicTableBlockEnum"]])
 
 slots.bond_type = Slot(uri=CHEMONT.bond_type, name="bond type", curie=CHEMONT.curie('bond_type'),
                    model_uri=CHEMONT.bond_type, domain=None, range=Optional[Union[str, "BondTypeEnum"]])
@@ -2920,6 +3504,12 @@ slots.acidity = Slot(uri=CHEMONT.acidity, name="acidity", curie=CHEMONT.curie('a
 
 slots.hard_or_soft = Slot(uri=CHEMONT.hard_or_soft, name="hard or soft", curie=CHEMONT.curie('hard_or_soft'),
                    model_uri=CHEMONT.hard_or_soft, domain=None, range=Optional[Union[str, "HardOrSoftEnum"]])
+
+slots.has_parent_alcohol = Slot(uri=CHEMONT.has_parent_alcohol, name="has parent alcohol", curie=CHEMONT.curie('has_parent_alcohol'),
+                   model_uri=CHEMONT.has_parent_alcohol, domain=None, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.has_parent_acid = Slot(uri=CHEMONT.has_parent_acid, name="has parent acid", curie=CHEMONT.curie('has_parent_acid'),
+                   model_uri=CHEMONT.has_parent_acid, domain=None, range=Optional[Union[str, BronstedAcidId]])
 
 slots.relative_configuration = Slot(uri=CHEMONT.relative_configuration, name="relative configuration", curie=CHEMONT.curie('relative_configuration'),
                    model_uri=CHEMONT.relative_configuration, domain=None, range=Optional[str])
@@ -2978,6 +3568,9 @@ slots.participant = Slot(uri=CHEMONT.participant, name="participant", curie=CHEM
 slots.stoichiometry = Slot(uri=CHEMONT.stoichiometry, name="stoichiometry", curie=CHEMONT.curie('stoichiometry'),
                    model_uri=CHEMONT.stoichiometry, domain=None, range=Optional[int])
 
+slots.has_role = Slot(uri=CHEMONT.has_role, name="has role", curie=CHEMONT.curie('has_role'),
+                   model_uri=CHEMONT.has_role, domain=None, range=Optional[Union[str, "IngredientRoleEnum"]])
+
 slots.composed_of = Slot(uri=CHEMONT.composed_of, name="composed of", curie=CHEMONT.curie('composed_of'),
                    model_uri=CHEMONT.composed_of, domain=None, range=Optional[Union[str, ChemicalEntityId]])
 
@@ -3008,11 +3601,57 @@ slots.molecule_grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="mo
 slots.molecule_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="molecule grouping class_classifies", curie=CHEMONT.curie('classifies'),
                    model_uri=CHEMONT.molecule_grouping_class_classifies, domain=MoleculeGroupingClass, range=Optional[Union[str, MoleculeId]])
 
+slots.molecular_component_grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="molecular component grouping class_subtype of", curie=CHEMONT.curie('subtype_of'),
+                   model_uri=CHEMONT.molecular_component_grouping_class_subtype_of, domain=MolecularComponentGroupingClass, range=Optional[Union[Union[dict, "MolecularComponentGroupingClass"], List[Union[dict, "MolecularComponentGroupingClass"]]]])
+
+slots.molecular_component_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="molecular component grouping class_classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.molecular_component_grouping_class_classifies, domain=MolecularComponentGroupingClass, range=Optional[Union[str, MolecularComponentId]])
+
+slots.molecular_derivative_grouping_class_name = Slot(uri=CHEMONT.name, name="molecular derivative grouping class_name", curie=CHEMONT.curie('name'),
+                   model_uri=CHEMONT.molecular_derivative_grouping_class_name, domain=MolecularDerivativeGroupingClass, range=Optional[str])
+
+slots.molecular_derivative_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="molecular derivative grouping class_classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.molecular_derivative_grouping_class_classifies, domain=MolecularDerivativeGroupingClass, range=Optional[Union[str, MoleculeId]])
+
+slots.molecule_grouping_class_defined_by_components_has_part = Slot(uri=CHEMONT.has_part, name="molecule grouping class defined by components_has part", curie=CHEMONT.curie('has_part'),
+                   model_uri=CHEMONT.molecule_grouping_class_defined_by_components_has_part, domain=MoleculeGroupingClassDefinedByComponents, range=Optional[Union[dict, "ChemicalEntityOrGrouping"]])
+
+slots.molecule_grouping_class_defined_by_addition_of_a_group_has_group = Slot(uri=CHEMONT.has_group, name="molecule grouping class defined by addition of a group_has group", curie=CHEMONT.curie('has_group'),
+                   model_uri=CHEMONT.molecule_grouping_class_defined_by_addition_of_a_group_has_group, domain=MoleculeGroupingClassDefinedByAdditionOfAGroup, range=Optional[Union[Union[str, ChemicalGroupId], List[Union[str, ChemicalGroupId]]]])
+
+slots.molecule_grouping_class_defined_by_addition_of_a_group_derivative_of = Slot(uri=CHEMONT.derivative_of, name="molecule grouping class defined by addition of a group_derivative of", curie=CHEMONT.curie('derivative_of'),
+                   model_uri=CHEMONT.molecule_grouping_class_defined_by_addition_of_a_group_derivative_of, domain=MoleculeGroupingClassDefinedByAdditionOfAGroup, range=Optional[Union[str, PolyatomicEntityId]])
+
+slots.chemical_salt_grouping_class_name = Slot(uri=CHEMONT.name, name="chemical salt grouping class_name", curie=CHEMONT.curie('name'),
+                   model_uri=CHEMONT.chemical_salt_grouping_class_name, domain=ChemicalSaltGroupingClass, range=Optional[str])
+
+slots.chemical_salt_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="chemical salt grouping class_classifies", curie=CHEMONT.curie('classifies'),
+                   model_uri=CHEMONT.chemical_salt_grouping_class_classifies, domain=ChemicalSaltGroupingClass, range=Optional[Union[str, ChemicalSaltId]])
+
+slots.chemical_salt_by_cation_name = Slot(uri=CHEMONT.name, name="chemical salt by cation_name", curie=CHEMONT.curie('name'),
+                   model_uri=CHEMONT.chemical_salt_by_cation_name, domain=ChemicalSaltByCation, range=Optional[str])
+
+slots.chemical_salt_by_anion_name = Slot(uri=CHEMONT.name, name="chemical salt by anion_name", curie=CHEMONT.curie('name'),
+                   model_uri=CHEMONT.chemical_salt_by_anion_name, domain=ChemicalSaltByAnion, range=Optional[str])
+
+slots.acid_anion_grouping_class_name = Slot(uri=CHEMONT.name, name="acid anion grouping class_name", curie=CHEMONT.curie('name'),
+                   model_uri=CHEMONT.acid_anion_grouping_class_name, domain=AcidAnionGroupingClass, range=Optional[str],
+                   pattern=re.compile(r'ate$'))
+
+slots.acid_base_conflation_class_has_physiological_base = Slot(uri=CHEMONT.has_physiological_base, name="acid base conflation class_has physiological base", curie=CHEMONT.curie('has_physiological_base'),
+                   model_uri=CHEMONT.acid_base_conflation_class_has_physiological_base, domain=AcidBaseConflationClass, range=Optional[Union[str, AcidBaseId]])
+
 slots.atom_grouping_class_subtype_of = Slot(uri=CHEMONT.subtype_of, name="atom grouping class_subtype of", curie=CHEMONT.curie('subtype_of'),
                    model_uri=CHEMONT.atom_grouping_class_subtype_of, domain=AtomGroupingClass, range=Optional[Union[Union[dict, MoleculeGroupingClass], List[Union[dict, MoleculeGroupingClass]]]])
 
 slots.atom_grouping_class_classifies = Slot(uri=CHEMONT.classifies, name="atom grouping class_classifies", curie=CHEMONT.curie('classifies'),
                    model_uri=CHEMONT.atom_grouping_class_classifies, domain=AtomGroupingClass, range=Optional[Union[str, AtomId]])
+
+slots.material_has_part = Slot(uri=CHEMONT.has_part, name="material_has part", curie=CHEMONT.curie('has_part'),
+                   model_uri=CHEMONT.material_has_part, domain=Material, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.nanostructure_has_morphological_category = Slot(uri=CHEMONT.has_morphological_category, name="nanostructure_has morphological category", curie=CHEMONT.curie('has_morphological_category'),
+                   model_uri=CHEMONT.nanostructure_has_morphological_category, domain=Nanostructure, range=Optional[Union[str, "NanostructureMorphologyEnum"]])
 
 slots.anion_state_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="anion state_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.anion_state_elemental_charge, domain=None, range=Optional[int])
@@ -3057,11 +3696,11 @@ slots.chemical_element_symbol = Slot(uri=CHEMONT.symbol, name="chemical element_
                    model_uri=CHEMONT.chemical_element_symbol, domain=ChemicalElement, range=Optional[str],
                    pattern=re.compile(r'^[A-Z][a-z]*'))
 
-slots.chemical_element_periodic_table_group = Slot(uri=CHEMONT.periodic_table_group, name="chemical element_periodic table group", curie=CHEMONT.curie('periodic_table_group'),
-                   model_uri=CHEMONT.chemical_element_periodic_table_group, domain=ChemicalElement, range=Optional[str])
+slots.chemical_element_in_periodic_table_group = Slot(uri=CHEMONT.in_periodic_table_group, name="chemical element_in periodic table group", curie=CHEMONT.curie('in_periodic_table_group'),
+                   model_uri=CHEMONT.chemical_element_in_periodic_table_group, domain=ChemicalElement, range=Optional[int])
 
-slots.chemical_element_periodic_table_block = Slot(uri=CHEMONT.periodic_table_block, name="chemical element_periodic table block", curie=CHEMONT.curie('periodic_table_block'),
-                   model_uri=CHEMONT.chemical_element_periodic_table_block, domain=ChemicalElement, range=Optional[str])
+slots.chemical_element_in_periodic_table_block = Slot(uri=CHEMONT.in_periodic_table_block, name="chemical element_in periodic table block", curie=CHEMONT.curie('in_periodic_table_block'),
+                   model_uri=CHEMONT.chemical_element_in_periodic_table_block, domain=ChemicalElement, range=Optional[Union[dict, "PeriodicTableBlock"]])
 
 slots.chemical_element_boiling_point_in_celcius = Slot(uri=CHEMONT.boiling_point_in_celcius, name="chemical element_boiling point in celcius", curie=CHEMONT.curie('boiling_point_in_celcius'),
                    model_uri=CHEMONT.chemical_element_boiling_point_in_celcius, domain=ChemicalElement, range=Optional[float])
@@ -3086,6 +3725,9 @@ slots.atom_anion_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="ato
 
 slots.atom_cation_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="atom cation_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.atom_cation_elemental_charge, domain=AtomCation, range=Optional[int])
+
+slots.periodic_table_block_type = Slot(uri=CHEMONT.type, name="periodic table block_type", curie=CHEMONT.curie('type'),
+                   model_uri=CHEMONT.periodic_table_block_type, domain=PeriodicTableBlock, range=Optional[Union[str, "PeriodicTableBlockEnum"]])
 
 slots.standard_inchi_object_inchi_version_string = Slot(uri=CHEMONT.inchi_version_string, name="standard inchi object_inchi version string", curie=CHEMONT.curie('inchi_version_string'),
                    model_uri=CHEMONT.standard_inchi_object_inchi_version_string, domain=StandardInchiObject, range=str,
@@ -3121,14 +3763,32 @@ slots.atom_occurrence_formal_charge = Slot(uri=CHEMONT.formal_charge, name="atom
 slots.atom_occurrence_coordination_number = Slot(uri=CHEMONT.coordination_number, name="atom occurrence_coordination number", curie=CHEMONT.curie('coordination_number'),
                    model_uri=CHEMONT.atom_occurrence_coordination_number, domain=AtomOccurrence, range=Optional[int])
 
-slots.conjugated_acid_acidity = Slot(uri=CHEMONT.acidity, name="conjugated acid_acidity", curie=CHEMONT.curie('acidity'),
-                   model_uri=CHEMONT.conjugated_acid_acidity, domain=ConjugatedAcid, range=Optional[float])
+slots.Bronsted_acid_acidity = Slot(uri=CHEMONT.acidity, name="Bronsted acid_acidity", curie=CHEMONT.curie('acidity'),
+                   model_uri=CHEMONT.Bronsted_acid_acidity, domain=BronstedAcid, range=Optional[float])
 
-slots.conjugated_acid_hard_or_soft = Slot(uri=CHEMONT.hard_or_soft, name="conjugated acid_hard or soft", curie=CHEMONT.curie('hard_or_soft'),
-                   model_uri=CHEMONT.conjugated_acid_hard_or_soft, domain=ConjugatedAcid, range=Optional[Union[str, "HardOrSoftEnum"]])
+slots.Bronsted_acid_hard_or_soft = Slot(uri=CHEMONT.hard_or_soft, name="Bronsted acid_hard or soft", curie=CHEMONT.curie('hard_or_soft'),
+                   model_uri=CHEMONT.Bronsted_acid_hard_or_soft, domain=BronstedAcid, range=Optional[Union[str, "HardOrSoftEnum"]])
+
+slots.Bronsted_acid_acid_form_of = Slot(uri=CHEMONT.acid_form_of, name="Bronsted acid_acid form of", curie=CHEMONT.curie('acid_form_of'),
+                   model_uri=CHEMONT.Bronsted_acid_acid_form_of, domain=BronstedAcid, range=Optional[Union[Union[str, AcidBaseId], List[Union[str, AcidBaseId]]]])
+
+slots.acid_base_has_acid_form = Slot(uri=CHEMONT.has_acid_form, name="acid base_has acid form", curie=CHEMONT.curie('has_acid_form'),
+                   model_uri=CHEMONT.acid_base_has_acid_form, domain=AcidBase, range=Optional[Union[str, BronstedAcidId]])
 
 slots.chemical_salt_elemental_charge = Slot(uri=CHEMONT.elemental_charge, name="chemical salt_elemental charge", curie=CHEMONT.curie('elemental_charge'),
                    model_uri=CHEMONT.chemical_salt_elemental_charge, domain=ChemicalSalt, range=Optional[int])
+
+slots.chemical_salt_has_cationic_component = Slot(uri=CHEMONT.has_cationic_component, name="chemical salt_has cationic component", curie=CHEMONT.curie('has_cationic_component'),
+                   model_uri=CHEMONT.chemical_salt_has_cationic_component, domain=ChemicalSalt, range=Optional[Union[dict, CationState]])
+
+slots.chemical_salt_has_anionic_component = Slot(uri=CHEMONT.has_anionic_component, name="chemical salt_has anionic component", curie=CHEMONT.curie('has_anionic_component'),
+                   model_uri=CHEMONT.chemical_salt_has_anionic_component, domain=ChemicalSalt, range=Optional[Union[dict, AnionState]])
+
+slots.ester_has_parent_alcohol = Slot(uri=CHEMONT.has_parent_alcohol, name="ester_has parent alcohol", curie=CHEMONT.curie('has_parent_alcohol'),
+                   model_uri=CHEMONT.ester_has_parent_alcohol, domain=Ester, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.ester_has_parent_acid = Slot(uri=CHEMONT.has_parent_acid, name="ester_has parent acid", curie=CHEMONT.curie('has_parent_acid'),
+                   model_uri=CHEMONT.ester_has_parent_acid, domain=Ester, range=Optional[Union[str, BronstedAcidId]])
 
 slots.enantiomer_relative_configuration = Slot(uri=CHEMONT.relative_configuration, name="enantiomer_relative configuration", curie=CHEMONT.curie('relative_configuration'),
                    model_uri=CHEMONT.enantiomer_relative_configuration, domain=Enantiomer, range=Optional[str])
@@ -3192,6 +3852,9 @@ slots.reaction_participant_participant = Slot(uri=CHEMONT.participant, name="rea
 
 slots.reaction_participant_stoichiometry = Slot(uri=CHEMONT.stoichiometry, name="reaction participant_stoichiometry", curie=CHEMONT.curie('stoichiometry'),
                    model_uri=CHEMONT.reaction_participant_stoichiometry, domain=ReactionParticipant, range=Optional[int])
+
+slots.proportional_part_has_role = Slot(uri=CHEMONT.has_role, name="proportional part_has role", curie=CHEMONT.curie('has_role'),
+                   model_uri=CHEMONT.proportional_part_has_role, domain=ProportionalPart, range=Optional[Union[str, "IngredientRoleEnum"]])
 
 slots.proportional_part_composed_of = Slot(uri=CHEMONT.composed_of, name="proportional part_composed of", curie=CHEMONT.curie('composed_of'),
                    model_uri=CHEMONT.proportional_part_composed_of, domain=ProportionalPart, range=Optional[Union[str, ChemicalEntityId]])

@@ -18,14 +18,14 @@ different metamodel formalisms (this schema is closed-world and thus
 not well represented in OWL).
 
 The schema language used here is
-[biolinkml](https://github.com/biolink/biolinkml/), which provides
+[linkml](https://linkml.github.com/), which provides
 powerful modeling framework that incorporates aspects of UML, ShEx,
 and OWL, and is semantic-web ready.
 
 The goal is to create instances of these schema classes
 (e.g. carbon-14) which would be OWL classes, auto-populated with
 standardized names and logical axioms. This could be done via a
-compilation to dospd or robot, or direcly within the biolinkml
+compilation to dospd or robot, or direcly within the LinkML
 framework (see [this
 issue](https://github.com/INCATools/dead_simple_owl_design_patterns/issues/51)
 ). TBD.
