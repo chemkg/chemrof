@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-02 17:32
+# Generation date: 2021-04-02 17:43
 # Schema: chemont
 #
 # id: chemont
@@ -2426,7 +2426,7 @@ class RelationalChemicalEntity(YAMLRoot):
 
 class ChemicalCharacteristic(YAMLRoot):
     """
-    A property of a chemical entity
+    A reified property of a chemical entity.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
