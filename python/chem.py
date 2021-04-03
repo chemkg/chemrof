@@ -1,9 +1,11 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-02 17:44
+# Generation date: 2021-04-02 17:47
 # Schema: chemont
 #
 # id: chemont
-# description: A data model describing metaclasses for chemical ontology classes
+# description: A data model describing metaclasses for chemical ontology classes. Aspects of this have been
+#              cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator
+#              Chemical Working Group, but all mistakes are my own For full context/motivation see the website.
 # license: https://creativecommons.org/publicdomain/zero/1.0/
 
 import dataclasses
