@@ -98,7 +98,7 @@
                 <h1 id="class-polyatomicion">Class: PolyatomicIon</h1>
 <p>A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).</p>
 <p>URI: <a href="https://w3id.org/chemont/PolyatomicIon">chemont:PolyatomicIon</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[StandardInchiObject],[PolyatomicIon&#124;elemental_charge:integer%20%3F;is_organic(i):boolean%20%3F;has_part(i):string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F]uses%20-.-&gt;[Charged],[PolyatomicIon]^-[MolecularCation],[PolyatomicIon]^-[MolecularAnion],[PolyatomicIon]^-[AcidFormOfConjugatedAcid],[Molecule]^-[PolyatomicIon],[OwlClass],[Molecule],[MolecularCation],[MolecularAnion],[Charged],[AtomicBond],[AtomOccurrence],[Atom],[AcidFormOfConjugatedAcid]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[StandardInchiObject],[ChemicalEntity]&lt;conjugate%20acid%20of%200..1-%20[PolyatomicIon&#124;elemental_charge:integer%20%3F;is_organic(i):boolean%20%3F;has_part(i):string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F],[ChemicalEntity]&lt;conjugate%20base%20of%200..1-%20[PolyatomicIon],[PolyatomicIon]uses%20-.-&gt;[Charged],[PolyatomicIon]^-[MolecularCation],[PolyatomicIon]^-[MolecularAnion],[Molecule]^-[PolyatomicIon],[OwlClass],[Molecule],[MolecularCation],[MolecularAnion],[ChemicalEntity],[ChemicalCharacteristic],[Charged],[AtomicBond],[AtomOccurrence],[Atom]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../Molecule/">Molecule</a> - A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.</li>
@@ -109,17 +109,32 @@
 </ul>
 <h2 id="children">Children</h2>
 <ul>
-<li><a href="../AcidFormOfConjugatedAcid/">AcidFormOfConjugatedAcid</a> - A molecule capable of donating a proton. Example: carboxylic acid is an organic acid that contains a carboxyl group (C(=O)OH)[1] attached to an R-group</li>
 <li><a href="../MolecularAnion/">MolecularAnion</a> - A polyatomic ion that is negative</li>
 <li><a href="../MolecularCation/">MolecularCation</a> - A polyatomic ion that is positive</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <h2 id="attributes">Attributes</h2>
+<h3 id="own">Own</h3>
+<ul>
+<li><a href="../conjugate_acid_of/">conjugate acid of</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalEntity/">ChemicalEntity</a></li>
+</ul>
+</li>
+<li><a href="../conjugate_base_of/">conjugate base of</a>  <sub>OPT</sub><ul>
+<li>Description: connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)</li>
+<li>range: <a href="../ChemicalEntity/">ChemicalEntity</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="inherited-from-molecule">Inherited from molecule:</h3>
 <ul>
 <li><a href="../has_atoms/">has atoms</a>  <sub>0..*</sub><ul>
 <li>Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences</li>
 <li>range: <a href="../Atom/">Atom</a></li>
+</ul>
+</li>
+<li><a href="../has_characteristic/">has characteristic</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalCharacteristic/">ChemicalCharacteristic</a></li>
 </ul>
 </li>
 <li><a href="../has_standard_inchi_object/">has standard inchi object</a>  <sub>OPT</sub><ul>

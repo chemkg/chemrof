@@ -98,7 +98,7 @@
                 <h1 id="class-molecularanion">Class: MolecularAnion</h1>
 <p>A polyatomic ion that is negative</p>
 <p>URI: <a href="https://w3id.org/chemont/MolecularAnion">chemont:MolecularAnion</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[StandardInchiObject],[PolyatomicIon],[OwlClass],[Molecule],[MolecularAnion&#124;elemental_charge(i):integer%20%3F;is_organic(i):boolean%20%3F;has_part(i):string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F]uses%20-.-&gt;[AnionState],[PolyatomicIon]^-[MolecularAnion],[AtomicBond],[AtomOccurrence],[Atom],[AnionState]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[StandardInchiObject],[PolyatomicIon],[OwlClass],[Molecule],[MolecularAnion&#124;elemental_charge(i):integer%20%3F;is_organic(i):boolean%20%3F;has_part(i):string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F]uses%20-.-&gt;[AnionState],[MolecularAnion]^-[AcidBase],[PolyatomicIon]^-[MolecularAnion],[ChemicalEntity],[ChemicalCharacteristic],[AtomicBond],[AtomOccurrence],[Atom],[AnionState],[AcidBase]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../PolyatomicIon/">PolyatomicIon</a> - A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).</li>
@@ -107,12 +107,30 @@
 <ul>
 <li>mixin: <a href="../AnionState/">AnionState</a> - This mixin is applied on an entity (atom or molecule) that is negatively charged</li>
 </ul>
+<h2 id="children">Children</h2>
+<ul>
+<li><a href="../AcidBase/">AcidBase</a> - A conugate base of an acid with charge specified. Example: citrate(3-)</li>
+</ul>
+<h2 id="referenced-by-class">Referenced by class</h2>
 <h2 id="attributes">Attributes</h2>
 <h3 id="inherited-from-polyatomic-ion">Inherited from polyatomic ion:</h3>
 <ul>
+<li><a href="../conjugate_acid_of/">conjugate acid of</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalEntity/">ChemicalEntity</a></li>
+</ul>
+</li>
+<li><a href="../conjugate_base_of/">conjugate base of</a>  <sub>OPT</sub><ul>
+<li>Description: connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)</li>
+<li>range: <a href="../ChemicalEntity/">ChemicalEntity</a></li>
+</ul>
+</li>
 <li><a href="../has_atoms/">has atoms</a>  <sub>0..*</sub><ul>
 <li>Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences</li>
 <li>range: <a href="../Atom/">Atom</a></li>
+</ul>
+</li>
+<li><a href="../has_characteristic/">has characteristic</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalCharacteristic/">ChemicalCharacteristic</a></li>
 </ul>
 </li>
 <li><a href="../has_standard_inchi_object/">has standard inchi object</a>  <sub>OPT</sub><ul>
