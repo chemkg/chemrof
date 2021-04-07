@@ -1,4 +1,4 @@
-id: chemont
+id: chemschema
 title: chemical ontology metaclasses
 description: >-
   A data model describing metaclasses for chemical ontology classes.
@@ -23,13 +23,13 @@ prefixes:
   LANL.ELEMENT: https://periodic.lanl.gov/
   bioptop: "http://purl.org/biotop/biotop.owl#"
   schema: http://schema.org/
-  chemont: https://w3id.org/chemont/
+  chemschema: https://w3id.org/chemschema/
   dcterms: http://purl.org/dc/terms/
   biolink: https://w3id.org/biolink/
   linkml: https://w3id.org/linkml/
   wd: http://www.wikidata.org/entity/  
   
-default_prefix: chemont
+default_prefix: chemschema
 default_range: string
 
 default_curi_maps:
@@ -768,6 +768,8 @@ classes:
         description: >-
           E.g. O, K, Ge
         pattern: "^[A-Z][a-z]*"
+        exact_mappings:
+          - wd:P246
       in periodic table group:
         description: >-
           which number in periodic table column
@@ -811,6 +813,7 @@ classes:
     comments:
       Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances.
     slots:
+      - has element
       - neutron number
       - isotope of
       - half life
@@ -819,6 +822,7 @@ classes:
       - decay energy
       - mode of formation
     defining_slots:
+      - has element
       - neutron number
     examples:
       - value: 1H (protium)
@@ -868,8 +872,10 @@ classes:
   monoatomic ion:
     aliases: ['charged atom']
     is_a: atom ionic form
-    mixins:
-      - charged   
+    mixins:      
+      - charged
+    slots:
+      - has element
     description: >-
       An atom type that has a charge
     mappings:
@@ -1354,6 +1360,8 @@ slots:
     range: string
     description: >-
       name of chemical entity. E.g. nickel, carbon-16
+    slot_uri:
+      rdfs:label
   
   symbol:
     is_a: information property
@@ -1384,6 +1392,8 @@ slots:
     range: count
     mappings:
       - CHEMINF:000079
+    exact_mappings:
+      - wd:P1086
     
   neutron number:
     is_a: subatomic particle count
@@ -1422,6 +1432,11 @@ slots:
     domain: chemical entity
     range: chemical entity
 
+  has element:
+    is_a: alternate form of
+    range: chemical element
+      
+    
   allotropic analog of:
     is_a: alternate form of
     description:

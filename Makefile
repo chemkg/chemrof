@@ -107,3 +107,5 @@ docserve:
 
 gh-deploy:
 	mkdocs gh-deploy
+
+include Makefile.etl
