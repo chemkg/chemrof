@@ -55,6 +55,11 @@ chem:MonoatomicIon/Mn/+4
 
 This will autoclassify to "manganese ion" etc
 
+here is an example of the atom hierarchy in protege, showing automatic classification:
+
+![image](https://user-images.githubusercontent.com/50745/113934643-de047280-97aa-11eb-859a-5c3650871cb5.png)
+
+
 ## Two-level representation
 
 One thing that may seem unintuitive is that *instances* at the LinkML level are *classes* at the OBO level. This is illustrated here:
