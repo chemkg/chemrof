@@ -104,7 +104,7 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Atom>  (
-    @<AtomIonicForm> OR @<ChemicalElement> OR @<FullySpecifiedAtom> OR @<Isotope> OR @<Nuclide>
+    @<AtomIonicForm> OR @<ChemicalElement> OR @<FullySpecifiedAtom> OR @<Nuclide>
 )
 
 <Atom_struct> {
@@ -332,6 +332,17 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<ChemicalGroupingByCharge> CLOSED {
+    (  $<ChemicalGroupingByCharge_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<MoleculeGroupingClass> * ;
+          <has_charge_state> @linkml:Uriorcurie ? ;
+          <charge_agnostic_entity> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <ChemicalGroupingByCharge> ] ?
+    )
+}
+
 <ChemicalMixture>  (
     @<ImpreciseChemicalMixture> OR @<PreciseChemicalMixture>
 )
@@ -504,7 +515,7 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <GroupingClass>  (
-    @<AtomGroupingClass> OR @<MolecularComponentGroupingClass> OR @<MoleculeGroupingClass>
+    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MolecularComponentGroupingClass> OR @<MoleculeGroupingClass>
 )
 
 <GroupingClass_struct> {
@@ -586,6 +597,22 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<Isobar> CLOSED {
+    (  $<Isobar_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ? ;
+          <has_element> @<ChemicalElement> ? ;
+          <nucleon_number> @<Count> ? ;
+          <isobar_of> @<ChemicalEntity> ? ;
+          <half_life> @<NumberOfYears> ? ;
+          <decay_product> @<Isotope> ? ;
+          <decay_mode> @linkml:String ? ;
+          <decay_energy> @linkml:String ? ;
+          <mode_of_formation> @linkml:String ?
+       ) ;
+       rdf:type [ <Isobar> ]
+    )
+}
+
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
           rdf:type [ <Reaction> ] ?
@@ -595,8 +622,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Isotope> CLOSED {
-    (  $<Isotope_tes> (  &<Atom_tes> ;
-          rdf:type [ <Atom> ] ? ;
+    (  $<Isotope_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ? ;
           <has_element> @<ChemicalElement> ? ;
           <neutron_number> @<Count> ? ;
           <isotope_of> @<Isotope> ? ;
@@ -897,7 +924,7 @@ linkml:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <Nuclide> ]
        )
-    } OR @<Radionuclide>
+    } OR @<Isobar> OR @<Isotope> OR @<Radionuclide>
 )
 
 <OwlClass> {
@@ -1016,7 +1043,8 @@ linkml:Nodeidentifier NONLITERAL
     (  $<RacemicMixture_tes> (  &<PreciseChemicalMixture_tes> ;
           rdf:type [ <PreciseChemicalMixture> ] ? ;
           <has_left_enantiomer> @<Enantiomer> ;
-          <has_right_enantiomer> @<Enantiomer>
+          <has_right_enantiomer> @<Enantiomer> ;
+          <chirality_agnostic_form> @<Molecule>
        ) ;
        rdf:type [ <RacemicMixture> ]
     )

@@ -272,6 +272,15 @@ type ChemicalGroup
     owlSubclassOf: OwlClass
   }
 
+type ChemicalGroupingByCharge
+  {
+    classifies: ChemicalEntity
+    owlSubclassOf: OwlClass
+    subtypeOf: [MoleculeGroupingClass]
+    hasChargeState: Uriorcurie
+    chargeAgnosticEntity: ChemicalEntity
+  }
+
 interface ChemicalMixture
   {
     id: String!
@@ -519,6 +528,28 @@ type IsWhole
   {
   }
 
+type Isobar
+  {
+    id: String!
+    isRadical: Boolean
+    hasStandardInchiObject: StandardInchiObject
+    hasCharacteristic: ChemicalCharacteristic
+    owlSubclassOf: OwlClass
+    atomicNumber: Count
+    symbol: String
+    name: String
+    hasPart: SubatomicParticle
+    energyLevel: String
+    hasElement: ChemicalElement
+    nucleonNumber: Count
+    isobarOf: ChemicalEntity
+    halfLife: NumberOfYears
+    decayProduct: Isotope
+    decayMode: String
+    decayEnergy: String
+    modeOfFormation: String
+  }
+
 type IsomeraseReaction
   {
     leftParticipants: [ReactionParticipant]
@@ -545,6 +576,7 @@ type Isotope
     symbol: String
     name: String
     hasPart: SubatomicParticle
+    energyLevel: String
     hasElement: ChemicalElement
     neutronNumber: Count
     isotopeOf: Isotope
@@ -994,6 +1026,7 @@ type RacemicMixture
     owlSubclassOf: OwlClass
     hasLeftEnantiomer: Enantiomer!
     hasRightEnantiomer: Enantiomer!
+    chiralityAgnosticForm: Molecule!
   }
 
 type Radionuclide

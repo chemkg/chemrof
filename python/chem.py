@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-07 00:01
+# Generation date: 2021-04-07 14:12
 # Schema: chemschema
 #
 # id: https://w3id.org/chemschema
@@ -23,8 +23,8 @@ from linkml.utils.formatutils import camelcase, underscore, sfx
 from linkml.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml.utils.curienamespace import CurieNamespace
-from linkml.utils.metamodelcore import Bool
-from linkml_model.types import Boolean, Float, Integer, String
+from linkml.utils.metamodelcore import Bool, URIorCURIE
+from linkml_model.types import Boolean, Float, Integer, String, Uriorcurie
 
 metamodel_version = "1.7.0"
 
@@ -290,15 +290,19 @@ class ChemicalElementId(AtomId):
     pass
 
 
-class IsotopeId(AtomId):
-    pass
-
-
 class NuclideId(AtomId):
     pass
 
 
 class RadionuclideId(NuclideId):
+    pass
+
+
+class IsotopeId(NuclideId):
+    pass
+
+
+class IsobarId(NuclideId):
     pass
 
 
@@ -408,6 +412,38 @@ class GroupingClass(YAMLRoot):
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**self.owl_subclass_of)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ChemicalGroupingByCharge(GroupingClass):
+    """
+    A grouping class that refines a charge-neutral entity
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.ChemicalGroupingByCharge
+    class_class_curie: ClassVar[str] = "chemschema:ChemicalGroupingByCharge"
+    class_name: ClassVar[str] = "chemical grouping by charge"
+    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.ChemicalGroupingByCharge
+
+    subtype_of: Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]] = empty_list()
+    has_charge_state: Optional[Union[str, URIorCURIE]] = None
+    charge_agnostic_entity: Optional[Union[str, ChemicalEntityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.subtype_of is None:
+            self.subtype_of = []
+        if not isinstance(self.subtype_of, list):
+            self.subtype_of = [self.subtype_of]
+        self.subtype_of = [v if isinstance(v, MoleculeGroupingClass) else MoleculeGroupingClass(**v) for v in self.subtype_of]
+
+        if self.has_charge_state is not None and not isinstance(self.has_charge_state, URIorCURIE):
+            self.has_charge_state = URIorCURIE(self.has_charge_state)
+
+        if self.charge_agnostic_entity is not None and not isinstance(self.charge_agnostic_entity, ChemicalEntityId):
+            self.charge_agnostic_entity = ChemicalEntityId(self.charge_agnostic_entity)
 
         super().__post_init__(**kwargs)
 
@@ -2042,7 +2078,57 @@ class ChemicalElement(Atom):
 
 
 @dataclass
-class Isotope(Atom):
+class Nuclide(Atom):
+    """
+    an atomic species characterized by the specific constitution of its nucleus
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.Nuclide
+    class_class_curie: ClassVar[str] = "chemschema:Nuclide"
+    class_name: ClassVar[str] = "nuclide"
+    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Nuclide
+
+    id: Union[str, NuclideId] = None
+    energy_level: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, NuclideId):
+            self.id = NuclideId(self.id)
+
+        if self.energy_level is not None and not isinstance(self.energy_level, str):
+            self.energy_level = str(self.energy_level)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Radionuclide(Nuclide):
+    """
+    an atom that has excess nuclear energy, making it unstable
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.Radionuclide
+    class_class_curie: ClassVar[str] = "chemschema:Radionuclide"
+    class_name: ClassVar[str] = "radionuclide"
+    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Radionuclide
+
+    id: Union[str, RadionuclideId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, RadionuclideId):
+            self.id = RadionuclideId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Isotope(Nuclide):
     """
     A specific subtype of an atom with a specified neutron number
     """
@@ -2097,51 +2183,56 @@ class Isotope(Atom):
 
 
 @dataclass
-class Nuclide(Atom):
+class Isobar(Nuclide):
     """
-    an atomic species characterized by the specific constitution of its nucleus
+    Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.Nuclide
-    class_class_curie: ClassVar[str] = "chemschema:Nuclide"
-    class_name: ClassVar[str] = "nuclide"
-    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Nuclide
+    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.Isobar
+    class_class_curie: ClassVar[str] = "chemschema:Isobar"
+    class_name: ClassVar[str] = "isobar"
+    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Isobar
 
-    id: Union[str, NuclideId] = None
-    energy_level: Optional[str] = None
+    id: Union[str, IsobarId] = None
+    has_element: Optional[Union[str, ChemicalElementId]] = None
+    nucleon_number: Optional[int] = None
+    isobar_of: Optional[Union[str, ChemicalEntityId]] = None
+    half_life: Optional[int] = None
+    decay_product: Optional[Union[str, IsotopeId]] = None
+    decay_mode: Optional[str] = None
+    decay_energy: Optional[str] = None
+    mode_of_formation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
-        if not isinstance(self.id, NuclideId):
-            self.id = NuclideId(self.id)
+        if not isinstance(self.id, IsobarId):
+            self.id = IsobarId(self.id)
 
-        if self.energy_level is not None and not isinstance(self.energy_level, str):
-            self.energy_level = str(self.energy_level)
+        if self.has_element is not None and not isinstance(self.has_element, ChemicalElementId):
+            self.has_element = ChemicalElementId(self.has_element)
 
-        super().__post_init__(**kwargs)
+        if self.nucleon_number is not None and not isinstance(self.nucleon_number, int):
+            self.nucleon_number = int(self.nucleon_number)
 
+        if self.isobar_of is not None and not isinstance(self.isobar_of, ChemicalEntityId):
+            self.isobar_of = ChemicalEntityId(self.isobar_of)
 
-@dataclass
-class Radionuclide(Nuclide):
-    """
-    an atom that has excess nuclear energy, making it unstable
-    """
-    _inherited_slots: ClassVar[List[str]] = []
+        if self.half_life is not None and not isinstance(self.half_life, int):
+            self.half_life = int(self.half_life)
 
-    class_class_uri: ClassVar[URIRef] = CHEMSCHEMA.Radionuclide
-    class_class_curie: ClassVar[str] = "chemschema:Radionuclide"
-    class_name: ClassVar[str] = "radionuclide"
-    class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Radionuclide
+        if self.decay_product is not None and not isinstance(self.decay_product, IsotopeId):
+            self.decay_product = IsotopeId(self.decay_product)
 
-    id: Union[str, RadionuclideId] = None
+        if self.decay_mode is not None and not isinstance(self.decay_mode, str):
+            self.decay_mode = str(self.decay_mode)
 
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
-        if not isinstance(self.id, RadionuclideId):
-            self.id = RadionuclideId(self.id)
+        if self.decay_energy is not None and not isinstance(self.decay_energy, str):
+            self.decay_energy = str(self.decay_energy)
+
+        if self.mode_of_formation is not None and not isinstance(self.mode_of_formation, str):
+            self.mode_of_formation = str(self.mode_of_formation)
 
         super().__post_init__(**kwargs)
 
@@ -2799,6 +2890,7 @@ class RacemicMixture(PreciseChemicalMixture):
     id: Union[str, RacemicMixtureId] = None
     has_left_enantiomer: Union[str, EnantiomerId] = None
     has_right_enantiomer: Union[str, EnantiomerId] = None
+    chirality_agnostic_form: Union[str, MoleculeId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
@@ -2815,6 +2907,11 @@ class RacemicMixture(PreciseChemicalMixture):
             raise ValueError("has_right_enantiomer must be supplied")
         if not isinstance(self.has_right_enantiomer, EnantiomerId):
             self.has_right_enantiomer = EnantiomerId(self.has_right_enantiomer)
+
+        if self.chirality_agnostic_form is None:
+            raise ValueError("chirality_agnostic_form must be supplied")
+        if not isinstance(self.chirality_agnostic_form, MoleculeId):
+            self.chirality_agnostic_form = MoleculeId(self.chirality_agnostic_form)
 
         super().__post_init__(**kwargs)
 
@@ -3296,6 +3393,9 @@ slots.has_cyclic_structure = Slot(uri=CHEMSCHEMA.has_cyclic_structure, name="has
 slots.has_sequence_representation = Slot(uri=CHEMSCHEMA.has_sequence_representation, name="has sequence representation", curie=CHEMSCHEMA.curie('has_sequence_representation'),
                    model_uri=CHEMSCHEMA.has_sequence_representation, domain=None, range=Optional[str])
 
+slots.AZE_notation_html = Slot(uri=CHEMSCHEMA.AZE_notation_html, name="AZE notation html", curie=CHEMSCHEMA.curie('AZE_notation_html'),
+                   model_uri=CHEMSCHEMA.AZE_notation_html, domain=None, range=Optional[str])
+
 slots.chemical_formula = Slot(uri=CHEMSCHEMA.chemical_formula, name="chemical formula", curie=CHEMSCHEMA.curie('chemical_formula'),
                    model_uri=CHEMSCHEMA.chemical_formula, domain=ChemicalEntity, range=Optional[str], mappings = [SCHEMA.hasRepresentation, EDAM.data_0846])
 
@@ -3456,6 +3556,12 @@ slots.classified_by = Slot(uri=CHEMSCHEMA.classified_by, name="classified by", c
 slots.classifies = Slot(uri=CHEMSCHEMA.classifies, name="classifies", curie=CHEMSCHEMA.curie('classifies'),
                    model_uri=CHEMSCHEMA.classifies, domain=None, range=Optional[str])
 
+slots.has_charge_state = Slot(uri=CHEMSCHEMA.has_charge_state, name="has charge state", curie=CHEMSCHEMA.curie('has_charge_state'),
+                   model_uri=CHEMSCHEMA.has_charge_state, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.charge_agnostic_entity = Slot(uri=CHEMSCHEMA.charge_agnostic_entity, name="charge agnostic entity", curie=CHEMSCHEMA.curie('charge_agnostic_entity'),
+                   model_uri=CHEMSCHEMA.charge_agnostic_entity, domain=None, range=Optional[Union[str, ChemicalEntityId]])
+
 slots.has_morphological_category = Slot(uri=CHEMSCHEMA.has_morphological_category, name="has morphological category", curie=CHEMSCHEMA.curie('has_morphological_category'),
                    model_uri=CHEMSCHEMA.has_morphological_category, domain=None, range=Optional[Union[str, "NanostructureMorphologyEnum"]])
 
@@ -3543,6 +3649,9 @@ slots.has_left_enantiomer = Slot(uri=CHEMSCHEMA.has_left_enantiomer, name="has l
 slots.has_right_enantiomer = Slot(uri=CHEMSCHEMA.has_right_enantiomer, name="has right enantiomer", curie=CHEMSCHEMA.curie('has_right_enantiomer'),
                    model_uri=CHEMSCHEMA.has_right_enantiomer, domain=None, range=Union[str, EnantiomerId])
 
+slots.chirality_agnostic_form = Slot(uri=CHEMSCHEMA.chirality_agnostic_form, name="chirality agnostic form", curie=CHEMSCHEMA.curie('chirality_agnostic_form'),
+                   model_uri=CHEMSCHEMA.chirality_agnostic_form, domain=None, range=Union[str, MoleculeId])
+
 slots.has_bonding_structure = Slot(uri=CHEMSCHEMA.has_bonding_structure, name="has bonding structure", curie=CHEMSCHEMA.curie('has_bonding_structure'),
                    model_uri=CHEMSCHEMA.has_bonding_structure, domain=None, range=str)
 
@@ -3608,6 +3717,15 @@ slots.grouping_class_subtype_of = Slot(uri=CHEMSCHEMA.subtype_of, name="grouping
 
 slots.grouping_class_classifies = Slot(uri=CHEMSCHEMA.classifies, name="grouping class_classifies", curie=CHEMSCHEMA.curie('classifies'),
                    model_uri=CHEMSCHEMA.grouping_class_classifies, domain=GroupingClass, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.chemical_grouping_by_charge_subtype_of = Slot(uri=CHEMSCHEMA.subtype_of, name="chemical grouping by charge_subtype of", curie=CHEMSCHEMA.curie('subtype_of'),
+                   model_uri=CHEMSCHEMA.chemical_grouping_by_charge_subtype_of, domain=ChemicalGroupingByCharge, range=Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]])
+
+slots.chemical_grouping_by_charge_has_charge_state = Slot(uri=CHEMSCHEMA.has_charge_state, name="chemical grouping by charge_has charge state", curie=CHEMSCHEMA.curie('has_charge_state'),
+                   model_uri=CHEMSCHEMA.chemical_grouping_by_charge_has_charge_state, domain=ChemicalGroupingByCharge, range=Optional[Union[str, URIorCURIE]])
+
+slots.chemical_grouping_by_charge_charge_agnostic_entity = Slot(uri=CHEMSCHEMA.charge_agnostic_entity, name="chemical grouping by charge_charge agnostic entity", curie=CHEMSCHEMA.curie('charge_agnostic_entity'),
+                   model_uri=CHEMSCHEMA.chemical_grouping_by_charge_charge_agnostic_entity, domain=ChemicalGroupingByCharge, range=Optional[Union[str, ChemicalEntityId]])
 
 slots.molecule_grouping_class_subtype_of = Slot(uri=CHEMSCHEMA.subtype_of, name="molecule grouping class_subtype of", curie=CHEMSCHEMA.curie('subtype_of'),
                    model_uri=CHEMSCHEMA.molecule_grouping_class_subtype_of, domain=MoleculeGroupingClass, range=Optional[Union[Union[dict, "MoleculeGroupingClass"], List[Union[dict, "MoleculeGroupingClass"]]]])
@@ -3821,6 +3939,9 @@ slots.racemic_mixture_has_left_enantiomer = Slot(uri=CHEMSCHEMA.has_left_enantio
 
 slots.racemic_mixture_has_right_enantiomer = Slot(uri=CHEMSCHEMA.has_right_enantiomer, name="racemic mixture_has right enantiomer", curie=CHEMSCHEMA.curie('has_right_enantiomer'),
                    model_uri=CHEMSCHEMA.racemic_mixture_has_right_enantiomer, domain=RacemicMixture, range=Union[str, EnantiomerId])
+
+slots.racemic_mixture_chirality_agnostic_form = Slot(uri=CHEMSCHEMA.chirality_agnostic_form, name="racemic mixture_chirality agnostic form", curie=CHEMSCHEMA.curie('chirality_agnostic_form'),
+                   model_uri=CHEMSCHEMA.racemic_mixture_chirality_agnostic_form, domain=RacemicMixture, range=Union[str, MoleculeId])
 
 slots.allotrope_allotropic_analog_of = Slot(uri=CHEMSCHEMA.allotropic_analog_of, name="allotrope_allotropic analog of", curie=CHEMSCHEMA.curie('allotropic_analog_of'),
                    model_uri=CHEMSCHEMA.allotrope_allotropic_analog_of, domain=Allotrope, range=Union[str, ChemicalElementId])

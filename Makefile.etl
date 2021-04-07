@@ -1,0 +1,70 @@
+SP = pl2sparql -i obo_prefixes  -u obo_metadata/oio  -A ~/repos/onto-mirror/void.ttl -m obo=http://purl.obolibrary.org/obo/
+
+extract/wd-info-%.tsv:
+	pq-wikidata -f tsv "$*(S),rdf(S,P,O)" > $@.tmp && mv $@.tmp $@
+extract/wd-edge-%.tsv:
+	pq-wikidata -f tsv "$*(S),rdf(S,P,O),rdf_is_iri(O)" -l -L enlabel > $@.tmp && mv $@.tmp $@
+extract/wd-all-nodeprop-%.tsv:
+	pq-wikidata -f tsv "$*(S),rdf(S,P,O),\+rdf_is_iri(O)" -l -L enlabel > $@.tmp && mv $@.tmp $@
+extract/wd-en-nodeprop-%.tsv:
+	pq-wikidata -f tsv "$*(S),rdf(S,P,O),is_en(O)" -l -L enlabel > $@.tmp && mv $@.tmp $@
+
+
+extract/wd-chemical_element.tsv:
+	pq-wikidata -f tsv --header id,label,symbol,atomic_number "chemical_element(S),enlabel(S,L),element_symbol(S,Sym),atomic_number(S,N)"  > $@.tmp && mv $@.tmp $@
+
+extract/chebi-inchi.tsv:
+	$(SP) -f tsv --header inchi,chemid,label -e -i chebi "rdf(X,'http://purl.obolibrary.org/obo/chebi/inchi',Y),label(X,XN)" "x(Y,X,XN)"  > $@.tmp && mv $@.tmp $@
+extract/chebi-inchi-summary.tsv:
+	$(SP) -f tsv --header inchi,count,chemids,labels -e -i chebi "setof(C,rdf(C,'http://purl.obolibrary.org/obo/chebi/inchi',F),Cs),length(Cs,Len),maplist(label,Cs,CNs)" "x(F,Len,Cs,CNs)"  > $@.tmp && mv $@.tmp $@
+extract/chebi-smiles-summary.tsv:
+	$(SP) -f tsv --header smiles,count,chemids,labels -e -i chebi "setof(C,rdf(C,'http://purl.obolibrary.org/obo/chebi/smiles',F),Cs),length(Cs,Len),maplist(label,Cs,CNs)" "x(F,Len,Cs,CNs)"  > $@.tmp && mv $@.tmp $@
+
+extract/chebi-RacemicMixture.tsv:
+	pq-ontobee -e --consult src/prolog/chebi.pro report racemic_mixture > $@.tmp && mv $@.tmp $@
+
+INJECTS = ChemicalGroupingByCharge
+METACLASSES = ChemicalElement Isotope MonoatomicIon $(INJECTS)
+
+database/%.jsonld: database/%.ttl
+	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
+
+database/wd/%.ttl:
+	curl --header "Accept: text/turtle"  -G 'https://query.wikidata.org/sparql' --data-urlencode "query@sparql/construct-wd-$*.rq" > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd/%.ttl
+
+database/chebi/%.ttl:
+	curl --header "Accept: text/turtle"  -G 'http://sparql.hegroup.org/sparql' --data-urlencode "query@sparql/construct-chebi-$*.rq" > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd/%.ttl
+
+
+database/wd-all.ttl: database/wd/
+	riot database/wd/*.ttl > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd-all.ttl
+
+database/all.ttl: database/wd database/chebi
+	riot database/*/*.ttl > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd-all.ttl
+
+database/%-merged.ttl: database/%.ttl owl/chem.owl.ttl
+	robot merge -i $< -i owl/chem.owl.ttl -o $@
+
+database/inject/inject-%.ttl: database/all-merged.owl
+	robot query -i $< -q sparql/inject-$*.rq $@
+.PRECIOUS: database/inject/inject-%.ttl
+
+INJECT_FILES = $(patsubst %, database/inject/inject-%.ttl, $(INJECTS))
+database/chem.ttl: database/all-merged.ttl $(INJECT_FILES)
+	robot merge -i $< $(patsubst %, -i database/inject/inject-%.ttl, $(INJECTS)) -o $@
+.PRECIOUS: database/chem.ttl
+
+owl/gen/%.owl: database/chem.ttl
+	robot query -i $< -q sparql/owlgen/gen-$*.rq $@
+
+owl/chem-ontology-asserted.owl:
+	robot merge -i src/ontology/chem-edit.owl.ttl $(patsubst %, -i owl/gen/%.owl, $(METACLASSES)) -o $@
+.PRECIOUS: owl/chem-ontology-asserted.owl
+
+REASONER = JFACT
+owl/chem-ontology.owl: owl/chem-ontology-asserted.owl
+	robot reason -r $(REASONER) -i $< -o $@

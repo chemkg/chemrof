@@ -706,6 +706,35 @@
          "title": "ChemicalGroup",
          "type": "object"
       },
+      "ChemicalGroupingByCharge": {
+         "additionalProperties": false,
+         "description": "A grouping class that refines a charge-neutral entity",
+         "properties": {
+            "charge_agnostic_entity": {
+               "type": "string"
+            },
+            "classifies": {
+               "type": "string"
+            },
+            "has_charge_state": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "$ref": "#/definitions/MoleculeGroupingClass"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "ChemicalGroupingByCharge",
+         "type": "object"
+      },
       "ChemicalSalt": {
          "additionalProperties": false,
          "description": "a chemical compound consisting of an ionic assembly of cations and anions.",
@@ -1403,6 +1432,78 @@
          "title": "IsWhole",
          "type": "object"
       },
+      "Isobar": {
+         "additionalProperties": false,
+         "description": "Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.",
+         "properties": {
+            "atomic_number": {
+               "description": "number of protons in an atom",
+               "type": "integer"
+            },
+            "decay_energy": {
+               "type": "string"
+            },
+            "decay_mode": {
+               "type": "string"
+            },
+            "decay_product": {
+               "type": "string"
+            },
+            "energy_level": {
+               "description": "e.g. ground, stable",
+               "type": "string"
+            },
+            "half_life": {
+               "type": "integer"
+            },
+            "has_characteristic": {
+               "$ref": "#/definitions/ChemicalCharacteristic"
+            },
+            "has_element": {
+               "type": "string"
+            },
+            "has_part": {
+               "type": "string"
+            },
+            "has_standard_inchi_object": {
+               "$ref": "#/definitions/StandardInchiObject"
+            },
+            "id": {
+               "type": "string"
+            },
+            "is_radical": {
+               "type": "boolean"
+            },
+            "isobar_of": {
+               "description": "equal mass number (Z1 + N1 = Z2 + N2)",
+               "type": "string"
+            },
+            "mode_of_formation": {
+               "type": "string"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "nucleon_number": {
+               "description": "number of nucleons in an atom. proton number plus neutral number.",
+               "type": "integer"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "symbol": {
+               "description": "short symbol for chemical entity, e.g. K, C-16",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Isobar",
+         "type": "object"
+      },
       "IsomeraseReaction": {
          "additionalProperties": false,
          "description": "A reaction that converts a molecule from one isomer to another. TODO: create rules for this",
@@ -1468,6 +1569,10 @@
                "type": "string"
             },
             "decay_product": {
+               "type": "string"
+            },
+            "energy_level": {
+               "description": "e.g. ground, stable",
                "type": "string"
             },
             "half_life": {
@@ -2899,6 +3004,9 @@
          "additionalProperties": false,
          "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
          "properties": {
+            "chirality_agnostic_form": {
+               "type": "string"
+            },
             "has_characteristic": {
                "$ref": "#/definitions/ChemicalCharacteristic"
             },
@@ -2929,7 +3037,8 @@
          "required": [
             "id",
             "has_left_enantiomer",
-            "has_right_enantiomer"
+            "has_right_enantiomer",
+            "chirality_agnostic_form"
          ],
          "title": "RacemicMixture",
          "type": "object"
