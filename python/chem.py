@@ -1,8 +1,8 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-06 12:53
+# Generation date: 2021-04-07 00:01
 # Schema: chemschema
 #
-# id: chemschema
+# id: https://w3id.org/chemschema
 # description: A data model describing metaclasses for chemical ontology classes. Aspects of this have been
 #              cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator
 #              Chemical Working Group, but all mistakes are my own For full context/motivation see the website.
@@ -2054,6 +2054,7 @@ class Isotope(Atom):
     class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.Isotope
 
     id: Union[str, IsotopeId] = None
+    has_element: Optional[Union[str, ChemicalElementId]] = None
     neutron_number: Optional[int] = None
     isotope_of: Optional[Union[str, IsotopeId]] = None
     half_life: Optional[int] = None
@@ -2067,6 +2068,9 @@ class Isotope(Atom):
             raise ValueError("id must be supplied")
         if not isinstance(self.id, IsotopeId):
             self.id = IsotopeId(self.id)
+
+        if self.has_element is not None and not isinstance(self.has_element, ChemicalElementId):
+            self.has_element = ChemicalElementId(self.has_element)
 
         if self.neutron_number is not None and not isinstance(self.neutron_number, int):
             self.neutron_number = int(self.neutron_number)
@@ -2204,12 +2208,16 @@ class MonoatomicIon(AtomIonicForm):
     class_model_uri: ClassVar[URIRef] = CHEMSCHEMA.MonoatomicIon
 
     id: Union[str, MonoatomicIonId] = None
+    has_element: Optional[Union[str, ChemicalElementId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
         if not isinstance(self.id, MonoatomicIonId):
             self.id = MonoatomicIonId(self.id)
+
+        if self.has_element is not None and not isinstance(self.has_element, ChemicalElementId):
+            self.has_element = ChemicalElementId(self.has_element)
 
         super().__post_init__(**kwargs)
 
@@ -3182,6 +3190,9 @@ slots.elemental_charge = Slot(uri=CHEMSCHEMA.elemental_charge, name="elemental c
 
 slots.alternate_form_of = Slot(uri=CHEMSCHEMA.alternate_form_of, name="alternate form of", curie=CHEMSCHEMA.curie('alternate_form_of'),
                    model_uri=CHEMSCHEMA.alternate_form_of, domain=ChemicalEntity, range=Optional[Union[str, ChemicalEntityId]])
+
+slots.has_element = Slot(uri=CHEMSCHEMA.has_element, name="has element", curie=CHEMSCHEMA.curie('has_element'),
+                   model_uri=CHEMSCHEMA.has_element, domain=ChemicalEntity, range=Optional[Union[str, ChemicalElementId]])
 
 slots.allotropic_analog_of = Slot(uri=CHEMSCHEMA.allotropic_analog_of, name="allotropic analog of", curie=CHEMSCHEMA.curie('allotropic_analog_of'),
                    model_uri=CHEMSCHEMA.allotropic_analog_of, domain=Allotrope, range=Optional[Union[str, AllotropeId]])

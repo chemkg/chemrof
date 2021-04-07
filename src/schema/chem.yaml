@@ -1,4 +1,5 @@
-id: chemschema
+id: https://w3id.org/chemschema
+name: chemschema
 title: chemical ontology metaclasses
 description: >-
   A data model describing metaclasses for chemical ontology classes.
@@ -69,6 +70,22 @@ classes:
       classifies:
         range: chemical entity
 
+  chemical grouping by charge:
+    is_a: grouping class
+    description: >-
+      A grouping class that refines a charge-neutral entity
+    slot_usage:
+      subtype of:
+        range: molecule grouping class
+        description: >-
+          grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes
+      has charge state:
+        range: uriorcurie
+      charge agnostic entity:
+        range: chemical entity
+    examples:
+      - value: copper cation
+        
   molecule grouping class:
     is_a: grouping class
     description: >-
@@ -806,8 +823,30 @@ classes:
     mappings:
       - COB:0000043
 
-  isotope:
+  nuclide:
+    aliases:
+      - nucleide
+      - nuclear species
     is_a: atom
+    slots:
+      - energy level
+    description: >-
+      an atomic species characterized by the specific constitution of its nucleus
+    examples:
+      - value: https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m
+
+  radionuclide:
+    aliases:
+      - radioactive nuclide
+      - radioactive isotope
+    is_a: nuclide
+    description: >-
+      an atom that has excess nuclear energy, making it unstable
+    examples:
+      - value: radioactive isotope
+      
+  isotope:
+    is_a: nuclide
     description: >-
       A specific subtype of an atom with a specified neutron number
     comments:
@@ -831,28 +870,26 @@ classes:
     exact_mappings:
       - wd:Q25276
 
-  nuclide:
-    aliases:
-      - nucleide
-      - nuclear species
-    is_a: atom
-    slots:
-      - energy level
-    description: >-
-      an atomic species characterized by the specific constitution of its nucleus
-    examples:
-      - value: https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m
-
-  radionuclide:
-    aliases:
-      - radioactive nuclide
-      - radioactive isotope
+  isobar:
     is_a: nuclide
     description: >-
-      an atom that has excess nuclear energy, making it unstable
+      Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.
+    slots:
+      - has element
+      - nucleon number
+      - isobar of
+      - half life
+      - decay product
+      - decay mode
+      - decay energy
+      - mode of formation
+    defining_slots:
+      - has element
+      - nucleon number
     examples:
-      - value: radioactive isotope
-      
+      - value: isobar-40
+        description: Any nuclide with a mass number of 40:  40S, 40Cl, 40Ar, 40K, and 40Ca
+
   atom ionic form:
     abstract: true
     aliases:
@@ -1167,6 +1204,7 @@ classes:
   racemic mixture:
     aliases:
       - racemate
+      - racemic mixture of enantiomers
     is_a: precise chemical mixture
     description: >-
       a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
@@ -1178,8 +1216,16 @@ classes:
       has right enantiomer:
         required: true
         range: enantiomer
+      chirality agnostic form:
+        required: true
+        range: molecule
+      defining_slots:
+        - has left enantiomer
+        - has right enantiomer
     exact_mappings:
       - CHEBI:60911
+    see_also:
+      - https://github.com/ebi-chebi/ChEBI/issues/3245
 
   allotrope:
     is_a: molecule
@@ -1407,6 +1453,8 @@ slots:
       - CHEMINF:000078
     
   nucleon number:
+    aliases:
+      - mass number
     is_a: subatomic particle count
     description: >-
       number of nucleons in an atom. proton number plus neutral number.
@@ -1637,6 +1685,11 @@ slots:
     is_a: information property
     range: sequence string
   
+  AZE notation html:
+    is_a: information property
+    description: >-
+      E.g. <super>12</super>/<sub>6</sub>C
+    
   chemical formula:
     abstract: true
     is_a: information property
@@ -1703,7 +1756,13 @@ slots:
       - http://www.axeleratio.com/csm/proj/main.htm
     
   isomeric smiles string:
+    aliases:
+      - iso-SMILES
     is_a: smiles string
+    description: >-
+      A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13
+    exact_mappings:
+      - wd:P2017
 
   extended smiles string:
     aliases:

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
      xml:base="http://www.w3.org/2002/07/owl"
-     xmlns:obo="http://purl.obolibrary.org/obo/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -67,12 +66,6 @@
     
 
 
-    <!-- https://w3id.org/chemschema/has_element -->
-
-    <AnnotationProperty rdf:about="https://w3id.org/chemschema/has_element"/>
-    
-
-
     <!-- https://w3id.org/linkml/examples -->
 
     <AnnotationProperty rdf:about="https://w3id.org/linkml/examples"/>
@@ -116,15 +109,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/RO_0004003 -->
-
-    <ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0004003">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:label xml:lang="en">fooz</rdfs:label>
-    </ObjectProperty>
     
 
 
@@ -521,6 +505,16 @@
         <rdfs:subPropertyOf rdf:resource="https://w3id.org/chemschema/alternate_form_of"/>
         <rdfs:domain rdf:resource="https://w3id.org/chemschema/ChemicalEntity"/>
         <rdfs:range rdf:resource="https://w3id.org/chemschema/ChemicalEntity"/>
+    </ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/chemschema/has_element -->
+
+    <ObjectProperty rdf:about="https://w3id.org/chemschema/has_element">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/chemschema/alternate_form_of"/>
+        <rdfs:domain rdf:resource="https://w3id.org/chemschema/ChemicalEntity"/>
+        <rdfs:range rdf:resource="https://w3id.org/chemschema/ChemicalElement"/>
     </ObjectProperty>
     
 
@@ -2440,15 +2434,6 @@
     
 
 
-    <!-- http://purl.obolibrary.org/obo/RO_0004004 -->
-
-    <DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/RO_0004004">
-        <rdfs:subPropertyOf rdf:resource="https://w3id.org/linkml/topValue"/>
-        <rdfs:label xml:lang="en">baz</rdfs:label>
-    </DatatypeProperty>
-    
-
-
     <!-- https://w3id.org/linkml/topValue -->
 
     <DatatypeProperty rdf:about="https://w3id.org/linkml/topValue">
@@ -2495,25 +2480,6 @@
     <!-- http://UNKNOWN.org/periodic_table_block_enum -->
 
     <Class rdf:about="http://UNKNOWN.org/periodic_table_block_enum"/>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/RO_0004005 -->
-
-    <Class rdf:about="http://purl.obolibrary.org/obo/RO_0004005">
-        <equivalentClass>
-            <Class>
-                <intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://w3id.org/chemschema/MonoatomicIon"/>
-                    <Restriction>
-                        <onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0004004"/>
-                        <hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasValue>
-                    </Restriction>
-                </intersectionOf>
-            </Class>
-        </equivalentClass>
-        <rdfs:label xml:lang="en">bazoo</rdfs:label>
-    </Class>
     
 
 
@@ -3817,6 +3783,13 @@
     <Class rdf:about="https://w3id.org/chemschema/MonoatomicIon">
         <rdfs:subClassOf rdf:resource="https://w3id.org/chemschema/AtomIonicForm"/>
         <rdfs:subClassOf rdf:resource="https://w3id.org/chemschema/Charged"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="https://w3id.org/chemschema/has_element"/>
+                <maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</maxQualifiedCardinality>
+                <onClass rdf:resource="https://w3id.org/chemschema/ChemicalElement"/>
+            </Restriction>
+        </rdfs:subClassOf>
     </Class>
     
 
@@ -6003,6 +5976,14 @@
     <!-- https://w3id.org/chemschema/has_derivative -->
 
     <NamedIndividual rdf:about="https://w3id.org/chemschema/has_derivative">
+        <rdf:type rdf:resource="https://w3id.org/linkml/SlotDefinition"/>
+    </NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/chemschema/has_element -->
+
+    <NamedIndividual rdf:about="https://w3id.org/chemschema/has_element">
         <rdf:type rdf:resource="https://w3id.org/linkml/SlotDefinition"/>
     </NamedIndividual>
     
@@ -34592,7 +34573,6 @@
 
     <NamedIndividual rdf:about="https://w3id.org/chemschema/MonoatomicIon/Co/+1">
         <rdf:type rdf:resource="https://w3id.org/chemschema/MonoatomicIon"/>
-        <obo:RO_0004004 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</obo:RO_0004004>
         <rdfs:label>cobalt(1+)</rdfs:label>
         <chemschema:charge rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</chemschema:charge>
         <chemschema:chebi_iri rdf:resource="http://purl.obolibrary.org/obo/CHEBI_85033"/>
@@ -37251,8 +37231,8 @@
         <skos:altLabel>chemical species of an element</skos:altLabel>
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/COB_0000011"/>
         <skos:exactMatch rdf:resource="http://semanticscience.org/resource/SIO_010044"/>
-        <skos:altLabel>atomic species</skos:altLabel>
         <skos:note>{&apos;chemical species of an element&apos;: &apos;Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859&apos;}</skos:note>
+        <skos:altLabel>atomic species</skos:altLabel>
         <rdfs:label>atom</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/AtomAnion">
@@ -37295,8 +37275,8 @@
     <rdf:Description rdf:about="https://w3id.org/chemschema/AtomicBond">
         <skos:altLabel>chemical bond</skos:altLabel>
         <skos:definition>A connection between two atoms. Note this is the reified form of &apos;atomically connected to&apos;. </skos:definition>
-        <rdfs:label>atomic bond</rdfs:label>
         <skos:exactMatch rdf:resource="http://semanticscience.org/resource/CHEMINF_000063"/>
+        <rdfs:label>atomic bond</rdfs:label>
         <skos:altLabel>bond</skos:altLabel>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/BronstedAcid">
@@ -37340,8 +37320,8 @@
         <skos:note>Does not encompass chemical grouping classes, such as &quot;amino acid&quot;. Use the class ChemicalGrouping for this.</skos:note>
         <skos:altLabel>chemical</skos:altLabel>
         <skos:exactMatch rdf:resource="http://semanticscience.org/resource/CHEMINF_000000"/>
-        <skos:note>In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]</skos:note>
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24431"/>
+        <skos:note>In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]</skos:note>
         <skos:altLabel>specific chemical entity</skos:altLabel>
         <skos:altLabel>chemical species</skos:altLabel>
         <skos:definition>An entity that can be described using using chemical properties.</skos:definition>
@@ -37517,10 +37497,10 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/MolecularComplex">
         <skos:altLabel>molecule complex</skos:altLabel>
-        <skos:note>In SIO, molecular complex is an only child of chemical complex, which is under chemical substance. chemical complex is defined as A chemical complex is a chemical substance composed of a weakly connected molecules and ions in a known stoichiometry.</skos:note>
         <skos:note>In bioptop, molecule complex is a sibling of structured biological entity under poly molecular composite entity</skos:note>
-        <rdfs:label>molecular complex</rdfs:label>
+        <skos:note>In SIO, molecular complex is an only child of chemical complex, which is under chemical substance. chemical complex is defined as A chemical complex is a chemical substance composed of a weakly connected molecules and ions in a known stoichiometry.</skos:note>
         <skos:altLabel>complex of molecular entities</skos:altLabel>
+        <rdfs:label>molecular complex</rdfs:label>
         <skos:definition>A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex</skos:definition>
         <skos:altLabel>poly molecular composite entity</skos:altLabel>
     </rdf:Description>
@@ -37571,8 +37551,8 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/MoleculeGroupingClassDefinedByComponents">
         <skos:definition>A grouping class defined as an exhaustive list of components</skos:definition>
-        <linkml:examples>Example(value=&apos;nucleotide&apos;, description=&apos;a nucleotide is composed of a nucleobase, a five-carbon sugar, and one or more phosphate groups&apos;)</linkml:examples>
         <linkml:examples>Example(value=&apos;nucleoside&apos;, description=&apos;A nucleoside consists of a nucleobase and a five-carbon sugar (ribose or 2-deoxyribose)&apos;)</linkml:examples>
+        <linkml:examples>Example(value=&apos;nucleotide&apos;, description=&apos;a nucleotide is composed of a nucleobase, a five-carbon sugar, and one or more phosphate groups&apos;)</linkml:examples>
         <rdfs:label>molecule grouping class defined by components</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/MoleculePairwiseSimilarity">
@@ -37580,8 +37560,8 @@
         <rdfs:seeAlso>https://en.wikipedia.org/wiki/Chemical_similarity</rdfs:seeAlso>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/MonoatomicIon">
-        <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/COB_0000042"/>
         <skos:altLabel>charged atom</skos:altLabel>
+        <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/COB_0000042"/>
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24867"/>
         <rdfs:label>monoatomic ion</rdfs:label>
         <skos:definition>An atom type that has a charge</skos:definition>
@@ -37593,8 +37573,8 @@
     <rdf:Description rdf:about="https://w3id.org/chemschema/MonomolecularPolymer">
         <rdfs:label>monomolecular polymer</rdfs:label>
         <skos:altLabel>polymer</skos:altLabel>
-        <skos:definition>A macromolecule composed of repeating subunits. Examples: cellulose</skos:definition>
         <skos:altLabel>oligo or polymer</skos:altLabel>
+        <skos:definition>A macromolecule composed of repeating subunits. Examples: cellulose</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/Nanostructure">
         <linkml:examples>Example(value=&apos;platinum copper nanoparticle&apos;, description=&apos;A nanostructure that is made from platinum and copper atoms&apos;)</linkml:examples>
@@ -37717,8 +37697,8 @@
         <rdfs:label>small molecule</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/StandardInchiObject">
-        <rdfs:label>standard inchi object</rdfs:label>
         <rdfs:seeAlso>https://en.wikipedia.org/wiki/International_Chemical_Identifier</rdfs:seeAlso>
+        <rdfs:label>standard inchi object</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/State">
         <rdfs:label>state</rdfs:label>
@@ -37753,8 +37733,8 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/UnchargedAtom">
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/COB_0000043"/>
-        <rdfs:label>uncharged atom</rdfs:label>
         <skos:definition>An atom type that has no charge</skos:definition>
+        <rdfs:label>uncharged atom</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/UnchargedMolecule">
         <skos:definition>A molecule that has no charge</skos:definition>
@@ -37800,8 +37780,8 @@
         <rdfs:label>canonical smiles string</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/chemical_formula">
-        <skos:definition>A generic grouping for miolecular formulae and empirican formulae</skos:definition>
         <rdfs:label>chemical formula</rdfs:label>
+        <skos:definition>A generic grouping for miolecular formulae and empirican formulae</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/chemical_isomer_of">
         <rdfs:seeAlso>https://en.wikipedia.org/wiki/Isomer</rdfs:seeAlso>
@@ -37850,8 +37830,8 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/diastereoisomers_of">
         <skos:note>Diastereomers differ from enantiomers in that the latter are pairs of stereoisomers that differ in all stereocenters and are therefore mirror images of one another</skos:note>
-        <skos:definition>A stereoisomer non-mirror image non-identical stereoisomers</skos:definition>
         <rdfs:label>diastereoisomers of</rdfs:label>
+        <skos:definition>A stereoisomer non-mirror image non-identical stereoisomers</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/elemental_charge">
         <skos:definition>number of protons minus number of electrons</skos:definition>
@@ -37881,8 +37861,8 @@
         <rdfs:label>functional isomer of</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/generalized_empirical_formula">
-        <skos:definition>A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane</skos:definition>
         <rdfs:label>generalized empirical formula</rdfs:label>
+        <skos:definition>A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/half_life">
         <rdfs:label>half life</rdfs:label>
@@ -37916,6 +37896,9 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/has_derivative">
         <rdfs:label>has derivative</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://w3id.org/chemschema/has_element">
+        <rdfs:label>has element</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/has_group">
         <skos:definition>Relation between a molecule and the groups it contains</skos:definition>
@@ -38102,8 +38085,8 @@
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/structural_isomer_of">
         <rdfs:label>structural isomer of</rdfs:label>
-        <rdfs:seeAlso>https://goldbook.iupac.org/terms/view/C01285</rdfs:seeAlso>
         <skos:definition>a relationship that holds between two forms of the &apos;same&apos; molecule with identical chemical formulas but different bonding patterns</skos:definition>
+        <rdfs:seeAlso>https://goldbook.iupac.org/terms/view/C01285</rdfs:seeAlso>
         <rdfs:seeAlso>https://en.wikipedia.org/wiki/Structural_isomer</rdfs:seeAlso>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/chemschema/subatomic_particle_count">
@@ -38143,8 +38126,8 @@
         <skos:editorialNote>URI is dateTime because OWL reasoners don&apos;t work with straight date or time</skos:editorialNote>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/linkml/Datetime">
-        <skos:definition>The combination of a date and time</skos:definition>
         <rdfs:label>datetime</rdfs:label>
+        <skos:definition>The combination of a date and time</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/linkml/Decimal">
         <skos:definition>A real number with arbitrary precision that conforms to the xsd:decimal specification</skos:definition>
@@ -38155,8 +38138,8 @@
         <skos:definition>A real number that conforms to the xsd:double specification</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/linkml/Float">
-        <rdfs:label>float</rdfs:label>
         <skos:definition>A real number that conforms to the xsd:float specification</skos:definition>
+        <rdfs:label>float</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/linkml/Integer">
         <rdfs:label>integer</rdfs:label>
@@ -38256,9 +38239,9 @@
         <skos:definition>The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://w3id.org/linkml/atom_occurrence_valence">
-        <skos:note>forumla: number of electrons in valence shell of free atom – number of non-bonding electrons on atom in molecule</skos:note>
-        <rdfs:label>atom occurrence_valence</rdfs:label>
         <skos:note>forumla: number of bonds + formal charge</skos:note>
+        <rdfs:label>atom occurrence_valence</rdfs:label>
+        <skos:note>forumla: number of electrons in valence shell of free atom – number of non-bonding electrons on atom in molecule</skos:note>
         <skos:note>todo: determine if this is in CHEBI and how to map</skos:note>
         <skos:note>example:  In methane, carbon has a valence of 4, and each hydrogen has a valency of 1</skos:note>
         <skos:definition>the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]</skos:definition>
@@ -38658,5 +38641,5 @@
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.6) https://github.com/owlcs/owlapi -->
 
