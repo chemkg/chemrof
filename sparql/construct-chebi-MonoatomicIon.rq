@@ -1,0 +1,29 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX chem: <https://w3id.org/chemschema/>
+PREFIX CHEBI: <http://purl.obolibrary.org/obo/CHEBI_>
+PREFIX chebigraph: <http://purl.obolibrary.org/obo/merged/CHEBI>
+PREFIX chebivoc: <http://purl.obolibrary.org/obo/chebi/>
+
+CONSTRUCT {
+    ?iri a chem:MonoatomicIon ;
+      rdfs:label ?label ;
+      chem:charge ?charge_int ;
+      chem:has_element ?element_iri ;
+      chem:inchi_string ?inchi ;
+      chem:chebi_iri ?i
+}
+WHERE {
+  GRAPH chebigraph: {
+    ?i rdfs:subClassOf+ CHEBI:24867 ;
+       rdfs:label ?label ;
+       chebivoc:charge ?charge ;
+       chebivoc:formula ?element_symbol ;
+       chebivoc:inchi ?inchi .
+
+
+    FILTER( regex(str(?inchi), "^InChI=1S/\\w+/q.\\d+$") )
+    BIND(xsd:integer(?charge) AS ?charge_int)
+    BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
+    BIND(IRI(CONCAT("https://w3id.org/chemschema/MonoatomicIon/", STR(?element_symbol), "/", STR(?charge))) AS ?iri)
+  }
+}

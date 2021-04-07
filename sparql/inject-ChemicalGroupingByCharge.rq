@@ -1,0 +1,36 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX chem: <https://w3id.org/chemschema/>
+PREFIX type: <http://www.wikidata.org/prop/direct/P31>
+PREFIX subClassOf: <http://www.wikidata.org/prop/direct/P279>
+PREFIX Isotope: <http://www.wikidata.org/entity/Q25276>
+PREFIX Element: <http://www.wikidata.org/entity/Q11344>
+PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
+PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
+PREFIX neutron_number: <http://www.wikidata.org/prop/direct/P1148>
+
+## TODO: generalize beyond elements
+
+CONSTRUCT {
+    ?iri a chem:ChemicalGroupingByCharge ;
+      rdfs:label ?label ;
+      chem:symbol ?symbol ;
+      chem:has_charge_state ?charge_state ;
+      chem:charge_agnostic_entity ?element
+}
+WHERE {
+  ?element a chem:ChemicalElement ;
+       chem:symbol ?element_symbol ;
+       rdfs:label ?element_label .
+
+  VALUES (?charge_state ?charge_label ?charge_symbol) {
+     ( chem:Charged  "charged" "Ch")
+     ( chem:Uncharged  "uncharged" "0")
+     ( chem:AnionState  "anion" "-")
+     ( chem:CationState  "cation" "+")
+  }
+
+  BIND(CONCAT(?element_label, " ", ?charge_label) AS ?label)
+  BIND(CONCAT(?element_symbol, "(", ?charge_symbol, ")") AS ?symbol)
+  BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalGroupingByCharge/", STR(?element_symbol), "/", ?charge_symbol)) AS ?iri)
+
+}
