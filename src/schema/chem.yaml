@@ -64,6 +64,8 @@ classes:
       - owl class
     description: >-
       A non-specific entity. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
+    slots:
+      - id
     slot_usage:
       subtype of:
         range: grouping class
@@ -329,8 +331,12 @@ classes:
       - id
       - name
       - is radical
-      - has standard inchi object
       - has characteristic
+      - inchi string
+      - inchi chemical sublayer
+    slot_usage:
+      inchi chemical sublayer:
+        required: true
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -479,6 +485,11 @@ classes:
     abstract: true
     description: >-
       Any chemical entity consisting of more than one atom.
+    slots:
+      - inchi atom connections sublayer
+    slot_usage:
+      inchi atom connections sublayer:
+        required: true
 
   small molecule:
     is_a: molecule
@@ -918,6 +929,8 @@ classes:
     mappings:
       - COB:0000042
       - CHEBI:24867
+    comments:
+      - this is mass-number neutral, so there can be no mass associated with a monatomic ion instance
         
   atom anion:
     is_a: monoatomic ion
@@ -943,11 +956,13 @@ classes:
     description: >-
       A monoatomic ion that is positive
     ## TODO: do both hydron and proton go here?
-
+    examples:
+      - value: Helium(2+)
+        description: 1S/He/q+2
 
   fully specified atom:
     description: >-
-      An atom type that has atomic number, charge, and neutron number stated
+      An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)
     aliases:
       - atomic species
       - chemical species of an element
@@ -957,6 +972,9 @@ classes:
     slots:
       - elemental charge
       - neutron number
+    examples:
+      - value: Helium-4(2+)
+        description: The atom that is equivalent to an alpha particle 1S/He/q+2/i1+0
 
 
   informational chemical entity:
@@ -979,6 +997,8 @@ classes:
     
   inchi object:
     is_a: informational chemical entity
+    description: >-
+      A representation of an InChI string as an object, composed of distinct sublayers
     abstract: true
     see_also:
       - https://doi.org/10.1186/s13321-015-0068-4
@@ -989,15 +1009,15 @@ classes:
       - https://en.wikipedia.org/wiki/International_Chemical_Identifier
     slots:
       - inchi version string
-      - inchi chemical sublayer
-      - inchi atom connections sublayer
-      - inchi hydrogen connections sublayer
-      - inchi charge sublayer
-      - inchi proton sublayer
-      - inchi stereochemical double bond sublayer
-      - inchi tetrahedral stereochemical sublayer
-      - inchi stereochemical type sublayer
-      - inchi isotopic layer
+      - inchi chemical sublayer                  ## e.g. C8H1...
+      - inchi atom connections sublayer          ## e.g. c1-10-...
+      - inchi hydrogen connections sublayer      ## e.g. h4H,1-3H3...
+      - inchi charge sublayer                    ## e.g. q-1
+      - inchi proton sublayer                        ## e.g. p...
+      - inchi stereochemical double bond sublayer    ## e.g. b...
+      - inchi tetrahedral stereochemical sublayer    ## e.g. [tm] (stereochemical)
+      - inchi stereochemical type sublayer           ## e.g. s... (stereochemical)
+      - inchi isotopic layer                         ## e.g. i1+1
     slot_usage:
       inchi version string:
         pattern: "^1S$"
@@ -1342,6 +1362,53 @@ classes:
         range: float
         minimum_value: 1.0
         maximum_value: 1.0
+
+  specificity mixin:
+    abstract: true
+    mixin: true
+      
+  entity with atoms enumerated:
+    is_a: specificity mixin
+    description: >-
+      A mixin for an entity that consists of one or more atoms where the atoms and the number of occurrences is counted (corresponding to the chemical layer in InChI)
+    mixin: true
+    slots:
+      - inchi chemical sublayer                  ## e.g. C8H1...
+
+  entity with connectivity specificied:
+    is_a: specificity mixin
+    mixin: true
+    description: >-
+      A mixin for an entity that consists of two or more atom occurrences where the connectivity is specified (corresponding to the /c layer in InChI)
+    slots:
+      - inchi atom connections sublayer          ## e.g. c1-10-...
+      - inchi hydrogen connections sublayer      ## e.g. h4H,1-3H3...
+      
+  entity with charge specified:
+    is_a: specificity mixin
+    mixin: true
+    description: >-
+      A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)
+    slots:
+      - inchi charge sublayer                    ## e.g. q-1
+
+  entity with stereochemistry specified:
+    is_a: specificity mixin
+    mixin: true
+    description: >-
+      A mixin for an entity where the stereochemistry is explicitly specified (corresponding to the /t, m/, and /s layers in InChI)
+    slots:
+      - inchi stereochemical double bond sublayer    ## e.g. b...
+      - inchi tetrahedral stereochemical sublayer    ## e.g. [tm] (stereochemical)
+      - inchi stereochemical type sublayer           ## e.g. s... (stereochemical)
+      
+  entity with isotope specified:
+    is_a: specificity mixin
+    mixin: true
+    description: >-
+      A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)
+    slots:
+      - inchi isotopic layer                         ## e.g. i1+1
         
 types:
 
@@ -1457,7 +1524,7 @@ slots:
       - mass number
     is_a: subatomic particle count
     description: >-
-      number of nucleons in an atom. proton number plus neutral number.
+      number of nucleons in an atom. proton number plus neutron number.
     domain: atom
     range: count
       
@@ -1731,7 +1798,8 @@ slots:
     
   inchi string:
     is_a: chemical formula
-    key: true
+    todos:
+      - declare this as a key once compound_key is introduced to linkml
     
   inchi key string:
     is_a: chemical formula
@@ -1776,40 +1844,43 @@ slots:
     description: >-
       A deterministic SMILES string. Note there is no unique system for canonical smiles strings
 
-  has standard inchi object:
-    is_a: information property
-    range: standard inchi object
-    required: false
-    multivalued: false
     
   inchi component:
     is_a: information property
+    description: >-
+      A part of an InChI object
     
   inchi sublayer:
     is_a: inchi component
-    domain: inchi object
     abstract: true
+    see_also:
+      - https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png
 
   inchi version string:
     is_a: inchi component
     pattern: "^1[S]"
     required: true
 
-  inchi chemical sublayer:
+  inchi sublayer in main layer:
     is_a: inchi sublayer
+    description: >-
+      The main layer consists of chemical formula, atom connections, and hydrogen atoms. Example: CH3O/c1-2/h1H3/q-1
+    
+  inchi chemical sublayer:
+    is_a: inchi sublayer in main layer
     pattern: "^[A-Z0-9\\.]+$"
     required: true
     description: >-
       the main chemical formula
 
   inchi atom connections sublayer:
-    is_a: inchi sublayer
+    is_a: inchi sublayer in main layer
     pattern: "^c.*"
     description: >-
       The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 
   inchi hydrogen connections sublayer:
-    is_a: inchi sublayer
+    is_a: inchi sublayer in main layer
     pattern: "^h.*"
     description: >-
       Describes how many hydrogen atoms are connected to each of the other atoms.

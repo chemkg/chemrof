@@ -23,8 +23,11 @@ extract/chebi-smiles-summary.tsv:
 extract/chebi-RacemicMixture.tsv:
 	pq-ontobee -e --consult src/prolog/chebi.pro report racemic_mixture > $@.tmp && mv $@.tmp $@
 
+database/pchebi/%.ttl:
+	pq-ontobee -e --consult src/prolog/chebi.pro "save_triples('$*','$@.tmp')" && mv $@.tmp $@
+
 INJECTS = ChemicalGroupingByCharge
-METACLASSES = ChemicalElement Isotope MonoatomicIon $(INJECTS)
+METACLASSES = ChemicalElement Isotope MonoatomicIon RacemicMixture $(INJECTS)
 
 database/%.jsonld: database/%.ttl
 	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
@@ -61,10 +64,10 @@ database/chem.ttl: database/all-merged.ttl $(INJECT_FILES)
 owl/gen/%.owl: database/chem.ttl
 	robot query -i $< -q sparql/owlgen/gen-$*.rq $@
 
-owl/chem-ontology-asserted.owl:
+owl/chem-ontology-asserted.owl: owl/gen
 	robot merge -i src/ontology/chem-edit.owl.ttl $(patsubst %, -i owl/gen/%.owl, $(METACLASSES)) -o $@
 .PRECIOUS: owl/chem-ontology-asserted.owl
 
-REASONER = JFACT
+REASONER = HERMIT
 owl/chem-ontology.owl: owl/chem-ontology-asserted.owl
 	robot reason -r $(REASONER) -i $< -o $@
