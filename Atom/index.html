@@ -106,7 +106,7 @@
                 <h1 id="class-atom">Class: Atom</h1>
 <p>A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.</p>
 <p>URI: <a href="https://w3id.org/chemschema/Atom">chemschema:Atom</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[StandardInchiObject],[OwlClass],[Nuclide],[Molecule],[FullySpecifiedAtom],[ChemicalEntity],[ChemicalElement],[ChemicalCharacteristic],[AtomOccurrence],[AtomIonicForm],[AtomGroupingClass],[SubatomicParticle]&lt;has%20part%200..1-%20[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F],[AtomGroupingClass]-%20classifies%200..1&gt;[Atom],[AtomOccurrence]-%20occurrence%20of%201..1&gt;[Atom],[Molecule]-%20has%20atoms%200..*&gt;[Atom],[Atom]^-[Nuclide],[Atom]^-[FullySpecifiedAtom],[Atom]^-[ChemicalElement],[Atom]^-[AtomIonicForm],[ChemicalEntity]^-[Atom]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[SubatomicParticle],[OwlClass],[Nuclide],[Molecule],[FullySpecifiedAtom],[ChemicalRole],[ChemicalEntity],[ChemicalElement],[AtomOccurrence],[AtomIonicForm],[AtomGroupingClass],[SubatomicParticle]&lt;has%20part%200..1-%20[Atom&#124;atomic_number:count%20%3F;symbol:string%20%3F;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F;inchi_string(i):chemical_encoding%20%3F;inchi_chemical_sublayer(i):string],[AtomGroupingClass]-%20classifies%200..1&gt;[Atom],[AtomOccurrence]-%20occurrence%20of%201..1&gt;[Atom],[Molecule]-%20has%20atoms%200..*&gt;[Atom],[Atom]^-[Nuclide],[Atom]^-[FullySpecifiedAtom],[Atom]^-[ChemicalElement],[Atom]^-[AtomIonicForm],[ChemicalEntity]^-[Atom]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../ChemicalEntity/">ChemicalEntity</a> - An entity that can be described using using chemical properties.</li>
@@ -115,7 +115,7 @@
 <ul>
 <li><a href="../AtomIonicForm/">AtomIonicForm</a> - an atom type in which charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−.</li>
 <li><a href="../ChemicalElement/">ChemicalElement</a> - generic form of an atom, with unspecified neutron or charge</li>
-<li><a href="../FullySpecifiedAtom/">FullySpecifiedAtom</a> - An atom type that has atomic number, charge, and neutron number stated</li>
+<li><a href="../FullySpecifiedAtom/">FullySpecifiedAtom</a> - An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)</li>
 <li><a href="../Nuclide/">Nuclide</a> - an atomic species characterized by the specific constitution of its nucleus</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
@@ -150,16 +150,20 @@
 </ul>
 <h3 id="inherited-from-chemical-entity">Inherited from chemical entity:</h3>
 <ul>
-<li><a href="../has_characteristic/">has characteristic</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../ChemicalCharacteristic/">ChemicalCharacteristic</a></li>
+<li><a href="../chemical_entity_inchi_chemical_sublayer/">chemical entity➞inchi chemical sublayer</a>  <sub>REQ</sub><ul>
+<li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
-<li><a href="../has_standard_inchi_object/">has standard inchi object</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../StandardInchiObject/">StandardInchiObject</a></li>
+<li><a href="../has_chemical_role/">has chemical role</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalRole/">ChemicalRole</a></li>
 </ul>
 </li>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+<li><a href="../inchi_string/">inchi string</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/ChemicalEncoding/">ChemicalEncoding</a></li>
 </ul>
 </li>
 <li><a href="../is_radical/">is radical</a>  <sub>OPT</sub><ul>

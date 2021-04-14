@@ -106,7 +106,7 @@
                 <h1 id="class-imprecisechemicalmixture">Class: ImpreciseChemicalMixture</h1>
 <p>A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste</p>
 <p>URI: <a href="https://w3id.org/chemschema/ImpreciseChemicalMixture">chemschema:ImpreciseChemicalMixture</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[StandardInchiObject],[ProportionalPart],[OwlClass],[ProportionalPart]&lt;has%20proportional%20parts%200..*-++[ImpreciseChemicalMixture&#124;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F],[ChemicalMixture]^-[ImpreciseChemicalMixture],[ChemicalMixture],[ChemicalCharacteristic]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[ProportionalPart],[OwlClass],[ProportionalPart]&lt;has%20proportional%20parts%200..*-++[ImpreciseChemicalMixture&#124;has_mixfile_location:file_location%20%3F;has_minchi_representation:chemical_encoding%20%3F;inchi_atom_connections_sublayer(i):string;id(i):string;name(i):string%20%3F;is_radical(i):boolean%20%3F;inchi_string(i):chemical_encoding%20%3F;inchi_chemical_sublayer(i):string],[ChemicalMixture]^-[ImpreciseChemicalMixture],[ChemicalRole],[ChemicalMixture]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../ChemicalMixture/">ChemicalMixture</a> - A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry</li>
@@ -115,6 +115,16 @@
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
+<li><a href="../has_minchi_representation/">has minchi representation</a>  <sub>OPT</sub><ul>
+<li>Description: Proposed new Mixtures InChI</li>
+<li>range: <a href="../types/ChemicalEncoding/">ChemicalEncoding</a></li>
+</ul>
+</li>
+<li><a href="../has_mixfile_location/">has mixfile location</a>  <sub>OPT</sub><ul>
+<li>Description: Location of a MixFile representing a chemical mixture</li>
+<li>range: <a href="../types/FileLocation/">FileLocation</a></li>
+</ul>
+</li>
 <li><a href="../has_proportional_parts/">has proportional parts</a>  <sub>0..*</sub><ul>
 <li>Description: Relationship between a complex mixture and its parts</li>
 <li>range: <a href="../ProportionalPart/">ProportionalPart</a></li>
@@ -123,16 +133,20 @@
 </ul>
 <h3 id="inherited-from-chemical-mixture">Inherited from chemical mixture:</h3>
 <ul>
-<li><a href="../has_characteristic/">has characteristic</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../ChemicalCharacteristic/">ChemicalCharacteristic</a></li>
+<li><a href="../chemical_entity_inchi_chemical_sublayer/">chemical entity➞inchi chemical sublayer</a>  <sub>REQ</sub><ul>
+<li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
-<li><a href="../has_standard_inchi_object/">has standard inchi object</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../StandardInchiObject/">StandardInchiObject</a></li>
+<li><a href="../has_chemical_role/">has chemical role</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../ChemicalRole/">ChemicalRole</a></li>
 </ul>
 </li>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+<li><a href="../inchi_string/">inchi string</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../types/ChemicalEncoding/">ChemicalEncoding</a></li>
 </ul>
 </li>
 <li><a href="../is_radical/">is radical</a>  <sub>OPT</sub><ul>
@@ -141,6 +155,10 @@
 </li>
 <li><a href="../name/">name</a>  <sub>OPT</sub><ul>
 <li>Description: name of chemical entity. E.g. nickel, carbon-16</li>
+<li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+<li><a href="../polyatomic_entity_inchi_atom_connections_sublayer/">polyatomic entity➞inchi atom connections sublayer</a>  <sub>REQ</sub><ul>
 <li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
