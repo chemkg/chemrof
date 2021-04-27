@@ -4,6 +4,7 @@ PREFIX type: <http://www.wikidata.org/prop/direct/P31>
 PREFIX Element: <http://www.wikidata.org/entity/Q11344>
 PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
 PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
+PREFIX CE: <https://w3id.org/chemschema/ChemicalElement->
 
 CONSTRUCT {
     ?iri a chem:ChemicalElement ;
@@ -19,5 +20,5 @@ WHERE {
 
        FILTER (LANG(?label) = "en")
 
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?symbol))) AS ?iri)
+   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement-", ENCODE_FOR_URI(?symbol))) AS ?iri)
 }
