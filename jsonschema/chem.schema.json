@@ -16,6 +16,9 @@
                "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "name": {
                "type": "string"
             },
@@ -26,12 +29,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AcidAnionGroupingClass",
          "type": "object"
       },
@@ -73,14 +78,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -90,6 +92,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -109,7 +120,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "AcidBase",
          "type": "object"
@@ -132,6 +145,9 @@
                "description": "The base which defs this conflation class",
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -139,12 +155,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AcidBaseConflationClass",
          "type": "object"
       },
@@ -179,14 +197,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -196,6 +211,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -216,6 +240,8 @@
          },
          "required": [
             "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer",
             "allotropic_analog_of",
             "has_bonding_structure"
          ],
@@ -226,16 +252,22 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_sequence_representation": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -251,7 +283,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "AminoAcidSequenceInterval",
          "type": "object"
@@ -270,8 +304,8 @@
             "elemental_charge": {
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_element": {
                "type": "string"
@@ -279,10 +313,13 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -302,7 +339,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "AtomAnion",
          "type": "object"
@@ -321,8 +359,8 @@
             "elemental_charge": {
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_element": {
                "type": "string"
@@ -330,10 +368,13 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -353,7 +394,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "AtomCation",
          "type": "object"
@@ -365,6 +407,9 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "in_periodic_table_block": {
                "$ref": "#/definitions/PeriodicTableBlock"
             },
@@ -374,12 +419,14 @@
             },
             "subtype_of": {
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AtomGroupingByPeriodicTableBlock",
          "type": "object"
       },
@@ -388,6 +435,9 @@
          "description": "Example: p-block atom",
          "properties": {
             "classifies": {
+               "type": "string"
+            },
+            "id": {
                "type": "string"
             },
             "in_periodic_table_group": {
@@ -399,12 +449,14 @@
             },
             "subtype_of": {
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AtomGroupingByPeriodicTableGroup",
          "type": "object"
       },
@@ -415,18 +467,23 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AtomGroupingByProperty",
          "type": "object"
       },
@@ -437,18 +494,23 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "AtomGroupingClass",
          "type": "object"
       },
@@ -558,14 +620,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -575,6 +634,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -594,17 +662,11 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "BronstedAcid",
-         "type": "object"
-      },
-      "ChemicalCharacteristic": {
-         "additionalProperties": false,
-         "description": "A reified property of a chemical entity.",
-         "properties": {},
-         "required": [],
-         "title": "ChemicalCharacteristic",
          "type": "object"
       },
       "ChemicalElement": {
@@ -621,14 +683,11 @@
             "electron_configuration": {
                "type": "string"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_stereocenter": {
                "items": {
@@ -646,6 +705,12 @@
             "in_periodic_table_group": {
                "description": "which number in periodic table column",
                "type": "integer"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
+               "type": "string"
             },
             "is_radical": {
                "type": "boolean"
@@ -670,7 +735,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "ChemicalElement",
          "type": "object"
@@ -679,13 +745,19 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -701,7 +773,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "ChemicalGroup",
          "type": "object"
@@ -719,6 +793,9 @@
             "has_charge_state": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -726,13 +803,28 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "ChemicalGroupingByCharge",
+         "type": "object"
+      },
+      "ChemicalRole": {
+         "additionalProperties": false,
+         "description": "A characteristic of a chemical entity that is realized under particular conditions",
+         "properties": {
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            }
+         },
+         "required": [],
+         "title": "ChemicalRole",
          "type": "object"
       },
       "ChemicalSalt": {
@@ -748,13 +840,19 @@
             "has_cationic_component": {
                "$ref": "#/definitions/CationState"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -770,7 +868,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "ChemicalSalt",
          "type": "object"
@@ -788,6 +888,9 @@
             "has_cationic_component": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "name": {
                "type": "string"
             },
@@ -798,12 +901,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "ChemicalSaltByAnion",
          "type": "object"
       },
@@ -820,6 +925,9 @@
             "has_cationic_component": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "name": {
                "type": "string"
             },
@@ -830,12 +938,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "ChemicalSaltByCation",
          "type": "object"
       },
@@ -852,6 +962,9 @@
             "has_cationic_component": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "name": {
                "type": "string"
             },
@@ -862,12 +975,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "ChemicalSaltGroupingClass",
          "type": "object"
       },
@@ -908,17 +1023,14 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "items": {
                   "type": "string"
                },
                "type": "array"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -927,6 +1039,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -949,7 +1070,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Copolymer",
          "type": "object"
@@ -958,17 +1081,23 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -984,7 +1113,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "DNASequenceInterval",
          "type": "object"
@@ -993,13 +1124,16 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1015,7 +1149,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Electron",
          "type": "object"
@@ -1051,14 +1186,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -1068,6 +1200,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1093,7 +1234,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Enantiomer",
          "type": "object"
@@ -1122,8 +1265,8 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_parent_acid": {
                "type": "string"
@@ -1134,9 +1277,6 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
@@ -1145,6 +1285,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1164,7 +1313,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Ester",
          "type": "object"
@@ -1179,7 +1330,7 @@
       },
       "FullySpecifiedAtom": {
          "additionalProperties": false,
-         "description": "An atom type that has atomic number, charge, and neutron number stated",
+         "description": "An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)",
          "properties": {
             "atomic_number": {
                "description": "number of protons in an atom",
@@ -1189,16 +1340,19 @@
                "description": "number of protons minus number of electrons",
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1222,7 +1376,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "FullySpecifiedAtom",
          "type": "object"
@@ -1231,13 +1386,19 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1256,7 +1417,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "FunctionalGroup",
          "type": "object"
@@ -1275,6 +1438,9 @@
                "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -1282,12 +1448,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "GeneralAcidBaseGroupingClass",
          "type": "object"
       },
@@ -1298,6 +1466,9 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -1305,18 +1476,20 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "GeneralizedMolecularStructureClass",
          "type": "object"
       },
       "Glycan": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A macromolecule consisting of a large number of monosaccharides linked glycosidically",
          "properties": {
             "has_atom_occurrences": {
                "items": {
@@ -1338,14 +1511,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -1354,6 +1524,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1373,7 +1552,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Glycan",
          "type": "object"
@@ -1382,8 +1563,16 @@
          "additionalProperties": false,
          "description": "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
+            },
+            "has_minchi_representation": {
+               "description": "Proposed new Mixtures InChI",
+               "type": "string"
+            },
+            "has_mixfile_location": {
+               "description": "Location of a MixFile representing a chemical mixture",
+               "type": "string"
             },
             "has_proportional_parts": {
                "description": "Relationship between a complex mixture and its parts",
@@ -1392,10 +1581,16 @@
                },
                "type": "array"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1411,7 +1606,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "ImpreciseChemicalMixture",
          "type": "object"
@@ -1456,8 +1653,8 @@
             "half_life": {
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_element": {
                "type": "string"
@@ -1465,10 +1662,13 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1486,7 +1686,7 @@
                "type": "string"
             },
             "nucleon_number": {
-               "description": "number of nucleons in an atom. proton number plus neutral number.",
+               "description": "number of nucleons in an atom. proton number plus neutron number.",
                "type": "integer"
             },
             "owl_subclass_of": {
@@ -1499,14 +1699,15 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Isobar",
          "type": "object"
       },
       "IsomeraseReaction": {
          "additionalProperties": false,
-         "description": "A reaction that converts a molecule from one isomer to another. TODO: create rules for this",
+         "description": "A reaction that converts a molecule from one isomer to another.",
          "properties": {
             "description": {
                "type": "string"
@@ -1578,8 +1779,8 @@
             "half_life": {
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_element": {
                "type": "string"
@@ -1587,10 +1788,13 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1621,7 +1825,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Isotope",
          "type": "object"
@@ -1663,14 +1868,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -1679,6 +1881,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1698,7 +1909,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Macromolecule",
          "type": "object"
@@ -1715,30 +1928,23 @@
          "title": "Material",
          "type": "object"
       },
-      "Measure": {
-         "additionalProperties": false,
-         "description": "todo",
-         "properties": {
-            "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
-               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            }
-         },
-         "required": [],
-         "title": "Measure",
-         "type": "object"
-      },
       "Moiety": {
          "additionalProperties": false,
          "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1754,7 +1960,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Moiety",
          "type": "object"
@@ -1794,14 +2002,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -1811,6 +2016,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1830,7 +2044,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularAnion",
          "type": "object"
@@ -1870,14 +2086,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -1887,6 +2100,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -1906,7 +2128,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularCation",
          "type": "object"
@@ -1915,13 +2139,19 @@
          "additionalProperties": false,
          "description": "A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1937,7 +2167,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularComplex",
          "type": "object"
@@ -1946,13 +2178,19 @@
          "additionalProperties": false,
          "description": "A proper part of a molecule that is larger than an atom",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -1968,7 +2206,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularComponent",
          "type": "object"
@@ -1980,18 +2220,23 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
                "items": {
-                  "$ref": "#/definitions/MolecularComponentGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "MolecularComponentGroupingClass",
          "type": "object"
       },
@@ -2005,6 +2250,9 @@
             "derivative_of": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "name": {
                "type": "string"
             },
@@ -2015,12 +2263,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "MolecularDerivativeGroupingClass",
          "type": "object"
       },
@@ -2048,14 +2298,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -2065,6 +2312,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2084,7 +2340,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularSpecies",
          "type": "object"
@@ -2093,13 +2351,19 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2115,7 +2379,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MolecularSubsequence",
          "type": "object"
@@ -2127,6 +2393,9 @@
             "classifies": {
                "type": "string"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -2134,12 +2403,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "MoleculeGroupingClass",
          "type": "object"
       },
@@ -2159,6 +2430,9 @@
                },
                "type": "array"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -2166,12 +2440,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "MoleculeGroupingClassDefinedByAdditionOfAGroup",
          "type": "object"
       },
@@ -2185,6 +2461,9 @@
             "has_part": {
                "$ref": "#/definitions/ChemicalEntityOrGrouping"
             },
+            "id": {
+               "type": "string"
+            },
             "owl_subclass_of": {
                "$ref": "#/definitions/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
@@ -2192,12 +2471,14 @@
             "subtype_of": {
                "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
                "items": {
-                  "$ref": "#/definitions/MoleculeGroupingClass"
+                  "type": "string"
                },
                "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id"
+         ],
          "title": "MoleculeGroupingClassDefinedByComponents",
          "type": "object"
       },
@@ -2238,8 +2519,8 @@
                "description": "number of protons minus number of electrons",
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_element": {
                "type": "string"
@@ -2247,10 +2528,13 @@
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2270,7 +2554,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "MonoatomicIon",
          "type": "object"
@@ -2279,13 +2564,19 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2301,7 +2592,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Monomer",
          "type": "object"
@@ -2330,14 +2623,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -2346,6 +2636,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2368,7 +2667,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "MonomolecularPolymer",
          "type": "object"
@@ -2413,14 +2714,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -2430,6 +2728,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2449,7 +2756,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "NaturalProduct",
          "type": "object"
@@ -2458,13 +2767,16 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2480,7 +2792,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Neutron",
          "type": "object"
@@ -2509,14 +2822,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -2526,6 +2836,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2545,7 +2864,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "NonSpeciesMolecule",
          "type": "object"
@@ -2554,13 +2875,16 @@
          "additionalProperties": false,
          "description": "A neutron or proton",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2576,7 +2900,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Nucleon",
          "type": "object"
@@ -2585,17 +2910,23 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2611,7 +2942,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "NucleotideSequenceInterval",
          "type": "object"
@@ -2628,16 +2961,19 @@
                "description": "e.g. ground, stable",
                "type": "string"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2657,7 +2993,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Nuclide",
          "type": "object"
@@ -2686,14 +3023,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -2702,6 +3036,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2721,7 +3064,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Peptide",
          "type": "object"
@@ -2773,14 +3118,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -2790,6 +3132,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2809,7 +3160,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "PolyatomicIon",
          "type": "object"
@@ -2818,13 +3171,19 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -2840,7 +3199,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "PolymerPart",
          "type": "object"
@@ -2894,14 +3255,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "items": {
@@ -2910,6 +3268,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -2929,7 +3296,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Protein",
          "type": "object"
@@ -2938,88 +3307,16 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
-            "is_radical": {
-               "type": "boolean"
-            },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
+            "inchi_chemical_sublayer": {
                "type": "string"
             },
-            "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
-               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            }
-         },
-         "required": [
-            "id"
-         ],
-         "title": "Proton",
-         "type": "object"
-      },
-      "RNASequenceInterval": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_sequence_representation": {
-               "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
-               "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
-            "id": {
-               "type": "string"
-            },
-            "is_radical": {
-               "type": "boolean"
-            },
-            "name": {
-               "description": "name of chemical entity. E.g. nickel, carbon-16",
-               "type": "string"
-            },
-            "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
-               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
-            }
-         },
-         "required": [
-            "id"
-         ],
-         "title": "RNASequenceInterval",
-         "type": "object"
-      },
-      "RacemicMixture": {
-         "additionalProperties": false,
-         "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
-         "properties": {
-            "chirality_agnostic_form": {
-               "type": "string"
-            },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_left_enantiomer": {
-               "type": "string"
-            },
-            "has_right_enantiomer": {
-               "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
-            "id": {
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -3036,6 +3333,98 @@
          },
          "required": [
             "id",
+            "inchi_chemical_sublayer"
+         ],
+         "title": "Proton",
+         "type": "object"
+      },
+      "RNASequenceInterval": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
+            },
+            "has_sequence_representation": {
+               "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
+               "type": "string"
+            },
+            "is_radical": {
+               "type": "boolean"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            }
+         },
+         "required": [
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
+         ],
+         "title": "RNASequenceInterval",
+         "type": "object"
+      },
+      "RacemicMixture": {
+         "additionalProperties": false,
+         "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
+         "properties": {
+            "chirality_agnostic_form": {
+               "type": "string"
+            },
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
+            },
+            "has_left_enantiomer": {
+               "type": "string"
+            },
+            "has_right_enantiomer": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
+               "type": "string"
+            },
+            "is_radical": {
+               "type": "boolean"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            }
+         },
+         "required": [
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer",
             "has_left_enantiomer",
             "has_right_enantiomer",
             "chirality_agnostic_form"
@@ -3055,16 +3444,19 @@
                "description": "e.g. ground, stable",
                "type": "string"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -3084,7 +3476,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "Radionuclide",
          "type": "object"
@@ -3158,6 +3551,19 @@
          "title": "ReactionParticipant",
          "type": "object"
       },
+      "Similarity": {
+         "additionalProperties": false,
+         "description": "A relationship between two or more entities that is quantified based on their similarity",
+         "properties": {
+            "owl_subclass_of": {
+               "$ref": "#/definitions/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            }
+         },
+         "required": [],
+         "title": "Similarity",
+         "type": "object"
+      },
       "SmallMolecule": {
          "additionalProperties": false,
          "description": "A molecule characterized by availability in small-molecule databases",
@@ -3182,14 +3588,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -3199,6 +3602,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -3218,7 +3630,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "SmallMolecule",
          "type": "object"
@@ -3305,14 +3719,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -3322,6 +3733,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -3341,7 +3761,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "Stereoisomer",
          "type": "object"
@@ -3350,13 +3772,16 @@
          "additionalProperties": false,
          "description": "A chemical entity below the granularity of an atom.",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -3372,7 +3797,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "SubatomicParticle",
          "type": "object"
@@ -3381,13 +3807,19 @@
          "additionalProperties": false,
          "description": "polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions\u2013that is, non-covalent bonds",
          "properties": {
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -3403,7 +3835,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "SupramolecularPolymer",
          "type": "object"
@@ -3445,16 +3879,19 @@
                "description": "number of protons minus number of electrons",
                "type": "integer"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
             },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
-            },
             "id": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_radical": {
@@ -3474,7 +3911,8 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer"
          ],
          "title": "UnchargedAtom",
          "type": "object"
@@ -3506,14 +3944,11 @@
                },
                "type": "array"
             },
-            "has_characteristic": {
-               "$ref": "#/definitions/ChemicalCharacteristic"
+            "has_chemical_role": {
+               "$ref": "#/definitions/ChemicalRole"
             },
             "has_part": {
                "type": "string"
-            },
-            "has_standard_inchi_object": {
-               "$ref": "#/definitions/StandardInchiObject"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -3523,6 +3958,15 @@
                "type": "array"
             },
             "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "type": "string"
+            },
+            "inchi_string": {
                "type": "string"
             },
             "is_organic": {
@@ -3542,7 +3986,9 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "inchi_chemical_sublayer",
+            "inchi_atom_connections_sublayer"
          ],
          "title": "UnchargedMolecule",
          "type": "object"
@@ -3557,7 +4003,7 @@
       }
    },
    "properties": {},
-   "title": "chemschema",
+   "title": "chem-model",
    "type": "object"
 }
 

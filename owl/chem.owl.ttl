@@ -6,23 +6,24 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/chemschema> a owl:Ontology ;
-    rdfs:label "chemschema" ;
+    rdfs:label "chem-model" ;
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
-    dcterms:title "chemical ontology metaclasses" ;
-    skos:definition """A data model describing metaclasses for chemical ontology classes.
-Aspects of this have been cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes are my own
+    dcterms:title "Chemistry Data Model" ;
+    skos:definition """A data model for managing information about chemical entities, ranging from atoms through molecules to complex mixtures.
+Aspects of this have been cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes are my own.
 For full context/motivation see the website.""" ;
-    linkml:generation_date "2021-04-07 14:12" ;
+    linkml:generation_date "2021-04-14 16:10" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "chem.yaml" ;
-    linkml:source_file_date "Wed Apr  7 14:12:04 2021" ;
-    linkml:source_file_size 57923 .
+    linkml:source_file_date "Wed Apr 14 16:10:16 2021" ;
+    linkml:source_file_size 65679 .
 
 <https://w3id.org/chemschema/AZE_notation_html> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "AZE notation html" ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_representation> ;
     skos:definition "E.g. <super>12</super>/<sub>6</sub>C" .
 
 <https://w3id.org/chemschema/AtomGroupingByPeriodicTableBlock> a owl:Class,
@@ -59,22 +60,90 @@ For full context/motivation see the website.""" ;
     rdfs:label "electron" ;
     rdfs:subClassOf <https://w3id.org/chemschema/SubatomicParticle> .
 
+<https://w3id.org/chemschema/EntityWithAtomsEnumerated> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "entity with atoms enumerated" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_chemical_sublayer> ;
+            owl:qualifiedCardinality 1 ],
+        <https://w3id.org/chemschema/SpecificityMixin>,
+        linkml:mixin ;
+    skos:definition "A mixin for an entity that consists of one or more atoms where the atoms and the number of occurrences is counted (corresponding to the chemical layer in InChI)" .
+
+<https://w3id.org/chemschema/EntityWithChargeSpecified> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "entity with charge specified" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_charge_sublayer> ],
+        <https://w3id.org/chemschema/SpecificityMixin>,
+        linkml:mixin ;
+    skos:definition "A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)" .
+
+<https://w3id.org/chemschema/EntityWithConnectivitySpecificied> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "entity with connectivity specificied" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_atom_connections_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_hydrogen_connections_sublayer> ],
+        <https://w3id.org/chemschema/SpecificityMixin>,
+        linkml:mixin ;
+    skos:definition "A mixin for an entity that consists of two or more atom occurrences where the connectivity is specified (corresponding to the /c layer in InChI)" .
+
+<https://w3id.org/chemschema/EntityWithIsotopeSpecified> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "entity with isotope specified" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_isotopic_layer> ],
+        <https://w3id.org/chemschema/SpecificityMixin>,
+        linkml:mixin ;
+    skos:definition "A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)" .
+
+<https://w3id.org/chemschema/EntityWithStereochemistrySpecified> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "entity with stereochemistry specified" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_double_bond_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_type_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_tetrahedral_stereochemical_sublayer> ],
+        <https://w3id.org/chemschema/SpecificityMixin>,
+        linkml:mixin ;
+    skos:definition "A mixin for an entity where the stereochemistry is explicitly specified (corresponding to the /t, m/, and /s layers in InChI)" .
+
 <https://w3id.org/chemschema/FullySpecifiedAtom> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "fully specified atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Count> ;
             owl:onProperty <https://w3id.org/chemschema/neutron_number> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
         <https://w3id.org/chemschema/Atom> ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
-    skos:definition "An atom type that has atomic number, charge, and neutron number stated" ;
-    skos:note "{'chemical species of an element': 'Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859'}" .
+    skos:definition "An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)" ;
+    skos:note "{'chemical species of an element': 'Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859'}" ;
+    linkml:examples "Example(value='Helium-4(2+)', description='The atom that is equivalent to an alpha particle 1S/He/q+2/i1+0')" .
 
 <https://w3id.org/chemschema/GeneralAcidBaseGroupingClass> a owl:Class,
         linkml:ClassDefinition ;
@@ -93,7 +162,11 @@ For full context/motivation see the website.""" ;
 <https://w3id.org/chemschema/Glycan> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "glycan" ;
-    rdfs:subClassOf <https://w3id.org/chemschema/Macromolecule> .
+    rdfs:subClassOf <https://w3id.org/chemschema/Macromolecule> ;
+    skos:altLabel "polysaccharides" ;
+    skos:definition "A macromolecule consisting of a large number of monosaccharides linked glycosidically" ;
+    skos:note "Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans" ;
+    linkml:examples "Example(value='https://www.glycoepitope.jp/epitopes/EP0311', description='GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)')" .
 
 <https://w3id.org/chemschema/IsPart> a owl:Class,
         linkml:ClassDefinition ;
@@ -111,27 +184,27 @@ For full context/motivation see the website.""" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/decay_energy> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/chemschema/mode_of_formation> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
+            owl:onProperty <https://w3id.org/chemschema/isobar_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Isotope> ;
             owl:onProperty <https://w3id.org/chemschema/decay_product> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/decay_energy> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/decay_mode> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/NumberOfYears> ;
             owl:onProperty <https://w3id.org/chemschema/half_life> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
-            owl:onProperty <https://w3id.org/chemschema/isobar_of> ],
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/decay_mode> ],
         <https://w3id.org/chemschema/Nuclide> ;
     skos:definition "Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons." ;
     linkml:examples "Example(value='isobar-40', description='Any nuclide with a mass number of 40:  40S, 40Cl, 40Ar, 40K, and 40Ca')" .
@@ -140,7 +213,7 @@ For full context/motivation see the website.""" ;
         linkml:ClassDefinition ;
     rdfs:label "isomerase reaction" ;
     rdfs:subClassOf <https://w3id.org/chemschema/Reaction> ;
-    skos:definition "A reaction that converts a molecule from one isomer to another. TODO: create rules for this" .
+    skos:definition "A reaction that converts a molecule from one isomer to another." .
 
 <https://w3id.org/chemschema/Moiety> a owl:Class,
         linkml:ClassDefinition ;
@@ -276,6 +349,14 @@ For full context/motivation see the website.""" ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/smiles_string> ;
     skos:definition "A deterministic SMILES string. Note there is no unique system for canonical smiles strings" .
 
+<https://w3id.org/chemschema/carbbank_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "carbbank representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/carboydrate_representation> ;
+    skos:definition "The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation." .
+
 <https://w3id.org/chemschema/curly_smiles_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "curly smiles string" ;
@@ -332,6 +413,22 @@ For full context/motivation see the website.""" ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_formula> ;
     skos:definition "A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane" .
 
+<https://w3id.org/chemschema/glycoct_condensed> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "glycoct condensed" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/carboydrate_representation> ;
+    skos:definition "This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear." .
+
+<https://w3id.org/chemschema/glycominds_linearcode_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "glycominds linearcode representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/carboydrate_representation> ;
+    skos:definition "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by “a” or “b” for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures)." .
+
 <https://w3id.org/chemschema/has_cyclic_structure> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "has cyclic structure" ;
@@ -340,10 +437,16 @@ For full context/motivation see the website.""" ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_property> ;
     skos:definition "true if the molecule possesses a cycle in the atom connectivity graph" .
 
+<https://w3id.org/chemschema/has_molfile_location> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has molfile location" ;
+    rdfs:range <https://w3id.org/chemschema/FileLocation> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
+    skos:definition "Location of a MolFile representing a chemical structure" .
+
 <https://w3id.org/chemschema/inchi_fixed_H_layer> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi fixed H layer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
     rdfs:range linkml:String ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
 
@@ -357,16 +460,8 @@ For full context/motivation see the website.""" ;
 <https://w3id.org/chemschema/inchi_reconnected_layer> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi reconnected layer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
     rdfs:range linkml:String ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
-
-<https://w3id.org/chemschema/inchi_string> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi string" ;
-    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
-    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_formula> .
 
 <https://w3id.org/chemschema/isomeric_smiles_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -383,6 +478,22 @@ For full context/motivation see the website.""" ;
     rdfs:range <https://w3id.org/chemschema/Isotope> ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/alternate_form_of> ;
     skos:definition "relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number." .
+
+<https://w3id.org/chemschema/kegg_chemical_function_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "kegg chemical function representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/carboydrate_representation> ;
+    skos:definition "A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names." .
+
+<https://w3id.org/chemschema/linucs_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "linucs representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/carboydrate_representation> ;
+    skos:definition "A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets." .
 
 <https://w3id.org/chemschema/lychi_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -434,7 +545,7 @@ For full context/motivation see the website.""" ;
     rdfs:domain <https://w3id.org/chemschema/Atom> ;
     rdfs:range <https://w3id.org/chemschema/Count> ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/subatomic_particle_count> ;
-    skos:definition "number of nucleons in an atom. proton number plus neutral number." .
+    skos:definition "number of nucleons in an atom. proton number plus neutron number." .
 
 <https://w3id.org/chemschema/position_isomer_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -794,6 +905,13 @@ linkml:chemical_element_symbol a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/symbol> ;
     skos:definition "E.g. O, K, Ge" .
 
+linkml:chemical_entity_inchi_chemical_sublayer a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "chemical entity_inchi chemical sublayer" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_chemical_sublayer> .
+
 linkml:chemical_grouping_by_charge_charge_agnostic_entity a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "chemical grouping by charge_charge agnostic entity" ;
@@ -1053,6 +1171,13 @@ linkml:periodic_table_block_type a owl:ObjectProperty,
     rdfs:range <http://UNKNOWN.org/periodic_table_block_enum> ;
     rdfs:subPropertyOf linkml:type .
 
+linkml:polyatomic_entity_inchi_atom_connections_sublayer a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "polyatomic entity_inchi atom connections sublayer" ;
+    rdfs:domain <https://w3id.org/chemschema/PolyatomicEntity> ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_atom_connections_sublayer> .
+
 linkml:proportional_part_composed_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "proportional part_composed of" ;
@@ -1268,7 +1393,8 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
             owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
         <https://w3id.org/chemschema/CationState>,
         <https://w3id.org/chemschema/MonoatomicIon> ;
-    skos:definition "A monoatomic ion that is positive" .
+    skos:definition "A monoatomic ion that is positive" ;
+    linkml:examples "Example(value='Helium(2+)', description='1S/He/q+2')" .
 
 <https://w3id.org/chemschema/ChemicalSaltByAnion> a owl:Class,
         linkml:ClassDefinition ;
@@ -1322,13 +1448,28 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "imprecise chemical mixture" ;
     rdfs:seeAlso "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/FileLocation> ;
+            owl:onProperty <https://w3id.org/chemschema/has_mixfile_location> ],
+        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemschema/ProportionalPart> ;
             owl:onProperty <https://w3id.org/chemschema/has_proportional_parts> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/ChemicalEncoding> ;
+            owl:onProperty <https://w3id.org/chemschema/has_minchi_representation> ],
         <https://w3id.org/chemschema/ChemicalMixture> ;
     skos:altLabel "portion of matter" ;
     skos:definition "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste" ;
     skos:note "although the stoichiometry is not known rough percentage parts can be provided" ;
     linkml:examples "Example(value='toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )', description=None)" .
+
+<https://w3id.org/chemschema/InchiObject> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "inchi object" ;
+    rdfs:seeAlso "https://doi.org/10.1186/s13321-015-0068-4" ;
+    rdfs:subClassOf <https://w3id.org/chemschema/InformationalChemicalEntity> ;
+    skos:definition "A representation of an InChI string as an object, composed of distinct sublayers" .
 
 <https://w3id.org/chemschema/Location> a owl:Class,
         linkml:ClassDefinition ;
@@ -1338,12 +1479,6 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
             owl:onClass <https://w3id.org/chemschema/OwlClass> ;
             owl:onProperty <https://w3id.org/chemschema/owl_subclass_of> ],
         <https://w3id.org/chemschema/OwlClass> .
-
-<https://w3id.org/chemschema/Measure> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "measure" ;
-    rdfs:subClassOf <https://w3id.org/chemschema/RelationalChemicalEntity> ;
-    skos:definition "todo" .
 
 <https://w3id.org/chemschema/MolecularAnion> a owl:Class,
         linkml:ClassDefinition ;
@@ -1392,6 +1527,58 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:label "periodic table placement" ;
     rdfs:subClassOf <https://w3id.org/chemschema/InformationalChemicalEntity> .
 
+<https://w3id.org/chemschema/Similarity> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "similarity" ;
+    rdfs:subClassOf <https://w3id.org/chemschema/RelationalChemicalEntity> ;
+    skos:definition "A relationship between two or more entities that is quantified based on their similarity" .
+
+<https://w3id.org/chemschema/StandardInchiObject> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "standard inchi object" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/International_Chemical_Identifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_hydrogen_connections_sublayer> ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_chemical_sublayer> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_charge_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_proton_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_double_bond_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_type_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_isotopic_layer> ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_version_string> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_tetrahedral_stereochemical_sublayer> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_atom_connections_sublayer> ],
+        <https://w3id.org/chemschema/InchiObject> .
+
 <https://w3id.org/chemschema/State> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "state" ;
@@ -1434,6 +1621,11 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:range linkml:Integer ;
     skos:definition "the number of electron pairs (bonds) between a pair of atoms" .
 
+<https://w3id.org/chemschema/classification_relationship> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "classification relationship" ;
+    rdfs:range linkml:String .
+
 <https://w3id.org/chemschema/classified_by> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "classified by" ;
@@ -1468,10 +1660,10 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/has_part> ;
     skos:definition "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences" .
 
-<https://w3id.org/chemschema/has_characteristic> a owl:ObjectProperty,
+<https://w3id.org/chemschema/has_chemical_role> a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "has characteristic" ;
-    rdfs:range <https://w3id.org/chemschema/ChemicalCharacteristic> .
+    rdfs:label "has chemical role" ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalRole> .
 
 <https://w3id.org/chemschema/has_element> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1480,18 +1672,30 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:range <https://w3id.org/chemschema/ChemicalElement> ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/alternate_form_of> .
 
+<https://w3id.org/chemschema/has_minchi_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has minchi representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:seeAlso "https://cheminf20.org/2018/08/27/mixtures-cheminformatics/" ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_representation> ;
+    skos:definition "Proposed new Mixtures InChI" .
+
+<https://w3id.org/chemschema/has_mixfile_location> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has mixfile location" ;
+    rdfs:range <https://w3id.org/chemschema/FileLocation> ;
+    rdfs:seeAlso "https://github.com/cdd/mixtures",
+        "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4" ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
+    skos:definition "Location of a MixFile representing a chemical mixture" .
+
 <https://w3id.org/chemschema/has_proportional_parts> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "has proportional parts" ;
     rdfs:domain <https://w3id.org/chemschema/ImpreciseChemicalMixture> ;
     rdfs:range <https://w3id.org/chemschema/ProportionalPart> ;
     skos:definition "Relationship between a complex mixture and its parts" .
-
-<https://w3id.org/chemschema/has_standard_inchi_object> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "has standard inchi object" ;
-    rdfs:range <https://w3id.org/chemschema/StandardInchiObject> ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
 
 <https://w3id.org/chemschema/has_subtype> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1501,77 +1705,18 @@ linkml:uncharged_elemental_charge a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_to_chemical_relationship> ;
     owl:inverseOf <https://w3id.org/chemschema/subtype_of> .
 
-<https://w3id.org/chemschema/id> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "id" ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
-
-<https://w3id.org/chemschema/inchi_atom_connections_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi atom connections sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> ;
-    skos:definition "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones." .
-
-<https://w3id.org/chemschema/inchi_charge_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi charge sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
-
-<https://w3id.org/chemschema/inchi_chemical_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi chemical sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> ;
-    skos:definition "the main chemical formula" .
-
-<https://w3id.org/chemschema/inchi_hydrogen_connections_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi hydrogen connections sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> ;
-    skos:definition "Describes how many hydrogen atoms are connected to each of the other atoms." .
-
-<https://w3id.org/chemschema/inchi_isotopic_layer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi isotopic layer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
-
 <https://w3id.org/chemschema/inchi_proton_sublayer> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi proton sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
     rdfs:range linkml:String ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
 
-<https://w3id.org/chemschema/inchi_stereochemical_double_bond_sublayer> a owl:ObjectProperty,
+<https://w3id.org/chemschema/inchi_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "inchi stereochemical double bond sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
-
-<https://w3id.org/chemschema/inchi_stereochemical_type_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi stereochemical type sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
-
-<https://w3id.org/chemschema/inchi_tetrahedral_stereochemical_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi tetrahedral stereochemical sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
+    rdfs:label "inchi string" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_formula> .
 
 <https://w3id.org/chemschema/is_organic> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1670,12 +1815,6 @@ linkml:polymer_of a owl:ObjectProperty,
     skos:definition "Applies to entities that have a charge state, which may be positive, negative, or neutral" ;
     skos:exactMatch <http://semanticscience.org/resource/CHEMINF_000120> .
 
-<https://w3id.org/chemschema/ChemicalCharacteristic> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "chemical characteristic" ;
-    skos:altLabel "role" ;
-    skos:definition "A reified property of a chemical entity." .
-
 <https://w3id.org/chemschema/ChemicalEntityOrGrouping> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "chemical entity or grouping" ;
@@ -1694,6 +1833,17 @@ linkml:polymer_of a owl:ObjectProperty,
     rdfs:label "chemical mixture" ;
     rdfs:subClassOf <https://w3id.org/chemschema/PolyatomicEntity> ;
     skos:definition "A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry" .
+
+<https://w3id.org/chemschema/ChemicalRole> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "chemical role" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/OwlClass> ;
+            owl:onProperty <https://w3id.org/chemschema/owl_subclass_of> ],
+        <https://w3id.org/chemschema/OwlClass> ;
+    skos:altLabel "role" ;
+    skos:definition "A characteristic of a chemical entity that is realized under particular conditions" .
 
 <https://w3id.org/chemschema/Connectivity> a owl:Class,
         linkml:ClassDefinition ;
@@ -1746,12 +1896,12 @@ linkml:polymer_of a owl:ObjectProperty,
     rdfs:label "molecular derivative grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/Molecule> ;
-            owl:onProperty <https://w3id.org/chemschema/classifies> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/chemschema/name> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/Molecule> ;
+            owl:onProperty <https://w3id.org/chemschema/classifies> ],
         <https://w3id.org/chemschema/MoleculeGroupingClass> ;
     skos:definition "A grouping class defined as a derivative of another molecule or molecular grouping class" ;
     linkml:examples "Example(value='D-ornithine derivative', description=None)",
@@ -1761,12 +1911,12 @@ linkml:polymer_of a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "molecule grouping class defined by addition of a group" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/ChemicalGroup> ;
-            owl:onProperty <https://w3id.org/chemschema/has_group> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/PolyatomicEntity> ;
             owl:onProperty <https://w3id.org/chemschema/derivative_of> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/ChemicalGroup> ;
+            owl:onProperty <https://w3id.org/chemschema/has_group> ],
         <https://w3id.org/chemschema/MoleculeGroupingClass> ;
     skos:definition "A grouping class defined in terms of a derivative of a molecule and the addition of a group" ;
     linkml:examples "Example(value='acetyl xylan', description=None)" .
@@ -1783,7 +1933,8 @@ linkml:polymer_of a owl:ObjectProperty,
     skos:altLabel "charged atom" ;
     skos:definition "An atom type that has a charge" ;
     skos:exactMatch <http://purl.obolibrary.org/obo/CHEBI_24867>,
-        <http://purl.obolibrary.org/obo/COB_0000042> .
+        <http://purl.obolibrary.org/obo/COB_0000042> ;
+    skos:note "this is mass-number neutral, so there can be no mass associated with a monatomic ion instance" .
 
 <https://w3id.org/chemschema/MonomolecularPolymer> a owl:Class,
         linkml:ClassDefinition ;
@@ -1812,12 +1963,12 @@ linkml:polymer_of a owl:ObjectProperty,
             owl:onProperty <https://w3id.org/chemschema/conjugate_acid_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
             owl:onProperty <https://w3id.org/chemschema/conjugate_base_of> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
         <https://w3id.org/chemschema/Charged>,
         <https://w3id.org/chemschema/Molecule> ;
     skos:altLabel "polyatomic ion species" ;
@@ -1948,6 +2099,12 @@ linkml:polymer_of a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/acid_form_of> ;
     skos:definition "connects an acid to the base that is stable at physiological pH. E.g. citric acid has physiological base citrate(3-)" .
 
+<https://w3id.org/chemschema/id> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "id" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
+
 <https://w3id.org/chemschema/in_periodic_table_block> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "in periodic table block" ;
@@ -1958,11 +2115,49 @@ linkml:polymer_of a owl:ObjectProperty,
     rdfs:label "in periodic table group" ;
     rdfs:range <https://w3id.org/chemschema/PeriodicTableGroup> .
 
+<https://w3id.org/chemschema/inchi_charge_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi charge sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
+
 <https://w3id.org/chemschema/inchi_component> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi component" ;
     rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
+    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
+    skos:definition "A part of an InChI object" .
+
+<https://w3id.org/chemschema/inchi_hydrogen_connections_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi hydrogen connections sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer_in_main_layer> ;
+    skos:definition "Describes how many hydrogen atoms are connected to each of the other atoms." .
+
+<https://w3id.org/chemschema/inchi_isotopic_layer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi isotopic layer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
+
+<https://w3id.org/chemschema/inchi_stereochemical_double_bond_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi stereochemical double bond sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
+
+<https://w3id.org/chemschema/inchi_stereochemical_type_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi stereochemical type sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
+
+<https://w3id.org/chemschema/inchi_tetrahedral_stereochemical_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi tetrahedral stereochemical sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> .
 
 <https://w3id.org/chemschema/inchi_version_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2285,12 +2480,12 @@ linkml:valence a owl:ObjectProperty,
     rdfs:label "atom ionic form" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty linkml:elemental_change ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty linkml:elemental_change ],
         <https://w3id.org/chemschema/Atom> ;
     skos:altLabel "atom ionic species" ;
     skos:definition "an atom type in which charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−." ;
@@ -2300,19 +2495,27 @@ linkml:valence a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "chemical grouping by charge" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Uriorcurie ;
+            owl:onProperty linkml:has_charge_state ],
+        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemschema/MoleculeGroupingClass> ;
             owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
             owl:onProperty linkml:charge_agnostic_entity ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty linkml:has_charge_state ],
         <https://w3id.org/chemschema/GroupingClass> ;
     skos:definition "A grouping class that refines a charge-neutral entity" ;
     linkml:examples "Example(value='copper cation', description=None)" .
+
+<https://w3id.org/chemschema/FileLocation> a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:label "file location" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty linkml:topValue ;
+            owl:qualifiedCardinality 1 ] .
 
 <https://w3id.org/chemschema/GroupingClassForAcidsOrBases> a owl:Class,
         linkml:ClassDefinition ;
@@ -2320,11 +2523,11 @@ linkml:valence a owl:ObjectProperty,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
-            owl:onProperty <https://w3id.org/chemschema/conjugate_acid_of> ],
+            owl:onProperty <https://w3id.org/chemschema/conjugate_base_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
-            owl:onProperty <https://w3id.org/chemschema/conjugate_base_of> ],
+            owl:onProperty <https://w3id.org/chemschema/conjugate_acid_of> ],
         <https://w3id.org/chemschema/MoleculeGroupingClass> .
 
 <https://w3id.org/chemschema/NucleotideSequenceInterval> a owl:Class,
@@ -2382,63 +2585,17 @@ linkml:valence a owl:ObjectProperty,
             owl:onProperty linkml:has_right_enantiomer ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/chemschema/Molecule> ;
-            owl:onProperty linkml:chirality_agnostic_form ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/chemschema/Enantiomer> ;
             owl:onProperty linkml:has_left_enantiomer ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/chemschema/Molecule> ;
+            owl:onProperty linkml:chirality_agnostic_form ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/chemschema/PreciseChemicalMixture> ;
     skos:altLabel "racemate",
         "racemic mixture of enantiomers" ;
     skos:definition "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide" .
-
-<https://w3id.org/chemschema/StandardInchiObject> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "standard inchi object" ;
-    rdfs:seeAlso "https://en.wikipedia.org/wiki/International_Chemical_Identifier" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_atom_connections_sublayer> ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_version_string> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_tetrahedral_stereochemical_sublayer> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_charge_sublayer> ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_chemical_sublayer> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_type_sublayer> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_proton_sublayer> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_isotopic_layer> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_stereochemical_double_bond_sublayer> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/inchi_hydrogen_connections_sublayer> ],
-        <https://w3id.org/chemschema/InchiObject> .
 
 <https://w3id.org/chemschema/Uncharged> a owl:Class,
         linkml:ClassDefinition ;
@@ -2459,6 +2616,13 @@ linkml:valence a owl:ObjectProperty,
     rdfs:range <https://w3id.org/chemschema/AcidBase> ;
     rdfs:subPropertyOf <https://w3id.org/chemschema/conjugate_acid_of> ;
     skos:definition "connects an acid to any of the the base anions. E.g. citric acid acid form of citrate(1-),citrate(2-),citrate(3-)" .
+
+<https://w3id.org/chemschema/inchi_sublayer_in_main_layer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi sublayer in main layer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer> ;
+    skos:definition "The main layer consists of chemical formula, atom connections, and hydrogen atoms. Example: CH3O/c1-2/h1H3/q-1" .
 
 <https://w3id.org/chemschema/smiles_string> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2508,12 +2672,12 @@ linkml:score a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "allotrope" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/chemschema/ChemicalElement> ;
-            owl:onProperty <https://w3id.org/chemschema/allotropic_analog_of> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:onClass linkml:String ;
             owl:onProperty linkml:has_bonding_structure ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/chemschema/ChemicalElement> ;
+            owl:onProperty <https://w3id.org/chemschema/allotropic_analog_of> ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/chemschema/Molecule> ;
     skos:definition "A molecule consisting of atoms of the same element" ;
@@ -2524,12 +2688,12 @@ linkml:score a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "atom grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/MoleculeGroupingClass> ;
-            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Atom> ;
             owl:onProperty <https://w3id.org/chemschema/classifies> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/MoleculeGroupingClass> ;
+            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
         <https://w3id.org/chemschema/GroupingClass> ;
     skos:definition "A grouping class that classifies atoms. For example, metal atom" .
 
@@ -2560,12 +2724,12 @@ linkml:score a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "molecular component grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/MolecularComponentGroupingClass> ;
-            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/MolecularComponent> ;
             owl:onProperty <https://w3id.org/chemschema/classifies> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/MolecularComponentGroupingClass> ;
+            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
         <https://w3id.org/chemschema/GroupingClass> ;
     skos:definition "A grouping class that classifies molecular components. Example: inorganic anion group" .
 
@@ -2585,7 +2749,7 @@ linkml:score a owl:ObjectProperty,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Molecule> ;
             owl:onProperty linkml:left_molecule ],
-        <https://w3id.org/chemschema/Measure> .
+        <https://w3id.org/chemschema/Similarity> .
 
 <https://w3id.org/chemschema/PeriodicTableBlock> a owl:Class,
         linkml:ClassDefinition ;
@@ -2653,6 +2817,20 @@ linkml:score a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/has_part> ;
     skos:definition "Relation between a molecule and the molecules it is made from." .
 
+<https://w3id.org/chemschema/inchi_atom_connections_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi atom connections sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer_in_main_layer> ;
+    skos:definition "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones." .
+
+<https://w3id.org/chemschema/inchi_chemical_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi chemical sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_sublayer_in_main_layer> ;
+    skos:definition "the main chemical formula" .
+
 <https://w3id.org/chemschema/structural_isomer_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "structural isomer of" ;
@@ -2702,16 +2880,16 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:seeAlso "https://github.com/MaastrichtU-IDS/semanticscience/issues/96" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/AnionState> ;
+            owl:onProperty <https://w3id.org/chemschema/has_anionic_component> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty <https://w3id.org/chemschema/elemental_charge> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/CationState> ;
             owl:onProperty <https://w3id.org/chemschema/has_cationic_component> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/AnionState> ;
-            owl:onProperty <https://w3id.org/chemschema/has_anionic_component> ],
         <https://w3id.org/chemschema/PreciseChemicalMixture> ;
     skos:definition "a chemical compound consisting of an ionic assembly of cations and anions." ;
     skos:note "in SIO falls under molecular complex? Also in biolink" ;
@@ -2725,12 +2903,6 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
             owl:onProperty linkml:topValue ;
             owl:qualifiedCardinality 1 ] .
 
-<https://w3id.org/chemschema/PolyatomicEntity> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "polyatomic entity" ;
-    rdfs:subClassOf <https://w3id.org/chemschema/ChemicalEntity> ;
-    skos:definition "Any chemical entity consisting of more than one atom." .
-
 <https://w3id.org/chemschema/RelationalChemicalEntity> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "relational chemical entity" ;
@@ -2741,31 +2913,61 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         <https://w3id.org/chemschema/OwlClass> ;
     skos:definition "A reified relationship" .
 
+<https://w3id.org/chemschema/SpecificityMixin> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "specificity mixin" ;
+    rdfs:subClassOf linkml:mixin .
+
+<https://w3id.org/chemschema/carboydrate_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "carboydrate representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_representation> .
+
+<https://w3id.org/chemschema/chemical_representation> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "chemical representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
+    rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
+
 <https://w3id.org/chemschema/has_sequence_representation> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "has sequence representation" ;
+    rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
     rdfs:range <https://w3id.org/chemschema/SequenceString> ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> .
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_representation> .
+
+<https://w3id.org/chemschema/PolyatomicEntity> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "polyatomic entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_atom_connections_sublayer> ;
+            owl:qualifiedCardinality 1 ],
+        <https://w3id.org/chemschema/ChemicalEntity> ;
+    skos:definition "Any chemical entity consisting of more than one atom." .
 
 <https://w3id.org/chemschema/ProportionalPart> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "proportional part" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
-            owl:onProperty linkml:composed_of ],
+            owl:onClass <http://UNKNOWN.org/ingredient_role_enum> ;
+            owl:onProperty linkml:has_role ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
             owl:onProperty linkml:minimal_percentage ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty linkml:maximum_percentage ],
+            owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
+            owl:onProperty linkml:composed_of ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/ingredient_role_enum> ;
-            owl:onProperty linkml:has_role ],
+            owl:onClass linkml:Float ;
+            owl:onProperty linkml:maximum_percentage ],
         <https://w3id.org/chemschema/RelationalChemicalEntity> ;
     skos:definition "A part of a complex mixture that is of uniform composition" .
 
@@ -2781,6 +2983,11 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     skos:altLabel "molecular part",
         "submolecule" ;
     skos:definition "A proper part of a molecule that is larger than an atom" .
+
+<https://w3id.org/chemschema/information_property> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "information property" ;
+    rdfs:range linkml:String .
 
 <https://w3id.org/chemschema/subtype_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2806,16 +3013,20 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/GroupingClass> ;
-            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/OwlClass> ;
+            owl:onProperty <https://w3id.org/chemschema/owl_subclass_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
             owl:onProperty <https://w3id.org/chemschema/classifies> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/OwlClass> ;
-            owl:onProperty <https://w3id.org/chemschema/owl_subclass_of> ],
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/id> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/GroupingClass> ;
+            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
         <https://w3id.org/chemschema/OwlClass> ;
     skos:definition "A non-specific entity. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" .
 
@@ -2824,12 +3035,12 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:label "reaction participant" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty linkml:stoichiometry ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/ChemicalEntity> ;
             owl:onProperty linkml:participant ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty linkml:stoichiometry ],
         <https://w3id.org/chemschema/RelationalChemicalEntity> ;
     skos:definition "Instances of this link a reaction to a chemical entity participant" .
 
@@ -2846,11 +3057,6 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_to_chemical_relationship> ;
     owl:inverseOf <https://w3id.org/chemschema/classified_by> .
 
-<https://w3id.org/chemschema/information_property> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "information property" ;
-    rdfs:range linkml:String .
-
 <https://w3id.org/chemschema/alternate_form_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "alternate form of" ;
@@ -2864,8 +3070,15 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:label "chemical formula" ;
     rdfs:domain <https://w3id.org/chemschema/ChemicalEntity> ;
     rdfs:range <https://w3id.org/chemschema/ChemicalEncoding> ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
-    skos:definition "A generic grouping for miolecular formulae and empirican formulae" .
+    rdfs:subPropertyOf <https://w3id.org/chemschema/chemical_representation> ;
+    skos:definition "A generic grouping for miolecular formulae and empirical formulae" .
+
+<https://w3id.org/chemschema/inchi_sublayer> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inchi sublayer" ;
+    rdfs:range linkml:String ;
+    rdfs:seeAlso "https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png" ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_component> .
 
 <https://w3id.org/chemschema/name> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2874,24 +3087,13 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/chemschema/information_property> ;
     skos:definition "name of chemical entity. E.g. nickel, carbon-16" .
 
-<https://w3id.org/chemschema/owl_subclass_of> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "owl subclass of" ;
-    rdfs:domain <https://w3id.org/chemschema/OwlClass> ;
-    rdfs:range <https://w3id.org/chemschema/OwlClass> ;
-    skos:definition "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)" .
-
 <https://w3id.org/chemschema/Enantiomer> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "enantiomer" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty linkml:optical_configuration ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty linkml:relative_configuration ],
+            owl:onProperty linkml:absolute_configuration ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Molecule> ;
@@ -2899,7 +3101,11 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty linkml:absolute_configuration ],
+            owl:onProperty linkml:optical_configuration ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty linkml:relative_configuration ],
         <https://w3id.org/chemschema/Stereoisomer> ;
     skos:definition "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide" ;
     skos:note "key= (enantiomer form of, absolute configuration)",
@@ -2914,32 +3120,40 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         <https://w3id.org/chemschema/Molecule> ;
     skos:definition "A large molecule, such as a polymer, lipid, or macrocycle" .
 
+<https://w3id.org/chemschema/owl_subclass_of> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "owl subclass of" ;
+    rdfs:domain <https://w3id.org/chemschema/OwlClass> ;
+    rdfs:range <https://w3id.org/chemschema/OwlClass> ;
+    rdfs:subPropertyOf <https://w3id.org/chemschema/classification_relationship> ;
+    skos:definition "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)" .
+
 <https://w3id.org/chemschema/AtomicBond> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atomic bond" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty linkml:bond_length_in_angstroms ],
+            owl:onProperty linkml:bond_angle ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty <https://w3id.org/chemschema/bond_order> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
             owl:onProperty linkml:torsional_angle ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/AtomOccurrence> ;
+            owl:onProperty <https://w3id.org/chemschema/has_atom_occurrences> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <http://UNKNOWN.org/bond_type_enum> ;
             owl:onProperty linkml:bond_type ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty <https://w3id.org/chemschema/bond_order> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/AtomOccurrence> ;
-            owl:onProperty <https://w3id.org/chemschema/has_atom_occurrences> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty linkml:bond_angle ],
+            owl:onProperty linkml:bond_length_in_angstroms ],
         <https://w3id.org/chemschema/OwlClass>,
         <https://w3id.org/chemschema/RelationalChemicalEntity> ;
     skos:altLabel "bond",
@@ -2951,25 +3165,18 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "Bronsted acid" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty linkml:acidity ],
-        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemschema/AcidBase> ;
             owl:onProperty <https://w3id.org/chemschema/acid_form_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <http://UNKNOWN.org/hard_or_soft_enum> ;
             owl:onProperty linkml:hard_or_soft ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty linkml:acidity ],
         <https://w3id.org/chemschema/Molecule> ;
     skos:definition "A molecule capable of donating a hydron to an acceptor. Example: citric acid" .
-
-<https://w3id.org/chemschema/inchi_sublayer> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inchi sublayer" ;
-    rdfs:domain <https://w3id.org/chemschema/InchiObject> ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf <https://w3id.org/chemschema/inchi_component> .
 
 <https://w3id.org/chemschema/AtomOccurrence> a owl:Class,
         linkml:ClassDefinition ;
@@ -2981,7 +3188,7 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty linkml:coordination_number ],
+            owl:onProperty linkml:valence ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
@@ -2989,7 +3196,7 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty linkml:valence ],
+            owl:onProperty linkml:coordination_number ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/chemschema/Atom> ;
             owl:onProperty linkml:occurrence_of ;
@@ -3004,8 +3211,8 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:seeAlso "https://en.wikipedia.org/wiki/Chemical_element" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/symbol> ],
+            owl:onClass linkml:Float ;
+            owl:onProperty linkml:boiling_point_in_celcius ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -3013,22 +3220,22 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty linkml:boiling_point_in_celcius ],
+            owl:onProperty linkml:standard_atomic_weight ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/PeriodicTableBlock> ;
+            owl:onProperty <https://w3id.org/chemschema/in_periodic_table_block> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemschema/Stereocenter> ;
             owl:onProperty linkml:has_stereocenter ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty linkml:standard_atomic_weight ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
             owl:onProperty linkml:melting_point_in_celcius ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/PeriodicTableBlock> ;
-            owl:onProperty <https://w3id.org/chemschema/in_periodic_table_block> ],
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/symbol> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/PeriodicTableGroup> ;
@@ -3044,16 +3251,24 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "reaction" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/ReactionParticipant> ;
+            owl:onProperty linkml:right_participants ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty linkml:is_diastereoselective ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty linkml:is_transport ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty linkml:is_balanced ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty linkml:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/ReactionParticipant> ;
-            owl:onProperty linkml:right_participants ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
@@ -3061,56 +3276,34 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty linkml:is_transport ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/smarts_string> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty linkml:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty linkml:is_balanced ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/ReactionParticipant> ;
-            owl:onProperty linkml:left_participants ],
+            owl:onProperty linkml:is_stereo ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty linkml:reaction_center ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty linkml:is_stereo ] ;
+            owl:onClass linkml:String ;
+            owl:onProperty linkml:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/ReactionParticipant> ;
+            owl:onProperty linkml:left_participants ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/smarts_string> ] ;
     skos:definition "reaction" .
-
-<https://w3id.org/chemschema/ChemicalEncoding> a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "chemical encoding" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty linkml:topValue ;
-            owl:qualifiedCardinality 1 ] .
-
-<https://w3id.org/chemschema/InchiObject> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "inchi object" ;
-    rdfs:seeAlso "https://doi.org/10.1186/s13321-015-0068-4" ;
-    rdfs:subClassOf <https://w3id.org/chemschema/InformationalChemicalEntity> .
 
 <https://w3id.org/chemschema/MoleculeGroupingClass> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecule grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/MoleculeGroupingClass> ;
-            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Molecule> ;
             owl:onProperty <https://w3id.org/chemschema/classifies> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/MoleculeGroupingClass> ;
+            owl:onProperty <https://w3id.org/chemschema/subtype_of> ],
         <https://w3id.org/chemschema/GroupingClass> ;
     skos:definition "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide" ;
     skos:note "Molecular grouping classes are typically defined by elemental composition and structure as well as chemical properties",
@@ -3123,6 +3316,14 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Isotope> ;
+            owl:onProperty <https://w3id.org/chemschema/isotope_of> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/decay_energy> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/chemschema/Isotope> ;
             owl:onProperty <https://w3id.org/chemschema/decay_product> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
@@ -3131,19 +3332,11 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/mode_of_formation> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/decay_energy> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/Isotope> ;
-            owl:onProperty <https://w3id.org/chemschema/isotope_of> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/chemschema/decay_mode> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/mode_of_formation> ],
         <https://w3id.org/chemschema/Nuclide> ;
     skos:definition "A specific subtype of an atom with a specified neutron number" ;
     skos:note "Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances." ;
@@ -3171,12 +3364,12 @@ linkml:grouping_class_subtype_of a owl:ObjectProperty,
     rdfs:label "atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/symbol> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/Count> ;
             owl:onProperty <https://w3id.org/chemschema/atomic_number> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/symbol> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/SubatomicParticle> ;
@@ -3198,6 +3391,13 @@ linkml:Boolean a owl:Class,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A binary (true or false) value" .
 
+linkml:TypeDefinition a owl:Class ;
+    rdfs:label "type_definition" ;
+    skos:definition "A data type definition." .
+
+linkml:topValue a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
 <https://w3id.org/chemschema/OwlClass> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "owl class" ;
@@ -3212,12 +3412,13 @@ linkml:Boolean a owl:Class,
     skos:definition "instances of this class mixin are OWL Classes" ;
     skos:exactMatch owl:Class .
 
-linkml:TypeDefinition a owl:Class ;
-    rdfs:label "type_definition" ;
-    skos:definition "A data type definition." .
-
-linkml:topValue a owl:DatatypeProperty ;
-    rdfs:label "value" .
+<https://w3id.org/chemschema/ChemicalEncoding> a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:label "chemical encoding" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty linkml:topValue ;
+            owl:qualifiedCardinality 1 ] .
 
 linkml:Float a owl:Class,
         linkml:TypeDefinition ;
@@ -3242,28 +3443,32 @@ linkml:Integer a owl:Class,
     rdfs:label "chemical entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/ChemicalCharacteristic> ;
-            owl:onProperty <https://w3id.org/chemschema/has_characteristic> ],
+            owl:onClass <https://w3id.org/chemschema/ChemicalRole> ;
+            owl:onProperty <https://w3id.org/chemschema/has_chemical_role> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/name> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://w3id.org/chemschema/is_radical> ],
+            owl:onProperty <https://w3id.org/chemschema/id> ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/chemschema/OwlClass> ;
             owl:onProperty <https://w3id.org/chemschema/owl_subclass_of> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/chemschema/StandardInchiObject> ;
-            owl:onProperty <https://w3id.org/chemschema/has_standard_inchi_object> ],
+            owl:onClass <https://w3id.org/chemschema/ChemicalEncoding> ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_string> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty <https://w3id.org/chemschema/is_radical> ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/chemschema/id> ;
+            owl:onProperty <https://w3id.org/chemschema/inchi_chemical_sublayer> ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/chemschema/name> ],
         <https://w3id.org/chemschema/OwlClass> ;
     skos:altLabel "chemical",
         "chemical species",
@@ -3279,25 +3484,25 @@ linkml:Integer a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/Molecule> ;
+            owl:onProperty <https://w3id.org/chemschema/has_submolecules> ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/chemschema/has_part> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/Atom> ;
-            owl:onProperty <https://w3id.org/chemschema/has_atoms> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty <https://w3id.org/chemschema/is_organic> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/AtomOccurrence> ;
-            owl:onProperty <https://w3id.org/chemschema/has_atom_occurrences> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/chemschema/Molecule> ;
-            owl:onProperty <https://w3id.org/chemschema/has_submolecules> ],
-        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/chemschema/AtomicBond> ;
             owl:onProperty <https://w3id.org/chemschema/has_bonds> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/Atom> ;
+            owl:onProperty <https://w3id.org/chemschema/has_atoms> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/chemschema/AtomOccurrence> ;
+            owl:onProperty <https://w3id.org/chemschema/has_atom_occurrences> ],
         <https://w3id.org/chemschema/FullyCovalentlyBonded>,
         <https://w3id.org/chemschema/PolyatomicEntity> ;
     skos:altLabel "molecular entity",
