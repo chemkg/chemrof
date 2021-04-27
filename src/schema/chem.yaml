@@ -1,12 +1,13 @@
 id: https://w3id.org/chemschema
-name: chemschema
-title: chemical ontology metaclasses
+name: chem-model
+title: Chemistry Data Model
 description: >-
-  A data model describing metaclasses for chemical ontology classes.
+  A data model for managing information about chemical entities, ranging from atoms
+  through molecules to complex mixtures.
 
   Aspects of this have been cribbed from various sources including CHEBI, SIO,
   Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes
-  are my own
+  are my own.
 
   For full context/motivation see the website.
 
@@ -331,7 +332,7 @@ classes:
       - id
       - name
       - is radical
-      - has characteristic
+      - has chemical role
       - inchi string
       - inchi chemical sublayer
     slot_usage:
@@ -533,8 +534,19 @@ classes:
       
   glycan:
     is_a: macromolecule
+    aliases:
+      - polysaccharides ## IUPAC
+    description: >-
+      A macromolecule consisting of a large number of monosaccharides linked glycosidically
+    comments:
+      - Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans
     id_prefixes:
       - KEGG.GLYCAN
+      - GlyTouCan
+      - Glycosciences.DB
+    examples:
+      - value: https://www.glycoepitope.jp/epitopes/EP0311
+        description: GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)
 
   monomolecular polymer:
     is_a: macromolecule
@@ -622,10 +634,12 @@ classes:
     is_a: chemical mixture
     description: >-
       A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste
-    comments:
-      - although the stoichiometry is not known rough percentage parts can be provided
     slots:
       - has proportional parts
+      - has mixfile location
+      - has minchi representation
+    comments:
+      - although the stoichiometry is not known rough percentage parts can be provided
     see_also:
       - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
     examples:
@@ -649,7 +663,7 @@ classes:
       - is organic
     slot_usage:
       has atom occurrences:
-        minimum_value: 2
+#        minimum_value: 2
       has bonds:
         minimum_value: 1
         aliases: ['adjacency matrix']
@@ -1031,11 +1045,13 @@ classes:
     close_mappings:
       - biolink:Association
 
-  chemical characteristic:
+  chemical role:
     aliases:
       - role
+    mixins:
+      - owl class
     description: >-
-      A reified property of a chemical entity.
+      A characteristic of a chemical entity that is realized under particular conditions
       
       
   location:
@@ -1070,8 +1086,8 @@ classes:
       - bond order
     slot_usage:
       has atom occurrences:
-        minimum_value: 2
-        maximum_value: 2
+#        minimum_value: 2
+#        maximum_value: 2
       bond type:
         range: bond_type_enum
       bond length in angstroms:
@@ -1310,7 +1326,8 @@ classes:
     is_a: reaction
     description: >-
       A reaction that converts a molecule from one isomer to another.
-      TODO: create rules for this
+    todos:
+      - create rules for this
 
   reaction participant:
     is_a: relational chemical entity
@@ -1336,13 +1353,13 @@ classes:
       maximum percentage:
         range: float
 
-  measure:
+  similarity:
     is_a: relational chemical entity
     description:
-      todo
+      A relationship between two or more entities that is quantified based on their similarity
     
   molecule pairwise similarity:
-    is_a: measure
+    is_a: similarity
     slot_usage:
       left molecule:
         range: molecule
@@ -1441,7 +1458,10 @@ types:
   DNA sequence string:
     uri: xsd:string
     base: str
-    
+
+  file location:
+    uri: xsd:anyURI
+    base: str
 
 slots:
 
@@ -1612,6 +1632,8 @@ slots:
       - decide on domain/range. in chebi, daidzein monosulfate is conjugate acid of daidzein monosulfate(1-), yet it is an acid derivative, not an acid
 
   acid form of:
+    aliases:
+      - protonated form of
     is_a: conjugate acid of
     description: >-
       connects an acid to any of the the base anions. E.g. citric acid acid form of citrate(1-),citrate(2-),citrate(3-)
@@ -1620,6 +1642,8 @@ slots:
     range: acid base  ## TODO - grouping class
       
   has physiological base:
+    aliases:
+      - deprotonated form of
     is_a: acid form of
     description: >-
       connects an acid to the base that is stable at physiological pH. E.g. citric acid has physiological base citrate(3-)
@@ -1635,8 +1659,8 @@ slots:
       
   ## other relations
 
-  has characteristic:
-    range: chemical characteristic
+  has chemical role:
+    range: chemical role
   
   has part:
     is_a: chemical to chemical relationship
@@ -1748,20 +1772,69 @@ slots:
     mappings:
       - CHEMINF:000067
 
-  has sequence representation:
+  chemical representation:
+    aliases:
+      - has chemical encoding
+    abstract: true
     is_a: information property
+    domain: chemical entity
+    range: chemical encoding
+    
+  has minchi representation:
+    is_a: chemical representation
+    description: >-
+      Proposed new Mixtures InChI
+    see_also:
+      - https://cheminf20.org/2018/08/27/mixtures-cheminformatics/
+  
+  has sequence representation:
+    is_a: chemical representation
     range: sequence string
   
   AZE notation html:
-    is_a: information property
+    is_a: chemical representation
     description: >-
       E.g. <super>12</super>/<sub>6</sub>C
     
+  carboydrate representation:
+    abstract: true
+    is_a: chemical representation
+
+  wurcs representation:
+    is_a: carboydrate representation
+    pattern: "^WURCS=Version/.*"
+    
+  carbbank representation:
+    is_a: carboydrate representation
+    description: >-
+      The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation.
+
+  linucs representation:
+    is_a: carboydrate representation
+    description: >-
+      A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.
+
+  glycominds linearcode representation:
+    is_a: carboydrate representation
+    description: >-
+      A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by “a” or “b” for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures).
+
+  kegg chemical function representation:
+    is_a: carboydrate representation
+    description: >-
+      A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names.
+
+  glycoct condensed:
+    is_a: carboydrate representation
+    description: >-
+      This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.
+
+
   chemical formula:
     abstract: true
-    is_a: information property
+    is_a: chemical representation
     description: >-
-      A generic grouping for miolecular formulae and empirican formulae
+      A generic grouping for miolecular formulae and empirical formulae
     domain: chemical entity
     range: chemical encoding
     mappings:
@@ -1844,6 +1917,20 @@ slots:
     description: >-
       A deterministic SMILES string. Note there is no unique system for canonical smiles strings
 
+  has mixfile location:
+    is_a: information property
+    range: file location
+    description: >-
+      Location of a MixFile representing a chemical mixture
+    see_also:
+      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
+      - https://github.com/cdd/mixtures
+    
+  has molfile location:
+    is_a: information property
+    range: file location
+    description: >-
+      Location of a MolFile representing a chemical structure
     
   inchi component:
     is_a: information property
@@ -2045,7 +2132,12 @@ slots:
     domain: atomic bond
     range: float
 
+  classification relationship:
+    abstract: true
+    mixin: true
+
   owl subclass of:
+    is_a: classification relationship      
     aliases:
       - is a
     mixin: true

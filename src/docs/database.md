@@ -69,10 +69,10 @@ This is referenced in instances in the file MonoatomicIon.ttl is derived from CH
 ```turtle
 chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
         rdfs:label      "manganese(4+)" ;
-        ns1:chebi_iri   CHEBI:25158 ;
-        ns1:charge      4 ;
-        ns1:has_element chem:Mn ;
-        ns1:inchi_string        "InChI=1S/Mn/q+4"^^xsd:string .
+        chem:chebi_iri   CHEBI:25158 ;
+        chem:charge      4 ;
+        chem:has_element chem:Mn ;
+        chem:inchi_string        "InChI=1S/Mn/q+4"^^xsd:string .
 ```
 
 Similarly the file Isotope.ttl references the elements:
