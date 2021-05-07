@@ -1,10 +1,10 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX chem: <https://w3id.org/chemschema/>
 PREFIX type: <http://www.wikidata.org/prop/direct/P31>
-PREFIX Element: <http://www.wikidata.org/entity/Q11344>
+PREFIX WdElement: <http://www.wikidata.org/entity/Q11344>
 PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
 PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
-PREFIX CE: <https://w3id.org/chemschema/ChemicalElement->
+PREFIX ElementInstance: <https://w3id.org/chemschema/ChemicalElement/>
 
 CONSTRUCT {
     ?iri a chem:ChemicalElement ;
@@ -13,12 +13,12 @@ CONSTRUCT {
       chem:atomic_number ?an
 }
 WHERE {
-    ?i type: Element: ;
+    ?i type: WdElement: ;
        rdfs:label ?label ;
        symbol: ?symbol ;
        atomic_number: ?an .
 
        FILTER (LANG(?label) = "en")
 
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement-", ENCODE_FOR_URI(?symbol))) AS ?iri)
+   BIND(IRI(CONCAT(STR(ElementInstance:), ENCODE_FOR_URI(?symbol))) AS ?iri)
 }

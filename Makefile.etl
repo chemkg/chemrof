@@ -1,4 +1,83 @@
+REASONER = HERMIT
 SP = pl2sparql -i obo_prefixes  -u obo_metadata/oio  -A ~/repos/onto-mirror/void.ttl -m obo=http://purl.obolibrary.org/obo/
+INJECTS = ChemicalGroupingByCharge
+WD_CLASSES = ChemicalElement Isotope
+CHEBI_CLASSES = MonoatomicIon
+PCHEBI_CLASSES = RacemicMixture Enantiomer
+METACLASSES = $(WD_CLASSES) $(CHEBI_CLASSES) $(PCHEBI_CLASSES) $(INJECTS)
+
+all-owl: owl/chem-ontology.owl
+
+owl/chem-ontology-asserted.owl: gen-owl-mods
+	robot merge -i src/ontology/chem-edit.owl.ttl $(patsubst %, -i owl/gen/%.owl, $(METACLASSES)) -o $@
+.PRECIOUS: owl/chem-ontology-asserted.owl
+
+owl/chem-ontology.owl: owl/chem-ontology-asserted.owl
+	robot reason -r $(REASONER) -i $< -o $@
+
+# create OWL from ttl database
+owl/gen/%.owl: database/chem.ttl sparql/owlgen/gen-%.rq
+	robot query -i $< -q sparql/owlgen/gen-$*.rq $@
+
+gen-owl-mods: $(patsubst %, owl/gen/%.owl, $(METACLASSES))
+
+
+# --
+# DATABASE
+# --
+
+all-data: database/chem.ttl
+
+
+
+# Database is the union of all triples plus injected triples
+INJECT_FILES = $(patsubst %, database/inject/inject-%.ttl, $(INJECTS))
+database/chem.ttl: database/all-merged.ttl $(INJECT_FILES)
+	robot merge -i $< $(patsubst %, -i database/inject/inject-%.ttl, $(INJECTS)) -o $@
+.PRECIOUS: database/chem.ttl
+
+database/%-merged.ttl: database/%.ttl owl/chem.owl.ttl
+	robot merge -i $< -i owl/chem.owl.ttl -o $@
+
+database/all-wd.ttl: $(patsubst %,database/wd/%.ttl,$(WD_CLASSES))
+	riot $^ > $@.tmp && mv $@.tmp $@
+database/all-chebi.ttl: $(patsubst %,database/chebi/%.ttl,$(CHEBI_CLASSES))
+	riot $^ > $@.tmp && mv $@.tmp $@
+database/all-pchebi.ttl: $(patsubst %,database/pchebi/%.ttl,$(PCHEBI_CLASSES))
+	riot $^ > $@.tmp && mv $@.tmp $@
+
+database/all.ttl: database/all-wd.ttl database/all-chebi.ttl database/all-pchebi.ttl
+	riot $^ > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/all.ttl
+
+
+database/%.jsonld: database/%.ttl
+	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
+
+# build from Wikidata SPARQL queries
+database/wd/%.ttl:
+	curl --header "Accept: text/turtle"  -G 'https://query.wikidata.org/sparql' --data-urlencode "query@sparql/construct-wd-$*.rq" > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd/%.ttl
+
+# build from CHEBI SPARQL queries over Ontobee
+database/chebi/%.ttl:
+	curl --header "Accept: text/turtle"  -G 'http://sparql.hegroup.org/sparql' --data-urlencode "query@sparql/construct-chebi-$*.rq" > $@.tmp && mv $@.tmp $@
+.PRECIOUS: database/wd/%.ttl
+
+# build from CHEBI prolog queries
+database/pchebi/%.ttl:
+	pq-ontobee -e --consult src/prolog/chebi.pro "save_triples('$*','$@.tmp')" && mv $@.tmp $@
+
+
+database/inject/inject-%.ttl: database/all-merged.ttl sparql/inject-%.rq
+	robot query -i $< -q sparql/inject-$*.rq $@
+.PRECIOUS: database/inject/inject-%.ttl
+
+
+
+
+
+## REPORTING
 
 extract/wd-info-%.tsv:
 	pq-wikidata -f tsv "$*(S),rdf(S,P,O)" > $@.tmp && mv $@.tmp $@
@@ -23,51 +102,5 @@ extract/chebi-smiles-summary.tsv:
 extract/chebi-RacemicMixture.tsv:
 	pq-ontobee -e --consult src/prolog/chebi.pro report racemic_mixture > $@.tmp && mv $@.tmp $@
 
-database/pchebi/%.ttl:
-	pq-ontobee -e --consult src/prolog/chebi.pro "save_triples('$*','$@.tmp')" && mv $@.tmp $@
-
-INJECTS = ChemicalGroupingByCharge
-METACLASSES = ChemicalElement Isotope MonoatomicIon RacemicMixture $(INJECTS)
-
-database/%.jsonld: database/%.ttl
-	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
-
-database/wd/%.ttl:
-	curl --header "Accept: text/turtle"  -G 'https://query.wikidata.org/sparql' --data-urlencode "query@sparql/construct-wd-$*.rq" > $@.tmp && mv $@.tmp $@
-.PRECIOUS: database/wd/%.ttl
-
-database/chebi/%.ttl:
-	curl --header "Accept: text/turtle"  -G 'http://sparql.hegroup.org/sparql' --data-urlencode "query@sparql/construct-chebi-$*.rq" > $@.tmp && mv $@.tmp $@
-.PRECIOUS: database/wd/%.ttl
-
-
-database/wd-all.ttl: database/wd/
-	riot database/wd/*.ttl > $@.tmp && mv $@.tmp $@
-.PRECIOUS: database/wd-all.ttl
-
-database/all.ttl: database/wd database/chebi
-	riot database/*/*.ttl > $@.tmp && mv $@.tmp $@
-.PRECIOUS: database/wd-all.ttl
-
-database/%-merged.ttl: database/%.ttl owl/chem.owl.ttl
-	robot merge -i $< -i owl/chem.owl.ttl -o $@
-
-database/inject/inject-%.ttl: database/all-merged.owl
-	robot query -i $< -q sparql/inject-$*.rq $@
-.PRECIOUS: database/inject/inject-%.ttl
-
-INJECT_FILES = $(patsubst %, database/inject/inject-%.ttl, $(INJECTS))
-database/chem.ttl: database/all-merged.ttl $(INJECT_FILES)
-	robot merge -i $< $(patsubst %, -i database/inject/inject-%.ttl, $(INJECTS)) -o $@
-.PRECIOUS: database/chem.ttl
-
-owl/gen/%.owl: database/chem.ttl
-	robot query -i $< -q sparql/owlgen/gen-$*.rq $@
-
-owl/chem-ontology-asserted.owl: owl/gen
-	robot merge -i src/ontology/chem-edit.owl.ttl $(patsubst %, -i owl/gen/%.owl, $(METACLASSES)) -o $@
-.PRECIOUS: owl/chem-ontology-asserted.owl
-
-REASONER = HERMIT
-owl/chem-ontology.owl: owl/chem-ontology-asserted.owl
-	robot reason -r $(REASONER) -i $< -o $@
+extract/report-%.tsv:
+	pq-ontobee -e --consult src/prolog/chebi.pro report $* > $@.tmp && mv $@.tmp $@

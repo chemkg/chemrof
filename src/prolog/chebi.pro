@@ -28,9 +28,15 @@ zero_charge(A) :-
 foo("0").
 
 
+has_inchi(C,I) :-
+        rdf(C,'http://purl.obolibrary.org/obo/chebi/inchi',I).
+
 inchi(C,A) :-
         (   ontobee ?? rdf(C,'http://purl.obolibrary.org/obo/chebi/inchi',S)),
         literal_atom(S,A).
+
+is_enantiomer(C) :- is_enantiomer_of(C,_).
+is_enantiomer(C) :- is_enantiomer_of(_,C).
 
 is_enantiomer_of(C1,C2) :-
         subclass_of_some(C1,'http://purl.obolibrary.org/obo/chebi#is_enantiomer_of',C2).
@@ -88,19 +94,20 @@ inchi_search(P,C,S) :-
         contains(str(S),P).
 
         
-enantiomer(C,N,P) :-
+enantiomer(C,N,P,PN) :-
         ontobee ??
         subclass_of_some(C,'http://purl.obolibrary.org/obo/chebi#is_enantiomer_of',C2),
-        rdf(C,rdfs:label,N),
-        rdf(C,rdfs:subClassOf,P),
-        rdf(C2,rdfs:subClassOf,P),
+        chrdf(C,rdfs:label,N),
+        chrdf(C,rdfs:subClassOf,P),
+        chrdf(C2,rdfs:subClassOf,P),
         % C2 should be the only child of P
         \+ ((rdf(C3,rdfs:subClassOf,P),
              C3\=C,
-             C3\=C2)).
+             C3\=C2)),
+        chrdf(P,rdfs:label,PN).
 
-enantiomer_config(C,N,P,Config) :-
-        enantiomer(C,N,P),
+enantiomer_config(C,N,P,PN,Config) :-
+        enantiomer(C,N,P,PN),
         literal_atom(N,A),
         concat_atom([Config,_|_],'-',A).
 
@@ -134,7 +141,8 @@ dataframe:dataframe(enantiomer,
                     [[class=C,
                       name=N,
                       enantiomer_form_of=P,
-                      config=Config]-enantiomer_config(C,N,P,Config),
+                      parent_name=PN,
+                      config=Config]-enantiomer_config(C,N,P,PN,Config),
                      [inchi=CI]-inchi(C,CI),
                      [parent_inchi=PI]-inchi(P,PI),
                      [diff=Diff]-inchi_subtract(C,P,Diff)
@@ -175,8 +183,28 @@ dataframe:dataframe(test,
                     [endpoint(ontobee)]).
 
 
+passthru('.').
+passthru('-').
+passthru('_').
+passthru('@').
+passthru('~').
+passthru(X) :- X @>= 'a', X @=< 'z'.
+passthru(X) :- X @>= 'A', X @=< 'Z'.
+passthru(X) :- X @>= '0', X @=< '9'.
+foo_('0').
+
+        % see comments on https://eu.swi-prolog.org/pldoc/man?predicate=uri_encoded/3#
+encode_char_as_uri(X,X) :- passthru(X),!.
+encode_char_as_uri(X,U) :- char_code(X,Code),hex_bytes(Hex,[Code]),upcase_atom(Hex,HexUp),atom_concat('%',HexUp,U).
+
+encode_as_uri(A,U) :-
+        atom_chars(A,Cs),
+        maplist(encode_char_as_uri,Cs,Cs2),
+                                     concat_atom(Cs2,U).
+
 inchi_iri(S,X) :-
-        atom_concat('https://w3id.org/chemschema/ChemicalEntity/',S,X).
+        encode_as_uri(S,S2),
+        atom_concat('https://w3id.org/chemschema/ChemicalEntity/',S2,X).
 
 write_triples(C) :-
         gen_triples(C,Triples),
@@ -233,7 +261,7 @@ gen_triples('Enantiomer',Triples) :-
                  rdf(I,chem:config,literal(Config)),
                  rdf(I,chem:enantiomer_form_of,PI)
                  ],
-        enantiomer_config(C,N,Parent,Config),
+        enantiomer_config(C,N,Parent,_,Config),
         inchi(C,Inchi),  % TODO - infer this
         inchi(Parent,PInchi),
         atom_concat(Inchi,InchiDiff,PInchi),

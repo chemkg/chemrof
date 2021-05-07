@@ -7,6 +7,8 @@ PREFIX Element: <http://www.wikidata.org/entity/Q11344>
 PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
 PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
 PREFIX neutron_number: <http://www.wikidata.org/prop/direct/P1148>
+PREFIX ElementInstance: <https://w3id.org/chemschema/ChemicalElement/>
+PREFIX ChemicalGroupingByCharge: <https://w3id.org/chemschema/ChemicalGroupingByCharge/>
 
 ## TODO: generalize beyond elements
 
@@ -31,6 +33,8 @@ WHERE {
 
   BIND(CONCAT(?element_label, " ", ?charge_label) AS ?label)
   BIND(CONCAT(?element_symbol, "(", ?charge_symbol, ")") AS ?symbol)
-  BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalGroupingByCharge/", STR(?element_symbol), "/", ?charge_symbol)) AS ?iri)
+  BIND(IRI(CONCAT(STR(ChemicalGroupingByCharge:),
+                  ENCODE_FOR_URI(CONCAT(?element_symbol,
+                                       ?charge_symbol)))) AS ?iri)
 
 }
