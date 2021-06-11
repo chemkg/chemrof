@@ -3,6 +3,8 @@ PREFIX chem: <https://w3id.org/chemschema/>
 PREFIX CHEBI: <http://purl.obolibrary.org/obo/CHEBI_>
 PREFIX chebigraph: <http://purl.obolibrary.org/obo/merged/CHEBI>
 PREFIX chebivoc: <http://purl.obolibrary.org/obo/chebi/>
+PREFIX ElementInstance: <https://w3id.org/chemschema/ChemicalElement/>
+PREFIX MonoatomicIonInstance: <https://w3id.org/chemschema/MonoatomicIon/>
 
 CONSTRUCT {
     ?iri a chem:MonoatomicIon ;
@@ -23,7 +25,9 @@ WHERE {
 
     FILTER( regex(str(?inchi), "^InChI=1S/\\w+/q.\\d+$") )
     BIND(xsd:integer(?charge) AS ?charge_int)
-    BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
-    BIND(IRI(CONCAT("https://w3id.org/chemschema/MonoatomicIon/", STR(?element_symbol), "/", STR(?charge))) AS ?iri)
+    BIND(IRI(CONCAT(STR(ElementInstance:),
+                    ENCODE_FOR_URI(?element_symbol))) AS ?element_iri)
+    BIND(IRI(CONCAT(STR(MonoatomicIonInstance:),
+                    ENCODE_FOR_URI(CONCAT(?element_symbol, "-", STR(?charge))))) AS ?iri)
   }
 }

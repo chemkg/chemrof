@@ -7,6 +7,8 @@ PREFIX Element: <http://www.wikidata.org/entity/Q11344>
 PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
 PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
 PREFIX neutron_number: <http://www.wikidata.org/prop/direct/P1148>
+PREFIX ElementInstance: <https://w3id.org/chemschema/ChemicalElement/>
+PREFIX IsotopeInstance: <https://w3id.org/chemschema/Isotope/>
 
 CONSTRUCT {
     ?iri a chem:Isotope ;
@@ -25,7 +27,9 @@ WHERE {
 
     FILTER (LANG(?label) = "en")
 
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/Isotope/", STR(?element_symbol), "/", STR(?nn))) AS ?iri)
+   BIND(IRI(CONCAT(STR(ElementInstance:),
+                   ENCODE_FOR_URI(?element_symbol))) AS ?element_iri)
+   BIND(IRI(CONCAT(STR(IsotopeInstance:),
+                   ENCODE_FOR_URI(CONCAT(?element_symbol, "-", STR(?nn))))) AS ?iri)
 
 }

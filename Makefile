@@ -5,7 +5,7 @@ SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
 SCHEMA_NAME = chem
 SCHEMA_SRC = $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml
-TGTS = graphql jsonschema docs shex owl csv graphql python
+TGTS = graphql jsonschema docs shex owl csv graphql python rdf
 
 #GEN_OPTS = --no-mergeimports
 GEN_OPTS = 
