@@ -1,31 +1,32 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-14 16:10
+# Generation date: 2021-06-21 08:54
 # Schema: chem-model
 #
 # id: https://w3id.org/chemschema
 # description: A data model for managing information about chemical entities, ranging from atoms through molecules
 #              to complex mixtures. Aspects of this have been cribbed from various sources including CHEBI, SIO,
 #              Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes are my own. For
-#              full context/motivation see the website.
+#              full context/motivation see the [GitHub repo](https://github.com/cmungall/chem-schema).
 # license: https://creativecommons.org/publicdomain/zero/1.0/
 
 import dataclasses
 import sys
 import re
+from jsonasobj2 import JsonObj
 from typing import Optional, List, Union, Dict, ClassVar, Any
 from dataclasses import dataclass
-from linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
+from linkml_runtime.linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
 
-from linkml.utils.slot import Slot
-from linkml.utils.metamodelcore import empty_list, empty_dict, bnode
-from linkml.utils.yamlutils import YAMLRoot, extended_str, extended_float, extended_int
-from linkml.utils.dataclass_extensions_376 import dataclasses_init_fn_with_kwargs
-from linkml.utils.formatutils import camelcase, underscore, sfx
-from linkml.utils.enumerations import EnumDefinitionImpl
+from linkml_runtime.utils.slot import Slot
+from linkml_runtime.utils.metamodelcore import empty_list, empty_dict, bnode
+from linkml_runtime.utils.yamlutils import YAMLRoot, extended_str, extended_float, extended_int
+from linkml_runtime.utils.dataclass_extensions_376 import dataclasses_init_fn_with_kwargs
+from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
+from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
-from linkml.utils.curienamespace import CurieNamespace
-from linkml.utils.metamodelcore import Bool, URIorCURIE
-from linkml_model.types import Boolean, Float, Integer, String, Uriorcurie
+from linkml_runtime.utils.curienamespace import CurieNamespace
+from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, URIorCURIE
 
 metamodel_version = "1.7.0"
 
@@ -64,8 +65,10 @@ SEED = CurieNamespace('SEED', 'http://identifiers.org/seed/')
 SIO = CurieNamespace('SIO', 'http://semanticscience.org/resource/SIO_')
 UNII = CurieNamespace('UNII', 'http://identifiers.org/unii/')
 UNIPROTKB = CurieNamespace('UniProtKB', 'http://example.org/UNKNOWN/UniProtKB/')
+WIKIPEDIA = CurieNamespace('Wikipedia', 'https://en.wikipedia.org/wiki/')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 BIOPTOP = CurieNamespace('bioptop', 'http://purl.org/biotop/biotop.owl#')
+BIOTOP = CurieNamespace('biotop', 'http://purl.org/biotop/biotop.owl#')
 CHEMSCHEMA = CurieNamespace('chemschema', 'https://w3id.org/chemschema/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EDAM = CurieNamespace('edam', 'http://identifiers.org/edam/')
@@ -73,6 +76,7 @@ LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
+SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
 WD = CurieNamespace('wd', 'http://www.wikidata.org/entity/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = CHEMSCHEMA
@@ -492,15 +496,13 @@ class GroupingClass(YAMLRoot):
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, GroupingClassId):
             self.id = GroupingClassId(self.id)
 
-        if self.subtype_of is None:
-            self.subtype_of = []
         if not isinstance(self.subtype_of, list):
-            self.subtype_of = [self.subtype_of]
+            self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, GroupingClassId) else GroupingClassId(v) for v in self.subtype_of]
 
         if self.classifies is not None and not isinstance(self.classifies, ChemicalEntityId):
@@ -530,15 +532,13 @@ class ChemicalGroupingByCharge(GroupingClass):
     charge_agnostic_entity: Optional[Union[str, ChemicalEntityId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalGroupingByChargeId):
             self.id = ChemicalGroupingByChargeId(self.id)
 
-        if self.subtype_of is None:
-            self.subtype_of = []
         if not isinstance(self.subtype_of, list):
-            self.subtype_of = [self.subtype_of]
+            self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, MoleculeGroupingClassId) else MoleculeGroupingClassId(v) for v in self.subtype_of]
 
         if self.has_charge_state is not None and not isinstance(self.has_charge_state, URIorCURIE):
@@ -567,15 +567,13 @@ class MoleculeGroupingClass(GroupingClass):
     classifies: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MoleculeGroupingClassId):
             self.id = MoleculeGroupingClassId(self.id)
 
-        if self.subtype_of is None:
-            self.subtype_of = []
         if not isinstance(self.subtype_of, list):
-            self.subtype_of = [self.subtype_of]
+            self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, MoleculeGroupingClassId) else MoleculeGroupingClassId(v) for v in self.subtype_of]
 
         if self.classifies is not None and not isinstance(self.classifies, MoleculeId):
@@ -601,15 +599,13 @@ class MolecularComponentGroupingClass(GroupingClass):
     classifies: Optional[Union[str, MolecularComponentId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularComponentGroupingClassId):
             self.id = MolecularComponentGroupingClassId(self.id)
 
-        if self.subtype_of is None:
-            self.subtype_of = []
         if not isinstance(self.subtype_of, list):
-            self.subtype_of = [self.subtype_of]
+            self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, MolecularComponentGroupingClassId) else MolecularComponentGroupingClassId(v) for v in self.subtype_of]
 
         if self.classifies is not None and not isinstance(self.classifies, MolecularComponentId):
@@ -636,8 +632,8 @@ class MolecularDerivativeGroupingClass(MoleculeGroupingClass):
     classifies: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularDerivativeGroupingClassId):
             self.id = MolecularDerivativeGroupingClassId(self.id)
 
@@ -669,8 +665,8 @@ class MoleculeGroupingClassDefinedByComponents(MoleculeGroupingClass):
     has_part: Optional[Union[dict, "ChemicalEntityOrGrouping"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MoleculeGroupingClassDefinedByComponentsId):
             self.id = MoleculeGroupingClassDefinedByComponentsId(self.id)
 
@@ -697,15 +693,13 @@ class MoleculeGroupingClassDefinedByAdditionOfAGroup(MoleculeGroupingClass):
     derivative_of: Optional[Union[str, PolyatomicEntityId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MoleculeGroupingClassDefinedByAdditionOfAGroupId):
             self.id = MoleculeGroupingClassDefinedByAdditionOfAGroupId(self.id)
 
-        if self.has_group is None:
-            self.has_group = []
         if not isinstance(self.has_group, list):
-            self.has_group = [self.has_group]
+            self.has_group = [self.has_group] if self.has_group is not None else []
         self.has_group = [v if isinstance(v, ChemicalGroupId) else ChemicalGroupId(v) for v in self.has_group]
 
         if self.derivative_of is not None and not isinstance(self.derivative_of, PolyatomicEntityId):
@@ -733,8 +727,8 @@ class ChemicalSaltGroupingClass(MoleculeGroupingClass):
     classifies: Optional[Union[str, ChemicalSaltId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalSaltGroupingClassId):
             self.id = ChemicalSaltGroupingClassId(self.id)
 
@@ -770,8 +764,8 @@ class ChemicalSaltByCation(ChemicalSaltGroupingClass):
     name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalSaltByCationId):
             self.id = ChemicalSaltByCationId(self.id)
 
@@ -801,8 +795,8 @@ class ChemicalSaltByAnion(ChemicalSaltGroupingClass):
     name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalSaltByAnionId):
             self.id = ChemicalSaltByAnionId(self.id)
 
@@ -832,8 +826,8 @@ class GeneralizedMolecularStructureClass(MoleculeGroupingClass):
     id: Union[str, GeneralizedMolecularStructureClassId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, GeneralizedMolecularStructureClassId):
             self.id = GeneralizedMolecularStructureClassId(self.id)
 
@@ -879,8 +873,8 @@ class AcidAnionGroupingClass(GroupingClassForAcidsOrBases):
     name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AcidAnionGroupingClassId):
             self.id = AcidAnionGroupingClassId(self.id)
 
@@ -905,8 +899,8 @@ class GeneralAcidBaseGroupingClass(GroupingClassForAcidsOrBases):
     id: Union[str, GeneralAcidBaseGroupingClassId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, GeneralAcidBaseGroupingClassId):
             self.id = GeneralAcidBaseGroupingClassId(self.id)
 
@@ -929,8 +923,8 @@ class AcidBaseConflationClass(GroupingClassForAcidsOrBases):
     has_physiological_base: Optional[Union[str, AcidBaseId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AcidBaseConflationClassId):
             self.id = AcidBaseConflationClassId(self.id)
 
@@ -957,15 +951,13 @@ class AtomGroupingClass(GroupingClass):
     classifies: Optional[Union[str, AtomId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomGroupingClassId):
             self.id = AtomGroupingClassId(self.id)
 
-        if self.subtype_of is None:
-            self.subtype_of = []
         if not isinstance(self.subtype_of, list):
-            self.subtype_of = [self.subtype_of]
+            self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, MoleculeGroupingClassId) else MoleculeGroupingClassId(v) for v in self.subtype_of]
 
         if self.classifies is not None and not isinstance(self.classifies, AtomId):
@@ -1001,8 +993,8 @@ class AtomGroupingByPeriodicTableGroup(AtomGroupingByPeriodicTablePlacement):
     in_periodic_table_group: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomGroupingByPeriodicTableGroupId):
             self.id = AtomGroupingByPeriodicTableGroupId(self.id)
 
@@ -1028,8 +1020,8 @@ class AtomGroupingByPeriodicTableBlock(AtomGroupingByPeriodicTablePlacement):
     in_periodic_table_block: Optional[Union[dict, "PeriodicTableBlock"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomGroupingByPeriodicTableBlockId):
             self.id = AtomGroupingByPeriodicTableBlockId(self.id)
 
@@ -1054,8 +1046,8 @@ class AtomGroupingByProperty(AtomGroupingClass):
     id: Union[str, AtomGroupingByPropertyId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomGroupingByPropertyId):
             self.id = AtomGroupingByPropertyId(self.id)
 
@@ -1126,13 +1118,13 @@ class ChemicalEntity(YAMLRoot):
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalEntityId):
             self.id = ChemicalEntityId(self.id)
 
-        if self.inchi_chemical_sublayer is None:
-            raise ValueError("inchi_chemical_sublayer must be supplied")
+        if self._is_empty(self.inchi_chemical_sublayer):
+            self.MissingRequiredField("inchi_chemical_sublayer")
         if not isinstance(self.inchi_chemical_sublayer, str):
             self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
 
@@ -1170,8 +1162,8 @@ class SubatomicParticle(ChemicalEntity):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, SubatomicParticleId):
             self.id = SubatomicParticleId(self.id)
 
@@ -1194,8 +1186,8 @@ class Nucleon(SubatomicParticle):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NucleonId):
             self.id = NucleonId(self.id)
 
@@ -1215,8 +1207,8 @@ class Neutron(Nucleon):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NeutronId):
             self.id = NeutronId(self.id)
 
@@ -1236,8 +1228,8 @@ class Proton(Nucleon):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ProtonId):
             self.id = ProtonId(self.id)
 
@@ -1257,8 +1249,8 @@ class Electron(SubatomicParticle):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ElectronId):
             self.id = ElectronId(self.id)
 
@@ -1450,8 +1442,8 @@ class PolyatomicEntity(ChemicalEntity):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.inchi_atom_connections_sublayer is None:
-            raise ValueError("inchi_atom_connections_sublayer must be supplied")
+        if self._is_empty(self.inchi_atom_connections_sublayer):
+            self.MissingRequiredField("inchi_atom_connections_sublayer")
         if not isinstance(self.inchi_atom_connections_sublayer, str):
             self.inchi_atom_connections_sublayer = str(self.inchi_atom_connections_sublayer)
 
@@ -1475,8 +1467,8 @@ class MolecularComponent(PolyatomicEntity):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularComponentId):
             self.id = MolecularComponentId(self.id)
 
@@ -1497,8 +1489,8 @@ class PolymerPart(MolecularComponent):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, PolymerPartId):
             self.id = PolymerPartId(self.id)
 
@@ -1519,8 +1511,8 @@ class Monomer(PolymerPart):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MonomerId):
             self.id = MonomerId(self.id)
 
@@ -1541,8 +1533,8 @@ class MolecularSubsequence(PolymerPart):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularSubsequenceId):
             self.id = MolecularSubsequenceId(self.id)
 
@@ -1563,8 +1555,8 @@ class ChemicalGroup(MolecularComponent):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalGroupId):
             self.id = ChemicalGroupId(self.id)
 
@@ -1622,8 +1614,8 @@ class MolecularComplex(PreciseChemicalMixture):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularComplexId):
             self.id = MolecularComplexId(self.id)
 
@@ -1648,8 +1640,8 @@ class SupramolecularPolymer(MolecularComplex):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, SupramolecularPolymerId):
             self.id = SupramolecularPolymerId(self.id)
 
@@ -1678,15 +1670,13 @@ class ImpreciseChemicalMixture(ChemicalMixture):
     has_minchi_representation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ImpreciseChemicalMixtureId):
             self.id = ImpreciseChemicalMixtureId(self.id)
 
-        if self.has_proportional_parts is None:
-            self.has_proportional_parts = []
         if not isinstance(self.has_proportional_parts, list):
-            self.has_proportional_parts = [self.has_proportional_parts]
+            self.has_proportional_parts = [self.has_proportional_parts] if self.has_proportional_parts is not None else []
         self.has_proportional_parts = [v if isinstance(v, ProportionalPart) else ProportionalPart(**v) for v in self.has_proportional_parts]
 
         if self.has_mixfile_location is not None and not isinstance(self.has_mixfile_location, str):
@@ -1721,28 +1711,18 @@ class Molecule(PolyatomicEntity):
     has_part: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.has_atom_occurrences is None:
-            self.has_atom_occurrences = []
-        if not isinstance(self.has_atom_occurrences, list):
-            self.has_atom_occurrences = [self.has_atom_occurrences]
-        self._normalize_inlined_slot(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", inlined_as_list=True, keyed=False)
+        self._normalize_inlined_as_dict(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", keyed=False)
 
-        if self.has_bonds is None:
-            self.has_bonds = []
         if not isinstance(self.has_bonds, list):
-            self.has_bonds = [self.has_bonds]
+            self.has_bonds = [self.has_bonds] if self.has_bonds is not None else []
         self.has_bonds = [v if isinstance(v, AtomicBond) else AtomicBond(**v) for v in self.has_bonds]
 
-        if self.has_submolecules is None:
-            self.has_submolecules = []
         if not isinstance(self.has_submolecules, list):
-            self.has_submolecules = [self.has_submolecules]
+            self.has_submolecules = [self.has_submolecules] if self.has_submolecules is not None else []
         self.has_submolecules = [v if isinstance(v, MoleculeId) else MoleculeId(v) for v in self.has_submolecules]
 
-        if self.has_atoms is None:
-            self.has_atoms = []
         if not isinstance(self.has_atoms, list):
-            self.has_atoms = [self.has_atoms]
+            self.has_atoms = [self.has_atoms] if self.has_atoms is not None else []
         self.has_atoms = [v if isinstance(v, AtomId) else AtomId(v) for v in self.has_atoms]
 
         if self.is_organic is not None and not isinstance(self.is_organic, Bool):
@@ -1771,8 +1751,8 @@ class SmallMolecule(Molecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, SmallMoleculeId):
             self.id = SmallMoleculeId(self.id)
 
@@ -1797,15 +1777,13 @@ class Macromolecule(Molecule):
     has_submolecules: Optional[Union[Union[str, MoleculeId], List[Union[str, MoleculeId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MacromoleculeId):
             self.id = MacromoleculeId(self.id)
 
-        if self.has_submolecules is None:
-            self.has_submolecules = []
         if not isinstance(self.has_submolecules, list):
-            self.has_submolecules = [self.has_submolecules]
+            self.has_submolecules = [self.has_submolecules] if self.has_submolecules is not None else []
         self.has_submolecules = [v if isinstance(v, MoleculeId) else MoleculeId(v) for v in self.has_submolecules]
 
         super().__post_init__(**kwargs)
@@ -1825,8 +1803,8 @@ class Peptide(Macromolecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, PeptideId):
             self.id = PeptideId(self.id)
 
@@ -1847,8 +1825,8 @@ class Protein(Macromolecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ProteinId):
             self.id = ProteinId(self.id)
 
@@ -1872,8 +1850,8 @@ class Glycan(Macromolecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, GlycanId):
             self.id = GlycanId(self.id)
 
@@ -1898,8 +1876,8 @@ class MonomolecularPolymer(Macromolecule):
     polymer_of: Optional[Union[str, MacromoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MonomolecularPolymerId):
             self.id = MonomolecularPolymerId(self.id)
 
@@ -1927,15 +1905,13 @@ class Copolymer(MonomolecularPolymer):
     has_part: Optional[Union[Union[str, MacromoleculeId], List[Union[str, MacromoleculeId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, CopolymerId):
             self.id = CopolymerId(self.id)
 
-        if self.has_part is None:
-            self.has_part = []
         if not isinstance(self.has_part, list):
-            self.has_part = [self.has_part]
+            self.has_part = [self.has_part] if self.has_part is not None else []
         self.has_part = [v if isinstance(v, MacromoleculeId) else MacromoleculeId(v) for v in self.has_part]
 
         super().__post_init__(**kwargs)
@@ -1955,8 +1931,8 @@ class NaturalProduct(Molecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NaturalProductId):
             self.id = NaturalProductId(self.id)
 
@@ -1981,8 +1957,8 @@ class Moiety(MolecularComponent):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MoietyId):
             self.id = MoietyId(self.id)
 
@@ -2029,8 +2005,8 @@ class AminoAcidSequenceInterval(SequenceInterval):
     has_sequence_representation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AminoAcidSequenceIntervalId):
             self.id = AminoAcidSequenceIntervalId(self.id)
 
@@ -2055,8 +2031,8 @@ class NucleotideSequenceInterval(SequenceInterval):
     has_sequence_representation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NucleotideSequenceIntervalId):
             self.id = NucleotideSequenceIntervalId(self.id)
 
@@ -2080,8 +2056,8 @@ class DNASequenceInterval(NucleotideSequenceInterval):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, DNASequenceIntervalId):
             self.id = DNASequenceIntervalId(self.id)
 
@@ -2102,8 +2078,8 @@ class RNASequenceInterval(NucleotideSequenceInterval):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, RNASequenceIntervalId):
             self.id = RNASequenceIntervalId(self.id)
 
@@ -2125,8 +2101,8 @@ class FunctionalGroup(MolecularComponent):
     is_substitutent_group_from: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, FunctionalGroupId):
             self.id = FunctionalGroupId(self.id)
 
@@ -2153,8 +2129,8 @@ class MolecularSpecies(Molecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularSpeciesId):
             self.id = MolecularSpeciesId(self.id)
 
@@ -2178,8 +2154,8 @@ class NonSpeciesMolecule(Molecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NonSpeciesMoleculeId):
             self.id = NonSpeciesMoleculeId(self.id)
 
@@ -2205,8 +2181,8 @@ class PolyatomicIon(Molecule):
     conjugate_acid_of: Optional[Union[str, ChemicalEntityId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, PolyatomicIonId):
             self.id = PolyatomicIonId(self.id)
 
@@ -2236,8 +2212,8 @@ class MolecularCation(PolyatomicIon):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularCationId):
             self.id = MolecularCationId(self.id)
 
@@ -2261,8 +2237,8 @@ class MolecularAnion(PolyatomicIon):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularAnionId):
             self.id = MolecularAnionId(self.id)
 
@@ -2287,8 +2263,8 @@ class UnchargedMolecule(Molecule):
     elemental_charge: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, UnchargedMoleculeId):
             self.id = UnchargedMoleculeId(self.id)
 
@@ -2357,8 +2333,8 @@ class ChemicalElement(Atom):
     has_stereocenter: Optional[Union[Union[dict, "Stereocenter"], List[Union[dict, "Stereocenter"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalElementId):
             self.id = ChemicalElementId(self.id)
 
@@ -2383,10 +2359,8 @@ class ChemicalElement(Atom):
         if self.electron_configuration is not None and not isinstance(self.electron_configuration, str):
             self.electron_configuration = str(self.electron_configuration)
 
-        if self.has_stereocenter is None:
-            self.has_stereocenter = []
         if not isinstance(self.has_stereocenter, list):
-            self.has_stereocenter = [self.has_stereocenter]
+            self.has_stereocenter = [self.has_stereocenter] if self.has_stereocenter is not None else []
         self.has_stereocenter = [v if isinstance(v, Stereocenter) else Stereocenter(**v) for v in self.has_stereocenter]
 
         super().__post_init__(**kwargs)
@@ -2409,8 +2383,8 @@ class Nuclide(Atom):
     energy_level: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, NuclideId):
             self.id = NuclideId(self.id)
 
@@ -2436,8 +2410,8 @@ class Radionuclide(Nuclide):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, RadionuclideId):
             self.id = RadionuclideId(self.id)
 
@@ -2468,8 +2442,8 @@ class Isotope(Nuclide):
     mode_of_formation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, IsotopeId):
             self.id = IsotopeId(self.id)
 
@@ -2524,8 +2498,8 @@ class Isobar(Nuclide):
     mode_of_formation: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, IsobarId):
             self.id = IsobarId(self.id)
 
@@ -2599,8 +2573,8 @@ class UnchargedAtom(AtomIonicForm):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, UnchargedAtomId):
             self.id = UnchargedAtomId(self.id)
 
@@ -2624,8 +2598,8 @@ class MonoatomicIon(AtomIonicForm):
     has_element: Optional[Union[str, ChemicalElementId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MonoatomicIonId):
             self.id = MonoatomicIonId(self.id)
 
@@ -2652,8 +2626,8 @@ class AtomAnion(MonoatomicIon):
     elemental_charge: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomAnionId):
             self.id = AtomAnionId(self.id)
 
@@ -2680,8 +2654,8 @@ class AtomCation(MonoatomicIon):
     elemental_charge: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AtomCationId):
             self.id = AtomCationId(self.id)
 
@@ -2709,8 +2683,8 @@ class FullySpecifiedAtom(Atom):
     neutron_number: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, FullySpecifiedAtomId):
             self.id = FullySpecifiedAtomId(self.id)
 
@@ -2796,13 +2770,13 @@ class StandardInchiObject(InchiObject):
     inchi_isotopic_layer: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.inchi_version_string is None:
-            raise ValueError("inchi_version_string must be supplied")
+        if self._is_empty(self.inchi_version_string):
+            self.MissingRequiredField("inchi_version_string")
         if not isinstance(self.inchi_version_string, str):
             self.inchi_version_string = str(self.inchi_version_string)
 
-        if self.inchi_chemical_sublayer is None:
-            raise ValueError("inchi_chemical_sublayer must be supplied")
+        if self._is_empty(self.inchi_chemical_sublayer):
+            self.MissingRequiredField("inchi_chemical_sublayer")
         if not isinstance(self.inchi_chemical_sublayer, str):
             self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
 
@@ -2952,11 +2926,7 @@ class AtomicBond(RelationalChemicalEntity):
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**self.owl_subclass_of)
 
-        if self.has_atom_occurrences is None:
-            self.has_atom_occurrences = []
-        if not isinstance(self.has_atom_occurrences, list):
-            self.has_atom_occurrences = [self.has_atom_occurrences]
-        self._normalize_inlined_slot(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", inlined_as_list=True, keyed=False)
+        self._normalize_inlined_as_dict(slot_name="has_atom_occurrences", slot_type=AtomOccurrence, key_name="occurrence of", keyed=False)
 
         if self.bond_order is not None and not isinstance(self.bond_order, int):
             self.bond_order = int(self.bond_order)
@@ -2997,8 +2967,8 @@ class AtomOccurrence(RelationalChemicalEntity):
     coordination_number: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.occurrence_of is None:
-            raise ValueError("occurrence_of must be supplied")
+        if self._is_empty(self.occurrence_of):
+            self.MissingRequiredField("occurrence_of")
         if not isinstance(self.occurrence_of, AtomId):
             self.occurrence_of = AtomId(self.occurrence_of)
 
@@ -3040,8 +3010,8 @@ class BronstedAcid(Molecule):
     acid_form_of: Optional[Union[Union[str, AcidBaseId], List[Union[str, AcidBaseId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, BronstedAcidId):
             self.id = BronstedAcidId(self.id)
 
@@ -3051,10 +3021,8 @@ class BronstedAcid(Molecule):
         if self.hard_or_soft is not None and not isinstance(self.hard_or_soft, HardOrSoftEnum):
             self.hard_or_soft = HardOrSoftEnum(self.hard_or_soft)
 
-        if self.acid_form_of is None:
-            self.acid_form_of = []
         if not isinstance(self.acid_form_of, list):
-            self.acid_form_of = [self.acid_form_of]
+            self.acid_form_of = [self.acid_form_of] if self.acid_form_of is not None else []
         self.acid_form_of = [v if isinstance(v, AcidBaseId) else AcidBaseId(v) for v in self.acid_form_of]
 
         super().__post_init__(**kwargs)
@@ -3078,8 +3046,8 @@ class AcidBase(MolecularAnion):
     has_acid_form: Optional[Union[str, BronstedAcidId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AcidBaseId):
             self.id = AcidBaseId(self.id)
 
@@ -3109,8 +3077,8 @@ class ChemicalSalt(PreciseChemicalMixture):
     has_anionic_component: Optional[Union[dict, AnionState]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalSaltId):
             self.id = ChemicalSaltId(self.id)
 
@@ -3146,8 +3114,8 @@ class Ester(Molecule):
     has_parent_acid: Optional[Union[str, BronstedAcidId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, EsterId):
             self.id = EsterId(self.id)
 
@@ -3174,8 +3142,8 @@ class Stereoisomer(Molecule):
     inchi_atom_connections_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, StereoisomerId):
             self.id = StereoisomerId(self.id)
 
@@ -3203,8 +3171,8 @@ class Enantiomer(Stereoisomer):
     enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, EnantiomerId):
             self.id = EnantiomerId(self.id)
 
@@ -3244,23 +3212,23 @@ class RacemicMixture(PreciseChemicalMixture):
     chirality_agnostic_form: Union[str, MoleculeId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, RacemicMixtureId):
             self.id = RacemicMixtureId(self.id)
 
-        if self.has_left_enantiomer is None:
-            raise ValueError("has_left_enantiomer must be supplied")
+        if self._is_empty(self.has_left_enantiomer):
+            self.MissingRequiredField("has_left_enantiomer")
         if not isinstance(self.has_left_enantiomer, EnantiomerId):
             self.has_left_enantiomer = EnantiomerId(self.has_left_enantiomer)
 
-        if self.has_right_enantiomer is None:
-            raise ValueError("has_right_enantiomer must be supplied")
+        if self._is_empty(self.has_right_enantiomer):
+            self.MissingRequiredField("has_right_enantiomer")
         if not isinstance(self.has_right_enantiomer, EnantiomerId):
             self.has_right_enantiomer = EnantiomerId(self.has_right_enantiomer)
 
-        if self.chirality_agnostic_form is None:
-            raise ValueError("chirality_agnostic_form must be supplied")
+        if self._is_empty(self.chirality_agnostic_form):
+            self.MissingRequiredField("chirality_agnostic_form")
         if not isinstance(self.chirality_agnostic_form, MoleculeId):
             self.chirality_agnostic_form = MoleculeId(self.chirality_agnostic_form)
 
@@ -3286,18 +3254,18 @@ class Allotrope(Molecule):
     has_bonding_structure: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AllotropeId):
             self.id = AllotropeId(self.id)
 
-        if self.allotropic_analog_of is None:
-            raise ValueError("allotropic_analog_of must be supplied")
+        if self._is_empty(self.allotropic_analog_of):
+            self.MissingRequiredField("allotropic_analog_of")
         if not isinstance(self.allotropic_analog_of, ChemicalElementId):
             self.allotropic_analog_of = ChemicalElementId(self.allotropic_analog_of)
 
-        if self.has_bonding_structure is None:
-            raise ValueError("has_bonding_structure must be supplied")
+        if self._is_empty(self.has_bonding_structure):
+            self.MissingRequiredField("has_bonding_structure")
         if not isinstance(self.has_bonding_structure, str):
             self.has_bonding_structure = str(self.has_bonding_structure)
 
@@ -3329,16 +3297,12 @@ class Reaction(YAMLRoot):
     description: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.left_participants is None:
-            self.left_participants = []
         if not isinstance(self.left_participants, list):
-            self.left_participants = [self.left_participants]
+            self.left_participants = [self.left_participants] if self.left_participants is not None else []
         self.left_participants = [v if isinstance(v, ReactionParticipant) else ReactionParticipant(**v) for v in self.left_participants]
 
-        if self.right_participants is None:
-            self.right_participants = []
         if not isinstance(self.right_participants, list):
-            self.right_participants = [self.right_participants]
+            self.right_participants = [self.right_participants] if self.right_participants is not None else []
         self.right_participants = [v if isinstance(v, ReactionParticipant) else ReactionParticipant(**v) for v in self.right_participants]
 
         if self.direction is not None and not isinstance(self.direction, str):
@@ -3522,8 +3486,8 @@ class EntityWithAtomsEnumerated(SpecificityMixin):
     inchi_chemical_sublayer: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.inchi_chemical_sublayer is None:
-            raise ValueError("inchi_chemical_sublayer must be supplied")
+        if self._is_empty(self.inchi_chemical_sublayer):
+            self.MissingRequiredField("inchi_chemical_sublayer")
         if not isinstance(self.inchi_chemical_sublayer, str):
             self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
 
@@ -3888,6 +3852,10 @@ slots.AZE_notation_html = Slot(uri=CHEMSCHEMA.AZE_notation_html, name="AZE notat
 
 slots.carboydrate_representation = Slot(uri=CHEMSCHEMA.carboydrate_representation, name="carboydrate representation", curie=CHEMSCHEMA.curie('carboydrate_representation'),
                    model_uri=CHEMSCHEMA.carboydrate_representation, domain=ChemicalEntity, range=Optional[str])
+
+slots.wurcs_representation = Slot(uri=CHEMSCHEMA.wurcs_representation, name="wurcs representation", curie=CHEMSCHEMA.curie('wurcs_representation'),
+                   model_uri=CHEMSCHEMA.wurcs_representation, domain=ChemicalEntity, range=Optional[str],
+                   pattern=re.compile(r'^WURCS=Version/.*'))
 
 slots.carbbank_representation = Slot(uri=CHEMSCHEMA.carbbank_representation, name="carbbank representation", curie=CHEMSCHEMA.curie('carbbank_representation'),
                    model_uri=CHEMSCHEMA.carbbank_representation, domain=ChemicalEntity, range=Optional[str])

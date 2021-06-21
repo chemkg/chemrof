@@ -20,7 +20,7 @@ example `carbon` is an instance of the ChemicalElement class, and
 `carbon-12` is an instance of the sibling Isotope class) into classes,
 and to use reasoning to classify.
 
-Currently this is done via SPARQL construct but later this will be
+Currently this is done via SPARQL construct (see [owlgen folder](https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen) but later this will be
 done by generating equivalence axioms from compound keys in the
 database.
 
@@ -37,7 +37,7 @@ chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
         ns1:inchi_string        "InChI=1S/Mn/q+4"^^xsd:string .
 ```
 
-This is translated to class-level:
+This is translated to class-level ([via this query](https://github.com/cmungall/chem-schema/blob/master/sparql/owlgen/gen-MonoatomicIon.rq)):
 
 ```turtle
 chem:MonoatomicIon/Mn/+4
