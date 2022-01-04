@@ -1,7 +1,5 @@
 {
-   "$id": "https://w3id.org/chemschema",
-   "$schema": "http://json-schema.org/draft-07/schema#",
-   "definitions": {
+   "$defs": {
       "AcidAnionGroupingClass": {
          "additionalProperties": false,
          "description": "A molecule grouping class that groups the different ion forms of the base of an acid",
@@ -20,11 +18,12 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "pattern": "ate$",
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -57,11 +56,12 @@
                "type": "integer"
             },
             "has_acid_form": {
+               "description": "connects a base to the acid form. E.g. citrate(3-) has acid form citric acid",
                "type": "string"
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -75,14 +75,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -96,10 +99,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -118,7 +123,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -150,7 +155,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -172,11 +177,12 @@
          "description": "A molecule consisting of atoms of the same element",
          "properties": {
             "allotropic_analog_of": {
+               "description": "relationship that holds between two allotropes, where both allotropes are allotropes of the same element",
                "type": "string"
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -194,14 +200,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -215,10 +224,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -237,7 +248,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -254,7 +265,7 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_sequence_representation": {
                "type": "string"
@@ -263,10 +274,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -281,7 +294,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -303,21 +316,25 @@
                "type": "string"
             },
             "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "maximum": -1,
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_element": {
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -332,7 +349,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -358,21 +375,25 @@
                "type": "string"
             },
             "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "minimum": 1,
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_element": {
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -387,7 +408,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -412,13 +433,14 @@
                "type": "string"
             },
             "in_periodic_table_block": {
-               "$ref": "#/definitions/PeriodicTableBlock"
+               "$ref": "#/$defs/PeriodicTableBlock"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
                "items": {
                   "type": "string"
                },
@@ -445,10 +467,11 @@
                "type": "integer"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
                "items": {
                   "type": "string"
                },
@@ -472,10 +495,11 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
                "items": {
                   "type": "string"
                },
@@ -499,10 +523,11 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
                "items": {
                   "type": "string"
                },
@@ -531,7 +556,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "oxidation_number": {
@@ -565,16 +590,16 @@
                "type": "integer"
             },
             "bond_type": {
-               "type": "string"
+               "$ref": "#/$defs/BondTypeEnum"
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "torsional_angle": {
@@ -585,11 +610,24 @@
          "title": "AtomicBond",
          "type": "object"
       },
+      "BondTypeEnum": {
+         "description": "",
+         "enum": [
+            "covalent",
+            "ionic",
+            "polycentric",
+            "metal-metal",
+            "salt bridge"
+         ],
+         "title": "BondTypeEnum",
+         "type": "string"
+      },
       "BronstedAcid": {
          "additionalProperties": false,
          "description": "A molecule capable of donating a hydron to an acceptor. Example: citric acid",
          "properties": {
             "acid_form_of": {
+               "description": "connects an acid to any of the the base anions. E.g. citric acid acid form of citrate(1-),citrate(2-),citrate(3-)",
                "items": {
                   "type": "string"
                },
@@ -599,11 +637,11 @@
                "type": "number"
             },
             "hard_or_soft": {
-               "type": "string"
+               "$ref": "#/$defs/HardOrSoftEnum"
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -617,14 +655,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -638,10 +679,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -660,7 +703,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -685,14 +728,15 @@
                "type": "string"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "has_stereocenter": {
                "items": {
-                  "$ref": "#/definitions/Stereocenter"
+                  "$ref": "#/$defs/Stereocenter"
                },
                "type": "array"
             },
@@ -700,7 +744,7 @@
                "type": "string"
             },
             "in_periodic_table_block": {
-               "$ref": "#/definitions/PeriodicTableBlock",
+               "$ref": "#/$defs/PeriodicTableBlock",
                "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in"
             },
             "in_periodic_table_group": {
@@ -708,6 +752,7 @@
                "type": "integer"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -725,7 +770,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "standard_atomic_weight": {
@@ -748,16 +793,18 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -772,7 +819,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -799,7 +846,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -821,7 +868,7 @@
          "description": "A characteristic of a chemical entity that is realized under particular conditions",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -834,25 +881,30 @@
          "description": "a chemical compound consisting of an ionic assembly of cations and anions.",
          "properties": {
             "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "maximum": 0,
+               "minimum": 0,
                "type": "integer"
             },
             "has_anionic_component": {
-               "$ref": "#/definitions/AnionState"
+               "$ref": "#/$defs/AnionState"
             },
             "has_cationic_component": {
-               "$ref": "#/definitions/CationState"
+               "$ref": "#/$defs/CationState"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -867,7 +919,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -894,10 +946,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -931,10 +984,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -968,10 +1022,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -993,7 +1048,7 @@
          "description": "a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image.",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1007,7 +1062,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1021,20 +1076,23 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "items": {
                   "type": "string"
                },
                "type": "array"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -1044,10 +1102,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1066,7 +1126,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "polymer_of": {
@@ -1084,7 +1144,7 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
@@ -1094,10 +1154,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1112,7 +1174,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1127,12 +1189,13 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1147,7 +1210,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1170,7 +1233,7 @@
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1184,14 +1247,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -1205,10 +1271,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1230,7 +1298,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "relative_configuration": {
@@ -1249,7 +1317,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1263,12 +1331,13 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_parent_acid": {
                "type": "string"
@@ -1277,6 +1346,8 @@
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -1290,10 +1361,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1312,7 +1385,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1343,15 +1416,17 @@
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1370,7 +1445,7 @@
                "type": "integer"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -1389,16 +1464,18 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1416,7 +1493,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1444,7 +1521,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -1472,7 +1549,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -1495,7 +1572,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1509,17 +1586,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -1529,10 +1610,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1551,7 +1634,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1561,12 +1644,22 @@
          "title": "Glycan",
          "type": "object"
       },
+      "HardOrSoftEnum": {
+         "description": "",
+         "enum": [
+            "hard",
+            "soft",
+            "borderline"
+         ],
+         "title": "HardOrSoftEnum",
+         "type": "string"
+      },
       "ImpreciseChemicalMixture": {
          "additionalProperties": false,
          "description": "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_minchi_representation": {
                "description": "Proposed new Mixtures InChI",
@@ -1579,7 +1672,7 @@
             "has_proportional_parts": {
                "description": "Relationship between a complex mixture and its parts",
                "items": {
-                  "$ref": "#/definitions/ProportionalPart"
+                  "$ref": "#/$defs/ProportionalPart"
                },
                "type": "array"
             },
@@ -1587,10 +1680,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1605,7 +1700,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1614,6 +1709,17 @@
          ],
          "title": "ImpreciseChemicalMixture",
          "type": "object"
+      },
+      "IngredientRoleEnum": {
+         "description": "",
+         "enum": [
+            "active ingredient",
+            "inactive ingredient",
+            "excipient",
+            "solvent"
+         ],
+         "title": "IngredientRoleEnum",
+         "type": "string"
       },
       "IsPart": {
          "additionalProperties": false,
@@ -1656,18 +1762,20 @@
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_element": {
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1693,7 +1801,7 @@
                "type": "integer"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -1740,7 +1848,7 @@
             },
             "left_participants": {
                "items": {
-                  "$ref": "#/definitions/ReactionParticipant"
+                  "$ref": "#/$defs/ReactionParticipant"
                },
                "type": "array"
             },
@@ -1749,7 +1857,7 @@
             },
             "right_participants": {
                "items": {
-                  "$ref": "#/definitions/ReactionParticipant"
+                  "$ref": "#/$defs/ReactionParticipant"
                },
                "type": "array"
             },
@@ -1788,18 +1896,20 @@
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_element": {
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1825,7 +1935,7 @@
                "type": "integer"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -1845,7 +1955,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1859,17 +1969,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -1879,10 +1993,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1901,7 +2017,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1916,7 +2032,7 @@
          "description": "",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -1930,7 +2046,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -1944,17 +2060,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -1964,10 +2084,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -1986,7 +2108,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2001,6 +2123,7 @@
          "description": "A substance composed of one or more chemical entities",
          "properties": {
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             }
          },
@@ -2013,16 +2136,18 @@
          "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2037,7 +2162,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2064,7 +2189,7 @@
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2078,14 +2203,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -2099,10 +2227,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2121,7 +2251,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2148,7 +2278,7 @@
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2162,14 +2292,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -2183,10 +2316,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2205,7 +2340,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2220,16 +2355,18 @@
          "description": "A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2244,7 +2381,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2259,16 +2396,18 @@
          "description": "A proper part of a molecule that is larger than an atom",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2283,7 +2422,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2304,10 +2443,11 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
                "items": {
                   "type": "string"
                },
@@ -2334,10 +2474,11 @@
                "type": "string"
             },
             "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -2360,7 +2501,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2374,14 +2515,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -2395,10 +2539,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2417,7 +2563,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2432,16 +2578,18 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2456,7 +2604,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2477,7 +2625,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -2505,6 +2653,7 @@
                "type": "string"
             },
             "has_group": {
+               "description": "Relation between a molecule and the groups it contains",
                "items": {
                   "type": "string"
                },
@@ -2514,7 +2663,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -2539,13 +2688,14 @@
                "type": "string"
             },
             "has_part": {
-               "$ref": "#/definitions/ChemicalEntityOrGrouping"
+               "$ref": "#/$defs/ChemicalEntityOrGrouping",
+               "description": "basic parthood relations"
             },
             "id": {
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "subtype_of": {
@@ -2570,7 +2720,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "right_molecule": {
@@ -2600,18 +2750,20 @@
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_element": {
                "type": "string"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2626,7 +2778,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -2645,16 +2797,18 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2669,7 +2823,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2685,7 +2839,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2699,17 +2853,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -2719,10 +2877,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2741,7 +2901,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "polymer_of": {
@@ -2759,10 +2919,11 @@
          "description": "A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale.",
          "properties": {
             "has_morphological_category": {
-               "description": "e.g. rod, sheet",
-               "type": "string"
+               "$ref": "#/$defs/NanostructureMorphologyEnum",
+               "description": "e.g. rod, sheet"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             }
          },
@@ -2770,13 +2931,30 @@
          "title": "Nanostructure",
          "type": "object"
       },
+      "NanostructureMorphologyEnum": {
+         "description": "",
+         "enum": [
+            "nanotube",
+            "nanoparticle",
+            "nanorod",
+            "nanotubosome",
+            "quantum dot",
+            "nanofibre",
+            "nanocrystal",
+            "nanoribbon",
+            "nanosheet",
+            "nanowire"
+         ],
+         "title": "NanostructureMorphologyEnum",
+         "type": "string"
+      },
       "NaturalProduct": {
          "additionalProperties": false,
          "description": "",
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2790,14 +2968,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -2811,10 +2992,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2833,7 +3016,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2848,12 +3031,13 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2868,7 +3052,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2884,7 +3068,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -2898,14 +3082,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -2919,10 +3106,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2941,7 +3130,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2956,12 +3145,13 @@
          "description": "A neutron or proton",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -2976,7 +3166,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -2991,7 +3181,7 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
@@ -3001,10 +3191,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3019,7 +3211,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3042,15 +3234,17 @@
                "type": "string"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3065,7 +3259,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -3085,7 +3279,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -3099,17 +3293,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -3119,10 +3317,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3141,7 +3341,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3156,12 +3356,24 @@
          "description": "A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in",
          "properties": {
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/PeriodicTableBlockEnum"
             }
          },
          "required": [],
          "title": "PeriodicTableBlock",
          "type": "object"
+      },
+      "PeriodicTableBlockEnum": {
+         "description": "",
+         "enum": [
+            "s-block",
+            "p-block",
+            "d-block",
+            "f-block",
+            "g-block"
+         ],
+         "title": "PeriodicTableBlockEnum",
+         "type": "string"
       },
       "PolyatomicIon": {
          "additionalProperties": false,
@@ -3180,7 +3392,7 @@
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -3194,14 +3406,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -3215,10 +3430,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3237,7 +3454,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3252,16 +3469,18 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3276,7 +3495,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3294,7 +3513,7 @@
                "type": "string"
             },
             "has_role": {
-               "type": "string"
+               "$ref": "#/$defs/IngredientRoleEnum"
             },
             "maximum_percentage": {
                "type": "number"
@@ -3303,7 +3522,7 @@
                "type": "number"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3317,7 +3536,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -3331,17 +3550,21 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
                   "type": "string"
                },
@@ -3351,10 +3574,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3373,7 +3598,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3388,12 +3613,13 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3408,7 +3634,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3423,7 +3649,7 @@
          "description": "",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_sequence_representation": {
                "description": "By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence",
@@ -3433,10 +3659,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3451,7 +3679,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3469,7 +3697,7 @@
                "type": "string"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_left_enantiomer": {
                "type": "string"
@@ -3481,10 +3709,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3499,7 +3729,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3524,15 +3754,17 @@
                "type": "string"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3547,7 +3779,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -3594,7 +3826,7 @@
             },
             "left_participants": {
                "items": {
-                  "$ref": "#/definitions/ReactionParticipant"
+                  "$ref": "#/$defs/ReactionParticipant"
                },
                "type": "array"
             },
@@ -3603,7 +3835,7 @@
             },
             "right_participants": {
                "items": {
-                  "$ref": "#/definitions/ReactionParticipant"
+                  "$ref": "#/$defs/ReactionParticipant"
                },
                "type": "array"
             },
@@ -3622,7 +3854,7 @@
          "description": "Instances of this link a reaction to a chemical entity participant",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "participant": {
@@ -3641,7 +3873,7 @@
          "description": "A relationship between two or more entities that is quantified based on their similarity",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3655,7 +3887,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -3669,14 +3901,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -3690,10 +3925,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3712,7 +3949,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3781,7 +4018,7 @@
          "description": "a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer",
          "properties": {
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3795,7 +4032,7 @@
          "properties": {
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -3809,14 +4046,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -3830,10 +4070,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3852,7 +4094,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3867,12 +4109,13 @@
          "description": "A chemical entity below the granularity of an atom.",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3887,7 +4130,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3902,16 +4145,18 @@
          "description": "polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions\u2013that is, non-covalent bonds",
          "properties": {
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "id": {
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3926,7 +4171,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -3944,13 +4189,15 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "right_molecule": {
                "type": "string"
             },
             "score": {
+               "maximum": 1,
+               "minimum": 1,
                "type": "number"
             }
          },
@@ -3974,15 +4221,17 @@
                "type": "integer"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
                "type": "string"
             },
             "id": {
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -3997,7 +4246,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
             "symbol": {
@@ -4016,11 +4265,14 @@
          "description": "A molecule that has no charge",
          "properties": {
             "elemental_charge": {
+               "description": "number of protons minus number of electrons",
+               "maximum": 0,
+               "minimum": 0,
                "type": "integer"
             },
             "has_atom_occurrences": {
                "items": {
-                  "$ref": "#/definitions/AtomOccurrence"
+                  "$ref": "#/$defs/AtomOccurrence"
                },
                "type": "array"
             },
@@ -4034,14 +4286,17 @@
             "has_bonds": {
                "description": "The set of all bonds connecting atoms in a molecule",
                "items": {
-                  "$ref": "#/definitions/AtomicBond"
+                  "$ref": "#/$defs/AtomicBond"
                },
+               "minimum": 1,
                "type": "array"
             },
             "has_chemical_role": {
-               "$ref": "#/definitions/ChemicalRole"
+               "$ref": "#/$defs/ChemicalRole"
             },
             "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
                "type": "string"
             },
             "has_submolecules": {
@@ -4055,10 +4310,12 @@
                "type": "string"
             },
             "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
                "pattern": "^c.*",
                "type": "string"
             },
             "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
                "pattern": "^[A-Z0-9\\.]+$",
                "type": "string"
             },
@@ -4077,7 +4334,7 @@
                "type": "string"
             },
             "owl_subclass_of": {
-               "$ref": "#/definitions/OwlClass",
+               "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             }
          },
@@ -4096,7 +4353,11 @@
          "type": "object"
       }
    },
+   "$id": "https://w3id.org/chemschema",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "additionalProperties": true,
    "properties": {},
+   "required": [],
    "title": "chem-model",
    "type": "object"
 }
