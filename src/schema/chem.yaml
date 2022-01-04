@@ -808,7 +808,7 @@ classes:
       - SIO:010044
           
   chemical element:
-    is_a: atom
+    is_a: partially specified atom
     aliases:
       - element
       - generic atom
@@ -816,6 +816,9 @@ classes:
       generic form of an atom, with unspecified neutron or charge
     defining_slots:
       - atomic number
+#    unique_keys:
+#      - unique_key_slots:
+#          - atomic number
     slot_usage:
       symbol:
         aliases:
@@ -865,7 +868,7 @@ classes:
     aliases:
       - nucleide
       - nuclear species
-    is_a: atom
+    is_a: partially specified atom
     slots:
       - energy level
     description: >-
@@ -933,8 +936,8 @@ classes:
     aliases:
       - atom ionic species
     description: >-
-      an atom type in which charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−.
-    is_a: atom
+      an atom type in which only charge state is specified. Example: Chloride is an atom ionic species; its formula is Cl−.
+    is_a: partially specified atom
     slots:
       - elemental charge
     slot_usage:
@@ -987,6 +990,12 @@ classes:
       - value: Helium(2+)
         description: 1S/He/q+2
 
+  partially specified atom:
+    abstract: true
+    description: >-
+      An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated
+    is_a: atom
+        
   fully specified atom:
     description: >-
       An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)
@@ -1808,7 +1817,7 @@ slots:
   has rinchi representation:
     aliases:
       - RInChi
-    is_a: chemical representation
+    is_a: chemical formula
     key: true
     description: >-
       Proposed Reactions InChI
@@ -1835,7 +1844,8 @@ slots:
       - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
 
   rinchi key string:
-    is_a: chemical formula
+    is_a: hashed chemical formula
+    description: A hashed representation of a RInChi string
     key: true
     annotations:
       hash_of: has rinchi representation
@@ -1891,7 +1901,14 @@ slots:
     description: >-
       This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.
 
-
+  hashed chemical formula:
+    abstract: true
+    is_a: chemical representation
+    domain: chemical entity
+    range: chemical encoding
+    description: >-
+      A hashed version of a chemical formula
+      
   chemical formula:
     abstract: true
     is_a: chemical representation
@@ -1937,7 +1954,8 @@ slots:
       - declare this as a key once compound_key is introduced to linkml
     
   inchi key string:
-    is_a: chemical formula
+    is_a: hashed chemical formula
+    description: A hashed representation of an InChi string
     key: false # rare; Pletnev I, Erin A, McNaught A, Blinov K, Tchekhovskoi D, Heller S (2012) InChIKey collision resistance: an experimental testing. J Cheminform. 4:12
     annotations:
       hash_of: inchi string

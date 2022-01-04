@@ -106,7 +106,7 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Atom>  (
-    @<AtomIonicForm> OR @<ChemicalElement> OR @<FullySpecifiedAtom> OR @<Nuclide>
+    @<FullySpecifiedAtom> OR @<PartiallySpecifiedAtom>
 )
 
 <Atom_struct> {
@@ -197,8 +197,8 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <AtomIonicForm_struct> {
-    (  $<AtomIonicForm_tes> (  &<Atom_tes> ;
-          rdf:type [ <Atom> ] ? ;
+    (  $<AtomIonicForm_tes> (  &<PartiallySpecifiedAtom_tes> ;
+          rdf:type [ <PartiallySpecifiedAtom> ] ? ;
           <elemental_charge> @linkml:Integer ? ;
           <elemental_change> @linkml:String ?
        ) ;
@@ -283,8 +283,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <ChemicalElement> CLOSED {
-    (  $<ChemicalElement_tes> (  &<Atom_tes> ;
-          rdf:type [ <Atom> ] ? ;
+    (  $<ChemicalElement_tes> (  &<PartiallySpecifiedAtom_tes> ;
+          rdf:type [ <PartiallySpecifiedAtom> ] ? ;
           <symbol> @linkml:String ? ;
           <in_periodic_table_group> @<PeriodicTableGroup> ? ;
           <in_periodic_table_block> @<PeriodicTableBlock> ? ;
@@ -971,8 +971,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <Nuclide>  (
     CLOSED {
-       (  $<Nuclide_tes> (  &<Atom_tes> ;
-             rdf:type [ <Atom> ] ? ;
+       (  $<Nuclide_tes> (  &<PartiallySpecifiedAtom_tes> ;
+             rdf:type [ <PartiallySpecifiedAtom> ] ? ;
              <energy_level> @linkml:String ?
           ) ;
           rdf:type [ <Nuclide> ]
@@ -983,6 +983,18 @@ linkml:Nodeidentifier NONLITERAL
 <OwlClass> {
     (  $<OwlClass_tes> rdf:type . * ;
        rdf:type [ owl:Class ] ?
+    )
+}
+
+<PartiallySpecifiedAtom>  (
+    @<AtomIonicForm> OR @<ChemicalElement> OR @<Nuclide>
+)
+
+<PartiallySpecifiedAtom_struct> {
+    (  $<PartiallySpecifiedAtom_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ?
+       ) ;
+       rdf:type [ <PartiallySpecifiedAtom> ]
     )
 }
 
