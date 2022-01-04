@@ -36,7 +36,8 @@ docs:
 stage: $(patsubst %,stage-%,$(TGTS))
 stage-%: gen-%
 	cp -pr target/$* .
-
+stage-python: gen-python
+	cp -pr target/python/chem.py chem/chem_datamodel.py
 
 ###  -- MARKDOWN DOCS --
 # Generate documentation ready for mkdocs

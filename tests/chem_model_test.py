@@ -1,5 +1,7 @@
 from chem import RacemicMixture, Enantiomer
 
+#r_form = Enantiomer(id='CHEBI:61917')
+
 r_form = Enantiomer(id='CHEBI:61917',
                     enantiomer_form_of='CHEBI:74947',
                     absolute_configuration='R')

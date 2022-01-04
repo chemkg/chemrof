@@ -1,5 +1,5 @@
 # Auto generated from chem.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-06-21 08:54
+# Generation date: 2021-07-11 18:21
 # Schema: chem-model
 #
 # id: https://w3id.org/chemschema

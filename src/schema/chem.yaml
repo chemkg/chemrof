@@ -1,7 +1,7 @@
 id: https://w3id.org/chemschema
 name: chem-model
 title: Chemistry Data Model
-description: >-
+description: |-
   A data model for managing information about chemical entities, ranging from atoms
   through molecules to complex mixtures.
 
@@ -340,7 +340,8 @@ classes:
       - inchi chemical sublayer
     slot_usage:
       inchi chemical sublayer:
-        required: true
+        required: false
+        recommended: true
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
@@ -493,7 +494,8 @@ classes:
       - inchi atom connections sublayer
     slot_usage:
       inchi atom connections sublayer:
-        required: true
+        required: false
+        recommended: true
 
   small molecule:
     is_a: molecule
@@ -509,6 +511,15 @@ classes:
     slot_usage:
       has submolecules:
         range: molecule
+    comments:
+      - check on classification of lipids
+
+  lipid:
+    is_a: macromolecule
+    id_prefixes:
+      - LIPIDMAPS
+      - SWISSLIPID
+      - LIPIDBANK
       
   molecular complex:
     aliases:
@@ -636,7 +647,7 @@ classes:
       - portion of matter
     is_a: chemical mixture
     description: >-
-      A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste
+      A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals
     slots:
       - has proportional parts
       - has mixfile location
@@ -1256,7 +1267,8 @@ classes:
         required: true
         range: enantiomer
       chirality agnostic form:
-        required: true
+        recommended: true
+        required: false
         range: molecule
     defining_slots:
       - has left enantiomer
@@ -1297,6 +1309,8 @@ classes:
       - MetaNetX
       - SEED
       - RetroRules
+    slots:
+      - has rinchi representation
     slot_usage:
       left participants:
         multivalued: true
@@ -1784,12 +1798,58 @@ slots:
     range: chemical encoding
     
   has minchi representation:
+    aliases:
+      - MInChi
     is_a: chemical representation
     description: >-
       Proposed new Mixtures InChI
     see_also:
       - https://cheminf20.org/2018/08/27/mixtures-cheminformatics/
   
+  has rinchi representation:
+    aliases:
+      - RInChi
+    is_a: chemical representation
+    key: true
+    description: >-
+      Proposed Reactions InChI
+    #string_serialization: "RInChI=1.00.1S{...}"
+    examples:
+      - value: "RInChI=1.00.1S /layer2<>layer3<>layer4/d+/u2-0-1"
+      - value: "C2H4O2/c1-2(3)4/h1H3,(H,3,4)!C2H6O/c1-2-3/h3H,2H2,1H3<>C4H8O2/c1-3-6-4(2)5/h3H2,1- 2H3!H2O/h1H2<>H2O4S/c1-5(2,3)4/h(H2,1,2,3,4):"
+        description: hydrolysis of ethyl acetate
+    see_also:
+      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
+    comments:
+      - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
+  
+  has rauxinfo representation:
+    aliases:
+      - RAuxInfo
+    is_a: chemical representation
+    key: true
+    description: >-
+      Auxhiliary information on top of a RInChi
+    see_also:
+      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
+    comments:
+      - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
+
+  rinchi key string:
+    is_a: chemical formula
+    key: true
+    annotations:
+      hash_of: has rinchi representation
+      
+  long rinchi key string:
+    is_a: rinchi key string
+    key: true
+      
+  short rinchi key string:
+    is_a: rinchi key string
+    key: true
+      
+      
   has sequence representation:
     is_a: chemical representation
     range: sequence string
@@ -1880,6 +1940,8 @@ slots:
   inchi key string:
     is_a: chemical formula
     key: false # rare; Pletnev I, Erin A, McNaught A, Blinov K, Tchekhovskoi D, Heller S (2012) InChIKey collision resistance: an experimental testing. J Cheminform. 4:12
+    annotations:
+      hash_of: inchi string
     
   smiles string:
     is_a: chemical formula
@@ -1920,6 +1982,14 @@ slots:
     description: >-
       A deterministic SMILES string. Note there is no unique system for canonical smiles strings
 
+  selfies string:
+    is_a: chemical formula
+    aliases:
+      - SELFIES
+    key: true
+    see_also:
+      - https://iopscience.iop.org/article/10.1088/2632-2153/aba947
+
   has mixfile location:
     is_a: information property
     range: file location
@@ -1959,7 +2029,7 @@ slots:
   inchi chemical sublayer:
     is_a: inchi sublayer in main layer
     pattern: "^[A-Z0-9\\.]+$"
-    required: true
+    required: false
     description: >-
       the main chemical formula
 

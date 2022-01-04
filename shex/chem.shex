@@ -309,7 +309,7 @@ linkml:Nodeidentifier NONLITERAL
           <is_radical> @linkml:Boolean ? ;
           <has_chemical_role> @<ChemicalRole> ? ;
           <inchi_string> @<ChemicalEncoding> ? ;
-          <inchi_chemical_sublayer> @linkml:String
+          <inchi_chemical_sublayer> @linkml:String ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
     )
@@ -461,7 +461,7 @@ linkml:Nodeidentifier NONLITERAL
 <EntityWithAtomsEnumerated> {
     (  $<EntityWithAtomsEnumerated_tes> (  &<SpecificityMixin_tes> ;
           rdf:type [ <SpecificityMixin> ] ? ;
-          <inchi_chemical_sublayer> @linkml:String
+          <inchi_chemical_sublayer> @linkml:String ?
        ) ;
        rdf:type [ <EntityWithAtomsEnumerated> ] ?
     )
@@ -672,7 +672,7 @@ linkml:Nodeidentifier NONLITERAL
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
           rdf:type [ <Reaction> ] ?
        ) ;
-       rdf:type [ <IsomeraseReaction> ] ?
+       rdf:type [ <IsomeraseReaction> ]
     )
 }
 
@@ -689,6 +689,14 @@ linkml:Nodeidentifier NONLITERAL
           <mode_of_formation> @linkml:String ?
        ) ;
        rdf:type [ <Isotope> ]
+    )
+}
+
+<Lipid> CLOSED {
+    (  $<Lipid_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Lipid> ]
     )
 }
 
@@ -710,7 +718,7 @@ linkml:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <Macromolecule> ]
        )
-    } OR @<Glycan> OR @<MonomolecularPolymer> OR @<Peptide> OR @<Protein>
+    } OR @<Glycan> OR @<Lipid> OR @<MonomolecularPolymer> OR @<Peptide> OR @<Protein>
 )
 
 <Material>  (
@@ -1012,7 +1020,7 @@ linkml:Nodeidentifier NONLITERAL
 <PolyatomicEntity_struct> {
     (  $<PolyatomicEntity_tes> (  &<ChemicalEntity_tes> ;
           rdf:type [ <ChemicalEntity> ] ? ;
-          <inchi_atom_connections_sublayer> @linkml:String
+          <inchi_atom_connections_sublayer> @linkml:String ?
        ) ;
        rdf:type [ <PolyatomicEntity> ]
     )
@@ -1090,7 +1098,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <PreciseChemicalMixture> ] ? ;
           <has_left_enantiomer> @<Enantiomer> ;
           <has_right_enantiomer> @<Enantiomer> ;
-          <chirality_agnostic_form> @<Molecule>
+          <chirality_agnostic_form> @<Molecule> ?
        ) ;
        rdf:type [ <RacemicMixture> ]
     )
@@ -1106,7 +1114,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <Reaction>  (
     CLOSED {
-       (  $<Reaction_tes> (  <left_participants> @<ReactionParticipant> * ;
+       (  $<Reaction_tes> (  <has_rinchi_representation> @<ChemicalEncoding> ;
+             <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
              <direction> @linkml:String ? ;
              <smarts_string> @linkml:String ? ;
@@ -1118,7 +1127,7 @@ linkml:Nodeidentifier NONLITERAL
              <reaction_center> @linkml:String ? ;
              <description> @linkml:String ?
           ) ;
-          rdf:type [ <Reaction> ] ?
+          rdf:type [ <Reaction> ]
        )
     } OR @<IsomeraseReaction>
 )
@@ -1199,7 +1208,7 @@ linkml:Nodeidentifier NONLITERAL
     (  $<StandardInchiObject_tes> (  &<InchiObject_tes> ;
           rdf:type [ <InchiObject> ] ? ;
           <inchi_version_string> @linkml:String ;
-          <inchi_chemical_sublayer> @linkml:String ;
+          <inchi_chemical_sublayer> @linkml:String ? ;
           <inchi_atom_connections_sublayer> @linkml:String ? ;
           <inchi_hydrogen_connections_sublayer> @linkml:String ? ;
           <inchi_charge_sublayer> @linkml:String ? ;

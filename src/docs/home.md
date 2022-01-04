@@ -40,7 +40,11 @@ approach. At the same time we can generate an OBO-style ontology from this repre
 
 ### Example
 
-The [Enantiomer](/Enantiomer) class represents a chemical entity that has a form (e.g L/D) specified. In the yaml:
+Enantiomers are mirror-image stereoisomers.
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Milchs%C3%A4ure_Enantiomerenpaar.svg/298px-Milchs%C3%A4ure_Enantiomerenpaar.svg.png)
+
+The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form (e.g L/D) specified. In the yaml:
 
 ```yaml
   enantiomer:
@@ -70,7 +74,7 @@ The [Enantiomer](/Enantiomer) class represents a chemical entity that has a form
       - SIO:010777
 ```
 
-Note that a class "Enantiomer" does not really make sense at an OBO level where all chemical entities are classes.
+Note that a class "Enantiomer" does not really make sense at an OBO level where all chemical entities are classes; it is a metaclass.
 
 ## Derived artefacts
 
