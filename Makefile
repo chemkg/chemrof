@@ -34,7 +34,7 @@ docs:
 	mkdir $@
 
 project: $(SOURCE_FILES)
-	gen-project -d . $<
+	gen-project -d schema $<
 
 # test docs locally.
 docserve:
