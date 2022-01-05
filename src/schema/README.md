@@ -1,7 +1,7 @@
 # Schema
 
-The source file is chemont.yaml
+The source file is chemrof.yaml
 
-Can be browsed here: http://cmungall.github.io/chemont
+Can be browsed here: http://chemkg.github.io/chemrof
 
-For example: https://cmungall.github.io/chemistry-ontology/Isotope.html
+For example: https://chemkg.github.io/chemrof/Isotope.html
