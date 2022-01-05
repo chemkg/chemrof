@@ -1,11 +1,11 @@
 SRC_DIR = src
-SCHEMA_DIR = $(SRC_DIR)/schemrof.
+SCHEMA_DIR = $(SRC_DIR)/schema
 SOURCE_FILES := $(shell find $(SCHEMA_DIR) -name '*.yaml')
 SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
-SCHEMA_NAME = chemrof.of
+SCHEMA_NAME = chemrof
 SCHEMA_SRC = $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml
-TGTS = graphql jsonschemrof. docs shex owl csv graphql python
+TGTS = graphql jsonschema docs shex owl csv graphql python
 
 #GEN_OPTS = --no-mergeimports
 GEN_OPTS = 
@@ -37,7 +37,7 @@ stage: $(patsubst %,stage-%,$(TGTS))
 stage-%: gen-%
 	cp -pr target/$* .
 stage-python: gen-python
-	cp -pr target/python/chemrof.py chemrof.chemrof.datamodel.py
+	cp -pr target/python/chem.py chem/chem_datamodel.py
 
 ###  -- MARKDOWN DOCS --
 # Generate documentation ready for mkdocs
@@ -64,11 +64,11 @@ gen-graphql:target/graphql/$(SCHEMA_NAME).graphql
 target/graphql/%.graphql: $(SCHEMA_DIR)/%.yaml tdir-graphql
 	gen-graphql $(GEN_OPTS) $< > $@
 
-###  -- JSON schemrof. --
+###  -- JSON schema --
 # TODO: modularize imports. For now imports are merged.
-gen-jsonschemrof.: target/jsonschemrof./$(SCHEMA_NAME).schemrof..json
-target/jsonschemrof./%.schemrof..json: $(SCHEMA_DIR)/%.yaml tdir-jsonschemrof.
-	gen-json-schemrof. $(GEN_OPTS) -t transaction $< > $@
+gen-jsonschema: target/jsonschema/$(SCHEMA_NAME).schema.json
+target/jsonschema/%.schema.json: $(SCHEMA_DIR)/%.yaml tdir-jsonschema
+	gen-json-schema $(GEN_OPTS) -t transaction $< > $@
 
 ###  -- Shex --
 # one file per module
