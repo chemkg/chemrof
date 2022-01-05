@@ -51,7 +51,7 @@ files, one file per class/table in the schema.
 
 For example:
 
- * [ChemicalElement.ttl](https://github.com/cmungall/chem-schema/blob/master/database/wd/ChemicalElement.ttl) from WikiData
+ * [ChemicalElement.ttl](https://github.com/chemkg/chemrof/blob/master/database/wd/ChemicalElement.ttl) from WikiData
 
 ## Example
 
@@ -81,14 +81,14 @@ Similarly the file Isotope.ttl references the elements:
 chem:MonoatomicIon/Mn a chem:Isotope ;
         rdfs:label "manganese-46m"@en ;
         chem:neutron_number 21.0 ;
-        chem:has_element <https://w3id.org/chemschema/ChemicalElement/Mn> .
+        chem:has_element <https://w3id.org/chemrof/ChemicalElement/Mn> .
 ```
 
 
 ## Merged Database
 
 We also provide a file
-[all-merged.owl](https://github.com/cmungall/chem-schema/blob/master/database/all-merged.owl)
+[all-merged.owl](https://github.com/chemkg/chemrof/blob/master/database/all-merged.owl)
 that contains both the schema (as owl classes) and data (as
 instances).
 

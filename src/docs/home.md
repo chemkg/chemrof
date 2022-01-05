@@ -1,6 +1,6 @@
 # Chem: Schema for chemistry data models and ontologies
 
-GitHub: [cmungall/chem-schema](https://github.com/cmungall/chem-schema)
+GitHub: [chemkg/chemrof](https://github.com/chemkg/chemrof)
 
 This repo includes schema/datamodel for a chemical entity
 datamodeling. It also provides an example database and an example of
@@ -23,8 +23,8 @@ Instances of the classes in the data model are CHEBI classes, e.g.
 
 The schema and overall framework uses [LinkML](https://linkml.github.io)
 
- * Browse the schema here: [http://cmungall.github.io/chem-schema](http://cmungall.github.io/chem-schema)
- * See the yaml source in the [src/schema](https://github.com/cmungall/chem-schema/blob/master/src/schema) directory
+ * Browse the schema here: [http://chemkg.github.io/chemrof](http://chemkg.github.io/chemrof)
+ * See the yaml source in the [src/schema](https://github.com/chemkg/chemrof/blob/master/src/schema) directory
 
 ### Schema Organization
 
@@ -80,13 +80,13 @@ Note that a class "Enantiomer" does not really make sense at an OBO level where 
 
 Currently the main derived artefacts of interest are:
 
- - [JSON Schema](https://github.com/cmungall/chem-schema/tree/master/jsonschema)
- - [ShEx](https://github.com/cmungall/chem-schema/tree/master/shex)
- - [Python dataclasses](https://github.com/cmungall/chem-schema/tree/master/python)
+ - [JSON Schema](https://github.com/chemkg/chemrof/tree/master/jsonschema)
+ - [ShEx](https://github.com/chemkg/chemrof/tree/master/shex)
+ - [Python dataclasses](https://github.com/chemkg/chemrof/tree/master/python)
 
 With care, you also see:
 
- - [OWL](https://github.com/cmungall/chem-schema/tree/master/owl) -- note this should be read as a meta-ontology by OBO people
+ - [OWL](https://github.com/chemkg/chemrof/tree/master/owl) -- note this should be read as a meta-ontology by OBO people
 
 ## Comparison with CHEBI and Wikidata
 
