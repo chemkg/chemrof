@@ -1,6 +1,6 @@
-# Chemical Ontology Metaclasses
+# Chemical Entity Materials and Reactions Ontological Framework (ChEMROF)
 
-See the [Documentation](https://cmungall.github.io/chem-schema/home/)
+See the [Documentation](https://chemkg.github.io/chemrof/home/)
 
 Quick links:
 
