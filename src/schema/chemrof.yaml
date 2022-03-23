@@ -10,29 +10,38 @@ description: |-
   are my own.
 
   For full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).
-  
 license: https://creativecommons.org/publicdomain/zero/1.0/
 version: 0.0.1
 
 prefixes:
+  chemrof: https://w3id.org/chemrof/
   COB: http://purl.obolibrary.org/obo/COB_
   BFO: http://purl.obolibrary.org/obo/BFO_
   RO: http://purl.obolibrary.org/obo/RO_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
   CHEMINF: http://semanticscience.org/resource/CHEMINF_
+  RXNO: http://purl.obolibrary.org/obo/RXNO_
+  MOP: http://purl.obolibrary.org/obo/MOP_
+  REX: http://purl.obolibrary.org/obo/REX_
+  FIX: http://purl.obolibrary.org/obo/FIX_
   SIO: http://semanticscience.org/resource/SIO_
   PUBCHEM.ELEMENT: https://pubchem.ncbi.nlm.nih.gov/element/
   LANL.ELEMENT: https://periodic.lanl.gov/
   bioptop: "http://purl.org/biotop/biotop.owl#"
   schema: http://schema.org/
-  chemrof: https://w3id.org/chemrof/
   dcterms: http://purl.org/dc/terms/
   biolink: https://w3id.org/biolink/
   linkml: https://w3id.org/linkml/
+  goldbook: https://goldbook.iupac.org/terms/view/
   Wikipedia: https://en.wikipedia.org/wiki/
   biotop: http://purl.org/biotop/biotop.owl#
   skos: http://www.w3.org/2004/02/skos/core#
-  wd: http://www.wikidata.org/entity/  
+  wd: http://www.wikidata.org/entity/
+  cml: http://www.xml-cml.org/schema/
+  bo: http://www.blueobelisk.org/dict/terminology
+  gc: http://purl.org/gc/
+  damlpt: http://www.daml.org/2003/01/periodictable/PeriodicTable#
+  OntoRxn: http://www.semanticweb.com/OntoRxn#
   
 default_prefix: chemrof
 default_range: string
@@ -76,6 +85,31 @@ classes:
       classifies:
         range: chemical entity
 
+  reaction grouping class:
+    description: >-
+      A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
+    id_prefixes:
+      - KEGG.REACTION
+      - GO
+      - MetaCyc
+      - EC
+      - RXNO
+      - MOP
+    slot_usage:
+      classifies:
+        range: reaction
+        
+  material grouping class:
+    is_a: grouping class
+    description: >-
+      A grouping class that classifies materials
+    examples:
+      - value: MREO
+        description: mixed rare earth oxides
+    slot_usage:
+      classifies:
+        range: material
+      
   chemical grouping by charge:
     is_a: grouping class
     description: >-
@@ -214,6 +248,14 @@ classes:
       A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
     examples:
       - value: monosaccharide
+
+  monomeric polymeric grouping class:
+    is_a: generalized molecular structure class
+    slots:
+      - has repeat unit
+    examples:
+      - value: polynucleotide
+        description: A polynucleotide molecule is a biopolymer composed of 13 or more nucleotide monomers covalently bonded in a chain
       
   grouping class for acids or bases:
     abstract: true
@@ -316,6 +358,9 @@ classes:
         description: A nanostructure that has rod morphology and is composed of zinc oxide
       - value: platinum copper nanoparticle
         description: A nanostructure that is made from platinum and copper atoms
+
+  mineral:
+    is_a: material
         
   chemical entity:
     aliases:
@@ -345,6 +390,7 @@ classes:
     mappings:
       - CHEBI:24431
       - CHEMINF:000000
+      - OntoRxn:ChemSpecies
     exact_mappings:    
       - SIO:010004
     id_prefixes:
@@ -358,7 +404,6 @@ classes:
       - INCHIKEY
       - UNII
       - KEGG
-      - HMDB
       - SEED
   
   subatomic particle:
@@ -569,31 +614,48 @@ classes:
       - oligo or polymer
     description: >-
       A macromolecule composed of repeating subunits. Examples: cellulose
-    slot_usage:
-      polymer of:
-        is_a: has part
-        range: macromolecule
-        exact_mappings:
-          - wd:P4600
-          - CHEBI:60027
+    slots:
+      - polymer of
+      - has repeat unit
+      - is branched
+      - polymer architecture type
+    exact_mappings:
+      - wd:Q81163
       
   supramolecular polymer:
     is_a: molecular complex
     description: >-
       polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds
+    slots:
+      - polymer of
+      - has repeat unit
     exact_mappings:
       - Wikipedia:Supramolecular_polymer
     
   copolymer:
+    aliases:
+      - heteropolymer
     is_a: monomolecular polymer
     description: >-
-      a polymer derived from more than one species of monomer
+      a polymer with a more than one type of repeating unit
     slot_usage:
-      has part:
-        range: macromolecule
+      polymer of:
         multivalued: true
     examples:
       - value: PEVA
+      - value: styrene-butadiene rubber
+        description: The repeat units based on styrene and 1,3-butadiene form two repeating units, which can alternate in any order in the macromolecule, making the polymer thus a random copolymer.
+    
+  homopolymer:
+    is_a: monomolecular polymer
+    description: >-
+      a polymer with a single type of repeating unit
+    slot_usage:
+      polymer of:
+        multivalued: false
+    examples:
+      - value: polystyrene
+        description: composed only of styrene-based repeat units
     
   molecular component:
     aliases:
@@ -603,7 +665,7 @@ classes:
     description: >-
       A proper part of a molecule that is larger than an atom
 
-  
+  # TODO: replace with roles
   polymer part:
     is_a: molecular component
   
@@ -690,6 +752,7 @@ classes:
     exact_mappings:
       - SIO:011125
       - biotop:MonoMolecularEntity
+      - gc:Molecule
     examples:
       - value: dioxygen
       - value: cysteine
@@ -818,7 +881,8 @@ classes:
     defining_slots:
       - atomic number
 #    unique_keys:
-#      - unique_key_slots:
+#      main:
+#        unique_key_slots:
 #          - atomic number
     slot_usage:
       symbol:
@@ -833,10 +897,14 @@ classes:
         description: >-
           which number in periodic table column
         range: periodic table group
+        exact_mappings:
+          - bo:group
       in periodic table block:
         description: >-
           block of periodic table unified by the orbitals their valence electrons or vacancies lie in
         range: periodic table block
+        exact_mappings:
+          - bo:block
       boiling point in celcius:
         range: float
       melting point in celcius:
@@ -853,6 +921,7 @@ classes:
         range: stereocenter
         multivalued: true
       has physiologically stable form:
+        description: connects an element to the equivalent form that is physiologically stable at pH 7.3
         aliases:
           - has Ph 7.3 mapping
         see_also:
@@ -864,6 +933,7 @@ classes:
       - https://en.wikipedia.org/wiki/Chemical_element
     exact_mappings:
       - wd:Q11344
+      - gc:Element
         
   uncharged atom:
     is_a: atom ionic form
@@ -951,7 +1021,7 @@ classes:
     slots:
       - elemental charge
     slot_usage:
-      elemental change:
+      elemental charge:
         todos:
           - decide whether to permit this to have magnitude be unspecified, or whether to use a grouping class for this
     examples:
@@ -1105,6 +1175,7 @@ classes:
        a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
     
   atomic bond:
+    class_uri: gc:Bond
     is_a: relational chemical entity
     aliases:
       - bond
@@ -1160,6 +1231,9 @@ classes:
       oxidation number:
         aliases:
           - oxidation
+          - oxidation state
+        exact_mappings:
+          - goldbook:O04363
         description: >-
           The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons
           being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number.
@@ -1314,6 +1388,24 @@ classes:
       - value: diamond
       - value: dioxygen
 
+  polymer repeat unit:
+    is_a: relational chemical entity
+    description: >-
+      An abstract part of a polymer that is all instances of a repeated monomer of a single type
+    slot_usage:
+      repetition of:
+        description: the macromolecule that is repeated
+        range: molecule
+      degree of polymerization:
+        range: count
+        see_also:
+          - https://en.wikipedia.org/wiki/Degree_of_polymerization
+      mass:
+        description: >-
+          the mass of a polymer repeat unit is the product of the mass of the repeated element multiplied by the degree
+    see_also:
+      - https://en.wikipedia.org/wiki/Repeat_unit
+
   reaction:
     description: >-
       reaction
@@ -1327,6 +1419,9 @@ classes:
       - MetaNetX
       - SEED
       - RetroRules
+      - RXNO
+      - MOP
+      - REX
     slots:
       - has rinchi representation
     slot_usage:
@@ -1356,6 +1451,8 @@ classes:
       reaction center: {}
       description:
         string_serialization: "{left participants} {direction} {right participants}"
+    todos:
+      - Align with https://docs.open-reaction-database.org/en/latest/schema.html
 
   isomerase reaction:
     is_a: reaction
@@ -1530,6 +1627,8 @@ slots:
       name of chemical entity. E.g. nickel, carbon-16
     slot_uri:
       rdfs:label
+    exact_mappings:
+      - bo:symbol
   
   symbol:
     is_a: information property
@@ -1537,6 +1636,7 @@ slots:
     #key: true
     description: >-
       short symbol for chemical entity, e.g. K, C-16
+    slot_uri: bo:symbol
   
   ## numeric properties of atoms
 
@@ -1558,6 +1658,7 @@ slots:
       number of protons in an atom
     domain: atom
     range: count
+    slot_uri: bo:atomicNumber
     mappings:
       - CHEMINF:000079
     exact_mappings:
@@ -1640,6 +1741,18 @@ slots:
     description: >-
       equal mass number (Z1 + N1 = Z2 + N2)
 
+  has different charge state from:
+    mixin: true
+    abstract: true
+
+  has lower charge from:    
+    is_a: has different charge state from
+    mixin: true
+    
+  has higher charge from:    
+    is_a: has different charge state from
+    mixin: true
+    
   derivative of:
     is_a: alternate form of
     
@@ -1647,19 +1760,36 @@ slots:
     is_a: alternate form of
     inverse: derivative of
     
+  transitive conjugatated form of:
+    is_a: derivative of
+    transitive: true
+    annotations:
+      transitive_closure_of: direct conjugatated from
+    
+  direct conjugatated form of:
+    is_a: derivative of
+    multivalued: false
+    symmetric: true
+    
   conjugate base of:
     aliases:
       - is conjugate base of (chebi)
-    is_a: derivative of
+    is_a: direct conjugatated form of
+    mixins:
+      - has lower charge from
     description: >-
       connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)
+    notes:
+      - sometimes chebi hops over a state skipping an intermediate
     see_also:
       - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
 
   conjugate acid of:
     aliases:
       - is conjugate acid of (chebi)
-    is_a: has derivative
+    is_a: direct conjugatated form of
+    mixins:
+      - has higher charge from
     inverse: conjugate base of
     see_also:
       - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
@@ -1705,6 +1835,33 @@ slots:
       - BFO:0000050
       - schema:hasBioChemEntityPart
 
+  has repeat unit:
+    range: chemical entity
+    
+  polymer of:
+    is_a: has part
+    range: macromolecule
+    exact_mappings:
+      - wd:P4600
+      - CHEBI:60027
+
+  has polymer repeat units:
+    description: Relation between a polymer and all instances of a repeated polymeric unit
+    range: polymer repeat unit
+    multivalued: true
+
+  is branched:
+    range: boolean
+    see_also:
+      - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
+
+  polymer architecture type:
+    #range: TODO enum
+    description: >-
+      morphological structure of a polymer
+    see_also:
+      - https://en.wikipedia.org/wiki/Polymer_architecture
+      
   has atoms:
     description: >-
       Relation between a molecule and the atoms it contains.
@@ -1807,6 +1964,46 @@ slots:
     mappings:
       - CHEMINF:000067
 
+  molecular property:
+    is_a: chemical property
+    slot_uri: FIX:0000276
+  molecular electronic absorption spectroscopy:
+    is_a: molecular property
+    slot_uri: FIX:0000011
+  molecular spectroscopy by energy state:
+    is_a: molecular property
+    slot_uri: FIX:0000030
+  molecular spectroscopy:
+    is_a: molecular property
+    slot_uri: FIX:0000063
+  molecular replacement:
+    is_a: molecular property
+    slot_uri: FIX:0000251
+  molecular mass:
+    is_a: molecular property
+    slot_uri: FIX:0000270
+  molecular size:
+    is_a: molecular property
+    slot_uri: FIX:0000271
+  molecular hydration:
+    is_a: molecular property
+    slot_uri: FIX:0000272
+  molecular shape:
+    is_a: molecular property
+    slot_uri: FIX:0000273
+  molecular charge:
+    is_a: molecular property
+    slot_uri: FIX:0000275
+  molecular structure:
+    is_a: molecular property
+    slot_uri: FIX:0000305
+  molecular heat capacity:
+    is_a: molecular property
+    slot_uri: FIX:0000389
+  molecular electronic spectroscopy:
+    is_a: molecular property
+    slot_uri: FIX:0000943
+      
   chemical representation:
     aliases:
       - has chemical encoding
@@ -1959,9 +2156,14 @@ slots:
       - https://github.com/ncats/lychi
     
   inchi string:
+    title: InChi
     is_a: chemical formula
     todos:
       - declare this as a key once compound_key is introduced to linkml
+    see_also:
+      - https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi
+    exact_mappings:
+      - OntoRXN:hasInChi
     
   inchi key string:
     is_a: hashed chemical formula
@@ -2247,6 +2449,8 @@ slots:
     range: owl class
     exact_mappings:
       - rdfs:subClassOf
+    narrow_mappings:
+      - bo:family
     
   subtype of:
     is_a: chemical to chemical relationship
@@ -2318,7 +2522,33 @@ enums:
       d-block:
       f-block:
       g-block:    
-  
+
+  element_family_enum:
+    close_mappings:
+      - bo:family
+    permissible_values:
+      Alkali_Earth:
+      Alkaline_Earth:
+      Halogen:
+      Metalloids:
+      Noblegas:
+      Non-Metal:
+      Other_Metal:
+      Rare_Earth:
+      Transition:
+
+  element_metallic_classification:
+    exact_mappings:
+      - damlpt:Classification
+    permissible_values:
+      Metallic:
+        meaning: damlpt:Metallic
+      Non-Metallic:
+        meaning: damlpt:Non-Metallic
+      Semi-Metallic:
+        meaning: damlpt:Semi-Metallic
+        
+        
   ingredient_role_enum:
     permissible_values:
       active ingredient:
@@ -2331,10 +2561,24 @@ enums:
       covalent:
         description: >-
           A covalent bond is a chemical bond that involves the sharing of pairs of electrons between atoms. This sharing results in a stable balance of attractive and repulsive forces between those atoms.
+        meaning: gc:NormalBond
+      aromatic:
+        meaning: gc:AromaticBond
+      single:
+        meaning: gc:Single
+      double:
+        meaning: gc:Double
+      triple:
+        meaning: gc:Triple
+      quadruple:
+        meaning: gc:Quadruple
+      hydrogen:
+        meaning: gc:HydrogenBond
       ionic:
       polycentric:
       metal-metal:
       salt bridge:
+      
   hard_or_soft_enum:
     permissible_values:
       hard:
