@@ -1,0 +1,271 @@
+id: http://www.semanticweb.com/OntoRxn
+name: OntoRxn
+description: OntoRxn
+imports:
+- linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  OntoRxn: https://w3id.org/None/
+default_prefix: OntoRxn
+types: {}
+classes:
+  MOP_0000543:
+    class_uri: obo:MOP_0000543
+  VectorValue:
+    class_uri: gc:VectorValue
+    is_a: Value
+  Species:
+    class_uri: ontospecies:Species
+  Block:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#Block
+  Classification:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#Classification
+  Element:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#Element
+  Group:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#Group
+  Period:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#Period
+  StandardState:
+    class_uri: http://www.daml.org/2003/01/periodictable/PeriodicTable.owl#StandardState
+  ChemSpecies:
+    class_uri: OntoRxn:ChemSpecies
+    slots:
+    - hasCalculation
+    - hasInChI
+    is_a: Thing
+    comments:
+    - Individual molecular entity participating at some point of a reaction network.@en
+  CompCalculation:
+    class_uri: OntoRxn:CompCalculation
+    slots:
+    - hasThermoConditions
+    - hasInChI
+    - hasSolvent
+    - hasSymmetryNumber
+    - hasXYZGeometry
+    is_a: Thing
+    comments:
+    - Collection of computational data from an electronic structure calculation.@en
+  NetworkStage:
+    class_uri: OntoRxn:NetworkStage
+    slots:
+    - hasSpecies
+    is_a: Thing
+    comments:
+    - Collection of structures that must be combined to define a point in a reaction
+      network, so as the corresponding energy of the molecule set matches the chosen
+      reference state.@en
+    slot_usage:
+      hasSpecies:
+        required: true
+  ReactionStep:
+    class_uri: OntoRxn:ReactionStep
+    slots:
+    - hasNode
+    - hasReactionType
+    - hasTS
+    - isConnectedWith
+    is_a: Thing
+    comments:
+    - Non-directed step in a reaction network containing two intermediates and (possibly)
+      the corresponding transition state between them.@en
+    slot_usage:
+      hasNode:
+        multivalued: true
+  ThermoCondition:
+    class_uri: OntoRxn:ThermoCondition
+    slots:
+    - hasPressure
+    - hasTemperature
+    is_a: AuxiliaryConcept
+    comments:
+    - A class representing the thermodynamic conditions for a calculation
+  BaseCalculation:
+    class_uri: http://www.theworldavatar.com/ontology/ontocompchem/ontocompchem.owl#BaseCalculation
+    slots:
+    - hasEnvironment
+    - hasInitialization
+    - hasUniqueSpecies
+    comments:
+    - General class for computational chemistry calculations
+  GenericCalculation:
+    class_uri: http://www.theworldavatar.com/ontology/ontocompchem/ontocompchem.owl#GenericCalculation
+    is_a: BaseCalculation
+    comments:
+    - Calculations performed by unspecified software.
+  NodeShape:
+    class_uri: http://www.w3.org/ns/shacl#NodeShape
+  CalculationResult:
+    slots:
+    - hasEnergy
+    - hasFreqList
+    - hasMolMass
+    - hasMomentInertia
+    - hasRotTemps
+    - hasSolventPolarity
+  GaussianCalculation:
+    is_a: BaseCalculation
+slots:
+  hasCalculation:
+    slot_uri: OntoRxn:hasCalculation
+    range: CompCalculation
+    comments:
+    - Links a given chemical entity in the reaction network to the calculation(s)
+      defined for that entity.@en
+    multivalued: true
+  hasElecEnergy:
+    slot_uri: OntoRxn:hasElecEnergy
+    is_a: hasEnergy
+    comments:
+    - Property defining the electronic energy of a calculation
+    multivalued: true
+  hasEnergy:
+    slot_uri: OntoRxn:hasEnergy
+    range: FloatValue
+    comments:
+    - Parent property for energies in a calculation.
+    multivalued: true
+  hasFreqList:
+    slot_uri: OntoRxn:hasFreqList
+    range: VectorValue
+    comments:
+    - Property defining the list of frequencies (in cm-1) for a calculation.
+    multivalued: true
+  hasGibbsFreeEnergy:
+    slot_uri: OntoRxn:hasGibbsFreeEnergy
+    is_a: hasEnergy
+    comments:
+    - Property defining the Gibbs free energy of a calculation.
+    multivalued: true
+  hasMolMass:
+    slot_uri: OntoRxn:hasMolMass
+    range: FloatValue
+    multivalued: true
+  hasMomentInertia:
+    slot_uri: OntoRxn:hasMomentInertia
+    range: VectorValue
+    multivalued: true
+  hasNode:
+    slot_uri: OntoRxn:hasNode
+    range: NetworkStage
+    comments:
+    - Links a reaction step in the reaction network with the stage corresponding to
+      an intermediate.@en
+    multivalued: true
+  hasPressure:
+    slot_uri: OntoRxn:hasPressure
+    range: FloatValue
+    comments:
+    - Property defining the pressure for determining thermodynamic properties
+    multivalued: true
+  hasReactionType:
+    slot_uri: OntoRxn:hasReactionType
+    range: MOP_0000543
+    comments:
+    - Property that links a named molecular process to a ReactionStep entity
+    multivalued: true
+  hasRotTemps:
+    slot_uri: OntoRxn:hasRotTemps
+    range: VectorValue
+    multivalued: true
+  hasSolventPolarity:
+    slot_uri: OntoRxn:hasSolventPolarity
+    range: FloatValue
+    multivalued: true
+  hasSpecies:
+    slot_uri: OntoRxn:hasSpecies
+    range: ChemSpecies
+    comments:
+    - Links a given stage in the reaction network to the chemical entities collected
+      by that stage.@en
+    multivalued: true
+  hasTS:
+    slot_uri: OntoRxn:hasTS
+    range: NetworkStage
+    comments:
+    - Links a reaction step in the reaction network with the stage corresponding to
+      a transition state.@en
+    multivalued: true
+  hasTemperature:
+    slot_uri: OntoRxn:hasTemperature
+    range: FloatValue
+    comments:
+    - Property defining the temperature for determining thermodynamic properties
+    multivalued: true
+  hasThermoConditions:
+    slot_uri: OntoRxn:hasThermoConditions
+    range: ThermoCondition
+    comments:
+    - Property to link calculations with the corresponding thermodynamic conditions
+    multivalued: true
+  isCalculationOf:
+    slot_uri: OntoRxn:isCalculationOf
+    comments:
+    - Links a calculation to the chemical entity to which it refers.@en
+    multivalued: true
+  isConnectedWith:
+    slot_uri: OntoRxn:isConnectedWith
+    range: ReactionStep
+    comments:
+    - Links two reaction steps having some common intermediate.@en
+    multivalued: true
+  isNodeOf:
+    slot_uri: OntoRxn:isNodeOf
+    comments:
+    - Links the stage corresponding to an intermediate in the reaction network to
+      the reaction step(s) it participates in.@en
+    multivalued: true
+  isSpeciesOf:
+    slot_uri: OntoRxn:isSpeciesOf
+    comments:
+    - Links a given chemical entity in the reaction network to the stage(s) in which
+      it is contained.@en
+    multivalued: true
+  isTSOf:
+    slot_uri: OntoRxn:isTSOf
+    comments:
+    - Links the stage corresponding to a transition state in the reaction network
+      to the reaction step it participates in.@en
+    multivalued: true
+  hasAnnotation:
+    slot_uri: OntoRxn:hasAnnotation
+    comments:
+    - Property defining string annotations@en
+    multivalued: true
+  hasInChI:
+    slot_uri: OntoRxn:hasInChI
+    multivalued: true
+  hasSolvent:
+    slot_uri: OntoRxn:hasSolvent
+    comments:
+    - Property defining the solvent modelled for a calculation.@en
+    multivalued: true
+  hasSymmetryNumber:
+    slot_uri: OntoRxn:hasSymmetryNumber
+    multivalued: true
+  hasXYZGeometry:
+    slot_uri: OntoRxn:hasXYZGeometry
+    comments:
+    - Property defining the string corresponding to the XYZ coordinates of a calculation.@en
+    multivalued: true
+  isAbstract:
+    slot_uri: isAbstract
+    multivalued: true
+  description:
+    slot_uri: terms:description
+    multivalued: true
+  title:
+    slot_uri: dc:title
+    multivalued: true
+  hasVersion:
+    slot_uri: terms:hasVersion
+    multivalued: true
+  issued:
+    slot_uri: terms:issued
+    multivalued: true
+  license:
+    slot_uri: terms:license
+    multivalued: true
+enums: {}
+

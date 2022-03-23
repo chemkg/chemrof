@@ -1,0 +1,2549 @@
+@prefix : <http://www.daml.org/2003/01/periodictable/PeriodicTable#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.daml.org/2003/01/periodictable/PeriodicTable> .
+
+<http://www.daml.org/2003/01/periodictable/PeriodicTable> rdf:type owl:Ontology ;
+                                                           rdfs:comment "Periodic Table of the Elements" ;
+                                                           owl:versionInfo "$Id: PeriodicTable.owl,v 1.10 2004/02/05 15:49:58 mdean Exp $" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#block
+:block rdf:type owl:ObjectProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#classification
+:classification rdf:type owl:ObjectProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#element
+:element rdf:type owl:ObjectProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group
+:group rdf:type owl:ObjectProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period
+:period rdf:type owl:ObjectProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#standardState
+:standardState rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#atomicNumber
+:atomicNumber rdf:type owl:DatatypeProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#atomicWeight
+:atomicWeight rdf:type owl:DatatypeProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#casRegistryID
+:casRegistryID rdf:type owl:DatatypeProperty ;
+               rdfs:comment "Chemical Abstracts Service (CAS) related information" ;
+               rdfs:seeAlso <http://www.cas.org> .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#color
+:color rdf:type owl:DatatypeProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#name
+:name rdf:type owl:DatatypeProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#number
+:number rdf:type owl:DatatypeProperty .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#symbol
+:symbol rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Block
+:Block rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Class ;
+                             owl:oneOf ( :d-block
+                                         :f-block
+                                         :p-block
+                                         :s-block
+                                       )
+                           ] .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Classification
+:Classification rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:oneOf ( :Metallic
+                                                  :Non-metallic
+                                                  :Semi-metallic
+                                                )
+                                    ] .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Element
+:Element rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :block ;
+                           owl:allValuesFrom :Block
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :classification ;
+                           owl:allValuesFrom :Classification
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :group ;
+                           owl:allValuesFrom :Group
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :period ;
+                           owl:allValuesFrom :Period
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :standardState ;
+                           owl:allValuesFrom :StandardState
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :block ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :group ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :period ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :atomicNumber ;
+                           owl:allValuesFrom xsd:integer
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :atomicWeight ;
+                           owl:allValuesFrom xsd:float
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :color ;
+                           owl:allValuesFrom xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :name ;
+                           owl:allValuesFrom xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :symbol ;
+                           owl:allValuesFrom xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :atomicNumber ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :atomicWeight ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :name ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :symbol ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Group
+:Group rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :element ;
+                         owl:allValuesFrom :Element
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :name ;
+                         owl:allValuesFrom xsd:string
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :number ;
+                         owl:allValuesFrom xsd:integer
+                       ] .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Period
+:Period rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :element ;
+                          owl:allValuesFrom :Element
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :number ;
+                          owl:allValuesFrom xsd:integer
+                        ] .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#StandardState
+:StandardState rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Class ;
+                                     owl:oneOf ( :gas
+                                                 :liquid
+                                                 :solid
+                                                 :state_unknown
+                                               )
+                                   ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ac
+:Ac rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 89 ;
+    :atomicWeight "227.0"^^xsd:float ;
+    :casRegistryID "7440-34-8"^^xsd:string ;
+    :color "silvery"^^xsd:string ;
+    :name "actinium"^^xsd:string ;
+    :symbol "Ac"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ag
+:Ag rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_11 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 47 ;
+    :atomicWeight "107.8682"^^xsd:float ;
+    :casRegistryID "7440-22-4"^^xsd:string ;
+    :color "silver"^^xsd:string ;
+    :name "silver"^^xsd:string ;
+    :symbol "Ag"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Al
+:Al rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_13 ;
+    :period :period_3 ;
+    :standardState :solid ;
+    :atomicNumber 13 ;
+    :atomicWeight "26.981539"^^xsd:float ;
+    :casRegistryID "7429-90-5"^^xsd:string ;
+    :color "silvery"^^xsd:string ;
+    :name "aluminium"^^xsd:string ;
+    :symbol "Al"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Am
+:Am rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 95 ;
+    :atomicWeight "243.0"^^xsd:float ;
+    :casRegistryID "7440-35-9"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "americium"^^xsd:string ;
+    :symbol "Am"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ar
+:Ar rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_3 ;
+    :standardState :gas ;
+    :atomicNumber 18 ;
+    :atomicWeight "39.948"^^xsd:float ;
+    :casRegistryID "7440-37-1"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "argon"^^xsd:string ;
+    :symbol "Ar"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#As
+:As rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_15 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 33 ;
+    :atomicWeight "74.9216"^^xsd:float ;
+    :casRegistryID "7440-38-2"^^xsd:string ;
+    :color "metallic grey"^^xsd:string ;
+    :name "arsenic"^^xsd:string ;
+    :symbol "As"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#At
+:At rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_17 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 85 ;
+    :atomicWeight "210.0"^^xsd:float ;
+    :casRegistryID "7440-68-8"^^xsd:string ;
+    :color "metallic"^^xsd:string ;
+    :name "astatine"^^xsd:string ;
+    :symbol "At"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Au
+:Au rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_11 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 79 ;
+    :atomicWeight "196.96655"^^xsd:float ;
+    :casRegistryID "7440-57-5"^^xsd:string ;
+    :color "gold"^^xsd:string ;
+    :name "gold"^^xsd:string ;
+    :symbol "Au"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#B
+:B rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Semi-metallic ;
+   :group :group_13 ;
+   :period :period_2 ;
+   :standardState :solid ;
+   :atomicNumber 5 ;
+   :atomicWeight "10.811"^^xsd:float ;
+   :casRegistryID "7440-42-8"^^xsd:string ;
+   :color "black"^^xsd:string ;
+   :name "boron"^^xsd:string ;
+   :symbol "B"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ba
+:Ba rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 56 ;
+    :atomicWeight "137.327"^^xsd:float ;
+    :casRegistryID "7440-39-3"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "barium"^^xsd:string ;
+    :symbol "Ba"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Be
+:Be rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_2 ;
+    :standardState :solid ;
+    :atomicNumber 4 ;
+    :atomicWeight "9.012182"^^xsd:float ;
+    :casRegistryID "7440-41-7"^^xsd:string ;
+    :color "lead gray"^^xsd:string ;
+    :name "beryllium"^^xsd:string ;
+    :symbol "Be"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Bh
+:Bh rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_7 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 107 ;
+    :atomicWeight "264.0"^^xsd:float ;
+    :casRegistryID "54037-14-8"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "bohrium"^^xsd:string ;
+    :symbol "Bh"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Bi
+:Bi rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_15 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 83 ;
+    :atomicWeight "208.98038"^^xsd:float ;
+    :casRegistryID "7440-69-9"^^xsd:string ;
+    :color "lustrous reddish white"^^xsd:string ;
+    :name "bismuth"^^xsd:string ;
+    :symbol "Bi"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Bk
+:Bk rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 97 ;
+    :atomicWeight "247.0"^^xsd:float ;
+    :casRegistryID "7440-40-6"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "berkelium"^^xsd:string ;
+    :symbol "Bk"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Br
+:Br rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_17 ;
+    :period :period_4 ;
+    :standardState :liquid ;
+    :atomicNumber 35 ;
+    :atomicWeight "79.904"^^xsd:float ;
+    :casRegistryID "7726-95-6"^^xsd:string ;
+    :color "red-brown, metallic lustre when solid"^^xsd:string ;
+    :name "bromine"^^xsd:string ;
+    :symbol "Br"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#C
+:C rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_14 ;
+   :period :period_2 ;
+   :standardState :solid ;
+   :atomicNumber 6 ;
+   :atomicWeight "12.0107"^^xsd:float ;
+   :casRegistryID "7440-44-0"^^xsd:string ;
+   :color "graphite is black, diamond is colourless"^^xsd:string ;
+   :name "carbon"^^xsd:string ;
+   :symbol "C"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ca
+:Ca rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 20 ;
+    :atomicWeight "40.078"^^xsd:float ;
+    :casRegistryID "7440-70-2"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "calcium"^^xsd:string ;
+    :symbol "Ca"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cd
+:Cd rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_12 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 48 ;
+    :atomicWeight "112.411"^^xsd:float ;
+    :casRegistryID "7440-43-9"^^xsd:string ;
+    :color "silvery grey metallic"^^xsd:string ;
+    :name "cadmium"^^xsd:string ;
+    :symbol "Cd"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ce
+:Ce rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 58 ;
+    :atomicWeight "140.116"^^xsd:float ;
+    :casRegistryID "7440-45-1"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "cerium"^^xsd:string ;
+    :symbol "Ce"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cf
+:Cf rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 98 ;
+    :atomicWeight "251.0"^^xsd:float ;
+    :casRegistryID "7440-71-3"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "californium"^^xsd:string ;
+    :symbol "Cf"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cl
+:Cl rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_17 ;
+    :period :period_3 ;
+    :standardState :gas ;
+    :atomicNumber 17 ;
+    :atomicWeight "35.453"^^xsd:float ;
+    :casRegistryID "7782-50-5"^^xsd:string ;
+    :color "yellowish green"^^xsd:string ;
+    :name "chlorine"^^xsd:string ;
+    :symbol "Cl"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cm
+:Cm rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 96 ;
+    :atomicWeight "247.0"^^xsd:float ;
+    :casRegistryID "7440-51-9"^^xsd:string ;
+    :color "silver"^^xsd:string ;
+    :name "curium"^^xsd:string ;
+    :symbol "Cm"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Co
+:Co rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_9 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 27 ;
+    :atomicWeight "58.9332"^^xsd:float ;
+    :casRegistryID "7440-48-4"^^xsd:string ;
+    :color "lustrous, metallic, greyish tinge"^^xsd:string ;
+    :name "cobalt"^^xsd:string ;
+    :symbol "Co"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cr
+:Cr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_6 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 24 ;
+    :atomicWeight "51.9961"^^xsd:float ;
+    :casRegistryID "7440-47-3"^^xsd:string ;
+    :color "silvery metallic"^^xsd:string ;
+    :name "chromium"^^xsd:string ;
+    :symbol "Cr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cs
+:Cs rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_1 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 55 ;
+    :atomicWeight "132.90546"^^xsd:float ;
+    :casRegistryID "7440-46-2"^^xsd:string ;
+    :color "silvery gold"^^xsd:string ;
+    :name "caesium"^^xsd:string ;
+    :symbol "Cs"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Cu
+:Cu rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_11 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 29 ;
+    :atomicWeight "63.546"^^xsd:float ;
+    :casRegistryID "7440-50-8"^^xsd:string ;
+    :color "copper, metallic"^^xsd:string ;
+    :name "copper"^^xsd:string ;
+    :symbol "Cu"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Db
+:Db rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_5 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 105 ;
+    :atomicWeight "262.0"^^xsd:float ;
+    :casRegistryID "53850-35-4"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "dubnium"^^xsd:string ;
+    :symbol "Db"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Dy
+:Dy rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 66 ;
+    :atomicWeight "162.5"^^xsd:float ;
+    :casRegistryID "7429-91-6"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "dysprosium"^^xsd:string ;
+    :symbol "Dy"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Er
+:Er rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 68 ;
+    :atomicWeight "167.259"^^xsd:float ;
+    :casRegistryID "7440-52-0"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "erbium"^^xsd:string ;
+    :symbol "Er"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Es
+:Es rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 99 ;
+    :atomicWeight "252.0"^^xsd:float ;
+    :casRegistryID "7429-92-7"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "einsteinium"^^xsd:string ;
+    :symbol "Es"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Eu
+:Eu rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 63 ;
+    :atomicWeight "151.964"^^xsd:float ;
+    :casRegistryID "7440-53-1"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "europium"^^xsd:string ;
+    :symbol "Eu"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#F
+:F rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_17 ;
+   :period :period_2 ;
+   :standardState :gas ;
+   :atomicNumber 9 ;
+   :atomicWeight "18.998404"^^xsd:float ;
+   :casRegistryID "7782-41-4"^^xsd:string ;
+   :color "pale yellow"^^xsd:string ;
+   :name "fluorine"^^xsd:string ;
+   :symbol "F"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Fe
+:Fe rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_8 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 26 ;
+    :atomicWeight "55.845"^^xsd:float ;
+    :casRegistryID "7439-89-6"^^xsd:string ;
+    :color "lustrous, metallic, greyish tinge"^^xsd:string ;
+    :name "iron"^^xsd:string ;
+    :symbol "Fe"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Fm
+:Fm rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 100 ;
+    :atomicWeight "257.0"^^xsd:float ;
+    :casRegistryID "7440-72-4"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "fermium"^^xsd:string ;
+    :symbol "Fm"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Fr
+:Fr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_1 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 87 ;
+    :atomicWeight "223.0"^^xsd:float ;
+    :casRegistryID "7440-73-5"^^xsd:string ;
+    :color "metallic"^^xsd:string ;
+    :name "francium"^^xsd:string ;
+    :symbol "Fr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ga
+:Ga rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_13 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 31 ;
+    :atomicWeight "69.723"^^xsd:float ;
+    :casRegistryID "7440-55-3"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "gallium"^^xsd:string ;
+    :symbol "Ga"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Gd
+:Gd rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 64 ;
+    :atomicWeight "157.25"^^xsd:float ;
+    :casRegistryID "7440-54-2"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "gadolinium"^^xsd:string ;
+    :symbol "Gd"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ge
+:Ge rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_14 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 32 ;
+    :atomicWeight "72.64"^^xsd:float ;
+    :casRegistryID "7440-56-4"^^xsd:string ;
+    :color "greyish white"^^xsd:string ;
+    :name "germanium"^^xsd:string ;
+    :symbol "Ge"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#H
+:H rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :s-block ;
+   :classification :Non-metallic ;
+   :group :group_1 ;
+   :period :period_1 ;
+   :standardState :gas ;
+   :atomicNumber 1 ;
+   :atomicWeight "1.00794"^^xsd:float ;
+   :casRegistryID "1333-74-0"^^xsd:string ;
+   :color "colourless"^^xsd:string ;
+   :name "hydrogen"^^xsd:string ;
+   :symbol "H"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#He
+:He rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_1 ;
+    :standardState :gas ;
+    :atomicNumber 2 ;
+    :atomicWeight "4.002602"^^xsd:float ;
+    :casRegistryID "7440-59-7"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "helium"^^xsd:string ;
+    :symbol "He"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Hf
+:Hf rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_4 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 72 ;
+    :atomicWeight "178.49"^^xsd:float ;
+    :casRegistryID "7440-58-6"^^xsd:string ;
+    :color "grey steel"^^xsd:string ;
+    :name "hafnium"^^xsd:string ;
+    :symbol "Hf"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Hg
+:Hg rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_12 ;
+    :period :period_6 ;
+    :standardState :liquid ;
+    :atomicNumber 80 ;
+    :atomicWeight "200.59"^^xsd:float ;
+    :casRegistryID "7439-97-6"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "mercury"^^xsd:string ;
+    :symbol "Hg"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ho
+:Ho rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 67 ;
+    :atomicWeight "164.93031"^^xsd:float ;
+    :casRegistryID "7440-60-0"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "holmium"^^xsd:string ;
+    :symbol "Ho"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Hs
+:Hs rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_8 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 108 ;
+    :atomicWeight "269.0"^^xsd:float ;
+    :casRegistryID "54037-57-9"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "hassium"^^xsd:string ;
+    :symbol "Hs"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#I
+:I rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_17 ;
+   :period :period_5 ;
+   :standardState :solid ;
+   :atomicNumber 53 ;
+   :atomicWeight "126.90447"^^xsd:float ;
+   :casRegistryID "7553-56-2"^^xsd:string ;
+   :color "violet-dark grey, lustrous"^^xsd:string ;
+   :name "iodine"^^xsd:string ;
+   :symbol "I"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#In
+:In rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_13 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 49 ;
+    :atomicWeight "114.818"^^xsd:float ;
+    :casRegistryID "7440-74-6"^^xsd:string ;
+    :color "silvery lustrous grey"^^xsd:string ;
+    :name "indium"^^xsd:string ;
+    :symbol "In"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ir
+:Ir rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_9 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 77 ;
+    :atomicWeight "192.217"^^xsd:float ;
+    :casRegistryID "7439-88-5"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "iridium"^^xsd:string ;
+    :symbol "Ir"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#K
+:K rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :s-block ;
+   :classification :Metallic ;
+   :group :group_1 ;
+   :period :period_4 ;
+   :standardState :solid ;
+   :atomicNumber 19 ;
+   :atomicWeight "39.0983"^^xsd:float ;
+   :casRegistryID "7440-09-7"^^xsd:string ;
+   :color "silvery white"^^xsd:string ;
+   :name "potassium"^^xsd:string ;
+   :symbol "K"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Kr
+:Kr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_4 ;
+    :standardState :gas ;
+    :atomicNumber 36 ;
+    :atomicWeight "83.798"^^xsd:float ;
+    :casRegistryID "7439-90-9"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "krypton"^^xsd:string ;
+    :symbol "Kr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#La
+:La rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 57 ;
+    :atomicWeight "138.9055"^^xsd:float ;
+    :casRegistryID "7439-91-0"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "lanthanum"^^xsd:string ;
+    :symbol "La"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Li
+:Li rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_1 ;
+    :period :period_2 ;
+    :standardState :solid ;
+    :atomicNumber 3 ;
+    :atomicWeight "6.941"^^xsd:float ;
+    :casRegistryID "7439-93-2"^^xsd:string ;
+    :color "silvery white/grey"^^xsd:string ;
+    :name "lithium"^^xsd:string ;
+    :symbol "Li"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Lr
+:Lr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_3 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 103 ;
+    :atomicWeight "262.0"^^xsd:float ;
+    :casRegistryID "22537-19-5"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "lawrencium"^^xsd:string ;
+    :symbol "Lr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Lu
+:Lu rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_3 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 71 ;
+    :atomicWeight "174.967"^^xsd:float ;
+    :casRegistryID "7439-94-3"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "lutetium"^^xsd:string ;
+    :symbol "Lu"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Md
+:Md rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 101 ;
+    :atomicWeight "258.0"^^xsd:float ;
+    :casRegistryID "7440-11-1"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "mendelevium"^^xsd:string ;
+    :symbol "Md"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Metallic
+:Metallic rdf:type owl:NamedIndividual ,
+                   :Classification .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Mg
+:Mg rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_3 ;
+    :standardState :solid ;
+    :atomicNumber 12 ;
+    :atomicWeight "24.305"^^xsd:float ;
+    :casRegistryID "7439-95-4"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "magnesium"^^xsd:string ;
+    :symbol "Mg"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Mn
+:Mn rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_7 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 25 ;
+    :atomicWeight "54.93805"^^xsd:float ;
+    :casRegistryID "7439-96-5"^^xsd:string ;
+    :color "silvery metallic"^^xsd:string ;
+    :name "manganese"^^xsd:string ;
+    :symbol "Mn"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Mo
+:Mo rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_6 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 42 ;
+    :atomicWeight "95.94"^^xsd:float ;
+    :casRegistryID "7439-98-7"^^xsd:string ;
+    :color "grey metallic"^^xsd:string ;
+    :name "molybdenum"^^xsd:string ;
+    :symbol "Mo"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Mt
+:Mt rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_9 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 109 ;
+    :atomicWeight "268.0"^^xsd:float ;
+    :casRegistryID "54038-01-6"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "meitnerium"^^xsd:string ;
+    :symbol "Mt"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#N
+:N rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_15 ;
+   :period :period_2 ;
+   :standardState :gas ;
+   :atomicNumber 7 ;
+   :atomicWeight "14.0067"^^xsd:float ;
+   :casRegistryID "7727-37-9"^^xsd:string ;
+   :color "colourless"^^xsd:string ;
+   :name "nitrogen"^^xsd:string ;
+   :symbol "N"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Na
+:Na rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_1 ;
+    :period :period_3 ;
+    :standardState :solid ;
+    :atomicNumber 11 ;
+    :atomicWeight "22.98977"^^xsd:float ;
+    :casRegistryID "7440-23-5"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "sodium"^^xsd:string ;
+    :symbol "Na"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Nb
+:Nb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_5 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 41 ;
+    :atomicWeight "92.90638"^^xsd:float ;
+    :casRegistryID "7440-03-1"^^xsd:string ;
+    :color "grey metallic"^^xsd:string ;
+    :name "niobium"^^xsd:string ;
+    :symbol "Nb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Nd
+:Nd rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 60 ;
+    :atomicWeight "144.24"^^xsd:float ;
+    :casRegistryID "7440-00-8"^^xsd:string ;
+    :color "silvery white, yellowish tinge"^^xsd:string ;
+    :name "neodymium"^^xsd:string ;
+    :symbol "Nd"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ne
+:Ne rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_2 ;
+    :standardState :gas ;
+    :atomicNumber 10 ;
+    :atomicWeight "20.1797"^^xsd:float ;
+    :casRegistryID "7440-01-9"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "neon"^^xsd:string ;
+    :symbol "Ne"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ni
+:Ni rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_10 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 28 ;
+    :atomicWeight "58.6934"^^xsd:float ;
+    :casRegistryID "7440-02-0"^^xsd:string ;
+    :color "lustrous, metallic, silvery tinge"^^xsd:string ;
+    :name "nickel"^^xsd:string ;
+    :symbol "Ni"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#No
+:No rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 102 ;
+    :atomicWeight "259.0"^^xsd:float ;
+    :casRegistryID "10028-14-5"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "nobelium"^^xsd:string ;
+    :symbol "No"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Non-metallic
+:Non-metallic rdf:type owl:NamedIndividual ,
+                       :Classification .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Np
+:Np rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 93 ;
+    :atomicWeight "237.0"^^xsd:float ;
+    :casRegistryID "7439-99-8"^^xsd:string ;
+    :color "silvery metallic"^^xsd:string ;
+    :name "neptunium"^^xsd:string ;
+    :symbol "Np"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#O
+:O rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_16 ;
+   :period :period_2 ;
+   :standardState :gas ;
+   :atomicNumber 8 ;
+   :atomicWeight "15.9994"^^xsd:float ;
+   :casRegistryID "7782-44-7"^^xsd:string ;
+   :color "colourless as a gas, liquid is pale blue"^^xsd:string ;
+   :name "oxygen"^^xsd:string ;
+   :symbol "O"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Os
+:Os rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_8 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 76 ;
+    :atomicWeight "190.23"^^xsd:float ;
+    :casRegistryID "7440-04-2"^^xsd:string ;
+    :color "bluish grey"^^xsd:string ;
+    :name "osmium"^^xsd:string ;
+    :symbol "Os"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#P
+:P rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_15 ;
+   :period :period_3 ;
+   :standardState :solid ;
+   :atomicNumber 15 ;
+   :atomicWeight "30.97376"^^xsd:float ;
+   :casRegistryID "7723-14-0"^^xsd:string ;
+   :color "colourless/red/silvery white"^^xsd:string ;
+   :name "phosphorus"^^xsd:string ;
+   :symbol "P"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pa
+:Pa rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 91 ;
+    :atomicWeight "231.03587"^^xsd:float ;
+    :casRegistryID "7440-13-3"^^xsd:string ;
+    :color "silvery metallic"^^xsd:string ;
+    :name "protactinium"^^xsd:string ;
+    :symbol "Pa"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pb
+:Pb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_14 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 82 ;
+    :atomicWeight "207.2"^^xsd:float ;
+    :casRegistryID "7439-92-1"^^xsd:string ;
+    :color "bluish white"^^xsd:string ;
+    :name "lead"^^xsd:string ;
+    :symbol "Pb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pd
+:Pd rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_10 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 46 ;
+    :atomicWeight "106.42"^^xsd:float ;
+    :casRegistryID "7440-05-3"^^xsd:string ;
+    :color "silvery white metallic"^^xsd:string ;
+    :name "palladium"^^xsd:string ;
+    :symbol "Pd"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pm
+:Pm rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 61 ;
+    :atomicWeight "145.0"^^xsd:float ;
+    :casRegistryID "7440-12-2"^^xsd:string ;
+    :color "metallic"^^xsd:string ;
+    :name "promethium"^^xsd:string ;
+    :symbol "Pm"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Po
+:Po rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_16 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 84 ;
+    :atomicWeight "209.0"^^xsd:float ;
+    :casRegistryID "7440-08-6"^^xsd:string ;
+    :color "silvery"^^xsd:string ;
+    :name "polonium"^^xsd:string ;
+    :symbol "Po"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pr
+:Pr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 59 ;
+    :atomicWeight "140.90765"^^xsd:float ;
+    :casRegistryID "7440-10-0"^^xsd:string ;
+    :color "silvery white, yellowish tinge"^^xsd:string ;
+    :name "praseodymium"^^xsd:string ;
+    :symbol "Pr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pt
+:Pt rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_10 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 78 ;
+    :atomicWeight "195.078"^^xsd:float ;
+    :casRegistryID "7440-06-4"^^xsd:string ;
+    :color "greyish white"^^xsd:string ;
+    :name "platinum"^^xsd:string ;
+    :symbol "Pt"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Pu
+:Pu rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 94 ;
+    :atomicWeight "244.0"^^xsd:float ;
+    :casRegistryID "7440-07-5"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "plutonium"^^xsd:string ;
+    :symbol "Pu"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ra
+:Ra rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 88 ;
+    :atomicWeight "226.0"^^xsd:float ;
+    :casRegistryID "7440-14-4"^^xsd:string ;
+    :color "metallic"^^xsd:string ;
+    :name "radium"^^xsd:string ;
+    :symbol "Ra"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Rb
+:Rb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_1 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 37 ;
+    :atomicWeight "85.4678"^^xsd:float ;
+    :casRegistryID "7440-17-7"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "rubidium"^^xsd:string ;
+    :symbol "Rb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Re
+:Re rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_7 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 75 ;
+    :atomicWeight "186.207"^^xsd:float ;
+    :casRegistryID "7440-15-5"^^xsd:string ;
+    :color "greyish white"^^xsd:string ;
+    :name "rhenium"^^xsd:string ;
+    :symbol "Re"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Rf
+:Rf rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_4 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 104 ;
+    :atomicWeight "261.0"^^xsd:float ;
+    :casRegistryID "53850-36-5"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "rutherfordium"^^xsd:string ;
+    :symbol "Rf"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Rh
+:Rh rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_9 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 45 ;
+    :atomicWeight "102.9055"^^xsd:float ;
+    :casRegistryID "7440-16-6"^^xsd:string ;
+    :color "silvery white metallic"^^xsd:string ;
+    :name "rhodium"^^xsd:string ;
+    :symbol "Rh"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Rn
+:Rn rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_6 ;
+    :standardState :gas ;
+    :atomicNumber 86 ;
+    :atomicWeight "222.0"^^xsd:float ;
+    :casRegistryID "10043-92-2"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "radon"^^xsd:string ;
+    :symbol "Rn"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ru
+:Ru rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_8 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 44 ;
+    :atomicWeight "101.07"^^xsd:float ;
+    :casRegistryID "7440-18-8"^^xsd:string ;
+    :color "silvery white metallic"^^xsd:string ;
+    :name "ruthenium"^^xsd:string ;
+    :symbol "Ru"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#S
+:S rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :p-block ;
+   :classification :Non-metallic ;
+   :group :group_16 ;
+   :period :period_3 ;
+   :standardState :solid ;
+   :atomicNumber 16 ;
+   :atomicWeight "32.065"^^xsd:float ;
+   :casRegistryID "7704-34-9"^^xsd:string ;
+   :color "lemon yellow"^^xsd:string ;
+   :name "sulpher"^^xsd:string ;
+   :symbol "S"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sb
+:Sb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_15 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 51 ;
+    :atomicWeight "121.76"^^xsd:float ;
+    :casRegistryID "7440-36-0"^^xsd:string ;
+    :color "silvery lustrous grey"^^xsd:string ;
+    :name "antimony"^^xsd:string ;
+    :symbol "Sb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sc
+:Sc rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_3 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 21 ;
+    :atomicWeight "44.95591"^^xsd:float ;
+    :casRegistryID "7440-20-2"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "scandium"^^xsd:string ;
+    :symbol "Sc"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Se
+:Se rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_16 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 34 ;
+    :atomicWeight "78.96"^^xsd:float ;
+    :casRegistryID "7782-49-2"^^xsd:string ;
+    :color "grey, metallic lustre"^^xsd:string ;
+    :name "selenium"^^xsd:string ;
+    :symbol "Se"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Semi-metallic
+:Semi-metallic rdf:type owl:NamedIndividual ,
+                        :Classification .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sg
+:Sg rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_6 ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 106 ;
+    :atomicWeight "266.0"^^xsd:float ;
+    :casRegistryID "54038-81-2"^^xsd:string ;
+    :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+    :name "seaborgium"^^xsd:string ;
+    :symbol "Sg"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Si
+:Si rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_14 ;
+    :period :period_3 ;
+    :standardState :solid ;
+    :atomicNumber 14 ;
+    :atomicWeight "28.0855"^^xsd:float ;
+    :casRegistryID "7440-21-3"^^xsd:string ;
+    :color "dark grey with a bluish tinge"^^xsd:string ;
+    :name "silicon"^^xsd:string ;
+    :symbol "Si"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sm
+:Sm rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 62 ;
+    :atomicWeight "150.36"^^xsd:float ;
+    :casRegistryID "7440-19-9"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "samarium"^^xsd:string ;
+    :symbol "Sm"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sn
+:Sn rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_14 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 50 ;
+    :atomicWeight "118.71"^^xsd:float ;
+    :casRegistryID "7440-31-5"^^xsd:string ;
+    :color "silvery lustrous grey"^^xsd:string ;
+    :name "tin"^^xsd:string ;
+    :symbol "Sn"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Sr
+:Sr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :s-block ;
+    :classification :Metallic ;
+    :group :group_2 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 38 ;
+    :atomicWeight "87.62"^^xsd:float ;
+    :casRegistryID "7440-24-6"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "strontium"^^xsd:string ;
+    :symbol "Sr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ta
+:Ta rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_5 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 73 ;
+    :atomicWeight "180.9479"^^xsd:float ;
+    :casRegistryID "7440-25-7"^^xsd:string ;
+    :color "grey blue"^^xsd:string ;
+    :name "tantalum"^^xsd:string ;
+    :symbol "Ta"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Tb
+:Tb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 65 ;
+    :atomicWeight "158.92534"^^xsd:float ;
+    :casRegistryID "7440-27-9"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "terbium"^^xsd:string ;
+    :symbol "Tb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Tc
+:Tc rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_7 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 43 ;
+    :atomicWeight "98.0"^^xsd:float ;
+    :casRegistryID "7440-26-8"^^xsd:string ;
+    :color "silvery grey metallic"^^xsd:string ;
+    :name "technetium"^^xsd:string ;
+    :symbol "Tc"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Te
+:Te rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Semi-metallic ;
+    :group :group_16 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 52 ;
+    :atomicWeight "127.6"^^xsd:float ;
+    :casRegistryID "13494-80-9"^^xsd:string ;
+    :color "silvery lustrous grey"^^xsd:string ;
+    :name "tellurium"^^xsd:string ;
+    :symbol "Te"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Th
+:Th rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_actinoid ;
+    :period :period_7 ;
+    :standardState :solid ;
+    :atomicNumber 90 ;
+    :atomicWeight "232.0381"^^xsd:float ;
+    :casRegistryID "7440-29-1"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "thorium"^^xsd:string ;
+    :symbol "Th"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Ti
+:Ti rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_4 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 22 ;
+    :atomicWeight "47.867"^^xsd:float ;
+    :casRegistryID "7440-32-6"^^xsd:string ;
+    :color "silvery metallic"^^xsd:string ;
+    :name "titanium"^^xsd:string ;
+    :symbol "Ti"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Tl
+:Tl rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Metallic ;
+    :group :group_13 ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 81 ;
+    :atomicWeight "204.3833"^^xsd:float ;
+    :casRegistryID "7440-28-0"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "thallium"^^xsd:string ;
+    :symbol "Tl"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Tm
+:Tm rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 69 ;
+    :atomicWeight "168.9342"^^xsd:float ;
+    :casRegistryID "7440-30-4"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "thulium"^^xsd:string ;
+    :symbol "Tm"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#U
+:U rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :f-block ;
+   :classification :Metallic ;
+   :group :group_actinoid ;
+   :period :period_7 ;
+   :standardState :solid ;
+   :atomicNumber 92 ;
+   :atomicWeight "238.02892"^^xsd:float ;
+   :casRegistryID "7440-61-1"^^xsd:string ;
+   :color "metallic grey"^^xsd:string ;
+   :name "uranium"^^xsd:string ;
+   :symbol "U"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uub
+:Uub rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :d-block ;
+     :classification :Metallic ;
+     :group :group_12 ;
+     :period :period_7 ;
+     :standardState :liquid ;
+     :atomicNumber 112 ;
+     :atomicWeight "285.0"^^xsd:float ;
+     :casRegistryID "54084-26-3"^^xsd:string ;
+     :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+     :name "ununbium"^^xsd:string ;
+     :symbol "Uub"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uuh
+:Uuh rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :classification :Metallic ;
+     :group :group_16 ;
+     :period :period_7 ;
+     :standardState :solid ;
+     :atomicNumber 116 ;
+     :casRegistryID "54100-71-9"^^xsd:string ;
+     :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+     :name "ununhexium"^^xsd:string ;
+     :symbol "Uuh"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uun
+:Uun rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :d-block ;
+     :classification :Metallic ;
+     :group :group_10 ;
+     :period :period_7 ;
+     :standardState :solid ;
+     :atomicNumber 110 ;
+     :atomicWeight "271.0"^^xsd:float ;
+     :casRegistryID "54083-77-1"^^xsd:string ;
+     :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+     :name "ununnilium"^^xsd:string ;
+     :symbol "Uun"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uuo
+:Uuo rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :classification :Non-metallic ;
+     :group :group_18 ;
+     :period :period_7 ;
+     :standardState :gas ;
+     :atomicNumber 118 ;
+     :casRegistryID "54144-19-3"^^xsd:string ;
+     :color "unknown, but probably a colourless gas"^^xsd:string ;
+     :name "ununoctium"^^xsd:string ;
+     :symbol "Uuo"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uup
+:Uup rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :group :group_15 ;
+     :period :period_7 ;
+     :standardState :state_unknown ;
+     :atomicNumber 115 ;
+     :name "ununpentium"^^xsd:string ;
+     :symbol "Uup"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uuq
+:Uuq rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :classification :Metallic ;
+     :group :group_14 ;
+     :period :period_7 ;
+     :standardState :solid ;
+     :atomicNumber 114 ;
+     :atomicWeight "289.0"^^xsd:float ;
+     :casRegistryID "54085-16-4"^^xsd:string ;
+     :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+     :name "ununquadium"^^xsd:string ;
+     :symbol "Uuq"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uus
+:Uus rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :group :group_17 ;
+     :period :period_7 ;
+     :standardState :state_unknown ;
+     :atomicNumber 117 ;
+     :name "ununseptium"^^xsd:string ;
+     :symbol "Uus"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uut
+:Uut rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :p-block ;
+     :group :group_13 ;
+     :period :period_7 ;
+     :standardState :state_unknown ;
+     :atomicNumber 113 ;
+     :name "ununtrium"^^xsd:string ;
+     :symbol "Uut"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Uuu
+:Uuu rdf:type owl:NamedIndividual ,
+              :Element ;
+     :block :d-block ;
+     :classification :Metallic ;
+     :group :group_11 ;
+     :period :period_7 ;
+     :standardState :solid ;
+     :atomicNumber 111 ;
+     :atomicWeight "272.0"^^xsd:float ;
+     :casRegistryID "54386-24-2"^^xsd:string ;
+     :color "unknown, but probably metallic and silvery white or grey in appearance"^^xsd:string ;
+     :name "unununium"^^xsd:string ;
+     :symbol "Uuu"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#V
+:V rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :d-block ;
+   :classification :Metallic ;
+   :group :group_5 ;
+   :period :period_4 ;
+   :standardState :solid ;
+   :atomicNumber 23 ;
+   :atomicWeight "50.9415"^^xsd:float ;
+   :casRegistryID "7440-62-2"^^xsd:string ;
+   :color "silvery grey metallic"^^xsd:string ;
+   :name "vanadium"^^xsd:string ;
+   :symbol "V"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#W
+:W rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :d-block ;
+   :classification :Metallic ;
+   :group :group_6 ;
+   :period :period_6 ;
+   :standardState :solid ;
+   :atomicNumber 74 ;
+   :atomicWeight "183.84"^^xsd:float ;
+   :casRegistryID "7440-33-7"^^xsd:string ;
+   :color "greyish white, lustrous"^^xsd:string ;
+   :name "tungsten"^^xsd:string ;
+   :symbol "W"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Xe
+:Xe rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :p-block ;
+    :classification :Non-metallic ;
+    :group :group_18 ;
+    :period :period_5 ;
+    :standardState :gas ;
+    :atomicNumber 54 ;
+    :atomicWeight "131.293"^^xsd:float ;
+    :casRegistryID "7440-63-3"^^xsd:string ;
+    :color "colourless"^^xsd:string ;
+    :name "xenon"^^xsd:string ;
+    :symbol "Xe"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Y
+:Y rdf:type owl:NamedIndividual ,
+            :Element ;
+   :block :d-block ;
+   :classification :Metallic ;
+   :group :group_3 ;
+   :period :period_5 ;
+   :standardState :solid ;
+   :atomicNumber 39 ;
+   :atomicWeight "88.90585"^^xsd:float ;
+   :casRegistryID "7440-65-5"^^xsd:string ;
+   :color "silvery white"^^xsd:string ;
+   :name "yttrium"^^xsd:string ;
+   :symbol "Y"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Yb
+:Yb rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :f-block ;
+    :classification :Metallic ;
+    :group :group_lanthanoid ;
+    :period :period_6 ;
+    :standardState :solid ;
+    :atomicNumber 70 ;
+    :atomicWeight "173.04"^^xsd:float ;
+    :casRegistryID "7440-64-4"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "ytterbium"^^xsd:string ;
+    :symbol "Yb"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Zn
+:Zn rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_12 ;
+    :period :period_4 ;
+    :standardState :solid ;
+    :atomicNumber 30 ;
+    :atomicWeight "65.409"^^xsd:float ;
+    :casRegistryID "7440-66-6"^^xsd:string ;
+    :color "bluish pale grey"^^xsd:string ;
+    :name "zinc"^^xsd:string ;
+    :symbol "Zn"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#Zr
+:Zr rdf:type owl:NamedIndividual ,
+             :Element ;
+    :block :d-block ;
+    :classification :Metallic ;
+    :group :group_4 ;
+    :period :period_5 ;
+    :standardState :solid ;
+    :atomicNumber 40 ;
+    :atomicWeight "91.224"^^xsd:float ;
+    :casRegistryID "7440-67-7"^^xsd:string ;
+    :color "silvery white"^^xsd:string ;
+    :name "zirconium"^^xsd:string ;
+    :symbol "Zr"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#d-block
+:d-block rdf:type owl:NamedIndividual ,
+                  :Block .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#f-block
+:f-block rdf:type owl:NamedIndividual ,
+                  :Block .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#gas
+:gas rdf:type owl:NamedIndividual ,
+              :StandardState .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_1
+:group_1 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Cs ,
+                  :Fr ,
+                  :H ,
+                  :K ,
+                  :Li ,
+                  :Na ,
+                  :Rb ;
+         :name "Alkali metal"^^xsd:string ;
+         :number 1 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_10
+:group_10 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :Ni ,
+                   :Pd ,
+                   :Pt ,
+                   :Uun ;
+          :number 10 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_11
+:group_11 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :Ag ,
+                   :Au ,
+                   :Cu ,
+                   :Uuu ;
+          :name "Coinage metal"^^xsd:string ;
+          :number 11 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_12
+:group_12 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :Cd ,
+                   :Hg ,
+                   :Uub ,
+                   :Zn ;
+          :number 12 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_13
+:group_13 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :Al ,
+                   :B ,
+                   :Ga ,
+                   :In ,
+                   :Tl ,
+                   :Uut ;
+          :number 13 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_14
+:group_14 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :C ,
+                   :Ge ,
+                   :Pb ,
+                   :Si ,
+                   :Sn ,
+                   :Uuq ;
+          :number 14 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_15
+:group_15 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :As ,
+                   :Bi ,
+                   :N ,
+                   :P ,
+                   :Sb ,
+                   :Uup ;
+          :name "Pnictogen"^^xsd:string ;
+          :number 15 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_16
+:group_16 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :O ,
+                   :Po ,
+                   :S ,
+                   :Se ,
+                   :Te ,
+                   :Uuh ;
+          :name "Chalcogen"^^xsd:string ;
+          :number 16 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_17
+:group_17 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :At ,
+                   :Br ,
+                   :Cl ,
+                   :F ,
+                   :I ,
+                   :Uus ;
+          :name "Halogen"^^xsd:string ;
+          :number 17 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_18
+:group_18 rdf:type owl:NamedIndividual ,
+                   :Group ;
+          :element :Ar ,
+                   :He ,
+                   :Kr ,
+                   :Ne ,
+                   :Rn ,
+                   :Uuo ,
+                   :Xe ;
+          :name "Noble gas"^^xsd:string ;
+          :number 18 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_2
+:group_2 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Ba ,
+                  :Be ,
+                  :Ca ,
+                  :Mg ,
+                  :Ra ,
+                  :Sr ;
+         :name "Alkaline earth metal"^^xsd:string ;
+         :number 2 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_3
+:group_3 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Lr ,
+                  :Lu ,
+                  :Sc ,
+                  :Y ;
+         :number 3 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_4
+:group_4 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Hf ,
+                  :Rf ,
+                  :Ti ,
+                  :Zr ;
+         :number 4 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_5
+:group_5 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Db ,
+                  :Nb ,
+                  :Ta ,
+                  :V ;
+         :number 5 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_6
+:group_6 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Cr ,
+                  :Mo ,
+                  :Sg ,
+                  :W ;
+         :number 6 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_7
+:group_7 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Bh ,
+                  :Mn ,
+                  :Re ,
+                  :Tc ;
+         :number 7 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_8
+:group_8 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Fe ,
+                  :Hs ,
+                  :Os ,
+                  :Ru ;
+         :number 8 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_9
+:group_9 rdf:type owl:NamedIndividual ,
+                  :Group ;
+         :element :Co ,
+                  :Ir ,
+                  :Mt ,
+                  :Rh ;
+         :number 9 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_actinoid
+:group_actinoid rdf:type owl:NamedIndividual ,
+                         :Group ;
+                :element :Ac ,
+                         :Am ,
+                         :Bk ,
+                         :Cf ,
+                         :Cm ,
+                         :Es ,
+                         :Fm ,
+                         :Md ,
+                         :No ,
+                         :Np ,
+                         :Pa ,
+                         :Pu ,
+                         :Th ,
+                         :U ;
+                :name "Actinoid"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#group_lanthanoid
+:group_lanthanoid rdf:type owl:NamedIndividual ,
+                           :Group ;
+                  :element :Ce ,
+                           :Dy ,
+                           :Er ,
+                           :Eu ,
+                           :Gd ,
+                           :Ho ,
+                           :La ,
+                           :Nd ,
+                           :Pm ,
+                           :Pr ,
+                           :Sm ,
+                           :Tb ,
+                           :Tm ,
+                           :Yb ;
+                  :name "Lanthanoid"^^xsd:string .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#liquid
+:liquid rdf:type owl:NamedIndividual ,
+                 :StandardState .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#p-block
+:p-block rdf:type owl:NamedIndividual ,
+                  :Block .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_1
+:period_1 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :H ,
+                   :He ;
+          :number 1 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_2
+:period_2 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :B ,
+                   :Be ,
+                   :C ,
+                   :F ,
+                   :Li ,
+                   :N ,
+                   :Ne ,
+                   :O ;
+          :number 2 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_3
+:period_3 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :Al ,
+                   :Ar ,
+                   :Cl ,
+                   :Mg ,
+                   :Na ,
+                   :P ,
+                   :S ,
+                   :Si ;
+          :number 3 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_4
+:period_4 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :As ,
+                   :Br ,
+                   :Ca ,
+                   :Co ,
+                   :Cr ,
+                   :Cu ,
+                   :Fe ,
+                   :Ga ,
+                   :Ge ,
+                   :K ,
+                   :Kr ,
+                   :Mn ,
+                   :Ni ,
+                   :Sc ,
+                   :Se ,
+                   :Ti ,
+                   :V ,
+                   :Zn ;
+          :number 4 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_5
+:period_5 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :Ag ,
+                   :Cd ,
+                   :I ,
+                   :In ,
+                   :Mo ,
+                   :Nb ,
+                   :Pd ,
+                   :Rb ,
+                   :Rh ,
+                   :Ru ,
+                   :Sb ,
+                   :Sn ,
+                   :Sr ,
+                   :Tc ,
+                   :Te ,
+                   :Xe ,
+                   :Y ,
+                   :Zr ;
+          :number 5 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_6
+:period_6 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :At ,
+                   :Au ,
+                   :Ba ,
+                   :Bi ,
+                   :Ce ,
+                   :Cs ,
+                   :Dy ,
+                   :Er ,
+                   :Eu ,
+                   :Gd ,
+                   :Hf ,
+                   :Hg ,
+                   :Ho ,
+                   :Ir ,
+                   :La ,
+                   :Lu ,
+                   :Nd ,
+                   :Os ,
+                   :Pb ,
+                   :Pm ,
+                   :Po ,
+                   :Pr ,
+                   :Pt ,
+                   :Re ,
+                   :Rn ,
+                   :Sm ,
+                   :Ta ,
+                   :Tb ,
+                   :Tl ,
+                   :Tm ,
+                   :W ,
+                   :Yb ;
+          :number 6 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#period_7
+:period_7 rdf:type owl:NamedIndividual ,
+                   :Period ;
+          :element :Ac ,
+                   :Am ,
+                   :Bh ,
+                   :Bk ,
+                   :Cf ,
+                   :Cm ,
+                   :Db ,
+                   :Es ,
+                   :Fm ,
+                   :Fr ,
+                   :Hs ,
+                   :Lr ,
+                   :Md ,
+                   :Mt ,
+                   :No ,
+                   :Np ,
+                   :Pa ,
+                   :Pu ,
+                   :Ra ,
+                   :Rf ,
+                   :Sg ,
+                   :Th ,
+                   :U ,
+                   :Uub ,
+                   :Uuh ,
+                   :Uun ,
+                   :Uuo ,
+                   :Uup ,
+                   :Uuq ,
+                   :Uus ,
+                   :Uut ,
+                   :Uuu ;
+          :number 7 .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#s-block
+:s-block rdf:type owl:NamedIndividual ,
+                  :Block .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#solid
+:solid rdf:type owl:NamedIndividual ,
+                :StandardState .
+
+
+###  http://www.daml.org/2003/01/periodictable/PeriodicTable#state_unknown
+:state_unknown rdf:type owl:NamedIndividual ,
+                        :StandardState .
+
+
+###  Generated by the OWL API (version 4.5.6) https://github.com/owlcs/owlapi
