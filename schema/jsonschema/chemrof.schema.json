@@ -312,9 +312,6 @@
                "description": "number of protons in an atom",
                "type": "integer"
             },
-            "elemental_change": {
-               "type": "string"
-            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "maximum": -1,
@@ -370,9 +367,6 @@
             "atomic_number": {
                "description": "number of protons in an atom",
                "type": "integer"
-            },
-            "elemental_change": {
-               "type": "string"
             },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
@@ -614,6 +608,12 @@
          "description": "",
          "enum": [
             "covalent",
+            "aromatic",
+            "single",
+            "double",
+            "triple",
+            "quadruple",
+            "hydrogen",
             "ionic",
             "polycentric",
             "metal-metal",
@@ -735,6 +735,7 @@
                "type": "string"
             },
             "has_physiologically_stable_form": {
+               "description": "connects an element to the equivalent form that is physiologically stable at pH 7.3",
                "type": "string"
             },
             "has_stereocenter": {
@@ -1067,7 +1068,7 @@
       },
       "Copolymer": {
          "additionalProperties": false,
-         "description": "a polymer derived from more than one species of monomer",
+         "description": "a polymer with a more than one type of repeating unit",
          "properties": {
             "has_atom_occurrences": {
                "items": {
@@ -1095,10 +1096,11 @@
             },
             "has_part": {
                "description": "basic parthood relations",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
+               "minimum": 1,
+               "type": "string"
+            },
+            "has_repeat_unit": {
+               "type": "string"
             },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
@@ -1123,6 +1125,9 @@
             "inchi_string": {
                "type": "string"
             },
+            "is_branched": {
+               "type": "boolean"
+            },
             "is_organic": {
                "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
                "type": "boolean"
@@ -1138,8 +1143,15 @@
                "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
             },
-            "polymer_of": {
+            "polymer_architecture_type": {
+               "description": "morphological structure of a polymer",
                "type": "string"
+            },
+            "polymer_of": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
             }
          },
          "required": [
@@ -1228,6 +1240,32 @@
          ],
          "title": "Electron",
          "type": "object"
+      },
+      "ElementFamilyEnum": {
+         "description": "",
+         "enum": [
+            "Alkali_Earth",
+            "Alkaline_Earth",
+            "Halogen",
+            "Metalloids",
+            "Noblegas",
+            "Non-Metal",
+            "Other_Metal",
+            "Rare_Earth",
+            "Transition"
+         ],
+         "title": "ElementFamilyEnum",
+         "type": "string"
+      },
+      "ElementMetallicClassification": {
+         "description": "",
+         "enum": [
+            "Metallic",
+            "Non-Metallic",
+            "Semi-Metallic"
+         ],
+         "title": "ElementMetallicClassification",
+         "type": "string"
       },
       "Enantiomer": {
          "additionalProperties": false,
@@ -1663,6 +1701,97 @@
          "title": "HardOrSoftEnum",
          "type": "string"
       },
+      "Homopolymer": {
+         "additionalProperties": false,
+         "description": "a polymer with a single type of repeating unit",
+         "properties": {
+            "has_atom_occurrences": {
+               "items": {
+                  "$ref": "#/$defs/AtomOccurrence"
+               },
+               "type": "array"
+            },
+            "has_atoms": {
+               "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "has_bonds": {
+               "description": "The set of all bonds connecting atoms in a molecule",
+               "items": {
+                  "$ref": "#/$defs/AtomicBond"
+               },
+               "minimum": 1,
+               "type": "array"
+            },
+            "has_chemical_role": {
+               "$ref": "#/$defs/ChemicalRole"
+            },
+            "has_part": {
+               "description": "basic parthood relations",
+               "minimum": 1,
+               "type": "string"
+            },
+            "has_repeat_unit": {
+               "type": "string"
+            },
+            "has_submolecules": {
+               "description": "Relation between a molecule and the molecules it is made from.",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            },
+            "inchi_atom_connections_sublayer": {
+               "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
+               "pattern": "^c.*",
+               "type": "string"
+            },
+            "inchi_chemical_sublayer": {
+               "description": "the main chemical formula",
+               "pattern": "^[A-Z0-9\\.]+$",
+               "type": "string"
+            },
+            "inchi_string": {
+               "type": "string"
+            },
+            "is_branched": {
+               "type": "boolean"
+            },
+            "is_organic": {
+               "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
+               "type": "boolean"
+            },
+            "is_radical": {
+               "type": "boolean"
+            },
+            "name": {
+               "description": "name of chemical entity. E.g. nickel, carbon-16",
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/$defs/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "polymer_architecture_type": {
+               "description": "morphological structure of a polymer",
+               "type": "string"
+            },
+            "polymer_of": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Homopolymer",
+         "type": "object"
+      },
       "ImpreciseChemicalMixture": {
          "additionalProperties": false,
          "description": "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals",
@@ -1833,6 +1962,9 @@
             },
             "direction": {
                "description": "One of l->r, r->l, bidirectional, neutral",
+               "type": "string"
+            },
+            "has_reaction_smiles_representation": {
                "type": "string"
             },
             "has_rinchi_representation": {
@@ -2138,6 +2270,47 @@
          },
          "required": [],
          "title": "Material",
+         "type": "object"
+      },
+      "MaterialGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class that classifies materials",
+         "properties": {
+            "classifies": {
+               "$ref": "#/$defs/Material"
+            },
+            "id": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/$defs/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MaterialGroupingClass",
+         "type": "object"
+      },
+      "Mineral": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_part": {
+               "description": "basic parthood relations",
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Mineral",
          "type": "object"
       },
       "Moiety": {
@@ -2751,9 +2924,6 @@
                "description": "number of protons in an atom",
                "type": "integer"
             },
-            "elemental_change": {
-               "type": "string"
-            },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
                "type": "integer"
@@ -2842,6 +3012,37 @@
          "title": "Monomer",
          "type": "object"
       },
+      "MonomericPolymericGroupingClass": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            },
+            "has_repeat_unit": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/$defs/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "subtype_of": {
+               "description": "grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MonomericPolymericGroupingClass",
+         "type": "object"
+      },
       "MonomolecularPolymer": {
          "additionalProperties": false,
          "description": "A macromolecule composed of repeating subunits. Examples: cellulose",
@@ -2875,6 +3076,9 @@
                "minimum": 1,
                "type": "string"
             },
+            "has_repeat_unit": {
+               "type": "string"
+            },
             "has_submolecules": {
                "description": "Relation between a molecule and the molecules it is made from.",
                "items": {
@@ -2898,6 +3102,9 @@
             "inchi_string": {
                "type": "string"
             },
+            "is_branched": {
+               "type": "boolean"
+            },
             "is_organic": {
                "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
                "type": "boolean"
@@ -2912,6 +3119,10 @@
             "owl_subclass_of": {
                "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "polymer_architecture_type": {
+               "description": "morphological structure of a polymer",
+               "type": "string"
             },
             "polymer_of": {
                "type": "string"
@@ -3514,6 +3725,30 @@
          "title": "PolymerPart",
          "type": "object"
       },
+      "PolymerRepeatUnit": {
+         "additionalProperties": false,
+         "description": "An abstract part of a polymer that is all instances of a repeated monomer of a single type",
+         "properties": {
+            "degree_of_polymerization": {
+               "type": "integer"
+            },
+            "mass": {
+               "description": "the mass of a polymer repeat unit is the product of the mass of the repeated element multiplied by the degree",
+               "type": "number"
+            },
+            "owl_subclass_of": {
+               "$ref": "#/$defs/OwlClass",
+               "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "repetition_of": {
+               "description": "the macromolecule that is repeated",
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "PolymerRepeatUnit",
+         "type": "object"
+      },
       "ProportionalPart": {
          "additionalProperties": false,
          "description": "A part of a complex mixture that is of uniform composition",
@@ -3813,6 +4048,9 @@
                "description": "One of l->r, r->l, bidirectional, neutral",
                "type": "string"
             },
+            "has_reaction_smiles_representation": {
+               "type": "string"
+            },
             "has_rinchi_representation": {
                "description": "Proposed Reactions InChI",
                "type": "string"
@@ -3856,6 +4094,18 @@
             "has_rinchi_representation"
          ],
          "title": "Reaction",
+         "type": "object"
+      },
+      "ReactionGroupingClass": {
+         "additionalProperties": false,
+         "description": "A grouping class for reactions, for example, dehalogenase; breaking of covalent bond",
+         "properties": {
+            "classifies": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "ReactionGroupingClass",
          "type": "object"
       },
       "ReactionParticipant": {
@@ -4156,6 +4406,9 @@
             "has_chemical_role": {
                "$ref": "#/$defs/ChemicalRole"
             },
+            "has_repeat_unit": {
+               "type": "string"
+            },
             "id": {
                "type": "string"
             },
@@ -4182,6 +4435,9 @@
             "owl_subclass_of": {
                "$ref": "#/$defs/OwlClass",
                "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+            },
+            "polymer_of": {
+               "type": "string"
             }
          },
          "required": [
@@ -4221,9 +4477,6 @@
             "atomic_number": {
                "description": "number of protons in an atom",
                "type": "integer"
-            },
-            "elemental_change": {
-               "type": "string"
             },
             "elemental_charge": {
                "description": "number of protons minus number of electrons",
@@ -4365,8 +4618,10 @@
    "$id": "https://w3id.org/chemrof",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "additionalProperties": true,
+   "metamodel_version": "1.7.0",
    "properties": {},
    "required": [],
    "title": "chemrof",
-   "type": "object"
+   "type": "object",
+   "version": "0.0.1"
 }

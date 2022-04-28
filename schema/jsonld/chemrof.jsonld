@@ -10,6 +10,10 @@
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "prefixes": [
     {
+      "prefix_prefix": "chemrof",
+      "prefix_reference": "https://w3id.org/chemrof/"
+    },
+    {
       "prefix_prefix": "COB",
       "prefix_reference": "http://purl.obolibrary.org/obo/COB_"
     },
@@ -28,6 +32,22 @@
     {
       "prefix_prefix": "CHEMINF",
       "prefix_reference": "http://semanticscience.org/resource/CHEMINF_"
+    },
+    {
+      "prefix_prefix": "RXNO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/RXNO_"
+    },
+    {
+      "prefix_prefix": "MOP",
+      "prefix_reference": "http://purl.obolibrary.org/obo/MOP_"
+    },
+    {
+      "prefix_prefix": "REX",
+      "prefix_reference": "http://purl.obolibrary.org/obo/REX_"
+    },
+    {
+      "prefix_prefix": "FIX",
+      "prefix_reference": "http://purl.obolibrary.org/obo/FIX_"
     },
     {
       "prefix_prefix": "SIO",
@@ -50,10 +70,6 @@
       "prefix_reference": "http://schema.org/"
     },
     {
-      "prefix_prefix": "chemrof",
-      "prefix_reference": "https://w3id.org/chemrof/"
-    },
-    {
       "prefix_prefix": "dcterms",
       "prefix_reference": "http://purl.org/dc/terms/"
     },
@@ -64,6 +80,10 @@
     {
       "prefix_prefix": "linkml",
       "prefix_reference": "https://w3id.org/linkml/"
+    },
+    {
+      "prefix_prefix": "goldbook",
+      "prefix_reference": "https://goldbook.iupac.org/terms/view/"
     },
     {
       "prefix_prefix": "Wikipedia",
@@ -80,6 +100,26 @@
     {
       "prefix_prefix": "wd",
       "prefix_reference": "http://www.wikidata.org/entity/"
+    },
+    {
+      "prefix_prefix": "cml",
+      "prefix_reference": "http://www.xml-cml.org/schema/"
+    },
+    {
+      "prefix_prefix": "bo",
+      "prefix_reference": "http://www.blueobelisk.org/dict/terminology"
+    },
+    {
+      "prefix_prefix": "gc",
+      "prefix_reference": "http://purl.org/gc/"
+    },
+    {
+      "prefix_prefix": "damlpt",
+      "prefix_reference": "http://www.daml.org/2003/01/periodictable/PeriodicTable#"
+    },
+    {
+      "prefix_prefix": "OntoRxn",
+      "prefix_reference": "http://www.semanticweb.com/OntoRxn#"
     }
   ],
   "default_curi_maps": [
@@ -386,6 +426,65 @@
       ]
     },
     {
+      "name": "element_family_enum",
+      "definition_uri": "https://w3id.org/chemrof/ElementFamilyEnum",
+      "close_mappings": [
+        "bo:family"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "Alkali_Earth"
+        },
+        {
+          "text": "Alkaline_Earth"
+        },
+        {
+          "text": "Halogen"
+        },
+        {
+          "text": "Metalloids"
+        },
+        {
+          "text": "Noblegas"
+        },
+        {
+          "text": "Non-Metal"
+        },
+        {
+          "text": "Other_Metal"
+        },
+        {
+          "text": "Rare_Earth"
+        },
+        {
+          "text": "Transition"
+        }
+      ]
+    },
+    {
+      "name": "element_metallic_classification",
+      "definition_uri": "https://w3id.org/chemrof/ElementMetallicClassification",
+      "exact_mappings": [
+        "damlpt:Classification"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "Metallic",
+          "meaning": "damlpt:Metallic"
+        },
+        {
+          "text": "Non-Metallic",
+          "meaning": "damlpt:Non-Metallic"
+        },
+        {
+          "text": "Semi-Metallic",
+          "meaning": "damlpt:Semi-Metallic"
+        }
+      ]
+    },
+    {
       "name": "ingredient_role_enum",
       "definition_uri": "https://w3id.org/chemrof/IngredientRoleEnum",
       "from_schema": "https://w3id.org/chemrof",
@@ -411,7 +510,32 @@
       "permissible_values": [
         {
           "text": "covalent",
-          "description": "A covalent bond is a chemical bond that involves the sharing of pairs of electrons between atoms. This sharing results in a stable balance of attractive and repulsive forces between those atoms."
+          "description": "A covalent bond is a chemical bond that involves the sharing of pairs of electrons between atoms. This sharing results in a stable balance of attractive and repulsive forces between those atoms.",
+          "meaning": "gc:NormalBond"
+        },
+        {
+          "text": "aromatic",
+          "meaning": "gc:AromaticBond"
+        },
+        {
+          "text": "single",
+          "meaning": "gc:Single"
+        },
+        {
+          "text": "double",
+          "meaning": "gc:Double"
+        },
+        {
+          "text": "triple",
+          "meaning": "gc:Triple"
+        },
+        {
+          "text": "quadruple",
+          "meaning": "gc:Quadruple"
+        },
+        {
+          "text": "hydrogen",
+          "meaning": "gc:HydrogenBond"
         },
         {
           "text": "ionic"
@@ -522,6 +646,9 @@
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
       ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "information_property",
@@ -537,10 +664,13 @@
     {
       "name": "symbol",
       "definition_uri": "https://w3id.org/chemrof/symbol",
+      "mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "short symbol for chemical entity, e.g. K, C-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "information_property",
-      "slot_uri": "https://w3id.org/chemrof/symbol",
+      "slot_uri": "http://www.blueobelisk.org/dict/terminologysymbol",
       "owner": "Atom",
       "domain_of": [
         "Atom"
@@ -580,6 +710,7 @@
         "Z"
       ],
       "mappings": [
+        "http://www.blueobelisk.org/dict/terminologyatomicNumber",
         "http://semanticscience.org/resource/CHEMINF_000079"
       ],
       "exact_mappings": [
@@ -589,7 +720,7 @@
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "subatomic_particle_count",
       "domain": "Atom",
-      "slot_uri": "https://w3id.org/chemrof/atomic_number",
+      "slot_uri": "http://www.blueobelisk.org/dict/terminologyatomicNumber",
       "owner": "Atom",
       "domain_of": [
         "Atom"
@@ -753,6 +884,36 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "has_different_charge_state_from",
+      "definition_uri": "https://w3id.org/chemrof/has_different_charge_state_from",
+      "from_schema": "https://w3id.org/chemrof",
+      "abstract": true,
+      "mixin": true,
+      "slot_uri": "https://w3id.org/chemrof/has_different_charge_state_from",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_lower_charge_from",
+      "definition_uri": "https://w3id.org/chemrof/has_lower_charge_from",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "has_different_charge_state_from",
+      "mixin": true,
+      "slot_uri": "https://w3id.org/chemrof/has_lower_charge_from",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_higher_charge_from",
+      "definition_uri": "https://w3id.org/chemrof/has_higher_charge_from",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "has_different_charge_state_from",
+      "mixin": true,
+      "slot_uri": "https://w3id.org/chemrof/has_higher_charge_from",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "derivative_of",
       "definition_uri": "https://w3id.org/chemrof/derivative_of",
       "from_schema": "https://w3id.org/chemrof",
@@ -780,17 +941,54 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "transitive_conjugatated_form_of",
+      "definition_uri": "https://w3id.org/chemrof/transitive_conjugatated_form_of",
+      "annotations": [
+        {
+          "tag": "transitive_closure_of",
+          "value": "direct conjugatated from",
+          "@type": "Annotation"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "derivative_of",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/transitive_conjugatated_form_of",
+      "owner": "transitive_conjugatated_form_of",
+      "transitive": true,
+      "range": "ChemicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "direct_conjugatated_form_of",
+      "definition_uri": "https://w3id.org/chemrof/direct_conjugatated_form_of",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "derivative_of",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/direct_conjugatated_form_of",
+      "owner": "direct_conjugatated_form_of",
+      "symmetric": true,
+      "range": "ChemicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "conjugate_base_of",
       "definition_uri": "https://w3id.org/chemrof/conjugate_base_of",
       "aliases": [
         "is conjugate base of (chebi)"
       ],
       "description": "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)",
+      "notes": [
+        "sometimes chebi hops over a state skipping an intermediate"
+      ],
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
         "https://academic.oup.com/nar/article/36/suppl_1/D344/2506390"
       ],
-      "is_a": "derivative_of",
+      "is_a": "direct_conjugatated_form_of",
+      "mixins": [
+        "has_lower_charge_from"
+      ],
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/conjugate_base_of",
       "owner": "PolyatomicIon",
@@ -815,7 +1013,10 @@
       "see_also": [
         "https://academic.oup.com/nar/article/36/suppl_1/D344/2506390"
       ],
-      "is_a": "has_derivative",
+      "is_a": "direct_conjugatated_form_of",
+      "mixins": [
+        "has_higher_charge_from"
+      ],
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/conjugate_acid_of",
       "owner": "PolyatomicIon",
@@ -898,6 +1099,80 @@
       "domain_of": [
         "MoleculeGroupingClassDefinedByComponents",
         "Material"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_repeat_unit",
+      "definition_uri": "https://w3id.org/chemrof/has_repeat_unit",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_repeat_unit",
+      "owner": "SupramolecularPolymer",
+      "domain_of": [
+        "MonomericPolymericGroupingClass",
+        "MonomolecularPolymer",
+        "SupramolecularPolymer"
+      ],
+      "range": "ChemicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "polymer_of",
+      "definition_uri": "https://w3id.org/chemrof/polymer_of",
+      "exact_mappings": [
+        "http://www.wikidata.org/entity/P4600",
+        "http://purl.obolibrary.org/obo/CHEBI_60027"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "has_part",
+      "slot_uri": "https://w3id.org/chemrof/polymer_of",
+      "owner": "SupramolecularPolymer",
+      "domain_of": [
+        "MonomolecularPolymer",
+        "SupramolecularPolymer"
+      ],
+      "range": "Macromolecule",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_polymer_repeat_units",
+      "definition_uri": "https://w3id.org/chemrof/has_polymer_repeat_units",
+      "description": "Relation between a polymer and all instances of a repeated polymeric unit",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_polymer_repeat_units",
+      "multivalued": true,
+      "inlined": true,
+      "range": "PolymerRepeatUnit",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "is_branched",
+      "definition_uri": "https://w3id.org/chemrof/is_branched",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/is_branched",
+      "owner": "MonomolecularPolymer",
+      "domain_of": [
+        "MonomolecularPolymer"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "polymer_architecture_type",
+      "definition_uri": "https://w3id.org/chemrof/polymer_architecture_type",
+      "description": "morphological structure of a polymer",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Polymer_architecture"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/polymer_architecture_type",
+      "owner": "MonomolecularPolymer",
+      "domain_of": [
+        "MonomolecularPolymer"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1169,6 +1444,162 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "molecular_property",
+      "definition_uri": "https://w3id.org/chemrof/molecular_property",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000276"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000276",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_electronic_absorption_spectroscopy",
+      "definition_uri": "https://w3id.org/chemrof/molecular_electronic_absorption_spectroscopy",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000011"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000011",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_spectroscopy_by_energy_state",
+      "definition_uri": "https://w3id.org/chemrof/molecular_spectroscopy_by_energy_state",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000030"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000030",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_spectroscopy",
+      "definition_uri": "https://w3id.org/chemrof/molecular_spectroscopy",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000063"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000063",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_replacement",
+      "definition_uri": "https://w3id.org/chemrof/molecular_replacement",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000251"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000251",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_mass",
+      "definition_uri": "https://w3id.org/chemrof/molecular_mass",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000270"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000270",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_size",
+      "definition_uri": "https://w3id.org/chemrof/molecular_size",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000271"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000271",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_hydration",
+      "definition_uri": "https://w3id.org/chemrof/molecular_hydration",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000272"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000272",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_shape",
+      "definition_uri": "https://w3id.org/chemrof/molecular_shape",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000273"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000273",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_charge",
+      "definition_uri": "https://w3id.org/chemrof/molecular_charge",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000275"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000275",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_structure",
+      "definition_uri": "https://w3id.org/chemrof/molecular_structure",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000305"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000305",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_heat_capacity",
+      "definition_uri": "https://w3id.org/chemrof/molecular_heat_capacity",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000389"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000389",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "molecular_electronic_spectroscopy",
+      "definition_uri": "https://w3id.org/chemrof/molecular_electronic_spectroscopy",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/FIX_0000943"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "molecular_property",
+      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000943",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "chemical_representation",
       "definition_uri": "https://w3id.org/chemrof/chemical_representation",
       "aliases": [
@@ -1239,6 +1670,23 @@
       ],
       "range": "chemical_encoding",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_reaction_smiles_representation",
+      "definition_uri": "https://w3id.org/chemrof/has_reaction_smiles_representation",
+      "aliases": [
+        "reaction SMILES"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_formula",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/has_reaction_smiles_representation",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "chemical_encoding",
       "@type": "SlotDefinition"
     },
     {
@@ -1526,10 +1974,16 @@
     {
       "name": "inchi_string",
       "definition_uri": "https://w3id.org/chemrof/inchi_string",
+      "exact_mappings": [
+        "http://www.semanticweb.com/OntoRxn#hasInChi"
+      ],
       "todos": [
         "declare this as a key once compound_key is introduced to linkml"
       ],
       "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi"
+      ],
       "is_a": "chemical_formula",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/inchi_string",
@@ -2182,6 +2636,9 @@
       "exact_mappings": [
         "http://www.w3.org/2000/01/rdf-schema#subClassOf"
       ],
+      "narrow_mappings": [
+        "http://www.blueobelisk.org/dict/terminologyfamily"
+      ],
       "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "classification_relationship",
@@ -2294,18 +2751,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "polymer_of",
-      "exact_mappings": [
-        "http://www.wikidata.org/entity/P4600",
-        "http://purl.obolibrary.org/obo/CHEBI_60027"
-      ],
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "has_part",
-      "slot_uri": "https://w3id.org/chemrof/polymer_of",
-      "range": "Macromolecule",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "is_substitutent_group_from",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_substitutent_group_from",
@@ -2368,21 +2813,12 @@
       "aliases": [
         "has Ph 7.3 mapping"
       ],
+      "description": "connects an element to the equivalent form that is physiologically stable at pH 7.3",
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
         "https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv"
       ],
       "slot_uri": "https://w3id.org/chemrof/has_physiologically_stable_form",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "elemental_change",
-      "todos": [
-        "decide whether to permit this to have magnitude be unspecified, or whether to use a grouping class for this"
-      ],
-      "from_schema": "https://w3id.org/chemrof",
-      "slot_uri": "https://w3id.org/chemrof/elemental_change",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -2452,7 +2888,11 @@
     {
       "name": "oxidation_number",
       "aliases": [
-        "oxidation"
+        "oxidation",
+        "oxidation state"
+      ],
+      "exact_mappings": [
+        "https://goldbook.iupac.org/terms/view/O04363"
       ],
       "description": "The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]",
       "from_schema": "https://w3id.org/chemrof",
@@ -2576,6 +3016,24 @@
       "slot_uri": "https://w3id.org/chemrof/has_bonding_structure",
       "range": "string",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "repetition_of",
+      "description": "the macromolecule that is repeated",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/repetition_of",
+      "range": "Molecule",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "degree_of_polymerization",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Degree_of_polymerization"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/degree_of_polymerization",
+      "range": "count",
       "@type": "SlotDefinition"
     },
     {
@@ -2767,6 +3225,41 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "reaction_grouping_class_classifies",
+      "definition_uri": "https://w3id.org/chemrof/classifies",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "classifies",
+      "domain": "ReactionGroupingClass",
+      "slot_uri": "https://w3id.org/chemrof/classifies",
+      "alias": "classifies",
+      "owner": "ReactionGroupingClass",
+      "domain_of": [
+        "ReactionGroupingClass"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classifies",
+      "range": "Reaction",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "material_grouping_class_classifies",
+      "definition_uri": "https://w3id.org/chemrof/classifies",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "grouping_class_classifies",
+      "domain": "MaterialGroupingClass",
+      "slot_uri": "https://w3id.org/chemrof/classifies",
+      "inlined": true,
+      "alias": "classifies",
+      "owner": "MaterialGroupingClass",
+      "domain_of": [
+        "MaterialGroupingClass"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classifies",
+      "range": "Material",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "chemical_grouping_by_charge_subtype_of",
       "definition_uri": "https://w3id.org/chemrof/subtype_of",
       "aliases": [
@@ -2931,6 +3424,9 @@
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
       ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "name",
@@ -3029,6 +3525,9 @@
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
       ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "name",
@@ -3068,6 +3567,9 @@
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
       ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "chemical_salt_grouping_class_name",
@@ -3090,6 +3592,9 @@
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
       ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "chemical_salt_grouping_class_name",
@@ -3111,6 +3616,9 @@
       "definition_uri": "https://w3id.org/chemrof/name",
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
+      ],
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
       ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "from_schema": "https://w3id.org/chemrof",
@@ -3363,19 +3871,21 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "monomolecular_polymer_polymer_of",
+      "name": "copolymer_polymer_of",
+      "definition_uri": "https://w3id.org/chemrof/polymer_of",
       "exact_mappings": [
         "http://www.wikidata.org/entity/P4600",
         "http://purl.obolibrary.org/obo/CHEBI_60027"
       ],
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "has_part",
-      "domain": "MonomolecularPolymer",
+      "is_a": "polymer_of",
+      "domain": "Copolymer",
       "slot_uri": "https://w3id.org/chemrof/polymer_of",
+      "multivalued": true,
       "alias": "polymer of",
-      "owner": "MonomolecularPolymer",
+      "owner": "Copolymer",
       "domain_of": [
-        "MonomolecularPolymer"
+        "Copolymer"
       ],
       "is_usage_slot": true,
       "usage_slot_name": "polymer of",
@@ -3383,25 +3893,23 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "copolymer_has_part",
-      "definition_uri": "https://w3id.org/chemrof/has_part",
-      "mappings": [
-        "http://purl.obolibrary.org/obo/BFO_0000050",
-        "http://schema.org/hasBioChemEntityPart"
+      "name": "homopolymer_polymer_of",
+      "definition_uri": "https://w3id.org/chemrof/polymer_of",
+      "exact_mappings": [
+        "http://www.wikidata.org/entity/P4600",
+        "http://purl.obolibrary.org/obo/CHEBI_60027"
       ],
-      "description": "basic parthood relations",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "has_part",
-      "domain": "Copolymer",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
-      "multivalued": true,
-      "alias": "has part",
-      "owner": "Copolymer",
+      "is_a": "polymer_of",
+      "domain": "Homopolymer",
+      "slot_uri": "https://w3id.org/chemrof/polymer_of",
+      "alias": "polymer of",
+      "owner": "Homopolymer",
       "domain_of": [
-        "Copolymer"
+        "Homopolymer"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "has part",
+      "usage_slot_name": "polymer of",
       "range": "Macromolecule",
       "@type": "SlotDefinition"
     },
@@ -3550,6 +4058,9 @@
       "aliases": [
         "atomic symbol"
       ],
+      "mappings": [
+        "http://www.blueobelisk.org/dict/terminologysymbol"
+      ],
       "exact_mappings": [
         "http://www.wikidata.org/entity/P246"
       ],
@@ -3557,7 +4068,7 @@
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "symbol",
       "domain": "ChemicalElement",
-      "slot_uri": "https://w3id.org/chemrof/symbol",
+      "slot_uri": "http://www.blueobelisk.org/dict/terminologysymbol",
       "alias": "symbol",
       "owner": "ChemicalElement",
       "domain_of": [
@@ -3572,6 +4083,9 @@
     {
       "name": "chemical_element_in_periodic_table_group",
       "definition_uri": "https://w3id.org/chemrof/in_periodic_table_group",
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologygroup"
+      ],
       "description": "which number in periodic table column",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "in_periodic_table_group",
@@ -3590,6 +4104,9 @@
     {
       "name": "chemical_element_in_periodic_table_block",
       "definition_uri": "https://w3id.org/chemrof/in_periodic_table_block",
+      "exact_mappings": [
+        "http://www.blueobelisk.org/dict/terminologyblock"
+      ],
       "description": "block of periodic table unified by the orbitals their valence electrons or vacancies lie in",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "in_periodic_table_block",
@@ -3725,6 +4242,7 @@
       "aliases": [
         "has Ph 7.3 mapping"
       ],
+      "description": "connects an element to the equivalent form that is physiologically stable at pH 7.3",
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
         "https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv"
@@ -3743,22 +4261,27 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "atom_ionic_form_elemental_change",
+      "name": "atom_ionic_form_elemental_charge",
+      "definition_uri": "https://w3id.org/chemrof/elemental_charge",
+      "mappings": [
+        "http://semanticscience.org/resource/CHEMINF_000120"
+      ],
+      "description": "number of protons minus number of electrons",
       "todos": [
         "decide whether to permit this to have magnitude be unspecified, or whether to use a grouping class for this"
       ],
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "elemental_change",
+      "is_a": "elemental_charge",
       "domain": "AtomIonicForm",
-      "slot_uri": "https://w3id.org/chemrof/elemental_change",
-      "alias": "elemental change",
+      "slot_uri": "https://w3id.org/chemrof/elemental_charge",
+      "alias": "elemental charge",
       "owner": "AtomIonicForm",
       "domain_of": [
         "AtomIonicForm"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "elemental change",
-      "range": "string",
+      "usage_slot_name": "elemental charge",
+      "range": "integer",
       "@type": "SlotDefinition"
     },
     {
@@ -3972,7 +4495,11 @@
     {
       "name": "atom_occurrence_oxidation_number",
       "aliases": [
-        "oxidation"
+        "oxidation",
+        "oxidation state"
+      ],
+      "exact_mappings": [
+        "https://goldbook.iupac.org/terms/view/O04363"
       ],
       "description": "The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]",
       "from_schema": "https://w3id.org/chemrof",
@@ -4346,6 +4873,59 @@
       "usage_slot_name": "has bonding structure",
       "range": "string",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "polymer_repeat_unit_repetition_of",
+      "description": "the macromolecule that is repeated",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "repetition_of",
+      "domain": "PolymerRepeatUnit",
+      "slot_uri": "https://w3id.org/chemrof/repetition_of",
+      "alias": "repetition of",
+      "owner": "PolymerRepeatUnit",
+      "domain_of": [
+        "PolymerRepeatUnit"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "repetition of",
+      "range": "Molecule",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "polymer_repeat_unit_degree_of_polymerization",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Degree_of_polymerization"
+      ],
+      "is_a": "degree_of_polymerization",
+      "domain": "PolymerRepeatUnit",
+      "slot_uri": "https://w3id.org/chemrof/degree_of_polymerization",
+      "alias": "degree of polymerization",
+      "owner": "PolymerRepeatUnit",
+      "domain_of": [
+        "PolymerRepeatUnit"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "degree of polymerization",
+      "range": "count",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "polymer_repeat_unit_mass",
+      "description": "the mass of a polymer repeat unit is the product of the mass of the repeated element multiplied by the degree",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "mass",
+      "domain": "PolymerRepeatUnit",
+      "slot_uri": "https://w3id.org/chemrof/mass",
+      "alias": "mass",
+      "owner": "PolymerRepeatUnit",
+      "domain_of": [
+        "PolymerRepeatUnit"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "mass",
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
@@ -4749,6 +5329,49 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "ReactionGroupingClass",
+      "id_prefixes": [
+        "KEGG.REACTION",
+        "GO",
+        "MetaCyc",
+        "EC",
+        "RXNO",
+        "MOP"
+      ],
+      "definition_uri": "https://w3id.org/chemrof/ReactionGroupingClass",
+      "description": "A grouping class for reactions, for example, dehalogenase; breaking of covalent bond",
+      "from_schema": "https://w3id.org/chemrof",
+      "slots": [
+        "reaction_grouping_class_classifies"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/ReactionGroupingClass",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MaterialGroupingClass",
+      "definition_uri": "https://w3id.org/chemrof/MaterialGroupingClass",
+      "description": "A grouping class that classifies materials",
+      "examples": [
+        {
+          "value": "MREO",
+          "description": "mixed rare earth oxides",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "GroupingClass",
+      "slots": [
+        "id",
+        "grouping_class_subtype_of",
+        "owl_subclass_of",
+        "material_grouping_class_classifies"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/MaterialGroupingClass",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ChemicalGroupingByCharge",
       "definition_uri": "https://w3id.org/chemrof/ChemicalGroupingByCharge",
       "description": "A grouping class that refines a charge-neutral entity",
@@ -5013,6 +5636,29 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "MonomericPolymericGroupingClass",
+      "definition_uri": "https://w3id.org/chemrof/MonomericPolymericGroupingClass",
+      "examples": [
+        {
+          "value": "polynucleotide",
+          "description": "A polynucleotide molecule is a biopolymer composed of 13 or more nucleotide monomers covalently bonded in a chain",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "GeneralizedMolecularStructureClass",
+      "slots": [
+        "id",
+        "owl_subclass_of",
+        "molecule_grouping_class_subtype_of",
+        "molecule_grouping_class_classifies",
+        "has_repeat_unit"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/MonomericPolymericGroupingClass",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "GroupingClassForAcidsOrBases",
       "definition_uri": "https://w3id.org/chemrof/GroupingClassForAcidsOrBases",
       "from_schema": "https://w3id.org/chemrof",
@@ -5242,6 +5888,18 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Mineral",
+      "definition_uri": "https://w3id.org/chemrof/Mineral",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "Material",
+      "slots": [
+        "material_has_part"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/Mineral",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ChemicalEntity",
       "id_prefixes": [
         "CHEBI",
@@ -5254,7 +5912,6 @@
         "INCHIKEY",
         "UNII",
         "KEGG",
-        "HMDB",
         "SEED"
       ],
       "definition_uri": "https://w3id.org/chemrof/ChemicalEntity",
@@ -5265,7 +5922,8 @@
       ],
       "mappings": [
         "CHEBI:24431",
-        "CHEMINF:000000"
+        "CHEMINF:000000",
+        "OntoRxn:ChemSpecies"
       ],
       "exact_mappings": [
         "SIO:010004"
@@ -5824,6 +6482,9 @@
         "polymer",
         "oligo or polymer"
       ],
+      "exact_mappings": [
+        "wd:Q81163"
+      ],
       "description": "A macromolecule composed of repeating subunits. Examples: cellulose",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "Macromolecule",
@@ -5842,7 +6503,10 @@
         "is_organic",
         "molecule_has_part",
         "macromolecule_has_submolecules",
-        "monomolecular_polymer_polymer_of"
+        "polymer_of",
+        "has_repeat_unit",
+        "is_branched",
+        "polymer_architecture_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MonomolecularPolymer",
@@ -5865,7 +6529,9 @@
         "inchi_string",
         "chemical_entity_inchi_chemical_sublayer",
         "owl_subclass_of",
-        "polyatomic_entity_inchi_atom_connections_sublayer"
+        "polyatomic_entity_inchi_atom_connections_sublayer",
+        "polymer_of",
+        "has_repeat_unit"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/SupramolecularPolymer",
@@ -5874,10 +6540,18 @@
     {
       "name": "Copolymer",
       "definition_uri": "https://w3id.org/chemrof/Copolymer",
-      "description": "a polymer derived from more than one species of monomer",
+      "aliases": [
+        "heteropolymer"
+      ],
+      "description": "a polymer with a more than one type of repeating unit",
       "examples": [
         {
           "value": "PEVA",
+          "@type": "Example"
+        },
+        {
+          "value": "styrene-butadiene rubber",
+          "description": "The repeat units based on styrene and 1,3-butadiene form two repeating units, which can alternate in any order in the macromolecule, making the polymer thus a random copolymer.",
           "@type": "Example"
         }
       ],
@@ -5896,12 +6570,52 @@
         "molecule_has_bonds",
         "has_atoms",
         "is_organic",
+        "molecule_has_part",
         "macromolecule_has_submolecules",
-        "monomolecular_polymer_polymer_of",
-        "copolymer_has_part"
+        "has_repeat_unit",
+        "is_branched",
+        "polymer_architecture_type",
+        "copolymer_polymer_of"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Copolymer",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Homopolymer",
+      "definition_uri": "https://w3id.org/chemrof/Homopolymer",
+      "description": "a polymer with a single type of repeating unit",
+      "examples": [
+        {
+          "value": "polystyrene",
+          "description": "composed only of styrene-based repeat units",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "MonomolecularPolymer",
+      "slots": [
+        "id",
+        "name",
+        "is_radical",
+        "has_chemical_role",
+        "inchi_string",
+        "chemical_entity_inchi_chemical_sublayer",
+        "owl_subclass_of",
+        "polyatomic_entity_inchi_atom_connections_sublayer",
+        "molecule_has_atom_occurrences",
+        "molecule_has_bonds",
+        "has_atoms",
+        "is_organic",
+        "molecule_has_part",
+        "macromolecule_has_submolecules",
+        "has_repeat_unit",
+        "is_branched",
+        "polymer_architecture_type",
+        "homopolymer_polymer_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/Homopolymer",
       "@type": "ClassDefinition"
     },
     {
@@ -6116,7 +6830,8 @@
       ],
       "exact_mappings": [
         "SIO:011125",
-        "biotop:MonoMolecularEntity"
+        "biotop:MonoMolecularEntity",
+        "gc:Molecule"
       ],
       "description": "A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.",
       "examples": [
@@ -6558,7 +7273,8 @@
         "generic atom"
       ],
       "exact_mappings": [
-        "wd:Q11344"
+        "wd:Q11344",
+        "gc:Element"
       ],
       "description": "generic form of an atom, with unspecified neutron or charge",
       "examples": [
@@ -6603,6 +7319,15 @@
       "defining_slots": [
         "atomic_number"
       ],
+      "unique_keys": [
+        {
+          "unique_key_name": "main",
+          "unique_key_slots": [
+            "atomic_number"
+          ],
+          "@type": "UniqueKey"
+        }
+      ],
       "@type": "ClassDefinition"
     },
     {
@@ -6628,8 +7353,7 @@
         "symbol",
         "name",
         "atom_has_part",
-        "elemental_charge",
-        "atom_ionic_form_elemental_change"
+        "atom_ionic_form_elemental_charge"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/UnchargedAtom",
@@ -6825,8 +7549,7 @@
         "symbol",
         "name",
         "atom_has_part",
-        "elemental_charge",
-        "atom_ionic_form_elemental_change"
+        "atom_ionic_form_elemental_charge"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/AtomIonicForm",
@@ -6862,8 +7585,7 @@
         "symbol",
         "name",
         "atom_has_part",
-        "elemental_charge",
-        "atom_ionic_form_elemental_change",
+        "atom_ionic_form_elemental_charge",
         "has_element"
       ],
       "slot_usage": {},
@@ -6890,7 +7612,6 @@
         "symbol",
         "name",
         "atom_has_part",
-        "atom_ionic_form_elemental_change",
         "has_element",
         "atom_anion_elemental_charge"
       ],
@@ -6928,7 +7649,6 @@
         "symbol",
         "name",
         "atom_has_part",
-        "atom_ionic_form_elemental_change",
         "has_element",
         "atom_cation_elemental_charge"
       ],
@@ -7161,6 +7881,7 @@
         "chemical bond"
       ],
       "mappings": [
+        "gc:Bond",
         "CHEMINF:000063"
       ],
       "description": "A connection between two atoms. Note this is the reified form of 'atomically connected to'. ",
@@ -7179,7 +7900,7 @@
         "atomic_bond_torsional_angle"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/AtomicBond",
+      "class_uri": "http://purl.org/gc/Bond",
       "@type": "ClassDefinition"
     },
     {
@@ -7479,6 +8200,25 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "PolymerRepeatUnit",
+      "definition_uri": "https://w3id.org/chemrof/PolymerRepeatUnit",
+      "description": "An abstract part of a polymer that is all instances of a repeated monomer of a single type",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Repeat_unit"
+      ],
+      "is_a": "RelationalChemicalEntity",
+      "slots": [
+        "owl_subclass_of",
+        "polymer_repeat_unit_repetition_of",
+        "polymer_repeat_unit_degree_of_polymerization",
+        "polymer_repeat_unit_mass"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/PolymerRepeatUnit",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Reaction",
       "id_prefixes": [
         "RHEA",
@@ -7489,13 +8229,20 @@
         "EC",
         "MetaNetX",
         "SEED",
-        "RetroRules"
+        "RetroRules",
+        "RXNO",
+        "MOP",
+        "REX"
       ],
       "definition_uri": "https://w3id.org/chemrof/Reaction",
       "description": "reaction",
+      "todos": [
+        "Align with https://docs.open-reaction-database.org/en/latest/schema.html"
+      ],
       "from_schema": "https://w3id.org/chemrof",
       "slots": [
         "has_rinchi_representation",
+        "has_reaction_smiles_representation",
         "reaction_left_participants",
         "reaction_right_participants",
         "reaction_direction",
@@ -7523,6 +8270,7 @@
       "is_a": "Reaction",
       "slots": [
         "has_rinchi_representation",
+        "has_reaction_smiles_representation",
         "reaction_left_participants",
         "reaction_right_participants",
         "reaction_direction",
@@ -7707,12 +8455,12 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2022-01-04T17:48:54",
-  "source_file_size": 68954,
-  "generation_date": "2022-01-04T18:03:40",
+  "source_file_date": "2022-04-19T18:19:46",
+  "source_file_size": 75822,
+  "generation_date": "2022-04-28T12:23:13",
   "@type": "SchemaDefinition",
   "@context": [
-    "./jsonld/chemrof.context.jsonld",
+    "schema/jsonld/chemrof.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
     {
       "@base": "https://w3id.org/chemrof/"

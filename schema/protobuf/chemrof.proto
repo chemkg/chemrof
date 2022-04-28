@@ -87,9 +87,8 @@ message AtomAnion
   optional symbol String = 8
   optional name String = 9
   optional hasPart SubatomicParticle = 10
-  optional elementalChange String = 11
-  optional hasElement ChemicalElement = 12
-  optional elementalCharge Integer = 13
+  optional hasElement ChemicalElement = 11
+  optional elementalCharge Integer = 12
  }
 // A monoatomic ion that is positive, e.g Cu(2+)
 message AtomCation
@@ -104,9 +103,8 @@ message AtomCation
   optional symbol String = 8
   optional name String = 9
   optional hasPart SubatomicParticle = 10
-  optional elementalChange String = 11
-  optional hasElement ChemicalElement = 12
-  optional elementalCharge Integer = 13
+  optional hasElement ChemicalElement = 11
+  optional elementalCharge Integer = 12
  }
 // Example: group 13 atom
 message AtomGroupingByPeriodicTableBlock
@@ -287,7 +285,7 @@ message ChiralityCenter
  {
   optional owlSubclassOf OwlClass = 1
  }
-// a polymer derived from more than one species of monomer
+// a polymer with a more than one type of repeating unit
 message Copolymer
  {
   id String = 1
@@ -302,9 +300,12 @@ message Copolymer
   repeated hasBonds AtomicBond = 10
   repeated hasAtoms Atom = 11
   optional isOrganic Boolean = 12
-  repeated hasSubmolecules Molecule = 13
-  optional polymerOf Macromolecule = 14
-  repeated hasPart Macromolecule = 15
+  optional hasPart String = 13
+  repeated hasSubmolecules Molecule = 14
+  optional hasRepeatUnit ChemicalEntity = 15
+  optional isBranched Boolean = 16
+  optional polymerArchitectureType String = 17
+  repeated polymerOf Macromolecule = 18
  }
 message DNASequenceInterval
  {
@@ -434,6 +435,28 @@ message Glycan
   optional hasPart String = 13
   repeated hasSubmolecules Molecule = 14
  }
+// a polymer with a single type of repeating unit
+message Homopolymer
+ {
+  id String = 1
+  optional name String = 2
+  optional isRadical Boolean = 3
+  optional hasChemicalRole ChemicalRole = 4
+  optional inchiString ChemicalEncoding = 5
+  optional inchiChemicalSublayer String = 6
+  optional owlSubclassOf OwlClass = 7
+  optional inchiAtomConnectionsSublayer String = 8
+  repeated hasAtomOccurrences AtomOccurrence = 9
+  repeated hasBonds AtomicBond = 10
+  repeated hasAtoms Atom = 11
+  optional isOrganic Boolean = 12
+  optional hasPart String = 13
+  repeated hasSubmolecules Molecule = 14
+  optional hasRepeatUnit ChemicalEntity = 15
+  optional isBranched Boolean = 16
+  optional polymerArchitectureType String = 17
+  optional polymerOf Macromolecule = 18
+ }
 // A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals
 message ImpreciseChemicalMixture
  {
@@ -476,17 +499,18 @@ message Isobar
 message IsomeraseReaction
  {
   optional hasRinchiRepresentation ChemicalEncoding = 1
-  repeated leftParticipants ReactionParticipant = 2
-  repeated rightParticipants ReactionParticipant = 3
-  optional direction String = 4
-  optional smartsString String = 5
-  optional isDiastereoselective Boolean = 6
-  optional isStereo Boolean = 7
-  optional isBalanced Boolean = 8
-  optional isTransport Boolean = 9
-  optional isFullyCharacterized Boolean = 10
-  optional reactionCenter String = 11
-  optional description String = 12
+  optional hasReactionSmilesRepresentation ChemicalEncoding = 2
+  repeated leftParticipants ReactionParticipant = 3
+  repeated rightParticipants ReactionParticipant = 4
+  optional direction String = 5
+  optional smartsString String = 6
+  optional isDiastereoselective Boolean = 7
+  optional isStereo Boolean = 8
+  optional isBalanced Boolean = 9
+  optional isTransport Boolean = 10
+  optional isFullyCharacterized Boolean = 11
+  optional reactionCenter String = 12
+  optional description String = 13
  }
 // A specific subtype of an atom with a specified neutron number
 message Isotope
@@ -552,6 +576,18 @@ message Macromolecule
  }
 // A substance composed of one or more chemical entities
 message Material
+ {
+  optional hasPart ChemicalEntity = 1
+ }
+// A grouping class that classifies materials
+message MaterialGroupingClass
+ {
+  id String = 1
+  repeated subtypeOf GroupingClass = 2
+  optional owlSubclassOf OwlClass = 3
+  optional classifies Material = 4
+ }
+message Mineral
  {
   optional hasPart ChemicalEntity = 1
  }
@@ -728,8 +764,7 @@ message MonoatomicIon
   optional name String = 9
   optional hasPart SubatomicParticle = 10
   optional elementalCharge Integer = 11
-  optional elementalChange String = 12
-  optional hasElement ChemicalElement = 13
+  optional hasElement ChemicalElement = 12
  }
 message Monomer
  {
@@ -741,6 +776,14 @@ message Monomer
   optional inchiChemicalSublayer String = 6
   optional owlSubclassOf OwlClass = 7
   optional inchiAtomConnectionsSublayer String = 8
+ }
+message MonomericPolymericGroupingClass
+ {
+  id String = 1
+  optional owlSubclassOf OwlClass = 2
+  repeated subtypeOf MoleculeGroupingClass = 3
+  optional classifies Molecule = 4
+  optional hasRepeatUnit ChemicalEntity = 5
  }
 // A macromolecule composed of repeating subunits. Examples: cellulose
 message MonomolecularPolymer
@@ -760,6 +803,9 @@ message MonomolecularPolymer
   optional hasPart String = 13
   repeated hasSubmolecules Molecule = 14
   optional polymerOf Macromolecule = 15
+  optional hasRepeatUnit ChemicalEntity = 16
+  optional isBranched Boolean = 17
+  optional polymerArchitectureType String = 18
  }
 // A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale.
 message Nanostructure
@@ -904,6 +950,14 @@ message PolymerPart
   optional owlSubclassOf OwlClass = 7
   optional inchiAtomConnectionsSublayer String = 8
  }
+// An abstract part of a polymer that is all instances of a repeated monomer of a single type
+message PolymerRepeatUnit
+ {
+  optional owlSubclassOf OwlClass = 1
+  optional repetitionOf Molecule = 2
+  optional degreeOfPolymerization Count = 3
+  optional mass Float = 4
+ }
 // A part of a complex mixture that is of uniform composition
 message ProportionalPart
  {
@@ -974,17 +1028,23 @@ message Radionuclide
 message Reaction
  {
   optional hasRinchiRepresentation ChemicalEncoding = 1
-  repeated leftParticipants ReactionParticipant = 2
-  repeated rightParticipants ReactionParticipant = 3
-  optional direction String = 4
-  optional smartsString String = 5
-  optional isDiastereoselective Boolean = 6
-  optional isStereo Boolean = 7
-  optional isBalanced Boolean = 8
-  optional isTransport Boolean = 9
-  optional isFullyCharacterized Boolean = 10
-  optional reactionCenter String = 11
-  optional description String = 12
+  optional hasReactionSmilesRepresentation ChemicalEncoding = 2
+  repeated leftParticipants ReactionParticipant = 3
+  repeated rightParticipants ReactionParticipant = 4
+  optional direction String = 5
+  optional smartsString String = 6
+  optional isDiastereoselective Boolean = 7
+  optional isStereo Boolean = 8
+  optional isBalanced Boolean = 9
+  optional isTransport Boolean = 10
+  optional isFullyCharacterized Boolean = 11
+  optional reactionCenter String = 12
+  optional description String = 13
+ }
+// A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
+message ReactionGroupingClass
+ {
+  optional classifies Reaction = 1
  }
 // Instances of this link a reaction to a chemical entity participant
 message ReactionParticipant
@@ -1085,6 +1145,8 @@ message SupramolecularPolymer
   optional inchiChemicalSublayer String = 6
   optional owlSubclassOf OwlClass = 7
   optional inchiAtomConnectionsSublayer String = 8
+  optional polymerOf Macromolecule = 9
+  optional hasRepeatUnit ChemicalEntity = 10
  }
 message TanimotoSimilarity
  {
@@ -1107,7 +1169,6 @@ message UnchargedAtom
   optional name String = 9
   optional hasPart SubatomicParticle = 10
   optional elementalCharge Integer = 11
-  optional elementalChange String = 12
  }
 // A molecule that has no charge
 message UnchargedMolecule

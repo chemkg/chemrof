@@ -1,5 +1,5 @@
 {
-   "_comments": "Auto generated from chemrof.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-01-04T18:03:39\n    Schema: chemrof\n    \n    id: https://w3id.org/chemrof\n    description: A data model for managing information about chemical entities, ranging from atoms\nthrough molecules to complex mixtures.\n\nAspects of this have been cribbed from various sources including CHEBI, SIO,\nWikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes\nare my own.\n\nFor full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
+   "_comments": "Auto generated from chemrof.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-04-28T12:23:12\n    Schema: chemrof\n    metamodel version: 1.7.0\n    model version: 0.0.1\n    \n    id: https://w3id.org/chemrof\n    description: A data model for managing information about chemical entities, ranging from atoms\nthrough molecules to complex mixtures.\n\nAspects of this have been cribbed from various sources including CHEBI, SIO,\nWikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes\nare my own.\n\nFor full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
    "@context": {
       "BFO": {
          "@id": "http://purl.obolibrary.org/obo/BFO_",
@@ -20,6 +20,10 @@
       },
       "DRUGBANK": "http://identifiers.org/drugbank/",
       "EC": "http://example.org/UNKNOWN/EC/",
+      "FIX": {
+         "@id": "http://purl.obolibrary.org/obo/FIX_",
+         "@prefix": true
+      },
       "GO": "http://identifiers.org/go/",
       "GlyTouCan": "http://identifiers.org/glytoucan/",
       "Glycosciences.DB": "http://example.org/UNKNOWN/Glycosciences.DB/",
@@ -33,15 +37,29 @@
       "LIPIDBANK": "http://identifiers.org/lipidbank/",
       "LIPIDMAPS": "http://identifiers.org/lipidmaps/",
       "MESH": "http://identifiers.org/mesh/",
+      "MOP": {
+         "@id": "http://purl.obolibrary.org/obo/MOP_",
+         "@prefix": true
+      },
       "MetaCyc": "http://example.org/UNKNOWN/MetaCyc/",
       "MetaNetX": "http://example.org/UNKNOWN/MetaNetX/",
+      "OntoRXN": "http://www.semanticweb.com/OntoRxn#",
+      "OntoRxn": "http://www.semanticweb.com/OntoRxn#",
       "PR": "http://identifiers.org/pr/",
       "PUBCHEM.COMPOUND": "http://identifiers.org/pubchem.compound/",
       "PUBCHEM.ELEMENT": "https://pubchem.ncbi.nlm.nih.gov/element/",
       "REACT": "http://example.org/UNKNOWN/REACT/",
+      "REX": {
+         "@id": "http://purl.obolibrary.org/obo/REX_",
+         "@prefix": true
+      },
       "RHEA": "http://identifiers.org/rhea/",
       "RO": {
          "@id": "http://purl.obolibrary.org/obo/RO_",
+         "@prefix": true
+      },
+      "RXNO": {
+         "@id": "http://purl.obolibrary.org/obo/RXNO_",
          "@prefix": true
       },
       "RetroRules": "http://example.org/UNKNOWN/RetroRules/",
@@ -57,9 +75,17 @@
       "biolink": "https://w3id.org/biolink/",
       "bioptop": "http://purl.org/biotop/biotop.owl#",
       "biotop": "http://purl.org/biotop/biotop.owl#",
+      "bo": {
+         "@id": "http://www.blueobelisk.org/dict/terminology",
+         "@prefix": true
+      },
       "chemrof": "https://w3id.org/chemrof/",
+      "cml": "http://www.xml-cml.org/schema/",
+      "damlpt": "http://www.daml.org/2003/01/periodictable/PeriodicTable#",
       "dcterms": "http://purl.org/dc/terms/",
       "edam": "http://identifiers.org/edam/",
+      "gc": "http://purl.org/gc/",
+      "goldbook": "https://goldbook.iupac.org/terms/view/",
       "linkml": "https://w3id.org/linkml/",
       "owl": "http://www.w3.org/2002/07/owl#",
       "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -81,7 +107,8 @@
          "@type": "@id"
       },
       "atomic_number": {
-         "@type": "xsd:int"
+         "@type": "xsd:int",
+         "@id": "bo:atomicNumber"
       },
       "atomically_connected_to": {
          "@type": "@id"
@@ -139,10 +166,16 @@
       "decay_product": {
          "@type": "@id"
       },
+      "degree_of_polymerization": {
+         "@type": "xsd:int"
+      },
       "derivative_of": {
          "@type": "@id"
       },
       "diastereoisomers_of": {
+         "@type": "@id"
+      },
+      "direct_conjugatated_form_of": {
          "@type": "@id"
       },
       "elemental_charge": {
@@ -230,7 +263,13 @@
       "has_physiological_base": {
          "@type": "@id"
       },
+      "has_polymer_repeat_units": {
+         "@type": "@id"
+      },
       "has_proportional_parts": {
+         "@type": "@id"
+      },
+      "has_repeat_unit": {
          "@type": "@id"
       },
       "has_right_enantiomer": {
@@ -258,6 +297,9 @@
          "@type": "xsd:int"
       },
       "is_balanced": {
+         "@type": "xsd:boolean"
+      },
+      "is_branched": {
          "@type": "xsd:boolean"
       },
       "is_diastereoselective": {
@@ -308,6 +350,45 @@
       "minimal_percentage": {
          "@type": "xsd:float"
       },
+      "molecular_charge": {
+         "@id": "FIX:0000275"
+      },
+      "molecular_electronic_absorption_spectroscopy": {
+         "@id": "FIX:0000011"
+      },
+      "molecular_electronic_spectroscopy": {
+         "@id": "FIX:0000943"
+      },
+      "molecular_heat_capacity": {
+         "@id": "FIX:0000389"
+      },
+      "molecular_hydration": {
+         "@id": "FIX:0000272"
+      },
+      "molecular_mass": {
+         "@id": "FIX:0000270"
+      },
+      "molecular_property": {
+         "@id": "FIX:0000276"
+      },
+      "molecular_replacement": {
+         "@id": "FIX:0000251"
+      },
+      "molecular_shape": {
+         "@id": "FIX:0000273"
+      },
+      "molecular_size": {
+         "@id": "FIX:0000271"
+      },
+      "molecular_spectroscopy": {
+         "@id": "FIX:0000063"
+      },
+      "molecular_spectroscopy_by_energy_state": {
+         "@id": "FIX:0000030"
+      },
+      "molecular_structure": {
+         "@id": "FIX:0000305"
+      },
       "monoisotopic_mass": {
          "@type": "xsd:float"
       },
@@ -344,6 +425,9 @@
       "position_isomer_of": {
          "@type": "@id"
       },
+      "repetition_of": {
+         "@type": "@id"
+      },
       "right_molecule": {
          "@type": "@id"
       },
@@ -368,11 +452,17 @@
       "subtype_of": {
          "@type": "@id"
       },
+      "symbol": {
+         "@id": "bo:symbol"
+      },
       "tautomer_of": {
          "@type": "@id"
       },
       "torsional_angle": {
          "@type": "xsd:float"
+      },
+      "transitive_conjugatated_form_of": {
+         "@type": "@id"
       },
       "type": {
          "@context": {
@@ -384,6 +474,9 @@
       },
       "valence": {
          "@type": "xsd:integer"
+      },
+      "AtomicBond": {
+         "@id": "gc:Bond"
       },
       "OwlClass": {
          "@id": "owl:Class"

@@ -3,6 +3,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX gc: <http://purl.org/gc/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 
@@ -112,8 +113,8 @@ linkml:Nodeidentifier NONLITERAL
 <Atom_struct> {
     (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
           rdf:type [ <ChemicalEntity> ] ? ;
-          <atomic_number> @<Count> ? ;
-          <symbol> @linkml:String ? ;
+          <http://www.blueobelisk.org/dict/terminologyatomicNumber> @<Count> ? ;
+          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <has_part> @<SubatomicParticle> ?
        ) ;
        rdf:type [ <Atom> ]
@@ -199,8 +200,7 @@ linkml:Nodeidentifier NONLITERAL
 <AtomIonicForm_struct> {
     (  $<AtomIonicForm_tes> (  &<PartiallySpecifiedAtom_tes> ;
           rdf:type [ <PartiallySpecifiedAtom> ] ? ;
-          <elemental_charge> @linkml:Integer ? ;
-          <elemental_change> @linkml:String ?
+          <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <AtomIonicForm> ]
     )
@@ -233,7 +233,7 @@ linkml:Nodeidentifier NONLITERAL
           <bond_angle> @linkml:Float ? ;
           <torsional_angle> @linkml:Float ?
        ) ;
-       rdf:type [ <AtomicBond> ] ?
+       rdf:type [ gc:Bond ] ?
     )
 }
 
@@ -285,7 +285,7 @@ linkml:Nodeidentifier NONLITERAL
 <ChemicalElement> CLOSED {
     (  $<ChemicalElement_tes> (  &<PartiallySpecifiedAtom_tes> ;
           rdf:type [ <PartiallySpecifiedAtom> ] ? ;
-          <symbol> @linkml:String ? ;
+          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <in_periodic_table_group> @<PeriodicTableGroup> ? ;
           <in_periodic_table_block> @<PeriodicTableBlock> ? ;
           <boiling_point_in_celcius> @linkml:Float ? ;
@@ -427,7 +427,7 @@ linkml:Nodeidentifier NONLITERAL
 <Copolymer> CLOSED {
     (  $<Copolymer_tes> (  &<MonomolecularPolymer_tes> ;
           rdf:type [ <MonomolecularPolymer> ] ? ;
-          <has_part> @<Macromolecule> *
+          <polymer_of> @<Macromolecule> *
        ) ;
        rdf:type [ <Copolymer> ]
     )
@@ -554,13 +554,15 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<GeneralizedMolecularStructureClass> CLOSED {
-    (  $<GeneralizedMolecularStructureClass_tes> (  &<MoleculeGroupingClass_tes> ;
-          rdf:type [ <MoleculeGroupingClass> ] ?
-       ) ;
-       rdf:type [ <GeneralizedMolecularStructureClass> ]
-    )
-}
+<GeneralizedMolecularStructureClass>  (
+    CLOSED {
+       (  $<GeneralizedMolecularStructureClass_tes> (  &<MoleculeGroupingClass_tes> ;
+             rdf:type [ <MoleculeGroupingClass> ] ?
+          ) ;
+          rdf:type [ <GeneralizedMolecularStructureClass> ]
+       )
+    } OR @<MonomericPolymericGroupingClass>
+)
 
 <Glycan> CLOSED {
     (  $<Glycan_tes> (  &<Macromolecule_tes> ;
@@ -571,7 +573,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <GroupingClass>  (
-    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MolecularComponentGroupingClass> OR @<MoleculeGroupingClass>
+    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MaterialGroupingClass> OR @<MolecularComponentGroupingClass> OR
+    @<MoleculeGroupingClass>
 )
 
 <GroupingClass_struct> {
@@ -595,6 +598,15 @@ linkml:Nodeidentifier NONLITERAL
           <conjugate_acid_of> @<ChemicalEntity> ?
        ) ;
        rdf:type [ <GroupingClassForAcidsOrBases> ]
+    )
+}
+
+<Homopolymer> CLOSED {
+    (  $<Homopolymer_tes> (  &<MonomolecularPolymer_tes> ;
+          rdf:type [ <MonomolecularPolymer> ] ? ;
+          <polymer_of> @<Macromolecule> ?
+       ) ;
+       rdf:type [ <Homopolymer> ]
     )
 }
 
@@ -729,8 +741,25 @@ linkml:Nodeidentifier NONLITERAL
        (  $<Material_tes> <has_part> @<ChemicalEntity> ? ;
           rdf:type [ <Material> ] ?
        )
-    } OR @<Nanostructure>
+    } OR @<Mineral> OR @<Nanostructure>
 )
+
+<MaterialGroupingClass> CLOSED {
+    (  $<MaterialGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <classifies> @<Material> ?
+       ) ;
+       rdf:type [ <MaterialGroupingClass> ]
+    )
+}
+
+<Mineral> CLOSED {
+    (  $<Mineral_tes> (  &<Material_tes> ;
+          rdf:type [ <Material> ] ?
+       ) ;
+       rdf:type [ <Mineral> ] ?
+    )
+}
 
 <Moiety> CLOSED {
     (  $<Moiety_tes> (  &<MolecularComponent_tes> ;
@@ -907,15 +936,27 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<MonomericPolymericGroupingClass> CLOSED {
+    (  $<MonomericPolymericGroupingClass_tes> (  &<GeneralizedMolecularStructureClass_tes> ;
+          rdf:type [ <GeneralizedMolecularStructureClass> ] ? ;
+          <has_repeat_unit> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <MonomericPolymericGroupingClass> ]
+    )
+}
+
 <MonomolecularPolymer>  (
     CLOSED {
        (  $<MonomolecularPolymer_tes> (  &<Macromolecule_tes> ;
              rdf:type [ <Macromolecule> ] ? ;
-             <polymer_of> @<Macromolecule> ?
+             <polymer_of> @<Macromolecule> ? ;
+             <has_repeat_unit> @<ChemicalEntity> ? ;
+             <is_branched> @linkml:Boolean ? ;
+             <polymer_architecture_type> @linkml:String ?
           ) ;
           rdf:type [ <MonomolecularPolymer> ]
        )
-    } OR @<Copolymer>
+    } OR @<Copolymer> OR @<Homopolymer>
 )
 
 <Nanostructure> CLOSED {
@@ -1066,6 +1107,17 @@ linkml:Nodeidentifier NONLITERAL
     } OR @<MolecularSubsequence> OR @<Monomer>
 )
 
+<PolymerRepeatUnit> CLOSED {
+    (  $<PolymerRepeatUnit_tes> (  &<RelationalChemicalEntity_tes> ;
+          rdf:type [ <RelationalChemicalEntity> ] ? ;
+          <repetition_of> @<Molecule> ? ;
+          <degree_of_polymerization> @<Count> ? ;
+          <mass> @linkml:Float ?
+       ) ;
+       rdf:type [ <PolymerRepeatUnit> ] ?
+    )
+}
+
 <PreciseChemicalMixture>  (
     @<ChemicalSalt> OR @<MolecularComplex> OR @<RacemicMixture>
 )
@@ -1130,6 +1182,7 @@ linkml:Nodeidentifier NONLITERAL
 <Reaction>  (
     CLOSED {
        (  $<Reaction_tes> (  <has_rinchi_representation> @<ChemicalEncoding> ;
+             <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
              <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
              <direction> @linkml:String ? ;
@@ -1147,6 +1200,12 @@ linkml:Nodeidentifier NONLITERAL
     } OR @<IsomeraseReaction>
 )
 
+<ReactionGroupingClass> CLOSED {
+    (  $<ReactionGroupingClass_tes> <classifies> @<Reaction> ? ;
+       rdf:type [ <ReactionGroupingClass> ] ?
+    )
+}
+
 <ReactionParticipant> CLOSED {
     (  $<ReactionParticipant_tes> (  &<RelationalChemicalEntity_tes> ;
           rdf:type [ <RelationalChemicalEntity> ] ? ;
@@ -1158,7 +1217,7 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <RelationalChemicalEntity>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<Similarity>
+    @<AtomOccurrence> OR @<AtomicBond> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<Similarity>
 )
 
 <RelationalChemicalEntity_struct> {
@@ -1279,7 +1338,9 @@ linkml:Nodeidentifier NONLITERAL
 
 <SupramolecularPolymer> CLOSED {
     (  $<SupramolecularPolymer_tes> (  &<MolecularComplex_tes> ;
-          rdf:type [ <MolecularComplex> ] ?
+          rdf:type [ <MolecularComplex> ] ? ;
+          <polymer_of> @<Macromolecule> ? ;
+          <has_repeat_unit> @<ChemicalEntity> ?
        ) ;
        rdf:type [ <SupramolecularPolymer> ]
     )

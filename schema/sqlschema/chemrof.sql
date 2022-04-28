@@ -133,6 +133,26 @@ CREATE TABLE chirality_center (
 	PRIMARY KEY (owl_subclass_of)
 );
 
+CREATE TABLE copolymer (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	is_radical BOOLEAN, 
+	has_chemical_role TEXT, 
+	inchi_string TEXT, 
+	inchi_chemical_sublayer TEXT, 
+	owl_subclass_of TEXT, 
+	inchi_atom_connections_sublayer TEXT, 
+	has_atom_occurrences TEXT, 
+	has_bonds TEXT, 
+	is_organic BOOLEAN, 
+	has_part TEXT, 
+	has_repeat_unit TEXT, 
+	is_branched BOOLEAN, 
+	polymer_architecture_type TEXT, 
+	polymer_of TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "DNA_sequence_interval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -240,6 +260,7 @@ CREATE TABLE imprecise_chemical_mixture (
 
 CREATE TABLE isomerase_reaction (
 	has_rinchi_representation TEXT NOT NULL, 
+	has_reaction_smiles_representation TEXT, 
 	left_participants TEXT, 
 	right_participants TEXT, 
 	direction TEXT, 
@@ -251,7 +272,7 @@ CREATE TABLE isomerase_reaction (
 	is_fully_characterized BOOLEAN, 
 	reaction_center TEXT, 
 	description TEXT, 
-	PRIMARY KEY (has_rinchi_representation, left_participants, right_participants, direction, smarts_string, is_diastereoselective, is_stereo, is_balanced, is_transport, is_fully_characterized, reaction_center, description)
+	PRIMARY KEY (has_rinchi_representation, has_reaction_smiles_representation, left_participants, right_participants, direction, smarts_string, is_diastereoselective, is_stereo, is_balanced, is_transport, is_fully_characterized, reaction_center, description)
 );
 
 CREATE TABLE lipid (
@@ -292,6 +313,18 @@ CREATE TABLE macromolecule (
 );
 
 CREATE TABLE material (
+	has_part TEXT, 
+	PRIMARY KEY (has_part)
+);
+
+CREATE TABLE material_grouping_class (
+	id TEXT NOT NULL, 
+	owl_subclass_of TEXT, 
+	classifies TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE mineral (
 	has_part TEXT, 
 	PRIMARY KEY (has_part)
 );
@@ -454,6 +487,15 @@ CREATE TABLE monomer (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE monomeric_polymeric_grouping_class (
+	id TEXT NOT NULL, 
+	owl_subclass_of TEXT, 
+	subtype_of TEXT, 
+	classifies TEXT, 
+	has_repeat_unit TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE nanostructure (
 	has_part TEXT, 
 	has_morphological_category VARCHAR(12), 
@@ -579,6 +621,14 @@ CREATE TABLE polymer_part (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE polymer_repeat_unit (
+	owl_subclass_of TEXT, 
+	repetition_of TEXT, 
+	degree_of_polymerization INTEGER, 
+	mass FLOAT, 
+	PRIMARY KEY (owl_subclass_of, repetition_of, degree_of_polymerization, mass)
+);
+
 CREATE TABLE protein (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -608,6 +658,7 @@ CREATE TABLE proton (
 
 CREATE TABLE reaction (
 	has_rinchi_representation TEXT NOT NULL, 
+	has_reaction_smiles_representation TEXT, 
 	left_participants TEXT, 
 	right_participants TEXT, 
 	direction TEXT, 
@@ -619,7 +670,12 @@ CREATE TABLE reaction (
 	is_fully_characterized BOOLEAN, 
 	reaction_center TEXT, 
 	description TEXT, 
-	PRIMARY KEY (has_rinchi_representation, left_participants, right_participants, direction, smarts_string, is_diastereoselective, is_stereo, is_balanced, is_transport, is_fully_characterized, reaction_center, description)
+	PRIMARY KEY (has_rinchi_representation, has_reaction_smiles_representation, left_participants, right_participants, direction, smarts_string, is_diastereoselective, is_stereo, is_balanced, is_transport, is_fully_characterized, reaction_center, description)
+);
+
+CREATE TABLE reaction_grouping_class (
+	classifies TEXT, 
+	PRIMARY KEY (classifies)
 );
 
 CREATE TABLE reaction_participant (
@@ -701,18 +757,6 @@ CREATE TABLE subatomic_particle (
 	inchi_string TEXT, 
 	inchi_chemical_sublayer TEXT, 
 	owl_subclass_of TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE supramolecular_polymer (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
-	inchi_atom_connections_sublayer TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -836,24 +880,6 @@ CREATE TABLE chemical_salt_grouping_class (
 	FOREIGN KEY(classifies) REFERENCES chemical_salt (id)
 );
 
-CREATE TABLE copolymer (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
-	inchi_atom_connections_sublayer TEXT, 
-	has_atom_occurrences TEXT, 
-	has_bonds TEXT, 
-	is_organic BOOLEAN, 
-	polymer_of TEXT, 
-	has_part TEXT, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
-);
-
 CREATE TABLE ester (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -890,6 +916,27 @@ CREATE TABLE fully_specified_atom (
 	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
 );
 
+CREATE TABLE homopolymer (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	is_radical BOOLEAN, 
+	has_chemical_role TEXT, 
+	inchi_string TEXT, 
+	inchi_chemical_sublayer TEXT, 
+	owl_subclass_of TEXT, 
+	inchi_atom_connections_sublayer TEXT, 
+	has_atom_occurrences TEXT, 
+	has_bonds TEXT, 
+	is_organic BOOLEAN, 
+	has_part TEXT, 
+	has_repeat_unit TEXT, 
+	is_branched BOOLEAN, 
+	polymer_architecture_type TEXT, 
+	polymer_of TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
+);
+
 CREATE TABLE molecular_component_grouping_class (
 	id TEXT NOT NULL, 
 	owl_subclass_of TEXT, 
@@ -914,6 +961,9 @@ CREATE TABLE monomolecular_polymer (
 	is_organic BOOLEAN, 
 	has_part TEXT, 
 	polymer_of TEXT, 
+	has_repeat_unit TEXT, 
+	is_branched BOOLEAN, 
+	polymer_architecture_type TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
 );
@@ -978,6 +1028,21 @@ CREATE TABLE radionuclide (
 	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
 );
 
+CREATE TABLE supramolecular_polymer (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	is_radical BOOLEAN, 
+	has_chemical_role TEXT, 
+	inchi_string TEXT, 
+	inchi_chemical_sublayer TEXT, 
+	owl_subclass_of TEXT, 
+	inchi_atom_connections_sublayer TEXT, 
+	polymer_of TEXT, 
+	has_repeat_unit TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
+);
+
 CREATE TABLE uncharged_atom (
 	id TEXT NOT NULL, 
 	is_radical BOOLEAN, 
@@ -990,7 +1055,6 @@ CREATE TABLE uncharged_atom (
 	name TEXT, 
 	has_part TEXT, 
 	elemental_charge INTEGER, 
-	elemental_change TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
 );
@@ -1007,6 +1071,20 @@ CREATE TABLE "Bronsted_acid_has_atoms" (
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
 	FOREIGN KEY(backref_id) REFERENCES "Bronsted_acid" (id)
+);
+
+CREATE TABLE copolymer_has_atoms (
+	backref_id TEXT, 
+	has_atoms TEXT, 
+	PRIMARY KEY (backref_id, has_atoms), 
+	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
+);
+
+CREATE TABLE copolymer_has_submolecules (
+	backref_id TEXT, 
+	has_submolecules TEXT, 
+	PRIMARY KEY (backref_id, has_submolecules), 
+	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
 );
 
 CREATE TABLE enantiomer_has_submolecules (
@@ -1063,6 +1141,13 @@ CREATE TABLE macromolecule_has_submolecules (
 	has_submolecules TEXT, 
 	PRIMARY KEY (backref_id, has_submolecules), 
 	FOREIGN KEY(backref_id) REFERENCES macromolecule (id)
+);
+
+CREATE TABLE material_grouping_class_subtype_of (
+	backref_id TEXT, 
+	subtype_of TEXT, 
+	PRIMARY KEY (backref_id, subtype_of), 
+	FOREIGN KEY(backref_id) REFERENCES material_grouping_class (id)
 );
 
 CREATE TABLE molecular_anion_has_submolecules (
@@ -1261,7 +1346,6 @@ CREATE TABLE atom_anion (
 	symbol TEXT, 
 	name TEXT, 
 	has_part TEXT, 
-	elemental_change TEXT, 
 	has_element TEXT, 
 	elemental_charge INTEGER, 
 	PRIMARY KEY (id), 
@@ -1280,7 +1364,6 @@ CREATE TABLE atom_cation (
 	symbol TEXT, 
 	name TEXT, 
 	has_part TEXT, 
-	elemental_change TEXT, 
 	has_element TEXT, 
 	elemental_charge INTEGER, 
 	PRIMARY KEY (id), 
@@ -1327,7 +1410,6 @@ CREATE TABLE monoatomic_ion (
 	name TEXT, 
 	has_part TEXT, 
 	elemental_charge INTEGER, 
-	elemental_change TEXT, 
 	has_element TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
@@ -1355,20 +1437,6 @@ CREATE TABLE acid_base_has_atoms (
 	FOREIGN KEY(backref_id) REFERENCES acid_base (id)
 );
 
-CREATE TABLE copolymer_has_atoms (
-	backref_id TEXT, 
-	has_atoms TEXT, 
-	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
-);
-
-CREATE TABLE copolymer_has_submolecules (
-	backref_id TEXT, 
-	has_submolecules TEXT, 
-	PRIMARY KEY (backref_id, has_submolecules), 
-	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
-);
-
 CREATE TABLE ester_has_submolecules (
 	backref_id TEXT, 
 	has_submolecules TEXT, 
@@ -1381,6 +1449,20 @@ CREATE TABLE ester_has_atoms (
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
 	FOREIGN KEY(backref_id) REFERENCES ester (id)
+);
+
+CREATE TABLE homopolymer_has_atoms (
+	backref_id TEXT, 
+	has_atoms TEXT, 
+	PRIMARY KEY (backref_id, has_atoms), 
+	FOREIGN KEY(backref_id) REFERENCES homopolymer (id)
+);
+
+CREATE TABLE homopolymer_has_submolecules (
+	backref_id TEXT, 
+	has_submolecules TEXT, 
+	PRIMARY KEY (backref_id, has_submolecules), 
+	FOREIGN KEY(backref_id) REFERENCES homopolymer (id)
 );
 
 CREATE TABLE monomolecular_polymer_has_atoms (

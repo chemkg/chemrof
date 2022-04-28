@@ -106,7 +106,6 @@ type AtomAnion implements AnionState
     symbol: String
     name: String
     hasPart: SubatomicParticle
-    elementalChange: String
     hasElement: ChemicalElement
     elementalCharge: Integer
   }
@@ -123,7 +122,6 @@ type AtomCation implements CationState
     symbol: String
     name: String
     hasPart: SubatomicParticle
-    elementalChange: String
     hasElement: ChemicalElement
     elementalCharge: Integer
   }
@@ -183,7 +181,6 @@ interface AtomIonicForm
     name: String
     hasPart: SubatomicParticle
     elementalCharge: Integer
-    elementalChange: String
   }
 
 type AtomOccurrence implements OwlClass
@@ -392,9 +389,12 @@ type Copolymer
     hasBonds: [AtomicBond]
     hasAtoms: [Atom]
     isOrganic: Boolean
+    hasPart: String
     hasSubmolecules: [Molecule]
-    polymerOf: Macromolecule
-    hasPart: [Macromolecule]
+    hasRepeatUnit: ChemicalEntity
+    isBranched: Boolean
+    polymerArchitectureType: String
+    polymerOf: [Macromolecule]
   }
 
 type DNASequenceInterval
@@ -578,6 +578,28 @@ interface GroupingClassForAcidsOrBases
     conjugateAcidOf: ChemicalEntity
   }
 
+type Homopolymer
+  {
+    id: String!
+    name: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasAtoms: [Atom]
+    isOrganic: Boolean
+    hasPart: String
+    hasSubmolecules: [Molecule]
+    hasRepeatUnit: ChemicalEntity
+    isBranched: Boolean
+    polymerArchitectureType: String
+    polymerOf: Macromolecule
+  }
+
 type ImpreciseChemicalMixture
   {
     id: String!
@@ -639,6 +661,7 @@ type Isobar
 type IsomeraseReaction
   {
     hasRinchiRepresentation: ChemicalEncoding!
+    hasReactionSmilesRepresentation: ChemicalEncoding
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
@@ -717,6 +740,19 @@ type Macromolecule
   }
 
 type Material
+  {
+    hasPart: ChemicalEntity
+  }
+
+type MaterialGroupingClass
+  {
+    id: String!
+    subtypeOf: [GroupingClass]
+    owlSubclassOf: OwlClass
+    classifies: Material
+  }
+
+type Mineral
   {
     hasPart: ChemicalEntity
   }
@@ -913,7 +949,6 @@ type MonoatomicIon implements Charged
     name: String
     hasPart: SubatomicParticle
     elementalCharge: Integer
-    elementalChange: String
     hasElement: ChemicalElement
   }
 
@@ -927,6 +962,15 @@ type Monomer
     inchiChemicalSublayer: String
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+  }
+
+type MonomericPolymericGroupingClass
+  {
+    id: String!
+    owlSubclassOf: OwlClass
+    subtypeOf: [MoleculeGroupingClass]
+    classifies: Molecule
+    hasRepeatUnit: ChemicalEntity
   }
 
 type MonomolecularPolymer
@@ -946,6 +990,9 @@ type MonomolecularPolymer
     hasPart: String
     hasSubmolecules: [Molecule]
     polymerOf: Macromolecule
+    hasRepeatUnit: ChemicalEntity
+    isBranched: Boolean
+    polymerArchitectureType: String
   }
 
 type Nanostructure
@@ -1131,6 +1178,14 @@ type PolymerPart
     inchiAtomConnectionsSublayer: String
   }
 
+type PolymerRepeatUnit
+  {
+    owlSubclassOf: OwlClass
+    repetitionOf: Molecule
+    degreeOfPolymerization: Count
+    mass: Float
+  }
+
 type PreciseChemicalMixture implements WeaklyBonded
   {
     id: String!
@@ -1214,6 +1269,7 @@ type Radionuclide
 type Reaction
   {
     hasRinchiRepresentation: ChemicalEncoding!
+    hasReactionSmilesRepresentation: ChemicalEncoding
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
@@ -1225,6 +1281,11 @@ type Reaction
     isFullyCharacterized: Boolean
     reactionCenter: String
     description: String
+  }
+
+type ReactionGroupingClass
+  {
+    classifies: Reaction
   }
 
 type ReactionParticipant
@@ -1354,6 +1415,8 @@ type SupramolecularPolymer
     inchiChemicalSublayer: String
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    polymerOf: Macromolecule
+    hasRepeatUnit: ChemicalEntity
   }
 
 type TanimotoSimilarity
@@ -1382,7 +1445,6 @@ type UnchargedAtom implements Uncharged
     name: String
     hasPart: SubatomicParticle
     elementalCharge: Integer
-    elementalChange: String
   }
 
 type UnchargedMolecule implements Uncharged

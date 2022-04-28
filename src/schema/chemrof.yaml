@@ -92,7 +92,7 @@ classes:
       - KEGG.REACTION
       - GO
       - MetaCyc
-      - EC
+      - EC   ## levels 1-3
       - RXNO
       - MOP
     slot_usage:
@@ -880,10 +880,10 @@ classes:
       generic form of an atom, with unspecified neutron or charge
     defining_slots:
       - atomic number
-#    unique_keys:
-#      main:
-#        unique_key_slots:
-#          - atomic number
+    unique_keys:
+      main:
+        unique_key_slots:
+          - atomic number
     slot_usage:
       symbol:
         aliases:
@@ -1412,7 +1412,7 @@ classes:
     id_prefixes:
       - RHEA
       - KEGG.REACTION
-      - GO
+      - GO  ## catalytic activity
       - MetaCyc
       - REACT
       - EC
@@ -1424,6 +1424,7 @@ classes:
       - REX
     slots:
       - has rinchi representation
+      - has reaction smiles representation
     slot_usage:
       left participants:
         multivalued: true
@@ -2037,7 +2038,12 @@ slots:
       - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
     comments:
       - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
-  
+
+  has reaction smiles representation:
+    aliases:
+      - reaction SMILES
+    is_a: chemical formula
+      
   has rauxinfo representation:
     aliases:
       - RAuxInfo
@@ -2156,7 +2162,7 @@ slots:
       - https://github.com/ncats/lychi
     
   inchi string:
-    title: InChi
+#    title: InChi
     is_a: chemical formula
     todos:
       - declare this as a key once compound_key is introduced to linkml

@@ -1,3 +1,13 @@
+/*
+
+  Examples of use:
+
+  See Makefile.etl
+  
+  pq-ontobee -e --consult src/prolog/chebi.pro "conjugate(A,B,AN,BN,ACh,BCh)"
+
+  */
+
 :- use_module(library(sparqlprog/dataframe)).
 :- use_module(library(sparqlprog/owl_util)).
 
@@ -37,6 +47,16 @@ is_enantiomer_of(C1,C2) :-
 
 is_conjugate_base_of(C1,C2) :-
         subclass_of_some(C1,'http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of',C2).
+is_conjugate_acid_of(C1,C2) :-
+        subclass_of_some(C1,'http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of',C2).
+
+conjugate_non_reciprocal1(C1,C2) :-
+        is_conjugate_base_of(C1,C2),
+        \+ is_conjugate_acid_of(C2,C1).
+conjugate_non_reciprocal2(C1,C2) :-
+        is_conjugate_acid_of(C1,C2),
+        \+ is_conjugate_base_of(C2,C1).
+
 
 has_part(C,P,N) :-
         ontobee ??
@@ -76,6 +96,21 @@ conjugate(A,B,AN,BN,ACh,BCh) :-
         is_conjugate_base_of(B,A),
         chrdf(A,rdfs:label,AN),
         chrdf(A,'http://purl.obolibrary.org/obo/chebi/charge',ACh),
+        chrdf(B,rdfs:label,BN),
+        chrdf(B,'http://purl.obolibrary.org/obo/chebi/charge',BCh).
+
+conjugate_no_charge1(A,B,AN,BN,ACh) :-
+        ontobee ??
+        is_conjugate_base_of(B,A),
+        chrdf(A,rdfs:label,AN),
+        chrdf(A,'http://purl.obolibrary.org/obo/chebi/charge',ACh),
+        chrdf(B,rdfs:label,BN),
+        \+ chrdf(B,'http://purl.obolibrary.org/obo/chebi/charge',_).
+conjugate_no_charge2(A,B,AN,BN,BCh) :-
+        ontobee ??
+        is_conjugate_base_of(B,A),
+        chrdf(A,rdfs:label,AN),
+        \+ chrdf(A,'http://purl.obolibrary.org/obo/chebi/charge',_),
         chrdf(B,rdfs:label,BN),
         chrdf(B,'http://purl.obolibrary.org/obo/chebi/charge',BCh).
 

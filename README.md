@@ -1,6 +1,6 @@
 # Chemical Entity Materials and Reactions Ontological Framework (ChEMROF)
 
-See the [Documentation](https://chemkg.github.io/chemrof/home/)
+See the [Documentation](https://chemkg.github.io/chemrof/home)
 
 Quick links:
 

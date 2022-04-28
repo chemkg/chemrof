@@ -1,3 +1,4 @@
+RUN = poetry run
 SRC_DIR = src
 SCHEMA_DIR = $(SRC_DIR)/schema
 SOURCE_FILES := $(shell find $(SCHEMA_DIR) -name '*.yaml')
@@ -8,10 +9,12 @@ SCHEMA_SRC = $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml
 TGTS = graphql jsonschema docs shex owl csv graphql python
 
 #GEN_OPTS = --no-mergeimports
-GEN_OPTS = 
+GEN_OPTS =
 
-all: gen stage
-gen: $(patsubst %,gen-%,$(TGTS))
+RUN = poetry run
+
+all: gen
+gen: project
 clean:
 	rm -rf target/
 	rm -rf docs/
@@ -33,14 +36,22 @@ tdir-%:
 docs:
 	mkdir $@
 
-project: $(SOURCE_FILES)
-	gen-project -d schema $<
+docs/index.md: $(SOURCE_FILES)
+	$(RUN) gen-markdown -d docs $< -I $@
+
+project: project1 schema/owl/chemrof.owl.ttl
+project1: $(SOURCE_FILES)
+#	gen-project -A 'owl: {metaclasses: false, type_objects: false}' -d schema $<
+	$(RUN) gen-project -d schema $<
+
+schema/owl/$(SCHEMA_NAME).owl.ttl: $(SOURCE_FILES)
+	$(RUN) gen-owl --no-metaclasses --no-type-objects $< > $@.tmp && mv $@.tmp $@
 
 # test docs locally.
 docserve:
-	mkdocs serve
+	$(RUN) mkdocs serve
 
 gh-deploy:
-	mkdocs gh-deploy
+	$(RUN) mkdocs gh-deploy
 
 include Makefile.etl

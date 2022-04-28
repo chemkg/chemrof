@@ -1,17 +1,24 @@
 @prefix CHEBI: <http://purl.obolibrary.org/obo/CHEBI_> .
 @prefix CHEMINF: <http://semanticscience.org/resource/CHEMINF_> .
 @prefix COB: <http://purl.obolibrary.org/obo/COB_> .
+@prefix FIX: <http://purl.obolibrary.org/obo/FIX_> .
 @prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix OntoRxn: <http://www.semanticweb.com/OntoRxn#> .
 @prefix SIO: <http://semanticscience.org/resource/SIO_> .
 @prefix Wikipedia: <https://en.wikipedia.org/wiki/> .
 @prefix biolink: <https://w3id.org/biolink/> .
 @prefix biotop: <http://purl.org/biotop/biotop.owl#> .
+@prefix bo: <http://www.blueobelisk.org/dict/terminology> .
 @prefix chemrof: <https://w3id.org/chemrof/> .
+@prefix damlpt: <http://www.daml.org/2003/01/periodictable/PeriodicTable#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gc: <http://purl.org/gc/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -25,32 +32,24 @@
         chemrof:Material,
         chemrof:OwlClass,
         chemrof:Reaction,
+        chemrof:ReactionGroupingClass,
         chemrof:SpecificityMixin,
         chemrof:State ;
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     dcterms:title "Chemical Entities Mixtures and Reactions Ontological Framework" ;
     pav:version "0.0.1" ;
-    skos:definition """A data model for managing information about chemical entities, ranging from atoms
-through molecules to complex mixtures.
-
-Aspects of this have been cribbed from various sources including CHEBI, SIO,
-Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes
-are my own.
-
-For full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).""" ;
-    linkml:generation_date "2022-01-04T18:03:43" ;
+    linkml:generation_date "2022-04-28T12:23:17" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "chemrof.yaml" ;
-    linkml:source_file_date "2022-01-04T17:48:54" ;
-    linkml:source_file_size 68954 .
+    linkml:source_file_date "2022-04-19T18:19:46" ;
+    linkml:source_file_size 75822 .
 
 chemrof:AZE_notation_html a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "AZE notation html" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_representation ;
-    skos:definition "E.g. <super>12</super>/<sub>6</sub>C" .
+    rdfs:subPropertyOf chemrof:chemical_representation .
 
 chemrof:AcidAnionGroupingClass a owl:Class,
         linkml:ClassDefinition ;
@@ -60,7 +59,6 @@ chemrof:AcidAnionGroupingClass a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty rdfs:label ],
         chemrof:GroupingClassForAcidsOrBases ;
-    skos:definition "A molecule grouping class that groups the different ion forms of the base of an acid" ;
     linkml:examples "Example(value='citrate', description=None)",
         "Example(value='pimelate', description=None)" .
 
@@ -72,7 +70,6 @@ chemrof:AcidBaseConflationClass a owl:Class,
             owl:onClass chemrof:AcidBase ;
             owl:onProperty chemrof:has_physiological_base ],
         chemrof:GroupingClassForAcidsOrBases ;
-    skos:definition "A molecule grouping class that can groups an acid together with all its conjugate bases. physiological" ;
     linkml:examples "Example(value='citrate/citric acid', description=None)" .
 
 chemrof:Allotrope a owl:Class,
@@ -87,7 +84,6 @@ chemrof:Allotrope a owl:Class,
             owl:onProperty chemrof:has_bonding_structure ;
             owl:qualifiedCardinality 1 ],
         chemrof:Molecule ;
-    skos:definition "A molecule consisting of atoms of the same element" ;
     linkml:examples "Example(value='diamond', description=None)",
         "Example(value='dioxygen', description=None)" .
 
@@ -108,8 +104,7 @@ chemrof:AtomAnion a owl:Class,
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:elemental_charge ],
         chemrof:AnionState,
-        chemrof:MonoatomicIon ;
-    skos:definition "A monoatomic ion that is negative" .
+        chemrof:MonoatomicIon .
 
 chemrof:AtomCation a owl:Class,
         linkml:ClassDefinition ;
@@ -120,7 +115,6 @@ chemrof:AtomCation a owl:Class,
             owl:onProperty chemrof:elemental_charge ],
         chemrof:CationState,
         chemrof:MonoatomicIon ;
-    skos:definition "A monoatomic ion that is positive, e.g Cu(2+)" ;
     linkml:examples "Example(value='Helium(2+)', description='1S/He/q+2')" .
 
 chemrof:AtomGroupingByPeriodicTableBlock a owl:Class,
@@ -130,8 +124,7 @@ chemrof:AtomGroupingByPeriodicTableBlock a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:PeriodicTableBlock ;
             owl:onProperty chemrof:in_periodic_table_block ],
-        chemrof:AtomGroupingByPeriodicTablePlacement ;
-    skos:definition "Example: group 13 atom" .
+        chemrof:AtomGroupingByPeriodicTablePlacement .
 
 chemrof:AtomGroupingByPeriodicTableGroup a owl:Class,
         linkml:ClassDefinition ;
@@ -140,14 +133,12 @@ chemrof:AtomGroupingByPeriodicTableGroup a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:PeriodicTableGroup ;
             owl:onProperty chemrof:in_periodic_table_group ],
-        chemrof:AtomGroupingByPeriodicTablePlacement ;
-    skos:definition "Example: p-block atom" .
+        chemrof:AtomGroupingByPeriodicTablePlacement .
 
 chemrof:AtomGroupingByProperty a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atom grouping by property" ;
-    rdfs:subClassOf chemrof:AtomGroupingClass ;
-    skos:definition "Example: metal atom" .
+    rdfs:subClassOf chemrof:AtomGroupingClass .
 
 chemrof:ChemicalGroupingByCharge a owl:Class,
         linkml:ClassDefinition ;
@@ -157,14 +148,13 @@ chemrof:ChemicalGroupingByCharge a owl:Class,
             owl:onClass linkml:Uriorcurie ;
             owl:onProperty chemrof:has_charge_state ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalEntity ;
             owl:onProperty chemrof:charge_agnostic_entity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
         chemrof:GroupingClass ;
-    skos:definition "A grouping class that refines a charge-neutral entity" ;
     linkml:examples "Example(value='copper cation', description=None)" .
 
 chemrof:ChemicalSaltByAnion a owl:Class,
@@ -175,7 +165,6 @@ chemrof:ChemicalSaltByAnion a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty rdfs:label ],
         chemrof:ChemicalSaltGroupingClass ;
-    skos:definition "A grouping class for a chemical salt named by anion" ;
     linkml:examples "Example(value='chloride salt', description=None)" .
 
 chemrof:ChemicalSaltByCation a owl:Class,
@@ -186,24 +175,23 @@ chemrof:ChemicalSaltByCation a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty rdfs:label ],
         chemrof:ChemicalSaltGroupingClass ;
-    skos:definition "A grouping class for a chemical salt named by cation" ;
     linkml:examples "Example(value='sodium salt', description=None)" .
 
 chemrof:ChiralityCenter a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "chirality center" ;
-    rdfs:subClassOf chemrof:Stereocenter ;
-    skos:definition "a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. " .
+    rdfs:subClassOf chemrof:Stereocenter .
 
 chemrof:Copolymer a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "copolymer" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Macromolecule ;
-            owl:onProperty chemrof:has_part ],
+            owl:onProperty chemrof:polymer_of ],
         chemrof:MonomolecularPolymer ;
-    skos:definition "a polymer derived from more than one species of monomer" ;
-    linkml:examples "Example(value='PEVA', description=None)" .
+    skos:altLabel "heteropolymer" ;
+    linkml:examples "Example(value='PEVA', description=None)",
+        "Example(value='styrene-butadiene rubber', description='The repeat units based on styrene and 1,3-butadiene form two repeating units, which can alternate in any order in the macromolecule, making the polymer thus a random copolymer.')" .
 
 chemrof:DNASequenceInterval a owl:Class,
         linkml:ClassDefinition ;
@@ -223,8 +211,7 @@ chemrof:EntityWithAtomsEnumerated a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_chemical_sublayer ],
         chemrof:SpecificityMixin,
-        linkml:mixin ;
-    skos:definition "A mixin for an entity that consists of one or more atoms where the atoms and the number of occurrences is counted (corresponding to the chemical layer in InChI)" .
+        linkml:mixin .
 
 chemrof:EntityWithChargeSpecified a owl:Class,
         linkml:ClassDefinition ;
@@ -234,8 +221,7 @@ chemrof:EntityWithChargeSpecified a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_charge_sublayer ],
         chemrof:SpecificityMixin,
-        linkml:mixin ;
-    skos:definition "A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)" .
+        linkml:mixin .
 
 chemrof:EntityWithConnectivitySpecificied a owl:Class,
         linkml:ClassDefinition ;
@@ -249,8 +235,7 @@ chemrof:EntityWithConnectivitySpecificied a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_atom_connections_sublayer ],
         chemrof:SpecificityMixin,
-        linkml:mixin ;
-    skos:definition "A mixin for an entity that consists of two or more atom occurrences where the connectivity is specified (corresponding to the /c layer in InChI)" .
+        linkml:mixin .
 
 chemrof:EntityWithIsotopeSpecified a owl:Class,
         linkml:ClassDefinition ;
@@ -260,8 +245,7 @@ chemrof:EntityWithIsotopeSpecified a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_isotopic_layer ],
         chemrof:SpecificityMixin,
-        linkml:mixin ;
-    skos:definition "A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)" .
+        linkml:mixin .
 
 chemrof:EntityWithStereochemistrySpecified a owl:Class,
         linkml:ClassDefinition ;
@@ -269,32 +253,30 @@ chemrof:EntityWithStereochemistrySpecified a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
         chemrof:SpecificityMixin,
-        linkml:mixin ;
-    skos:definition "A mixin for an entity where the stereochemistry is explicitly specified (corresponding to the /t, m/, and /s layers in InChI)" .
+        linkml:mixin .
 
 chemrof:Ester a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "ester" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_parent_alcohol ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:BronstedAcid ;
             owl:onProperty chemrof:has_parent_acid ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_parent_alcohol ],
         chemrof:Molecule ;
-    skos:definition "An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group" ;
     linkml:examples "Example(value='butyl ethanoate', description='has parent alcohol butanol and has parent acid acetic acid')" .
 
 chemrof:FullySpecifiedAtom a owl:Class,
@@ -302,16 +284,15 @@ chemrof:FullySpecifiedAtom a owl:Class,
     rdfs:label "fully specified atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Count ;
-            owl:onProperty chemrof:neutron_number ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Count ;
+            owl:onProperty chemrof:neutron_number ],
         chemrof:Atom ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
-    skos:definition "An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)" ;
     skos:note "{'chemical species of an element': 'Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859'}" ;
     linkml:examples "Example(value='Helium-4(2+)', description='The atom that is equivalent to an alpha particle 1S/He/q+2/i1+0')" .
 
@@ -328,24 +309,25 @@ chemrof:GeneralAcidBaseGroupingClass a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "general acid base grouping class" ;
     rdfs:subClassOf chemrof:GroupingClassForAcidsOrBases ;
-    skos:definition "A molecule grouping class that can groups an acid together with all its conjugate bases. physiological" ;
     linkml:examples "Example(value='tricarboxylic acid/tricarboxylic acid anion', description=None)" .
-
-chemrof:GeneralizedMolecularStructureClass a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "generalized molecular structure class" ;
-    rdfs:subClassOf chemrof:MoleculeGroupingClass ;
-    skos:definition "A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane" ;
-    linkml:examples "Example(value='monosaccharide', description=None)" .
 
 chemrof:Glycan a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "glycan" ;
     rdfs:subClassOf chemrof:Macromolecule ;
     skos:altLabel "polysaccharides" ;
-    skos:definition "A macromolecule consisting of a large number of monosaccharides linked glycosidically" ;
     skos:note "Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans" ;
     linkml:examples "Example(value='https://www.glycoepitope.jp/epitopes/EP0311', description='GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)')" .
+
+chemrof:Homopolymer a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "homopolymer" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Macromolecule ;
+            owl:onProperty chemrof:polymer_of ],
+        chemrof:MonomolecularPolymer ;
+    linkml:examples "Example(value='polystyrene', description='composed only of styrene-based repeat units')" .
 
 chemrof:IsPart a owl:Class,
         linkml:ClassDefinition ;
@@ -362,26 +344,6 @@ chemrof:Isobar a owl:Class,
     rdfs:label "isobar" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Isotope ;
-            owl:onProperty chemrof:decay_product ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:decay_mode ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:decay_energy ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Count ;
-            owl:onProperty chemrof:nucleon_number ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:mode_of_formation ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalElement ;
             owl:onProperty chemrof:has_element ],
         [ a owl:Restriction ;
@@ -390,61 +352,90 @@ chemrof:Isobar a owl:Class,
             owl:onProperty chemrof:half_life ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Count ;
+            owl:onProperty chemrof:nucleon_number ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:decay_mode ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalEntity ;
             owl:onProperty chemrof:isobar_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:mode_of_formation ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:decay_energy ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Isotope ;
+            owl:onProperty chemrof:decay_product ],
         chemrof:Nuclide ;
-    skos:definition "Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons." ;
     linkml:examples "Example(value='isobar-40', description='Any nuclide with a mass number of 40:  40S, 40Cl, 40Ar, 40K, and 40Ca')" .
 
 chemrof:IsomeraseReaction a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "isomerase reaction" ;
-    rdfs:subClassOf chemrof:Reaction ;
-    skos:definition "A reaction that converts a molecule from one isomer to another." .
+    rdfs:subClassOf chemrof:Reaction .
 
 chemrof:Lipid a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "lipid" ;
     rdfs:subClassOf chemrof:Macromolecule .
 
+chemrof:MaterialGroupingClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "material grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Material ;
+            owl:onProperty chemrof:classifies ],
+        chemrof:GroupingClass ;
+    linkml:examples "Example(value='MREO', description='mixed rare earth oxides')" .
+
+chemrof:Mineral a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "mineral" ;
+    rdfs:subClassOf chemrof:Material .
+
 chemrof:Moiety a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "moiety" ;
-    rdfs:subClassOf chemrof:MolecularComponent ;
-    skos:definition "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups" .
+    rdfs:subClassOf chemrof:MolecularComponent .
 
 chemrof:MolecularCation a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular cation" ;
     rdfs:subClassOf chemrof:CationState,
-        chemrof:PolyatomicIon ;
-    skos:definition "A polyatomic ion that is positive" .
+        chemrof:PolyatomicIon .
 
 chemrof:MolecularDerivativeGroupingClass a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular derivative grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:derivative_of ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty rdfs:label ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:derivative_of ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Molecule ;
             owl:onProperty chemrof:classifies ],
         chemrof:MoleculeGroupingClass ;
-    skos:definition "A grouping class defined as a derivative of another molecule or molecular grouping class" ;
     linkml:examples "Example(value='D-ornithine derivative', description=None)",
         "Example(value='oxoacid derivative', description=None)" .
 
 chemrof:MolecularSpecies a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular species" ;
-    rdfs:subClassOf chemrof:Molecule ;
-    skos:definition "A molecule in which the units are identical. Example: methyl" .
+    rdfs:subClassOf chemrof:Molecule .
 
 chemrof:MolecularSubsequence a owl:Class,
         linkml:ClassDefinition ;
@@ -455,14 +446,13 @@ chemrof:MoleculeGroupingClassDefinedByAdditionOfAGroup a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecule grouping class defined by addition of a group" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalGroup ;
-            owl:onProperty chemrof:has_group ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:PolyatomicEntity ;
             owl:onProperty chemrof:derivative_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalGroup ;
+            owl:onProperty chemrof:has_group ],
         chemrof:MoleculeGroupingClass ;
-    skos:definition "A grouping class defined in terms of a derivative of a molecule and the addition of a group" ;
     linkml:examples "Example(value='acetyl xylan', description=None)" .
 
 chemrof:MoleculeGroupingClassDefinedByComponents a owl:Class,
@@ -473,7 +463,6 @@ chemrof:MoleculeGroupingClassDefinedByComponents a owl:Class,
             owl:onClass chemrof:ChemicalEntityOrGrouping ;
             owl:onProperty chemrof:has_part ],
         chemrof:MoleculeGroupingClass ;
-    skos:definition "A grouping class defined as an exhaustive list of components" ;
     linkml:examples "Example(value='nucleoside', description='A nucleoside consists of a nucleobase and a five-carbon sugar (ribose or 2-deoxyribose)')",
         "Example(value='nucleotide', description='a nucleotide is composed of a nucleobase, a five-carbon sugar, and one or more phosphate groups')" .
 
@@ -483,15 +472,24 @@ chemrof:Monomer a owl:Class,
     rdfs:subClassOf chemrof:PolymerPart ;
     skos:altLabel "momomer species" .
 
+chemrof:MonomericPolymericGroupingClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "monomeric polymeric grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_repeat_unit ],
+        chemrof:GeneralizedMolecularStructureClass ;
+    linkml:examples "Example(value='polynucleotide', description='A polynucleotide molecule is a biopolymer composed of 13 or more nucleotide monomers covalently bonded in a chain')" .
+
 chemrof:Nanostructure a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "nanostructure" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/nanostructure_morphology_enum> ;
+            owl:onClass chemrof:NanostructureMorphologyEnum ;
             owl:onProperty chemrof:has_morphological_category ],
         chemrof:Material ;
-    skos:definition "A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale." ;
     linkml:examples "Example(value='Zinc oxide (ZnO) nanorod', description='A nanostructure that has rod morphology and is composed of zinc oxide')",
         "Example(value='platinum copper nanoparticle', description='A nanostructure that is made from platinum and copper atoms')" .
 
@@ -508,8 +506,7 @@ chemrof:Neutron a owl:Class,
 chemrof:NonSpeciesMolecule a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "non species molecule" ;
-    rdfs:subClassOf chemrof:Molecule ;
-    skos:definition "A molecule in which the units are not identical. TODO: move this higher" .
+    rdfs:subClassOf chemrof:Molecule .
 
 chemrof:Peptide a owl:Class,
         linkml:ClassDefinition ;
@@ -537,7 +534,7 @@ chemrof:RacemicMixture a owl:Class,
     rdfs:seeAlso "https://github.com/ebi-chebi/ChEBI/issues/3245" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass chemrof:Enantiomer ;
-            owl:onProperty chemrof:has_left_enantiomer ;
+            owl:onProperty chemrof:has_right_enantiomer ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
@@ -545,12 +542,11 @@ chemrof:RacemicMixture a owl:Class,
             owl:onProperty chemrof:chirality_agnostic_form ],
         [ a owl:Restriction ;
             owl:onClass chemrof:Enantiomer ;
-            owl:onProperty chemrof:has_right_enantiomer ;
+            owl:onProperty chemrof:has_left_enantiomer ;
             owl:qualifiedCardinality 1 ],
         chemrof:PreciseChemicalMixture ;
     skos:altLabel "racemate",
         "racemic mixture of enantiomers" ;
-    skos:definition "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide" ;
     skos:exactMatch CHEBI:60911 .
 
 chemrof:Radionuclide a owl:Class,
@@ -559,14 +555,12 @@ chemrof:Radionuclide a owl:Class,
     rdfs:subClassOf chemrof:Nuclide ;
     skos:altLabel "radioactive isotope",
         "radioactive nuclide" ;
-    skos:definition "an atom that has excess nuclear energy, making it unstable" ;
     linkml:examples "Example(value='radioactive isotope', description=None)" .
 
 chemrof:SmallMolecule a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "small molecule" ;
-    rdfs:subClassOf chemrof:Molecule ;
-    skos:definition "A molecule characterized by availability in small-molecule databases" .
+    rdfs:subClassOf chemrof:Molecule .
 
 chemrof:StandardInchiObject a owl:Class,
         linkml:ClassDefinition ;
@@ -575,15 +569,7 @@ chemrof:StandardInchiObject a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_chemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+            owl:onProperty chemrof:inchi_proton_sublayer ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_version_string ;
@@ -591,15 +577,11 @@ chemrof:StandardInchiObject a owl:Class,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -607,7 +589,19 @@ chemrof:StandardInchiObject a owl:Class,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:inchi_chemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -617,8 +611,15 @@ chemrof:StandardInchiObject a owl:Class,
 chemrof:SupramolecularPolymer a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "supramolecular polymer" ;
-    rdfs:subClassOf chemrof:MolecularComplex ;
-    skos:definition "polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Macromolecule ;
+            owl:onProperty chemrof:polymer_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_repeat_unit ],
+        chemrof:MolecularComplex ;
     skos:exactMatch Wikipedia:Supramolecular_polymer .
 
 chemrof:TanimotoSimilarity a owl:Class,
@@ -637,7 +638,6 @@ chemrof:UnchargedAtom a owl:Class,
     rdfs:label "uncharged atom" ;
     rdfs:subClassOf chemrof:AtomIonicForm,
         chemrof:Uncharged ;
-    skos:definition "An atom type that has no charge" ;
     skos:exactMatch COB:0000043 .
 
 chemrof:UnchargedMolecule a owl:Class,
@@ -648,8 +648,7 @@ chemrof:UnchargedMolecule a owl:Class,
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:elemental_charge ],
         chemrof:Molecule,
-        chemrof:Uncharged ;
-    skos:definition "A molecule that has no charge" .
+        chemrof:Uncharged .
 
 chemrof:atomically_connected_to a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -662,30 +661,28 @@ chemrof:bond_energy a owl:ObjectProperty,
     rdfs:label "bond energy" ;
     rdfs:domain chemrof:AtomicBond ;
     rdfs:range linkml:Float ;
-    skos:definition "the measure of bond strength in a chemical bond." .
+    skos:altLabel "average bond enthalpy",
+        "mean bond enthalpy" .
 
 chemrof:bond_length a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "bond length" ;
     rdfs:domain chemrof:AtomicBond ;
-    rdfs:range linkml:Float ;
-    skos:definition "the average distance between nuclei of two bonded atoms in a molecule" .
+    rdfs:range linkml:Float .
 
 chemrof:canonical_smiles_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "canonical smiles string" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:smiles_string ;
-    skos:definition "A deterministic SMILES string. Note there is no unique system for canonical smiles strings" .
+    rdfs:subPropertyOf chemrof:smiles_string .
 
 chemrof:carbbank_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "carbbank representation" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:carboydrate_representation ;
-    skos:definition "The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation." .
+    rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 chemrof:classified_by a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -695,7 +692,7 @@ chemrof:classified_by a owl:ObjectProperty,
     rdfs:subPropertyOf chemrof:chemical_to_chemical_relationship,
         chemrof:owl_subclass_of ;
     owl:inverseOf chemrof:classifies ;
-    skos:definition "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class" ;
+    skos:exactMatch rdf:type ;
     linkml:examples "Example(value=None, description='glucose classified by monosaccharide')" .
 
 chemrof:curly_smiles_string a owl:ObjectProperty,
@@ -705,15 +702,14 @@ chemrof:curly_smiles_string a owl:ObjectProperty,
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:seeAlso "http://www.axeleratio.com/csm/proj/main.htm" ;
     rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "CurlySMILES is a chemical line notation which extends SMILES with annotations for storage, retrieval and modeling of interlinked, coordinated, assembled and adsorbed molecules in supramolecular structures and nanodevices. https://jcheminf.biomedcentral.com/articles/10.1186/1758-2946-3-1" .
+    skos:altLabel "CurlySMILES" .
 
 chemrof:empirical_formula a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "empirical formula" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose" .
+    rdfs:subPropertyOf chemrof:chemical_formula .
 
 chemrof:enantiomer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -721,22 +717,22 @@ chemrof:enantiomer_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:stereoisomer_of ;
-    skos:definition "a stereoisomer relationship where the two forms are mirror images of one another" .
+    skos:altLabel "enantiomorph of" .
 
 chemrof:epimer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "epimer of" ;
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
-    rdfs:subPropertyOf chemrof:diastereoisomers_of ;
-    skos:definition "A diastereoisomer of relationship in which the isomers differ at only one stereocenter" .
+    rdfs:subPropertyOf chemrof:diastereoisomers_of .
 
 chemrof:extended_smiles_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "extended smiles string" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:smiles_string .
+    rdfs:subPropertyOf chemrof:smiles_string ;
+    skos:altLabel "CXSMILES" .
 
 chemrof:functional_isomer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -744,31 +740,28 @@ chemrof:functional_isomer_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:structural_isomer_of ;
-    skos:definition "structural isomers that have the same molecular formula (that is, the same number of atoms of the same elements), but the atoms are connected in different ways so that the groupings are dissimilar." .
+    skos:altLabel "functional group isomer of" .
 
 chemrof:generalized_empirical_formula a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "generalized empirical formula" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane" .
+    rdfs:subPropertyOf chemrof:chemical_formula .
 
 chemrof:glycoct_condensed a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "glycoct condensed" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:carboydrate_representation ;
-    skos:definition "This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear." .
+    rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 chemrof:glycominds_linearcode_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "glycominds linearcode representation" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:carboydrate_representation ;
-    skos:definition "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by “a” or “b” for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures)." .
+    rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 chemrof:has_cyclic_structure a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -776,7 +769,15 @@ chemrof:has_cyclic_structure a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range linkml:Boolean ;
     rdfs:subPropertyOf chemrof:chemical_property ;
-    skos:definition "true if the molecule possesses a cycle in the atom connectivity graph" .
+    skos:exactMatch CHEMINF:000067 .
+
+chemrof:has_derivative a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has derivative" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEntity ;
+    rdfs:subPropertyOf chemrof:alternate_form_of ;
+    owl:inverseOf chemrof:derivative_of .
 
 chemrof:has_ionic_component a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -788,8 +789,12 @@ chemrof:has_molfile_location a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "has molfile location" ;
     rdfs:range chemrof:FileLocation ;
-    rdfs:subPropertyOf chemrof:information_property ;
-    skos:definition "Location of a MolFile representing a chemical structure" .
+    rdfs:subPropertyOf chemrof:information_property .
+
+chemrof:has_polymer_repeat_units a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has polymer repeat units" ;
+    rdfs:range chemrof:PolymerRepeatUnit .
 
 chemrof:has_rauxinfo_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -798,7 +803,7 @@ chemrof:has_rauxinfo_representation a owl:ObjectProperty,
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:seeAlso "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8" ;
     rdfs:subPropertyOf chemrof:chemical_representation ;
-    skos:definition "Auxhiliary information on top of a RInChi" ;
+    skos:altLabel "RAuxInfo" ;
     skos:note "A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI" .
 
 chemrof:has_subtype a owl:ObjectProperty,
@@ -820,8 +825,7 @@ chemrof:inchi_key_string a owl:ObjectProperty,
     rdfs:label "inchi key string" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:hashed_chemical_formula ;
-    skos:definition "A hashed representation of an InChi string" .
+    rdfs:subPropertyOf chemrof:hashed_chemical_formula .
 
 chemrof:inchi_reconnected_layer a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -835,31 +839,29 @@ chemrof:isomeric_smiles_string a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:subPropertyOf chemrof:smiles_string ;
-    skos:definition "A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13" .
+    skos:altLabel "iso-SMILES" ;
+    skos:exactMatch wd:P2017 .
 
 chemrof:isotone_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "isotone of" ;
     rdfs:domain chemrof:Isotope ;
     rdfs:range chemrof:Isotope ;
-    rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:definition "relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number." .
+    rdfs:subPropertyOf chemrof:alternate_form_of .
 
 chemrof:kegg_chemical_function_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "kegg chemical function representation" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:carboydrate_representation ;
-    skos:definition "A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names." .
+    rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 chemrof:linucs_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "linucs representation" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:carboydrate_representation ;
-    skos:definition "A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets." .
+    rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 chemrof:long_rinchi_key_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -894,23 +896,21 @@ chemrof:molecular_formula a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose" .
+    skos:exactMatch CHEMINF:000042 .
 
 chemrof:next_in_homologous_series_from a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "next in homologous series from" ;
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
-    rdfs:seeAlso "https://en.wikipedia.org/wiki/Homologous_series" ;
-    skos:definition "Next in a sequence of compounds with the same functional group and similar chemical properties in which the members of the series can be branched or unbranched. E.g.  ethane (C2H6) next in homologous series from methane (CH4)" .
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Homologous_series" .
 
 chemrof:nuclear_isomer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "nuclear isomer of" ;
     rdfs:domain chemrof:Isotope ;
     rdfs:range chemrof:Isotope ;
-    rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:definition "relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states" .
+    rdfs:subPropertyOf chemrof:alternate_form_of .
 
 chemrof:position_isomer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -918,7 +918,7 @@ chemrof:position_isomer_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:structural_isomer_of ;
-    skos:definition "a functional group or other substituent changes position on a parent structure." .
+    skos:altLabel "regioisomerism isomer of" .
 
 chemrof:selfies_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -926,7 +926,8 @@ chemrof:selfies_string a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:seeAlso "https://iopscience.iop.org/article/10.1088/2632-2153/aba947" ;
-    rdfs:subPropertyOf chemrof:chemical_formula .
+    rdfs:subPropertyOf chemrof:chemical_formula ;
+    skos:altLabel "SELFIES" .
 
 chemrof:short_rinchi_key_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -941,15 +942,21 @@ chemrof:skeletal_isomer_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:structural_isomer_of ;
-    skos:definition "components of the (usually carbon) skeleton are distinctly re-ordered to create different structures. Pentane exists as three isomers: n-pentane (often called simply \"pentane\"), isopentane (2-methylbutane) and neopentane (dimethylpropane)." .
+    skos:altLabel "chain isomer of" .
 
 chemrof:tautomer_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "tautomer of" ;
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
-    rdfs:subPropertyOf chemrof:structural_isomer_of ;
-    skos:definition "structural isomers (constitutional isomers) of chemical compounds that readily interconvert. Examples: a neutral amino acid and its zwitterion" .
+    rdfs:subPropertyOf chemrof:structural_isomer_of .
+
+chemrof:transitive_conjugatated_form_of a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "transitive conjugatated form of" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEntity ;
+    rdfs:subPropertyOf chemrof:derivative_of .
 
 chemrof:wurcs_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -959,8 +966,91 @@ chemrof:wurcs_representation a owl:ObjectProperty,
     rdfs:subPropertyOf chemrof:carboydrate_representation .
 
 linkml:SubsetDefinition a owl:Class ;
-    rdfs:label "subset_definition" ;
-    skos:definition "the name and description of a subset" .
+    rdfs:label "subset_definition" .
+
+FIX:0000011 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular electronic absorption spectroscopy" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000011 .
+
+FIX:0000030 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular spectroscopy by energy state" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000030 .
+
+FIX:0000063 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular spectroscopy" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000063 .
+
+FIX:0000251 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular replacement" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000251 .
+
+FIX:0000270 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular mass" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000270 .
+
+FIX:0000271 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular size" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000271 .
+
+FIX:0000272 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular hydration" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000272 .
+
+FIX:0000273 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular shape" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000273 .
+
+FIX:0000275 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular charge" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000275 .
+
+FIX:0000305 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular structure" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000305 .
+
+FIX:0000389 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular heat capacity" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000389 .
+
+FIX:0000943 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular electronic spectroscopy" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf FIX:0000276 ;
+    skos:exactMatch FIX:0000943 .
 
 chemrof:AminoAcidSequenceString a owl:Class,
         linkml:TypeDefinition ;
@@ -984,18 +1074,17 @@ chemrof:ChemicalSalt a owl:Class,
     rdfs:seeAlso "https://github.com/MaastrichtU-IDS/semanticscience/issues/96" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:CationState ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:CationState ;
+            owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:AnionState ;
             owl:onProperty chemrof:has_anionic_component ],
         chemrof:PreciseChemicalMixture ;
-    skos:definition "a chemical compound consisting of an ionic assembly of cations and anions." ;
     skos:exactMatch SIO:001422 ;
     skos:note "in SIO falls under molecular complex? Also in biolink" ;
     linkml:examples "Example(value='sodium carbonate CHEBI:29377', description=None)" .
@@ -1011,14 +1100,22 @@ chemrof:DNASequenceString a owl:Class,
 chemrof:FullyCovalentlyBonded a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "fully covalently bonded" ;
-    rdfs:subClassOf chemrof:Connectivity ;
-    skos:definition "All pairs of atoms in this entity are transitively connected via covalent bonds" .
+    rdfs:subClassOf chemrof:Connectivity .
+
+chemrof:GeneralizedMolecularStructureClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "generalized molecular structure class" ;
+    rdfs:subClassOf chemrof:MoleculeGroupingClass ;
+    linkml:examples "Example(value='monosaccharide', description=None)" .
 
 chemrof:ImpreciseChemicalMixture a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "imprecise chemical mixture" ;
     rdfs:seeAlso "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ProportionalPart ;
+            owl:onProperty chemrof:has_proportional_parts ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalEncoding ;
             owl:onProperty chemrof:has_minchi_representation ],
@@ -1026,12 +1123,8 @@ chemrof:ImpreciseChemicalMixture a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:FileLocation ;
             owl:onProperty chemrof:has_mixfile_location ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ProportionalPart ;
-            owl:onProperty chemrof:has_proportional_parts ],
         chemrof:ChemicalMixture ;
     skos:altLabel "portion of matter" ;
-    skos:definition "A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals" ;
     skos:note "although the stoichiometry is not known rough percentage parts can be provided" ;
     linkml:examples "Example(value='toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )', description=None)" .
 
@@ -1039,8 +1132,7 @@ chemrof:InchiObject a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "inchi object" ;
     rdfs:seeAlso "https://doi.org/10.1186/s13321-015-0068-4" ;
-    rdfs:subClassOf chemrof:InformationalChemicalEntity ;
-    skos:definition "A representation of an InChI string as an object, composed of distinct sublayers" .
+    rdfs:subClassOf chemrof:InformationalChemicalEntity .
 
 chemrof:Location a owl:Class,
         linkml:ClassDefinition ;
@@ -1055,8 +1147,7 @@ chemrof:MolecularAnion a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular anion" ;
     rdfs:subClassOf chemrof:AnionState,
-        chemrof:PolyatomicIon ;
-    skos:definition "A polyatomic ion that is negative" .
+        chemrof:PolyatomicIon .
 
 chemrof:MolecularComplex a owl:Class,
         linkml:ClassDefinition ;
@@ -1065,7 +1156,6 @@ chemrof:MolecularComplex a owl:Class,
     skos:altLabel "complex of molecular entities",
         "molecule complex",
         "poly molecular composite entity" ;
-    skos:definition "A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex" ;
     skos:exactMatch COB:0000080,
         biotop:MoleculeComplex,
         SIO:010506 ;
@@ -1076,14 +1166,13 @@ chemrof:MolecularComponentGroupingClass a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular component grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:MolecularComponentGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:MolecularComponent ;
             owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MolecularComponentGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        chemrof:GroupingClass ;
-    skos:definition "A grouping class that classifies molecular components. Example: inorganic anion group" .
+        chemrof:GroupingClass .
 
 chemrof:MoleculePairwiseSimilarity a owl:Class,
         linkml:ClassDefinition ;
@@ -1103,22 +1192,36 @@ chemrof:MoleculePairwiseSimilarity a owl:Class,
             owl:onProperty chemrof:right_molecule ],
         chemrof:Similarity .
 
-chemrof:MonomolecularPolymer a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "monomolecular polymer" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Macromolecule ;
-            owl:onProperty chemrof:polymer_of ],
-        chemrof:Macromolecule ;
-    skos:altLabel "oligo or polymer",
-        "polymer" ;
-    skos:definition "A macromolecule composed of repeating subunits. Examples: cellulose" .
-
 chemrof:PeriodicTablePlacement a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "periodic table placement" ;
     rdfs:subClassOf chemrof:InformationalChemicalEntity .
+
+chemrof:PolymerRepeatUnit a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "polymer repeat unit" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Repeat_unit" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Count ;
+            owl:onProperty chemrof:degree_of_polymerization ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Molecule ;
+            owl:onProperty chemrof:repetition_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty chemrof:mass ],
+        chemrof:RelationalChemicalEntity .
+
+chemrof:ReactionGroupingClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "reaction grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Reaction ;
+            owl:onProperty chemrof:classifies ] .
 
 chemrof:SequenceString a owl:Class,
         linkml:TypeDefinition ;
@@ -1131,8 +1234,7 @@ chemrof:SequenceString a owl:Class,
 chemrof:Similarity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "similarity" ;
-    rdfs:subClassOf chemrof:RelationalChemicalEntity ;
-    skos:definition "A relationship between two or more entities that is quantified based on their similarity" .
+    rdfs:subClassOf chemrof:RelationalChemicalEntity .
 
 chemrof:Stereoisomer a owl:Class,
         linkml:ClassDefinition ;
@@ -1143,8 +1245,7 @@ chemrof:Stereoisomer a owl:Class,
 chemrof:WeaklyBonded a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "weakly bonded" ;
-    rdfs:subClassOf chemrof:Connectivity ;
-    skos:definition "Not covalently bonded" .
+    rdfs:subClassOf chemrof:Connectivity .
 
 chemrof:absolute_configuration a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1157,14 +1258,6 @@ chemrof:acidity a owl:ObjectProperty,
 
 chemrof:allotropic_analog_of a owl:ObjectProperty,
         linkml:SlotDefinition .
-
-chemrof:atomic_number a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "atomic number" ;
-    rdfs:domain chemrof:Atom ;
-    rdfs:range chemrof:Count ;
-    rdfs:subPropertyOf chemrof:subatomic_particle_count ;
-    skos:definition "number of protons in an atom" .
 
 chemrof:boiling_point_in_celcius a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1179,8 +1272,7 @@ chemrof:bond_order a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "bond order" ;
     rdfs:domain chemrof:AtomicBond ;
-    rdfs:range linkml:Integer ;
-    skos:definition "the number of electron pairs (bonds) between a pair of atoms" .
+    rdfs:range linkml:Integer .
 
 chemrof:bond_type a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1202,6 +1294,9 @@ chemrof:composed_of a owl:ObjectProperty,
 chemrof:coordination_number a owl:ObjectProperty,
         linkml:SlotDefinition .
 
+chemrof:degree_of_polymerization a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
 chemrof:description a owl:ObjectProperty,
         linkml:SlotDefinition .
 
@@ -1211,16 +1306,13 @@ chemrof:diastereoisomers_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:stereoisomer_of ;
-    skos:definition "A stereoisomer non-mirror image non-identical stereoisomers" ;
+    skos:altLabel "diastereomers of" ;
     skos:note "Diastereomers differ from enantiomers in that the latter are pairs of stereoisomers that differ in all stereocenters and are therefore mirror images of one another" .
 
 chemrof:direction a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:electron_configuration a owl:ObjectProperty,
-        linkml:SlotDefinition .
-
-chemrof:elemental_change a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:enantiomer_form_of a owl:ObjectProperty,
@@ -1230,7 +1322,7 @@ chemrof:energy_level a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "energy level" ;
     rdfs:range linkml:String ;
-    skos:definition "e.g. ground, stable" .
+    skos:altLabel "energy state" .
 
 chemrof:formal_charge a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1246,8 +1338,7 @@ chemrof:has_atoms a owl:ObjectProperty,
     rdfs:label "has atoms" ;
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Atom ;
-    rdfs:subPropertyOf chemrof:has_part ;
-    skos:definition "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences" .
+    rdfs:subPropertyOf chemrof:has_part .
 
 chemrof:has_bonding_structure a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1263,19 +1354,23 @@ chemrof:has_chemical_role a owl:ObjectProperty,
     rdfs:label "has chemical role" ;
     rdfs:range chemrof:ChemicalRole .
 
-chemrof:has_derivative a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "has derivative" ;
-    rdfs:domain chemrof:ChemicalEntity ;
-    rdfs:range chemrof:ChemicalEntity ;
-    rdfs:subPropertyOf chemrof:alternate_form_of ;
-    owl:inverseOf chemrof:derivative_of .
-
 chemrof:has_group a owl:ObjectProperty,
         linkml:SlotDefinition .
 
+chemrof:has_higher_charge_from a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has higher charge from" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf chemrof:has_different_charge_state_from .
+
 chemrof:has_left_enantiomer a owl:ObjectProperty,
         linkml:SlotDefinition .
+
+chemrof:has_lower_charge_from a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has lower charge from" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf chemrof:has_different_charge_state_from .
 
 chemrof:has_minchi_representation a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1284,7 +1379,7 @@ chemrof:has_minchi_representation a owl:ObjectProperty,
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:seeAlso "https://cheminf20.org/2018/08/27/mixtures-cheminformatics/" ;
     rdfs:subPropertyOf chemrof:chemical_representation ;
-    skos:definition "Proposed new Mixtures InChI" .
+    skos:altLabel "MInChi" .
 
 chemrof:has_mixfile_location a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1292,8 +1387,7 @@ chemrof:has_mixfile_location a owl:ObjectProperty,
     rdfs:range chemrof:FileLocation ;
     rdfs:seeAlso "https://github.com/cdd/mixtures",
         "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4" ;
-    rdfs:subPropertyOf chemrof:information_property ;
-    skos:definition "Location of a MixFile representing a chemical mixture" .
+    rdfs:subPropertyOf chemrof:information_property .
 
 chemrof:has_morphological_category a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1315,7 +1409,15 @@ chemrof:has_proportional_parts a owl:ObjectProperty,
     rdfs:label "has proportional parts" ;
     rdfs:domain chemrof:ImpreciseChemicalMixture ;
     rdfs:range chemrof:ProportionalPart ;
-    skos:definition "Relationship between a complex mixture and its parts" .
+    skos:altLabel "has ingredients" .
+
+chemrof:has_reaction_smiles_representation a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has reaction smiles representation" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEncoding ;
+    rdfs:subPropertyOf chemrof:chemical_formula ;
+    skos:altLabel "reaction SMILES" .
 
 chemrof:has_right_enantiomer a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1327,7 +1429,7 @@ chemrof:has_rinchi_representation a owl:ObjectProperty,
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:seeAlso "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8" ;
     rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "Proposed Reactions InChI" ;
+    skos:altLabel "RInChi" ;
     skos:note "A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI" ;
     linkml:examples "Example(value='C2H4O2/c1-2(3)4/h1H3,(H,3,4)!C2H6O/c1-2-3/h3H,2H2,1H3<>C4H8O2/c1-3-6-4(2)5/h3H2,1- 2H3!H2O/h1H2<>H2O4S/c1-5(2,3)4/h(H2,1,2,3,4):', description='hydrolysis of ethyl acetate')",
         "Example(value='RInChI=1.00.1S /layer2<>layer3<>layer4/d+/u2-0-1', description=None)" .
@@ -1342,8 +1444,7 @@ chemrof:inchi_component a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi component" ;
     rdfs:range linkml:String ;
-    rdfs:subPropertyOf chemrof:information_property ;
-    skos:definition "A part of an InChI object" .
+    rdfs:subPropertyOf chemrof:information_property .
 
 chemrof:inchi_proton_sublayer a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1356,20 +1457,27 @@ chemrof:inchi_string a owl:ObjectProperty,
     rdfs:label "inchi string" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_formula .
+    rdfs:seeAlso "https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi" ;
+    rdfs:subPropertyOf chemrof:chemical_formula ;
+    skos:exactMatch OntoRxn:hasInChi .
 
 chemrof:inchi_sublayer_in_main_layer a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi sublayer in main layer" ;
     rdfs:range linkml:String ;
-    rdfs:subPropertyOf chemrof:inchi_sublayer ;
-    skos:definition "The main layer consists of chemical formula, atom connections, and hydrogen atoms. Example: CH3O/c1-2/h1H3/q-1" .
+    rdfs:subPropertyOf chemrof:inchi_sublayer .
 
 chemrof:inchi_version_string a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:is_balanced a owl:ObjectProperty,
         linkml:SlotDefinition .
+
+chemrof:is_branched a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "is branched" ;
+    rdfs:range linkml:Boolean ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)" .
 
 chemrof:is_diastereoselective a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1382,7 +1490,7 @@ chemrof:is_organic a owl:ObjectProperty,
     rdfs:label "is organic" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range linkml:Boolean ;
-    skos:definition "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]" .
+    skos:closeMatch SIO:010072 .
 
 chemrof:is_radical a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1404,24 +1512,19 @@ chemrof:isobar_of a owl:ObjectProperty,
     rdfs:label "isobar of" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEntity ;
-    rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:definition "equal mass number (Z1 + N1 = Z2 + N2)" .
+    rdfs:subPropertyOf chemrof:alternate_form_of .
 
 chemrof:isotope_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "isotope of" ;
     rdfs:domain chemrof:Isotope ;
     rdfs:range chemrof:Isotope ;
-    rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:definition "relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number." .
+    rdfs:subPropertyOf chemrof:alternate_form_of .
 
 chemrof:left_molecule a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:left_participants a owl:ObjectProperty,
-        linkml:SlotDefinition .
-
-chemrof:mass a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:maximum_percentage a owl:ObjectProperty,
@@ -1442,7 +1545,7 @@ chemrof:nucleon_number a owl:ObjectProperty,
     rdfs:domain chemrof:Atom ;
     rdfs:range chemrof:Count ;
     rdfs:subPropertyOf chemrof:subatomic_particle_count ;
-    skos:definition "number of nucleons in an atom. proton number plus neutron number." .
+    skos:altLabel "mass number" .
 
 chemrof:occurrence_of a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1456,8 +1559,11 @@ chemrof:oxidation_number a owl:ObjectProperty,
 chemrof:participant a owl:ObjectProperty,
         linkml:SlotDefinition .
 
-chemrof:polymer_of a owl:ObjectProperty,
-        linkml:SlotDefinition .
+chemrof:polymer_architecture_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "polymer architecture type" ;
+    rdfs:range linkml:String ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Polymer_architecture" .
 
 chemrof:property_of_atom a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1470,6 +1576,9 @@ chemrof:reaction_center a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:relative_configuration a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+chemrof:repetition_of a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:right_molecule a owl:ObjectProperty,
@@ -1496,6 +1605,101 @@ chemrof:type a owl:ObjectProperty,
 chemrof:valence a owl:ObjectProperty,
         linkml:SlotDefinition .
 
+CHEBI:50796 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanotube" .
+
+CHEBI:50803 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanoparticle" .
+
+CHEBI:50805 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanorod" .
+
+CHEBI:50806 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanotubosome" .
+
+CHEBI:50853 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "quantum dot" .
+
+CHEBI:52518 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanofibre" .
+
+CHEBI:52529 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanocrystal" .
+
+CHEBI:52530 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanoribbon" .
+
+CHEBI:52531 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanosheet" .
+
+CHEBI:52593 a owl:Class,
+        chemrof:NanostructureMorphologyEnum ;
+    rdfs:label "nanowire" .
+
+gc:AromaticBond a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "aromatic" .
+
+gc:Double a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "double" .
+
+gc:HydrogenBond a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "hydrogen" .
+
+gc:NormalBond a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "covalent" .
+
+gc:Quadruple a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "quadruple" .
+
+gc:Single a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "single" .
+
+gc:Triple a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "triple" .
+
+bo:atomicNumber a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "atomic number" ;
+    rdfs:domain chemrof:Atom ;
+    rdfs:range chemrof:Count ;
+    rdfs:subPropertyOf chemrof:subatomic_particle_count ;
+    skos:altLabel "Z",
+        "proton number" ;
+    skos:exactMatch CHEMINF:000079,
+        bo:atomicNumber,
+        wd:P1086 .
+
+bo:symbol a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+damlpt:Metallic a owl:Class,
+        chemrof:ElementMetallicClassification ;
+    rdfs:label "Metallic" .
+
+damlpt:Non-Metallic a owl:Class,
+        chemrof:ElementMetallicClassification ;
+    rdfs:label "Non-Metallic" .
+
+damlpt:Semi-Metallic a owl:Class,
+        chemrof:ElementMetallicClassification ;
+    rdfs:label "Semi-Metallic" .
+
 chemrof:AcidBase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "acid base" ;
@@ -1503,8 +1707,7 @@ chemrof:AcidBase a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:BronstedAcid ;
             owl:onProperty chemrof:has_acid_form ],
-        chemrof:MolecularAnion ;
-    skos:definition "A conugate base of an acid with charge specified. Example: citrate(3-)" .
+        chemrof:MolecularAnion .
 
 chemrof:AtomGroupingByPeriodicTablePlacement a owl:Class,
         linkml:ClassDefinition ;
@@ -1515,14 +1718,13 @@ chemrof:AtomGroupingClass a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atom grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Atom ;
             owl:onProperty chemrof:classifies ],
-        chemrof:GroupingClass ;
-    skos:definition "A grouping class that classifies atoms. For example, metal atom" .
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        chemrof:GroupingClass .
 
 chemrof:AtomIonicForm a owl:Class,
         linkml:ClassDefinition ;
@@ -1531,31 +1733,41 @@ chemrof:AtomIonicForm a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:elemental_change ],
         chemrof:PartiallySpecifiedAtom ;
     skos:altLabel "atom ionic species" ;
-    skos:definition "an atom type in which only charge state is specified, designated by the element followed by charge" ;
     linkml:examples "Example(value='chloride Cl-', description=None)" .
+
+<https://w3id.org/chemrof/BondTypeEnum#ionic> a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "ionic" .
+
+<https://w3id.org/chemrof/BondTypeEnum#metal-metal> a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "metal-metal" .
+
+<https://w3id.org/chemrof/BondTypeEnum#polycentric> a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "polycentric" .
+
+<https://w3id.org/chemrof/BondTypeEnum#salt+bridge> a owl:Class,
+        chemrof:BondTypeEnum ;
+    rdfs:label "salt bridge" .
 
 chemrof:BronstedAcid a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Bronsted acid" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AcidBase ;
-            owl:onProperty chemrof:acid_form_of ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:HardOrSoftEnum ;
+            owl:onProperty chemrof:hard_or_soft ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
             owl:onProperty chemrof:acidity ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/hard_or_soft_enum> ;
-            owl:onProperty chemrof:hard_or_soft ],
+            owl:allValuesFrom chemrof:AcidBase ;
+            owl:onProperty chemrof:acid_form_of ],
         chemrof:Molecule ;
-    skos:definition "A molecule capable of donating a hydron to an acceptor. Example: citric acid" ;
     skos:exactMatch CHEBI:39141 .
 
 chemrof:ChargeState a owl:Class,
@@ -1567,7 +1779,6 @@ chemrof:ChargeState a owl:Class,
             owl:onProperty chemrof:elemental_charge ],
         chemrof:State,
         linkml:mixin ;
-    skos:definition "Applies to entities that have a charge state, which may be positive, negative, or neutral" ;
     skos:exactMatch CHEMINF:000120 .
 
 chemrof:ChemicalEntityOrGrouping a owl:Class,
@@ -1579,7 +1790,6 @@ chemrof:ChemicalMixture a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "chemical mixture" ;
     rdfs:subClassOf chemrof:PolyatomicEntity ;
-    skos:definition "A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry" ;
     skos:exactMatch CHEBI:60004 .
 
 chemrof:ChemicalRole a owl:Class,
@@ -1590,40 +1800,70 @@ chemrof:ChemicalRole a owl:Class,
             owl:onClass chemrof:OwlClass ;
             owl:onProperty chemrof:owl_subclass_of ],
         chemrof:OwlClass ;
-    skos:altLabel "role" ;
-    skos:definition "A characteristic of a chemical entity that is realized under particular conditions" .
+    skos:altLabel "role" .
 
 chemrof:ChemicalSaltGroupingClass a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "chemical salt grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalSalt ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty rdfs:label ],
+            owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:has_anionic_component ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty rdfs:label ],
         chemrof:MoleculeGroupingClass ;
-    skos:definition "A grouping class for a chemical salt" ;
     linkml:examples "Example(value='sodium chloride', description=None)" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Alkali_Earth> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Alkali_Earth" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Alkaline_Earth> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Alkaline_Earth" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Halogen> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Halogen" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Metalloids> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Metalloids" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Noblegas> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Noblegas" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Non-Metal> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Non-Metal" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Other_Metal> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Other_Metal" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Rare_Earth> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Rare_Earth" .
+
+<https://w3id.org/chemrof/ElementFamilyEnum#Transition> a owl:Class,
+        chemrof:ElementFamilyEnum ;
+    rdfs:label "Transition" .
 
 chemrof:Enantiomer a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "enantiomer" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:optical_configuration ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:relative_configuration ],
@@ -1635,20 +1875,42 @@ chemrof:Enantiomer a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Molecule ;
             owl:onProperty chemrof:enantiomer_form_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:optical_configuration ],
         chemrof:Stereoisomer ;
-    skos:definition "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide" ;
     skos:exactMatch SIO:010777 ;
     skos:note "key= (enantiomer form of, absolute configuration)",
         "key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)" .
 
-chemrof:Material a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "material" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_part ] ;
-    skos:definition "A substance composed of one or more chemical entities" .
+<https://w3id.org/chemrof/HardOrSoftEnum#borderline> a owl:Class,
+        chemrof:HardOrSoftEnum ;
+    rdfs:label "borderline" .
+
+<https://w3id.org/chemrof/HardOrSoftEnum#hard> a owl:Class,
+        chemrof:HardOrSoftEnum ;
+    rdfs:label "hard" .
+
+<https://w3id.org/chemrof/HardOrSoftEnum#soft> a owl:Class,
+        chemrof:HardOrSoftEnum ;
+    rdfs:label "soft" .
+
+<https://w3id.org/chemrof/IngredientRoleEnum#active+ingredient> a owl:Class,
+        chemrof:IngredientRoleEnum ;
+    rdfs:label "active ingredient" .
+
+<https://w3id.org/chemrof/IngredientRoleEnum#excipient> a owl:Class,
+        chemrof:IngredientRoleEnum ;
+    rdfs:label "excipient" .
+
+<https://w3id.org/chemrof/IngredientRoleEnum#inactive+ingredient> a owl:Class,
+        chemrof:IngredientRoleEnum ;
+    rdfs:label "inactive ingredient" .
+
+<https://w3id.org/chemrof/IngredientRoleEnum#solvent> a owl:Class,
+        chemrof:IngredientRoleEnum ;
+    rdfs:label "solvent" .
 
 chemrof:MonoatomicIon a owl:Class,
         linkml:ClassDefinition ;
@@ -1660,16 +1922,38 @@ chemrof:MonoatomicIon a owl:Class,
         chemrof:AtomIonicForm,
         chemrof:Charged ;
     skos:altLabel "charged atom" ;
-    skos:definition "An atom type that has a charge" ;
     skos:exactMatch CHEBI:24867,
         COB:0000042 ;
     skos:note "this is mass-number neutral, so there can be no mass associated with a monatomic ion instance" .
 
+chemrof:MonomolecularPolymer a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "monomolecular polymer" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_repeat_unit ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Macromolecule ;
+            owl:onProperty chemrof:polymer_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:polymer_architecture_type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_branched ],
+        chemrof:Macromolecule ;
+    skos:altLabel "oligo or polymer",
+        "polymer" ;
+    skos:exactMatch wd:Q81163 .
+
 chemrof:Nucleon a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "nucleon" ;
-    rdfs:subClassOf chemrof:SubatomicParticle ;
-    skos:definition "A neutron or proton" .
+    rdfs:subClassOf chemrof:SubatomicParticle .
 
 chemrof:NucleotideSequenceInterval a owl:Class,
         linkml:ClassDefinition ;
@@ -1685,10 +1969,29 @@ chemrof:PeriodicTableBlock a owl:Class,
     rdfs:label "periodic table block" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/periodic_table_block_enum> ;
+            owl:onClass chemrof:PeriodicTableBlockEnum ;
             owl:onProperty chemrof:type ],
-        chemrof:PeriodicTablePlacement ;
-    skos:definition "A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in" .
+        chemrof:PeriodicTablePlacement .
+
+<https://w3id.org/chemrof/PeriodicTableBlockEnum#d-block> a owl:Class,
+        chemrof:PeriodicTableBlockEnum ;
+    rdfs:label "d-block" .
+
+<https://w3id.org/chemrof/PeriodicTableBlockEnum#f-block> a owl:Class,
+        chemrof:PeriodicTableBlockEnum ;
+    rdfs:label "f-block" .
+
+<https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> a owl:Class,
+        chemrof:PeriodicTableBlockEnum ;
+    rdfs:label "g-block" .
+
+<https://w3id.org/chemrof/PeriodicTableBlockEnum#p-block> a owl:Class,
+        chemrof:PeriodicTableBlockEnum ;
+    rdfs:label "p-block" .
+
+<https://w3id.org/chemrof/PeriodicTableBlockEnum#s-block> a owl:Class,
+        chemrof:PeriodicTableBlockEnum ;
+    rdfs:label "s-block" .
 
 chemrof:PeriodicTableGroup a owl:Class,
         linkml:TypeDefinition ;
@@ -1715,8 +2018,7 @@ chemrof:PolyatomicIon a owl:Class,
             owl:onProperty chemrof:conjugate_acid_of ],
         chemrof:Charged,
         chemrof:Molecule ;
-    skos:altLabel "polyatomic ion species" ;
-    skos:definition "A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-)." .
+    skos:altLabel "polyatomic ion species" .
 
 chemrof:PolymerPart a owl:Class,
         linkml:ClassDefinition ;
@@ -1736,65 +2038,13 @@ chemrof:ProportionalPart a owl:Class,
             owl:onProperty chemrof:composed_of ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:IngredientRoleEnum ;
+            owl:onProperty chemrof:has_role ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
             owl:onProperty chemrof:maximum_percentage ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/ingredient_role_enum> ;
-            owl:onProperty chemrof:has_role ],
-        chemrof:RelationalChemicalEntity ;
-    skos:definition "A part of a complex mixture that is of uniform composition" .
-
-chemrof:Reaction a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "reaction" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_balanced ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:reaction_center ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ReactionParticipant ;
-            owl:onProperty chemrof:left_participants ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:smarts_string ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_fully_characterized ],
-        [ a owl:Restriction ;
-            owl:onClass chemrof:ChemicalEncoding ;
-            owl:onProperty chemrof:has_rinchi_representation ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_transport ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ReactionParticipant ;
-            owl:onProperty chemrof:right_participants ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_stereo ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_diastereoselective ] ;
-    skos:definition "reaction" .
+        chemrof:RelationalChemicalEntity .
 
 chemrof:ReactionParticipant a owl:Class,
         linkml:ClassDefinition ;
@@ -1807,8 +2057,7 @@ chemrof:ReactionParticipant a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:stoichiometry ],
-        chemrof:RelationalChemicalEntity ;
-    skos:definition "Instances of this link a reaction to a chemical entity participant" .
+        chemrof:RelationalChemicalEntity .
 
 chemrof:SequenceInterval a owl:Class,
         linkml:ClassDefinition ;
@@ -1818,7 +2067,6 @@ chemrof:SequenceInterval a owl:Class,
             owl:onClass chemrof:SequenceString ;
             owl:onProperty chemrof:has_sequence_representation ],
         chemrof:MolecularComponent ;
-    skos:definition "a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence." ;
     skos:note "- includes an interval corresponding to the whole molecule as an edge case" .
 
 chemrof:State a owl:Class,
@@ -1831,8 +2079,7 @@ chemrof:Stereocenter a owl:Class,
     rdfs:label "stereocenter" ;
     rdfs:subClassOf chemrof:Location,
         chemrof:OwlClass ;
-    skos:altLabel "stereogenic center" ;
-    skos:definition "a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer" .
+    skos:altLabel "stereogenic center" .
 
 chemrof:Uncharged a owl:Class,
         linkml:ClassDefinition ;
@@ -1853,7 +2100,7 @@ chemrof:chemical_isomer_of a owl:ObjectProperty,
     rdfs:range chemrof:Molecule ;
     rdfs:seeAlso "https://en.wikipedia.org/wiki/Isomer" ;
     rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:definition "a relationship that holds between two forms of a parent molecule with identical chemical formulas but distinct arrangements of atoms in space" .
+    skos:altLabel "isomer of" .
 
 chemrof:decay_energy a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1876,6 +2123,14 @@ chemrof:decay_product a owl:ObjectProperty,
     rdfs:range chemrof:Isotope ;
     rdfs:subPropertyOf chemrof:chemical_property .
 
+chemrof:direct_conjugatated_form_of a owl:ObjectProperty,
+        owl:SymmetricProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "direct conjugatated form of" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEntity ;
+    rdfs:subPropertyOf chemrof:derivative_of .
+
 chemrof:half_life a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "half life" ;
@@ -1892,6 +2147,11 @@ chemrof:has_atom_occurrences a owl:ObjectProperty,
 chemrof:has_cationic_component a owl:ObjectProperty,
         linkml:SlotDefinition .
 
+chemrof:has_different_charge_state_from a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has different charge state from" ;
+    rdfs:range linkml:String .
+
 chemrof:has_submolecules a owl:ObjectProperty,
         linkml:SlotDefinition .
 
@@ -1900,14 +2160,14 @@ chemrof:hashed_chemical_formula a owl:ObjectProperty,
     rdfs:label "hashed chemical formula" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_representation ;
-    skos:definition "A hashed version of a chemical formula" .
+    rdfs:subPropertyOf chemrof:chemical_representation .
 
 chemrof:id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "id" ;
     rdfs:range linkml:String ;
-    rdfs:subPropertyOf chemrof:information_property .
+    rdfs:subPropertyOf chemrof:information_property ;
+    skos:exactMatch schema:identifier .
 
 chemrof:in_periodic_table_block a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1925,8 +2185,7 @@ chemrof:inchi_hydrogen_connections_sublayer a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "inchi hydrogen connections sublayer" ;
     rdfs:range linkml:String ;
-    rdfs:subPropertyOf chemrof:inchi_sublayer_in_main_layer ;
-    skos:definition "Describes how many hydrogen atoms are connected to each of the other atoms." .
+    rdfs:subPropertyOf chemrof:inchi_sublayer_in_main_layer .
 
 chemrof:inchi_isotopic_layer a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1952,6 +2211,9 @@ chemrof:inchi_tetrahedral_stereochemical_sublayer a owl:ObjectProperty,
     rdfs:range linkml:String ;
     rdfs:subPropertyOf chemrof:inchi_sublayer .
 
+chemrof:mass a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
 chemrof:mode_of_formation a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "mode of formation" ;
@@ -1965,15 +2227,15 @@ chemrof:neutron_number a owl:ObjectProperty,
     rdfs:domain chemrof:Atom ;
     rdfs:range chemrof:Count ;
     rdfs:subPropertyOf chemrof:subatomic_particle_count ;
-    skos:definition "number of neutrons in an atom" .
+    skos:altLabel "N" ;
+    skos:exactMatch CHEMINF:000078 .
 
 chemrof:rinchi_key_string a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "rinchi key string" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:hashed_chemical_formula ;
-    skos:definition "A hashed representation of a RInChi string" .
+    rdfs:subPropertyOf chemrof:hashed_chemical_formula .
 
 chemrof:score a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -1984,10 +2246,7 @@ chemrof:stereoisomer_of a owl:ObjectProperty,
     rdfs:domain chemrof:Molecule ;
     rdfs:range chemrof:Molecule ;
     rdfs:subPropertyOf chemrof:chemical_isomer_of ;
-    skos:definition "a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds" .
-
-chemrof:symbol a owl:ObjectProperty,
-        linkml:SlotDefinition .
+    skos:altLabel "spatial isomer of" .
 
 chemrof:thermophysical_property a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2005,7 +2264,6 @@ chemrof:AnionState a owl:Class,
         chemrof:Charged,
         linkml:mixin ;
     skos:altLabel "negatively charged state" ;
-    skos:definition "This mixin is applied on an entity (atom or molecule) that is negatively charged" ;
     skos:exactMatch CHEMINF:000403 .
 
 chemrof:CationState a owl:Class,
@@ -2018,13 +2276,20 @@ chemrof:CationState a owl:Class,
         chemrof:Charged,
         linkml:mixin ;
     skos:altLabel "positively charged state" ;
-    skos:definition "This mixin is applied on an entity (atom or molecule) that is positively charged" ;
     skos:exactMatch CHEMINF:000402 .
 
 chemrof:Connectivity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "connectivity" ;
     rdfs:subClassOf linkml:mixin .
+
+chemrof:ElementMetallicClassification a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "element_metallic_classification" ;
+    owl:unionOf ( damlpt:Metallic damlpt:Non-Metallic damlpt:Semi-Metallic ) ;
+    linkml:permissible_values damlpt:Metallic,
+        damlpt:Non-Metallic,
+        damlpt:Semi-Metallic .
 
 chemrof:FileLocation a owl:Class,
         linkml:TypeDefinition ;
@@ -2040,11 +2305,11 @@ chemrof:GroupingClassForAcidsOrBases a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:conjugate_acid_of ],
+            owl:onProperty chemrof:conjugate_base_of ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:conjugate_base_of ],
+            owl:onProperty chemrof:conjugate_acid_of ],
         chemrof:MoleculeGroupingClass .
 
 chemrof:InformationalChemicalEntity a owl:Class,
@@ -2066,7 +2331,6 @@ chemrof:Nuclide a owl:Class,
         chemrof:PartiallySpecifiedAtom ;
     skos:altLabel "nuclear species",
         "nucleide" ;
-    skos:definition "an atomic species characterized by the specific constitution of its nucleus" ;
     linkml:examples "Example(value='https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m', description=None)" .
 
 chemrof:NumberOfYears a owl:Class,
@@ -2080,8 +2344,7 @@ chemrof:NumberOfYears a owl:Class,
 chemrof:PartiallySpecifiedAtom a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "partially specified atom" ;
-    rdfs:subClassOf chemrof:Atom ;
-    skos:definition "An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated" .
+    rdfs:subClassOf chemrof:Atom .
 
 chemrof:PreciseChemicalMixture a owl:Class,
         linkml:ClassDefinition ;
@@ -2089,14 +2352,66 @@ chemrof:PreciseChemicalMixture a owl:Class,
     rdfs:subClassOf chemrof:ChemicalMixture,
         chemrof:WeaklyBonded ;
     skos:altLabel "chemical substance (SIO)" ;
-    skos:definition "A polyatomic entity that consists of two or more parts that are weakly bound, and of known stoichiometry" ;
     skos:exactMatch SIO:011126 .
+
+chemrof:Reaction a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "reaction" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_transport ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:reaction_center ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ReactionParticipant ;
+            owl:onProperty chemrof:right_participants ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ReactionParticipant ;
+            owl:onProperty chemrof:left_participants ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_stereo ],
+        [ a owl:Restriction ;
+            owl:onClass chemrof:ChemicalEncoding ;
+            owl:onProperty chemrof:has_rinchi_representation ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_fully_characterized ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_diastereoselective ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:description ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:smarts_string ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEncoding ;
+            owl:onProperty chemrof:has_reaction_smiles_representation ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_balanced ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:direction ] .
 
 chemrof:SubatomicParticle a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "subatomic particle" ;
     rdfs:subClassOf chemrof:ChemicalEntity ;
-    skos:definition "A chemical entity below the granularity of an atom." ;
     skos:exactMatch CHEBI:36342,
         COB:0000007 .
 
@@ -2111,8 +2426,10 @@ chemrof:conjugate_acid_of a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEntity ;
     rdfs:seeAlso "https://academic.oup.com/nar/article/36/suppl_1/D344/2506390" ;
-    rdfs:subPropertyOf chemrof:has_derivative ;
-    owl:inverseOf chemrof:conjugate_base_of .
+    rdfs:subPropertyOf chemrof:direct_conjugatated_form_of,
+        chemrof:has_higher_charge_from ;
+    owl:inverseOf chemrof:conjugate_base_of ;
+    skos:altLabel "is conjugate acid of (chebi)" .
 
 chemrof:conjugate_base_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2120,9 +2437,11 @@ chemrof:conjugate_base_of a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEntity ;
     rdfs:seeAlso "https://academic.oup.com/nar/article/36/suppl_1/D344/2506390" ;
-    rdfs:subPropertyOf chemrof:derivative_of ;
+    rdfs:subPropertyOf chemrof:direct_conjugatated_form_of,
+        chemrof:has_lower_charge_from ;
     owl:inverseOf chemrof:conjugate_acid_of ;
-    skos:definition "connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)" .
+    skos:altLabel "is conjugate base of (chebi)" ;
+    skos:editorialNote "sometimes chebi hops over a state skipping an intermediate" .
 
 chemrof:has_element a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2130,6 +2449,11 @@ chemrof:has_element a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalElement ;
     rdfs:subPropertyOf chemrof:alternate_form_of .
+
+chemrof:has_repeat_unit a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has repeat unit" ;
+    rdfs:range chemrof:ChemicalEntity .
 
 chemrof:has_sequence_representation a owl:ObjectProperty,
         linkml:SlotDefinition .
@@ -2146,7 +2470,6 @@ chemrof:smiles_string a owl:ObjectProperty,
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
     rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol." ;
     skos:note "a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see “Limitations of molecular graph representations” section), such as organometallic compounds and ionic salts." .
 
 chemrof:subatomic_particle_count a owl:ObjectProperty,
@@ -2160,6 +2483,14 @@ chemrof:AtomOccurrence a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atom occurrence" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass chemrof:Atom ;
+            owl:onProperty chemrof:occurrence_of ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty chemrof:oxidation_number ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty chemrof:formal_charge ],
@@ -2170,51 +2501,42 @@ chemrof:AtomOccurrence a owl:Class,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty chemrof:oxidation_number ],
-        [ a owl:Restriction ;
-            owl:onClass chemrof:Atom ;
-            owl:onProperty chemrof:occurrence_of ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
             owl:onProperty chemrof:coordination_number ],
         chemrof:OwlClass,
-        chemrof:RelationalChemicalEntity ;
-    skos:definition "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate" .
+        chemrof:RelationalChemicalEntity .
 
 chemrof:AtomicBond a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atomic bond" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty chemrof:torsional_angle ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty chemrof:bond_angle ],
+            owl:onClass chemrof:BondTypeEnum ;
+            owl:onProperty chemrof:bond_type ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
             owl:onProperty chemrof:bond_length_in_angstroms ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <http://UNKNOWN.org/bond_type_enum> ;
-            owl:onProperty chemrof:bond_type ],
+            owl:onClass linkml:Float ;
+            owl:onProperty chemrof:bond_angle ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty chemrof:bond_order ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:AtomOccurrence ;
             owl:onProperty chemrof:has_atom_occurrences ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty chemrof:bond_order ],
+            owl:onClass linkml:Float ;
+            owl:onProperty chemrof:torsional_angle ],
         chemrof:OwlClass,
         chemrof:RelationalChemicalEntity ;
     skos:altLabel "bond",
         "chemical bond" ;
-    skos:definition "A connection between two atoms. Note this is the reified form of 'atomically connected to'. " ;
-    skos:exactMatch CHEMINF:000063 .
+    skos:exactMatch gc:Bond,
+        CHEMINF:000063 .
 
 chemrof:Charged a owl:Class,
         linkml:ClassDefinition ;
@@ -2224,6 +2546,22 @@ chemrof:Charged a owl:Class,
     skos:altLabel "ion",
         "ionic state" .
 
+chemrof:HardOrSoftEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "hard_or_soft_enum" ;
+    owl:unionOf ( <https://w3id.org/chemrof/HardOrSoftEnum#hard> <https://w3id.org/chemrof/HardOrSoftEnum#soft> <https://w3id.org/chemrof/HardOrSoftEnum#borderline> ) ;
+    linkml:permissible_values <https://w3id.org/chemrof/HardOrSoftEnum#borderline>,
+        <https://w3id.org/chemrof/HardOrSoftEnum#hard>,
+        <https://w3id.org/chemrof/HardOrSoftEnum#soft> .
+
+chemrof:Material a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "material" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_part ] .
+
 chemrof:PolyatomicEntity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "polyatomic entity" ;
@@ -2231,10 +2569,9 @@ chemrof:PolyatomicEntity a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        chemrof:ChemicalEntity ;
-    skos:definition "Any chemical entity consisting of more than one atom." .
+        chemrof:ChemicalEntity .
 
-chemrof:derivative_of a owl:ObjectProperty,
+chemrof:polymer_of a owl:ObjectProperty,
         linkml:SlotDefinition .
 
 chemrof:structural_isomer_of a owl:ObjectProperty,
@@ -2245,7 +2582,7 @@ chemrof:structural_isomer_of a owl:ObjectProperty,
     rdfs:seeAlso "https://en.wikipedia.org/wiki/Structural_isomer",
         "https://goldbook.iupac.org/terms/view/C01285" ;
     rdfs:subPropertyOf chemrof:chemical_isomer_of ;
-    skos:definition "a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonding patterns" .
+    skos:altLabel "constitutional isomer" .
 
 chemrof:ChemicalElement a owl:Class,
         linkml:ClassDefinition ;
@@ -2254,27 +2591,38 @@ chemrof:ChemicalElement a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
+            owl:onProperty chemrof:boiling_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
             owl:onProperty chemrof:monoisotopic_mass ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty chemrof:standard_atomic_weight ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty bo:symbol ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty chemrof:melting_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:PeriodicTableGroup ;
+            owl:onProperty chemrof:in_periodic_table_group ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:has_physiologically_stable_form ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:symbol ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty chemrof:mass ],
+            owl:allValuesFrom chemrof:Stereocenter ;
+            owl:onProperty chemrof:has_stereocenter ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:PeriodicTableBlock ;
             owl:onProperty chemrof:in_periodic_table_block ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty chemrof:melting_point_in_celcius ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -2282,57 +2630,26 @@ chemrof:ChemicalElement a owl:Class,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty chemrof:standard_atomic_weight ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Float ;
-            owl:onProperty chemrof:boiling_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:PeriodicTableGroup ;
-            owl:onProperty chemrof:in_periodic_table_group ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Stereocenter ;
-            owl:onProperty chemrof:has_stereocenter ],
+            owl:onProperty chemrof:mass ],
         chemrof:PartiallySpecifiedAtom ;
     skos:altLabel "element",
         "generic atom" ;
-    skos:definition "generic form of an atom, with unspecified neutron or charge" ;
-    skos:exactMatch wd:Q11344 ;
+    skos:exactMatch gc:Element,
+        wd:Q11344 ;
     linkml:examples "Example(value='carbon', description=None)",
         "Example(value='nickel', description=None)" .
 
-chemrof:GroupingClass a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "grouping class" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:GroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:id ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:OwlClass ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        chemrof:OwlClass ;
-    skos:definition "A non-specific entity. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" .
+chemrof:IngredientRoleEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "ingredient_role_enum" ;
+    owl:unionOf ( <https://w3id.org/chemrof/IngredientRoleEnum#active+ingredient> <https://w3id.org/chemrof/IngredientRoleEnum#inactive+ingredient> <https://w3id.org/chemrof/IngredientRoleEnum#excipient> <https://w3id.org/chemrof/IngredientRoleEnum#solvent> ) ;
+    linkml:permissible_values <https://w3id.org/chemrof/IngredientRoleEnum#active+ingredient>,
+        <https://w3id.org/chemrof/IngredientRoleEnum#excipient>,
+        <https://w3id.org/chemrof/IngredientRoleEnum#inactive+ingredient>,
+        <https://w3id.org/chemrof/IngredientRoleEnum#solvent> .
 
-chemrof:RelationalChemicalEntity a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "relational chemical entity" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:OwlClass ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        chemrof:OwlClass ;
-    skos:closeMatch biolink:Association ;
-    skos:definition "A reified relationship" .
+chemrof:derivative_of a owl:ObjectProperty,
+        linkml:SlotDefinition .
 
 chemrof:information_property a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2342,13 +2659,52 @@ chemrof:information_property a owl:ObjectProperty,
 rdfs:label a owl:ObjectProperty,
         linkml:SlotDefinition .
 
+chemrof:GroupingClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:OwlClass ;
+            owl:onProperty chemrof:owl_subclass_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:GroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:id ;
+            owl:qualifiedCardinality 1 ],
+        chemrof:OwlClass .
+
 chemrof:MolecularComponent a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular component" ;
     rdfs:subClassOf chemrof:PolyatomicEntity ;
     skos:altLabel "molecular part",
-        "submolecule" ;
-    skos:definition "A proper part of a molecule that is larger than an atom" .
+        "submolecule" .
+
+chemrof:PeriodicTableBlockEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "periodic_table_block_enum" ;
+    owl:unionOf ( <https://w3id.org/chemrof/PeriodicTableBlockEnum#s-block> <https://w3id.org/chemrof/PeriodicTableBlockEnum#p-block> <https://w3id.org/chemrof/PeriodicTableBlockEnum#d-block> <https://w3id.org/chemrof/PeriodicTableBlockEnum#f-block> <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ) ;
+    linkml:permissible_values <https://w3id.org/chemrof/PeriodicTableBlockEnum#d-block>,
+        <https://w3id.org/chemrof/PeriodicTableBlockEnum#f-block>,
+        <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block>,
+        <https://w3id.org/chemrof/PeriodicTableBlockEnum#p-block>,
+        <https://w3id.org/chemrof/PeriodicTableBlockEnum#s-block> .
+
+chemrof:RelationalChemicalEntity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "relational chemical entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:OwlClass ;
+            owl:onProperty chemrof:owl_subclass_of ],
+        chemrof:OwlClass ;
+    skos:closeMatch biolink:Association .
 
 chemrof:SpecificityMixin a owl:Class,
         linkml:ClassDefinition ;
@@ -2367,10 +2723,31 @@ chemrof:chemical_representation a owl:ObjectProperty,
     rdfs:label "chemical representation" ;
     rdfs:domain chemrof:ChemicalEntity ;
     rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:information_property .
+    rdfs:subPropertyOf chemrof:information_property ;
+    skos:altLabel "has chemical encoding" .
+
+chemrof:has_part a owl:ObjectProperty,
+        linkml:SlotDefinition .
 
 chemrof:subtype_of a owl:ObjectProperty,
         linkml:SlotDefinition .
+
+chemrof:alternate_form_of a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "alternate form of" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEntity ;
+    rdfs:subPropertyOf chemrof:chemical_to_chemical_relationship .
+
+chemrof:owl_subclass_of a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "owl subclass of" ;
+    rdfs:domain chemrof:OwlClass ;
+    rdfs:range chemrof:OwlClass ;
+    rdfs:subPropertyOf chemrof:classification_relationship ;
+    skos:altLabel "is a" ;
+    skos:exactMatch rdfs:subClassOf ;
+    skos:narrowMatch bo:family .
 
 chemrof:Count a owl:Class,
         linkml:TypeDefinition ;
@@ -2380,6 +2757,26 @@ chemrof:Count a owl:Class,
             owl:onProperty linkml:topValue ;
             owl:qualifiedCardinality 1 ] .
 
+linkml:TypeDefinition a owl:Class ;
+    rdfs:label "type_definition" .
+
+linkml:topValue a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
+chemrof:ElementFamilyEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "element_family_enum" ;
+    owl:unionOf ( <https://w3id.org/chemrof/ElementFamilyEnum#Alkali_Earth> <https://w3id.org/chemrof/ElementFamilyEnum#Alkaline_Earth> <https://w3id.org/chemrof/ElementFamilyEnum#Halogen> <https://w3id.org/chemrof/ElementFamilyEnum#Metalloids> <https://w3id.org/chemrof/ElementFamilyEnum#Noblegas> <https://w3id.org/chemrof/ElementFamilyEnum#Non-Metal> <https://w3id.org/chemrof/ElementFamilyEnum#Other_Metal> <https://w3id.org/chemrof/ElementFamilyEnum#Rare_Earth> <https://w3id.org/chemrof/ElementFamilyEnum#Transition> ) ;
+    linkml:permissible_values <https://w3id.org/chemrof/ElementFamilyEnum#Alkali_Earth>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Alkaline_Earth>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Halogen>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Metalloids>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Noblegas>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Non-Metal>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Other_Metal>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Rare_Earth>,
+        <https://w3id.org/chemrof/ElementFamilyEnum#Transition> .
+
 chemrof:Macromolecule a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "macromolecule" ;
@@ -2387,67 +2784,31 @@ chemrof:Macromolecule a owl:Class,
             owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:has_submolecules ],
         chemrof:Molecule ;
-    skos:definition "A large molecule, such as a polymer, lipid, or macrocycle" ;
     skos:exactMatch Wikipedia:Macromolecule ;
     skos:note "check on classification of lipids" .
 
-chemrof:alternate_form_of a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "alternate form of" ;
-    rdfs:domain chemrof:ChemicalEntity ;
-    rdfs:range chemrof:ChemicalEntity ;
-    rdfs:subPropertyOf chemrof:chemical_to_chemical_relationship ;
-    skos:definition "A relationship between two entities of the same type" .
-
-chemrof:classifies a owl:ObjectProperty,
-        linkml:SlotDefinition .
-
-chemrof:has_part a owl:ObjectProperty,
-        linkml:SlotDefinition .
-
-chemrof:owl_subclass_of a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "owl subclass of" ;
-    rdfs:domain chemrof:OwlClass ;
-    rdfs:range chemrof:OwlClass ;
-    rdfs:subPropertyOf chemrof:classification_relationship ;
-    skos:definition "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)" .
+chemrof:MoleculeGroupingClass a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "molecule grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:Molecule ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        chemrof:GroupingClass ;
+    skos:note "Molecular grouping classes are typically defined by elemental composition and structure as well as chemical properties",
+        "Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass" ;
+    linkml:examples "Example(value='nucleobase', description=None)" .
 
 chemrof:chemical_property a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "chemical property" ;
     rdfs:range linkml:String .
 
-linkml:TypeDefinition a owl:Class ;
-    rdfs:label "type_definition" ;
-    skos:definition "A data type definition." .
-
-linkml:topValue a owl:DatatypeProperty ;
-    rdfs:label "value" .
-
-chemrof:MoleculeGroupingClass a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "molecule grouping class" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Molecule ;
-            owl:onProperty chemrof:classifies ],
-        chemrof:GroupingClass ;
-    skos:definition "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide" ;
-    skos:note "Molecular grouping classes are typically defined by elemental composition and structure as well as chemical properties",
-        "Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass" ;
-    linkml:examples "Example(value='nucleobase', description=None)" .
-
-chemrof:chemical_formula a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "chemical formula" ;
-    rdfs:domain chemrof:ChemicalEntity ;
-    rdfs:range chemrof:ChemicalEncoding ;
-    rdfs:subPropertyOf chemrof:chemical_representation ;
-    skos:definition "A generic grouping for miolecular formulae and empirical formulae" .
+chemrof:classifies a owl:ObjectProperty,
+        linkml:SlotDefinition .
 
 chemrof:inchi_sublayer a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -2456,47 +2817,89 @@ chemrof:inchi_sublayer a owl:ObjectProperty,
     rdfs:seeAlso "https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png" ;
     rdfs:subPropertyOf chemrof:inchi_component .
 
+chemrof:chemical_formula a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "chemical formula" ;
+    rdfs:domain chemrof:ChemicalEntity ;
+    rdfs:range chemrof:ChemicalEncoding ;
+    rdfs:subPropertyOf chemrof:chemical_representation ;
+    skos:exactMatch <http://identifiers.org/edam/data_0846>,
+        schema:hasRepresentation .
+
 chemrof:Atom a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:symbol ],
+            owl:onClass chemrof:Count ;
+            owl:onProperty bo:atomicNumber ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:SubatomicParticle ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:Count ;
-            owl:onProperty chemrof:atomic_number ],
+            owl:onClass linkml:String ;
+            owl:onProperty bo:symbol ],
         chemrof:ChemicalEntity ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
-    skos:definition "A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it." ;
     skos:exactMatch COB:0000011,
         SIO:010044 ;
     skos:note "{'chemical species of an element': 'Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859'}" .
 
+chemrof:NanostructureMorphologyEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "nanostructure_morphology_enum" ;
+    owl:unionOf ( CHEBI:50796 CHEBI:50803 CHEBI:50805 CHEBI:50806 CHEBI:50853 CHEBI:52518 CHEBI:52529 CHEBI:52530 CHEBI:52531 CHEBI:52593 ) ;
+    linkml:permissible_values CHEBI:50796,
+        CHEBI:50803,
+        CHEBI:50805,
+        CHEBI:50806,
+        CHEBI:50853,
+        CHEBI:52518,
+        CHEBI:52529,
+        CHEBI:52530,
+        CHEBI:52531,
+        CHEBI:52593 .
+
 chemrof:elemental_charge a owl:ObjectProperty,
         linkml:SlotDefinition .
+
+chemrof:BondTypeEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "bond_type_enum" ;
+    owl:unionOf ( gc:NormalBond gc:AromaticBond gc:Single gc:Double gc:Triple gc:Quadruple gc:HydrogenBond <https://w3id.org/chemrof/BondTypeEnum#ionic> <https://w3id.org/chemrof/BondTypeEnum#polycentric> <https://w3id.org/chemrof/BondTypeEnum#metal-metal> <https://w3id.org/chemrof/BondTypeEnum#salt+bridge> ) ;
+    linkml:permissible_values gc:AromaticBond,
+        gc:Double,
+        gc:HydrogenBond,
+        gc:NormalBond,
+        gc:Quadruple,
+        gc:Single,
+        gc:Triple,
+        <https://w3id.org/chemrof/BondTypeEnum#ionic>,
+        <https://w3id.org/chemrof/BondTypeEnum#metal-metal>,
+        <https://w3id.org/chemrof/BondTypeEnum#polycentric>,
+        <https://w3id.org/chemrof/BondTypeEnum#salt+bridge> .
+
+FIX:0000276 a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular property" ;
+    rdfs:range linkml:String ;
+    rdfs:subPropertyOf chemrof:chemical_property ;
+    skos:exactMatch FIX:0000276 .
 
 chemrof:Isotope a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "isotope" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalElement ;
-            owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:NumberOfYears ;
-            owl:onProperty chemrof:half_life ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Isotope ;
             owl:onProperty chemrof:decay_product ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:decay_mode ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -2504,21 +2907,24 @@ chemrof:Isotope a owl:Class,
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty chemrof:decay_mode ],
+            owl:onProperty chemrof:mode_of_formation ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Count ;
             owl:onProperty chemrof:neutron_number ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:mode_of_formation ],
+            owl:onClass chemrof:NumberOfYears ;
+            owl:onProperty chemrof:half_life ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:Isotope ;
             owl:onProperty chemrof:isotope_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalElement ;
+            owl:onProperty chemrof:has_element ],
         chemrof:Nuclide ;
-    skos:definition "A specific subtype of an atom with a specified neutron number" ;
     skos:exactMatch wd:Q25276 ;
     skos:note "Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances." ;
     linkml:examples "Example(value='1H (protium)', description=None)",
@@ -2537,7 +2943,6 @@ chemrof:OwlClass a owl:Class,
         "second order class",
         "species" ;
     skos:closeMatch skos:Concept ;
-    skos:definition "instances of this class mixin are OWL Classes" ;
     skos:exactMatch owl:Class,
         wd:Q24017414 .
 
@@ -2553,32 +2958,32 @@ chemrof:Molecule a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Atom ;
-            owl:onProperty chemrof:has_atoms ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty chemrof:is_organic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AtomicBond ;
-            owl:onProperty chemrof:has_bonds ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Molecule ;
-            owl:onProperty chemrof:has_submolecules ],
+            owl:allValuesFrom chemrof:AtomOccurrence ;
+            owl:onProperty chemrof:has_atom_occurrences ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AtomOccurrence ;
-            owl:onProperty chemrof:has_atom_occurrences ],
+            owl:allValuesFrom chemrof:Molecule ;
+            owl:onProperty chemrof:has_submolecules ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:AtomicBond ;
+            owl:onProperty chemrof:has_bonds ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty chemrof:is_organic ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Atom ;
+            owl:onProperty chemrof:has_atoms ],
         chemrof:FullyCovalentlyBonded,
         chemrof:PolyatomicEntity ;
     skos:altLabel "molecular entity",
         "monomolecular entity" ;
-    skos:definition "A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds." ;
     skos:exactMatch COB:0000013,
         biotop:MonoMolecularEntity,
+        gc:Molecule,
         SIO:011125 ;
     linkml:examples "Example(value='cysteine', description=None)",
         "Example(value='dioxygen', description=None)",
@@ -2589,50 +2994,48 @@ chemrof:ChemicalEntity a owl:Class,
     rdfs:label "chemical entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalEncoding ;
-            owl:onProperty chemrof:inchi_string ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty chemrof:is_radical ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass chemrof:ChemicalRole ;
-            owl:onProperty chemrof:has_chemical_role ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty chemrof:id ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty chemrof:inchi_chemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty rdfs:label ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty chemrof:id ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass chemrof:OwlClass ;
             owl:onProperty chemrof:owl_subclass_of ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalRole ;
+            owl:onProperty chemrof:has_chemical_role ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass chemrof:ChemicalEncoding ;
+            owl:onProperty chemrof:inchi_string ],
         chemrof:OwlClass ;
     skos:altLabel "chemical",
         "chemical species",
         "specific chemical entity" ;
-    skos:definition "An entity that can be described using using chemical properties." ;
     skos:exactMatch CHEBI:24431,
         CHEMINF:000000,
-        SIO:010004 ;
+        SIO:010004,
+        OntoRxn:ChemSpecies ;
     skos:note "Does not encompass chemical grouping classes, such as \"amino acid\". Use the class ChemicalGrouping for this.",
         "Encompasses subatomic particles through to macromolecular structures.",
         "In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]" .
 
 linkml:ClassDefinition a owl:Class ;
-    rdfs:label "class_definition" ;
-    skos:definition "the definition of a class or interface" .
+    rdfs:label "class_definition" .
 
 linkml:SlotDefinition a owl:Class ;
-    rdfs:label "slot_definition" ;
-    skos:definition "the definition of a property or a slot" .
+    rdfs:label "slot_definition" .
 
 
