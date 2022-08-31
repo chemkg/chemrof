@@ -37,7 +37,7 @@ docs:
 	mkdir $@
 
 docs/index.md: $(SOURCE_FILES)
-	$(RUN) gen-markdown -d docs $< -I $@
+	$(RUN) gen-doc -d docs $< -I $@
 
 project: project1 schema/owl/chemrof.owl.ttl
 project1: $(SOURCE_FILES)

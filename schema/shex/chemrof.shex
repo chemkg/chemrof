@@ -1,10 +1,10 @@
 BASE <https://w3id.org/chemrof/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX gc: <http://purl.org/gc/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 
 <PeriodicTableGroup> xsd:int
@@ -40,6 +40,8 @@ linkml:Time xsd:dateTime
 linkml:Date xsd:date
 
 linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
 
 linkml:Uriorcurie IRI
 
@@ -438,14 +440,6 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <NucleotideSequenceInterval> ] ?
        ) ;
        rdf:type [ <DNASequenceInterval> ]
-    )
-}
-
-<Electron> CLOSED {
-    (  $<Electron_tes> (  &<SubatomicParticle_tes> ;
-          rdf:type [ <SubatomicParticle> ] ?
-       ) ;
-       rdf:type [ <Electron> ]
     )
 }
 
@@ -976,14 +970,6 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<Neutron> CLOSED {
-    (  $<Neutron_tes> (  &<Nucleon_tes> ;
-          rdf:type [ <Nucleon> ] ?
-       ) ;
-       rdf:type [ <Neutron> ]
-    )
-}
-
 <NonSpeciesMolecule> CLOSED {
     (  $<NonSpeciesMolecule_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ?
@@ -991,16 +977,6 @@ linkml:Nodeidentifier NONLITERAL
        rdf:type [ <NonSpeciesMolecule> ]
     )
 }
-
-<Nucleon>  (
-    CLOSED {
-       (  $<Nucleon_tes> (  &<SubatomicParticle_tes> ;
-             rdf:type [ <SubatomicParticle> ] ?
-          ) ;
-          rdf:type [ <Nucleon> ]
-       )
-    } OR @<Neutron> OR @<Proton>
-)
 
 <NucleotideSequenceInterval>  (
     CLOSED {
@@ -1149,14 +1125,6 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <Macromolecule> ] ?
        ) ;
        rdf:type [ <Protein> ]
-    )
-}
-
-<Proton> CLOSED {
-    (  $<Proton_tes> (  &<Nucleon_tes> ;
-          rdf:type [ <Nucleon> ] ?
-       ) ;
-       rdf:type [ <Proton> ]
     )
 }
 
@@ -1326,15 +1294,13 @@ linkml:Nodeidentifier NONLITERAL
     } OR @<Enantiomer>
 )
 
-<SubatomicParticle>  (
-    CLOSED {
-       (  $<SubatomicParticle_tes> (  &<ChemicalEntity_tes> ;
-             rdf:type [ <ChemicalEntity> ] ?
-          ) ;
-          rdf:type [ <SubatomicParticle> ]
-       )
-    } OR @<Electron> OR @<Nucleon>
-)
+<SubatomicParticle> CLOSED {
+    (  $<SubatomicParticle_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ?
+       ) ;
+       rdf:type [ <SubatomicParticle> ]
+    )
+}
 
 <SupramolecularPolymer> CLOSED {
     (  $<SupramolecularPolymer_tes> (  &<MolecularComplex_tes> ;

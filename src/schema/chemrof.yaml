@@ -37,11 +37,17 @@ prefixes:
   biotop: http://purl.org/biotop/biotop.owl#
   skos: http://www.w3.org/2004/02/skos/core#
   wd: http://www.wikidata.org/entity/
+  wdeschema: https://www.wikidata.org/wiki/Special:EntitySchemaText/
   cml: http://www.xml-cml.org/schema/
   bo: http://www.blueobelisk.org/dict/terminology
   gc: http://purl.org/gc/
   damlpt: http://www.daml.org/2003/01/periodictable/PeriodicTable#
   OntoRxn: http://www.semanticweb.com/OntoRxn#
+  MetaCyc: http://identifiers.org/MetaCyc/
+  UniProtKB: http://identifiers.org/uniprot/
+  REACT: http://identifiers.org/reactome/
+  EC: https://enzyme.expasy.org/EC/
+  NCIT: http://purl.obolibrary.org/obo/NCIT_
   
 default_prefix: chemrof
 default_range: string
@@ -379,6 +385,7 @@ classes:
     slots:
       - id
       - name
+      - IUPAC name
       - is radical
       - has chemical role
       - inchi string
@@ -405,6 +412,7 @@ classes:
       - UNII
       - KEGG
       - SEED
+      - MetaNetX.chemical
   
   subatomic particle:
     is_a: chemical entity
@@ -413,27 +421,6 @@ classes:
     mappings:
       - COB:0000007
       - CHEBI:36342
-
-  nucleon:
-    deprecated: should be represented as an instance
-    is_a: subatomic particle
-    description: >-
-      A neutron or proton
-#    union_of:
-#      - neutron
-#      - proton
-
-  neutron:
-    deprecated: should be represented as an instance
-    is_a: nucleon
-  proton:
-    deprecated: should be represented as an instance
-    is_a: nucleon
-    
-  electron:
-    deprecated: should be represented as an instance
-    is_a: subatomic particle
-
 
   chemical entity or grouping:
     mixin: true
@@ -514,10 +501,13 @@ classes:
     aliases:
       - neutral charge
     is_a: charge state
+    description: >-
+      Applies to entities that are uncharged, i.e. have an elemental charge of zero
     slot_usage:
       elemental charge:
         minimum_value: 0
         maximum_value: 0
+        equals_expression: "0"
     mappings:
       - CHEMINF:000401
 
@@ -527,6 +517,8 @@ classes:
       - ion
       - ionic state
     is_a: charge state
+    description: >-
+      Applies to entities that are charged, either positive or negative
     union_of:
       - anion state
       - cation state
@@ -1363,11 +1355,17 @@ classes:
         recommended: true
         required: false
         range: molecule
+      IUPAC name:
+        pattern: "^rac-"
     defining_slots:
       - has left enantiomer
       - has right enantiomer
     exact_mappings:
       - CHEBI:60911
+      - NCIT:C103198
+      - wdeschema:E47
+      - wd:Q467717
+      - goldbook:R05025
     see_also:
       - https://github.com/ebi-chebi/ChEBI/issues/3245
 
@@ -1417,7 +1415,7 @@ classes:
       - MetaCyc
       - REACT
       - EC
-      - MetaNetX
+      - MetaNetX.reaction
       - SEED
       - RetroRules
       - RXNO
@@ -1639,6 +1637,13 @@ slots:
     description: >-
       short symbol for chemical entity, e.g. K, C-16
     slot_uri: bo:symbol
+
+  IUPAC name:
+    is_a: information property
+    range: string
+    slot_uri: CHEMINF:000107
+    exact_mappings:
+      - MI:2007
   
   ## numeric properties of atoms
 
@@ -2099,6 +2104,8 @@ slots:
     is_a: carboydrate representation
     description: >-
       A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.
+    see_also:
+      - https://github.com/biopragmatics/bioregistry/issues/537
 
   glycominds linearcode representation:
     is_a: carboydrate representation
@@ -2166,7 +2173,7 @@ slots:
       - https://github.com/ncats/lychi
     
   inchi string:
-#    title: InChi
+    title: InChi
     is_a: chemical formula
     todos:
       - declare this as a key once compound_key is introduced to linkml
@@ -2420,8 +2427,6 @@ slots:
     description: >-
       a stereoisomer relationship where the two forms are mirror images of one another
     multivalued: true
-
-    
     
   bond order:
     description: >-
@@ -2528,10 +2533,15 @@ enums:
   periodic_table_block_enum:
     permissible_values:
       s-block:
+        meaning: CHEBI:33674 ## s-block molecular entity
       p-block:
+        meaning: CHEBI:33675 ## p-block molecular entity
       d-block:
+        meaning: CHEBI:33561 ## d-block element atom
       f-block:
-      g-block:    
+        meaning: CHEBI:33562 ## f-block element atom
+      g-block:
+        description: The g-block is a hypothetical region in the periodic table of the elements.
 
   element_family_enum:
     close_mappings:
@@ -2595,3 +2605,130 @@ enums:
       soft:
       borderline:
     
+  subatomic_particle_type:
+    permissible_values:
+      proton:
+        meaning: CHEBI:24636
+        description: Nuclear particle of charge number +1, spin 1/2 and rest mass of 1.007276470(12) u.
+      alpha particle:
+        meaning: CHEBI:30216
+        description: Nucleus of the (4)He atom.
+      tau neutrino:
+        meaning: CHEBI:36354
+      positron:
+        meaning: CHEBI:30225
+        description: Elementary particle not affected by the strong force having a spin 1/2, a positive elementary charge and a rest mass of 0.000548579903(13) u, or 0.51099906(15) MeV.
+      muon:
+        meaning: CHEBI:36356
+        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 0.113428913(17) u, or 105.658389(34) MeV.
+      hyperon:
+        meaning: CHEBI:36365
+        description: A baryon which contain one or more strange quarks. Hyperons are short-lived and heavier than nucleons.
+      boson:
+        meaning: CHEBI:36341
+        description: Particle of integer spin quantum number following Bose-Einstein statistics. Bosons are named after Satyendra Nath Bose.
+      fermion:
+        meaning: CHEBI:36340
+        description: Particle of half-integer spin quantum number following Fermi-Dirac statistics. Fermions are named after Enrico Fermi.
+      baryon:
+        meaning: CHEBI:36339
+        description: Baryon is a fermion that does experience the strong force (strong interaction). The term is derived from the Greek betaalpharhoupsilonsigma (heavy).
+      top quark:
+        meaning: CHEBI:36371
+        description: A third-generation quark with a charge of +2/3.
+      hydron:
+        meaning: CHEBI:15378
+        description: The general name for the hydrogen nucleus, to be used without regard to the hydrogen nuclear mass (either for hydrogen in its natural abundance or where it is not desired to distinguish between the isotopes).
+      muon neutrino:
+        meaning: CHEBI:36353
+      nuclear particle:
+        meaning: CHEBI:36347
+        description: A nucleus or any of its constituents in any of their energy states.
+      pi minus meson:
+        meaning: CHEBI:36350
+        description: A subatomic particle of charge number -1, zero spin and rest mass of 0.1498323(8) u, or 139.5679(7) MeV.
+      pi meson:
+        meaning: CHEBI:36348
+        description: The collective name for zero-spin mesons pi(+), pi(-) and pi(0).
+      nucleon:
+        meaning: CHEBI:33253
+        description: Heavy nuclear particle: proton or neutron.
+      triton:
+        meaning: CHEBI:29234
+        description: Nucleus of the (3)H atom.
+      deuteron:
+        meaning: CHEBI:29233
+        description: Nucleus of the (2)H atom.
+      neutrino:
+        meaning: CHEBI:36352
+        description: An elementary particle of spin 1/2, zero electric charge and negligible rest mass. Three known types (flavors) of neutrino are electron neutrino, muon neutrino and tau neutrino, named after their charged partner leptons. The term "neutrino" has been coined by Enrico Fermi.
+      meson:
+        meaning: CHEBI:36345
+        description: A hadron with zero or integer spin; a strongly interacting boson. The term is derived from the Greek muepsilonsigmaomicronsigma (medium, middle).
+      quark:
+        meaning: CHEBI:36346
+        description: Quarks comprise one of two classes of the fundamental particles. Quarks possess fractional electric charges and are not observed in free state. The word "quark" first appears in James Joyce's Finnegans Wake and has been chosen by Murray Gell-Mann as a name for fundamental building blocks of particles.
+      Higgs boson:
+        meaning: CHEBI:146278
+        description: A boson that is its own antiparticle, has no spin, zero electric charge and zero colour charge.
+      fundamental particle:
+        meaning: CHEBI:33233
+        description: A particle not known to have substructure.
+      electron neutrino:
+        meaning: CHEBI:30223
+      subatomic particle:
+        meaning: CHEBI:36342
+        description: A particle smaller than an atom.
+      tau lepton:
+        meaning: CHEBI:36355
+        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 1777.05 MeV.
+      photon:
+        meaning: CHEBI:30212
+        description: Particle of zero charge, zero rest mass, spin quantum number 1, energy hnu and momentum hnu/c (h is the Planck constant, nu the frequency of radiation and c the speed of light), carrier of electromagnetic force.
+      up quark:
+        meaning: CHEBI:36366
+        description: A first-generation quark with a charge of +2/3. The up and down quarks are the fundamental constituents of the nucleons.
+      antimuon:
+        meaning: CHEBI:30214
+        description: Elementary particle not affected by the strong force having a spin 1/2, a positive elementary charge and a rest mass of 0.113428913(17) u, or 105.658389(34) MeV.
+      strange quark:
+        meaning: CHEBI:36368
+        description: A second-generation quark with a charge of -1/3 and a strangeness of -1.
+      Delta baryon:
+        meaning: CHEBI:36375
+      pi zero meson:
+        meaning: CHEBI:36351
+        description: A subatomic particle of zero charge, zero spin and rest mass of 0.1449008(9) u, or 134.9743(8) MeV.
+      hadron:
+        meaning: CHEBI:36344
+        description: Hadron is a subatomic particle which experiences the strong force.
+      bottom quark:
+        meaning: CHEBI:36370
+        description: A third-generation quark with a charge of -1/3.
+      composite particle:
+        meaning: CHEBI:36343
+        description: A subatomic particle known to have substructure (i.e. consisting of smaller particles).
+      atomic nucleus:
+        meaning: CHEBI:33252
+        description: A nucleus is the positively charged central portion of an atom, excluding the orbital electrons.
+      electron:
+        meaning: CHEBI:10545
+        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 0.000548579903(13) u, or 0.51099906(15) MeV.
+      neutron:
+        meaning: CHEBI:30222
+        description: Nuclear particle of zero charge, spin 1/2 and rest mass of 1.008664904(14) u.
+      lepton:
+        meaning: CHEBI:36338
+        description: Lepton is a fermion that does not experience the strong force (strong interaction). The term is derived from the Greek lambdaepsilonpitauomicronsigma (small, thin).
+      helion:
+        meaning: CHEBI:30220
+        description: Nucleus of the (3)He atom.
+      charm quark:
+        meaning: CHEBI:36369
+        description: A second-generation quark with a charge of +2/3.
+      down quark:
+        meaning: CHEBI:36367
+        description: A first-generation quark with a charge of -1/3. The up and down quarks are the fundamental constituents of the nucleons.
+      pi positive meson:
+        meaning: CHEBI:36349
+        description: A subatomic particle of charge number +1, zero spin and rest mass of 0.1498323(8) u, or 139.5679(7) MeV.

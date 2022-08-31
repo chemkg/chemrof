@@ -120,6 +120,22 @@
     {
       "prefix_prefix": "OntoRxn",
       "prefix_reference": "http://www.semanticweb.com/OntoRxn#"
+    },
+    {
+      "prefix_prefix": "MetaCyc",
+      "prefix_reference": "http://identifiers.org/MetaCyc/"
+    },
+    {
+      "prefix_prefix": "UniProtKB",
+      "prefix_reference": "http://identifiers.org/uniprot/"
+    },
+    {
+      "prefix_prefix": "REACT",
+      "prefix_reference": "http://identifiers.org/reactome/"
+    },
+    {
+      "prefix_prefix": "EC",
+      "prefix_reference": "https://enzyme.expasy.org/EC/"
     }
   ],
   "default_curi_maps": [
@@ -262,7 +278,7 @@
       "definition_uri": "https://w3id.org/linkml/Time",
       "description": "A time object represents a (local) time of day, independent of any particular day",
       "notes": [
-        "URI is dateTime because OWL reasoners don't work with straight date or time"
+        "URI is dateTime because OWL reasoners do not work with straight date or time"
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
@@ -293,6 +309,17 @@
       "imported_from": "linkml:types",
       "base": "XSDDateTime",
       "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date_or_datetime",
+      "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
+      "description": "Either a date or a datetime",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "https://w3id.org/linkml/DateOrDatetime",
       "repr": "str",
       "@type": "TypeDefinition"
     },
@@ -409,19 +436,24 @@
       "from_schema": "https://w3id.org/chemrof",
       "permissible_values": [
         {
-          "text": "s-block"
+          "text": "s-block",
+          "meaning": "CHEBI:33674"
         },
         {
-          "text": "p-block"
+          "text": "p-block",
+          "meaning": "CHEBI:33675"
         },
         {
-          "text": "d-block"
+          "text": "d-block",
+          "meaning": "CHEBI:33561"
         },
         {
-          "text": "f-block"
+          "text": "f-block",
+          "meaning": "CHEBI:33562"
         },
         {
-          "text": "g-block"
+          "text": "g-block",
+          "description": "The g-block is a hypothetical region in the periodic table of the elements."
         }
       ]
     },
@@ -1826,6 +1858,9 @@
       "definition_uri": "https://w3id.org/chemrof/linucs_representation",
       "description": "A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.",
       "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://github.com/biopragmatics/bioregistry/issues/537"
+      ],
       "is_a": "carboydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/linucs_representation",
@@ -1978,6 +2013,7 @@
     {
       "name": "inchi_string",
       "definition_uri": "https://w3id.org/chemrof/inchi_string",
+      "title": "InChi",
       "todos": [
         "declare this as a key once compound_key is introduced to linkml"
       ],
@@ -5916,7 +5952,8 @@
         "INCHIKEY",
         "UNII",
         "KEGG",
-        "SEED"
+        "SEED",
+        "MetaNetX.chemical"
       ],
       "definition_uri": "https://w3id.org/chemrof/ChemicalEntity",
       "description": "An entity that can be described using using chemical properties.",
@@ -5977,83 +6014,6 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/SubatomicParticle",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Nucleon",
-      "definition_uri": "https://w3id.org/chemrof/Nucleon",
-      "description": "A neutron or proton",
-      "deprecated": "should be represented as an instance",
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "SubatomicParticle",
-      "slots": [
-        "id",
-        "name",
-        "is_radical",
-        "has_chemical_role",
-        "inchi_string",
-        "chemical_entity_inchi_chemical_sublayer",
-        "owl_subclass_of"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/Nucleon",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Neutron",
-      "definition_uri": "https://w3id.org/chemrof/Neutron",
-      "deprecated": "should be represented as an instance",
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "Nucleon",
-      "slots": [
-        "id",
-        "name",
-        "is_radical",
-        "has_chemical_role",
-        "inchi_string",
-        "chemical_entity_inchi_chemical_sublayer",
-        "owl_subclass_of"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/Neutron",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Proton",
-      "definition_uri": "https://w3id.org/chemrof/Proton",
-      "deprecated": "should be represented as an instance",
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "Nucleon",
-      "slots": [
-        "id",
-        "name",
-        "is_radical",
-        "has_chemical_role",
-        "inchi_string",
-        "chemical_entity_inchi_chemical_sublayer",
-        "owl_subclass_of"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/Proton",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Electron",
-      "definition_uri": "https://w3id.org/chemrof/Electron",
-      "deprecated": "should be represented as an instance",
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "SubatomicParticle",
-      "slots": [
-        "id",
-        "name",
-        "is_radical",
-        "has_chemical_role",
-        "inchi_string",
-        "chemical_entity_inchi_chemical_sublayer",
-        "owl_subclass_of"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/Electron",
       "@type": "ClassDefinition"
     },
     {
@@ -8232,7 +8192,7 @@
         "MetaCyc",
         "REACT",
         "EC",
-        "MetaNetX",
+        "MetaNetX.reaction",
         "SEED",
         "RetroRules",
         "RXNO",
@@ -8460,9 +8420,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2022-05-03T17:38:07",
-  "source_file_size": 75991,
-  "generation_date": "2022-05-06T14:33:13",
+  "source_file_date": "2022-08-30T13:31:27",
+  "source_file_size": 76124,
+  "generation_date": "2022-08-30T13:44:52",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

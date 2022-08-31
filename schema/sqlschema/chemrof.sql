@@ -166,17 +166,6 @@ CREATE TABLE "DNA_sequence_interval" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE electron (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE enantiomer (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -518,17 +507,6 @@ CREATE TABLE natural_product (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE neutron (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE non_species_molecule (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -542,17 +520,6 @@ CREATE TABLE non_species_molecule (
 	has_bonds TEXT, 
 	is_organic BOOLEAN, 
 	has_part TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE nucleon (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -642,17 +609,6 @@ CREATE TABLE protein (
 	has_bonds TEXT, 
 	is_organic BOOLEAN, 
 	has_part TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE proton (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	owl_subclass_of TEXT, 
 	PRIMARY KEY (id)
 );
 
