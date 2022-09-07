@@ -37,7 +37,8 @@ docs:
 	mkdir $@
 
 docs/index.md: $(SOURCE_FILES)
-	$(RUN) gen-doc -d docs $< -I $@
+	cp src/docs/*.md docs/ ; \
+	$(RUN) gen-doc -d docs $<
 
 project: project1 schema/owl/chemrof.owl.ttl
 project1: $(SOURCE_FILES)
@@ -46,6 +47,10 @@ project1: $(SOURCE_FILES)
 
 schema/owl/$(SCHEMA_NAME).owl.ttl: $(SOURCE_FILES)
 	$(RUN) gen-owl --no-metaclasses --no-type-objects $< > $@.tmp && mv $@.tmp $@
+
+
+schema/sssom/chemrof.sssom.tsv: src/schema/chemrof.yaml
+	$(RUN) gen-sssom $< -o $@
 
 # test docs locally.
 docserve:

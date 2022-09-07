@@ -1,27 +1,34 @@
-# Chem: Schema for chemistry data models and ontologies
+# CHEMROF: Chemical Entities Mixtures Reactions Ontological Framework
 
 GitHub: [chemkg/chemrof](https://github.com/chemkg/chemrof)
 
-This repo includes schema/datamodel for a chemical entity
-datamodeling. It also provides an example database and an example of
-how to translate this into an OBO-style OWL ontology
+This project provides a LinkML schema/datamodel to represent chemical entities and other related entities.
 
-## Core Model
+It also includes as a proof of concept:
 
-Instances of the classes in the data model are CHEBI classes, e.g.
+ - small database of entities conforming to the model
+ - a translation of this database to an ontology (OWL TBox)
 
- - Elements: nickel atom, carbon atom, ...
- - Ions: nickel anion, copper(2+), ...
- - Isotopes: carbon-14, carbon-12, ...
- - Molecules:
-    - Enantiomers: L-serine
+## Core Datamodel
+
+Some example classes and their instances:
+
+ - [Elements](https://w3id.org/chemrof/ChemicalElement): nickel atom, carbon atom, ...
+ - [Ions](https://w3id.org/chemrof/MonoatomicIon): nickel anion, copper(2+), ...
+ - [Isotopes](https://w3id.org/chemrof/Isotope): carbon-14, carbon-12, ...
+ - [Molecules](https://w3id.org/chemrof/Molecule):
+    - [Enantiomers](https://w3id.org/chemrof/Enantiomer): L-serine
     - Acids: nitrate, ...
     - Drugs: imatinib, ...
     - Racemic Mixtures: thalidomide, ...
 
+Note that in a chemical ontology like CHEBI, concepts such as "nickel
+atom" are treated as classes. In this primary chemrof representation,
+they are instances, but can be later translated to OWL classes.
+
 ## Schema
 
-The schema and overall framework uses [LinkML](https://linkml.github.io)
+The schema and overall framework uses [LinkML](https://linkml.io/linkml)
 
  * Browse the schema here: [http://chemkg.github.io/chemrof](http://chemkg.github.io/chemrof)
  * See the yaml source in the [src/schema](https://github.com/chemkg/chemrof/blob/master/src/schema) directory
@@ -42,51 +49,124 @@ approach. At the same time we can generate an OBO-style ontology from this repre
 
 Enantiomers are mirror-image stereoisomers.
 
-![img](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Milchs%C3%A4ure_Enantiomerenpaar.svg/298px-Milchs%C3%A4ure_Enantiomerenpaar.svg.png)
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Thalidomide_enantiomers.svg/400px-Thalidomide_enantiomers.svg.png)
 
-The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form (e.g L/D) specified. In the yaml:
+The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form (e.g L/D) specified.
 
-```yaml
-  enantiomer:
-    is_a: stereoisomer
-    description: >-
-      one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
-    slot_usage:
-      relative configuration:
-        range: relative_configuration_enum
-      optical configuration:
-        range: optical_configuration_enum
-      absolute configuration:
-        range: absolute_configuration_enum
-      enantiomer form of:
-        range: molecule
-        is_a: owl subclass of
-        description: >-
-          Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
-    compound_keys:
-      main_key:
-        - enantiomer form of
-        - absolute configuration
-      inchi_based_unique_key:
-        - enantiomer form of
-        - inchi tetrahedral stereochemical sublayer
-    exact_mappings:
-      - SIO:010777
-```
+[Racemic mixtures](/Racemic mixture) are compounds with equal amounts left and right-handed enantiomers. 
+
+=== "Schema"
+
+    ```yaml
+    racemic mixture:
+      aliases:
+        - racemate
+        - racemic mixture of enantiomers
+      is_a: precise chemical mixture
+      description: >-
+        a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
+      slot_usage:
+        has left enantiomer:
+          required: true
+          range: enantiomer
+        has right enantiomer:
+          required: true
+          range: enantiomer
+        chirality agnostic form:
+          recommended: true
+          required: false
+          range: molecule
+        IUPAC name:
+          pattern: "^rac-"
+      defining_slots:
+        - has left enantiomer
+        - has right enantiomer
+      exact_mappings:
+        - CHEBI:60911
+        - NCIT:C103198
+        - wdeschema:E47
+        - wd:Q467717
+        - goldbook:R05025
+      see_also:
+        - https://github.com/ebi-chebi/ChEBI/issues/3245
+    ```
+
+=== "Example Data"
+
+    ```turtle
+    ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3
+            a chem:RacemicMixture ;
+            rdfs:label "thalidomide" ;
+            chem:chebi_iri obo:CHEBI_9513 ;
+            chem:chirality_agnostic_form ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29 ;
+            chem:has_left_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1 ;
+            chem:has_right_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1 .
+    ```
+
+=== "OWL (TBox)"
+
+    ```xml
+    <owl:Class rdf:about="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://w3id.org/chemrof/RacemicMixture"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://w3id.org/chemrof/chirality_agnostic_form"/>
+                        <owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://w3id.org/chemrof/RacemicMixture"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://w3id.org/chemrof/has_left_enantiomer"/>
+                        <owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://w3id.org/chemrof/has_right_enantiomer"/>
+                        <owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/chemrof/RacemicMixture"/>
+        <rdfs:label>thalidomide</rdfs:label>
+    </owl:Class>
+    ```
 
 Note that a class "Enantiomer" does not really make sense at an OBO level where all chemical entities are classes; it is a metaclass.
+
+## Mappings
+
+ - [SSSOM](https://github.com/chemkg/chemrof/tree/master/schema/sssom)
+
+Example mappings:
+
+|subject_id|subject_label|predicate_id|object_id|match_type|subject_source|
+|---|---|---|---|---|---|
+|chemrof:bond_type_enum#covalent|covalent|skos:exactMatch|gc:NormalBond|skos:exactMatch|https://w3id.org/chemrof|
+|chemrof:bond_type_enum#aromatic|aromatic|skos:exactMatch|gc:AromaticBond|skos:exactMatch|https://w3id.org/chemrof|
+|chemrof:element_metallic_classification#Metallic|Metallic|skos:exactMatch|damlpt:Metallic|skos:exactMatch|https://w3id.org/chemrof|
+|chemrof:nanostructure_morphology_enum#nanotube|nanotube|skos:exactMatch|CHEBI:50796|skos:exactMatch|https://w3id.org/chemrof|
+|chemrof:periodic_table_block_enum#s-block|s-block|skos:exactMatch|CHEBI:33674|skos:exactMatch|https://w3id.org/chemrof|
+|chemrof:Enantiomer|enantiomer|skos:exactMatch|SIO:010777|skos:exactMatch|https://w3id.org/chemrof|
+
 
 ## Derived artefacts
 
 Currently the main derived artefacts of interest are:
 
- - [JSON Schema](https://github.com/chemkg/chemrof/tree/master/jsonschema)
- - [ShEx](https://github.com/chemkg/chemrof/tree/master/shex)
- - [Python dataclasses](https://github.com/chemkg/chemrof/tree/master/python)
+ - [JSON Schema](https://github.com/chemkg/chemrof/tree/master/schema/jsonschema)
+ - [ShEx](https://github.com/chemkg/chemrof/tree/master/schema/shex)
+ - [SHACL](https://github.com/chemkg/chemrof/tree/master/schema/shacl)
 
 With care, you also see:
 
- - [OWL](https://github.com/chemkg/chemrof/tree/master/owl) -- note this should be read as a meta-ontology by OBO people
+ - [OWL](https://github.com/chemkg/chemrof/tree/master/schema/owl) -- note this should be read as a meta-ontology by OBO people
 
 ## Comparison with CHEBI and Wikidata
 

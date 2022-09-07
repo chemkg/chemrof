@@ -14,6 +14,7 @@ CREATE TABLE acid_anion_grouping_class (
 CREATE TABLE amino_acid_sequence_interval (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -82,6 +83,7 @@ CREATE TABLE atomic_bond (
 CREATE TABLE "Bronsted_acid" (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -116,6 +118,7 @@ CREATE TABLE chemical_role (
 CREATE TABLE chemical_salt (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -136,6 +139,7 @@ CREATE TABLE chirality_center (
 CREATE TABLE copolymer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -156,6 +160,7 @@ CREATE TABLE copolymer (
 CREATE TABLE "DNA_sequence_interval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -169,6 +174,7 @@ CREATE TABLE "DNA_sequence_interval" (
 CREATE TABLE enantiomer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -189,6 +195,7 @@ CREATE TABLE enantiomer (
 CREATE TABLE functional_group (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -220,6 +227,7 @@ CREATE TABLE generalized_molecular_structure_class (
 CREATE TABLE glycan (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -236,6 +244,7 @@ CREATE TABLE glycan (
 CREATE TABLE imprecise_chemical_mixture (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -267,6 +276,7 @@ CREATE TABLE isomerase_reaction (
 CREATE TABLE lipid (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -288,6 +298,7 @@ CREATE TABLE location (
 CREATE TABLE macromolecule (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -321,6 +332,7 @@ CREATE TABLE mineral (
 CREATE TABLE moiety (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -333,6 +345,7 @@ CREATE TABLE moiety (
 CREATE TABLE molecular_anion (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -352,6 +365,7 @@ CREATE TABLE molecular_anion (
 CREATE TABLE molecular_cation (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -371,6 +385,7 @@ CREATE TABLE molecular_cation (
 CREATE TABLE molecular_complex (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -383,6 +398,7 @@ CREATE TABLE molecular_complex (
 CREATE TABLE molecular_component (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -405,6 +421,7 @@ CREATE TABLE molecular_derivative_grouping_class (
 CREATE TABLE molecular_species (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -421,6 +438,7 @@ CREATE TABLE molecular_species (
 CREATE TABLE molecular_subsequence (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -467,6 +485,7 @@ CREATE TABLE molecule_pairwise_similarity (
 CREATE TABLE monomer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -494,6 +513,7 @@ CREATE TABLE nanostructure (
 CREATE TABLE natural_product (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -510,6 +530,7 @@ CREATE TABLE natural_product (
 CREATE TABLE non_species_molecule (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -526,6 +547,7 @@ CREATE TABLE non_species_molecule (
 CREATE TABLE nucleotide_sequence_interval (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -539,6 +561,7 @@ CREATE TABLE nucleotide_sequence_interval (
 CREATE TABLE peptide (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -560,6 +583,7 @@ CREATE TABLE periodic_table_block (
 CREATE TABLE polyatomic_ion (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -579,6 +603,7 @@ CREATE TABLE polyatomic_ion (
 CREATE TABLE polymer_part (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -599,6 +624,7 @@ CREATE TABLE polymer_repeat_unit (
 CREATE TABLE protein (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -644,6 +670,7 @@ CREATE TABLE reaction_participant (
 CREATE TABLE "RNA_sequence_interval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -662,6 +689,7 @@ CREATE TABLE similarity (
 CREATE TABLE small_molecule (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -692,6 +720,7 @@ CREATE TABLE standard_inchi_object (
 CREATE TABLE stereoisomer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -708,6 +737,7 @@ CREATE TABLE stereoisomer (
 CREATE TABLE subatomic_particle (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -727,6 +757,7 @@ CREATE TABLE tanimoto_similarity (
 CREATE TABLE uncharged_molecule (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -744,6 +775,7 @@ CREATE TABLE uncharged_molecule (
 CREATE TABLE acid_base (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -764,6 +796,7 @@ CREATE TABLE acid_base (
 
 CREATE TABLE chemical_element (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -789,6 +822,7 @@ CREATE TABLE chemical_element (
 CREATE TABLE chemical_group (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -839,6 +873,7 @@ CREATE TABLE chemical_salt_grouping_class (
 CREATE TABLE ester (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -857,6 +892,7 @@ CREATE TABLE ester (
 
 CREATE TABLE fully_specified_atom (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -875,6 +911,7 @@ CREATE TABLE fully_specified_atom (
 CREATE TABLE homopolymer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -906,6 +943,7 @@ CREATE TABLE molecular_component_grouping_class (
 CREATE TABLE monomolecular_polymer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -926,6 +964,7 @@ CREATE TABLE monomolecular_polymer (
 
 CREATE TABLE nuclide (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -963,6 +1002,7 @@ CREATE TABLE racemic_mixture (
 	has_left_enantiomer TEXT NOT NULL, 
 	has_right_enantiomer TEXT NOT NULL, 
 	chirality_agnostic_form TEXT, 
+	"IUPAC_name" TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(has_left_enantiomer) REFERENCES enantiomer (id), 
 	FOREIGN KEY(has_right_enantiomer) REFERENCES enantiomer (id)
@@ -970,6 +1010,7 @@ CREATE TABLE racemic_mixture (
 
 CREATE TABLE radionuclide (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -987,6 +1028,7 @@ CREATE TABLE radionuclide (
 CREATE TABLE supramolecular_polymer (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1001,6 +1043,7 @@ CREATE TABLE supramolecular_polymer (
 
 CREATE TABLE uncharged_atom (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1275,6 +1318,7 @@ CREATE TABLE acid_base_conflation_class (
 CREATE TABLE allotrope (
 	id TEXT NOT NULL, 
 	name TEXT, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1293,6 +1337,7 @@ CREATE TABLE allotrope (
 
 CREATE TABLE atom_anion (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1311,6 +1356,7 @@ CREATE TABLE atom_anion (
 
 CREATE TABLE atom_cation (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1329,6 +1375,7 @@ CREATE TABLE atom_cation (
 
 CREATE TABLE isotope (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1356,6 +1403,7 @@ CREATE TABLE isotope (
 
 CREATE TABLE monoatomic_ion (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
@@ -1437,6 +1485,7 @@ CREATE TABLE monomolecular_polymer_has_submolecules (
 
 CREATE TABLE isobar (
 	id TEXT NOT NULL, 
+	"IUPAC_name" TEXT, 
 	is_radical BOOLEAN, 
 	has_chemical_role TEXT, 
 	inchi_string TEXT, 
