@@ -1,18 +1,22 @@
 id: https://w3id.org/chemrof
 name: chemrof
 title: Chemical Entities Mixtures and Reactions Ontological Framework
-description: |-
-  A data model for managing information about chemical entities, ranging from atoms
+description: 'A data model for managing information about chemical entities, ranging
+  from atoms
+
   through molecules to complex mixtures.
 
+
   Aspects of this have been cribbed from various sources including CHEBI, SIO,
+
   Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes
+
   are my own.
 
-  For full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).
+
+  For full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).'
 license: https://creativecommons.org/publicdomain/zero/1.0/
 version: 0.0.1
-
 prefixes:
   chemrof: https://w3id.org/chemrof/
   COB: http://purl.obolibrary.org/obo/COB_
@@ -27,7 +31,7 @@ prefixes:
   SIO: http://semanticscience.org/resource/SIO_
   PUBCHEM.ELEMENT: https://pubchem.ncbi.nlm.nih.gov/element/
   LANL.ELEMENT: https://periodic.lanl.gov/
-  bioptop: "http://purl.org/biotop/biotop.owl#"
+  bioptop: http://purl.org/biotop/biotop.owl#
   schema: http://schema.org/
   dcterms: http://purl.org/dc/terms/
   biolink: https://w3id.org/biolink/
@@ -49,2717 +53,2398 @@ prefixes:
   EC: https://enzyme.expasy.org/EC/
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   MI: http://purl.obolibrary.org/obo/MI_
-  glycosciencesdb: "https://bioregistry.io/glycosciencesdb:"
+  glycosciencesdb: 'https://bioregistry.io/glycosciencesdb:'
   pdg: https://pdgapi.lbl.gov/summaries/
-  
 default_prefix: chemrof
 default_range: string
-
 default_curi_maps:
-  - semweb_context
-  - idot_context
-  
+- semweb_context
+- idot_context
 imports:
-  - linkml:types
-
+- linkml:types
 classes:
-
-  domain entity:
+  DomainEntity:
     abstract: true
     description: A discrete, specific named entity in the domain of chemistry.
     slots:
-      - id
-      - name
-      - type
-        
-  physicochemical entity:
+    - id
+    - name
+    - type
+  PhysicochemicalEntity:
     abstract: true
-    description: A discrete chemical structure, material structure, or subatomic particle type
-    is_a: domain entity
-        
-  chemical entity:
-    is_a: physicochemical entity
+    description: A discrete chemical structure, material structure, or subatomic particle
+      type
+    is_a: DomainEntity
+  ChemicalEntity:
+    is_a: PhysicochemicalEntity
     aliases:
-      - specific chemical entity
-      - chemical
-      - chemical species
+    - specific chemical entity
+    - chemical
+    - chemical species
     abstract: true
-    description: >-
-      A discrete structure that is one or more atoms that can be described by a chemical formula.
+    description: A discrete structure that is one or more atoms that can be described
+      by a chemical formula.
     comments:
-      - Does not encompass chemical grouping classes, such as "amino acid". Use the class ChemicalGrouping for this.
-      - In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]
+    - Does not encompass chemical grouping classes, such as "amino acid". Use the
+      class ChemicalGrouping for this.
+    - In common chemical usage generic and specific chemical names (such as radical
+      or hydroxide ion) or chemical formulae refer either to a chemical species or
+      to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]
     mixins:
-      - owl class
+    - OwlClass
     slots:
-      - IUPAC name
-      - is radical
-      - has chemical role
-      - inchi string
-      - inchi chemical sublayer
-      - smiles string
-      - empirical formula      
+    - IUPAC_name
+    - is_radical
+    - has_chemical_role
+    - inchi_string
+    - inchi_chemical_sublayer
+    - smiles_string
+    - empirical_formula
     slot_usage:
-      inchi chemical sublayer:
+      inchi_chemical_sublayer:
         required: false
         recommended: true
     unique_keys:
       smiles:
         unique_key_slots:
-          - smiles string
+        - smiles_string
     mappings:
-      - CHEBI:24431
-      - CHEMINF:000000
-      - OntoRxn:ChemSpecies
-    exact_mappings:    
-      - SIO:010004
+    - CHEBI:24431
+    - CHEMINF:000000
+    - OntoRxn:ChemSpecies
+    exact_mappings:
+    - SIO:010004
     id_prefixes:
-      - CHEBI
-      - CHEMBL.COMPOUND
-      - DRUGBANK
-      - PUBCHEM.COMPOUND
-      - MESH
-      - HMDB
-      - INCHI
-      - INCHIKEY
-      - UNII
-      - KEGG
-      - SEED
-      - MetaNetX.chemical
-  
-  subatomic particle:
-    is_a: physicochemical entity
-    description: >-
-      A chemical entity below the granularity of an atom.
+    - CHEBI
+    - CHEMBL.COMPOUND
+    - DRUGBANK
+    - PUBCHEM.COMPOUND
+    - MESH
+    - HMDB
+    - INCHI
+    - INCHIKEY
+    - UNII
+    - KEGG
+    - SEED
+    - MetaNetX.chemical
+  SubatomicParticle:
+    is_a: PhysicochemicalEntity
+    description: A chemical entity below the granularity of an atom.
     mappings:
-      - COB:0000007
-      - CHEBI:36342
+    - COB:0000007
+    - CHEBI:36342
     id_prefixes:
-      - wd
-      - PDG
-      - CHEBI
+    - wd
+    - PDG
+    - CHEBI
     slots:
-      - subatomic particle type
-  
-  owl class:
+    - subatomic_particle_type
+  OwlClass:
     aliases:
-      - species
-      - metaclass
-      - second order class
+    - species
+    - metaclass
+    - second order class
     mixin: true
-    description: >-
-      instances of this class mixin are OWL Classes
+    description: instances of this class mixin are OWL Classes
     class_uri: owl:Class
     close_mappings:
-      - skos:Concept
+    - skos:Concept
     exact_mappings:
-      - wd:Q24017414 ## second-order class
+    - wd:Q24017414
     slots:
-      - owl subclass of
-
-  grouping class:
+    - owl_subclass_of
+  GroupingClass:
     abstract: true
     mixins:
-      - owl class
-    description: >-
-      Instances of this class represent generic  concepts that can be used to group more specific concepts, or to classify entities
+    - OwlClass
+    description: Instances of this class represent generic  concepts that can be used
+      to group more specific concepts, or to classify entities
     slots:
-      - id
-      - name
-      - subtype of
+    - id
+    - name
+    - subtype_of
     slot_usage:
-      subtype of:
-        range: grouping class
-
-  physicochemical entity grouping class:
-    is_a: grouping class
+      subtype_of:
+        range: GroupingClass
+  PhysicochemicalEntityGroupingClass:
+    is_a: GroupingClass
     abstract: true
     slot_usage:
-      subtype of:
-        range: physicochemical entity grouping class
-        
-  chemical grouping class:
-    is_a: physicochemical entity grouping class
+      subtype_of:
+        range: PhysicochemicalEntityGroupingClass
+  ChemicalGroupingClass:
+    is_a: PhysicochemicalEntityGroupingClass
     abstract: true
     mixins:
-      - owl class
-    description: >-
-      Instances of this class represent generic chemical concepts that can be used to group more specific concepts, or to classify entities. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
+    - OwlClass
+    description: Instances of this class represent generic chemical concepts that
+      can be used to group more specific concepts, or to classify entities. For example
+      "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping
+      for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
     slots:
-      - id
+    - id
     slot_usage:
-      subtype of:
-        range: chemical grouping class
+      subtype_of:
+        range: ChemicalGroupingClass
       classifies:
-        range: chemical entity
-
-  reaction grouping class:
-    is_a: grouping class
-    description: >-
-      A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
+        range: ChemicalEntity
+  ReactionGroupingClass:
+    is_a: GroupingClass
+    description: A grouping class for reactions, for example, dehalogenase; breaking
+      of covalent bond
     id_prefixes:
-      - KEGG.REACTION
-      - GO
-      - MetaCyc
-      - EC   ## levels 1-3
-      - RXNO
-      - MOP
+    - KEGG.REACTION
+    - GO
+    - MetaCyc
+    - EC
+    - RXNO
+    - MOP
     slot_usage:
-      subtype of:
-        range: reaction grouping class
+      subtype_of:
+        range: ReactionGroupingClass
       classifies:
-        range: reaction
-        
-  material grouping class:
-    is_a: physicochemical entity grouping class
-    description: >-
-      A grouping class that classifies materials
+        range: Reaction
+  MaterialGroupingClass:
+    is_a: PhysicochemicalEntityGroupingClass
+    description: A grouping class that classifies materials
     examples:
-      - value: MREO
-        description: mixed rare earth oxides
+    - value: MREO
+      description: mixed rare earth oxides
     slot_usage:
-      subtype of:
-        range: material grouping class
+      subtype_of:
+        range: MaterialGroupingClass
       classifies:
-        range: material
-      
-  chemical grouping by charge:
-    is_a: chemical grouping class
-    description: >-
-      A grouping class that refines a charge-neutral entity
+        range: Material
+  ChemicalGroupingByCharge:
+    is_a: ChemicalGroupingClass
+    description: A grouping class that refines a charge-neutral entity
     slot_usage:
-      subtype of:
-        range: molecule grouping class
-        description: >-
-          grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes
-      has charge state:
+      subtype_of:
+        range: MoleculeGroupingClass
+        description: grouping classes can be arranged in hierarchies arbitrarily deep.
+          Note that subtype_of should only connect two grouping classes
+      has_charge_state:
         range: uriorcurie
-      charge agnostic entity:
-        range: chemical entity
+      charge_agnostic_entity:
+        range: ChemicalEntity
     examples:
-      - value: copper cation
-        
-  molecule grouping class:
-    is_a: chemical grouping class
-    description: >-
-      A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide
+    - value: copper cation
+  MoleculeGroupingClass:
+    is_a: ChemicalGroupingClass
+    description: 'A grouping class that classifies molecules. Example: carbohydrate,
+      monosaccharide, amino acid, polyacrylamide'
     comments:
-      - Unlike an actual molecule, a molecule grouping class will not have an inchi or properties such as mass
-      - Molecular grouping classes are typically defined by elemental composition and structure as well as chemical properties
+    - Unlike an actual molecule, a molecule grouping class will not have an inchi
+      or properties such as mass
+    - Molecular grouping classes are typically defined by elemental composition and
+      structure as well as chemical properties
     slot_usage:
-      subtype of:
-        range: molecule grouping class
-        description: >-
-          grouping classes can be arranged in hierarchies arbitrarily deep. Note that subtype_of should only connect two grouping classes
+      subtype_of:
+        range: MoleculeGroupingClass
+        description: grouping classes can be arranged in hierarchies arbitrarily deep.
+          Note that subtype_of should only connect two grouping classes
       classifies:
-        range: molecule
+        range: Molecule
     examples:
-      - value: nucleobase
-          
-  molecular component grouping class:
-    is_a: chemical grouping class
-    description: >-
-      A grouping class that classifies molecular components. Example: inorganic anion group
+    - value: nucleobase
+  MolecularComponentGroupingClass:
+    is_a: ChemicalGroupingClass
+    description: 'A grouping class that classifies molecular components. Example:
+      inorganic anion group'
     slot_usage:
-      subtype of:
-        range: molecular component grouping class
+      subtype_of:
+        range: MolecularComponentGroupingClass
       classifies:
-        range: molecular component
-          
-  molecular derivative grouping class:
-    is_a: molecule grouping class
-    description: A grouping class defined as a derivative of another molecule or molecular grouping class
+        range: MolecularComponent
+  MolecularDerivativeGroupingClass:
+    is_a: MoleculeGroupingClass
+    description: A grouping class defined as a derivative of another molecule or molecular
+      grouping class
     slots:
-      - derivative of
+    - derivative_of
     slot_usage:
       name:
-        string_serialization: "{derivative_of.label} derivative"
+        string_serialization: '{derivative_of.label} derivative'
       classifies:
-        range: molecule
+        range: Molecule
     defining_slots:
-      - derivative of
+    - derivative_of
     examples:
-      - value: oxoacid derivative
-      - value: D-ornithine derivative
-          
-  molecule grouping class defined by components:
-    is_a: molecule grouping class
+    - value: oxoacid derivative
+    - value: D-ornithine derivative
+  MoleculeGroupingClassDefinedByComponents:
+    is_a: MoleculeGroupingClass
     description: A grouping class defined as an exhaustive list of components
     slots:
-      - has part
+    - has_part
     slot_usage:
-      has part:
-        range: chemical entity or grouping
+      has_part:
+        range: ChemicalEntityOrGrouping
     defining_slots:
-      - has part
+    - has_part
     examples:
-      - value: nucleoside
-        description: A nucleoside consists of a nucleobase and a five-carbon sugar (ribose or 2-deoxyribose)
-      - value: nucleotide
-        description: a nucleotide is composed of a nucleobase, a five-carbon sugar, and one or more phosphate groups
-          
-  molecule grouping class defined by addition of a group:
-    is_a: molecule grouping class
-    description: A grouping class defined in terms of a derivative of a molecule and the addition of a group
+    - value: nucleoside
+      description: A nucleoside consists of a nucleobase and a five-carbon sugar (ribose
+        or 2-deoxyribose)
+    - value: nucleotide
+      description: a nucleotide is composed of a nucleobase, a five-carbon sugar,
+        and one or more phosphate groups
+  MoleculeGroupingClassDefinedByAdditionOfAGroup:
+    is_a: MoleculeGroupingClass
+    description: A grouping class defined in terms of a derivative of a molecule and
+      the addition of a group
     slot_usage:
-      has group:
-        range: chemical group
-      derivative of:
-        range: polyatomic entity
+      has_group:
+        range: ChemicalGroup
+      derivative_of:
+        range: PolyatomicEntity
     defining_slots:
-      - has group
-      - derivative of
+    - has_group
+    - derivative_of
     examples:
-      - value: acetyl xylan
-          
-  chemical salt grouping class:
-    is_a: molecule grouping class
+    - value: acetyl xylan
+  ChemicalSaltGroupingClass:
+    is_a: MoleculeGroupingClass
     description: A grouping class for a chemical salt
     slots:
-      - has anionic component
-      - has cationic component
+    - has_anionic_component
+    - has_cationic_component
     slot_usage:
       name:
-        string_serialization: "{has cationic component} {has anionic component}"
+        string_serialization: '{has cationic component} {has anionic component}'
       classifies:
-        range: chemical salt
+        range: ChemicalSalt
     defining_slots:
-      - has anionic component
-      - has cationic component
+    - has_anionic_component
+    - has_cationic_component
     examples:
-      - value: sodium chloride
-          
-  chemical salt by cation:
-    is_a: chemical salt grouping class
+    - value: sodium chloride
+  ChemicalSaltByCation:
+    is_a: ChemicalSaltGroupingClass
     description: A grouping class for a chemical salt named by cation
     slots:
-      - has cationic component
+    - has_cationic_component
     slot_usage:
       name:
-        string_serialization: "{has cationic component} salt"
+        string_serialization: '{has cationic component} salt'
     defining_slots:
-      - has cationic component
+    - has_cationic_component
     examples:
-      - value: sodium salt
-          
-  chemical salt by anion:
-    is_a: chemical salt grouping class
+    - value: sodium salt
+  ChemicalSaltByAnion:
+    is_a: ChemicalSaltGroupingClass
     description: A grouping class for a chemical salt named by anion
     slots:
-      - has anionic component
+    - has_anionic_component
     slot_usage:
       name:
-        string_serialization: "{has anionic component} salt"
+        string_serialization: '{has anionic component} salt'
     defining_slots:
-      - has anionic component
+    - has_anionic_component
     examples:
-      - value: chloride salt
-          
-  generalized molecular structure class:
-    is_a: molecule grouping class
-    description: >-
-      A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
+    - value: chloride salt
+  GeneralizedMolecularStructureClass:
+    is_a: MoleculeGroupingClass
+    description: A molecule grouping class that can be written using a chemical formula
+      using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2),
+      plus optionally constraints on those variables (e.g. n>3). An example is alkane;
+      CnH2n+2, which groups specific molecules such as methane
     examples:
-      - value: monosaccharide
-
-  monomeric polymeric grouping class:
-    is_a: generalized molecular structure class
+    - value: monosaccharide
+  MonomericPolymericGroupingClass:
+    is_a: GeneralizedMolecularStructureClass
     slots:
-      - has repeat unit
+    - has_repeat_unit
     examples:
-      - value: polynucleotide
-        description: A polynucleotide molecule is a biopolymer composed of 13 or more nucleotide monomers covalently bonded in a chain
-      
-  grouping class for acids or bases:
+    - value: polynucleotide
+      description: A polynucleotide molecule is a biopolymer composed of 13 or more
+        nucleotide monomers covalently bonded in a chain
+  GroupingClassForAcidsOrBases:
     abstract: true
-    is_a: molecule grouping class
+    is_a: MoleculeGroupingClass
     slots:
-      - conjugate base of
-      - conjugate acid of
-    
-  acid anion grouping class:
-    is_a: grouping class for acids or bases
-    description: >-
-      A molecule grouping class that groups the different ion forms of the base of an acid
+    - conjugate_base_of
+    - conjugate_acid_of
+  AcidAnionGroupingClass:
+    is_a: GroupingClassForAcidsOrBases
+    description: A molecule grouping class that groups the different ion forms of
+      the base of an acid
     slot_usage:
       name:
-        pattern: "ate$"
+        pattern: ate$
     defining_slots:
-      - conjugate base of
+    - conjugate_base_of
     examples:
-      - value: citrate
-      - value: pimelate
-        
-  general acid base grouping class:
-    is_a: grouping class for acids or bases
-    description: >-
-      A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    - value: citrate
+    - value: pimelate
+  GeneralAcidBaseGroupingClass:
+    is_a: GroupingClassForAcidsOrBases
+    description: A molecule grouping class that can groups an acid together with all
+      its conjugate bases. physiological
     examples:
-      - value: tricarboxylic acid/tricarboxylic acid anion
-    
-  acid base conflation class:
-    is_a: grouping class for acids or bases
-    description: >-
-      A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
+    - value: tricarboxylic acid/tricarboxylic acid anion
+  AcidBaseConflationClass:
+    is_a: GroupingClassForAcidsOrBases
+    description: A molecule grouping class that can groups an acid together with all
+      its conjugate bases. physiological
     examples:
-      - value: citrate/citric acid
+    - value: citrate/citric acid
     slot_usage:
-      has physiological base:
-        description: >-
-          The base which defs this conflation class
-        
-  atom grouping class:
-    is_a: chemical grouping class
-    description: >-
-      A grouping class that classifies atoms. For example, metal atom
+      has_physiological_base:
+        description: The base which defs this conflation class
+  AtomGroupingClass:
+    is_a: ChemicalGroupingClass
+    description: A grouping class that classifies atoms. For example, metal atom
     slot_usage:
-      subtype of:
-        range: molecule grouping class
+      subtype_of:
+        range: MoleculeGroupingClass
       classifies:
-        range: atom
-
-  atom grouping by periodic table placement:
-    is_a: atom grouping class
+        range: Atom
+  AtomGroupingByPeriodicTablePlacement:
+    is_a: AtomGroupingClass
     abstract: true
-
-  atom grouping by periodic table group:
-    description: >-
-      Example: p-block atom
-    is_a: atom grouping by periodic table placement
+  AtomGroupingByPeriodicTableGroup:
+    description: 'Example: p-block atom'
+    is_a: AtomGroupingByPeriodicTablePlacement
     slots:
-      - in periodic table group
+    - in_periodic_table_group
     defining_slots:
-      - in periodic table group
-
-  atom grouping by periodic table block:
-    description: >-
-      Example: group 13 atom
-    is_a: atom grouping by periodic table placement
+    - in_periodic_table_group
+  AtomGroupingByPeriodicTableBlock:
+    description: 'Example: group 13 atom'
+    is_a: AtomGroupingByPeriodicTablePlacement
     slots:
-      - in periodic table block
+    - in_periodic_table_block
     defining_slots:
-      - in periodic table block
-
-  atom grouping by property:
-    is_a: atom grouping class
-    description: >-
-      Example: metal atom
-
-  material:
-    is_a: physicochemical entity
-    description: >-
-      A substance composed of repeated chemical units that has a specific arrangement of atoms or molecules.
+    - in_periodic_table_block
+  AtomGroupingByProperty:
+    is_a: AtomGroupingClass
+    description: 'Example: metal atom'
+  Material:
+    is_a: PhysicochemicalEntity
+    description: A substance composed of repeated chemical units that has a specific
+      arrangement of atoms or molecules.
     notes:
-      - >-
-        this is intentionally placed outside the chemical entity hierarchy as the concept encompasses more than the chemical structure.
+    - this is intentionally placed outside the chemical entity hierarchy as the concept
+      encompasses more than the chemical structure.
     slots:
-      - has repeat unit
+    - has_repeat_unit
     slot_usage:
-      has part:
-        range: chemical entity
-
-  nanomaterial:
-    is_a: material
-    description: >-
-      A material of which a single unit is sized (in at least one dimension) between 1 and 100 nm
+      has_part:
+        range: ChemicalEntity
+  Nanomaterial:
+    is_a: Material
+    description: A material of which a single unit is sized (in at least one dimension)
+      between 1 and 100 nm
     source: https://en.wikipedia.org/wiki/Nanomaterials
     defining_slots:
-      - has repeat unit
-      - has morphological category
+    - has_repeat_unit
+    - has_morphological_category
     slot_usage:
-      has morphological category:
-        range: nanostructure_morphology_enum
-        description: >-
-          e.g. rod, sheet
+      has_morphological_category:
+        range: NanostructureMorphologyEnum
+        description: e.g. rod, sheet
     examples:
-      - value: Zinc oxide (ZnO) nanorod
-        description: A nanomaterial that has rod morphology and is composed of zinc oxide
-      - value: platinum copper nanoparticle
-        description: A nanomaterial that is made from platinum and copper atoms
-
-  mineral:
-    is_a: material
-
-
-  chemical entity or grouping:
+    - value: Zinc oxide (ZnO) nanorod
+      description: A nanomaterial that has rod morphology and is composed of zinc
+        oxide
+    - value: platinum copper nanoparticle
+      description: A nanomaterial that is made from platinum and copper atoms
+  Mineral:
+    is_a: Material
+  ChemicalEntityOrGrouping:
     mixin: true
     union_of:
-      - chemical entity
-      - chemical entity grouping class
-      
-  connectivity:
-    description: Abstract grouping for slots that related chemical entities via a connectivity relationships
+    - ChemicalEntity
+    - chemical entity grouping class
+  Connectivity:
+    description: Abstract grouping for slots that related chemical entities via a
+      connectivity relationships
     mixin: true
     abstract: true
-
-  fully covalently bonded:
-    is_a: connectivity
+  FullyCovalentlyBonded:
+    is_a: Connectivity
     mixin: true
-    description: >-
-      All pairs of atoms in this entity are transitively connected via covalent bonds
-    
-  weakly bonded:
-    is_a: connectivity
+    description: All pairs of atoms in this entity are transitively connected via
+      covalent bonds
+  WeaklyBonded:
+    is_a: Connectivity
     mixin: true
-    description: >-
-      Not covalently bonded
-    
-  state:
+    description: Not covalently bonded
+  State:
     mixin: true
     abstract: true
-    
-  charge state:
+  ChargeState:
     mixin: true
-    is_a: state
-    description: >-
-      Applies to entities that have a charge state, which may be positive, negative, or neutral
+    is_a: State
+    description: Applies to entities that have a charge state, which may be positive,
+      negative, or neutral
     slots:
-      - elemental charge
+    - elemental_charge
     mappings:
-      - CHEMINF:000120
+    - CHEMINF:000120
     union_of:
-      - uncharged
-      - charged
-
-  anion state:
+    - Uncharged
+    - Charged
+  AnionState:
     mixin: true
-    is_a: charged
+    is_a: Charged
     aliases:
-      - negatively charged state
-    description: >-
-      This mixin is applied on an entity (atom or molecule) that is negatively charged
+    - negatively charged state
+    description: This mixin is applied on an entity (atom or molecule) that is negatively
+      charged
     slot_usage:
-      elemental charge:
+      elemental_charge:
         maximum_value: -1
     mappings:
-      - CHEMINF:000403
-
-  cation state:
+    - CHEMINF:000403
+  CationState:
     mixin: true
-    is_a: charged
+    is_a: Charged
     aliases:
-      - positively charged state
-    description: >-
-      This mixin is applied on an entity (atom or molecule) that is positively charged
+    - positively charged state
+    description: This mixin is applied on an entity (atom or molecule) that is positively
+      charged
     slot_usage:
-      elemental charge:
+      elemental_charge:
         minimum_value: 1
     mappings:
-      - CHEMINF:000402
-
-  uncharged:
+    - CHEMINF:000402
+  Uncharged:
     mixin: true
     aliases:
-      - neutral charge
-    is_a: charge state
-    description: >-
-      Applies to entities that are uncharged, i.e. have an elemental charge of zero
+    - neutral charge
+    is_a: ChargeState
+    description: Applies to entities that are uncharged, i.e. have an elemental charge
+      of zero
     slot_usage:
-      elemental charge:
+      elemental_charge:
         minimum_value: 0
         maximum_value: 0
-        equals_expression: "0"
+        equals_expression: '0'
     mappings:
-      - CHEMINF:000401
-
-  charged:
+    - CHEMINF:000401
+  Charged:
     mixin: true
     aliases:
-      - ion
-      - ionic state
-    is_a: charge state
-    description: >-
-      Applies to entities that are charged, either positive or negative
+    - ion
+    - ionic state
+    is_a: ChargeState
+    description: Applies to entities that are charged, either positive or negative
     union_of:
-      - anion state
-      - cation state
-
-  polyatomic entity:
-    is_a: chemical entity
+    - AnionState
+    - CationState
+  PolyatomicEntity:
+    is_a: ChemicalEntity
     abstract: true
-    description: >-
-      Any chemical entity consisting of more than one atom.
+    description: Any chemical entity consisting of more than one atom.
     slots:
-      - inchi atom connections sublayer
+    - inchi_atom_connections_sublayer
     slot_usage:
-      inchi atom connections sublayer:
+      inchi_atom_connections_sublayer:
         required: false
         recommended: true
-
-  small molecule:
-    is_a: molecule
-    description: >-
-      A molecule characterized by availability in small-molecule databases
-      
-  macromolecule:
-    is_a: molecule
-    description: >-
-      A large molecule, such as a polymer, lipid, or macrocycle
+  SmallMolecule:
+    is_a: Molecule
+    description: A molecule characterized by availability in small-molecule databases
+  Macromolecule:
+    is_a: Molecule
+    description: A large molecule, such as a polymer, lipid, or macrocycle
     exact_mappings:
-      - Wikipedia:Macromolecule
+    - Wikipedia:Macromolecule
     slot_usage:
-      has submolecules:
-        range: molecule
+      has_submolecules:
+        range: Molecule
     comments:
-      - check on classification of lipids
-
-  lipid:
-    is_a: macromolecule
+    - check on classification of lipids
+  Lipid:
+    is_a: Macromolecule
     id_prefixes:
-      - LIPIDMAPS
-      - SWISSLIPID
-      - LIPIDBANK
+    - LIPIDMAPS
+    - SWISSLIPID
+    - LIPIDBANK
     examples:
-      - value: LIPIDMAPS:LMPR0102010012
-        description: "(-)-Citronellol"
-      
-  molecular complex:
+    - value: LIPIDMAPS:LMPR0102010012
+      description: (-)-Citronellol
+  MolecularComplex:
     aliases:
-      - poly molecular composite entity
-      - complex of molecular entities
-      - molecule complex ## biotop
-    is_a: precise chemical mixture
-    description: >-
-      A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex
+    - poly molecular composite entity
+    - complex of molecular entities
+    - molecule complex
+    is_a: PreciseChemicalMixture
+    description: 'A molecular complex is a chemical complex composed of at least one
+      weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA,
+      protein-containing macromolecular complex'
     comments:
-      - In bioptop, molecule complex is a sibling of structured biological entity under poly molecular composite entity
-      - In SIO, molecular complex is an only child of chemical complex, which is under chemical substance. chemical complex is defined as A chemical complex is a chemical substance composed of a weakly connected molecules and ions in a known stoichiometry.
+    - In bioptop, molecule complex is a sibling of structured biological entity under
+      poly molecular composite entity
+    - In SIO, molecular complex is an only child of chemical complex, which is under
+      chemical substance. chemical complex is defined as A chemical complex is a chemical
+      substance composed of a weakly connected molecules and ions in a known stoichiometry.
     exact_mappings:
-      - biotop:MoleculeComplex
-      - SIO:010506
-      - COB:0000080
-      
-  peptide:
-    is_a: macromolecule
-
-  protein:
-    is_a: macromolecule
+    - biotop:MoleculeComplex
+    - SIO:010506
+    - COB:0000080
+  Peptide:
+    is_a: Macromolecule
+  Protein:
+    is_a: Macromolecule
     id_prefixes:
-      - UniProtKB
-      - PR
-      
-  glycan:
-    is_a: macromolecule
+    - UniProtKB
+    - PR
+  Glycan:
+    is_a: Macromolecule
     aliases:
-      - polysaccharides ## IUPAC
-    description: >-
-      A macromolecule consisting of a large number of monosaccharides linked glycosidically
+    - polysaccharides
+    description: A macromolecule consisting of a large number of monosaccharides linked
+      glycosidically
     comments:
-      - Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans
+    - Glycans composed of a single type of monosaccharide residue (homopolysaccharide,
+      synonym homoglycan) are named by replacing the ending '-ose' of the sugar by
+      '-an', e.g. mannans, fructans, xylans, arabinans
     id_prefixes:
-      - KEGG.GLYCAN
-      - GlyTouCan
-      - glycosciencesdb
+    - KEGG.GLYCAN
+    - GlyTouCan
+    - glycosciencesdb
     examples:
-      - value: https://www.glycoepitope.jp/epitopes/EP0311
-        description: GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)
-
-  monomolecular polymer:
-    is_a: macromolecule
+    - value: https://www.glycoepitope.jp/epitopes/EP0311
+      description: GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)
+  MonomolecularPolymer:
+    is_a: Macromolecule
     aliases:
-      - polymer
-      - oligo or polymer
-    description: >-
-      A macromolecule composed of repeating subunits. Examples: cellulose
+    - polymer
+    - oligo or polymer
+    description: 'A macromolecule composed of repeating subunits. Examples: cellulose'
     slots:
-      - polymer of
-      - has repeat unit
-      - is branched
-      - polymer architecture type
+    - polymer_of
+    - has_repeat_unit
+    - is_branched
+    - polymer_architecture_type
     exact_mappings:
-      - wd:Q81163
-      
-  supramolecular polymer:
-    is_a: molecular complex
-    description: >-
-      polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds
+    - wd:Q81163
+  SupramolecularPolymer:
+    is_a: MolecularComplex
+    description: "polymeric arrays of monomeric units that are connected by reversible\
+      \ and highly directional secondary interactions\u2013that is, non-covalent bonds"
     slots:
-      - polymer of
-      - has repeat unit
+    - polymer_of
+    - has_repeat_unit
     exact_mappings:
-      - Wikipedia:Supramolecular_polymer
-    
-  copolymer:
+    - Wikipedia:Supramolecular_polymer
+  Copolymer:
     aliases:
-      - heteropolymer
-    is_a: monomolecular polymer
-    description: >-
-      a polymer with a more than one type of repeating unit
+    - heteropolymer
+    is_a: MonomolecularPolymer
+    description: a polymer with a more than one type of repeating unit
     slot_usage:
-      polymer of:
+      polymer_of:
         multivalued: true
     examples:
-      - value: PEVA
-      - value: styrene-butadiene rubber
-        description: The repeat units based on styrene and 1,3-butadiene form two repeating units, which can alternate in any order in the macromolecule, making the polymer thus a random copolymer.
-    
-  homopolymer:
-    is_a: monomolecular polymer
-    description: >-
-      a polymer with a single type of repeating unit
+    - value: PEVA
+    - value: styrene-butadiene rubber
+      description: The repeat units based on styrene and 1,3-butadiene form two repeating
+        units, which can alternate in any order in the macromolecule, making the polymer
+        thus a random copolymer.
+  Homopolymer:
+    is_a: MonomolecularPolymer
+    description: a polymer with a single type of repeating unit
     slot_usage:
-      polymer of:
+      polymer_of:
         multivalued: false
     examples:
-      - value: polystyrene
-        description: composed only of styrene-based repeat units
-    
-  molecular component:
+    - value: polystyrene
+      description: composed only of styrene-based repeat units
+  MolecularComponent:
     aliases:
-      - molecular part
-      - submolecule
-    is_a: polyatomic entity
-    description: >-
-      A proper part of a molecule that is larger than an atom
-
-  # TODO: replace with roles
-  polymer part:
-    is_a: molecular component
-  
-  monomer:
+    - molecular part
+    - submolecule
+    is_a: PolyatomicEntity
+    description: A proper part of a molecule that is larger than an atom
+  PolymerPart:
+    is_a: MolecularComponent
+  Monomer:
     aliases:
-      - momomer species
-    is_a: polymer part
-      
-  molecular subsequence:
-    is_a: polymer part
-      
-  chemical group:
+    - momomer species
+    is_a: PolymerPart
+  MolecularSubsequence:
+    is_a: PolymerPart
+  ChemicalGroup:
     aliases:
-      - group
-      - functional group
-      - chemical functional group
-    is_a: molecular component
-
-  chemical mixture:
+    - group
+    - FunctionalGroup
+    - chemical functional group
+    is_a: MolecularComponent
+  ChemicalMixture:
     abstract: true
-    is_a: polyatomic entity
-    description: >-
-      A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry
+    is_a: PolyatomicEntity
+    description: A polyatomic entity that consists of two or more parts that are weakly
+      bound, may be of known or unknown stoichiometry
     exact_mappings:
-      - CHEBI:60004
-    
-  precise chemical mixture:
+    - CHEBI:60004
+  PreciseChemicalMixture:
     aliases:
-      - chemical substance (SIO)
+    - chemical substance (SIO)
     abstract: true
-    is_a: chemical mixture
+    is_a: ChemicalMixture
     mixins:
-      - weakly bonded
-    description: >-
-      A polyatomic entity that consists of two or more parts that are weakly bound, and of known stoichiometry
+    - WeaklyBonded
+    description: A polyatomic entity that consists of two or more parts that are weakly
+      bound, and of known stoichiometry
     exact_mappings:
-      - SIO:011126
-      
-  imprecise chemical mixture:
+    - SIO:011126
+  ImpreciseChemicalMixture:
     aliases:
-      - portion of matter
-    is_a: chemical mixture
-    description: >-
-      A macroscopic polyatomic entity that consists of multiple chemical entities where the stoichiometry is not specified and the spatial arrangement of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste, organometallic compounds, heterogeneous metals
+    - portion of matter
+    is_a: ChemicalMixture
+    description: A macroscopic polyatomic entity that consists of multiple chemical
+      entities where the stoichiometry is not specified and the spatial arrangement
+      of the ingredients is not defined. Examples include coal, tea tree oil, toothpaste,
+      organometallic compounds, heterogeneous metals
     slots:
-      - has proportional parts
-      - has mixfile location
-      - has minchi representation
+    - has_proportional_parts
+    - has_mixfile_location
+    - has_minchi_representation
     comments:
-      - although the stoichiometry is not known rough percentage parts can be provided
+    - although the stoichiometry is not known rough percentage parts can be provided
     see_also:
-      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
+    - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
     examples:
-      - value: toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ... )
-      
-  molecule:
-    is_a: polyatomic entity
+    - value: toothpaste (sodium fluoride 0.243 w/v%[active] + H2O[inactive] + ...
+        )
+  Molecule:
+    is_a: PolyatomicEntity
     mixins:
-      - fully covalently bonded
+    - FullyCovalentlyBonded
     aliases:
-      - molecular entity
-      - monomolecular entity
-    description: >-
-      A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
+    - molecular entity
+    - monomolecular entity
+    description: A chemical entity that consists of two or more atoms where all atoms
+      are connected via covalent bonds.
     slots:
-      - has atom occurrences
-      - has bonds
-      - has submolecules
-      - has atoms
-      - is organic
+    - has_atom_occurrences
+    - has_bonds
+    - has_submolecules
+    - has_atoms
+    - is_organic
     slot_usage:
-      has atom occurrences:
+      has_atom_occurrences:
         minimum_cardinality: 2
-#      has bonds:
-#        aliases: ['adjacency matrix']
-#        description: >-
-#          The set of all bonds connecting atoms in a molecule
-      has part:
+      has_bonds:
+        aliases:
+        - adjacency matrix
+        description: The set of all bonds connecting atoms in a molecule
+      has_part:
         minimum_value: 1
     mappings:
-      - COB:0000013
+    - COB:0000013
     exact_mappings:
-      - SIO:011125
-      - biotop:MonoMolecularEntity
-      - gc:Molecule
+    - SIO:011125
+    - biotop:MonoMolecularEntity
+    - gc:Molecule
     examples:
-      - value: dioxygen
-      - value: cysteine
-      - value: phosphene
-
-  natural product:
-    is_a: molecule
-    
-  moiety:
-    is_a: molecular component
-    description: >-
-      a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
-
-  sequence interval:
-    is_a: molecular component
+    - value: dioxygen
+    - value: cysteine
+    - value: phosphene
+  NaturalProduct:
+    is_a: Molecule
+  Moiety:
+    is_a: MolecularComponent
+    description: a named part of a molecule. In some instances moieties may be composed
+      of yet smaller moieties and functional groups
+  SequenceInterval:
+    is_a: MolecularComponent
     abstract: true
     slots:
-      - has sequence representation
-    description: >-
-      a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence.
-    comments: >-
-      - includes an interval corresponding to the whole molecule as an edge case
-
-  amino acid sequence interval:
-    is_a: sequence interval
+    - has_sequence_representation
+    description: a chain of connected monomers in a linear polymer - for example,
+      a sub-region of an amino acid or nucleotide sequence.
+    comments: '- includes an interval corresponding to the whole molecule as an edge
+      case'
+  AminoAcidSequenceInterval:
+    is_a: SequenceInterval
     slot_usage:
-      has sequence representation:
-        range: amino acid sequence string
-
-  nucleotide sequence interval:
-    is_a: sequence interval
+      has_sequence_representation:
+        range: AminoAcidSequenceString
+  NucleotideSequenceInterval:
+    is_a: SequenceInterval
     slot_usage:
-      has sequence representation:
-        range: DNA sequence string
-        description: >-
-          By convention the sequence string is always the DNA sequence. For RNA intervals, this is the cDNA sequence
-      
-  DNA sequence interval:
-    is_a: nucleotide sequence interval
-      
-  RNA sequence interval:
-    is_a: nucleotide sequence interval
-      
-      
-  functional group:
-    is_a: molecular component
+      has_sequence_representation:
+        range: DNASequenceString
+        description: By convention the sequence string is always the DNA sequence.
+          For RNA intervals, this is the cDNA sequence
+  DNASequenceInterval:
+    is_a: NucleotideSequenceInterval
+  RNASequenceInterval:
+    is_a: NucleotideSequenceInterval
+  FunctionalGroup:
+    is_a: MolecularComponent
     slot_usage:
-      is substitutent group from:
-        range: molecule
-
-  molecular species:
-    is_a: molecule
-    description: >-
-      A molecule in which the units are identical. Example: methyl
-
-  non species molecule:
-    is_a: molecule
-    description: >-
-      A molecule in which the units are not identical. TODO: move this higher
-
-  polyatomic ion:
+      is_substitutent_group_from:
+        range: Molecule
+  MolecularSpecies:
+    is_a: Molecule
+    description: 'A molecule in which the units are identical. Example: methyl'
+  NonSpeciesMolecule:
+    is_a: Molecule
+    description: 'A molecule in which the units are not identical. TODO: move this
+      higher'
+  PolyatomicIon:
     aliases:
-      - polyatomic ion species
-    is_a: molecule
+    - polyatomic ion species
+    is_a: Molecule
     mixins:
-      - charged
+    - Charged
     slots:
-      - conjugate base of
-      - conjugate acid of
-    description: >-
-      A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
-
-  molecular cation:
-    is_a: polyatomic ion
+    - conjugate_base_of
+    - conjugate_acid_of
+    description: A molecule that has a charge. For example, nitrate is a molecular
+      and ionic species; its formula is (NO3-).
+  MolecularCation:
+    is_a: PolyatomicIon
     mixins:
-      - cation state
+    - CationState
     defining_slots:
-      - elemental charge
-    description: >-
-      A polyatomic ion that is positive
-      
-  molecular anion:
-    is_a: polyatomic ion
+    - elemental_charge
+    description: A polyatomic ion that is positive
+  MolecularAnion:
+    is_a: PolyatomicIon
     mixins:
-      - anion state
+    - AnionState
     defining_slots:
-      - elemental charge
-    description: >-
-      A polyatomic ion that is negative
-      
-  uncharged molecule:
-    is_a: molecule
+    - elemental_charge
+    description: A polyatomic ion that is negative
+  UnchargedMolecule:
+    is_a: Molecule
     mixins:
-      - uncharged   
-    description: >-
-      A molecule that has no charge
-      
-  atom:
-    is_a: chemical entity
+    - Uncharged
+    description: A molecule that has no charge
+  Atom:
+    is_a: ChemicalEntity
     abstract: true
     aliases:
-      - atomic species
-      - chemical species of an element
-    description: >-
-      A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it.
+    - atomic species
+    - chemical species of an element
+    description: A chemical entity consisting of exactly one atomic nucleus and the
+      electron(s) orbiting it.
     comments:
-      - chemical species of an element: Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859
+    - chemical species of an element: Specific form of an element defined as to isotopic
+        composition, electronic or oxidation state, and/or complex or molecular structure
+        https://goldbook.iupac.org/terms/view/CT06859
     slots:
-      - atomic number
-      - symbol
-      - name
-      - has nuclear parts
+    - atomic_number
+    - symbol
+    - name
+    - has_nuclear_parts
     slot_usage:
-      has part:
-        range: subatomic particle
+      has_part:
+        range: SubatomicParticle
     mappings:
-      - COB:0000011
-      - SIO:010044
-
-  chemical element:
-    is_a: partially specified atom
+    - COB:0000011
+    - SIO:010044
+  ChemicalElement:
+    is_a: PartiallySpecifiedAtom
     aliases:
-      - element
-      - generic atom
-    description: >-
-      generic form of an atom, with unspecified neutron or charge
+    - element
+    - generic atom
+    description: generic form of an atom, with unspecified neutron or charge
     defining_slots:
-      - atomic number
+    - atomic_number
     unique_keys:
       main:
         unique_key_slots:
-          - atomic number
+        - atomic_number
       mass:
         unique_key_slots:
-          - atomic number
+        - atomic_number
       periodic_table_position:
         unique_key_slots:
-          - in periodic table group
-          - in periodic table block
+        - in_periodic_table_group
+        - in_periodic_table_block
     slot_usage:
       symbol:
         aliases:
-          - atomic symbol
-        description: >-
-          E.g. O, K, Ge
-        pattern: "^[A-Z][a-z]*"
+        - atomic symbol
+        description: E.g. O, K, Ge
+        pattern: ^[A-Z][a-z]*
         exact_mappings:
-          - wd:P246
-      in periodic table group:
-        description: >-
-          which number in periodic table column
-        range: periodic table group
+        - wd:P246
+      in_periodic_table_group:
+        description: which number in periodic table column
+        range: PeriodicTableGroup
         exact_mappings:
-          - bo:group
-      in periodic table block:
-        description: >-
-          block of periodic table unified by the orbitals their valence electrons or vacancies lie in
-        range: periodic_table_block_enum
+        - bo:group
+      in_periodic_table_block:
+        description: block of periodic table unified by the orbitals their valence
+          electrons or vacancies lie in
+        range: PeriodicTableBlockEnum
         exact_mappings:
-          - bo:block
-      boiling point in celcius:
+        - bo:block
+      boiling_point_in_celcius:
         range: float
-      melting point in celcius:
+      melting_point_in_celcius:
         range: float
-      standard atomic weight:
+      standard_atomic_weight:
         range: float
       mass:
         range: float
-      monoisotopic mass:
+      monoisotopic_mass:
         range: float
-      electron configuration:
+      electron_configuration:
         range: string
-      has stereocenter:
-        range: stereocenter
+      has_stereocenter:
+        range: Stereocenter
         multivalued: true
-      has physiologically stable form:
-        description: connects an element to the equivalent form that is physiologically stable at pH 7.3
+      has_physiologically_stable_form:
+        description: connects an element to the equivalent form that is physiologically
+          stable at pH 7.3
         aliases:
-          - has Ph 7.3 mapping
+        - has Ph 7.3 mapping
         see_also:
-          - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
+        - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
     examples:
-      - value: carbon
-      - value: nickel
+    - value: carbon
+    - value: nickel
     see_also:
-      - https://en.wikipedia.org/wiki/Chemical_element
+    - https://en.wikipedia.org/wiki/Chemical_element
     exact_mappings:
-      - wd:Q11344
-      - gc:Element
-        
-  uncharged atom:
-    is_a: atom ionic form
+    - wd:Q11344
+    - gc:Element
+  UnchargedAtom:
+    is_a: AtomIonicForm
     mixins:
-      - uncharged   
-    description: >-
-      An atom type that has no charge
+    - Uncharged
+    description: An atom type that has no charge
     mappings:
-      - COB:0000043
-
-  nuclide:
+    - COB:0000043
+  Nuclide:
     aliases:
-      - nucleide
-      - nuclear species
-    is_a: partially specified atom
+    - nucleide
+    - nuclear species
+    is_a: PartiallySpecifiedAtom
     slots:
-      - energy level
-    description: >-
-      an atomic species characterized by the specific constitution of its nucleus
+    - energy_level
+    description: an atomic species characterized by the specific constitution of its
+      nucleus
     examples:
-      - value: https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m
-
-  radionuclide:
+    - value: https://en.wikipedia.org/wiki/Isotopes_of_tantalum#Tantalum-180m
+  Radionuclide:
     aliases:
-      - radioactive nuclide
-      - radioactive isotope
-    is_a: nuclide
-    description: >-
-      an atom that has excess nuclear energy, making it unstable
+    - radioactive nuclide
+    - radioactive isotope
+    is_a: Nuclide
+    description: an atom that has excess nuclear energy, making it unstable
     examples:
-      - value: radioactive isotope
-      
-  isotope:
-    is_a: nuclide
-    description: >-
-      A specific subtype of an atom with a specified neutron number
-    comments:
-      Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances.
+    - value: radioactive isotope
+  Isotope:
+    is_a: Nuclide
+    description: A specific subtype of an atom with a specified neutron number
+    comments: Wikidata has isotope as a subclass of nuclide, but nuclide has no instances
+      that are not isotope instances.
     slots:
-      - has element
-      - neutron number
-      - isotope of
-      - half life
-      - decay product
-      - decay mode
-      - decay energy
-      - mode of formation
+    - has_element
+    - neutron_number
+    - isotope_of
+    - half_life
+    - decay_product
+    - decay_mode
+    - decay_energy
+    - mode_of_formation
     defining_slots:
-      - has element
-      - neutron number
+    - has_element
+    - neutron_number
     examples:
-      - value: 1H (protium)
-      - value: 2H (deuterium)
-      - value: https://en.wikipedia.org/wiki/Carbon-12
-      - value: https://en.wikipedia.org/wiki/Actinium-225
+    - value: 1H (protium)
+    - value: 2H (deuterium)
+    - value: https://en.wikipedia.org/wiki/Carbon-12
+    - value: https://en.wikipedia.org/wiki/Actinium-225
     exact_mappings:
-      - wd:Q25276
-
-  isobar:
-    is_a: nuclide
-    description: >-
-      Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.
+    - wd:Q25276
+  Isobar:
+    is_a: Nuclide
+    description: Isobars are atoms (nuclides) of different chemical elements that
+      have the same number of nucleons.
     slots:
-      - has element
-      - nucleon number
-      - isobar of
-      - half life
-      - decay product
-      - decay mode
-      - decay energy
-      - mode of formation
+    - has_element
+    - nucleon_number
+    - isobar_of
+    - half_life
+    - decay_product
+    - decay_mode
+    - decay_energy
+    - mode_of_formation
     defining_slots:
-      - has element
-      - nucleon number
+    - has_element
+    - nucleon_number
     examples:
-      - value: isobar-40
-        description: "Any nuclide with a mass number of 40:  40S, 40Cl, 40Ar, 40K, and 40Ca"
-
-  atom ionic form:
+    - value: isobar-40
+      description: 'Any nuclide with a mass number of 40:  40S, 40Cl, 40Ar, 40K, and
+        40Ca'
+  AtomIonicForm:
     abstract: true
     aliases:
-      - atom ionic species
-    description: >-
-      an atom type in which only charge state is specified, designated by the element followed by charge
-    is_a: partially specified atom
+    - atom ionic species
+    description: an atom type in which only charge state is specified, designated
+      by the element followed by charge
+    is_a: PartiallySpecifiedAtom
     slots:
-      - elemental charge
+    - elemental_charge
     slot_usage:
-      elemental charge:
+      elemental_charge:
         todos:
-          - decide whether to permit this to have magnitude be unspecified, or whether to use a grouping class for this
+        - decide whether to permit this to have magnitude be unspecified, or whether
+          to use a grouping class for this
     examples:
-      - value: "chloride Cl-"
-
-  monoatomic ion:
-    aliases: ['charged atom']
-    is_a: atom ionic form
-    mixins:      
-      - charged
-    slots:
-      - has element
-    description: >-
-      An atom type that has a charge
-    mappings:
-      - COB:0000042
-      - CHEBI:24867
-    comments:
-      - this is mass-number neutral, so there can be no mass associated with a monatomic ion instance
-        
-  atom anion:
-    is_a: monoatomic ion
+    - value: chloride Cl-
+  MonoatomicIon:
+    aliases:
+    - charged atom
+    is_a: AtomIonicForm
     mixins:
-      - anion state
+    - Charged
+    slots:
+    - has_element
+    description: An atom type that has a charge
+    mappings:
+    - COB:0000042
+    - CHEBI:24867
+    comments:
+    - this is mass-number neutral, so there can be no mass associated with a monatomic
+      ion instance
+  AtomAnion:
+    is_a: MonoatomicIon
+    mixins:
+    - AnionState
     slot_usage:
-      elemental charge:
+      elemental_charge:
         maximum_value: -1
     defining_slots:
-      - elemental charge
-    description: >-
-      A monoatomic ion that is negative
-
-  atom cation:
-    is_a: monoatomic ion
+    - elemental_charge
+    description: A monoatomic ion that is negative
+  AtomCation:
+    is_a: MonoatomicIon
     mixins:
-      - cation state
+    - CationState
     slot_usage:
-      elemental charge:
+      elemental_charge:
         minimum_value: 1
     defining_slots:
-      - elemental charge
-    description: >-
-      A monoatomic ion that is positive, e.g Cu(2+)
-    ## TODO: do both hydron and proton go here?
+    - elemental_charge
+    description: A monoatomic ion that is positive, e.g Cu(2+)
     examples:
-      - value: Helium(2+)
-        description: 1S/He/q+2
-
-  partially specified atom:
+    - value: Helium(2+)
+      description: 1S/He/q+2
+  PartiallySpecifiedAtom:
     abstract: true
-    description: >-
-      An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated
-    is_a: atom
-        
-  fully specified atom:
-    description: >-
-      An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)
+    description: An atom type that only has a subset of properties (has atomic number,
+      charge, and neutron number) stated
+    is_a: Atom
+  FullySpecifiedAtom:
+    description: 'An atom type that has atomic number, charge, and neutron number
+      stated (equivalently: protons + mass + charge)'
     aliases:
-      - atomic species
-      - chemical species of an element
+    - atomic species
+    - chemical species of an element
     comments:
-      - "chemical species of an element: Specific form of an element defined as to isotopic composition, electronic or oxidation state, and/or complex or molecular structure https://goldbook.iupac.org/terms/view/CT06859"
-    is_a: atom
+    - 'chemical species of an element: Specific form of an element defined as to isotopic
+      composition, electronic or oxidation state, and/or complex or molecular structure
+      https://goldbook.iupac.org/terms/view/CT06859'
+    is_a: Atom
     slots:
-      - elemental charge
-      - neutron number
+    - elemental_charge
+    - neutron_number
     examples:
-      - value: Helium-4(2+)
-        description: The atom that is equivalent to an alpha particle 1S/He/q+2/i1+0
-
-
-  chemical information:
+    - value: Helium-4(2+)
+      description: The atom that is equivalent to an alpha particle 1S/He/q+2/i1+0
+  ChemicalInformation:
     abstract: true
-
-  periodic table placement:
+  PeriodicTablePlacement:
     abstract: true
-    is_a: chemical information
-
-
-    
-    
-  inchi object:
-    is_a: chemical information
-    description: >-
-      A representation of an InChI string as an object, composed of distinct sublayers
+    is_a: ChemicalInformation
+  InchiObject:
+    is_a: ChemicalInformation
+    description: A representation of an InChI string as an object, composed of distinct
+      sublayers
     abstract: true
     see_also:
-      - https://doi.org/10.1186/s13321-015-0068-4
-    
-  standard inchi object:
-    is_a: inchi object
+    - https://doi.org/10.1186/s13321-015-0068-4
+  StandardInchiObject:
+    is_a: InchiObject
     see_also:
-      - https://en.wikipedia.org/wiki/International_Chemical_Identifier
+    - https://en.wikipedia.org/wiki/International_Chemical_Identifier
     slots:
-      - inchi version string
-      - inchi chemical sublayer                  ## e.g. C8H1...
-      - inchi atom connections sublayer          ## e.g. c1-10-...
-      - inchi hydrogen connections sublayer      ## e.g. h4H,1-3H3...
-      - inchi charge sublayer                    ## e.g. q-1
-      - inchi proton sublayer                        ## e.g. p...
-      - inchi stereochemical double bond sublayer    ## e.g. b...
-      - inchi tetrahedral stereochemical sublayer    ## e.g. [tm] (stereochemical)
-      - inchi stereochemical type sublayer           ## e.g. s... (stereochemical)
-      - inchi isotopic layer                         ## e.g. i1+1
+    - inchi_version_string
+    - inchi_chemical_sublayer
+    - inchi_atom_connections_sublayer
+    - inchi_hydrogen_connections_sublayer
+    - inchi_charge_sublayer
+    - inchi_proton_sublayer
+    - inchi_stereochemical_double_bond_sublayer
+    - inchi_tetrahedral_stereochemical_sublayer
+    - inchi_stereochemical_type_sublayer
+    - inchi_isotopic_layer
     slot_usage:
-      inchi version string:
-        pattern: "^1S$"
-    
-  chemical relationship:
+      inchi_version_string:
+        pattern: ^1S$
+  ChemicalRelationship:
     abstract: true
     mixins:
-      - owl class
-    description: >-
-      A reified relationship
+    - OwlClass
+    description: A reified relationship
     close_mappings:
-      - biolink:Association
-
-  chemical role:
+    - biolink:Association
+  ChemicalRole:
     aliases:
-      - role
+    - role
     mixins:
-      - owl class
-    description: >-
-      A characteristic of a chemical entity that is realized under particular conditions
-      
-      
-  location:
+    - OwlClass
+    description: A characteristic of a chemical entity that is realized under particular
+      conditions
+  Location:
     abstract: true
-    description: Abstract grouping for entities that represent abstract or concrete locations of chemical entities or their parts.
-      
-  stereocenter:
-    is_a: location
+    description: Abstract grouping for entities that represent abstract or concrete
+      locations of chemical entities or their parts.
+  Stereocenter:
+    is_a: Location
     aliases:
-      - stereogenic center
-    description: >-
-      a geometric point in a molecule in which the interchanging of two substituents creates a stereoisomer.
+    - stereogenic center
+    description: a geometric point in a molecule in which the interchanging of two
+      substituents creates a stereoisomer.
     source: https://en.wikipedia.org/wiki/Stereocenter
-      
-  chirality center:
-    is_a: stereocenter
-    description: >-
-       a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
-    
-  atomic bond:
+  ChiralityCenter:
+    is_a: Stereocenter
+    description: 'a stereocenter consisting of an atom holding a set of ligands (atoms
+      or groups of atoms) in a spatial arrangement which is not superimposable on
+      its mirror image. '
+  AtomicBond:
     class_uri: gc:Bond
-    is_a: chemical relationship
+    is_a: ChemicalRelationship
     aliases:
-      - bond
-      - chemical bond
+    - bond
+    - chemical bond
     mixins:
-      - owl class
-    description: >-
-      A connection between two atoms. Note this is the reified form of 'atomically connected to'. 
+    - OwlClass
+    description: 'A connection between two atoms. Note this is the reified form of
+      ''atomically connected to''. '
     attributes:
       subject:
-        range: atom occurrence
+        range: AtomOccurrence
       object:
-        range: atom occurrence
-#      has atom occurrences:
-#        minimum_value: 2
-#        maximum_value: 2
-      bond type:
-        range: bond_type_enum
-      bond order:
-        description: >-
-          the number of electron pairs (bonds) between a pair of atoms
-        domain: atomic bond
+        range: AtomOccurrence
+      bond_type:
+        range: BondTypeEnum
+      bond_order:
+        description: the number of electron pairs (bonds) between a pair of atoms
+        domain: AtomicBond
         range: integer
-    
-      bond length:
-        description: >-
-          the average distance between nuclei of two bonded atoms in a molecule
-        domain: atomic bond
+      bond_length:
+        description: the average distance between nuclei of two bonded atoms in a
+          molecule
+        domain: AtomicBond
         range: float
-    
-      bond energy:
+      bond_energy:
         aliases:
-          - average bond enthalpy
-          - mean bond enthalpy
-        description: >-
-           the measure of bond strength in a chemical bond.
+        - average bond enthalpy
+        - mean bond enthalpy
+        description: the measure of bond strength in a chemical bond.
         range: float
-
-      bond length in angstroms:
-        description: >-
-          the average distance between nuclei of two bonded atoms in a molecule. It is a transferable property of a bond between atoms of fixed types, relatively independent of the rest of the molecule.
+      bond_length_in_angstroms:
+        description: the average distance between nuclei of two bonded atoms in a
+          molecule. It is a transferable property of a bond between atoms of fixed
+          types, relatively independent of the rest of the molecule.
         range: float
-      bond angle:
+      bond_angle:
         range: float
-      torsional angle:
+      torsional_angle:
         range: float
     mappings:
-      - CHEMINF:000063
-
-  subatomic particle occurrence:
-    is_a: chemical relationship
+    - CHEMINF:000063
+  SubatomicParticleOccurrence:
+    is_a: ChemicalRelationship
     mixins:
-      - owl class
+    - OwlClass
     attributes:
-      occurrence of:
-        range: subatomic particle
+      occurrence_of:
+        range: SubatomicParticle
         required: true
-      count:
+      Count:
         range: integer
-
-  atom occurrence:
-    is_a: chemical relationship
+  AtomOccurrence:
+    is_a: ChemicalRelationship
     mixins:
-      - owl class
-    description: >-
-      An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
+    - OwlClass
+    description: An occurrence of an atom in the context of a particular molecule.
+      For example, one of two occurrences of oxygen in nitrate
     attributes:
       name:
-        # key: true
         identifier: true
-      occurrence of:
-        range: atom
+      occurrence_of:
+        range: Atom
         required: true
       valence:
         aliases:
-          - atom valency
-          - valency
-        description: >-
-          the number of electrons that an atom uses in bonding
-          [https://doi.org/10.1021%2Fed083p791]
+        - atom valency
+        - valency
+        description: the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]
         comments:
-          - "forumla: number of electrons in valence shell of free atom – number of non-bonding electrons on atom in molecule"
-          - "forumla: number of bonds + formal charge"
-          - "example:  In methane, carbon has a valence of 4, and each hydrogen has a valency of 1"
-          - "example:  In in ammonia, nitrogen has a valence of 3, each each hydrogen has a valency of 1"
-          - "todo: determine if this is in CHEBI and how to map"
+        - "forumla: number of electrons in valence shell of free atom \u2013 number\
+          \ of non-bonding electrons on atom in molecule"
+        - 'forumla: number of bonds + formal charge'
+        - 'example:  In methane, carbon has a valence of 4, and each hydrogen has
+          a valency of 1'
+        - 'example:  In in ammonia, nitrogen has a valence of 3, each each hydrogen
+          has a valency of 1'
+        - 'todo: determine if this is in CHEBI and how to map'
         range: integer
-      oxidation number:
+      oxidation_number:
         aliases:
-          - oxidation
-          - oxidation state
+        - oxidation
+        - oxidation state
         exact_mappings:
-          - goldbook:O04363
-        description: >-
-          The charge remaining on an atom when all ligands are removed heterolytically in their closed form, with the electrons
-          being transferred to the more electronegative partner; homonuclear bonds do not contribute to the oxidation number.
-          [https://doi.org/10.1021%2Fed083p791]
+        - goldbook:O04363
+        description: The charge remaining on an atom when all ligands are removed
+          heterolytically in their closed form, with the electrons being transferred
+          to the more electronegative partner; homonuclear bonds do not contribute
+          to the oxidation number. [https://doi.org/10.1021%2Fed083p791]
         range: integer
-      formal charge:
+      formal_charge:
         aliases:
-          - charge
-        description: >-
-          The charge remaining on an atom when all ligands are removed homolytically.
-          [https://doi.org/10.1021%2Fed083p791]
+        - charge
+        description: The charge remaining on an atom when all ligands are removed
+          homolytically. [https://doi.org/10.1021%2Fed083p791]
         range: integer
-      coordination number:
+      coordination_number:
         aliases:
-          - coordination
-        description: >-
-          The number of atoms bonded to the atom of interest.
-          [https://doi.org/10.1021%2Fed083p791]
+        - coordination
+        description: The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]
         range: integer
-
-  Bronsted acid:
-    is_a: molecule
-    description: >-
-      A molecule capable of donating a hydron to an acceptor. Example: citric acid
+  BronstedAcid:
+    is_a: Molecule
+    description: 'A molecule capable of donating a hydron to an acceptor. Example:
+      citric acid'
     slot_usage:
       acidity:
         range: float
-      hard or soft:
-        range: hard_or_soft_enum
-      acid form of:
-        range: acid base
+      hard_or_soft:
+        range: HardOrSoftEnum
+      acid_form_of:
+        range: AcidBase
     exact_mappings:
-      - CHEBI:39141
-
-  acid base:
-    is_a: molecular anion
-    description: >-
-      A conugate base of an acid with charge specified. Example: citrate(3-)
+    - CHEBI:39141
+  AcidBase:
+    is_a: MolecularAnion
+    description: 'A conugate base of an acid with charge specified. Example: citrate(3-)'
     slot_usage:
-      has acid form:
-        range: Bronsted acid
-
-  # TODO
-  chemical salt:
-    is_a: precise chemical mixture
-    description: >-
-      a chemical compound consisting of an ionic assembly of cations and anions.
+      has_acid_form:
+        range: BronstedAcid
+  ChemicalSalt:
+    is_a: PreciseChemicalMixture
+    description: a chemical compound consisting of an ionic assembly of cations and
+      anions.
     examples:
-      - value: CHEBI:29377
-        description: sodium carbonate (has components sodium1+ and carbonate)
-      - description: metformin hydrochloride
+    - value: CHEBI:29377
+      description: sodium carbonate (has components sodium1+ and carbonate)
+    - description: metformin hydrochloride
     comments:
-      - in SIO falls under molecular complex? Also in biolink
+    - in SIO falls under molecular complex? Also in biolink
     slot_usage:
-      # TODO: strong/weak
-      elemental charge:
+      elemental_charge:
         minimum_value: 0
         maximum_value: 0
-      has cationic component:
-        range: cation state
-      has anionic component:
-        range: anion state
+      has_cationic_component:
+        range: CationState
+      has_anionic_component:
+        range: AnionState
     exact_mappings:
-      - SIO:001422
+    - SIO:001422
     see_also:
-      - https://github.com/MaastrichtU-IDS/semanticscience/issues/96
-      - https://www.drugs.com/article/pharmaceutical-salts.html
-
-  ester:
-    is_a: molecule
-    description: >-
-      An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group
+    - https://github.com/MaastrichtU-IDS/semanticscience/issues/96
+    - https://www.drugs.com/article/pharmaceutical-salts.html
+  Ester:
+    is_a: Molecule
+    description: "An ester is a chemical compound derived from an acid (organic or\
+      \ inorganic) in which at least one \u2013OH hydroxyl group is replaced by an\
+      \ \u2013O\u2013 alkyl (alkoxy) group"
     slot_usage:
-      has parent alcohol:
-        range: chemical entity
-      has parent acid:
-        range: Bronsted acid
+      has_parent_alcohol:
+        range: ChemicalEntity
+      has_parent_acid:
+        range: BronstedAcid
     examples:
-      - value: butyl ethanoate
-        description: has parent alcohol butanol and has parent acid acetic acid
-          
-      
-  stereoisomer:
-    is_a: molecule
+    - value: butyl ethanoate
+      description: has parent alcohol butanol and has parent acid acetic acid
+  Stereoisomer:
+    is_a: Molecule
     exact_mappings:
-      - SIO:010775
-
-  enantiomer:
-    is_a: stereoisomer
-    description: >-
-      one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
+    - SIO:010775
+  Enantiomer:
+    is_a: Stereoisomer
+    description: 'one of two stereoisomers of a chiral molecule that are mirror images.
+      Example: R-thalidomide'
     slot_usage:
-      relative configuration:
-        range: string  # L or D
-      optical configuration:
-        range: string  # + or -
-      absolute configuration:
-        range: string  # R or S (Right/Left)
+      relative_configuration:
+        range: string
+      optical_configuration:
+        range: string
+      absolute_configuration:
+        range: string
         see_also:
-          - https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules
-      enantiomer form of:
-        range: molecule
-        is_a: owl subclass of
-        description: >-
-          Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione
+        - https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules
+      enantiomer_form_of:
+        range: Molecule
+        is_a: owl_subclass_of
+        description: 'Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione'
     comments:
-      - "key= (enantiomer form of, absolute configuration)"
-      - "key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)"
+    - key= (enantiomer form of, absolute configuration)
+    - key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)
     exact_mappings:
-      - SIO:010777
-      
-  racemic mixture:
+    - SIO:010777
+  RacemicMixture:
     aliases:
-      - racemate
-      - racemic mixture of enantiomers
-    is_a: precise chemical mixture
-    description: >-
-      a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
+    - racemate
+    - racemic mixture of enantiomers
+    is_a: PreciseChemicalMixture
+    description: a chemical compound that has equal amounts of left- and right-handed
+      enantiomers of a chiral molecule. An example is Thalidomide
     slot_usage:
-      # TODO: map this to +/-
-      has left enantiomer:
+      has_left_enantiomer:
         required: true
-        range: enantiomer
-      has right enantiomer:
+        range: Enantiomer
+      has_right_enantiomer:
         required: true
-        range: enantiomer
-      chirality agnostic form:
+        range: Enantiomer
+      chirality_agnostic_form:
         recommended: true
         required: false
-        range: molecule
-      IUPAC name:
-        pattern: "^rac-"
+        range: Molecule
+      IUPAC_name:
+        pattern: ^rac-
     defining_slots:
-      - has left enantiomer
-      - has right enantiomer
+    - has_left_enantiomer
+    - has_right_enantiomer
     exact_mappings:
-      - CHEBI:60911
-      - NCIT:C103198
-      - wdeschema:E47
-      - wd:Q467717
-      - goldbook:R05025
+    - CHEBI:60911
+    - NCIT:C103198
+    - wdeschema:E47
+    - wd:Q467717
+    - goldbook:R05025
     see_also:
-      - https://github.com/ebi-chebi/ChEBI/issues/3245
+    - https://github.com/ebi-chebi/ChEBI/issues/3245
     examples:
-      - value: thalidomide
-
-  allotrope:
-    is_a: molecule
-    description: >-
-      A molecule consisting of atoms of the same element
+    - value: thalidomide
+  Allotrope:
+    is_a: Molecule
+    description: A molecule consisting of atoms of the same element
     slot_usage:
-      allotropic analog of:
-        range: chemical element
+      allotropic_analog_of:
+        range: ChemicalElement
         multivalued: false
         required: true
-      has bonding structure:
-        description: >-
-          The pattern in which the atoms are bonded; e.g. hexagonal lattice, sheets, etc
+      has_bonding_structure:
+        description: The pattern in which the atoms are bonded; e.g. hexagonal lattice,
+          sheets, etc
         multivalued: false
         required: true
     examples:
-      - value: diamond
-      - value: dioxygen
-
-  polymer repeat unit:
-    is_a: chemical relationship
-    description: >-
-      An abstract part of a polymer that is all instances of a repeated monomer of a single type
+    - value: diamond
+    - value: dioxygen
+  PolymerRepeatUnit:
+    is_a: ChemicalRelationship
+    description: An abstract part of a polymer that is all instances of a repeated
+      monomer of a single type
     slot_usage:
-      repetition of:
+      repetition_of:
         description: the macromolecule that is repeated
-        range: molecule
-      degree of polymerization:
-        range: count
+        range: Molecule
+      degree_of_polymerization:
+        range: Count
         see_also:
-          - https://en.wikipedia.org/wiki/Degree_of_polymerization
+        - https://en.wikipedia.org/wiki/Degree_of_polymerization
       mass:
-        range: float        
-        description: >-
-          the mass of a polymer repeat unit is the product of the mass of the repeated element multiplied by the degree
+        range: float
+        description: the mass of a polymer repeat unit is the product of the mass
+          of the repeated element multiplied by the degree
     see_also:
-      - https://en.wikipedia.org/wiki/Repeat_unit
-
-  reaction:
-    is_a: domain entity
-    description: >-
-      reaction
+    - https://en.wikipedia.org/wiki/Repeat_unit
+  Reaction:
+    is_a: DomainEntity
+    description: Reaction
     id_prefixes:
-      - RHEA
-      - KEGG.REACTION
-      - GO  ## catalytic activity
-      - MetaCyc
-      - REACT
-      - EC
-      - MetaNetX.reaction
-      - SEED
-      - RetroRules
-      - RXNO
-      - MOP
-      - REX
+    - RHEA
+    - KEGG.REACTION
+    - GO
+    - MetaCyc
+    - REACT
+    - EC
+    - MetaNetX.reaction
+    - SEED
+    - RetroRules
+    - RXNO
+    - MOP
+    - REX
     slots:
-      - has rinchi representation
-      - has reaction smiles representation
-      - reaction rate coefficient
-      - reaction rate
+    - has_rinchi_representation
+    - has_reaction_smiles_representation
+    - reaction_rate_coefficient
+    - reaction_rate
     slot_usage:
-      left participants:
+      left_participants:
         multivalued: true
-        range: reaction participant
-      right participants:
+        range: ReactionParticipant
+      right_participants:
         multivalued: true
-        range: reaction participant
+        range: ReactionParticipant
       direction:
-        description: >-
-          One of l->r, r->l, bidirectional, neutral
-      smarts string:
+        description: One of l->r, r->l, bidirectional, neutral
+      smarts_string:
         range: string
-      is diastereoselective:
+      is_diastereoselective:
         range: boolean
-      is stereo:
+      is_stereo:
         range: boolean
-      is balanced:
+      is_balanced:
         range: boolean
-      is transport:
+      is_transport:
         range: boolean
-      is fully characterized:
+      is_fully_characterized:
         range: boolean
-        description: >-
-          False if includes R-groups
-      reaction center: {}
+        description: False if includes R-groups
+      reaction_center: {}
       description:
-        string_serialization: "{left participants} {direction} {right participants}"
+        string_serialization: '{left participants} {direction} {right participants}'
     todos:
-      - Align with https://docs.open-reaction-database.org/en/latest/schema.html
-
-  isomerase reaction:
-    is_a: reaction
-    description: >-
-      A reaction that converts a molecule from one isomer to another.
+    - Align with https://docs.open-reaction-database.org/en/latest/schema.html
+  IsomeraseReaction:
+    is_a: Reaction
+    description: A reaction that converts a molecule from one isomer to another.
     todos:
-      - create rules for this
-
-  reaction participant:
-    is_a: chemical relationship
-    description: >-
-      Instances of this link a reaction to a chemical entity participant
+    - create rules for this
+  ReactionParticipant:
+    is_a: ChemicalRelationship
+    description: Instances of this link a reaction to a chemical entity participant
     slot_usage:
       participant:
-        range: chemical entity
+        range: ChemicalEntity
       stoichiometry:
         range: integer
-
-  proportional part:
-    is_a: chemical relationship
-    description: >-
-      A part of a complex mixture that is of uniform composition
+  ProportionalPart:
+    is_a: ChemicalRelationship
+    description: A part of a complex mixture that is of uniform composition
     slot_usage:
-      has role:
-        range: ingredient_role_enum
-      composed of:
-        range: chemical entity
-      minimal percentage:
+      has_role:
+        range: IngredientRoleEnum
+      composed_of:
+        range: ChemicalEntity
+      minimal_percentage:
         range: float
-      maximum percentage:
+      maximum_percentage:
         range: float
-
-  similarity:
-    is_a: chemical relationship
-    description:
-      A relationship between two or more entities that is quantified based on their similarity
-    
-  molecule pairwise similarity:
-    is_a: similarity
+  Similarity:
+    is_a: ChemicalRelationship
+    description: A relationship between two or more entities that is quantified based
+      on their similarity
+  MoleculePairwiseSimilarity:
+    is_a: Similarity
     slot_usage:
-      left molecule:
-        range: molecule
-      right molecule:
-        range: molecule
+      left_molecule:
+        range: Molecule
+      right_molecule:
+        range: Molecule
       score:
         range: float
     see_also:
-      - https://en.wikipedia.org/wiki/Chemical_similarity
-
-  tanimoto similarity:
+    - https://en.wikipedia.org/wiki/Chemical_similarity
+  TanimotoSimilarity:
     aliases:
-      - Jaccard similarity
-      - Tanimoto coefficient
-    is_a: molecule pairwise similarity
+    - Jaccard similarity
+    - Tanimoto coefficient
+    is_a: MoleculePairwiseSimilarity
     slot_usage:
       score:
         range: float
         minimum_value: 1.0
         maximum_value: 1.0
-
-
-  specificity mixin:
+  SpecificityMixin:
     abstract: true
     mixin: true
-      
-  entity with atoms enumerated:
-    is_a: specificity mixin
-    description: >-
-      A mixin for an entity that consists of one or more atoms where the atoms and the number of occurrences is counted (corresponding to the chemical layer in InChI)
+  EntityWithAtomsEnumerated:
+    is_a: SpecificityMixin
+    description: A mixin for an entity that consists of one or more atoms where the
+      atoms and the number of occurrences is counted (corresponding to the chemical
+      layer in InChI)
     mixin: true
     slots:
-      - inchi chemical sublayer                  ## e.g. C8H1...
-
-  entity with connectivity specificied:
-    is_a: specificity mixin
+    - inchi_chemical_sublayer
+  EntityWithConnectivitySpecificied:
+    is_a: SpecificityMixin
     mixin: true
-    description: >-
-      A mixin for an entity that consists of two or more atom occurrences where the connectivity is specified (corresponding to the /c layer in InChI)
+    description: A mixin for an entity that consists of two or more atom occurrences
+      where the connectivity is specified (corresponding to the /c layer in InChI)
     slots:
-      - inchi atom connections sublayer          ## e.g. c1-10-...
-      - inchi hydrogen connections sublayer      ## e.g. h4H,1-3H3...
-      
-  entity with charge specified:
-    is_a: specificity mixin
+    - inchi_atom_connections_sublayer
+    - inchi_hydrogen_connections_sublayer
+  EntityWithChargeSpecified:
+    is_a: SpecificityMixin
     mixin: true
-    description: >-
-      A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)
+    description: A mixin for an entity where the charge is explicitly specified (corresponding
+      to the /q layer in InChI)
     slots:
-      - inchi charge sublayer                    ## e.g. q-1
-
-  entity with stereochemistry specified:
-    is_a: specificity mixin
+    - inchi_charge_sublayer
+  EntityWithStereochemistrySpecified:
+    is_a: SpecificityMixin
     mixin: true
-    description: >-
-      A mixin for an entity where the stereochemistry is explicitly specified (corresponding to the /t, m/, and /s layers in InChI)
+    description: A mixin for an entity where the stereochemistry is explicitly specified
+      (corresponding to the /t, m/, and /s layers in InChI)
     slots:
-      - inchi stereochemical double bond sublayer    ## e.g. b...
-      - inchi tetrahedral stereochemical sublayer    ## e.g. [tm] (stereochemical)
-      - inchi stereochemical type sublayer           ## e.g. s... (stereochemical)
-      
-  entity with isotope specified:
-    is_a: specificity mixin
+    - inchi_stereochemical_double_bond_sublayer
+    - inchi_tetrahedral_stereochemical_sublayer
+    - inchi_stereochemical_type_sublayer
+  EntityWithIsotopeSpecified:
+    is_a: SpecificityMixin
     mixin: true
-    description: >-
-      A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)
+    description: A mixin for an entity where the charge is explicitly specified (corresponding
+      to the /q layer in InChI)
     slots:
-      - inchi isotopic layer                         ## e.g. i1+1
-        
+    - inchi_isotopic_layer
 types:
-
-  periodic table group:
+  PeriodicTableGroup:
     uri: xsd:int
     base: int
-  
-  count:
+  Count:
     uri: xsd:int
     base: int
     mappings:
-      - CHEMINF:000209
-
-  number of years:
+    - CHEMINF:000209
+  NumberOfYears:
     uri: xsd:int
     base: int
-
-  chemical encoding:
+  ChemicalEncoding:
     uri: xsd:string
     base: str
-
-  sequence string:
+  SequenceString:
     uri: xsd:string
     base: str
-
-  amino acid sequence string:
+  AminoAcidSequenceString:
     uri: xsd:string
     base: str
-
-  DNA sequence string:
+  DNASequenceString:
     uri: xsd:string
     base: str
-
-  file location:
+  FileLocation:
     uri: xsd:anyURI
     base: str
-
 slots:
-
-  chemical to chemical relationship:
+  chemical_to_chemical_relationship:
     abstract: true
-  
-  chemical property:
+  chemical_property:
     abstract: true
-  
-  information property:
+  information_property:
     abstract: true
-
-  in periodic table group:
-    range: periodic table group
-    
-  in periodic table block:
-    description: A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in
-    range: periodic_table_block_enum
-    
+  in_periodic_table_group:
+    range: PeriodicTableGroup
+  in_periodic_table_block:
+    description: A block of the periodic table is a set of elements unified by the
+      orbitals their valence electrons or vacancies lie in
+    range: PeriodicTableBlockEnum
   id:
-    is_a: information property
+    is_a: information_property
     identifier: true
     mappings:
-      - schema:identifier
-
-  ## metadata
-  
+    - schema:identifier
   name:
-    is_a: information property
+    is_a: information_property
     range: string
-    description: >-
-      name of chemical entity. E.g. nickel, carbon-16
-    slot_uri:
-      rdfs:label
+    description: name of chemical entity. E.g. nickel, carbon-16
+    slot_uri: rdfs:label
     close_mappings:
-      - bo:symbol
-  
+    - bo:symbol
   symbol:
-    is_a: information property
+    is_a: information_property
     range: string
-    #key: true
-    description: >-
-      short symbol for chemical entity, e.g. K, C-16
+    description: short symbol for chemical entity, e.g. K, C-16
     slot_uri: bo:symbol
-
   type:
     range: uriorcurie
     designates_type: true
-
-  IUPAC name:
-    is_a: information property
+  IUPAC_name:
+    is_a: information_property
     range: string
     slot_uri: CHEMINF:000107
     exact_mappings:
-      - MI:2007
-  
-  ## numeric properties of atoms
-
-  property of atom:
+    - MI:2007
+  property_of_atom:
     abstract: true
-    is_a: chemical property
-    domain: atom
-
-  subatomic particle count:
+    is_a: chemical_property
+    domain: Atom
+  subatomic_particle_count:
     abstract: true
-    is_a: property of atom
-
-  has nuclear parts:
-    is_a: property of atom
-    range: subatomic particle occurrence
-  
-  atomic number:
-    is_a: subatomic particle count
+    is_a: property_of_atom
+  has_nuclear_parts:
+    is_a: property_of_atom
+    range: SubatomicParticleOccurrence
+  atomic_number:
+    is_a: subatomic_particle_count
     aliases:
-      - proton number
-      - Z
-    description: >-
-      number of protons in an atom
-    domain: atom
-    range: count
+    - proton number
+    - Z
+    description: number of protons in an atom
+    domain: Atom
+    range: Count
     slot_uri: bo:atomicNumber
     mappings:
-      - CHEMINF:000079
+    - CHEMINF:000079
     exact_mappings:
-      - wd:P1086
-    
-  neutron number:
-    is_a: subatomic particle count
+    - wd:P1086
+  neutron_number:
+    is_a: subatomic_particle_count
     aliases:
-      - N
-    description: >-
-      number of neutrons in an atom
-    domain: atom
-    range: count
+    - N
+    description: number of neutrons in an atom
+    domain: Atom
+    range: Count
     mappings:
-      - CHEMINF:000078
-    
-  nucleon number:
+    - CHEMINF:000078
+  nucleon_number:
     aliases:
-      - mass number
-    is_a: subatomic particle count
-    description: >-
-      number of nucleons in an atom. proton number plus neutron number.
-    domain: atom
-    range: count
-    equals_expression: "{atomic_number}+{neutron_number}"
-      
-  elemental charge:
-    is_a: property of atom
-    description: >-
-      number of protons minus number of electrons
-    domain: chemical entity
+    - mass number
+    is_a: subatomic_particle_count
+    description: number of nucleons in an atom. proton number plus neutron number.
+    domain: Atom
+    range: Count
+    equals_expression: '{atomic_number}+{neutron_number}'
+  elemental_charge:
+    is_a: property_of_atom
+    description: number of protons minus number of electrons
+    domain: ChemicalEntity
     range: integer
     mappings:
-      - CHEMINF:000120
-
-  ## alternate form relations
-  
-  alternate form of:
-    is_a: chemical to chemical relationship
-    description: >-
-      A relationship between two entities of the same type
+    - CHEMINF:000120
+  alternate_form_of:
+    is_a: chemical_to_chemical_relationship
+    description: A relationship between two entities of the same type
     abstract: true
-    domain: chemical entity
-    range: chemical entity
-
-  has element:
-    is_a: alternate form of
-    range: chemical element
-      
-    
-  allotropic analog of:
-    is_a: alternate form of
-    description:
-      relationship that holds between two allotropes, where both allotropes are allotropes of the same element
-    domain: allotrope
-    range: allotrope
-    
-  isotope of:
-    is_a: alternate form of
-    description: >-
-      relationship that holds between two isotopes, always holds if the isotopes have the same atomic number and a different neutron number.
-    domain: isotope
-    range: isotope
+    domain: ChemicalEntity
+    range: ChemicalEntity
+  has_element:
+    is_a: alternate_form_of
+    range: ChemicalElement
+  allotropic_analog_of:
+    is_a: alternate_form_of
+    description: relationship that holds between two allotropes, where both allotropes
+      are allotropes of the same element
+    domain: Allotrope
+    range: Allotrope
+  isotope_of:
+    is_a: alternate_form_of
+    description: relationship that holds between two isotopes, always holds if the
+      isotopes have the same atomic number and a different neutron number.
+    domain: Isotope
+    range: Isotope
     examples:
-      - description: deuterium (CHEBI:29237) isotope of protium (CHEBI:29236)
-      
-  isotone of:
-    is_a: alternate form of
-    description: >-
-      relationship that holds between two isotones, always holds if the isotones have a different atomic number and the same neutron number.
-    domain: isotope
-    range: isotope
-      
-  nuclear isomer of:
-    is_a: alternate form of
-    description: >-
-      relationship that holds between two nuclear isomers, always holds if the isomers have the same nucleon number but different energy states
-    domain: isotope
-    range: isotope
-      
-  isobar of:
-    is_a: alternate form of
-    description: >-
-      equal mass number (Z1 + N1 = Z2 + N2)
-
-  has different charge state from:
+    - description: deuterium (CHEBI:29237) isotope of protium (CHEBI:29236)
+  isotone_of:
+    is_a: alternate_form_of
+    description: relationship that holds between two isotones, always holds if the
+      isotones have a different atomic number and the same neutron number.
+    domain: Isotope
+    range: Isotope
+  nuclear_isomer_of:
+    is_a: alternate_form_of
+    description: relationship that holds between two nuclear isomers, always holds
+      if the isomers have the same nucleon number but different energy states
+    domain: Isotope
+    range: Isotope
+  isobar_of:
+    is_a: alternate_form_of
+    description: equal mass number (Z1 + N1 = Z2 + N2)
+  has_different_charge_state_from:
     mixin: true
     abstract: true
-
-  has lower charge from:    
-    is_a: has different charge state from
+  has_lower_charge_from:
+    is_a: has_different_charge_state_from
     mixin: true
-    
-  has higher charge from:    
-    is_a: has different charge state from
+  has_higher_charge_from:
+    is_a: has_different_charge_state_from
     mixin: true
-    
-  derivative of:
-    is_a: alternate form of
-    
-  has derivative:
-    is_a: alternate form of
-    inverse: derivative of
-    
-  transitive conjugatated form of:
-    is_a: derivative of
+  derivative_of:
+    is_a: alternate_form_of
+  has_derivative:
+    is_a: alternate_form_of
+    inverse: derivative_of
+  transitive_conjugatated_form_of:
+    is_a: derivative_of
     transitive: true
     annotations:
       transitive_closure_of: direct conjugatated from
-    
-  direct conjugatated form of:
-    is_a: derivative of
+  direct_conjugatated_form_of:
+    is_a: derivative_of
     multivalued: false
     symmetric: true
-    
-  conjugate base of:
+  conjugate_base_of:
     aliases:
-      - is conjugate base of (chebi)
-    is_a: direct conjugatated form of
+    - is conjugate base of (chebi)
+    is_a: direct_conjugatated_form_of
     mixins:
-      - has lower charge from
-    description: >-
-      connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)
+    - has_lower_charge_from
+    description: 'connects the base form of an acid to an acid. Also connects the
+      different charge states of the base. Example: the different charge states of
+      lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)'
     notes:
-      - sometimes chebi hops over a state skipping an intermediate
+    - sometimes chebi hops over a state skipping an intermediate
     see_also:
-      - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
-
-  conjugate acid of:
+    - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
+  conjugate_acid_of:
     aliases:
-      - is conjugate acid of (chebi)
-    is_a: direct conjugatated form of
+    - is conjugate acid of (chebi)
+    is_a: direct_conjugatated_form_of
     mixins:
-      - has higher charge from
-    inverse: conjugate base of
+    - has_higher_charge_from
+    inverse: conjugate_base_of
     see_also:
-      - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
+    - https://academic.oup.com/nar/article/36/suppl_1/D344/2506390
     todos:
-      - decide on domain/range. in chebi, daidzein monosulfate is conjugate acid of daidzein monosulfate(1-), yet it is an acid derivative, not an acid
-
-  acid form of:
+    - decide on domain/range. in chebi, daidzein monosulfate is conjugate acid of
+      daidzein monosulfate(1-), yet it is an acid derivative, not an acid
+  acid_form_of:
     aliases:
-      - protonated form of
-    is_a: conjugate acid of
-    description: >-
-      connects an acid to any of the the base anions. E.g. citric acid acid form of citrate(1-),citrate(2-),citrate(3-)
+    - protonated form of
+    is_a: conjugate_acid_of
+    description: connects an acid to any of the the base anions. E.g. citric acid
+      acid form of citrate(1-),citrate(2-),citrate(3-)
     multivalued: true
-    domain: Bronsted acid
-    range: acid base  ## TODO - grouping class
-      
-  has physiological base:
+    domain: BronstedAcid
+    range: AcidBase
+  has_physiological_base:
     aliases:
-      - deprotonated form of
-    is_a: acid form of
-    description: >-
-      connects an acid to the base that is stable at physiological pH. E.g. citric acid has physiological base citrate(3-)
+    - deprotonated form of
+    is_a: acid_form_of
+    description: connects an acid to the base that is stable at physiological pH.
+      E.g. citric acid has physiological base citrate(3-)
     multivalued: false
-      
-  has acid form:
-    is_a: conjugate base of
-    description: >-
-      connects a base to the acid form. E.g. citrate(3-) has acid form citric acid
+  has_acid_form:
+    is_a: conjugate_base_of
+    description: connects a base to the acid form. E.g. citrate(3-) has acid form
+      citric acid
     multivalued: false
-    domain: acid base
-    range: Bronsted acid
-      
-  ## other relations
-
-  has chemical role:
-    range: chemical role
-  
-  has part:
-    is_a: chemical to chemical relationship
-    description: >-
-      basic parthood relations
+    domain: AcidBase
+    range: BronstedAcid
+  has_chemical_role:
+    range: ChemicalRole
+  has_part:
+    is_a: chemical_to_chemical_relationship
+    description: basic parthood relations
     mappings:
-      - BFO:0000050
-      - schema:hasBioChemEntityPart
-
-  has repeat unit:
-    range: chemical entity
-    
-  polymer of:
-    is_a: has part
-    range: macromolecule
+    - BFO:0000050
+    - schema:hasBioChemEntityPart
+  has_repeat_unit:
+    range: ChemicalEntity
+  polymer_of:
+    is_a: has_part
+    range: Macromolecule
     exact_mappings:
-      - wd:P4600
-      - CHEBI:60027
-
-  has polymer repeat units:
-    description: Relation between a polymer and all instances of a repeated polymeric unit
-    range: polymer repeat unit
+    - wd:P4600
+    - CHEBI:60027
+  has_polymer_repeat_units:
+    description: Relation between a polymer and all instances of a repeated polymeric
+      unit
+    range: PolymerRepeatUnit
     multivalued: true
-
-  is branched:
+  is_branched:
     range: boolean
     see_also:
-      - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
-
-  polymer architecture type:
-    #range: TODO enum
-    description: >-
-      morphological structure of a polymer
+    - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
+  polymer_architecture_type:
+    description: morphological structure of a polymer
     see_also:
-      - https://en.wikipedia.org/wiki/Polymer_architecture
-      
-  has atoms:
-    description: >-
-      Relation between a molecule and the atoms it contains.
-      Note that this is a shortcut relation: for granular representations go via atom occurrences
-    is_a: has part
-    domain: molecule
-    range: atom
+    - https://en.wikipedia.org/wiki/Polymer_architecture
+  has_atoms:
+    description: 'Relation between a molecule and the atoms it contains. Note that
+      this is a shortcut relation: for granular representations go via atom occurrences'
+    is_a: has_part
+    domain: Molecule
+    range: Atom
     multivalued: true
-      
-  has submolecules:
-    description: >-
-      Relation between a molecule and the molecules it is made from.
-    is_a: has part
-    domain: molecule
-    range: molecule
+  has_submolecules:
+    description: Relation between a molecule and the molecules it is made from.
+    is_a: has_part
+    domain: Molecule
+    range: Molecule
     multivalued: true
-
-  has ionic component:
+  has_ionic_component:
     abstract: true
-    is_a: has part
-
-  has cationic component:
-    is_a: has ionic component
-
-  has anionic component:
-    is_a: has ionic component
-    
-  has group:
-    description: >-
-      Relation between a molecule and the groups it contains
-    is_a: has submolecules
-    domain: atom
-
-  has proportional parts:
+    is_a: has_part
+  has_cationic_component:
+    is_a: has_ionic_component
+  has_anionic_component:
+    is_a: has_ionic_component
+  has_group:
+    description: Relation between a molecule and the groups it contains
+    is_a: has_submolecules
+    domain: Atom
+  has_proportional_parts:
     aliases:
-      - has ingredients
-    description: >-
-      Relationship between a complex mixture and its parts
-    domain: imprecise chemical mixture
-    range: proportional part
+    - has ingredients
+    description: Relationship between a complex mixture and its parts
+    domain: ImpreciseChemicalMixture
+    range: ProportionalPart
     multivalued: true
-  
-  ## other slots
-  
-  energy level:
+  energy_level:
     aliases:
-      - energy state
-    description: >-
-      e.g. ground, stable
-      
-  has atom occurrences:
-    description: >-
-      An individuated atom in the context of a chemical structure.
-    range: atom occurrence
+    - energy state
+    description: e.g. ground, stable
+  has_atom_occurrences:
+    description: An individuated atom in the context of a chemical structure.
+    range: AtomOccurrence
     multivalued: true
     inlined: true
     inlined_as_list: true
-      
-  has bonds:
-    domain: molecule
-    range: atomic bond
+  has_bonds:
+    domain: Molecule
+    range: AtomicBond
     multivalued: true
-      
-  half life:
-    is_a: chemical property
-    domain: isotope
-    range: number of years
-
-  decay mode:
-    is_a: chemical property
-    domain: isotope
-    range: string ## TODO: ontology: α, β−, γ, IC, EC
-
-  decay product:
-    is_a: chemical property
-    domain: isotope
-    range: isotope
-
-  decay energy:
-    is_a: chemical property
-    domain: isotope
-    
-  mode of formation:
-    is_a: chemical property
-    domain: isotope
-    range: string ## TODO: ontology: Cosmogenic, Synthetic, Fission
-
-  number of heavy atoms:
-    is_a: chemical property
+  half_life:
+    is_a: chemical_property
+    domain: Isotope
+    range: NumberOfYears
+  decay_mode:
+    is_a: chemical_property
+    domain: Isotope
+    range: string
+  decay_product:
+    is_a: chemical_property
+    domain: Isotope
+    range: Isotope
+  decay_energy:
+    is_a: chemical_property
+    domain: Isotope
+  mode_of_formation:
+    is_a: chemical_property
+    domain: Isotope
+    range: string
+  number_of_heavy_atoms:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
     title: Heavy Atoms
     description: number of of non-hydrogen atoms
-
-  number of rings:
-    is_a: chemical property
+  number_of_rings:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    
-  number of aromatic rings:
-    is_a: chemical property
+  number_of_aromatic_rings:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-  number of rotatable bonds:
-    is_a: chemical property
+  number_of_rotatable_bonds:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    description: >-
-      number of rotatable bonds corresponds to single bonds excluding following types of single bonds
-      terminal bonds;
-      attached to triple bonds;
-      amide, thioamide and sulfonamide bonds.
-      
-  van der waals molecular volume:
-    is_a: chemical property
+    description: number of rotatable bonds corresponds to single bonds excluding following
+      types of single bonds terminal bonds; attached to triple bonds; amide, thioamide
+      and sulfonamide bonds.
+  van_der_waals_molecular_volume:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
     unit:
-      symbol: Å3 molecule-1
-    description: >-
-      van der Waals molecular volume calculated from 2D structure using atomic radii with adjustments for number of bonds, aromatic and non-aromatic rings
-
-
-  topological polar surface area:
-    is_a: chemical property
+      symbol: "\xC53 molecule-1"
+    description: van der Waals molecular volume calculated from 2D structure using
+      atomic radii with adjustments for number of bonds, aromatic and non-aromatic
+      rings
+  topological_polar_surface_area:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
     unit:
-      symbol: Å2 molecule-1
-    description: >-
-      Topological Polar Surface Area corresponding to nitrogen and oxygen atoms calculated from 2D structure using contributions from pre-defined structure fragments containing these atoms
-      
-  number of hydrogen bond donors:
-    is_a: chemical property
+      symbol: "\xC52 molecule-1"
+    description: Topological Polar Surface Area corresponding to nitrogen and oxygen
+      atoms calculated from 2D structure using contributions from pre-defined structure
+      fragments containing these atoms
+  number_of_hydrogen_bond_donors:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    description: >-
-      number of hydrogen bond donors corresponding to sum of nitrogen and oxygen atoms with at least one implicit/explicit hydrogen atom
-      
-  number of hydrogen bond acceptors:
-    is_a: chemical property
+    description: number of hydrogen bond donors corresponding to sum of nitrogen and
+      oxygen atoms with at least one implicit/explicit hydrogen atom
+  number_of_hydrogen_bond_acceptors:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    description: >-
-      number of hydrogen bond acceptors corresponding to sum of nitrogen atoms without any any implicit/explicit hydrogen atom and all oxygen atoms
-
-  
+    description: number of hydrogen bond acceptors corresponding to sum of nitrogen
+      atoms without any any implicit/explicit hydrogen atom and all oxygen atoms
   logP6_partition_coefficient:
-    is_a: chemical property
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    description: >-
-      logP partition coefficient calculated from 2D structure using contributions from pre-defined structure fragments.
-      It corresponds to: log(Poctanol/Pwater) = log(SoluteInOctanol/SoluteInWater)
-      
-  molar refractivity:
-    is_a: chemical property
+    description: 'logP partition coefficient calculated from 2D structure using contributions
+      from pre-defined structure fragments. It corresponds to: log(Poctanol/Pwater)
+      = log(SoluteInOctanol/SoluteInWater)'
+  molar_refractivity:
+    is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html
-    description: >-
-      Molar refractivity calculated from 2D structure using contributions from pre-defined structure fragments.
-
-  thermophysical property:
-    is_a: chemical property
+    description: Molar refractivity calculated from 2D structure using contributions
+      from pre-defined structure fragments.
+  thermophysical_property:
+    is_a: chemical_property
     abstract: true
-
-  molar value:
-    is_a: thermophysical property
-
-  molar cohesive energy:
-    is_a: thermophysical property
-    
-  has cyclic structure:
-    is_a: chemical property
-    description: >-
-      true if the molecule possesses a cycle in the atom connectivity graph
-    domain: molecule
+  molar_value:
+    is_a: thermophysical_property
+  molar_cohesive_energy:
+    is_a: thermophysical_property
+  has_cyclic_structure:
+    is_a: chemical_property
+    description: true if the molecule possesses a cycle in the atom connectivity graph
+    domain: Molecule
     range: boolean
     mappings:
-      - CHEMINF:000067
-
-  molecular property:
-    is_a: chemical property
+    - CHEMINF:000067
+  molecular_property:
+    is_a: chemical_property
     slot_uri: FIX:0000276
-  molecular electronic absorption spectroscopy:
-    is_a: molecular property
+  molecular_electronic_absorption_spectroscopy:
+    is_a: molecular_property
     slot_uri: FIX:0000011
-  molecular spectroscopy by energy state:
-    is_a: molecular property
+  molecular_spectroscopy_by_energy_state:
+    is_a: molecular_property
     slot_uri: FIX:0000030
-  molecular spectroscopy:
-    is_a: molecular property
+  molecular_spectroscopy:
+    is_a: molecular_property
     slot_uri: FIX:0000063
-  molecular replacement:
-    is_a: molecular property
+  molecular_replacement:
+    is_a: molecular_property
     slot_uri: FIX:0000251
-  molecular mass:
-    is_a: molecular property
+  molecular_mass:
+    is_a: molecular_property
     slot_uri: FIX:0000270
-  molecular size:
-    is_a: molecular property
+  molecular_size:
+    is_a: molecular_property
     slot_uri: FIX:0000271
-  molecular hydration:
-    is_a: molecular property
+  molecular_hydration:
+    is_a: molecular_property
     slot_uri: FIX:0000272
-  molecular shape:
-    is_a: molecular property
+  molecular_shape:
+    is_a: molecular_property
     slot_uri: FIX:0000273
-  molecular charge:
-    is_a: molecular property
+  molecular_charge:
+    is_a: molecular_property
     slot_uri: FIX:0000275
-  molecular structure:
-    is_a: molecular property
+  molecular_structure:
+    is_a: molecular_property
     slot_uri: FIX:0000305
-  molecular heat capacity:
-    is_a: molecular property
+  molecular_heat_capacity:
+    is_a: molecular_property
     slot_uri: FIX:0000389
-  molecular electronic spectroscopy:
-    is_a: molecular property
+  molecular_electronic_spectroscopy:
+    is_a: molecular_property
     slot_uri: FIX:0000943
-      
-  chemical representation:
+  chemical_representation:
     aliases:
-      - has chemical encoding
+    - has chemical encoding
     abstract: true
-    is_a: information property
-    domain: chemical entity
-    range: chemical encoding
-    
-  has minchi representation:
+    is_a: information_property
+    domain: ChemicalEntity
+    range: ChemicalEncoding
+  has_minchi_representation:
     aliases:
-      - MInChi
-    is_a: chemical representation
-    description: >-
-      Proposed new Mixtures InChI
+    - MInChi
+    is_a: chemical_representation
+    description: Proposed new Mixtures InChI
     see_also:
-      - https://cheminf20.org/2018/08/27/mixtures-cheminformatics/
-  
-  has rinchi representation:
+    - https://cheminf20.org/2018/08/27/mixtures-cheminformatics/
+  has_rinchi_representation:
     aliases:
-      - RInChi
-    is_a: chemical formula
-    # key: true
-    description: >-
-      Proposed Reactions InChI
-    #string_serialization: "RInChI=1.00.1S{...}"
+    - RInChi
+    is_a: chemical_formula
+    description: Proposed Reactions InChI
     examples:
-      - value: "RInChI=1.00.1S /layer2<>layer3<>layer4/d+/u2-0-1"
-      - value: "C2H4O2/c1-2(3)4/h1H3,(H,3,4)!C2H6O/c1-2-3/h3H,2H2,1H3<>C4H8O2/c1-3-6-4(2)5/h3H2,1- 2H3!H2O/h1H2<>H2O4S/c1-5(2,3)4/h(H2,1,2,3,4):"
-        description: hydrolysis of ethyl acetate
+    - value: RInChI=1.00.1S /layer2<>layer3<>layer4/d+/u2-0-1
+    - value: 'C2H4O2/c1-2(3)4/h1H3,(H,3,4)!C2H6O/c1-2-3/h3H,2H2,1H3<>C4H8O2/c1-3-6-4(2)5/h3H2,1-
+        2H3!H2O/h1H2<>H2O4S/c1-5(2,3)4/h(H2,1,2,3,4):'
+      description: hydrolysis of ethyl acetate
     see_also:
-      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
+    - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
     comments:
-      - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
-
-  has reaction smiles representation:
+    - A half-reaction, such as a RInChI with starting materials and no identified
+      products, is a valid RInChI
+  has_reaction_smiles_representation:
     aliases:
-      - reaction SMILES
-    is_a: chemical formula
-      
-  has rauxinfo representation:
+    - reaction SMILES
+    is_a: chemical_formula
+  has_rauxinfo_representation:
     aliases:
-      - RAuxInfo
-    is_a: chemical representation
+    - RAuxInfo
+    is_a: chemical_representation
     key: true
-    description: >-
-      Auxhiliary information on top of a RInChi
+    description: Auxhiliary information on top of a RInChi
     see_also:
-      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
+    - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0277-8
     comments:
-      - A half-reaction, such as a RInChI with starting materials and no identified products, is a valid RInChI
-
-  rinchi key string:
-    is_a: hashed chemical formula
+    - A half-reaction, such as a RInChI with starting materials and no identified
+      products, is a valid RInChI
+  rinchi_key_string:
+    is_a: hashed_chemical_formula
     description: A hashed representation of a RInChi string
     key: true
     annotations:
-      hash_of: has rinchi representation
-      
-  long rinchi key string:
-    is_a: rinchi key string
+      hash_of: has_rinchi_representation
+  long_rinchi_key_string:
+    is_a: rinchi_key_string
     key: true
-      
-  short rinchi key string:
-    is_a: rinchi key string
+  short_rinchi_key_string:
+    is_a: rinchi_key_string
     key: true
-
-  reaction rate:
+  reaction_rate:
     aliases:
-      - v
+    - v
     range: float
     unit:
-      symbol: mol⋅m-3⋅s-1
-    
-  reaction rate coefficient:
+      symbol: "mol\u22C5m-3\u22C5s-1"
+  reaction_rate_coefficient:
     aliases:
-      - reaction rate constant
+    - reaction rate constant
     range: float
-    
-    
-      
-  has sequence representation:
-    is_a: chemical representation
-    range: sequence string
-  
-  AZE notation html:
-    is_a: chemical representation
-    description: >-
-      E.g. <super>12</super>/<sub>6</sub>C
-    
-  carboydrate representation:
+  has_sequence_representation:
+    is_a: chemical_representation
+    range: SequenceString
+  AZE_notation_html:
+    is_a: chemical_representation
+    description: E.g. <super>12</super>/<sub>6</sub>C
+  carboydrate_representation:
     abstract: true
-    is_a: chemical representation
-
-  wurcs representation:
+    is_a: chemical_representation
+  wurcs_representation:
     aliases:
-      - WURCS
-    is_a: carboydrate representation
-    pattern: "^WURCS=Version/.*"
-    
-  carbbank representation:
-    is_a: carboydrate representation
-    description: >-
-      The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation.
-
-  linucs representation:
-    is_a: carboydrate representation
-    description: >-
-      A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.
+    - WURCS
+    is_a: carboydrate_representation
+    pattern: ^WURCS=Version/.*
+  carbbank_representation:
+    is_a: carboydrate_representation
+    description: 'The carbohydrate structure format used by the Complex Carbohydrate
+      Structure Database (CCSD) originally developed at the University of Georgia.
+      This is a 2D structure where bars and hyphens are used to indicate linkages,
+      and monosaccharides are specified in the following order, separated by hyphens:
+      anomer - configuration symbol - monosaccharide abbreviation.'
+  linucs_representation:
+    is_a: carboydrate_representation
+    description: A unique linear notation proposed and used by GLYCOSCIENCES.de, with
+      the reducing end specified on the left. Monosaccharides, written according to
+      CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry
+      is specified and separated by hyphens. Glycosidic linkages are also surrounded
+      by hyphens, and carbon numbers of the linkages are separated by the plus sign.
+      Branches are indicated by curly brackets.
     see_also:
-      - https://github.com/biopragmatics/bioregistry/issues/537
-
-  glycominds linearcode representation:
-    is_a: carboydrate representation
-    description: >-
-      A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by “a” or “b” for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures).
-
-  kegg chemical function representation:
-    is_a: carboydrate representation
-    description: >-
-      A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names.
-
-  glycoct condensed:
-    is_a: carboydrate representation
-    description: >-
-      This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.
-
-  hashed chemical formula:
+    - https://github.com/biopragmatics/bioregistry/issues/537
+  glycominds_linearcode_representation:
+    is_a: carboydrate_representation
+    description: "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides\
+      \ are indicated by a one- or two-letter code, linkages are indicated by \u201C\
+      a\u201D or \u201Cb\u201D for anomers and a single number for the carbon number\
+      \ linkage on the reducing end, and branches are indicated by parentheses. This\
+      \ format is the most compact among existing formats, and several databases use\
+      \ a modified form of this format to accommodate additional codes and varying\
+      \ carbohydrate structures (such as ambiguous structures)."
+  kegg_chemical_function_representation:
+    is_a: carboydrate_representation
+    description: A multiline format used by the KEGG GLYCAN database and represents
+      glycans as graphs. Monosaccharides are represented as nodes, and glycosidic
+      linkages are represented as edges. Each node is given a unique number, and x-
+      and y- coordinates are specified such that the glycan structure can be drawn
+      on a 2D plane. Edge information uses the node numbers to specify anomeric and
+      carbon number information. Monosaccharide names are specified as text, and no
+      particular rules are specified to represent these names.
+  glycoct_condensed:
+    is_a: carboydrate_representation
+    description: This is a multiline format used by GlycomeDB, among others, and uses
+      a graph notation to represent glycans, similar to KCF. Monosaccharides are specified
+      more strictly to be able to map the monosaccharides between different representations.
+      Substituents, such as N-acetyl, are specified as separate nodes from their basetypes
+      and are linked together in the edge section. If newlines are removed, this format
+      can be made linear.
+  hashed_chemical_formula:
     abstract: true
-    is_a: chemical representation
-    domain: chemical entity
-    range: chemical encoding
-    description: >-
-      A hashed version of a chemical formula
-      
-  chemical formula:
+    is_a: chemical_representation
+    domain: ChemicalEntity
+    range: ChemicalEncoding
+    description: A hashed version of a chemical formula
+  chemical_formula:
     abstract: true
-    is_a: chemical representation
-    description: >-
-      A generic grouping for miolecular formulae and empirical formulae
-    domain: chemical entity
-    range: chemical encoding
+    is_a: chemical_representation
+    description: A generic grouping for miolecular formulae and empirical formulae
+    domain: ChemicalEntity
+    range: ChemicalEncoding
     mappings:
-      - schema:hasRepresentation
-      - edam:data_0846
-
-  molecular formula:
-    is_a: chemical formula
+    - schema:hasRepresentation
+    - edam:data_0846
+  molecular_formula:
+    is_a: chemical_formula
     aliases:
-      - chemical formula
-      - Hill notation
-    description: >-
-      A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose
+    - chemical_formula
+    - Hill notation
+    description: A chemical formula where numbers denote atom count. E.g. C6H12O6  for
+      glucose
     mappings:
-      - CHEMINF:000042
-
-  empirical formula:
-    is_a: chemical formula
-    description: >-
-      A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
-
-  generalized empirical formula:
-    is_a: chemical formula
-    description:
-      A variant of an empirical formula where numbers are replaced by generic ns; e.g. CnH2n+2 for alkane
-      
-  smarts string:
-    is_a: chemical formula
+    - CHEMINF:000042
+  empirical_formula:
+    is_a: chemical_formula
+    description: A chemical formula where numbers denote relative proportion of atoms.
+      E.g. CH2O for glucose
+  generalized_empirical_formula:
+    is_a: chemical_formula
+    description: A variant of an empirical formula where numbers are replaced by generic
+      ns; e.g. CnH2n+2 for alkane
+  smarts_string:
+    is_a: chemical_formula
     examples:
-      - value: "[#1,#6:60][C@@:6]12[CX4:7][CX4H2,CX4H0:8]([CX4H3,CX4H2,#1:80])([CX4H3,CX4H2,#1:81])[CX3:9](=[CX3H2:10])[C@@:11]1([C:1](=[O:2])[CX4,c:4][CX4,c:3][CX4,c,O,NX3!r3:5]2)[C:99]#[N:97]>>[C:10]#[C:9][*:8]([*:80])([*:81])[C:7][C@@:6]1([*:60])[*:5][*:3][*:4][C:1](=[O:2])[C:11]1[C:99]#[N:97]"
-    
-  lychi string:
-    is_a: chemical formula
+    - value: '[#1,#6:60][C@@:6]12[CX4:7][CX4H2,CX4H0:8]([CX4H3,CX4H2,#1:80])([CX4H3,CX4H2,#1:81])[CX3:9](=[CX3H2:10])[C@@:11]1([C:1](=[O:2])[CX4,c:4][CX4,c:3][CX4,c,O,NX3!r3:5]2)[C:99]#[N:97]>>[C:10]#[C:9][*:8]([*:80])([*:81])[C:7][C@@:6]1([*:60])[*:5][*:3][*:4][C:1](=[O:2])[C:11]1[C:99]#[N:97]'
+  lychi_string:
+    is_a: chemical_formula
     key: true
     see_also:
-      - https://github.com/ncats/lychi
-    
-  inchi string:
+    - https://github.com/ncats/lychi
+  inchi_string:
     title: InChi
-    is_a: chemical formula
+    is_a: chemical_formula
     todos:
-      - declare this as a key once compound_key is introduced to linkml
+    - declare this as a key once compound_key is introduced to linkml
     see_also:
-      - https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi
+    - https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi
     exact_mappings:
-      - OntoRXN:hasInChi
-    
-  inchi key string:
-    is_a: hashed chemical formula
+    - OntoRXN:hasInChi
+  inchi_key_string:
+    is_a: hashed_chemical_formula
     description: A hashed representation of an InChi string
-    key: false # rare; Pletnev I, Erin A, McNaught A, Blinov K, Tchekhovskoi D, Heller S (2012) InChIKey collision resistance: an experimental testing. J Cheminform. 4:12
+    key: false
     annotations:
-      hash_of: inchi string
-    
-  smiles string:
-    is_a: chemical formula
-    description: >-
-      A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
+      hash_of: inchi_string
+  smiles_string:
+    is_a: chemical_formula
+    description: A string encoding of a molecular graph, no chiral or isotopic information.
+      There are usually a large number of valid SMILES which represent a given structure.
+      For example, CCO, OCC and C(O)C all specify the structure of ethanol.
     comments:
-      - "a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see “Limitations of molecular graph representations” section), such as organometallic compounds and ionic salts."
+    - "a problematic set of structures to describe using SMILES notation is those\
+      \ which cannot be easily described using molecular graphs (see \u201CLimitations\
+      \ of molecular graph representations\u201D section), such as organometallic\
+      \ compounds and ionic salts."
     multivalued: true
-    # key: true
-
-  curly smiles string:
-    description: >-
-      CurlySMILES is a chemical line notation which extends SMILES with annotations for storage, retrieval and modeling of interlinked, coordinated, assembled and adsorbed molecules in supramolecular structures and nanodevices. https://jcheminf.biomedcentral.com/articles/10.1186/1758-2946-3-1
+  curly_smiles_string:
+    description: CurlySMILES is a chemical line notation which extends SMILES with
+      annotations for storage, retrieval and modeling of interlinked, coordinated,
+      assembled and adsorbed molecules in supramolecular structures and nanodevices.
+      https://jcheminf.biomedcentral.com/articles/10.1186/1758-2946-3-1
     aliases:
-      - CurlySMILES
-    is_a: chemical formula
+    - CurlySMILES
+    is_a: chemical_formula
     see_also:
-      - http://www.axeleratio.com/csm/proj/main.htm
-    
-  isomeric smiles string:
+    - http://www.axeleratio.com/csm/proj/main.htm
+  isomeric_smiles_string:
     aliases:
-      - iso-SMILES
-    is_a: smiles string
-    description: >-
-      A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13
+    - iso-SMILES
+    is_a: smiles_string
+    description: A SMILES string that distinguishes between isomeric forms. E.g. [13C]
+      for carbon-13
     exact_mappings:
-      - wd:P2017
-
-  extended smiles string:
+    - wd:P2017
+  extended_smiles_string:
     aliases:
-      - CXSMILES
-    is_a: smiles string
-
-  canonical smiles string:
-    is_a: smiles string
+    - CXSMILES
+    is_a: smiles_string
+  canonical_smiles_string:
+    is_a: smiles_string
     abstract: true
     multivalued: false
-    description: >-
-      A deterministic SMILES string. Note there is no unique system for canonical smiles strings
-
-  tucan string:
-    is_a: chemical formula
+    description: A deterministic SMILES string. Note there is no unique system for
+      canonical smiles strings
+  tucan_string:
+    is_a: chemical_formula
     see_also:
-      - https://doi.org/10.21203/rs.3.rs-1466562/v1
-
-  selfies string:
-    is_a: chemical formula
+    - https://doi.org/10.21203/rs.3.rs-1466562/v1
+  selfies_string:
+    is_a: chemical_formula
     aliases:
-      - SELFIES
+    - SELFIES
     key: true
     see_also:
-      - https://iopscience.iop.org/article/10.1088/2632-2153/aba947
-
-  has mixfile location:
-    is_a: information property
-    range: file location
-    description: >-
-      Location of a MixFile representing a chemical mixture
+    - https://iopscience.iop.org/article/10.1088/2632-2153/aba947
+  has_mixfile_location:
+    is_a: information_property
+    range: FileLocation
+    description: Location of a MixFile representing a chemical mixture
     see_also:
-      - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
-      - https://github.com/cdd/mixtures
-    
-  has molfile location:
-    is_a: information property
-    range: file location
-    description: >-
-      Location of a MolFile representing a chemical structure
-    
-  inchi component:
-    is_a: information property
-    description: >-
-      A part of an InChI object
-    
-  inchi sublayer:
-    is_a: inchi component
+    - https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4
+    - https://github.com/cdd/mixtures
+  has_molfile_location:
+    is_a: information_property
+    range: FileLocation
+    description: Location of a MolFile representing a chemical structure
+  inchi_component:
+    is_a: information_property
+    description: A part of an InChI object
+  inchi_sublayer:
+    is_a: inchi_component
     abstract: true
     see_also:
-      - https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png
-
-  inchi version string:
-    is_a: inchi component
-    pattern: "^1[S]"
+    - https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png
+  inchi_version_string:
+    is_a: inchi_component
+    pattern: ^1[S]
     required: true
-
-  inchi sublayer in main layer:
-    is_a: inchi sublayer
-    description: >-
-      The main layer consists of chemical formula, atom connections, and hydrogen atoms. Example: CH3O/c1-2/h1H3/q-1
-    
-  inchi chemical sublayer:
-    is_a: inchi sublayer in main layer
-    pattern: "^[A-Z0-9\\.]+$"
+  inchi_sublayer_in_main_layer:
+    is_a: inchi_sublayer
+    description: 'The main layer consists of chemical formula, atom connections, and
+      hydrogen atoms. Example: CH3O/c1-2/h1H3/q-1'
+  inchi_chemical_sublayer:
+    is_a: inchi_sublayer_in_main_layer
+    pattern: ^[A-Z0-9\.]+$
     required: false
-    description: >-
-      the main chemical formula
-
-  inchi atom connections sublayer:
-    is_a: inchi sublayer in main layer
-    pattern: "^c.*"
-    description: >-
-      The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
-
-  inchi hydrogen connections sublayer:
-    is_a: inchi sublayer in main layer
-    pattern: "^h.*"
-    description: >-
-      Describes how many hydrogen atoms are connected to each of the other atoms.
-
-  inchi charge sublayer:
-    is_a: inchi sublayer
-    pattern: "^q.*"
-
-  inchi proton sublayer:
-    is_a: inchi sublayer
-    pattern: "^p[\\-]\\d+"
-
-  inchi stereochemical double bond sublayer:
-    is_a: inchi sublayer
-    pattern: "^b.*"
-
-  inchi tetrahedral stereochemical sublayer:
-    is_a: inchi sublayer
-    pattern: "^[tm].*"  ## TODO
-
-  inchi stereochemical type sublayer:
-    is_a: inchi sublayer
-    pattern: "^s.*"
-
-  inchi isotopic layer:
-    is_a: inchi sublayer
-    pattern: "^[ih].*"  ## TODO
-
-  inchi fixed H layer:
-    is_a: inchi sublayer
-
-  inchi reconnected layer:
-    is_a: inchi sublayer
-
-      
-  atomically connected to:
-    domain: atom occurrence
-    range: atom occurrence
+    description: the main chemical formula
+  inchi_atom_connections_sublayer:
+    is_a: inchi_sublayer_in_main_layer
+    pattern: ^c.*
+    description: The atoms in the chemical formula (except for hydrogens) are numbered
+      in sequence; this sublayer describes which atoms are connected by bonds to which
+      other ones.
+  inchi_hydrogen_connections_sublayer:
+    is_a: inchi_sublayer_in_main_layer
+    pattern: ^h.*
+    description: Describes how many hydrogen atoms are connected to each of the other
+      atoms.
+  inchi_charge_sublayer:
+    is_a: inchi_sublayer
+    pattern: ^q.*
+  inchi_proton_sublayer:
+    is_a: inchi_sublayer
+    pattern: ^p[\-]\d+
+  inchi_stereochemical_double_bond_sublayer:
+    is_a: inchi_sublayer
+    pattern: ^b.*
+  inchi_tetrahedral_stereochemical_sublayer:
+    is_a: inchi_sublayer
+    pattern: ^[tm].*
+  inchi_stereochemical_type_sublayer:
+    is_a: inchi_sublayer
+    pattern: ^s.*
+  inchi_isotopic_layer:
+    is_a: inchi_sublayer
+    pattern: ^[ih].*
+  inchi_fixed_H_layer:
+    is_a: inchi_sublayer
+  inchi_reconnected_layer:
+    is_a: inchi_sublayer
+  atomically_connected_to:
+    domain: AtomOccurrence
+    range: AtomOccurrence
     multivalued: true
-
-  is organic:
-    domain: chemical entity
+  is_organic:
+    domain: ChemicalEntity
     range: boolean
-    description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
-    close_mappings:
-      SIO:010072
-
-  is radical:
-    domain: chemical entity
+    description: An organic molecule is a molecule composed of organic atoms (at least
+      carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
+    close_mappings: SIO:010072
+  is_radical:
+    domain: ChemicalEntity
     range: boolean
-
-  next in homologous series from:
-    description: >-
-      Next in a sequence of compounds with the same functional group and similar chemical properties in which the members of the series can be branched or unbranched. E.g.  ethane (C2H6) next in homologous series from methane (CH4)
-    domain: molecule
-    range: molecule
+  next_in_homologous_series_from:
+    description: Next in a sequence of compounds with the same functional group and
+      similar chemical properties in which the members of the series can be branched
+      or unbranched. E.g.  ethane (C2H6) next in homologous series from methane (CH4)
+    domain: Molecule
+    range: Molecule
     see_also:
-      - https://en.wikipedia.org/wiki/Homologous_series
-
-  isotopologue of:
-    is_a: alternate form of
-    description: >-
-      a relationship that holds between two forms of a parent molecule with identical chemical formulas but are differentiated by the number of neutrons in at least one atom
-    domain: molecule
-    range: molecule
+    - https://en.wikipedia.org/wiki/Homologous_series
+  isotopologue_of:
+    is_a: alternate_form_of
+    description: a relationship that holds between two forms of a parent molecule
+      with identical chemical formulas but are differentiated by the number of neutrons
+      in at least one atom
+    domain: Molecule
+    range: Molecule
     see_also:
-      - https://en.wikipedia.org/wiki/Isotopologue
+    - https://en.wikipedia.org/wiki/Isotopologue
     multivalued: true
     examples:
-      - description: light water is an isotopologue of heavy water (CHEBI:41981)
-    
-    
-  chemical isomer of:
+    - description: light water is an isotopologue of heavy water (CHEBI:41981)
+  chemical_isomer_of:
     aliases:
-      - isomer of
-    is_a: alternate form of
-    description: >-
-      a relationship that holds between two forms of a parent molecule with identical chemical formulas but distinct arrangements of atoms in space
-    domain: molecule
-    range: molecule
+    - isomer of
+    is_a: alternate_form_of
+    description: a relationship that holds between two forms of a parent molecule
+      with identical chemical formulas but distinct arrangements of atoms in space
+    domain: Molecule
+    range: Molecule
     see_also:
-      - https://en.wikipedia.org/wiki/Isomer
+    - https://en.wikipedia.org/wiki/Isomer
     multivalued: true
-    
-  structural isomer of:
+  structural_isomer_of:
     aliases:
-      - constitutional isomer
-    is_a: chemical isomer of
-    description: >-
-      a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonding patterns
+    - constitutional isomer
+    is_a: chemical_isomer_of
+    description: a relationship that holds between two forms of the 'same' molecule
+      with identical chemical formulas but different bonding patterns
     multivalued: true
     see_also:
-      - https://en.wikipedia.org/wiki/Structural_isomer
-      - https://goldbook.iupac.org/terms/view/C01285
-
-  skeletal isomer of:
+    - https://en.wikipedia.org/wiki/Structural_isomer
+    - https://goldbook.iupac.org/terms/view/C01285
+  skeletal_isomer_of:
     aliases:
-      - chain isomer of
-    is_a: structural isomer of
-    description: >-
-      components of the (usually carbon) skeleton are distinctly re-ordered to create different structures.
-      Pentane exists as three isomers: n-pentane (often called simply "pentane"), isopentane (2-methylbutane) and neopentane (dimethylpropane).
-      
-  position isomer of:
+    - chain isomer of
+    is_a: structural_isomer_of
+    description: 'components of the (usually carbon) skeleton are distinctly re-ordered
+      to create different structures. Pentane exists as three isomers: n-pentane (often
+      called simply "pentane"), isopentane (2-methylbutane) and neopentane (dimethylpropane).'
+  position_isomer_of:
     aliases:
-      - regioisomerism isomer of
-    is_a: structural isomer of
-    description: >-
-      a functional group or other substituent changes position on a parent structure.
-      
-  functional isomer of:
+    - regioisomerism isomer of
+    is_a: structural_isomer_of
+    description: a functional group or other substituent changes position on a parent
+      structure.
+  functional_isomer_of:
     aliases:
-      - functional group isomer of
-    is_a: structural isomer of
-    description: >-
-      structural isomers that have the same molecular formula (that is, the same number of atoms of the same elements), but the atoms are connected in different ways so that the groupings are dissimilar.
-      
-  tautomer of:
-    is_a: structural isomer of
-    description: >-
-       structural isomers (constitutional isomers) of chemical compounds that readily interconvert. Examples: a neutral amino acid and its zwitterion
+    - functional group isomer of
+    is_a: structural_isomer_of
+    description: structural isomers that have the same molecular formula (that is,
+      the same number of atoms of the same elements), but the atoms are connected
+      in different ways so that the groupings are dissimilar.
+  tautomer_of:
+    is_a: structural_isomer_of
+    description: 'structural isomers (constitutional isomers) of chemical compounds
+      that readily interconvert. Examples: a neutral amino acid and its zwitterion'
     todos:
-      - subtypes such as  keto-enol tautomerism
+    - subtypes such as  keto-enol tautomerism
     exact_mappings:
     - RO:0018036
-      
-  stereoisomer of:
+  stereoisomer_of:
     aliases:
-      - spatial isomer of
-    is_a: chemical isomer of
-    description: >-
-      a relationship that holds between two forms of the 'same' molecule with identical chemical formulas but different bonds
+    - spatial isomer of
+    is_a: chemical_isomer_of
+    description: a relationship that holds between two forms of the 'same' molecule
+      with identical chemical formulas but different bonds
     multivalued: true
-    
-  diastereoisomers of:
+  diastereoisomers_of:
     aliases:
-      - diastereomers of
-    is_a: stereoisomer of
-    description: >-
-      A stereoisomer non-mirror image non-identical stereoisomers
+    - diastereomers of
+    is_a: stereoisomer_of
+    description: A stereoisomer non-mirror image non-identical stereoisomers
     comments:
-      - Diastereomers differ from enantiomers in that the latter are pairs of stereoisomers that differ in all stereocenters and are therefore mirror images of one another
-    
-  epimer of:
-    is_a: diastereoisomers of
-    description: >-
-      A diastereoisomer of relationship in which the isomers differ at only one stereocenter
-      
-  enantiomer of:
+    - Diastereomers differ from enantiomers in that the latter are pairs of stereoisomers
+      that differ in all stereocenters and are therefore mirror images of one another
+  epimer_of:
+    is_a: diastereoisomers_of
+    description: A diastereoisomer of relationship in which the isomers differ at
+      only one stereocenter
+  enantiomer_of:
     aliases:
-      - enantiomorph of
-    is_a: stereoisomer of
-    description: >-
-      a stereoisomer relationship where the two forms are mirror images of one another
+    - enantiomorph of
+    is_a: stereoisomer_of
+    description: a stereoisomer relationship where the two forms are mirror images
+      of one another
     multivalued: true
-
-  variant reaction of:
+  variant_reaction_of:
     abstract: true
-    domain: reaction
-    range: reaction
-    
-  reaction has bidirectional form:
-    is_a: variant reaction of
+    domain: Reaction
+    range: Reaction
+  reaction_has_bidirectional_form:
+    is_a: variant_reaction_of
     exact_mappings:
-      - "http://purl.obolibrary.org/obo/rhea#_has_bi_reaction"
-    
-    
-  classification relationship:
+    - http://purl.obolibrary.org/obo/rhea#_has_bi_reaction
+  classification_relationship:
     abstract: true
     mixin: true
-
-  owl subclass of:
-    is_a: classification relationship      
+  owl_subclass_of:
+    is_a: classification_relationship
     aliases:
-      - is a
+    - is a
     mixin: true
-    description: >-
-      Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
-    domain: owl class
-    range: owl class
+    description: 'Holds between C and P if C owl:subClassOf P. Note that in this model,
+      most classes are metaclasses (see ''owl class''), where these metaclasses may
+      represent *groupings* or specific countable elements or species. We provide
+      two different sub-properties of subclass of for two cases: (1) subtype_of, which
+      connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a
+      amino-acid), (2) classified_by, which connects a specific element to a grouping
+      class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)'
+    domain: OwlClass
+    range: OwlClass
     exact_mappings:
-      - rdfs:subClassOf
+    - rdfs:subClassOf
     narrow_mappings:
-      - bo:family
-    
-  subtype of:
-    is_a: chemical to chemical relationship
+    - bo:family
+  subtype_of:
+    is_a: chemical_to_chemical_relationship
     aliases:
-      - metasubclass of ## wikidata
+    - metasubclass of
     mixins:
-      - owl subclass of
-    description: >-
-      A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class
-    domain: owl class
-    range: owl class
+    - owl_subclass_of
+    description: A subtype_of relationship holds between C and P if C is a more specialized
+      form of P. Here C and P denotes instances of OWL classes, where C and P both
+      function as grouping class
+    domain: OwlClass
+    range: OwlClass
     required: false
     multivalued: true
     narrow_mappings:
-      - rdfs:subClassOf
+    - rdfs:subClassOf
     exact_mappings:
-      - wd:P2445 ## metasubclass of
-      
-  has subtype:
-    is_a: chemical to chemical relationship
-    inverse: subtype of
-      
-  classified by:
-    is_a: chemical to chemical relationship
+    - wd:P2445
+  has_subtype:
+    is_a: chemical_to_chemical_relationship
+    inverse: subtype_of
+  classified_by:
+    is_a: chemical_to_chemical_relationship
     mixins:
-      - owl subclass of
-    description: >-
-      A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
-    domain: owl class
-    range: owl class
+    - owl_subclass_of
+    description: A subtype_of relationship holds between I and C if I is a specific
+      entity of type C. Here I and C denotes instances of OWL classes, where I is
+      a specific class and C is a grouping class
+    domain: OwlClass
+    range: OwlClass
     exact_mappings:
-      - rdf:type
+    - rdf:type
     examples:
-      - description: glucose classified by monosaccharide
-
+    - description: glucose classified by monosaccharide
   classifies:
-    is_a: chemical to chemical relationship
-    inverse: classified by
-
-  ## TODO: tidy these
-  has charge state:
+    is_a: chemical_to_chemical_relationship
+    inverse: classified_by
+  has_charge_state:
     range: uriorcurie
-  charge agnostic entity:
-    range: chemical entity
-  has morphological category:
+  charge_agnostic_entity:
+    range: ChemicalEntity
+  has_morphological_category:
     description: e.g. rod, sheet
-    range: nanostructure_morphology_enum
-  is substitutent group from:
-    range: molecule
-  boiling point in celcius:
+    range: NanostructureMorphologyEnum
+  is_substitutent_group_from:
+    range: Molecule
+  boiling_point_in_celcius:
     range: float
-  melting point in celcius:
+  melting_point_in_celcius:
     range: float
-  standard atomic weight:
+  standard_atomic_weight:
     range: float
   mass:
     range: float
-  monoisotopic mass:
+  monoisotopic_mass:
     range: float
-  electron configuration:
+  electron_configuration:
     range: string
-  has stereocenter:
+  has_stereocenter:
     multivalued: true
-    range: stereocenter
-  has physiologically stable form:
+    range: Stereocenter
+  has_physiologically_stable_form:
     description: connects an element to the equivalent form that is physiologically
       stable at pH 7.3
     aliases:
     - has Ph 7.3 mapping
     see_also:
     - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
-  subject atom occurrence:
-    range: atom occurrence
-  object atom occurrence:
-    range: atom occurrence
-  bond type:
-    range: bond_type_enum
-  subatomic particle type:
-    range: subatomic_particle_enum
-  bond length in angstroms:
+  subject_atom_occurrence:
+    range: AtomOccurrence
+  object_atom_occurrence:
+    range: AtomOccurrence
+  bond_type:
+    range: BondTypeEnum
+  subatomic_particle_type:
+    range: SubatomicParticleEnum
+  bond_length_in_angstroms:
     description: the average distance between nuclei of two bonded atoms in a molecule.
       It is a transferable property of a bond between atoms of fixed types, relatively
       independent of the rest of the molecule.
     range: float
-  bond angle:
+  bond_angle:
     range: float
-  torsional angle:
+  torsional_angle:
     range: float
-  occurrence of:
+  occurrence_of:
     required: true
-    range: atom
+    range: Atom
   valence:
     description: the number of electrons that an atom uses in bonding [https://doi.org/10.1021%2Fed083p791]
     comments:
@@ -2775,7 +2460,7 @@ slots:
     - atom valency
     - valency
     range: integer
-  oxidation number:
+  oxidation_number:
     description: The charge remaining on an atom when all ligands are removed heterolytically
       in their closed form, with the electrons being transferred to the more electronegative
       partner; homonuclear bonds do not contribute to the oxidation number. [https://doi.org/10.1021%2Fed083p791]
@@ -2785,119 +2470,114 @@ slots:
     exact_mappings:
     - goldbook:O04363
     range: integer
-  formal charge:
+  formal_charge:
     description: The charge remaining on an atom when all ligands are removed homolytically.
       [https://doi.org/10.1021%2Fed083p791]
     range: integer
     aliases:
     - charge
-  coordination number:
+  coordination_number:
     description: The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]
     range: integer
     aliases:
     - coordination
   acidity:
     range: float
-  hard or soft:
-    range: hard_or_soft_enum
-  has parent alcohol:
-    range: chemical entity
-  has parent acid:
-    range: Bronsted acid
-  relative configuration:
+  hard_or_soft:
+    range: HardOrSoftEnum
+  has_parent_alcohol:
+    range: ChemicalEntity
+  has_parent_acid:
+    range: BronstedAcid
+  relative_configuration:
     range: string
-  optical configuration:
+  optical_configuration:
     range: string
-  absolute configuration:
+  absolute_configuration:
     see_also:
     - https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules
     range: string
-  enantiomer form of:
+  enantiomer_form_of:
     description: 'Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione'
-    is_a: owl subclass of
-    range: molecule
-  has left enantiomer:
+    is_a: owl_subclass_of
+    range: Molecule
+  has_left_enantiomer:
     required: true
-    range: enantiomer
-  has right enantiomer:
+    range: Enantiomer
+  has_right_enantiomer:
     required: true
-    range: enantiomer
-  chirality agnostic form:
+    range: Enantiomer
+  chirality_agnostic_form:
     recommended: true
     required: false
-    range: molecule
-  has bonding structure:
+    range: Molecule
+  has_bonding_structure:
     multivalued: false
     description: The pattern in which the atoms are bonded; e.g. hexagonal lattice,
       sheets, etc
     required: true
-  repetition of:
+  repetition_of:
     description: the macromolecule that is repeated
-    range: molecule
-  degree of polymerization:
+    range: Molecule
+  degree_of_polymerization:
     see_also:
     - https://en.wikipedia.org/wiki/Degree_of_polymerization
-    range: count
-  left participants:
+    range: Count
+  left_participants:
     multivalued: true
-    range: reaction participant
-  right participants:
+    range: ReactionParticipant
+  right_participants:
     multivalued: true
-    range: reaction participant
+    range: ReactionParticipant
   direction:
     description: One of l->r, r->l, bidirectional, neutral
-  is diastereoselective:
+  is_diastereoselective:
     range: boolean
-  is stereo:
+  is_stereo:
     range: boolean
-  is balanced:
+  is_balanced:
     range: boolean
-  is transport:
+  is_transport:
     range: boolean
-  is fully characterized:
+  is_fully_characterized:
     description: False if includes R-groups
     range: boolean
-  reaction center: {}
+  reaction_center: {}
   description:
     string_serialization: '{left participants} {direction} {right participants}'
   participant:
-    range: chemical entity
+    range: ChemicalEntity
   stoichiometry:
     range: integer
-  has role:
-    range: ingredient_role_enum
-  composed of:
-    range: chemical entity
-  minimal percentage:
+  has_role:
+    range: IngredientRoleEnum
+  composed_of:
+    range: ChemicalEntity
+  minimal_percentage:
     range: float
-  maximum percentage:
+  maximum_percentage:
     range: float
-  left molecule:
-    range: molecule
-  right molecule:
-    range: molecule
+  left_molecule:
+    range: Molecule
+  right_molecule:
+    range: Molecule
   score:
     range: float
-
-  
-    
 enums:
-
-  classification_level_enum:
+  ClassificationLevelEnum:
     permissible_values:
-      Uncategorized:
-      Class:
-      Species:
-      Category:
-      Subspecies:
+      Uncategorized: null
+      Class: null
+      Species: null
+      Category: null
+      Subspecies: null
       StructuralSubspecies:
         is_a: Subspecies
       IsomericSubspecies:
         is_a: Subspecies
       MolecularSubspecies:
         is_a: Subspecies
-
-  nanostructure_morphology_enum:
+  NanostructureMorphologyEnum:
     permissible_values:
       nanotube:
         meaning: CHEBI:50796
@@ -2919,37 +2599,35 @@ enums:
         meaning: CHEBI:52531
       nanowire:
         meaning: CHEBI:52593
-    
-  periodic_table_block_enum:
+  PeriodicTableBlockEnum:
     permissible_values:
       s-block:
-        meaning: CHEBI:33674 ## s-block molecular entity
+        meaning: CHEBI:33674
       p-block:
-        meaning: CHEBI:33675 ## p-block molecular entity
+        meaning: CHEBI:33675
       d-block:
-        meaning: CHEBI:33561 ## d-block element atom
+        meaning: CHEBI:33561
       f-block:
-        meaning: CHEBI:33562 ## f-block element atom
+        meaning: CHEBI:33562
       g-block:
-        description: The g-block is a hypothetical region in the periodic table of the elements.
-
-  element_family_enum:
+        description: The g-block is a hypothetical region in the periodic table of
+          the elements.
+  ElementFamilyEnum:
     close_mappings:
-      - bo:family
+    - bo:family
     permissible_values:
-      Alkali_Earth:
-      Alkaline_Earth:
-      Halogen:
-      Metalloids:
-      Noblegas:
-      Non-Metal:
-      Other_Metal:
-      Rare_Earth:
-      Transition:
-
-  element_metallic_classification:
+      Alkali_Earth: null
+      Alkaline_Earth: null
+      Halogen: null
+      Metalloids: null
+      Noblegas: null
+      Non-Metal: null
+      Other_Metal: null
+      Rare_Earth: null
+      Transition: null
+  ElementMetallicClassification:
     exact_mappings:
-      - damlpt:Classification
+    - damlpt:Classification
     permissible_values:
       Metallic:
         meaning: damlpt:Metallic
@@ -2957,20 +2635,18 @@ enums:
         meaning: damlpt:Non-Metallic
       Semi-Metallic:
         meaning: damlpt:Semi-Metallic
-        
-        
-  ingredient_role_enum:
+  IngredientRoleEnum:
     permissible_values:
-      active ingredient:
-      inactive ingredient:
-      excipient:
-      solvent:
-        
-  bond_type_enum:
+      active ingredient: null
+      inactive ingredient: null
+      excipient: null
+      solvent: null
+  BondTypeEnum:
     permissible_values:
       covalent:
-        description: >-
-          A covalent bond is a chemical bond that involves the sharing of pairs of electrons between atoms. This sharing results in a stable balance of attractive and repulsive forces between those atoms.
+        description: A covalent bond is a chemical bond that involves the sharing
+          of pairs of electrons between atoms. This sharing results in a stable balance
+          of attractive and repulsive forces between those atoms.
         meaning: gc:NormalBond
       aromatic:
         meaning: gc:AromaticBond
@@ -2984,23 +2660,22 @@ enums:
         meaning: gc:Quadruple
       hydrogen:
         meaning: gc:HydrogenBond
-      ionic:
-      polycentric:
-      metal-metal:
-      salt bridge:
-      polar covalent:
-      
-  hard_or_soft_enum:
+      ionic: null
+      polycentric: null
+      metal-metal: null
+      salt bridge: null
+      polar covalent: null
+  HardOrSoftEnum:
     permissible_values:
-      hard:
-      soft:
-      borderline:
-    
-  subatomic_particle_enum:
+      hard: null
+      soft: null
+      borderline: null
+  SubatomicParticleEnum:
     permissible_values:
       proton:
         meaning: CHEBI:24636
-        description: Nuclear particle of charge number +1, spin 1/2 and rest mass of 1.007276470(12) u.
+        description: Nuclear particle of charge number +1, spin 1/2 and rest mass
+          of 1.007276470(12) u.
       alpha particle:
         meaning: CHEBI:30216
         description: Nucleus of the (4)He atom.
@@ -3008,28 +2683,39 @@ enums:
         meaning: CHEBI:36354
       positron:
         meaning: CHEBI:30225
-        description: Elementary particle not affected by the strong force having a spin 1/2, a positive elementary charge and a rest mass of 0.000548579903(13) u, or 0.51099906(15) MeV.
+        description: Elementary particle not affected by the strong force having a
+          spin 1/2, a positive elementary charge and a rest mass of 0.000548579903(13)
+          u, or 0.51099906(15) MeV.
       muon:
         meaning: CHEBI:36356
-        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 0.113428913(17) u, or 105.658389(34) MeV.
+        description: Elementary particle not affected by the strong force having a
+          spin 1/2, a negative elementary charge and a rest mass of 0.113428913(17)
+          u, or 105.658389(34) MeV.
       hyperon:
         meaning: CHEBI:36365
-        description: A baryon which contain one or more strange quarks. Hyperons are short-lived and heavier than nucleons.
+        description: A baryon which contain one or more strange quarks. Hyperons are
+          short-lived and heavier than nucleons.
       boson:
         meaning: CHEBI:36341
-        description: Particle of integer spin quantum number following Bose-Einstein statistics. Bosons are named after Satyendra Nath Bose.
+        description: Particle of integer spin quantum number following Bose-Einstein
+          statistics. Bosons are named after Satyendra Nath Bose.
       fermion:
         meaning: CHEBI:36340
-        description: Particle of half-integer spin quantum number following Fermi-Dirac statistics. Fermions are named after Enrico Fermi.
+        description: Particle of half-integer spin quantum number following Fermi-Dirac
+          statistics. Fermions are named after Enrico Fermi.
       baryon:
         meaning: CHEBI:36339
-        description: Baryon is a fermion that does experience the strong force (strong interaction). The term is derived from the Greek betaalpharhoupsilonsigma (heavy).
+        description: Baryon is a fermion that does experience the strong force (strong
+          interaction). The term is derived from the Greek betaalpharhoupsilonsigma
+          (heavy).
       top quark:
         meaning: CHEBI:36371
         description: A third-generation quark with a charge of +2/3.
       hydron:
         meaning: CHEBI:15378
-        description: The general name for the hydrogen nucleus, to be used without regard to the hydrogen nuclear mass (either for hydrogen in its natural abundance or where it is not desired to distinguish between the isotopes).
+        description: The general name for the hydrogen nucleus, to be used without
+          regard to the hydrogen nuclear mass (either for hydrogen in its natural
+          abundance or where it is not desired to distinguish between the isotopes).
       muon neutrino:
         meaning: CHEBI:36353
       nuclear particle:
@@ -3037,13 +2723,14 @@ enums:
         description: A nucleus or any of its constituents in any of their energy states.
       pi minus meson:
         meaning: CHEBI:36350
-        description: A subatomic particle of charge number -1, zero spin and rest mass of 0.1498323(8) u, or 139.5679(7) MeV.
+        description: A subatomic particle of charge number -1, zero spin and rest
+          mass of 0.1498323(8) u, or 139.5679(7) MeV.
       pi meson:
         meaning: CHEBI:36348
         description: The collective name for zero-spin mesons pi(+), pi(-) and pi(0).
       nucleon:
         meaning: CHEBI:33253
-        description: "Heavy nuclear particle: proton or neutron."
+        description: 'Heavy nuclear particle: proton or neutron.'
       triton:
         meaning: CHEBI:29234
         description: Nucleus of the (3)H atom.
@@ -3052,44 +2739,59 @@ enums:
         description: Nucleus of the (2)H atom.
       neutrino:
         meaning: CHEBI:36352
-        description: An elementary particle of spin 1/2, zero electric charge and negligible rest mass. Three known types (flavors) of neutrino are electron neutrino, muon neutrino and tau neutrino, named after their charged partner leptons.
+        description: An elementary particle of spin 1/2, zero electric charge and
+          negligible rest mass. Three known types (flavors) of neutrino are electron
+          neutrino, muon neutrino and tau neutrino, named after their charged partner
+          leptons.
       meson:
         meaning: CHEBI:36345
-        description: A hadron with zero or integer spin; a strongly interacting boson. The term is derived from the Greek muepsilonsigmaomicronsigma (medium, middle).
+        description: A hadron with zero or integer spin; a strongly interacting boson.
+          The term is derived from the Greek muepsilonsigmaomicronsigma (medium, middle).
       quark:
         meaning: CHEBI:36346
-        description: Quarks comprise one of two classes of the fundamental particles. Quarks possess fractional electric charges and are not observed in free state.
+        description: Quarks comprise one of two classes of the fundamental particles.
+          Quarks possess fractional electric charges and are not observed in free
+          state.
       Higgs boson:
         meaning: CHEBI:146278
-        description: A boson that is its own antiparticle, has no spin, zero electric charge and zero colour charge.
+        description: A boson that is its own antiparticle, has no spin, zero electric
+          charge and zero colour charge.
       fundamental particle:
         meaning: CHEBI:33233
         description: A particle not known to have substructure.
       electron neutrino:
         meaning: CHEBI:30223
-      subatomic particle:
+      SubatomicParticle:
         meaning: CHEBI:36342
         description: A particle smaller than an atom.
       tau lepton:
         meaning: CHEBI:36355
-        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 1777.05 MeV.
+        description: Elementary particle not affected by the strong force having a
+          spin 1/2, a negative elementary charge and a rest mass of 1777.05 MeV.
       photon:
         meaning: CHEBI:30212
-        description: Particle of zero charge, zero rest mass, spin quantum number 1, energy hnu and momentum hnu/c (h is the Planck constant, nu the frequency of radiation and c the speed of light), carrier of electromagnetic force.
+        description: Particle of zero charge, zero rest mass, spin quantum number
+          1, energy hnu and momentum hnu/c (h is the Planck constant, nu the frequency
+          of radiation and c the speed of light), carrier of electromagnetic force.
       up quark:
         meaning: CHEBI:36366
-        description: A first-generation quark with a charge of +2/3. The up and down quarks are the fundamental constituents of the nucleons.
+        description: A first-generation quark with a charge of +2/3. The up and down
+          quarks are the fundamental constituents of the nucleons.
       antimuon:
         meaning: CHEBI:30214
-        description: Elementary particle not affected by the strong force having a spin 1/2, a positive elementary charge and a rest mass of 0.113428913(17) u, or 105.658389(34) MeV.
+        description: Elementary particle not affected by the strong force having a
+          spin 1/2, a positive elementary charge and a rest mass of 0.113428913(17)
+          u, or 105.658389(34) MeV.
       strange quark:
         meaning: CHEBI:36368
-        description: A second-generation quark with a charge of -1/3 and a strangeness of -1.
+        description: A second-generation quark with a charge of -1/3 and a strangeness
+          of -1.
       Delta baryon:
         meaning: CHEBI:36375
       pi zero meson:
         meaning: CHEBI:36351
-        description: A subatomic particle of zero charge, zero spin and rest mass of 0.1449008(9) u, or 134.9743(8) MeV.
+        description: A subatomic particle of zero charge, zero spin and rest mass
+          of 0.1449008(9) u, or 134.9743(8) MeV.
       hadron:
         meaning: CHEBI:36344
         description: Hadron is a subatomic particle which experiences the strong force.
@@ -3098,19 +2800,22 @@ enums:
         description: A third-generation quark with a charge of -1/3.
       composite particle:
         meaning: CHEBI:36343
-        description: A subatomic particle known to have substructure (i.e. consisting of smaller particles).
-      #atomic nucleus:
-      #  meaning: CHEBI:33252
-      #  description: A nucleus is the positively charged central portion of an atom, excluding the orbital electrons.
+        description: A subatomic particle known to have substructure (i.e. consisting
+          of smaller particles).
       electron:
         meaning: CHEBI:10545
-        description: Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 0.000548579903(13) u, or 0.51099906(15) MeV.
+        description: Elementary particle not affected by the strong force having a
+          spin 1/2, a negative elementary charge and a rest mass of 0.000548579903(13)
+          u, or 0.51099906(15) MeV.
       neutron:
         meaning: CHEBI:30222
-        description: Nuclear particle of zero charge, spin 1/2 and rest mass of 1.008664904(14) u.
+        description: Nuclear particle of zero charge, spin 1/2 and rest mass of 1.008664904(14)
+          u.
       lepton:
         meaning: CHEBI:36338
-        description: Lepton is a fermion that does not experience the strong force (strong interaction). The term is derived from the Greek lambdaepsilonpitauomicronsigma (small, thin).
+        description: Lepton is a fermion that does not experience the strong force
+          (strong interaction). The term is derived from the Greek lambdaepsilonpitauomicronsigma
+          (small, thin).
       helion:
         meaning: CHEBI:30220
         description: Nucleus of the (3)He atom.
@@ -3119,7 +2824,10 @@ enums:
         description: A second-generation quark with a charge of +2/3.
       down quark:
         meaning: CHEBI:36367
-        description: A first-generation quark with a charge of -1/3. The up and down quarks are the fundamental constituents of the nucleons.
+        description: A first-generation quark with a charge of -1/3. The up and down
+          quarks are the fundamental constituents of the nucleons.
       pi positive meson:
         meaning: CHEBI:36349
-        description: A subatomic particle of charge number +1, zero spin and rest mass of 0.1498323(8) u, or 139.5679(7) MeV.
+        description: A subatomic particle of charge number +1, zero spin and rest
+          mass of 0.1498323(8) u, or 139.5679(7) MeV.
+
