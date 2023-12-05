@@ -35,7 +35,7 @@ linkml:Double xsd:double
 
 linkml:Decimal xsd:decimal
 
-linkml:Time xsd:dateTime
+linkml:Time xsd:time
 
 linkml:Date xsd:date
 
@@ -45,6 +45,8 @@ linkml:DateOrDatetime linkml:DateOrDatetime
 
 linkml:Uriorcurie IRI
 
+linkml:Curie xsd:string
+
 linkml:Uri IRI
 
 linkml:Ncname xsd:string
@@ -52,6 +54,12 @@ linkml:Ncname xsd:string
 linkml:Objectidentifier IRI
 
 linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
 
 <AcidAnionGroupingClass> CLOSED {
     (  $<AcidAnionGroupingClass_tes> (  &<GroupingClassForAcidsOrBases_tes> ;
@@ -117,6 +125,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <ChemicalEntity> ] ? ;
           <http://www.blueobelisk.org/dict/terminologyatomicNumber> @<Count> ? ;
           <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
+          <has_nuclear_parts> @<SubatomicParticleOccurrence> ? ;
           <has_part> @<SubatomicParticle> ?
        ) ;
        rdf:type [ <Atom> ]
@@ -148,7 +157,7 @@ linkml:Nodeidentifier NONLITERAL
 <AtomGroupingByPeriodicTableBlock> CLOSED {
     (  $<AtomGroupingByPeriodicTableBlock_tes> (  &<AtomGroupingByPeriodicTablePlacement_tes> ;
           rdf:type [ <AtomGroupingByPeriodicTablePlacement> ] ? ;
-          <in_periodic_table_block> @<PeriodicTableBlock> ?
+          <in_periodic_table_block> @<PeriodicTableBlockEnum> ?
        ) ;
        rdf:type [ <AtomGroupingByPeriodicTableBlock> ]
     )
@@ -185,8 +194,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <AtomGroupingClass>  (
     CLOSED {
-       (  $<AtomGroupingClass_tes> (  &<GroupingClass_tes> ;
-             rdf:type [ <GroupingClass> ] ? ;
+       (  $<AtomGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+             rdf:type [ <ChemicalGroupingClass> ] ? ;
              <subtype_of> @<MoleculeGroupingClass> * ;
              <classifies> @<Atom> ?
           ) ;
@@ -209,8 +218,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <AtomOccurrence> CLOSED {
-    (  $<AtomOccurrence_tes> (  &<RelationalChemicalEntity_tes> ;
-          rdf:type [ <RelationalChemicalEntity> ] ? ;
+    (  $<AtomOccurrence_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
           <occurrence_of> @<Atom> ;
@@ -219,18 +228,21 @@ linkml:Nodeidentifier NONLITERAL
           <formal_charge> @linkml:Integer ? ;
           <coordination_number> @linkml:Integer ?
        ) ;
-       rdf:type [ <AtomOccurrence> ] ?
+       rdf:type [ <AtomOccurrence> ]
     )
 }
 
 <AtomicBond> CLOSED {
-    (  $<AtomicBond_tes> (  &<RelationalChemicalEntity_tes> ;
-          rdf:type [ <RelationalChemicalEntity> ] ? ;
+    (  $<AtomicBond_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <has_atom_occurrences> @<AtomOccurrence> * ;
-          <bond_order> @linkml:Integer ? ;
+          <subject> @<AtomOccurrence> ? ;
+          <object> @<AtomOccurrence> ? ;
           <bond_type> @<BondTypeEnum> ? ;
+          <bond_order> @linkml:Integer ? ;
+          <bond_length> @linkml:Float ? ;
+          <bond_energy> @linkml:Float ? ;
           <bond_length_in_angstroms> @linkml:Float ? ;
           <bond_angle> @linkml:Float ? ;
           <torsional_angle> @linkml:Float ?
@@ -289,7 +301,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <PartiallySpecifiedAtom> ] ? ;
           <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <in_periodic_table_group> @<PeriodicTableGroup> ? ;
-          <in_periodic_table_block> @<PeriodicTableBlock> ? ;
+          <in_periodic_table_block> @<PeriodicTableBlockEnum> ? ;
           <boiling_point_in_celcius> @linkml:Float ? ;
           <melting_point_in_celcius> @linkml:Float ? ;
           <standard_atomic_weight> @linkml:Float ? ;
@@ -304,18 +316,21 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <ChemicalEntity>  (
-    @<Atom> OR @<PolyatomicEntity> OR @<SubatomicParticle>
+    @<Atom> OR @<PolyatomicEntity>
 )
 
 <ChemicalEntity_struct> {
-    (  $<ChemicalEntity_tes> (  &<OwlClass_tes> ;
+    (  $<ChemicalEntity_tes> (  &<PhysicochemicalEntity_tes> ;
+          rdf:type [ <PhysicochemicalEntity> ] ? ;
+          &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          rdfs:label @linkml:String ? ;
           <http://semanticscience.org/resource/CHEMINF_000107> @linkml:String ? ;
           <is_radical> @linkml:Boolean ? ;
           <has_chemical_role> @<ChemicalRole> ? ;
           <inchi_string> @<ChemicalEncoding> ? ;
-          <inchi_chemical_sublayer> @linkml:String ?
+          <inchi_chemical_sublayer> @linkml:String ? ;
+          <smiles_string> @<ChemicalEncoding> * ;
+          <empirical_formula> @<ChemicalEncoding> ?
        ) ;
        rdf:type [ <ChemicalEntity> ]
     )
@@ -336,13 +351,39 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <ChemicalGroupingByCharge> CLOSED {
-    (  $<ChemicalGroupingByCharge_tes> (  &<GroupingClass_tes> ;
-          rdf:type [ <GroupingClass> ] ? ;
+    (  $<ChemicalGroupingByCharge_tes> (  &<ChemicalGroupingClass_tes> ;
+          rdf:type [ <ChemicalGroupingClass> ] ? ;
           <subtype_of> @<MoleculeGroupingClass> * ;
           <has_charge_state> @linkml:Uriorcurie ? ;
           <charge_agnostic_entity> @<ChemicalEntity> ?
        ) ;
        rdf:type [ <ChemicalGroupingByCharge> ]
+    )
+}
+
+<ChemicalGroupingClass>  (
+    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MolecularComponentGroupingClass> OR @<MoleculeGroupingClass>
+)
+
+<ChemicalGroupingClass_struct> {
+    (  $<ChemicalGroupingClass_tes> (  &<PhysicochemicalEntityGroupingClass_tes> ;
+          rdf:type [ <PhysicochemicalEntityGroupingClass> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <subtype_of> @<ChemicalGroupingClass> * ;
+          <classifies> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <ChemicalGroupingClass> ]
+    )
+}
+
+<ChemicalInformation>  (
+    @<InchiObject> OR @<PeriodicTablePlacement>
+)
+
+<ChemicalInformation_struct> {
+    (  $<ChemicalInformation_tes> rdf:type . * ;
+       rdf:type [ <ChemicalInformation> ] ?
     )
 }
 
@@ -355,6 +396,19 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <PolyatomicEntity> ] ?
        ) ;
        rdf:type [ <ChemicalMixture> ]
+    )
+}
+
+<ChemicalRelationship>  (
+    @<AtomOccurrence> OR @<AtomicBond> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<Similarity> OR
+    @<SubatomicParticleOccurrence>
+)
+
+<ChemicalRelationship_struct> {
+    (  $<ChemicalRelationship_tes> (  &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ?
+       ) ;
+       rdf:type [ <ChemicalRelationship> ] ?
     )
 }
 
@@ -444,6 +498,18 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<DomainEntity>  (
+    @<PhysicochemicalEntity> OR @<Reaction>
+)
+
+<DomainEntity_struct> {
+    (  $<DomainEntity_tes> (  rdfs:label @linkml:String ? ;
+          <type> @linkml:Uriorcurie ?
+       ) ;
+       rdf:type [ <DomainEntity> ]
+    )
+}
+
 <Enantiomer> CLOSED {
     (  $<Enantiomer_tes> (  &<Stereoisomer_tes> ;
           rdf:type [ <Stereoisomer> ] ? ;
@@ -514,7 +580,7 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<FullyCovalentlyBonded> CLOSED {
+<FullyCovalentlyBonded> {
     (  $<FullyCovalentlyBonded_tes> (  &<Connectivity_tes> ;
           rdf:type [ <Connectivity> ] ?
        ) ;
@@ -568,15 +634,14 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <GroupingClass>  (
-    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MaterialGroupingClass> OR @<MolecularComponentGroupingClass> OR
-    @<MoleculeGroupingClass>
+    @<PhysicochemicalEntityGroupingClass> OR @<ReactionGroupingClass>
 )
 
 <GroupingClass_struct> {
     (  $<GroupingClass_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <subtype_of> @<GroupingClass> * ;
-          <classifies> @<ChemicalEntity> ?
+          rdfs:label @linkml:String ? ;
+          <subtype_of> @<GroupingClass> *
        ) ;
        rdf:type [ <GroupingClass> ]
     )
@@ -618,49 +683,13 @@ linkml:Nodeidentifier NONLITERAL
 
 <InchiObject>  (
     {
-       (  $<InchiObject_tes> (  &<InformationalChemicalEntity_tes> ;
-             rdf:type [ <InformationalChemicalEntity> ] ?
+       (  $<InchiObject_tes> (  &<ChemicalInformation_tes> ;
+             rdf:type [ <ChemicalInformation> ] ?
           ) ;
           rdf:type [ <InchiObject> ] ?
        )
     } OR @<StandardInchiObject>
 )
-
-<InformationalChemicalEntity>  (
-    @<InchiObject> OR @<PeriodicTablePlacement>
-)
-
-<InformationalChemicalEntity_struct> {
-    (  $<InformationalChemicalEntity_tes> rdf:type . * ;
-       rdf:type [ <InformationalChemicalEntity> ] ?
-    )
-}
-
-<IsPart> CLOSED {
-    (  $<IsPart_tes> (  &<IsPartOrWhole_tes> ;
-          rdf:type [ <IsPartOrWhole> ] ?
-       ) ;
-       rdf:type [ <IsPart> ] ?
-    )
-}
-
-<IsPartOrWhole>  (
-    @<IsPart> OR @<IsWhole>
-)
-
-<IsPartOrWhole_struct> {
-    (  $<IsPartOrWhole_tes> rdf:type . * ;
-       rdf:type [ <IsPartOrWhole> ] ?
-    )
-}
-
-<IsWhole> CLOSED {
-    (  $<IsWhole_tes> (  &<IsPartOrWhole_tes> ;
-          rdf:type [ <IsPartOrWhole> ] ?
-       ) ;
-       rdf:type [ <IsWhole> ] ?
-    )
-}
 
 <Isobar> CLOSED {
     (  $<Isobar_tes> (  &<Nuclide_tes> ;
@@ -711,10 +740,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Location>  (
-    CLOSED {
-       (  $<Location_tes> (  &<OwlClass_tes> ;
-             rdf:type [ owl:Class ] ?
-          ) ;
+    {
+       (  $<Location_tes> rdf:type . * ;
           rdf:type [ <Location> ] ?
        )
     } OR @<Stereocenter>
@@ -733,15 +760,20 @@ linkml:Nodeidentifier NONLITERAL
 
 <Material>  (
     CLOSED {
-       (  $<Material_tes> <has_part> @<ChemicalEntity> ? ;
-          rdf:type [ <Material> ] ?
+       (  $<Material_tes> (  &<PhysicochemicalEntity_tes> ;
+             rdf:type [ <PhysicochemicalEntity> ] ? ;
+             <has_repeat_unit> @<ChemicalEntity> ? ;
+             <has_part> @<ChemicalEntity> ?
+          ) ;
+          rdf:type [ <Material> ]
        )
-    } OR @<Mineral> OR @<Nanostructure>
+    } OR @<Mineral> OR @<Nanomaterial>
 )
 
 <MaterialGroupingClass> CLOSED {
-    (  $<MaterialGroupingClass_tes> (  &<GroupingClass_tes> ;
-          rdf:type [ <GroupingClass> ] ? ;
+    (  $<MaterialGroupingClass_tes> (  &<PhysicochemicalEntityGroupingClass_tes> ;
+          rdf:type [ <PhysicochemicalEntityGroupingClass> ] ? ;
+          <subtype_of> @<MaterialGroupingClass> * ;
           <classifies> @<Material> ?
        ) ;
        rdf:type [ <MaterialGroupingClass> ]
@@ -752,7 +784,7 @@ linkml:Nodeidentifier NONLITERAL
     (  $<Mineral_tes> (  &<Material_tes> ;
           rdf:type [ <Material> ] ?
        ) ;
-       rdf:type [ <Mineral> ] ?
+       rdf:type [ <Mineral> ]
     )
 }
 
@@ -807,8 +839,8 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <MolecularComponentGroupingClass> CLOSED {
-    (  $<MolecularComponentGroupingClass_tes> (  &<GroupingClass_tes> ;
-          rdf:type [ <GroupingClass> ] ? ;
+    (  $<MolecularComponentGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+          rdf:type [ <ChemicalGroupingClass> ] ? ;
           <subtype_of> @<MolecularComponentGroupingClass> * ;
           <classifies> @<MolecularComponent> ?
        ) ;
@@ -844,30 +876,28 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Molecule>  (
-    @<BronstedAcid> OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
+    CLOSED {
+       (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ? ;
+             &<FullyCovalentlyBonded_tes> ;
+             rdf:type [ <FullyCovalentlyBonded> ] ? ;
+             <has_atom_occurrences> @<AtomOccurrence> * ;
+             <has_bonds> @<AtomicBond> * ;
+             <has_submolecules> @<Molecule> * ;
+             <has_atoms> @<Atom> * ;
+             <is_organic> @linkml:Boolean ? ;
+             <has_part> @linkml:String ?
+          ) ;
+          rdf:type [ <Molecule> ]
+       )
+    } OR @<BronstedAcid> OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
     @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<SmallMolecule> OR @<Stereoisomer> OR @<UnchargedMolecule>
 )
 
-<Molecule_struct> {
-    (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
-          rdf:type [ <PolyatomicEntity> ] ? ;
-          &<FullyCovalentlyBonded_tes> ;
-          rdf:type [ <FullyCovalentlyBonded> ] ? ;
-          <has_atom_occurrences> @<AtomOccurrence> * ;
-          <has_bonds> @<AtomicBond> * ;
-          <has_submolecules> @<Molecule> * ;
-          <has_atoms> @<Atom> * ;
-          <is_organic> @linkml:Boolean ? ;
-          <has_part> @linkml:String ?
-       ) ;
-       rdf:type [ <Molecule> ]
-    )
-}
-
 <MoleculeGroupingClass>  (
     CLOSED {
-       (  $<MoleculeGroupingClass_tes> (  &<GroupingClass_tes> ;
-             rdf:type [ <GroupingClass> ] ? ;
+       (  $<MoleculeGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+             rdf:type [ <ChemicalGroupingClass> ] ? ;
              <subtype_of> @<MoleculeGroupingClass> * ;
              <classifies> @<Molecule> ?
           ) ;
@@ -903,7 +933,7 @@ linkml:Nodeidentifier NONLITERAL
              rdf:type [ <Similarity> ] ? ;
              <left_molecule> @<Molecule> ? ;
              <right_molecule> @<Molecule> ? ;
-             <score> @linkml:String ?
+             <score> @linkml:Float ?
           ) ;
           rdf:type [ <MoleculePairwiseSimilarity> ] ?
        )
@@ -954,12 +984,12 @@ linkml:Nodeidentifier NONLITERAL
     } OR @<Copolymer> OR @<Homopolymer>
 )
 
-<Nanostructure> CLOSED {
-    (  $<Nanostructure_tes> (  &<Material_tes> ;
+<Nanomaterial> CLOSED {
+    (  $<Nanomaterial_tes> (  &<Material_tes> ;
           rdf:type [ <Material> ] ? ;
           <has_morphological_category> @<NanostructureMorphologyEnum> ?
        ) ;
-       rdf:type [ <Nanostructure> ] ?
+       rdf:type [ <Nanomaterial> ]
     )
 }
 
@@ -1027,24 +1057,38 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<PeriodicTableBlock> CLOSED {
-    (  $<PeriodicTableBlock_tes> (  &<PeriodicTablePlacement_tes> ;
-          rdf:type [ <PeriodicTablePlacement> ] ? ;
-          <type> @<PeriodicTableBlockEnum> ?
+<PeriodicTablePlacement> {
+    (  $<PeriodicTablePlacement_tes> (  &<ChemicalInformation_tes> ;
+          rdf:type [ <ChemicalInformation> ] ?
        ) ;
-       rdf:type [ <PeriodicTableBlock> ] ?
+       rdf:type [ <PeriodicTablePlacement> ] ?
     )
 }
 
-<PeriodicTablePlacement>  (
-    {
-       (  $<PeriodicTablePlacement_tes> (  &<InformationalChemicalEntity_tes> ;
-             rdf:type [ <InformationalChemicalEntity> ] ?
-          ) ;
-          rdf:type [ <PeriodicTablePlacement> ] ?
-       )
-    } OR @<PeriodicTableBlock>
+<PhysicochemicalEntity>  (
+    @<ChemicalEntity> OR @<Material> OR @<SubatomicParticle>
 )
+
+<PhysicochemicalEntity_struct> {
+    (  $<PhysicochemicalEntity_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ?
+       ) ;
+       rdf:type [ <PhysicochemicalEntity> ]
+    )
+}
+
+<PhysicochemicalEntityGroupingClass>  (
+    @<ChemicalGroupingClass> OR @<MaterialGroupingClass>
+)
+
+<PhysicochemicalEntityGroupingClass_struct> {
+    (  $<PhysicochemicalEntityGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<PhysicochemicalEntityGroupingClass> *
+       ) ;
+       rdf:type [ <PhysicochemicalEntityGroupingClass> ]
+    )
+}
 
 <PolyatomicEntity>  (
     @<ChemicalMixture> OR @<MolecularComponent> OR @<Molecule>
@@ -1085,8 +1129,8 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <PolymerRepeatUnit> CLOSED {
-    (  $<PolymerRepeatUnit_tes> (  &<RelationalChemicalEntity_tes> ;
-          rdf:type [ <RelationalChemicalEntity> ] ? ;
+    (  $<PolymerRepeatUnit_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
           <repetition_of> @<Molecule> ? ;
           <degree_of_polymerization> @<Count> ? ;
           <mass> @linkml:Float ?
@@ -1110,8 +1154,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <ProportionalPart> CLOSED {
-    (  $<ProportionalPart_tes> (  &<RelationalChemicalEntity_tes> ;
-          rdf:type [ <RelationalChemicalEntity> ] ? ;
+    (  $<ProportionalPart_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
           <has_role> @<IngredientRoleEnum> ? ;
           <composed_of> @<ChemicalEntity> ? ;
           <minimal_percentage> @linkml:Float ? ;
@@ -1151,8 +1195,12 @@ linkml:Nodeidentifier NONLITERAL
 
 <Reaction>  (
     CLOSED {
-       (  $<Reaction_tes> (  <has_rinchi_representation> @<ChemicalEncoding> ;
+       (  $<Reaction_tes> (  &<DomainEntity_tes> ;
+             rdf:type [ <DomainEntity> ] ? ;
+             <has_rinchi_representation> @<ChemicalEncoding> ? ;
              <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
+             <reaction_rate_coefficient> @linkml:Float ? ;
+             <reaction_rate> @linkml:Float ? ;
              <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
              <direction> @linkml:String ? ;
@@ -1171,30 +1219,22 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <ReactionGroupingClass> CLOSED {
-    (  $<ReactionGroupingClass_tes> <classifies> @<Reaction> ? ;
-       rdf:type [ <ReactionGroupingClass> ] ?
+    (  $<ReactionGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<ReactionGroupingClass> * ;
+          <classifies> @<Reaction> ?
+       ) ;
+       rdf:type [ <ReactionGroupingClass> ]
     )
 }
 
 <ReactionParticipant> CLOSED {
-    (  $<ReactionParticipant_tes> (  &<RelationalChemicalEntity_tes> ;
-          rdf:type [ <RelationalChemicalEntity> ] ? ;
+    (  $<ReactionParticipant_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
           <participant> @<ChemicalEntity> ? ;
           <stoichiometry> @linkml:Integer ?
        ) ;
        rdf:type [ <ReactionParticipant> ] ?
-    )
-}
-
-<RelationalChemicalEntity>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<Similarity>
-)
-
-<RelationalChemicalEntity_struct> {
-    (  $<RelationalChemicalEntity_tes> (  &<OwlClass_tes> ;
-          rdf:type [ owl:Class ] ?
-       ) ;
-       rdf:type [ <RelationalChemicalEntity> ] ?
     )
 }
 
@@ -1221,8 +1261,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <Similarity>  (
     CLOSED {
-       (  $<Similarity_tes> (  &<RelationalChemicalEntity_tes> ;
-             rdf:type [ <RelationalChemicalEntity> ] ?
+       (  $<Similarity_tes> (  &<ChemicalRelationship_tes> ;
+             rdf:type [ <ChemicalRelationship> ] ?
           ) ;
           rdf:type [ <Similarity> ] ?
        )
@@ -1277,9 +1317,7 @@ linkml:Nodeidentifier NONLITERAL
 <Stereocenter>  (
     CLOSED {
        (  $<Stereocenter_tes> (  &<Location_tes> ;
-             rdf:type [ <Location> ] ? ;
-             &<OwlClass_tes> ;
-             rdf:type [ owl:Class ] ?
+             rdf:type [ <Location> ] ?
           ) ;
           rdf:type [ <Stereocenter> ] ?
        )
@@ -1297,10 +1335,23 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <SubatomicParticle> CLOSED {
-    (  $<SubatomicParticle_tes> (  &<ChemicalEntity_tes> ;
-          rdf:type [ <ChemicalEntity> ] ?
+    (  $<SubatomicParticle_tes> (  &<PhysicochemicalEntity_tes> ;
+          rdf:type [ <PhysicochemicalEntity> ] ? ;
+          <subatomic_particle_type> @<SubatomicParticleEnum> ?
        ) ;
        rdf:type [ <SubatomicParticle> ]
+    )
+}
+
+<SubatomicParticleOccurrence> CLOSED {
+    (  $<SubatomicParticleOccurrence_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <occurrence_of> @<SubatomicParticle> ;
+          <count> @linkml:Integer ?
+       ) ;
+       rdf:type [ <SubatomicParticleOccurrence> ] ?
     )
 }
 
@@ -1353,7 +1404,7 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<WeaklyBonded> CLOSED {
+<WeaklyBonded> {
     (  $<WeaklyBonded_tes> (  &<Connectivity_tes> ;
           rdf:type [ <Connectivity> ] ?
        ) ;

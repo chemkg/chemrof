@@ -1,8 +1,8 @@
 // A molecule grouping class that groups the different ion forms of the base of an acid
 message AcidAnionGroupingClass
  {
-  string id = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntity conjugateBaseOf = 0
@@ -14,11 +14,14 @@ message AcidBase
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -35,8 +38,9 @@ message AcidBase
 // A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
 message AcidBaseConflationClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntity conjugateBaseOf = 0
@@ -48,11 +52,14 @@ message Allotrope
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -68,11 +75,14 @@ message AminoAcidSequenceInterval
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   aminoAcidSequenceString hasSequenceRepresentation = 0
@@ -81,15 +91,19 @@ message AminoAcidSequenceInterval
 message AtomAnion
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   chemicalElement hasElement = 0
   integer elementalCharge = 0
@@ -98,15 +112,19 @@ message AtomAnion
 message AtomCation
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   chemicalElement hasElement = 0
   integer elementalCharge = 0
@@ -114,17 +132,19 @@ message AtomCation
 // Example: group 13 atom
 message AtomGroupingByPeriodicTableBlock
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
-  periodicTableBlock inPeriodicTableBlock = 0
+  periodicTableBlockEnum inPeriodicTableBlock = 0
  }
 // Example: p-block atom
 message AtomGroupingByPeriodicTableGroup
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
   periodicTableGroup inPeriodicTableGroup = 0
@@ -132,16 +152,18 @@ message AtomGroupingByPeriodicTableGroup
 // Example: metal atom
 message AtomGroupingByProperty
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
  }
 // A grouping class that classifies atoms. For example, metal atom
 message AtomGroupingClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
  }
@@ -149,6 +171,7 @@ message AtomGroupingClass
 message AtomOccurrence
  {
   owlClass owlSubclassOf = 0
+  string name = 0
   atom occurrenceOf = 0
   integer valence = 0
   integer oxidationNumber = 0
@@ -159,9 +182,12 @@ message AtomOccurrence
 message AtomicBond
  {
   owlClass owlSubclassOf = 0
- repeated  atomOccurrence hasAtomOccurrences = 0
-  integer bondOrder = 0
+  atomOccurrence subject = 0
+  atomOccurrence object = 0
   bondTypeEnum bondType = 0
+  integer bondOrder = 0
+  float bondLength = 0
+  float bondEnergy = 0
   float bondLengthInAngstroms = 0
   float bondAngle = 0
   float torsionalAngle = 0
@@ -171,11 +197,14 @@ message BronstedAcid
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -192,18 +221,22 @@ message BronstedAcid
 message ChemicalElement
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   string symbol = 0
   periodicTableGroup inPeriodicTableGroup = 0
-  periodicTableBlock inPeriodicTableBlock = 0
+  periodicTableBlockEnum inPeriodicTableBlock = 0
   float boilingPointInCelcius = 0
   float meltingPointInCelcius = 0
   float standardAtomicWeight = 0
@@ -217,20 +250,24 @@ message ChemicalGroup
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
 // A grouping class that refines a charge-neutral entity
 message ChemicalGroupingByCharge
  {
+  string name = 0
+  owlClass owlSubclassOf = 0
   string id = 0
   chemicalEntity classifies = 0
-  owlClass owlSubclassOf = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   uriorcurie hasChargeState = 0
   chemicalEntity chargeAgnosticEntity = 0
@@ -245,11 +282,14 @@ message ChemicalSalt
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   integer elementalCharge = 0
@@ -259,8 +299,8 @@ message ChemicalSalt
 // A grouping class for a chemical salt named by anion
 message ChemicalSaltByAnion
  {
-  string id = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasCationicComponent = 0
   chemicalSalt classifies = 0
@@ -270,8 +310,8 @@ message ChemicalSaltByAnion
 // A grouping class for a chemical salt named by cation
 message ChemicalSaltByCation
  {
-  string id = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasAnionicComponent = 0
   chemicalSalt classifies = 0
@@ -281,29 +321,27 @@ message ChemicalSaltByCation
 // A grouping class for a chemical salt
 message ChemicalSaltGroupingClass
  {
-  string id = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasAnionicComponent = 0
   string hasCationicComponent = 0
   string name = 0
   chemicalSalt classifies = 0
  }
-// a stereocenter consisting of an atom holding a set of ligands (atoms or groups of atoms) in a spatial arrangement which is not superimposable on its mirror image. 
-message ChiralityCenter
- {
-  owlClass owlSubclassOf = 0
- }
 // a polymer with a more than one type of repeating unit
 message Copolymer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -321,11 +359,14 @@ message DNASequenceInterval
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -335,11 +376,14 @@ message Enantiomer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -358,11 +402,14 @@ message Ester
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -378,15 +425,19 @@ message Ester
 message FullySpecifiedAtom
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   integer elementalCharge = 0
   count neutronNumber = 0
@@ -395,11 +446,14 @@ message FunctionalGroup
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   molecule isSubstitutentGroupFrom = 0
@@ -407,8 +461,9 @@ message FunctionalGroup
 // A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
 message GeneralAcidBaseGroupingClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntity conjugateBaseOf = 0
@@ -417,8 +472,9 @@ message GeneralAcidBaseGroupingClass
 // A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
 message GeneralizedMolecularStructureClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  }
@@ -427,11 +483,14 @@ message Glycan
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -446,11 +505,14 @@ message Homopolymer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -469,11 +531,14 @@ message ImpreciseChemicalMixture
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  proportionalPart hasProportionalParts = 0
@@ -484,15 +549,19 @@ message ImpreciseChemicalMixture
 message Isobar
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   string energyLevel = 0
   chemicalElement hasElement = 0
@@ -507,8 +576,13 @@ message Isobar
 // A reaction that converts a molecule from one isomer to another.
 message IsomeraseReaction
  {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
   chemicalEncoding hasRinchiRepresentation = 0
   chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -525,15 +599,19 @@ message IsomeraseReaction
 message Isotope
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   string energyLevel = 0
   chemicalElement hasElement = 0
@@ -549,11 +627,14 @@ message Lipid
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -562,21 +643,20 @@ message Lipid
   boolean isOrganic = 0
   string hasPart = 0
  repeated  molecule hasSubmolecules = 0
- }
-message Location
- {
-  owlClass owlSubclassOf = 0
  }
 // A large molecule, such as a polymer, lipid, or macrocycle
 message Macromolecule
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -586,21 +666,30 @@ message Macromolecule
   string hasPart = 0
  repeated  molecule hasSubmolecules = 0
  }
-// A substance composed of one or more chemical entities
+// A substance composed of repeated chemical units that has a specific arrangement of atoms or molecules.
 message Material
  {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  chemicalEntity hasRepeatUnit = 0
   chemicalEntity hasPart = 0
  }
 // A grouping class that classifies materials
 message MaterialGroupingClass
  {
   string id = 0
- repeated  groupingClass subtypeOf = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+ repeated  materialGroupingClass subtypeOf = 0
   material classifies = 0
  }
 message Mineral
  {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  chemicalEntity hasRepeatUnit = 0
   chemicalEntity hasPart = 0
  }
 // a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
@@ -608,11 +697,14 @@ message Moiety
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -621,11 +713,14 @@ message MolecularAnion
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -643,11 +738,14 @@ message MolecularCation
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -665,11 +763,14 @@ message MolecularComplex
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -678,27 +779,31 @@ message MolecularComponent
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
 // A grouping class that classifies molecular components. Example: inorganic anion group
 message MolecularComponentGroupingClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  molecularComponentGroupingClass subtypeOf = 0
   molecularComponent classifies = 0
  }
 // A grouping class defined as a derivative of another molecule or molecular grouping class
 message MolecularDerivativeGroupingClass
  {
-  string id = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   chemicalEntity derivativeOf = 0
   string name = 0
@@ -709,11 +814,14 @@ message MolecularSpecies
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -727,27 +835,54 @@ message MolecularSubsequence
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+ }
+// A chemical entity that consists of two or more atoms where all atoms are connected via covalent bonds.
+message Molecule
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string iUPACName = 0
+  boolean isRadical = 0
+  chemicalRole hasChemicalRole = 0
+  chemicalEncoding inchiString = 0
+  string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
+  owlClass owlSubclassOf = 0
+  string inchiAtomConnectionsSublayer = 0
+ repeated  atomOccurrence hasAtomOccurrences = 0
+ repeated  atomicBond hasBonds = 0
+ repeated  molecule hasSubmolecules = 0
+ repeated  atom hasAtoms = 0
+  boolean isOrganic = 0
+  string hasPart = 0
  }
 // A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide
 message MoleculeGroupingClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  }
 // A grouping class defined in terms of a derivative of a molecule and the addition of a group
 message MoleculeGroupingClassDefinedByAdditionOfAGroup
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  repeated  chemicalGroup hasGroup = 0
@@ -756,8 +891,9 @@ message MoleculeGroupingClassDefinedByAdditionOfAGroup
 // A grouping class defined as an exhaustive list of components
 message MoleculeGroupingClassDefinedByComponents
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntityOrGrouping hasPart = 0
@@ -767,21 +903,25 @@ message MoleculePairwiseSimilarity
   owlClass owlSubclassOf = 0
   molecule leftMolecule = 0
   molecule rightMolecule = 0
-  string score = 0
+  float score = 0
  }
 // An atom type that has a charge
 message MonoatomicIon
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   integer elementalCharge = 0
   chemicalElement hasElement = 0
@@ -790,18 +930,22 @@ message Monomer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
 message MonomericPolymericGroupingClass
  {
-  string id = 0
+  string name = 0
   owlClass owlSubclassOf = 0
+  string id = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntity hasRepeatUnit = 0
@@ -811,11 +955,14 @@ message MonomolecularPolymer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -829,9 +976,13 @@ message MonomolecularPolymer
   boolean isBranched = 0
   string polymerArchitectureType = 0
  }
-// A nanostructure is a structure of intermediate size between microscopic and molecular structures. Nanostructural detail is microstructure at nanoscale.
-message Nanostructure
+// A material of which a single unit is sized (in at least one dimension) between 1 and 100 nm
+message Nanomaterial
  {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  chemicalEntity hasRepeatUnit = 0
   chemicalEntity hasPart = 0
   nanostructureMorphologyEnum hasMorphologicalCategory = 0
  }
@@ -839,11 +990,14 @@ message NaturalProduct
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -858,11 +1012,14 @@ message NonSpeciesMolecule
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -876,11 +1033,14 @@ message NucleotideSequenceInterval
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -889,15 +1049,19 @@ message NucleotideSequenceInterval
 message Nuclide
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   string energyLevel = 0
  }
@@ -905,11 +1069,14 @@ message Peptide
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -919,21 +1086,19 @@ message Peptide
   string hasPart = 0
  repeated  molecule hasSubmolecules = 0
  }
-// A block of the periodic table is a set of elements unified by the orbitals their valence electrons or vacancies lie in
-message PeriodicTableBlock
- {
-  periodicTableBlockEnum type = 0
- }
 // A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
 message PolyatomicIon
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -950,11 +1115,14 @@ message PolymerPart
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -979,11 +1147,14 @@ message Protein
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -998,10 +1169,13 @@ message RacemicMixture
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   enantiomer hasLeftEnantiomer = 0
@@ -1013,23 +1187,32 @@ message RacemicMixture
 message Radionuclide
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   string energyLevel = 0
  }
 // reaction
 message Reaction
  {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
   chemicalEncoding hasRinchiRepresentation = 0
   chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -1045,6 +1228,10 @@ message Reaction
 // A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
 message ReactionGroupingClass
  {
+  string id = 0
+  string name = 0
+  owlClass owlSubclassOf = 0
+ repeated  reactionGroupingClass subtypeOf = 0
   reaction classifies = 0
  }
 // Instances of this link a reaction to a chemical entity participant
@@ -1058,11 +1245,14 @@ message RNASequenceInterval
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -1077,11 +1267,14 @@ message SmallMolecule
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1104,20 +1297,18 @@ message StandardInchiObject
   string inchiStereochemicalTypeSublayer = 0
   string inchiIsotopicLayer = 0
  }
-// a particular instance of a stereogenic element that is geometrically a point, bearing different substituents, such that interchanging any two substituents leads to a stereoisomer
-message Stereocenter
- {
-  owlClass owlSubclassOf = 0
- }
 message Stereoisomer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1132,23 +1323,28 @@ message SubatomicParticle
  {
   string id = 0
   string name = 0
-  string iUPACName = 0
-  boolean isRadical = 0
-  chemicalRole hasChemicalRole = 0
-  chemicalEncoding inchiString = 0
-  string inchiChemicalSublayer = 0
+  uriorcurie type = 0
+  subatomicParticleEnum subatomicParticleType = 0
+ }
+message SubatomicParticleOccurrence
+ {
   owlClass owlSubclassOf = 0
+  subatomicParticle occurrenceOf = 0
+  integer count = 0
  }
 // polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds
 message SupramolecularPolymer
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   macromolecule polymerOf = 0
@@ -1165,15 +1361,19 @@ message TanimotoSimilarity
 message UnchargedAtom
  {
   string id = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
   string name = 0
+  subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
   integer elementalCharge = 0
  }
@@ -1182,11 +1382,14 @@ message UnchargedMolecule
  {
   string id = 0
   string name = 0
+  uriorcurie type = 0
   string iUPACName = 0
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+ repeated  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
