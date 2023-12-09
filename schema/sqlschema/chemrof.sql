@@ -1,6 +1,6 @@
 
 
-CREATE TABLE amino_acid_sequence_interval (
+CREATE TABLE "AminoAcidSequenceInterval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -16,7 +16,7 @@ CREATE TABLE amino_acid_sequence_interval (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE atom_grouping_by_periodic_table_block (
+CREATE TABLE "AtomGroupingByPeriodicTableBlock" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -26,7 +26,7 @@ CREATE TABLE atom_grouping_by_periodic_table_block (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE atom_grouping_by_periodic_table_group (
+CREATE TABLE "AtomGroupingByPeriodicTableGroup" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -36,7 +36,7 @@ CREATE TABLE atom_grouping_by_periodic_table_group (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE atom_grouping_by_property (
+CREATE TABLE "AtomGroupingByProperty" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -45,7 +45,7 @@ CREATE TABLE atom_grouping_by_property (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE atom_grouping_class (
+CREATE TABLE "AtomGroupingClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -54,7 +54,7 @@ CREATE TABLE atom_grouping_class (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE atom_occurrence (
+CREATE TABLE "AtomOccurrence" (
 	owl_subclass_of TEXT, 
 	name TEXT NOT NULL, 
 	occurrence_of TEXT NOT NULL, 
@@ -65,7 +65,7 @@ CREATE TABLE atom_occurrence (
 	PRIMARY KEY (name)
 );
 
-CREATE TABLE "Bronsted_acid" (
+CREATE TABLE "BronstedAcid" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -88,7 +88,7 @@ CREATE TABLE "Bronsted_acid" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE chemical_grouping_by_charge (
+CREATE TABLE "ChemicalGroupingByCharge" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -99,12 +99,12 @@ CREATE TABLE chemical_grouping_by_charge (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE chemical_role (
+CREATE TABLE "ChemicalRole" (
 	owl_subclass_of TEXT, 
 	PRIMARY KEY (owl_subclass_of)
 );
 
-CREATE TABLE chemical_salt (
+CREATE TABLE "ChemicalSalt" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -122,7 +122,17 @@ CREATE TABLE chemical_salt (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE copolymer (
+CREATE TABLE "ChemicalSimilarity" (
+	owl_subclass_of TEXT, 
+	PRIMARY KEY (owl_subclass_of)
+);
+
+CREATE TABLE "Collection" (
+	entities TEXT, 
+	PRIMARY KEY (entities)
+);
+
+CREATE TABLE "Copolymer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -146,7 +156,7 @@ CREATE TABLE copolymer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "DNA_sequence_interval" (
+CREATE TABLE "DNASequenceInterval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -162,7 +172,7 @@ CREATE TABLE "DNA_sequence_interval" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE glycan (
+CREATE TABLE "Glycan" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -182,7 +192,7 @@ CREATE TABLE glycan (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE imprecise_chemical_mixture (
+CREATE TABLE "ImpreciseChemicalMixture" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -199,7 +209,7 @@ CREATE TABLE imprecise_chemical_mixture (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE isomerase_reaction (
+CREATE TABLE "IsomeraseReaction" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -221,7 +231,7 @@ CREATE TABLE isomerase_reaction (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE lipid (
+CREATE TABLE "Lipid" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -241,7 +251,7 @@ CREATE TABLE lipid (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE macromolecule (
+CREATE TABLE "Macromolecule" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -261,7 +271,7 @@ CREATE TABLE macromolecule (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE material (
+CREATE TABLE "Material" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -270,7 +280,7 @@ CREATE TABLE material (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE mineral (
+CREATE TABLE "Mineral" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -279,7 +289,7 @@ CREATE TABLE mineral (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE moiety (
+CREATE TABLE "Moiety" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -294,7 +304,7 @@ CREATE TABLE moiety (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE molecular_anion (
+CREATE TABLE "MolecularAnion" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -317,7 +327,7 @@ CREATE TABLE molecular_anion (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE molecular_cation (
+CREATE TABLE "MolecularCation" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -340,7 +350,7 @@ CREATE TABLE molecular_cation (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE molecular_complex (
+CREATE TABLE "MolecularComplex" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -355,7 +365,7 @@ CREATE TABLE molecular_complex (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE molecular_component (
+CREATE TABLE "MolecularComponent" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -370,42 +380,7 @@ CREATE TABLE molecular_component (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE molecular_species (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	type TEXT, 
-	"IUPAC_name" TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	empirical_formula TEXT, 
-	owl_subclass_of TEXT, 
-	inchi_atom_connections_sublayer TEXT, 
-	has_atom_occurrences TEXT, 
-	has_bonds TEXT, 
-	has_submolecules TEXT, 
-	is_organic BOOLEAN, 
-	has_part TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE molecular_subsequence (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	type TEXT, 
-	"IUPAC_name" TEXT, 
-	is_radical BOOLEAN, 
-	has_chemical_role TEXT, 
-	inchi_string TEXT, 
-	inchi_chemical_sublayer TEXT, 
-	empirical_formula TEXT, 
-	owl_subclass_of TEXT, 
-	inchi_atom_connections_sublayer TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE molecule (
+CREATE TABLE "MolecularSpecies" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -425,7 +400,7 @@ CREATE TABLE molecule (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE monomer (
+CREATE TABLE "MolecularSubsequence" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -440,7 +415,42 @@ CREATE TABLE monomer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE nanomaterial (
+CREATE TABLE "Molecule" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	"IUPAC_name" TEXT, 
+	is_radical BOOLEAN, 
+	has_chemical_role TEXT, 
+	inchi_string TEXT, 
+	inchi_chemical_sublayer TEXT, 
+	empirical_formula TEXT, 
+	owl_subclass_of TEXT, 
+	inchi_atom_connections_sublayer TEXT, 
+	has_atom_occurrences TEXT, 
+	has_bonds TEXT, 
+	has_submolecules TEXT, 
+	is_organic BOOLEAN, 
+	has_part TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "Monomer" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	"IUPAC_name" TEXT, 
+	is_radical BOOLEAN, 
+	has_chemical_role TEXT, 
+	inchi_string TEXT, 
+	inchi_chemical_sublayer TEXT, 
+	empirical_formula TEXT, 
+	owl_subclass_of TEXT, 
+	inchi_atom_connections_sublayer TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "Nanomaterial" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -450,7 +460,7 @@ CREATE TABLE nanomaterial (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE natural_product (
+CREATE TABLE "NaturalProduct" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -470,7 +480,7 @@ CREATE TABLE natural_product (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE non_species_molecule (
+CREATE TABLE "NonSpeciesMolecule" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -490,7 +500,7 @@ CREATE TABLE non_species_molecule (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE nucleotide_sequence_interval (
+CREATE TABLE "NucleotideSequenceInterval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -506,7 +516,7 @@ CREATE TABLE nucleotide_sequence_interval (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE peptide (
+CREATE TABLE "Peptide" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -526,7 +536,7 @@ CREATE TABLE peptide (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE polyatomic_ion (
+CREATE TABLE "PolyatomicIon" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -549,7 +559,7 @@ CREATE TABLE polyatomic_ion (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE polymer_part (
+CREATE TABLE "PolymerPart" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -564,7 +574,7 @@ CREATE TABLE polymer_part (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE protein (
+CREATE TABLE "Protein" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -584,7 +594,7 @@ CREATE TABLE protein (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE reaction (
+CREATE TABLE "Reaction" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -606,14 +616,14 @@ CREATE TABLE reaction (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE reaction_participant (
+CREATE TABLE "ReactionParticipant" (
 	owl_subclass_of TEXT, 
 	participant TEXT, 
 	stoichiometry INTEGER, 
 	PRIMARY KEY (owl_subclass_of, participant, stoichiometry)
 );
 
-CREATE TABLE "RNA_sequence_interval" (
+CREATE TABLE "RNASequenceInterval" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -629,12 +639,7 @@ CREATE TABLE "RNA_sequence_interval" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE similarity (
-	owl_subclass_of TEXT, 
-	PRIMARY KEY (owl_subclass_of)
-);
-
-CREATE TABLE small_molecule (
+CREATE TABLE "SmallMolecule" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -654,7 +659,7 @@ CREATE TABLE small_molecule (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE standard_inchi_object (
+CREATE TABLE "StandardInchiObject" (
 	inchi_version_string TEXT NOT NULL, 
 	inchi_chemical_sublayer TEXT, 
 	inchi_atom_connections_sublayer TEXT, 
@@ -668,7 +673,7 @@ CREATE TABLE standard_inchi_object (
 	PRIMARY KEY (inchi_version_string, inchi_chemical_sublayer, inchi_atom_connections_sublayer, inchi_hydrogen_connections_sublayer, inchi_charge_sublayer, inchi_proton_sublayer, inchi_stereochemical_double_bond_sublayer, inchi_tetrahedral_stereochemical_sublayer, inchi_stereochemical_type_sublayer, inchi_isotopic_layer)
 );
 
-CREATE TABLE stereoisomer (
+CREATE TABLE "Stereoisomer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -688,7 +693,7 @@ CREATE TABLE stereoisomer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE subatomic_particle (
+CREATE TABLE "SubatomicParticle" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -696,7 +701,7 @@ CREATE TABLE subatomic_particle (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE uncharged_molecule (
+CREATE TABLE "UnchargedMolecule" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -717,7 +722,7 @@ CREATE TABLE uncharged_molecule (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE acid_anion_grouping_class (
+CREATE TABLE "AcidAnionGroupingClass" (
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
@@ -726,10 +731,10 @@ CREATE TABLE acid_anion_grouping_class (
 	conjugate_acid_of TEXT, 
 	name TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE acid_base (
+CREATE TABLE "AcidBase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -751,10 +756,10 @@ CREATE TABLE acid_base (
 	elemental_charge INTEGER, 
 	has_acid_form TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_acid_form) REFERENCES "Bronsted_acid" (id)
+	FOREIGN KEY(has_acid_form) REFERENCES "BronstedAcid" (id)
 );
 
-CREATE TABLE atomic_bond (
+CREATE TABLE "AtomicBond" (
 	owl_subclass_of TEXT, 
 	subject TEXT, 
 	object TEXT, 
@@ -766,11 +771,11 @@ CREATE TABLE atomic_bond (
 	bond_angle FLOAT, 
 	torsional_angle FLOAT, 
 	PRIMARY KEY (owl_subclass_of, subject, object, bond_type, bond_order, bond_length, bond_energy, bond_length_in_angstroms, bond_angle, torsional_angle), 
-	FOREIGN KEY(subject) REFERENCES atom_occurrence (name), 
-	FOREIGN KEY(object) REFERENCES atom_occurrence (name)
+	FOREIGN KEY(subject) REFERENCES "AtomOccurrence" (name), 
+	FOREIGN KEY(object) REFERENCES "AtomOccurrence" (name)
 );
 
-CREATE TABLE chemical_element (
+CREATE TABLE "ChemicalElement" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -795,10 +800,10 @@ CREATE TABLE chemical_element (
 	electron_configuration TEXT, 
 	has_physiologically_stable_form TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE chemical_salt_by_anion (
+CREATE TABLE "ChemicalSaltByAnion" (
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
@@ -807,10 +812,10 @@ CREATE TABLE chemical_salt_by_anion (
 	has_anionic_component TEXT, 
 	name TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES chemical_salt (id)
+	FOREIGN KEY(classifies) REFERENCES "ChemicalSalt" (id)
 );
 
-CREATE TABLE chemical_salt_by_cation (
+CREATE TABLE "ChemicalSaltByCation" (
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
@@ -819,10 +824,10 @@ CREATE TABLE chemical_salt_by_cation (
 	has_cationic_component TEXT, 
 	name TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES chemical_salt (id)
+	FOREIGN KEY(classifies) REFERENCES "ChemicalSalt" (id)
 );
 
-CREATE TABLE chemical_salt_grouping_class (
+CREATE TABLE "ChemicalSaltGroupingClass" (
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
@@ -831,10 +836,10 @@ CREATE TABLE chemical_salt_grouping_class (
 	name TEXT, 
 	classifies TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES chemical_salt (id)
+	FOREIGN KEY(classifies) REFERENCES "ChemicalSalt" (id)
 );
 
-CREATE TABLE enantiomer (
+CREATE TABLE "Enantiomer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -856,10 +861,10 @@ CREATE TABLE enantiomer (
 	absolute_configuration TEXT, 
 	enantiomer_form_of TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(enantiomer_form_of) REFERENCES molecule (id)
+	FOREIGN KEY(enantiomer_form_of) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE ester (
+CREATE TABLE "Ester" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -879,10 +884,10 @@ CREATE TABLE ester (
 	has_parent_alcohol TEXT, 
 	has_parent_acid TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_parent_acid) REFERENCES "Bronsted_acid" (id)
+	FOREIGN KEY(has_parent_acid) REFERENCES "BronstedAcid" (id)
 );
 
-CREATE TABLE fully_specified_atom (
+CREATE TABLE "FullySpecifiedAtom" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -900,10 +905,10 @@ CREATE TABLE fully_specified_atom (
 	elemental_charge INTEGER, 
 	neutron_number INTEGER, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE functional_group (
+CREATE TABLE "FunctionalGroup" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -917,10 +922,10 @@ CREATE TABLE functional_group (
 	inchi_atom_connections_sublayer TEXT, 
 	is_substitutent_group_from TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(is_substitutent_group_from) REFERENCES molecule (id)
+	FOREIGN KEY(is_substitutent_group_from) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE general_acid_base_grouping_class (
+CREATE TABLE "GeneralAcidBaseGroupingClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -929,20 +934,20 @@ CREATE TABLE general_acid_base_grouping_class (
 	conjugate_base_of TEXT, 
 	conjugate_acid_of TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE generalized_molecular_structure_class (
+CREATE TABLE "GeneralizedMolecularStructureClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
 	classifies TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE homopolymer (
+CREATE TABLE "Homopolymer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -964,32 +969,32 @@ CREATE TABLE homopolymer (
 	polymer_architecture_type TEXT, 
 	polymer_of TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
+	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id)
 );
 
-CREATE TABLE material_grouping_class (
+CREATE TABLE "MaterialGroupingClass" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	classifies TEXT, 
-	material_grouping_class_id TEXT, 
+	"MaterialGroupingClass_id" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES material (id), 
-	FOREIGN KEY(material_grouping_class_id) REFERENCES material_grouping_class (id)
+	FOREIGN KEY(classifies) REFERENCES "Material" (id), 
+	FOREIGN KEY("MaterialGroupingClass_id") REFERENCES "MaterialGroupingClass" (id)
 );
 
-CREATE TABLE molecular_component_grouping_class (
+CREATE TABLE "MolecularComponentGroupingClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	classifies TEXT, 
-	molecular_component_grouping_class_id TEXT, 
+	"MolecularComponentGroupingClass_id" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecular_component (id), 
-	FOREIGN KEY(molecular_component_grouping_class_id) REFERENCES molecular_component_grouping_class (id)
+	FOREIGN KEY(classifies) REFERENCES "MolecularComponent" (id), 
+	FOREIGN KEY("MolecularComponentGroupingClass_id") REFERENCES "MolecularComponentGroupingClass" (id)
 );
 
-CREATE TABLE molecular_derivative_grouping_class (
+CREATE TABLE "MolecularDerivativeGroupingClass" (
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
@@ -997,20 +1002,20 @@ CREATE TABLE molecular_derivative_grouping_class (
 	name TEXT, 
 	classifies TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE molecule_grouping_class (
+CREATE TABLE "MoleculeGroupingClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
 	subtype_of TEXT, 
 	classifies TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE molecule_grouping_class_defined_by_addition_of_a_group (
+CREATE TABLE "MoleculeGroupingClassDefinedByAdditionOfAGroup" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -1018,10 +1023,10 @@ CREATE TABLE molecule_grouping_class_defined_by_addition_of_a_group (
 	classifies TEXT, 
 	derivative_of TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE molecule_grouping_class_defined_by_components (
+CREATE TABLE "MoleculeGroupingClassDefinedByComponents" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -1029,20 +1034,20 @@ CREATE TABLE molecule_grouping_class_defined_by_components (
 	classifies TEXT, 
 	has_part TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE molecule_pairwise_similarity (
+CREATE TABLE "MoleculePairwiseSimilarity" (
 	owl_subclass_of TEXT, 
 	left_molecule TEXT, 
 	right_molecule TEXT, 
 	score FLOAT, 
 	PRIMARY KEY (owl_subclass_of, left_molecule, right_molecule, score), 
-	FOREIGN KEY(left_molecule) REFERENCES molecule (id), 
-	FOREIGN KEY(right_molecule) REFERENCES molecule (id)
+	FOREIGN KEY(left_molecule) REFERENCES "Molecule" (id), 
+	FOREIGN KEY(right_molecule) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE monomeric_polymeric_grouping_class (
+CREATE TABLE "MonomericPolymericGroupingClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -1050,10 +1055,10 @@ CREATE TABLE monomeric_polymeric_grouping_class (
 	classifies TEXT, 
 	has_repeat_unit TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE monomolecular_polymer (
+CREATE TABLE "MonomolecularPolymer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -1075,10 +1080,10 @@ CREATE TABLE monomolecular_polymer (
 	is_branched BOOLEAN, 
 	polymer_architecture_type TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
+	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id)
 );
 
-CREATE TABLE nuclide (
+CREATE TABLE "Nuclide" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1095,30 +1100,30 @@ CREATE TABLE nuclide (
 	has_part TEXT, 
 	energy_level TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE polymer_repeat_unit (
+CREATE TABLE "PolymerRepeatUnit" (
 	owl_subclass_of TEXT, 
 	repetition_of TEXT, 
 	degree_of_polymerization INTEGER, 
 	mass FLOAT, 
 	PRIMARY KEY (owl_subclass_of, repetition_of, degree_of_polymerization, mass), 
-	FOREIGN KEY(repetition_of) REFERENCES molecule (id)
+	FOREIGN KEY(repetition_of) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE proportional_part (
+CREATE TABLE "ProportionalPart" (
 	owl_subclass_of TEXT, 
 	has_role VARCHAR(19), 
 	composed_of TEXT, 
 	minimal_percentage FLOAT, 
 	maximum_percentage FLOAT, 
-	imprecise_chemical_mixture_id TEXT, 
-	PRIMARY KEY (owl_subclass_of, has_role, composed_of, minimal_percentage, maximum_percentage, imprecise_chemical_mixture_id), 
-	FOREIGN KEY(imprecise_chemical_mixture_id) REFERENCES imprecise_chemical_mixture (id)
+	"ImpreciseChemicalMixture_id" TEXT, 
+	PRIMARY KEY (owl_subclass_of, has_role, composed_of, minimal_percentage, maximum_percentage, "ImpreciseChemicalMixture_id"), 
+	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id)
 );
 
-CREATE TABLE radionuclide (
+CREATE TABLE "Radionuclide" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1135,29 +1140,29 @@ CREATE TABLE radionuclide (
 	has_part TEXT, 
 	energy_level TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE reaction_grouping_class (
+CREATE TABLE "ReactionGroupingClass" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	classifies TEXT, 
-	reaction_grouping_class_id TEXT, 
+	"ReactionGroupingClass_id" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES reaction (id), 
-	FOREIGN KEY(reaction_grouping_class_id) REFERENCES reaction_grouping_class (id)
+	FOREIGN KEY(classifies) REFERENCES "Reaction" (id), 
+	FOREIGN KEY("ReactionGroupingClass_id") REFERENCES "ReactionGroupingClass" (id)
 );
 
-CREATE TABLE subatomic_particle_occurrence (
+CREATE TABLE "SubatomicParticleOccurrence" (
 	owl_subclass_of TEXT, 
 	occurrence_of TEXT NOT NULL, 
-	count INTEGER, 
-	PRIMARY KEY (owl_subclass_of, occurrence_of, count), 
-	FOREIGN KEY(occurrence_of) REFERENCES subatomic_particle (id)
+	"Count" INTEGER, 
+	PRIMARY KEY (owl_subclass_of, occurrence_of, "Count"), 
+	FOREIGN KEY(occurrence_of) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE supramolecular_polymer (
+CREATE TABLE "SupramolecularPolymer" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -1172,20 +1177,20 @@ CREATE TABLE supramolecular_polymer (
 	polymer_of TEXT, 
 	has_repeat_unit TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(polymer_of) REFERENCES macromolecule (id)
+	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id)
 );
 
-CREATE TABLE tanimoto_similarity (
+CREATE TABLE "TanimotoSimilarity" (
 	owl_subclass_of TEXT, 
 	left_molecule TEXT, 
 	right_molecule TEXT, 
 	score FLOAT, 
 	PRIMARY KEY (owl_subclass_of, left_molecule, right_molecule, score), 
-	FOREIGN KEY(left_molecule) REFERENCES molecule (id), 
-	FOREIGN KEY(right_molecule) REFERENCES molecule (id)
+	FOREIGN KEY(left_molecule) REFERENCES "Molecule" (id), 
+	FOREIGN KEY(right_molecule) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE uncharged_atom (
+CREATE TABLE "UnchargedAtom" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1202,332 +1207,332 @@ CREATE TABLE uncharged_atom (
 	has_part TEXT, 
 	elemental_charge INTEGER, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id)
 );
 
-CREATE TABLE amino_acid_sequence_interval_smiles_string (
+CREATE TABLE "AminoAcidSequenceInterval_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES amino_acid_sequence_interval (id)
+	FOREIGN KEY(backref_id) REFERENCES "AminoAcidSequenceInterval" (id)
 );
 
-CREATE TABLE "Bronsted_acid_smiles_string" (
+CREATE TABLE "BronstedAcid_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES "Bronsted_acid" (id)
+	FOREIGN KEY(backref_id) REFERENCES "BronstedAcid" (id)
 );
 
-CREATE TABLE "Bronsted_acid_has_atoms" (
+CREATE TABLE "BronstedAcid_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES "Bronsted_acid" (id)
+	FOREIGN KEY(backref_id) REFERENCES "BronstedAcid" (id)
 );
 
-CREATE TABLE chemical_salt_smiles_string (
+CREATE TABLE "ChemicalSalt_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES chemical_salt (id)
+	FOREIGN KEY(backref_id) REFERENCES "ChemicalSalt" (id)
 );
 
-CREATE TABLE copolymer_smiles_string (
+CREATE TABLE "Copolymer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Copolymer" (id)
 );
 
-CREATE TABLE copolymer_has_atoms (
+CREATE TABLE "Copolymer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES copolymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Copolymer" (id)
 );
 
-CREATE TABLE "DNA_sequence_interval_smiles_string" (
+CREATE TABLE "DNASequenceInterval_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES "DNA_sequence_interval" (id)
+	FOREIGN KEY(backref_id) REFERENCES "DNASequenceInterval" (id)
 );
 
-CREATE TABLE glycan_smiles_string (
+CREATE TABLE "Glycan_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES glycan (id)
+	FOREIGN KEY(backref_id) REFERENCES "Glycan" (id)
 );
 
-CREATE TABLE glycan_has_atoms (
+CREATE TABLE "Glycan_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES glycan (id)
+	FOREIGN KEY(backref_id) REFERENCES "Glycan" (id)
 );
 
-CREATE TABLE imprecise_chemical_mixture_smiles_string (
+CREATE TABLE "ImpreciseChemicalMixture_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES imprecise_chemical_mixture (id)
+	FOREIGN KEY(backref_id) REFERENCES "ImpreciseChemicalMixture" (id)
 );
 
-CREATE TABLE lipid_smiles_string (
+CREATE TABLE "Lipid_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES lipid (id)
+	FOREIGN KEY(backref_id) REFERENCES "Lipid" (id)
 );
 
-CREATE TABLE lipid_has_atoms (
+CREATE TABLE "Lipid_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES lipid (id)
+	FOREIGN KEY(backref_id) REFERENCES "Lipid" (id)
 );
 
-CREATE TABLE macromolecule_smiles_string (
+CREATE TABLE "Macromolecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES macromolecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "Macromolecule" (id)
 );
 
-CREATE TABLE macromolecule_has_atoms (
+CREATE TABLE "Macromolecule_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES macromolecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "Macromolecule" (id)
 );
 
-CREATE TABLE moiety_smiles_string (
+CREATE TABLE "Moiety_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES moiety (id)
+	FOREIGN KEY(backref_id) REFERENCES "Moiety" (id)
 );
 
-CREATE TABLE molecular_anion_smiles_string (
+CREATE TABLE "MolecularAnion_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_anion (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularAnion" (id)
 );
 
-CREATE TABLE molecular_anion_has_atoms (
+CREATE TABLE "MolecularAnion_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_anion (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularAnion" (id)
 );
 
-CREATE TABLE molecular_cation_smiles_string (
+CREATE TABLE "MolecularCation_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_cation (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularCation" (id)
 );
 
-CREATE TABLE molecular_cation_has_atoms (
+CREATE TABLE "MolecularCation_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_cation (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularCation" (id)
 );
 
-CREATE TABLE molecular_complex_smiles_string (
+CREATE TABLE "MolecularComplex_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_complex (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularComplex" (id)
 );
 
-CREATE TABLE molecular_component_smiles_string (
+CREATE TABLE "MolecularComponent_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_component (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularComponent" (id)
 );
 
-CREATE TABLE molecular_species_smiles_string (
+CREATE TABLE "MolecularSpecies_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_species (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularSpecies" (id)
 );
 
-CREATE TABLE molecular_species_has_atoms (
+CREATE TABLE "MolecularSpecies_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_species (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularSpecies" (id)
 );
 
-CREATE TABLE molecular_subsequence_smiles_string (
+CREATE TABLE "MolecularSubsequence_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecular_subsequence (id)
+	FOREIGN KEY(backref_id) REFERENCES "MolecularSubsequence" (id)
 );
 
-CREATE TABLE molecule_smiles_string (
+CREATE TABLE "Molecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE molecule_has_atoms (
+CREATE TABLE "Molecule_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE monomer_smiles_string (
+CREATE TABLE "Monomer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES monomer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Monomer" (id)
 );
 
-CREATE TABLE natural_product_smiles_string (
+CREATE TABLE "NaturalProduct_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES natural_product (id)
+	FOREIGN KEY(backref_id) REFERENCES "NaturalProduct" (id)
 );
 
-CREATE TABLE natural_product_has_atoms (
+CREATE TABLE "NaturalProduct_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES natural_product (id)
+	FOREIGN KEY(backref_id) REFERENCES "NaturalProduct" (id)
 );
 
-CREATE TABLE non_species_molecule_smiles_string (
+CREATE TABLE "NonSpeciesMolecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES non_species_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "NonSpeciesMolecule" (id)
 );
 
-CREATE TABLE non_species_molecule_has_atoms (
+CREATE TABLE "NonSpeciesMolecule_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES non_species_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "NonSpeciesMolecule" (id)
 );
 
-CREATE TABLE nucleotide_sequence_interval_smiles_string (
+CREATE TABLE "NucleotideSequenceInterval_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES nucleotide_sequence_interval (id)
+	FOREIGN KEY(backref_id) REFERENCES "NucleotideSequenceInterval" (id)
 );
 
-CREATE TABLE peptide_smiles_string (
+CREATE TABLE "Peptide_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES peptide (id)
+	FOREIGN KEY(backref_id) REFERENCES "Peptide" (id)
 );
 
-CREATE TABLE peptide_has_atoms (
+CREATE TABLE "Peptide_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES peptide (id)
+	FOREIGN KEY(backref_id) REFERENCES "Peptide" (id)
 );
 
-CREATE TABLE polyatomic_ion_smiles_string (
+CREATE TABLE "PolyatomicIon_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES polyatomic_ion (id)
+	FOREIGN KEY(backref_id) REFERENCES "PolyatomicIon" (id)
 );
 
-CREATE TABLE polyatomic_ion_has_atoms (
+CREATE TABLE "PolyatomicIon_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES polyatomic_ion (id)
+	FOREIGN KEY(backref_id) REFERENCES "PolyatomicIon" (id)
 );
 
-CREATE TABLE polymer_part_smiles_string (
+CREATE TABLE "PolymerPart_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES polymer_part (id)
+	FOREIGN KEY(backref_id) REFERENCES "PolymerPart" (id)
 );
 
-CREATE TABLE protein_smiles_string (
+CREATE TABLE "Protein_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES protein (id)
+	FOREIGN KEY(backref_id) REFERENCES "Protein" (id)
 );
 
-CREATE TABLE protein_has_atoms (
+CREATE TABLE "Protein_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES protein (id)
+	FOREIGN KEY(backref_id) REFERENCES "Protein" (id)
 );
 
-CREATE TABLE "RNA_sequence_interval_smiles_string" (
+CREATE TABLE "RNASequenceInterval_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES "RNA_sequence_interval" (id)
+	FOREIGN KEY(backref_id) REFERENCES "RNASequenceInterval" (id)
 );
 
-CREATE TABLE small_molecule_smiles_string (
+CREATE TABLE "SmallMolecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES small_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "SmallMolecule" (id)
 );
 
-CREATE TABLE small_molecule_has_atoms (
+CREATE TABLE "SmallMolecule_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES small_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "SmallMolecule" (id)
 );
 
-CREATE TABLE stereoisomer_smiles_string (
+CREATE TABLE "Stereoisomer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES stereoisomer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Stereoisomer" (id)
 );
 
-CREATE TABLE stereoisomer_has_atoms (
+CREATE TABLE "Stereoisomer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES stereoisomer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Stereoisomer" (id)
 );
 
-CREATE TABLE uncharged_molecule_smiles_string (
+CREATE TABLE "UnchargedMolecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES uncharged_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "UnchargedMolecule" (id)
 );
 
-CREATE TABLE uncharged_molecule_has_atoms (
+CREATE TABLE "UnchargedMolecule_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES uncharged_molecule (id)
+	FOREIGN KEY(backref_id) REFERENCES "UnchargedMolecule" (id)
 );
 
-CREATE TABLE acid_base_conflation_class (
+CREATE TABLE "AcidBaseConflationClass" (
 	name TEXT, 
 	owl_subclass_of TEXT, 
 	id TEXT NOT NULL, 
@@ -1537,11 +1542,11 @@ CREATE TABLE acid_base_conflation_class (
 	conjugate_acid_of TEXT, 
 	has_physiological_base TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(classifies) REFERENCES molecule (id), 
-	FOREIGN KEY(has_physiological_base) REFERENCES acid_base (id)
+	FOREIGN KEY(classifies) REFERENCES "Molecule" (id), 
+	FOREIGN KEY(has_physiological_base) REFERENCES "AcidBase" (id)
 );
 
-CREATE TABLE allotrope (
+CREATE TABLE "Allotrope" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -1561,10 +1566,10 @@ CREATE TABLE allotrope (
 	allotropic_analog_of TEXT NOT NULL, 
 	has_bonding_structure TEXT NOT NULL, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(allotropic_analog_of) REFERENCES chemical_element (id)
+	FOREIGN KEY(allotropic_analog_of) REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE atom_anion (
+CREATE TABLE "AtomAnion" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1582,11 +1587,11 @@ CREATE TABLE atom_anion (
 	has_element TEXT, 
 	elemental_charge INTEGER, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
-	FOREIGN KEY(has_element) REFERENCES chemical_element (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id), 
+	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE atom_cation (
+CREATE TABLE "AtomCation" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1604,11 +1609,11 @@ CREATE TABLE atom_cation (
 	has_element TEXT, 
 	elemental_charge INTEGER, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
-	FOREIGN KEY(has_element) REFERENCES chemical_element (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id), 
+	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE chemical_group (
+CREATE TABLE "ChemicalGroup" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -1620,12 +1625,12 @@ CREATE TABLE chemical_group (
 	empirical_formula TEXT, 
 	owl_subclass_of TEXT, 
 	inchi_atom_connections_sublayer TEXT, 
-	molecule_grouping_class_defined_by_addition_of_a_group_id TEXT, 
+	"MoleculeGroupingClassDefinedByAdditionOfAGroup_id" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(molecule_grouping_class_defined_by_addition_of_a_group_id) REFERENCES molecule_grouping_class_defined_by_addition_of_a_group (id)
+	FOREIGN KEY("MoleculeGroupingClassDefinedByAdditionOfAGroup_id") REFERENCES "MoleculeGroupingClassDefinedByAdditionOfAGroup" (id)
 );
 
-CREATE TABLE isotope (
+CREATE TABLE "Isotope" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1650,13 +1655,13 @@ CREATE TABLE isotope (
 	decay_energy TEXT, 
 	mode_of_formation TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
-	FOREIGN KEY(has_element) REFERENCES chemical_element (id), 
-	FOREIGN KEY(isotope_of) REFERENCES isotope (id), 
-	FOREIGN KEY(decay_product) REFERENCES isotope (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id), 
+	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id), 
+	FOREIGN KEY(isotope_of) REFERENCES "Isotope" (id), 
+	FOREIGN KEY(decay_product) REFERENCES "Isotope" (id)
 );
 
-CREATE TABLE monoatomic_ion (
+CREATE TABLE "MonoatomicIon" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1674,11 +1679,11 @@ CREATE TABLE monoatomic_ion (
 	elemental_charge INTEGER, 
 	has_element TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
-	FOREIGN KEY(has_element) REFERENCES chemical_element (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id), 
+	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE racemic_mixture (
+CREATE TABLE "RacemicMixture" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -1694,137 +1699,137 @@ CREATE TABLE racemic_mixture (
 	chirality_agnostic_form TEXT, 
 	"IUPAC_name" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_left_enantiomer) REFERENCES enantiomer (id), 
-	FOREIGN KEY(has_right_enantiomer) REFERENCES enantiomer (id), 
-	FOREIGN KEY(chirality_agnostic_form) REFERENCES molecule (id)
+	FOREIGN KEY(has_left_enantiomer) REFERENCES "Enantiomer" (id), 
+	FOREIGN KEY(has_right_enantiomer) REFERENCES "Enantiomer" (id), 
+	FOREIGN KEY(chirality_agnostic_form) REFERENCES "Molecule" (id)
 );
 
-CREATE TABLE stereocenter (
-	chemical_element_id TEXT, 
-	PRIMARY KEY (chemical_element_id), 
-	FOREIGN KEY(chemical_element_id) REFERENCES chemical_element (id)
+CREATE TABLE "Stereocenter" (
+	"ChemicalElement_id" TEXT, 
+	PRIMARY KEY ("ChemicalElement_id"), 
+	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE acid_base_smiles_string (
+CREATE TABLE "AcidBase_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES acid_base (id)
+	FOREIGN KEY(backref_id) REFERENCES "AcidBase" (id)
 );
 
-CREATE TABLE acid_base_has_atoms (
+CREATE TABLE "AcidBase_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES acid_base (id)
+	FOREIGN KEY(backref_id) REFERENCES "AcidBase" (id)
 );
 
-CREATE TABLE chemical_element_smiles_string (
+CREATE TABLE "ChemicalElement_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES chemical_element (id)
+	FOREIGN KEY(backref_id) REFERENCES "ChemicalElement" (id)
 );
 
-CREATE TABLE enantiomer_smiles_string (
+CREATE TABLE "Enantiomer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES enantiomer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Enantiomer" (id)
 );
 
-CREATE TABLE enantiomer_has_atoms (
+CREATE TABLE "Enantiomer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES enantiomer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Enantiomer" (id)
 );
 
-CREATE TABLE ester_smiles_string (
+CREATE TABLE "Ester_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES ester (id)
+	FOREIGN KEY(backref_id) REFERENCES "Ester" (id)
 );
 
-CREATE TABLE ester_has_atoms (
+CREATE TABLE "Ester_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES ester (id)
+	FOREIGN KEY(backref_id) REFERENCES "Ester" (id)
 );
 
-CREATE TABLE fully_specified_atom_smiles_string (
+CREATE TABLE "FullySpecifiedAtom_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES fully_specified_atom (id)
+	FOREIGN KEY(backref_id) REFERENCES "FullySpecifiedAtom" (id)
 );
 
-CREATE TABLE functional_group_smiles_string (
+CREATE TABLE "FunctionalGroup_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES functional_group (id)
+	FOREIGN KEY(backref_id) REFERENCES "FunctionalGroup" (id)
 );
 
-CREATE TABLE homopolymer_smiles_string (
+CREATE TABLE "Homopolymer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES homopolymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Homopolymer" (id)
 );
 
-CREATE TABLE homopolymer_has_atoms (
+CREATE TABLE "Homopolymer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES homopolymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "Homopolymer" (id)
 );
 
-CREATE TABLE monomolecular_polymer_smiles_string (
+CREATE TABLE "MonomolecularPolymer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES monomolecular_polymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "MonomolecularPolymer" (id)
 );
 
-CREATE TABLE monomolecular_polymer_has_atoms (
+CREATE TABLE "MonomolecularPolymer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES monomolecular_polymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "MonomolecularPolymer" (id)
 );
 
-CREATE TABLE nuclide_smiles_string (
+CREATE TABLE "Nuclide_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES nuclide (id)
+	FOREIGN KEY(backref_id) REFERENCES "Nuclide" (id)
 );
 
-CREATE TABLE radionuclide_smiles_string (
+CREATE TABLE "Radionuclide_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES radionuclide (id)
+	FOREIGN KEY(backref_id) REFERENCES "Radionuclide" (id)
 );
 
-CREATE TABLE supramolecular_polymer_smiles_string (
+CREATE TABLE "SupramolecularPolymer_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES supramolecular_polymer (id)
+	FOREIGN KEY(backref_id) REFERENCES "SupramolecularPolymer" (id)
 );
 
-CREATE TABLE uncharged_atom_smiles_string (
+CREATE TABLE "UnchargedAtom_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES uncharged_atom (id)
+	FOREIGN KEY(backref_id) REFERENCES "UnchargedAtom" (id)
 );
 
-CREATE TABLE isobar (
+CREATE TABLE "Isobar" (
 	id TEXT NOT NULL, 
 	type TEXT, 
 	"IUPAC_name" TEXT, 
@@ -1849,70 +1854,70 @@ CREATE TABLE isobar (
 	decay_energy TEXT, 
 	mode_of_formation TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(has_part) REFERENCES subatomic_particle (id), 
-	FOREIGN KEY(has_element) REFERENCES chemical_element (id), 
-	FOREIGN KEY(decay_product) REFERENCES isotope (id)
+	FOREIGN KEY(has_part) REFERENCES "SubatomicParticle" (id), 
+	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id), 
+	FOREIGN KEY(decay_product) REFERENCES "Isotope" (id)
 );
 
-CREATE TABLE allotrope_smiles_string (
+CREATE TABLE "Allotrope_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES allotrope (id)
+	FOREIGN KEY(backref_id) REFERENCES "Allotrope" (id)
 );
 
-CREATE TABLE allotrope_has_atoms (
+CREATE TABLE "Allotrope_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
-	FOREIGN KEY(backref_id) REFERENCES allotrope (id)
+	FOREIGN KEY(backref_id) REFERENCES "Allotrope" (id)
 );
 
-CREATE TABLE atom_anion_smiles_string (
+CREATE TABLE "AtomAnion_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES atom_anion (id)
+	FOREIGN KEY(backref_id) REFERENCES "AtomAnion" (id)
 );
 
-CREATE TABLE atom_cation_smiles_string (
+CREATE TABLE "AtomCation_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES atom_cation (id)
+	FOREIGN KEY(backref_id) REFERENCES "AtomCation" (id)
 );
 
-CREATE TABLE chemical_group_smiles_string (
+CREATE TABLE "ChemicalGroup_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES chemical_group (id)
+	FOREIGN KEY(backref_id) REFERENCES "ChemicalGroup" (id)
 );
 
-CREATE TABLE isotope_smiles_string (
+CREATE TABLE "Isotope_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES isotope (id)
+	FOREIGN KEY(backref_id) REFERENCES "Isotope" (id)
 );
 
-CREATE TABLE monoatomic_ion_smiles_string (
+CREATE TABLE "MonoatomicIon_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES monoatomic_ion (id)
+	FOREIGN KEY(backref_id) REFERENCES "MonoatomicIon" (id)
 );
 
-CREATE TABLE racemic_mixture_smiles_string (
+CREATE TABLE "RacemicMixture_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES racemic_mixture (id)
+	FOREIGN KEY(backref_id) REFERENCES "RacemicMixture" (id)
 );
 
-CREATE TABLE isobar_smiles_string (
+CREATE TABLE "Isobar_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
 	PRIMARY KEY (backref_id, smiles_string), 
-	FOREIGN KEY(backref_id) REFERENCES isobar (id)
+	FOREIGN KEY(backref_id) REFERENCES "Isobar" (id)
 );

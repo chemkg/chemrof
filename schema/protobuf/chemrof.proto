@@ -167,17 +167,6 @@ message AtomGroupingClass
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
  }
-// An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
-message AtomOccurrence
- {
-  owlClass owlSubclassOf = 0
-  string name = 0
-  atom occurrenceOf = 0
-  integer valence = 0
-  integer oxidationNumber = 0
-  integer formalCharge = 0
-  integer coordinationNumber = 0
- }
 // A connection between two atoms. Note this is the reified form of 'atomically connected to'. 
 message AtomicBond
  {
@@ -191,6 +180,17 @@ message AtomicBond
   float bondLengthInAngstroms = 0
   float bondAngle = 0
   float torsionalAngle = 0
+ }
+// An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate
+message AtomOccurrence
+ {
+  owlClass owlSubclassOf = 0
+  string name = 0
+  atom occurrenceOf = 0
+  integer valence = 0
+  integer oxidationNumber = 0
+  integer formalCharge = 0
+  integer coordinationNumber = 0
  }
 // A molecule capable of donating a hydron to an acceptor. Example: citric acid
 message BronstedAcid
@@ -328,6 +328,15 @@ message ChemicalSaltGroupingClass
   string hasCationicComponent = 0
   string name = 0
   chemicalSalt classifies = 0
+ }
+// A relationship between two or more chemical entities where there is some degree of similarity between these entities on their similarity
+message ChemicalSimilarity
+ {
+  owlClass owlSubclassOf = 0
+ }
+message Collection
+ {
+ repeated  domainEntity entities = 0
  }
 // a polymer with a more than one type of repeating unit
 message Copolymer
@@ -1203,7 +1212,7 @@ message Radionuclide
   subatomicParticle hasPart = 0
   string energyLevel = 0
  }
-// reaction
+// Reaction
 message Reaction
  {
   string id = 0
@@ -1256,11 +1265,6 @@ message RNASequenceInterval
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
- }
-// A relationship between two or more entities that is quantified based on their similarity
-message Similarity
- {
-  owlClass owlSubclassOf = 0
  }
 // A molecule characterized by availability in small-molecule databases
 message SmallMolecule

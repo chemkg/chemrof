@@ -201,6 +201,20 @@ type AtomGroupingClass
     classifies: Atom
   }
 
+type AtomicBond implements OwlClass
+  {
+    owlSubclassOf: OwlClass
+    subject: AtomOccurrence
+    object: AtomOccurrence
+    bondType: BondTypeEnum
+    bondOrder: Integer
+    bondLength: Float
+    bondEnergy: Float
+    bondLengthInAngstroms: Float
+    bondAngle: Float
+    torsionalAngle: Float
+  }
+
 interface AtomIonicForm
   {
     id: String!
@@ -230,20 +244,6 @@ type AtomOccurrence implements OwlClass
     oxidationNumber: Integer
     formalCharge: Integer
     coordinationNumber: Integer
-  }
-
-type AtomicBond implements OwlClass
-  {
-    owlSubclassOf: OwlClass
-    subject: AtomOccurrence
-    object: AtomOccurrence
-    bondType: BondTypeEnum
-    bondOrder: Integer
-    bondLength: Float
-    bondEnergy: Float
-    bondLengthInAngstroms: Float
-    bondAngle: Float
-    torsionalAngle: Float
   }
 
 type BronstedAcid
@@ -276,12 +276,12 @@ interface CationState
     elementalCharge: Integer
   }
 
-interface ChargeState
+interface Charged
   {
     elementalCharge: Integer
   }
 
-interface Charged
+interface ChargeState
   {
     elementalCharge: Integer
   }
@@ -452,8 +452,18 @@ type ChemicalSaltGroupingClass
     classifies: ChemicalSalt
   }
 
+type ChemicalSimilarity
+  {
+    owlSubclassOf: OwlClass
+  }
+
 type ChiralityCenter
   {
+  }
+
+type Collection
+  {
+    entities: [DomainEntity]
   }
 
 interface Connectivity
@@ -1558,11 +1568,6 @@ interface SequenceInterval
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: SequenceString
-  }
-
-type Similarity
-  {
-    owlSubclassOf: OwlClass
   }
 
 type SmallMolecule

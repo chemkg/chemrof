@@ -71,6 +71,20 @@ project: $(SOURCE_FILES)
 #	$(RUN) gen-owl --no-metaclasses --no-type-objects $< > $@.tmp && mv $@.tmp $@
 
 
+test-examples: examples/output
+
+examples/output: $(SCHEMA_SRC)
+	mkdir -p $@
+	$(RUN) linkml-run-examples \
+		--output-formats json \
+		--output-formats yaml \
+		--counter-example-input-directory src/data/examples/invalid \
+		--input-directory src/data/examples/valid \
+		--output-directory $@ \
+		--schema $< > $@/README.md
+.PHONY: examples/output
+
+
 schema/sssom/chemrof.sssom.tsv: src/schema/chemrof.yaml
 	$(RUN) gen-sssom $< -o $@
 

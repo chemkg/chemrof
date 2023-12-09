@@ -204,6 +204,25 @@ linkml:Sparqlpath xsd:string
     } OR @<AtomGroupingByPeriodicTablePlacement> OR @<AtomGroupingByProperty>
 )
 
+<AtomicBond> CLOSED {
+    (  $<AtomicBond_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <subject> @<AtomOccurrence> ? ;
+          <object> @<AtomOccurrence> ? ;
+          <bond_type> @<BondTypeEnum> ? ;
+          <bond_order> @linkml:Integer ? ;
+          <bond_length> @linkml:Float ? ;
+          <bond_energy> @linkml:Float ? ;
+          <bond_length_in_angstroms> @linkml:Float ? ;
+          <bond_angle> @linkml:Float ? ;
+          <torsional_angle> @linkml:Float ?
+       ) ;
+       rdf:type [ gc:Bond ] ?
+    )
+}
+
 <AtomIonicForm>  (
     @<MonoatomicIon> OR @<UnchargedAtom>
 )
@@ -232,25 +251,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<AtomicBond> CLOSED {
-    (  $<AtomicBond_tes> (  &<ChemicalRelationship_tes> ;
-          rdf:type [ <ChemicalRelationship> ] ? ;
-          &<OwlClass_tes> ;
-          rdf:type [ owl:Class ] ? ;
-          <subject> @<AtomOccurrence> ? ;
-          <object> @<AtomOccurrence> ? ;
-          <bond_type> @<BondTypeEnum> ? ;
-          <bond_order> @linkml:Integer ? ;
-          <bond_length> @linkml:Float ? ;
-          <bond_energy> @linkml:Float ? ;
-          <bond_length_in_angstroms> @linkml:Float ? ;
-          <bond_angle> @linkml:Float ? ;
-          <torsional_angle> @linkml:Float ?
-       ) ;
-       rdf:type [ gc:Bond ] ?
-    )
-}
-
 <BronstedAcid> CLOSED {
     (  $<BronstedAcid_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
@@ -271,6 +271,18 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Charged>  (
+    @<AnionState> OR @<CationState>
+)
+
+<Charged_struct> {
+    (  $<Charged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ?
+       ) ;
+       rdf:type [ <Charged> ] ?
+    )
+}
+
 <ChargeState>  (
     @<Charged> OR @<Uncharged>
 )
@@ -281,18 +293,6 @@ linkml:Sparqlpath xsd:string
           <elemental_charge> @linkml:Integer ?
        ) ;
        rdf:type [ <ChargeState> ] ?
-    )
-}
-
-<Charged>  (
-    @<AnionState> OR @<CationState>
-)
-
-<Charged_struct> {
-    (  $<Charged_tes> (  &<ChargeState_tes> ;
-          rdf:type [ <ChargeState> ] ?
-       ) ;
-       rdf:type [ <Charged> ] ?
     )
 }
 
@@ -400,8 +400,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <ChemicalRelationship>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<Similarity> OR
-    @<SubatomicParticleOccurrence>
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalSimilarity> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR
+    @<ReactionParticipant> OR @<SubatomicParticleOccurrence>
 )
 
 <ChemicalRelationship_struct> {
@@ -463,11 +463,27 @@ linkml:Sparqlpath xsd:string
     } OR @<ChemicalSaltByAnion> OR @<ChemicalSaltByCation>
 )
 
+<ChemicalSimilarity>  (
+    CLOSED {
+       (  $<ChemicalSimilarity_tes> (  &<ChemicalRelationship_tes> ;
+             rdf:type [ <ChemicalRelationship> ] ?
+          ) ;
+          rdf:type [ <ChemicalSimilarity> ] ?
+       )
+    } OR @<MoleculePairwiseSimilarity>
+)
+
 <ChiralityCenter> CLOSED {
     (  $<ChiralityCenter_tes> (  &<Stereocenter_tes> ;
           rdf:type [ <Stereocenter> ] ?
        ) ;
        rdf:type [ <ChiralityCenter> ] ?
+    )
+}
+
+<Collection> CLOSED {
+    (  $<Collection_tes> <entities> @<DomainEntity> * ;
+       rdf:type [ <Collection> ] ?
     )
 }
 
@@ -890,7 +906,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Molecule> ]
        )
-    } OR @<BronstedAcid> OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
+    } OR @<Allotrope> OR @<BronstedAcid> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
     @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<SmallMolecule> OR @<Stereoisomer> OR @<UnchargedMolecule>
 )
 
@@ -929,8 +945,8 @@ linkml:Sparqlpath xsd:string
 
 <MoleculePairwiseSimilarity>  (
     CLOSED {
-       (  $<MoleculePairwiseSimilarity_tes> (  &<Similarity_tes> ;
-             rdf:type [ <Similarity> ] ? ;
+       (  $<MoleculePairwiseSimilarity_tes> (  &<ChemicalSimilarity_tes> ;
+             rdf:type [ <ChemicalSimilarity> ] ? ;
              <left_molecule> @<Molecule> ? ;
              <right_molecule> @<Molecule> ? ;
              <score> @linkml:Float ?
@@ -1259,16 +1275,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Similarity>  (
-    CLOSED {
-       (  $<Similarity_tes> (  &<ChemicalRelationship_tes> ;
-             rdf:type [ <ChemicalRelationship> ] ?
-          ) ;
-          rdf:type [ <Similarity> ] ?
-       )
-    } OR @<MoleculePairwiseSimilarity>
-)
-
 <SmallMolecule> CLOSED {
     (  $<SmallMolecule_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ?
@@ -1349,7 +1355,7 @@ linkml:Sparqlpath xsd:string
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
           <occurrence_of> @<SubatomicParticle> ;
-          <count> @linkml:Integer ?
+          <Count> @linkml:Integer ?
        ) ;
        rdf:type [ <SubatomicParticleOccurrence> ] ?
     )
