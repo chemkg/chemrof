@@ -791,6 +791,9 @@
         },
         {
           "text": "polar covalent"
+        },
+        {
+          "text": "sigma"
         }
       ]
     },
@@ -2769,6 +2772,9 @@
       "see_also": [
         "https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi"
       ],
+      "aliases": [
+        "InChi"
+      ],
       "exact_mappings": [
         "http://www.semanticweb.com/OntoRxn#hasInChi"
       ],
@@ -2795,10 +2801,53 @@
       "description": "A hashed representation of an InChi string",
       "title": "inchi key string",
       "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "InChiKey",
+        "inchi key"
+      ],
       "is_a": "hashed_chemical_formula",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/inchi_key_string",
       "owner": "inchi_key_string",
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "inchi2d_string",
+      "definition_uri": "https://w3id.org/chemrof/inchi2d_string",
+      "title": "InChi2D",
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "InChi"
+      ],
+      "is_a": "chemical_formula",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/inchi2d_string",
+      "owner": "inchi2d_string",
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "inchi2d_key_string",
+      "definition_uri": "https://w3id.org/chemrof/inchi2d_key_string",
+      "annotations": [
+        {
+          "tag": "hash_of",
+          "value": "inchi2d_string",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A hashed representation of an InChi2D string",
+      "title": "inchi2d key string",
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "InChi2DKey",
+        "inchi2d key"
+      ],
+      "is_a": "hashed_chemical_formula",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/inchi2d_key_string",
+      "owner": "inchi2d_key_string",
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -4178,6 +4227,19 @@
       "range": "DomainEntity",
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "naturalProduct__derived_from_organisms",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/derived_from_organisms",
+      "multivalued": true,
+      "alias": "derived_from_organisms",
+      "owner": "NaturalProduct",
+      "domain_of": [
+        "NaturalProduct"
+      ],
+      "range": "uriorcurie",
       "@type": "SlotDefinition"
     },
     {
@@ -5971,6 +6033,33 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "Stereoisomer_isomeric_smiles_string",
+      "definition_uri": "https://w3id.org/chemrof/isomeric_smiles_string",
+      "description": "A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13",
+      "title": "isomeric smiles string",
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "iso-SMILES"
+      ],
+      "exact_mappings": [
+        "http://www.wikidata.org/entity/P2017"
+      ],
+      "is_a": "isomeric_smiles_string",
+      "domain": "Stereoisomer",
+      "slot_uri": "https://w3id.org/chemrof/isomeric_smiles_string",
+      "multivalued": true,
+      "alias": "isomeric_smiles_string",
+      "owner": "Stereoisomer",
+      "domain_of": [
+        "Stereoisomer"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "isomeric_smiles_string",
+      "range": "ChemicalEncoding",
+      "recommended": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "Enantiomer_relative_configuration",
       "definition_uri": "https://w3id.org/chemrof/relative_configuration",
       "title": "relative configuration",
@@ -6616,8 +6705,8 @@
       "is_usage_slot": true,
       "usage_slot_name": "score",
       "range": "float",
-      "minimum_value": 1,
-      "maximum_value": 1,
+      "minimum_value": 1.0,
+      "maximum_value": 1.0,
       "@type": "SlotDefinition"
     }
   ],
@@ -6635,6 +6724,7 @@
           "name": "entities",
           "multivalued": true,
           "range": "DomainEntity",
+          "inlined": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         }
@@ -6711,7 +6801,8 @@
         "OntoRxn:ChemSpecies"
       ],
       "exact_mappings": [
-        "SIO:010004"
+        "SIO:010004",
+        "wdeschema:E239"
       ],
       "is_a": "PhysicochemicalEntity",
       "abstract": true,
@@ -7771,6 +7862,9 @@
         }
       ],
       "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "wdeschema:E232"
+      ],
       "is_a": "Macromolecule",
       "slots": [
         "id",
@@ -8416,6 +8510,9 @@
       "definition_uri": "https://w3id.org/chemrof/NaturalProduct",
       "title": "natural product",
       "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "wdeschema:E240"
+      ],
       "is_a": "Molecule",
       "slots": [
         "id",
@@ -8435,9 +8532,18 @@
         "has_submolecules",
         "has_atoms",
         "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "naturalProduct__derived_from_organisms"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "derived_from_organisms",
+          "multivalued": true,
+          "range": "uriorcurie",
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "https://w3id.org/chemrof/NaturalProduct",
       "@type": "ClassDefinition"
     },
@@ -9934,7 +10040,8 @@
       "title": "stereoisomer",
       "from_schema": "https://w3id.org/chemrof",
       "exact_mappings": [
-        "SIO:010775"
+        "SIO:010775",
+        "wdeschema:E241"
       ],
       "is_a": "Molecule",
       "slots": [
@@ -9955,10 +10062,20 @@
         "has_submolecules",
         "has_atoms",
         "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "Stereoisomer_isomeric_smiles_string"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Stereoisomer",
+      "unique_keys": [
+        {
+          "unique_key_name": "smiles",
+          "unique_key_slots": [
+            "isomeric_smiles_string"
+          ],
+          "@type": "UniqueKey"
+        }
+      ],
       "@type": "ClassDefinition"
     },
     {
@@ -9994,6 +10111,7 @@
         "has_atoms",
         "is_organic",
         "Molecule_has_part",
+        "Stereoisomer_isomeric_smiles_string",
         "Enantiomer_relative_configuration",
         "Enantiomer_optical_configuration",
         "Enantiomer_absolute_configuration",
@@ -10379,9 +10497,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2023-12-05T14:37:58",
-  "source_file_size": 102619,
-  "generation_date": "2023-12-05T15:10:41",
+  "source_file_date": "2024-02-03T12:34:08",
+  "source_file_size": 103528,
+  "generation_date": "2024-02-08T16:19:27",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

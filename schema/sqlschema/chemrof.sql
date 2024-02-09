@@ -1413,6 +1413,13 @@ CREATE TABLE "NaturalProduct_has_atoms" (
 	FOREIGN KEY(backref_id) REFERENCES "NaturalProduct" (id)
 );
 
+CREATE TABLE "NaturalProduct_derived_from_organisms" (
+	backref_id TEXT, 
+	derived_from_organisms TEXT, 
+	PRIMARY KEY (backref_id, derived_from_organisms), 
+	FOREIGN KEY(backref_id) REFERENCES "NaturalProduct" (id)
+);
+
 CREATE TABLE "NonSpeciesMolecule_smiles_string" (
 	backref_id TEXT, 
 	smiles_string TEXT, 
@@ -1515,6 +1522,13 @@ CREATE TABLE "Stereoisomer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
+	FOREIGN KEY(backref_id) REFERENCES "Stereoisomer" (id)
+);
+
+CREATE TABLE "Stereoisomer_isomeric_smiles_string" (
+	backref_id TEXT, 
+	isomeric_smiles_string TEXT, 
+	PRIMARY KEY (backref_id, isomeric_smiles_string), 
 	FOREIGN KEY(backref_id) REFERENCES "Stereoisomer" (id)
 );
 
@@ -1742,6 +1756,13 @@ CREATE TABLE "Enantiomer_has_atoms" (
 	backref_id TEXT, 
 	has_atoms TEXT, 
 	PRIMARY KEY (backref_id, has_atoms), 
+	FOREIGN KEY(backref_id) REFERENCES "Enantiomer" (id)
+);
+
+CREATE TABLE "Enantiomer_isomeric_smiles_string" (
+	backref_id TEXT, 
+	isomeric_smiles_string TEXT, 
+	PRIMARY KEY (backref_id, isomeric_smiles_string), 
 	FOREIGN KEY(backref_id) REFERENCES "Enantiomer" (id)
 );
 

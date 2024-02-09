@@ -126,6 +126,7 @@ classes:
     - OntoRxn:ChemSpecies
     exact_mappings:
     - SIO:010004
+    - wdeschema:E239
     id_prefixes:
     - CHEBI
     - CHEMBL.COMPOUND
@@ -619,6 +620,8 @@ classes:
     - LIPIDMAPS
     - SWISSLIPID
     - LIPIDBANK
+    exact_mappings:
+      - wdeschema:E232
     examples:
     - value: LIPIDMAPS:LMPR0102010012
       description: (-)-Citronellol
@@ -822,6 +825,12 @@ classes:
   NaturalProduct:
     is_a: Molecule
     title: natural product
+    exact_mappings:
+      - wdeschema:E240
+    attributes:
+      derived_from_organisms:
+        range: uriorcurie
+        multivalued: true
   Moiety:
     is_a: MolecularComponent
     description: a named part of a molecule. In some instances moieties may be composed
@@ -1390,10 +1399,20 @@ classes:
       description: has parent alcohol butanol and has parent acid acetic acid
     title: ester
   Stereoisomer:
+    # should have exactly 1 isomeric SMILES
     is_a: Molecule
     exact_mappings:
     - SIO:010775
+    - wdeschema:E241
     title: stereoisomer
+    slot_usage:
+      isomeric_smiles_string:
+        recommended: true
+    unique_keys:
+      smiles:
+        unique_key_slots:
+        - isomeric_smiles_string
+        
   Enantiomer:
     is_a: Stereoisomer
     description: 'one of two stereoisomers of a chiral molecule that are mirror images.
@@ -2346,6 +2365,8 @@ slots:
     title: lychi string
   inchi_string:
     title: InChi
+    aliases:
+      - InChi
     is_a: chemical_formula
     todos:
     - declare this as a key once compound_key is introduced to linkml
@@ -2360,6 +2381,24 @@ slots:
     annotations:
       hash_of: inchi_string
     title: inchi key string
+    aliases:
+      - InChiKey
+      - inchi key
+  inchi2d_string:
+    title: InChi2D
+    aliases:
+      - InChi
+    is_a: chemical_formula
+  inchi2d_key_string:
+    is_a: hashed_chemical_formula
+    description: A hashed representation of an InChi2D string
+    key: false
+    annotations:
+      hash_of: inchi2d_string
+    title: inchi2d key string
+    aliases:
+      - InChi2DKey
+      - inchi2d key
   smiles_string:
     is_a: chemical_formula
     description: A string encoding of a molecular graph, no chiral or isotopic information.

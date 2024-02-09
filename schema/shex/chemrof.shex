@@ -157,7 +157,9 @@ linkml:Sparqlpath xsd:string
 <AtomGroupingByPeriodicTableBlock> CLOSED {
     (  $<AtomGroupingByPeriodicTableBlock_tes> (  &<AtomGroupingByPeriodicTablePlacement_tes> ;
           rdf:type [ <AtomGroupingByPeriodicTablePlacement> ] ? ;
-          <in_periodic_table_block> @<PeriodicTableBlockEnum> ?
+          <in_periodic_table_block> [ <http://purl.obolibrary.org/obo/CHEBI_33674> <http://purl.obolibrary.org/obo/CHEBI_33675>
+             <http://purl.obolibrary.org/obo/CHEBI_33561> <http://purl.obolibrary.org/obo/CHEBI_33562>
+             <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ] ?
        ) ;
        rdf:type [ <AtomGroupingByPeriodicTableBlock> ]
     )
@@ -211,7 +213,10 @@ linkml:Sparqlpath xsd:string
           rdf:type [ owl:Class ] ? ;
           <subject> @<AtomOccurrence> ? ;
           <object> @<AtomOccurrence> ? ;
-          <bond_type> @<BondTypeEnum> ? ;
+          <bond_type> [ gc:NormalBond gc:AromaticBond gc:Single gc:Double gc:Triple gc:Quadruple gc:HydrogenBond
+             <https://w3id.org/chemrof/BondTypeEnum#ionic> <https://w3id.org/chemrof/BondTypeEnum#polycentric>
+             <https://w3id.org/chemrof/BondTypeEnum#metal-metal> <https://w3id.org/chemrof/BondTypeEnum#salt%20bridge>
+             <https://w3id.org/chemrof/BondTypeEnum#polar%20covalent> <https://w3id.org/chemrof/BondTypeEnum#sigma> ] ? ;
           <bond_order> @linkml:Integer ? ;
           <bond_length> @linkml:Float ? ;
           <bond_energy> @linkml:Float ? ;
@@ -255,7 +260,8 @@ linkml:Sparqlpath xsd:string
     (  $<BronstedAcid_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
           <acidity> @linkml:Float ? ;
-          <hard_or_soft> @<HardOrSoftEnum> ? ;
+          <hard_or_soft> [ <https://w3id.org/chemrof/HardOrSoftEnum#hard> <https://w3id.org/chemrof/HardOrSoftEnum#soft>
+             <https://w3id.org/chemrof/HardOrSoftEnum#borderline> ] ? ;
           <acid_form_of> @<AcidBase> *
        ) ;
        rdf:type [ <BronstedAcid> ]
@@ -301,7 +307,9 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <PartiallySpecifiedAtom> ] ? ;
           <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <in_periodic_table_group> @<PeriodicTableGroup> ? ;
-          <in_periodic_table_block> @<PeriodicTableBlockEnum> ? ;
+          <in_periodic_table_block> [ <http://purl.obolibrary.org/obo/CHEBI_33674> <http://purl.obolibrary.org/obo/CHEBI_33675>
+             <http://purl.obolibrary.org/obo/CHEBI_33561> <http://purl.obolibrary.org/obo/CHEBI_33562>
+             <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ] ? ;
           <boiling_point_in_celcius> @linkml:Float ? ;
           <melting_point_in_celcius> @linkml:Float ? ;
           <standard_atomic_weight> @linkml:Float ? ;
@@ -1003,7 +1011,11 @@ linkml:Sparqlpath xsd:string
 <Nanomaterial> CLOSED {
     (  $<Nanomaterial_tes> (  &<Material_tes> ;
           rdf:type [ <Material> ] ? ;
-          <has_morphological_category> @<NanostructureMorphologyEnum> ?
+          <has_morphological_category> [ <http://purl.obolibrary.org/obo/CHEBI_50796> <http://purl.obolibrary.org/obo/CHEBI_50803>
+             <http://purl.obolibrary.org/obo/CHEBI_50805> <http://purl.obolibrary.org/obo/CHEBI_50806>
+             <http://purl.obolibrary.org/obo/CHEBI_50853> <http://purl.obolibrary.org/obo/CHEBI_52518>
+             <http://purl.obolibrary.org/obo/CHEBI_52529> <http://purl.obolibrary.org/obo/CHEBI_52530>
+             <http://purl.obolibrary.org/obo/CHEBI_52531> <http://purl.obolibrary.org/obo/CHEBI_52593> ] ?
        ) ;
        rdf:type [ <Nanomaterial> ]
     )
@@ -1011,7 +1023,8 @@ linkml:Sparqlpath xsd:string
 
 <NaturalProduct> CLOSED {
     (  $<NaturalProduct_tes> (  &<Molecule_tes> ;
-          rdf:type [ <Molecule> ] ?
+          rdf:type [ <Molecule> ] ? ;
+          <derived_from_organisms> @linkml:Uriorcurie *
        ) ;
        rdf:type [ <NaturalProduct> ]
     )
@@ -1172,7 +1185,9 @@ linkml:Sparqlpath xsd:string
 <ProportionalPart> CLOSED {
     (  $<ProportionalPart_tes> (  &<ChemicalRelationship_tes> ;
           rdf:type [ <ChemicalRelationship> ] ? ;
-          <has_role> @<IngredientRoleEnum> ? ;
+          <has_role> [ <https://w3id.org/chemrof/IngredientRoleEnum#active%20ingredient>
+             <https://w3id.org/chemrof/IngredientRoleEnum#inactive%20ingredient>
+             <https://w3id.org/chemrof/IngredientRoleEnum#excipient> <https://w3id.org/chemrof/IngredientRoleEnum#solvent> ] ? ;
           <composed_of> @<ChemicalEntity> ? ;
           <minimal_percentage> @linkml:Float ? ;
           <maximum_percentage> @linkml:Float ?
@@ -1333,7 +1348,8 @@ linkml:Sparqlpath xsd:string
 <Stereoisomer>  (
     CLOSED {
        (  $<Stereoisomer_tes> (  &<Molecule_tes> ;
-             rdf:type [ <Molecule> ] ?
+             rdf:type [ <Molecule> ] ? ;
+             <isomeric_smiles_string> @<ChemicalEncoding> *
           ) ;
           rdf:type [ <Stereoisomer> ]
        )
@@ -1343,7 +1359,27 @@ linkml:Sparqlpath xsd:string
 <SubatomicParticle> CLOSED {
     (  $<SubatomicParticle_tes> (  &<PhysicochemicalEntity_tes> ;
           rdf:type [ <PhysicochemicalEntity> ] ? ;
-          <subatomic_particle_type> @<SubatomicParticleEnum> ?
+          <subatomic_particle_type> [ <http://purl.obolibrary.org/obo/CHEBI_24636> <http://purl.obolibrary.org/obo/CHEBI_30216>
+             <http://purl.obolibrary.org/obo/CHEBI_36354> <http://purl.obolibrary.org/obo/CHEBI_30225>
+             <http://purl.obolibrary.org/obo/CHEBI_36356> <http://purl.obolibrary.org/obo/CHEBI_36365>
+             <http://purl.obolibrary.org/obo/CHEBI_36341> <http://purl.obolibrary.org/obo/CHEBI_36340>
+             <http://purl.obolibrary.org/obo/CHEBI_36339> <http://purl.obolibrary.org/obo/CHEBI_36371>
+             <http://purl.obolibrary.org/obo/CHEBI_15378> <http://purl.obolibrary.org/obo/CHEBI_36353>
+             <http://purl.obolibrary.org/obo/CHEBI_36347> <http://purl.obolibrary.org/obo/CHEBI_36350>
+             <http://purl.obolibrary.org/obo/CHEBI_36348> <http://purl.obolibrary.org/obo/CHEBI_33253>
+             <http://purl.obolibrary.org/obo/CHEBI_29234> <http://purl.obolibrary.org/obo/CHEBI_29233>
+             <http://purl.obolibrary.org/obo/CHEBI_36352> <http://purl.obolibrary.org/obo/CHEBI_36345>
+             <http://purl.obolibrary.org/obo/CHEBI_36346> <http://purl.obolibrary.org/obo/CHEBI_146278>
+             <http://purl.obolibrary.org/obo/CHEBI_33233> <http://purl.obolibrary.org/obo/CHEBI_30223>
+             <http://purl.obolibrary.org/obo/CHEBI_36342> <http://purl.obolibrary.org/obo/CHEBI_36355>
+             <http://purl.obolibrary.org/obo/CHEBI_30212> <http://purl.obolibrary.org/obo/CHEBI_36366>
+             <http://purl.obolibrary.org/obo/CHEBI_30214> <http://purl.obolibrary.org/obo/CHEBI_36368>
+             <http://purl.obolibrary.org/obo/CHEBI_36375> <http://purl.obolibrary.org/obo/CHEBI_36351>
+             <http://purl.obolibrary.org/obo/CHEBI_36344> <http://purl.obolibrary.org/obo/CHEBI_36370>
+             <http://purl.obolibrary.org/obo/CHEBI_36343> <http://purl.obolibrary.org/obo/CHEBI_10545>
+             <http://purl.obolibrary.org/obo/CHEBI_30222> <http://purl.obolibrary.org/obo/CHEBI_36338>
+             <http://purl.obolibrary.org/obo/CHEBI_30220> <http://purl.obolibrary.org/obo/CHEBI_36369>
+             <http://purl.obolibrary.org/obo/CHEBI_36367> <http://purl.obolibrary.org/obo/CHEBI_36349> ] ?
        ) ;
        rdf:type [ <SubatomicParticle> ]
     )
