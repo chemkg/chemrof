@@ -46,7 +46,8 @@ t:
 echo:
 	echo $(patsubst %,gen-%,$(TGTS))
 
-test: all
+#test: all
+test: test-examples
 
 install:
 	. environment.sh
