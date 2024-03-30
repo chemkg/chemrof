@@ -55,13 +55,15 @@ install:
 
 tdir-%:
 	mkdir -p target/$*
+
+gendoc: docs docs/index.md
+
 docs:
-	mkdir $@
+	mkdir -p $@
 
 docs/index.md: $(SOURCE_FILES)
-	cp src/docs/*.md docs/ ; \
+	cp -pr src/docs/*.md docs/ ; \
 	$(RUN) gen-doc -d docs $<
-	#$(RUN) gen-markdown -I $@ -d docs $<
 
 #project: project1 schema/owl/chemrof.owl.ttl
 project: $(SOURCE_FILES)
