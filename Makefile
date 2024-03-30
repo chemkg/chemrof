@@ -65,6 +65,12 @@ docs/index.md: $(SOURCE_FILES)
 	cp -pr src/docs/*.md docs/ ; \
 	$(RUN) gen-doc -d docs $<
 
+
+MKDOCS = $(RUN) mkdocs
+mkd-%:
+	$(MKDOCS) $*
+
+
 #project: project1 schema/owl/chemrof.owl.ttl
 project: $(SOURCE_FILES)
 #	gen-project -A 'owl: {metaclasses: false, type_objects: false}' -d schema $<
