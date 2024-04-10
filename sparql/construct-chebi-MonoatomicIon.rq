@@ -1,16 +1,18 @@
+# Generate MonoatomicIon instances from CHEBI
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX chem: <https://w3id.org/chemschema/>
+PREFIX chemrof: <https://w3id.org/chemrof/>
+PREFIX chemrof.data: <https://w3id.org/chemrof/data/>
 PREFIX CHEBI: <http://purl.obolibrary.org/obo/CHEBI_>
 PREFIX chebigraph: <http://purl.obolibrary.org/obo/merged/CHEBI>
 PREFIX chebivoc: <http://purl.obolibrary.org/obo/chebi/>
 
 CONSTRUCT {
-    ?iri a chem:MonoatomicIon ;
+    ?iri a chemrof:MonoatomicIon ;
       rdfs:label ?label ;
-      chem:charge ?charge_int ;
-      chem:has_element ?element_iri ;
-      chem:inchi_string ?inchi ;
-      chem:chebi_iri ?i
+      chemrof:charge ?charge_int ;
+      chemrof:has_element ?element_iri ;
+      chemrof:inchi_string ?inchi ;
+      chemrof:chebi_iri ?i
 }
 WHERE {
   GRAPH chebigraph: {
@@ -23,7 +25,7 @@ WHERE {
 
     FILTER( regex(str(?inchi), "^InChI=1S/\\w+/q.\\d+$") )
     BIND(xsd:integer(?charge) AS ?charge_int)
-    BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
-    BIND(IRI(CONCAT("https://w3id.org/chemschema/MonoatomicIon/", STR(?element_symbol), "/", STR(?charge))) AS ?iri)
+    BIND(IRI(CONCAT("https://w3id.org/chemrof/data/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
+    BIND(IRI(CONCAT("https://w3id.org/chemrof/data/MonoatomicIon/", STR(?element_symbol), "/", STR(?charge))) AS ?iri)
   }
 }

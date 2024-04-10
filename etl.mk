@@ -1,21 +1,31 @@
+# See   https://chemkg.github.io/chemrof/database/
 INJECTS = ChemicalGroupingByCharge
-METACLASSES = ChemicalElement Isotope MonoatomicIon RacemicMixture $(INJECTS)
+WD_CLASSES = ChemicalElement Isotope
+CHEBI_CLASSES = MonoatomicIon
+PCHEBI_CLASSES = RacemicMixture Enantiomer
+METACLASSES = $(WD_CLASSES) $(CHEBI_CLASSES)  $(PCHEBI_CLASSES) $(INJECTS)
 REASONER = HERMIT
+OWL_SCHEMA = src/chemrof/schema/owl/chemrof.owl.ttl
 
-all: owl/chem-ontology.owl
+all: owl/chemrof-ontology.owl
+
+# -- Ontology --
 
 # pre-reason prior to release
-ontology/chem-ontology.owl: owl/chem-ontology-asserted.owl
+ontology/chemrof-ontology.owl: owl/chemrof-ontology-asserted.owl
 	robot reason -r $(REASONER) -i $< -o $@
 
 # merge all sub-ontologies into one
-owl/chem-ontology-asserted.owl: owl/gen
+owl/chemrof-ontology-asserted.owl: owl/gen
 	robot merge -i src/ontology/chem-edit.owl.ttl $(patsubst %, -i owl/gen/%.owl, $(METACLASSES)) -o $@
-.PRECIOUS: owl/chem-ontology-asserted.owl
+.PRECIOUS: owl/chemrof-ontology-asserted.owl
 
 # translate abox database to owl tbox using metaclass-specific SPARQL queries
 owl/gen/%.owl: database/chem.ttl
 	robot query -i $< -q sparql/owlgen/gen-$*.rq $@
+
+# -- Database --
+# (Ontology as ABox)
 
 # create chem abox database
 INJECT_FILES = $(patsubst %, database/inject/inject-%.ttl, $(INJECTS))
@@ -24,27 +34,31 @@ database/chem.ttl: database/all-merged.ttl $(INJECT_FILES)
 .PRECIOUS: database/chem.ttl
 
 # merge database with schema
-database/%-merged.ttl: database/%.ttl owl/chem.owl.ttl
-	robot merge -i $< -i owl/chem.owl.ttl -o $@
+database/%-merged.owl.ttl: database/%.ttl $(OWL_SCHEMA)
+	robot merge -i $< -i $(OWL_SCHEMA) -o $@
 
 # merge chebi and wd databases together
-database/all.ttl: database/wd database/chebi
+database/all.ttl: database/wd database/chebi database/pchebi
 	riot database/*/*.ttl > $@.tmp && mv $@.tmp $@
 .PRECIOUS: database/wd-all.ttl
 
 # injection of additional facts
-database/inject/inject-%.ttl: database/all-merged.owl
+database/inject/inject-%.ttl: database/all-merged.ttl sparql/inject-%.rq
 	robot query -i $< -q sparql/inject-$*.rq $@
 .PRECIOUS: database/inject/inject-%.ttl
 
+all-wd: $(patsubst %, database/wd/%.ttl, $(WD_CLASSES))
+
 # metaclass specific sub-databases, from Wikidata
-database/wd/%.ttl:
+database/wd/%.ttl: sparql/construct-wd-%.rq
 	curl --header "Accept: text/turtle"  -G 'https://query.wikidata.org/sparql' --data-urlencode "query@sparql/construct-wd-$*.rq" > $@.tmp && mv $@.tmp $@
 .PRECIOUS: database/wd/%.ttl
 
+all-chebi: $(patsubst %, database/chebi/%.ttl, $(CHEBI_CLASSES))
+
 # metaclass specific sub-databases, from CHEBI
-database/chebi/%.ttl:
-	curl --header "Accept: text/turtle"  -G 'http://sparql.hegroup.org/sparql' --data-urlencode "query@sparql/construct-chebi-$*.rq" > $@.tmp && mv $@.tmp $@
+database/chebi/%.ttl: sparql/construct-chebi-%.rq
+	curl --header "Accept: text/turtle"  -G 'https://sparql.hegroup.org/sparql' --data-urlencode "query@$<" > $@.tmp && mv $@.tmp $@
 .PRECIOUS: database/wd/%.ttl
 
 # merge all wd together
@@ -82,12 +96,16 @@ extract/chebi-smiles-summary.tsv:
 extract/chebi-RacemicMixture.tsv:
 	pq-ontobee -e --consult src/prolog/chebi.pro report racemic_mixture > $@.tmp && mv $@.tmp $@
 
-database/pchebi/%.ttl:
+all-pchebi: $(patsubst %, database/pchebi/%.ttl, $(PCHEBI_CLASSES))
+
+database/pchebi/%.ttl: src/prolog/chebi.pro
 	pq-ontobee -e --consult src/prolog/chebi.pro "save_triples('$*','$@.tmp')" && mv $@.tmp $@
 
 
 database/%.jsonld: database/%.ttl
 	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
 
-
+# RHEA
+database/chebi_pH7_3_mapping.tsv:
+	curl -L -s https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv | perl -npe 's@@CHEBI:@;s@\t@\tCHEBI:@;s@^CHEBI:CHEBI.*@id\thas_physiological_stable_form\tsource@' > $@.tmp && mv $@.tmp $@
 

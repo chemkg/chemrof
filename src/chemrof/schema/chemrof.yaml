@@ -106,6 +106,7 @@ classes:
     - inchi_chemical_sublayer
     - smiles_string
     - empirical_formula
+    - has_physiologically_stable_form
     slot_usage:
       inchi_chemical_sublayer:
         required: false
@@ -419,7 +420,7 @@ classes:
     examples:
     - value: citrate/citric acid
     slot_usage:
-      has_physiological_base:
+      has_physiological_form:
         description: The base which defs this conflation class
     title: acid base conflation class
   AtomGroupingClass:
@@ -608,18 +609,20 @@ classes:
     comments:
     - check on classification of lipids
     title: macromolecule
-  Lipid:
-    is_a: Macromolecule
-    id_prefixes:
-    - LIPIDMAPS
-    - SWISSLIPID
-    - LIPIDBANK
-    exact_mappings:
-      - wdeschema:E232
-    examples:
-    - value: LIPIDMAPS:LMPR0102010012
-      description: (-)-Citronellol
-    title: lipid
+#  Lipid:
+#    comments:
+#      - consider making a mixin or a property
+#    is_a: Macromolecule
+#    id_prefixes:
+#    - LIPIDMAPS
+#    - SWISSLIPID
+#    - LIPIDBANK
+#    exact_mappings:
+#      - wdeschema:E232
+#    examples:
+#    - value: LIPIDMAPS:LMPR0102010012
+#      description: (-)-Citronellol
+#    title: lipid
   MolecularComplex:
     aliases:
     - poly molecular composite entity
@@ -875,16 +878,32 @@ classes:
     description: 'A molecule in which the units are not identical. TODO: move this
       higher'
     title: non species molecule
+  MoleculeByChargeState:
+    abstract: true
+    aliases:
+      - chargeomer
+    is_a: Molecule
+    description: A molecule that has a charge state specified
+    slots:
+      - bronsted_acid_base_role
+    slot_usage:
+      acidity:
+        range: float
+      hard_or_soft:
+        range: HardOrSoftEnum
+      acid_form_of:
+        range: MoleculeByChargeState
+    title: molecule by charge state
   PolyatomicIon:
     aliases:
     - polyatomic ion species
-    is_a: Molecule
+    is_a: MoleculeByChargeState
     mixins:
     - Charged
     slots:
     - conjugate_base_of
     - conjugate_acid_of
-    description: A molecule that has a charge. For example, nitrate is a molecular
+    description: A molecule that has a net charge. For example, nitrate is a molecular
       and ionic species; its formula is (NO3-).
     title: polyatomic ion
   MolecularCation:
@@ -903,12 +922,20 @@ classes:
     - elemental_charge
     description: A polyatomic ion that is negative
     title: molecular anion
-  UnchargedMolecule:
-    is_a: Molecule
+  NetUnchargedMolecule:
+    is_a: MoleculeByChargeState
     mixins:
     - Uncharged
-    description: A molecule that has no charge
+    description: A molecule that has no net charge
     title: uncharged molecule
+  Zwitterion:
+    is_a: NetUnchargedMolecule
+    description: A molecule that has both a positive and negative charges but is net neutral
+    title: zwitterion
+  NeutralMolecule:
+    is_a: NetUnchargedMolecule
+    description: A molecule that has no net charge and is not a zwitterion
+    title: neutral molecule
   Atom:
     is_a: ChemicalEntity
     abstract: true
@@ -1034,8 +1061,8 @@ classes:
   Isotope:
     is_a: Nuclide
     description: A specific subtype of an atom with a specified neutron number
-    comments: Wikidata has isotope as a subclass of nuclide, but nuclide has no instances
-      that are not isotope instances.
+    comments:
+      - Wikidata has isotope as a subclass of nuclide, but nuclide has no instances that are not isotope instances.
     slots:
     - has_element
     - neutron_number
@@ -1333,27 +1360,6 @@ classes:
         description: The number of atoms bonded to the atom of interest. [https://doi.org/10.1021%2Fed083p791]
         range: integer
     title: atom occurrence
-  BronstedAcid:
-    is_a: Molecule
-    description: 'A molecule capable of donating a hydron to an acceptor. Example:
-      citric acid'
-    slot_usage:
-      acidity:
-        range: float
-      hard_or_soft:
-        range: HardOrSoftEnum
-      acid_form_of:
-        range: AcidBase
-    exact_mappings:
-    - CHEBI:39141
-    title: Bronsted acid
-  AcidBase:
-    is_a: MolecularAnion
-    description: 'A conugate base of an acid with charge specified. Example: citrate(3-)'
-    slot_usage:
-      has_acid_form:
-        range: BronstedAcid
-    title: acid base
   ChemicalSalt:
     is_a: PreciseChemicalMixture
     description: a chemical compound consisting of an ionic assembly of cations and
@@ -1361,7 +1367,8 @@ classes:
     examples:
     - value: CHEBI:29377
       description: sodium carbonate (has components sodium1+ and carbonate)
-    - description: metformin hydrochloride
+    - value: CHEBI:6802
+      description: metformin hydrochloride
     comments:
     - in SIO falls under molecular complex? Also in biolink
     slot_usage:
@@ -1387,7 +1394,7 @@ classes:
       has_parent_alcohol:
         range: ChemicalEntity
       has_parent_acid:
-        range: BronstedAcid
+        range: MoleculeByChargeState
     examples:
     - value: butyl ethanoate
       description: has parent alcohol butanol and has parent acid acetic acid
@@ -1783,6 +1790,11 @@ slots:
     range: Count
     equals_expression: '{atomic_number}+{neutron_number}'
     title: nucleon number
+  charge:
+    abstract: true
+    union_of:
+      - elemental_charge
+      - molecular_charge
   elemental_charge:
     is_a: property_of_atom
     description: number of protons minus number of electrons
@@ -1900,24 +1912,27 @@ slots:
     description: connects an acid to any of the the base anions. E.g. citric acid
       acid form of citrate(1-),citrate(2-),citrate(3-)
     multivalued: true
-    domain: BronstedAcid
-    range: AcidBase
+    domain: MoleculeByChargeState
+    range: MoleculeByChargeState
     title: acid form of
-  has_physiological_base:
+  has_physiologically_stable_form:
     aliases:
-    - deprotonated form of
+    - protonation neutral form of
+    - has Ph 7.3 mapping
     is_a: acid_form_of
-    description: connects an acid to the base that is stable at physiological pH.
+    description: connects an acid to the form that is stable at physiological pH (7.3).
       E.g. citric acid has physiological base citrate(3-)
     multivalued: false
-    title: has physiological base
+    see_also:
+      - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
+    title: has physiologically stable form
   has_acid_form:
     is_a: conjugate_base_of
     description: connects a base to the acid form. E.g. citrate(3-) has acid form
       citric acid
     multivalued: false
-    domain: AcidBase
-    range: BronstedAcid
+    domain: MoleculeByChargeState
+    range: MoleculeByChargeState
     title: has acid form
   has_chemical_role:
     range: ChemicalRole
@@ -2319,13 +2334,19 @@ slots:
   chemical_formula:
     abstract: true
     is_a: chemical_representation
-    description: A generic grouping for miolecular formulae and empirical formulae
+    description: A generic grouping for molecular formulae and empirical formulae
     domain: ChemicalEntity
     range: ChemicalEncoding
     mappings:
     - schema:hasRepresentation
     - edam:data_0846
     title: chemical formula
+  chebi_formula:
+    is_a: chemical_formula
+    description: A CHEBI formular combines aspects of molecular and generalized molecular formulae,
+      and may also be an atom symbol
+    see_also:
+      - https://docs.google.com/document/d/1_w-DwBdCCOh1gMeeP6yqGzcnkpbHYOa3AGSODe5epcg/edit#heading=h.fblha9sgxp10
   molecular_formula:
     is_a: chemical_formula
     aliases:
@@ -2464,6 +2485,7 @@ slots:
     description: Location of a MolFile representing a chemical structure
     title: has molfile location
   inchi_component:
+    abstract: true
     is_a: information_property
     description: A part of an InChI object
     title: inchi component
@@ -2474,10 +2496,15 @@ slots:
     - https://www.inchi-trust.org/wp/wp-content/uploads/2014/05/techfaq_4.2.png
     title: inchi sublayer
   inchi_version_string:
+    aliases:
+      - inchi version prefix
     is_a: inchi_component
     pattern: ^1[S]
     required: true
     title: inchi version string
+    description: The first part of the inchi_string, after 'InChI='
+    annotations:
+      inchi.index: 1
   inchi_sublayer_in_main_layer:
     is_a: inchi_sublayer
     description: 'The main layer consists of chemical formula, atom connections, and
@@ -2487,8 +2514,18 @@ slots:
     is_a: inchi_sublayer_in_main_layer
     pattern: ^[A-Z0-9\.]+$
     required: false
-    description: the main chemical formula
     title: inchi chemical sublayer
+    description: The part of an InChI string that represents the chemical formula, occurring
+      after the version string. E.g. C6H12O6 for glucose
+    comments:
+      - "in the case of hydrates, the dot separates the formula of the compound from the water molecules.
+         For example, CuSO₄·5H₂O represents copper(II) sulfate pentahydrate, indicating that there are five water
+         molecules associated with each copper(II) sulfate unit in the crystal."
+      - 'Salt Formulations: Dots can also be used to denote the proportions in which different components are combined to form a salt. For instance, "CaCl₂·2AgNO₃" would suggest a complex formed from one unit of calcium chloride and two units of silver nitrate, though this particular example is more illustrative than practical.'
+      - 'Coordination Complexes: In coordination chemistry, dots can separate the metal complex from its counterions or ligands that are not directly bonded to the metal center. For example, "[Co(NH₃)₆]Cl₃" indicates a complex of cobalt with six ammonia ligands, and the three chloride ions are counterions. If written as "[Co(NH₃)₆]·3Cl", it would similarly denote the presence of three chloride ions associated with the complex, though this notation is less common'
+      - 'Molecular Assemblies: For certain supramolecular structures or assemblies, dots might be used to indicate a non-covalent association of components. This usage is less common and more context-dependent'
+    annotations:
+      inchi.index: 2
   inchi_atom_connections_sublayer:
     is_a: inchi_sublayer_in_main_layer
     pattern: ^c.*
@@ -2763,14 +2800,6 @@ slots:
     multivalued: true
     range: Stereocenter
     title: has stereocenter
-  has_physiologically_stable_form:
-    description: connects an element to the equivalent form that is physiologically
-      stable at pH 7.3
-    aliases:
-    - has Ph 7.3 mapping
-    see_also:
-    - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
-    title: has physiologically stable form
   subject_atom_occurrence:
     range: AtomOccurrence
     title: subject atom occurrence
@@ -2845,11 +2874,14 @@ slots:
   hard_or_soft:
     range: HardOrSoftEnum
     title: hard or soft
+  bronsted_acid_base_role:
+    range: BronstedAcidBaseRoleEnum
+    title: bronsted acid base role
   has_parent_alcohol:
     range: ChemicalEntity
     title: has parent alcohol
   has_parent_acid:
-    range: BronstedAcid
+    range: MoleculeByChargeState
     title: has parent acid
   relative_configuration:
     range: string
@@ -2955,6 +2987,12 @@ slots:
     range: float
     title: score
 enums:
+  MoleculeClassificationEnum:
+    permissible_values:
+      lipid:
+        meaning: CHEBI:18059
+      ester:
+        meaning: CHEBI:35701
   ClassificationLevelEnum:
     permissible_values:
       Uncategorized: null
@@ -3070,6 +3108,11 @@ enums:
       soft: null
       borderline: null
     title: hard_or_soft_enum
+  BronstedAcidBaseRoleEnum:
+    permissible_values:
+      acid: CHEBI:39141
+      base: CHEBI:39142
+    title: bronsted_acid_base_role_enum
   SubatomicParticleEnum:
     permissible_values:
       proton:

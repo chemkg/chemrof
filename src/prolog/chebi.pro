@@ -22,7 +22,8 @@
 :- use_module(library(semweb/rdf_ntriples)).
 
 :- rdf_register_prefix('CHEBI','http://purl.obolibrary.org/obo/CHEBI_').
-:- rdf_register_prefix('chem','https://w3id.org/chemschema/').
+:- rdf_register_prefix(chemrof,'https://w3id.org/chemrof/').
+:- rdf_register_prefix(chemrof_data,'https://w3id.org/chemrof/data/').
 
 racemic_mixture(C,N) :-
         ontobee ??
@@ -211,7 +212,7 @@ dataframe:dataframe(test,
 
 
 inchi_iri(S,X) :-
-        atom_concat('https://w3id.org/chemschema/ChemicalEntity/',S,X).
+        atom_concat('https://w3id.org/chemrof/data/ChemicalEntity/',S,X).
 
 write_triples(C) :-
         gen_triples(C,Triples),
@@ -236,14 +237,14 @@ gen_triple(C,T) :-
         member(T,L).
 
 gen_triples('RacemicMixture',Triples) :-
-        rdf_global_id(chem:'RacemicMixture',RMC),
+        rdf_global_id(chemrof:'RacemicMixture',RMC),
         Triples=[
                  rdf(I,rdf:type,RMC),
                  rdf(I,rdfs:label,N),
-                 rdf(I,chem:chebi_iri,C),
-                 rdf(I,chem:has_left_enantiomer,LI),
-                 rdf(I,chem:has_right_enantiomer,RI),
-                 rdf(I,chem:chirality_agnostic_form,PI)
+                 rdf(I,chemrof:chebi_iri,C),
+                 rdf(I,chemrof:has_left_enantiomer,LI),
+                 rdf(I,chemrof:has_right_enantiomer,RI),
+                 rdf(I,chemrof:chirality_agnostic_form,PI)
                  ],
         racemic_mixture(C,N),
         %inchi(C,Inchi),
@@ -260,13 +261,13 @@ gen_triples('RacemicMixture',Triples) :-
 gen_triples(foo,[rdf(x,a,y)]).
 
 gen_triples('Enantiomer',Triples) :-
-        rdf_global_id(chem:'Enantiomer',Metaclass),
+        rdf_global_id(chemrof:'Enantiomer',Metaclass),
         Triples=[
                  rdf(I,rdf:type,Metaclass),
                  rdf(I,rdfs:label,N),
-                 rdf(I,chem:chebi_iri,C),
-                 rdf(I,chem:config,literal(Config)),
-                 rdf(I,chem:enantiomer_form_of,PI)
+                 rdf(I,chemrof:chebi_iri,C),
+                 rdf(I,chemrof:config,literal(Config)),
+                 rdf(I,chemrof:enantiomer_form_of,PI)
                  ],
         enantiomer_config(C,N,Parent,Config),
         inchi(C,Inchi),  % TODO - infer this

@@ -13,14 +13,14 @@ It also includes as a proof of concept:
 
 Some example classes and their instances:
 
- - [Elements](https://w3id.org/chemrof/ChemicalElement): nickel atom, carbon atom, ...
- - [Ions](https://w3id.org/chemrof/MonoatomicIon): nickel anion, copper(2+), ...
- - [Isotopes](https://w3id.org/chemrof/Isotope): carbon-14, carbon-12, ...
+ - [Atoms](https://w3id.org/chemrof/Atom):
+    - [Elements](https://w3id.org/chemrof/ChemicalElement): nickel atom, carbon atom, ...
+    - [Monoatomic Ions](https://w3id.org/chemrof/MonoatomicIon): copper(2+), ...
+    - [Isotopes](https://w3id.org/chemrof/Isotope): carbon-14, carbon-12, ...
+    - [Fully Specified Atoms](https://w3id.org/chemrof/FullySpecifiedAtom): Helium-4(2+), ...
  - [Molecules](https://w3id.org/chemrof/Molecule):
     - [Enantiomers](https://w3id.org/chemrof/Enantiomer): L-serine
-    - Acids: nitrate, ...
-    - Drugs: imatinib, ...
-    - Racemic Mixtures: thalidomide, ...
+    - [Racemic Mixtures](https://w3id.org/chemrof/RacemicMixture): thalidomide, ...
 
 Note that in a chemical ontology like CHEBI, concepts such as "nickel
 atom" are treated as classes. In this primary chemrof representation,
@@ -91,7 +91,7 @@ The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form
         - https://github.com/ebi-chebi/ChEBI/issues/3245
     ```
 
-=== "Example Data"
+=== "Example Data (Turtle)"
 
     ```turtle
     ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3
@@ -102,6 +102,18 @@ The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form
             chem:has_left_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1 ;
             chem:has_right_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1 .
     ```
+
+=== "Example Data (YAML)"
+
+    ```yaml
+      id: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3"
+      type: "RacemicMixture"
+      label: "thalidomide"
+      chebi_iri: "CHEBI:9513"
+      chirality_agnostic_form: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29"
+      has_left_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1"
+      has_right_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%291
+   ``````
 
 === "OWL (TBox)"
 

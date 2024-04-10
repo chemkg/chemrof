@@ -1,15 +1,17 @@
+# generate chemrof-compliant elements from wikidata
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX chem: <https://w3id.org/chemschema/>
+PREFIX chemrof: <https://w3id.org/chemrof/>
+PREFIX chemrof.data: <https://w3id.org/chemrof/data/>
 PREFIX type: <http://www.wikidata.org/prop/direct/P31>
 PREFIX Element: <http://www.wikidata.org/entity/Q11344>
 PREFIX symbol: <http://www.wikidata.org/prop/direct/P246>
 PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
 
 CONSTRUCT {
-    ?iri a chem:ChemicalElement ;
+    ?iri a chemrof:ChemicalElement ;
       rdfs:label ?label ;
-      chem:symbol ?symbol ;
-      chem:atomic_number ?an
+      chemrof:symbol ?symbol ;
+      chemrof:atomic_number ?an
 }
 WHERE {
     ?i type: Element: ;
@@ -19,5 +21,5 @@ WHERE {
 
        FILTER (LANG(?label) = "en")
 
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?symbol))) AS ?iri)
+   BIND(IRI(CONCAT("https://w3id.org/chemrof/data/ChemicalElement/", STR(?symbol))) AS ?iri)
 }

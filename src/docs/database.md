@@ -8,7 +8,7 @@ entries in the database, ETL-ed from different sources.
 
 The database can be found in the
 [database](https://github.com/cmungall/chem-schema/tree/master/database)
-section
+directory of the GitHub repo.
 
 ## ETL
 
@@ -18,13 +18,13 @@ folder and the Makefile.
 
 Note so far we have only ETL'd a very small set of datatypes for proof of principles:
 
- - ChemicalElement
+ - [ChemicalElement](ChemicalElement.md)
  - Isotope
  - MonoatomicIon
 
 ## Identifiers
 
-Rather than using incremental IDs as in OBO, we aim to use InChi
+Rather than using numeric IDs as in OBO, we aim to use InChi
 strings as identifiers for almost all ChemicalEntity classes (except
 for the Atom branch). This facilitates integration between different
 sources - e.g. whether we ingest from chembl, pubchem, chebi, or
@@ -64,7 +64,8 @@ chem:MonoatomicIon/Mn a chem:ChemicalElement ;
         chem:atomic_number 25.0 .
 ```
 
-This is referenced in instances in the file MonoatomicIon.ttl is derived from CHEBI, e.g:
+This is referenced in instances in the file MonoatomicIon.ttl, which is derived from CHEBI.
+For example:
 
 ```turtle
 chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
@@ -78,7 +79,7 @@ chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
 Similarly the file Isotope.ttl references the elements:
 
 ```turtle
-chem:MonoatomicIon/Mn a chem:Isotope ;
+chem:Isotope/Mn/21 a chem:Isotope ;
         rdfs:label "manganese-46m"@en ;
         chem:neutron_number 21.0 ;
         chem:has_element <https://w3id.org/chemrof/ChemicalElement/Mn> .

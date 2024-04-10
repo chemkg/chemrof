@@ -8,7 +8,7 @@ SHELL := bash
 
 RUN = poetry run
 SRC_DIR = src
-SCHEMA_DIR = $(SRC_DIR)/schema
+SCHEMA_DIR = $(SRC_DIR)/chemrof/schema
 SOURCE_FILES := $(shell find $(SCHEMA_DIR) -name '*.yaml')
 SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
@@ -61,7 +61,7 @@ gendoc: docs docs/index.md
 docs:
 	mkdir -p $@
 
-docs/index.md: $(SOURCE_FILES)
+docs/index.md: $(SOURCE_FILES) src/docs
 	cp -pr src/docs/*.md docs/ ; \
 	$(RUN) gen-doc -d docs $<
 
@@ -94,7 +94,7 @@ examples/output: $(SCHEMA_SRC)
 .PHONY: examples/output
 
 
-schema/sssom/chemrof.sssom.tsv: src/schema/chemrof.yaml
+schema/sssom/chemrof.sssom.tsv: src/chemrof/schema/chemrof.yaml
 	$(RUN) gen-sssom $< -o $@
 
 # test docs locally.
@@ -104,4 +104,4 @@ docserve:
 gh-deploy:
 	$(RUN) mkdocs gh-deploy
 
-include Makefile.etl
+include etl.mk
