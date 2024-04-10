@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.8">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.f2e4d321.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -517,8 +517,8 @@
 representing chemical entities and their groupings, where these are
 database instances, and to use this for aligning across different
 chemical databases.</p>
-<p>A <strong>secondary objective</strong> is to be able to generate an ontology from the
-datamodel, and to use this to help advance the development of CHEBI.</p>
+<p>A <strong>secondary objective</strong> is to be able to generate an OBO-style ontology from the
+data model, and to use this to help advance the development of CHEBI.</p>
 <h2 id="download-owl">Download OWL</h2>
 <p>See the <a href="https://github.com/chemkg/chemrof/blob/master/ontology">ontology</a> folder on github</p>
 <h2 id="owl-generation">OWL generation</h2>
@@ -529,30 +529,30 @@ for specific details.</p>
 example <code>carbon</code> is an instance of the ChemicalElement class, and
 <code>carbon-12</code> is an instance of the sibling Isotope class) into classes,
 and to use reasoning to classify.</p>
-<p>Currently this is done via SPARQL construct (see <a href="https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen">owlgen folder</a></p>
+<p>Currently this is done via SPARQL construct (see <a href="https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen">owlgen folder</a>)</p>
 <p>Conversion to use <a href="https://linkml.io/linkml-owl">linkml-owl</a> is in progress.</p>
 <h2 id="example">Example</h2>
 <p>Mn(+4) is represented in the database as an individual of type MonoatomicIon</p>
-<pre><code class="language-turtle">chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
-        rdfs:label      &quot;manganese(4+)&quot; ;
-        ns1:chebi_iri   CHEBI:25158 ;
-        ns1:charge      4 ;
-        ns1:has_element chem:Mn ;
-        ns1:inchi_string        &quot;InChI=1S/Mn/q+4&quot;^^xsd:string .
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nn">chem</span><span class="p">:</span><span class="nt">MonoatomicIon</span><span class="err">/Mn/</span><span class="mi">+4</span>       <span class="nn">rdf</span><span class="p">:</span><span class="nt">type</span>        <span class="nn">chem</span><span class="p">:</span><span class="nt">MonoatomicIon</span> <span class="p">;</span>
+        <span class="nn">rdfs</span><span class="p">:</span><span class="nt">label</span>      <span class="s">&quot;manganese(4+)&quot;</span> <span class="p">;</span>
+        <span class="nn">ns1</span><span class="p">:</span><span class="nt">chebi_iri</span>   <span class="nn">CHEBI</span><span class="p">:</span><span class="nt">25158</span> <span class="p">;</span>
+        <span class="nn">ns1</span><span class="p">:</span><span class="nt">charge</span>      <span class="mi">4</span> <span class="p">;</span>
+        <span class="nn">ns1</span><span class="p">:</span><span class="nt">has_element</span> <span class="nn">chem</span><span class="p">:</span><span class="nt">Mn</span> <span class="p">;</span>
+        <span class="nn">ns1</span><span class="p">:</span><span class="nt">inchi_string</span>        <span class="s">&quot;InChI=1S/Mn/q+4&quot;</span><span class="p">^^</span><span class="nn">xsd</span><span class="p">:</span><span class="nt">string</span> <span class="p">.</span>
+</code></pre></div>
 <p>This is translated to class-level (<a href="https://github.com/cmungall/chem-schema/blob/master/sparql/owlgen/gen-MonoatomicIon.rq">via this query</a>):</p>
-<pre><code class="language-turtle">chem:MonoatomicIon/Mn/+4
-        a                    owl:Class ;
-        rdfs:label           &quot;manganese(4+)&quot; ;
-        owl:equivalentClass
-              [ owl:intersectionOf
-                          ( chem:ChemicalElement/Mn
-                            [ a               owl:Restriction ;
-                              owl:hasValue    4 ;
-                              owl:onProperty  chem:charge
-                            ]
-                          ) ] .
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nn">chem</span><span class="p">:</span><span class="nt">MonoatomicIon</span><span class="err">/Mn/</span><span class="mi">+4</span>
+        <span class="kt">a</span>                    <span class="nn">owl</span><span class="p">:</span><span class="nt">Class</span> <span class="p">;</span>
+        <span class="nn">rdfs</span><span class="p">:</span><span class="nt">label</span>           <span class="s">&quot;manganese(4+)&quot;</span> <span class="p">;</span>
+        <span class="nn">owl</span><span class="p">:</span><span class="nt">equivalentClass</span>
+              <span class="p">[</span> <span class="nn">owl</span><span class="p">:</span><span class="nt">intersectionOf</span>
+                          <span class="p">(</span> <span class="nn">chem</span><span class="p">:</span><span class="nt">ChemicalElement</span><span class="err">/Mn</span>
+                            <span class="p">[</span> <span class="kt">a</span>               <span class="nn">owl</span><span class="p">:</span><span class="nt">Restriction</span> <span class="p">;</span>
+                              <span class="nn">owl</span><span class="p">:</span><span class="nt">hasValue</span>    <span class="mi">4</span> <span class="p">;</span>
+                              <span class="nn">owl</span><span class="p">:</span><span class="nt">onProperty</span>  <span class="nn">chem</span><span class="p">:</span><span class="nt">charge</span>
+                            <span class="p">]</span>
+                          <span class="p">)</span> <span class="p">]</span> <span class="p">.</span>
+</code></pre></div>
 <p>This will autoclassify to "manganese ion" etc</p>
 <p>here is an example of the atom hierarchy in protege, showing automatic classification:</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/50745/113934643-de047280-97aa-11eb-859a-5c3650871cb5.png" /></p>
@@ -622,7 +622,7 @@ model/schema, allowing for both rigorous modeling and powerful programmatic tran
     <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
     
   </body>

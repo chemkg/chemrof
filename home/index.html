@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.8">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.f2e4d321.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -569,14 +569,16 @@
 <h2 id="core-datamodel">Core Datamodel</h2>
 <p>Some example classes and their instances:</p>
 <ul>
+<li><a href="https://w3id.org/chemrof/Atom">Atoms</a>:<ul>
 <li><a href="https://w3id.org/chemrof/ChemicalElement">Elements</a>: nickel atom, carbon atom, ...</li>
-<li><a href="https://w3id.org/chemrof/MonoatomicIon">Ions</a>: nickel anion, copper(2+), ...</li>
+<li><a href="https://w3id.org/chemrof/MonoatomicIon">Monoatomic Ions</a>: copper(2+), ...</li>
 <li><a href="https://w3id.org/chemrof/Isotope">Isotopes</a>: carbon-14, carbon-12, ...</li>
+<li><a href="https://w3id.org/chemrof/FullySpecifiedAtom">Fully Specified Atoms</a>: Helium-4(2+), ...</li>
+</ul>
+</li>
 <li><a href="https://w3id.org/chemrof/Molecule">Molecules</a>:<ul>
 <li><a href="https://w3id.org/chemrof/Enantiomer">Enantiomers</a>: L-serine</li>
-<li>Acids: nitrate, ...</li>
-<li>Drugs: imatinib, ...</li>
-<li>Racemic Mixtures: thalidomide, ...</li>
+<li><a href="https://w3id.org/chemrof/RacemicMixture">Racemic Mixtures</a>: thalidomide, ...</li>
 </ul>
 </li>
 </ul>
@@ -604,86 +606,102 @@ approach. At the same time we can generate an OBO-style ontology from this repre
 <p><img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Thalidomide_enantiomers.svg/400px-Thalidomide_enantiomers.svg.png" /></p>
 <p>The <a href="/Enantiomer">Enantiomer class</a> represents a chemical entity that has a form (e.g L/D) specified.</p>
 <p><a href="/Racemic mixture">Racemic mixtures</a> are compounds with equal amounts left and right-handed enantiomers. </p>
-<p>=== "Schema"</p>
-<pre><code>```yaml
-racemic mixture:
-  aliases:
-    - racemate
-    - racemic mixture of enantiomers
-  is_a: precise chemical mixture
-  description: &gt;-
-    a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide
-  slot_usage:
-    has left enantiomer:
-      required: true
-      range: enantiomer
-    has right enantiomer:
-      required: true
-      range: enantiomer
-    chirality agnostic form:
-      recommended: true
-      required: false
-      range: molecule
-    IUPAC name:
-      pattern: "^rac-"
-  defining_slots:
-    - has left enantiomer
-    - has right enantiomer
-  exact_mappings:
-    - CHEBI:60911
-    - NCIT:C103198
-    - wdeschema:E47
-    - wd:Q467717
-    - goldbook:R05025
-  see_also:
-    - https://github.com/ebi-chebi/ChEBI/issues/3245
-```
-</code></pre>
-<p>=== "Example Data"</p>
-<pre><code>```turtle
-ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3
-        a chem:RacemicMixture ;
-        rdfs:label "thalidomide" ;
-        chem:chebi_iri obo:CHEBI_9513 ;
-        chem:chirality_agnostic_form ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29 ;
-        chem:has_left_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1 ;
-        chem:has_right_enantiomer ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1 .
-```
-</code></pre>
-<p>=== "OWL (TBox)"</p>
-<pre><code>```xml
-&lt;owl:Class rdf:about="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3"&gt;
-    &lt;owl:equivalentClass&gt;
-        &lt;owl:Class&gt;
-            &lt;owl:intersectionOf rdf:parseType="Collection"&gt;
-                &lt;rdf:Description rdf:about="https://w3id.org/chemrof/RacemicMixture"/&gt;
-                &lt;owl:Restriction&gt;
-                    &lt;owl:onProperty rdf:resource="https://w3id.org/chemrof/chirality_agnostic_form"/&gt;
-                    &lt;owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29"/&gt;
-                &lt;/owl:Restriction&gt;
-            &lt;/owl:intersectionOf&gt;
-        &lt;/owl:Class&gt;
-    &lt;/owl:equivalentClass&gt;
-    &lt;owl:equivalentClass&gt;
-        &lt;owl:Class&gt;
-            &lt;owl:intersectionOf rdf:parseType="Collection"&gt;
-                &lt;rdf:Description rdf:about="https://w3id.org/chemrof/RacemicMixture"/&gt;
-                &lt;owl:Restriction&gt;
-                    &lt;owl:onProperty rdf:resource="https://w3id.org/chemrof/has_left_enantiomer"/&gt;
-                    &lt;owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1"/&gt;
-                &lt;/owl:Restriction&gt;
-                &lt;owl:Restriction&gt;
-                    &lt;owl:onProperty rdf:resource="https://w3id.org/chemrof/has_right_enantiomer"/&gt;
-                    &lt;owl:someValuesFrom rdf:resource="https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1"/&gt;
-                &lt;/owl:Restriction&gt;
-            &lt;/owl:intersectionOf&gt;
-        &lt;/owl:Class&gt;
-    &lt;/owl:equivalentClass&gt;
-    &lt;rdfs:subClassOf rdf:resource="https://w3id.org/chemrof/RacemicMixture"/&gt;
-    &lt;rdfs:label&gt;thalidomide&lt;/rdfs:label&gt;
-&lt;/owl:Class&gt;
-```
-</code></pre>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Schema</label><label for="__tabbed_1_2">Example Data (Turtle)</label><label for="__tabbed_1_3">Example Data (YAML)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nt">racemic mixture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">racemate</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">racemic mixture of enantiomers</span>
+<span class="w">  </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">precise chemical mixture</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">    </span><span class="no">a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide</span>
+<span class="w">  </span><span class="nt">slot_usage</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">has left enantiomer</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enantiomer</span>
+<span class="w">    </span><span class="nt">has right enantiomer</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enantiomer</span>
+<span class="w">    </span><span class="nt">chirality agnostic form</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">recommended</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">molecule</span>
+<span class="w">    </span><span class="nt">IUPAC name</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;^rac-&quot;</span>
+<span class="w">  </span><span class="nt">defining_slots</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has left enantiomer</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has right enantiomer</span>
+<span class="w">  </span><span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEBI:60911</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NCIT:C103198</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wdeschema:E47</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wd:Q467717</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">goldbook:R05025</span>
+<span class="w">  </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/ebi-chebi/ChEBI/issues/3245</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nn">ChemicalEntity</span><span class="p">:</span><span class="nt">InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3</span>
+        <span class="kt">a</span> <span class="nn">chem</span><span class="p">:</span><span class="nt">RacemicMixture</span> <span class="p">;</span>
+        <span class="nn">rdfs</span><span class="p">:</span><span class="nt">label</span> <span class="s">&quot;thalidomide&quot;</span> <span class="p">;</span>
+        <span class="nn">chem</span><span class="p">:</span><span class="nt">chebi_iri</span> <span class="nn">obo</span><span class="p">:</span><span class="nt">CHEBI_9513</span> <span class="p">;</span>
+        <span class="nn">chem</span><span class="p">:</span><span class="nt">chirality_agnostic_form</span> <span class="nn">ChemicalEntity</span><span class="p">:</span><span class="nt">InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29</span> <span class="p">;</span>
+        <span class="nn">chem</span><span class="p">:</span><span class="nt">has_left_enantiomer</span> <span class="nn">ChemicalEntity</span><span class="p">:</span><span class="nt">InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1</span> <span class="p">;</span>
+        <span class="nn">chem</span><span class="p">:</span><span class="nt">has_right_enantiomer</span> <span class="nn">ChemicalEntity</span><span class="p">:</span><span class="nt">InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1</span> <span class="p">.</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>```yaml
+  id: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3"
+  type: "RacemicMixture"
+  label: "thalidomide"
+  chebi_iri: "CHEBI:9513"
+  chirality_agnostic_form: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29"
+  has_left_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1"
+  has_right_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%291</p>
+</div>
+</div>
+</div>
+<p>``````</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">OWL (TBox)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;owl:Class</span><span class="w"> </span><span class="na">rdf:about=</span><span class="s">&quot;https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Fs3&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;owl:equivalentClass&gt;</span>
+<span class="w">        </span><span class="nt">&lt;owl:Class&gt;</span>
+<span class="w">            </span><span class="nt">&lt;owl:intersectionOf</span><span class="w"> </span><span class="na">rdf:parseType=</span><span class="s">&quot;Collection&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;rdf:Description</span><span class="w"> </span><span class="na">rdf:about=</span><span class="s">&quot;https://w3id.org/chemrof/RacemicMixture&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;owl:Restriction&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:onProperty</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/chirality_agnostic_form&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:someValuesFrom</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/owl:Restriction&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/owl:intersectionOf&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/owl:Class&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/owl:equivalentClass&gt;</span>
+<span class="w">    </span><span class="nt">&lt;owl:equivalentClass&gt;</span>
+<span class="w">        </span><span class="nt">&lt;owl:Class&gt;</span>
+<span class="w">            </span><span class="nt">&lt;owl:intersectionOf</span><span class="w"> </span><span class="na">rdf:parseType=</span><span class="s">&quot;Collection&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;rdf:Description</span><span class="w"> </span><span class="na">rdf:about=</span><span class="s">&quot;https://w3id.org/chemrof/RacemicMixture&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;owl:Restriction&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:onProperty</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/has_left_enantiomer&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:someValuesFrom</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/owl:Restriction&gt;</span>
+<span class="w">                </span><span class="nt">&lt;owl:Restriction&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:onProperty</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/has_right_enantiomer&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;owl:someValuesFrom</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/ChemicalEntity/InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm1%2Fs1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/owl:Restriction&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/owl:intersectionOf&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/owl:Class&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/owl:equivalentClass&gt;</span>
+<span class="w">    </span><span class="nt">&lt;rdfs:subClassOf</span><span class="w"> </span><span class="na">rdf:resource=</span><span class="s">&quot;https://w3id.org/chemrof/RacemicMixture&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;rdfs:label&gt;</span>thalidomide<span class="nt">&lt;/rdfs:label&gt;</span>
+<span class="nt">&lt;/owl:Class&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>Note that a class "Enantiomer" does not really make sense at an OBO level where all chemical entities are classes; it is a metaclass.</p>
 <h2 id="mappings">Mappings</h2>
 <ul>
@@ -816,7 +834,7 @@ ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%
     <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
     
   </body>
