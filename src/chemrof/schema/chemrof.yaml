@@ -42,13 +42,16 @@ prefixes:
   damlpt: http://www.daml.org/2003/01/periodictable/PeriodicTable#
   OntoRxn: http://www.semanticweb.com/OntoRxn#
   MetaCyc: http://identifiers.org/MetaCyc/
+  bigg.metabolite: http://identifiers.org/bigg.metabolite/
   UniProtKB: http://identifiers.org/uniprot/
   REACT: http://identifiers.org/reactome/
+  npatlas: http://identifiers.org/npatlas/
   EC: https://enzyme.expasy.org/EC/
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   MI: http://purl.obolibrary.org/obo/MI_
   glycosciencesdb: 'https://bioregistry.io/glycosciencesdb:'
   pdg: https://pdgapi.lbl.gov/summaries/
+  comptox: 'https://bioregistry.io/reference/comptox:'
 default_prefix: chemrof
 default_range: string
 default_curi_maps:
@@ -112,7 +115,7 @@ classes:
         required: false
         recommended: true
     unique_keys:
-      smiles:
+      smiles_string:
         unique_key_slots:
         - smiles_string
     mappings:
@@ -135,6 +138,8 @@ classes:
     - KEGG
     - SEED
     - MetaNetX.chemical
+    - bigg.metabolite
+    - comptox
     title: chemical entity
   SubatomicParticle:
     is_a: PhysicochemicalEntity
@@ -196,6 +201,8 @@ classes:
       for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc
     slots:
     - id
+    - smarts_string
+    - markush_string
     slot_usage:
       subtype_of:
         range: ChemicalGroupingClass
@@ -419,9 +426,9 @@ classes:
       its conjugate bases. physiological
     examples:
     - value: citrate/citric acid
-    slot_usage:
-      has_physiological_form:
-        description: The base which defs this conflation class
+    #slot_usage:
+    #  has_physiological_form:
+    #    description: The base which defs this conflation class
     title: acid base conflation class
   AtomGroupingClass:
     is_a: ChemicalGroupingClass
@@ -975,10 +982,11 @@ classes:
       mass:
         unique_key_slots:
         - atomic_number
-      periodic_table_position:
-        unique_key_slots:
-        - in_periodic_table_group
-        - in_periodic_table_block
+      # multivalues slots not allowed in SQL indexes
+      #periodic_table_position:
+      #  unique_key_slots:
+      #  - in_periodic_table_group
+      #  - in_periodic_table_block
     slot_usage:
       symbol:
         aliases:
@@ -1018,6 +1026,7 @@ classes:
           stable at pH 7.3
         aliases:
         - has Ph 7.3 mapping
+        - has_major_microspecies_at_pH_7_3
         see_also:
         - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
     examples:
@@ -1409,10 +1418,11 @@ classes:
     slot_usage:
       isomeric_smiles_string:
         recommended: true
-    unique_keys:
-      smiles:
-        unique_key_slots:
-        - isomeric_smiles_string
+    # TODO
+    #unique_keys:
+    #  smiles:
+    #    unique_key_slots:
+    #    - isomeric_smiles_string
         
   Enantiomer:
     is_a: Stereoisomer
@@ -1537,8 +1547,6 @@ classes:
         range: ReactionParticipant
       direction:
         description: One of l->r, r->l, bidirectional, neutral
-      smarts_string:
-        range: string
       is_diastereoselective:
         range: boolean
       is_stereo:
@@ -1550,6 +1558,10 @@ classes:
       is_fully_characterized:
         range: boolean
         description: False if includes R-groups
+      #is_non_catalytic:
+      #  range: boolean
+      #  comments:
+      #    - intended for cases such as dirigent protein activity
       reaction_center: {}
       description:
         string_serialization: '{left participants} {direction} {right participants}'
@@ -1863,6 +1875,7 @@ slots:
   derivative_of:
     is_a: alternate_form_of
     title: derivative of
+    range: DomainEntity
   has_derivative:
     is_a: alternate_form_of
     inverse: derivative_of
@@ -1912,8 +1925,10 @@ slots:
     description: connects an acid to any of the the base anions. E.g. citric acid
       acid form of citrate(1-),citrate(2-),citrate(3-)
     multivalued: true
-    domain: MoleculeByChargeState
-    range: MoleculeByChargeState
+    #domain: MoleculeByChargeState
+    #range: MoleculeByChargeState
+    domain: ChemicalEntity
+    range: ChemicalEntity
     title: acid form of
   has_physiologically_stable_form:
     aliases:
@@ -1926,6 +1941,7 @@ slots:
     see_also:
       - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
     title: has physiologically stable form
+    range: ChemicalEntity
   has_acid_form:
     is_a: conjugate_base_of
     description: connects a base to the acid form. E.g. citrate(3-) has acid form
@@ -2247,6 +2263,7 @@ slots:
     key: true
     title: short rinchi key string
   reaction_rate:
+    description: the overall speed of a reaction, typically measured in concentration change per unit time
     aliases:
     - v
     range: float
@@ -2254,10 +2271,25 @@ slots:
       symbol: "mol\u22C5m-3\u22C5s-1"
     title: reaction rate
   reaction_rate_coefficient:
+    description: a proportionality constant that relates the reaction rate to reactant concentrations.
     aliases:
     - reaction rate constant
     range: float
     title: reaction rate coefficient
+  kcat:
+    description: The maximum number of substrate molecules converted to product per enzyme molecule per unit time, when the enzyme is saturated with substrate.
+      It represents the maximum catalytic efficiency of an enzyme under ideal conditions.
+    unit:
+      symbol: "s-1"
+    aliases:
+      - turnover number
+  michaelis_constant:
+    aliases:
+      - Km
+    description:  the substrate concentration at which the reaction rate is half of its maximum value (Vmax)
+    comments:
+      - A lower Km indicates higher affinity (the enzyme needs less substrate to achieve half its maximum rate
+      - Km is typically expressed in units of concentration (e.g., mol/L, μM, mM)
   has_sequence_representation:
     is_a: chemical_representation
     range: SequenceString
@@ -2372,6 +2404,9 @@ slots:
     examples:
     - value: '[#1,#6:60][C@@:6]12[CX4:7][CX4H2,CX4H0:8]([CX4H3,CX4H2,#1:80])([CX4H3,CX4H2,#1:81])[CX3:9](=[CX3H2:10])[C@@:11]1([C:1](=[O:2])[CX4,c:4][CX4,c:3][CX4,c,O,NX3!r3:5]2)[C:99]#[N:97]>>[C:10]#[C:9][*:8]([*:80])([*:81])[C:7][C@@:6]1([*:60])[*:5][*:3][*:4][C:1](=[O:2])[C:11]1[C:99]#[N:97]'
     title: smarts string
+    description: a molecular pattern matching language, related to the popular SMILES molecular language, that can be used to specify sub-structural patterns in molecules.
+  markush_string:
+    is_a: chemical_formula
   lychi_string:
     is_a: chemical_formula
     key: true
@@ -2424,7 +2459,7 @@ slots:
       \ which cannot be easily described using molecular graphs (see \u201CLimitations\
       \ of molecular graph representations\u201D section), such as organometallic\
       \ compounds and ionic salts."
-    multivalued: true
+    #multivalued: true
     title: smiles string
   curly_smiles_string:
     description: CurlySMILES is a chemical line notation which extends SMILES with
