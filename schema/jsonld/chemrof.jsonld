@@ -30,6 +30,10 @@
       "prefix_reference": "http://purl.obolibrary.org/obo/CHEBI_"
     },
     {
+      "prefix_prefix": "chebi.property",
+      "prefix_reference": "http://purl.obolibrary.org/obo/chebi/"
+    },
+    {
       "prefix_prefix": "CHEMINF",
       "prefix_reference": "http://semanticscience.org/resource/CHEMINF_"
     },
@@ -1109,9 +1113,10 @@
       "title": "in periodic table group",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/in_periodic_table_group",
-      "owner": "AtomGroupingByPeriodicTableGroup",
+      "owner": "ChemicalElement",
       "domain_of": [
-        "AtomGroupingByPeriodicTableGroup"
+        "AtomGroupingByPeriodicTableGroup",
+        "ChemicalElement"
       ],
       "range": "PeriodicTableGroup",
       "@type": "SlotDefinition"
@@ -1123,9 +1128,10 @@
       "title": "in periodic table block",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/in_periodic_table_block",
-      "owner": "AtomGroupingByPeriodicTableBlock",
+      "owner": "ChemicalElement",
       "domain_of": [
-        "AtomGroupingByPeriodicTableBlock"
+        "AtomGroupingByPeriodicTableBlock",
+        "ChemicalElement"
       ],
       "range": "PeriodicTableBlockEnum",
       "@type": "SlotDefinition"
@@ -2217,11 +2223,11 @@
       "definition_uri": "https://w3id.org/chemrof/molecular_property",
       "title": "molecular property",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000276"
       ],
       "is_a": "chemical_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000276",
+      "slot_uri": "https://w3id.org/chemrof/molecular_property",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -2230,11 +2236,11 @@
       "definition_uri": "https://w3id.org/chemrof/molecular_electronic_absorption_spectroscopy",
       "title": "molecular electronic absorption spectroscopy",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000011"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000011",
+      "slot_uri": "https://w3id.org/chemrof/molecular_electronic_absorption_spectroscopy",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -2243,11 +2249,11 @@
       "definition_uri": "https://w3id.org/chemrof/molecular_spectroscopy_by_energy_state",
       "title": "molecular spectroscopy by energy state",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000030"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000030",
+      "slot_uri": "https://w3id.org/chemrof/molecular_spectroscopy_by_energy_state",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -2256,11 +2262,11 @@
       "definition_uri": "https://w3id.org/chemrof/molecular_spectroscopy",
       "title": "molecular spectroscopy",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000063"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000063",
+      "slot_uri": "https://w3id.org/chemrof/molecular_spectroscopy",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -2269,115 +2275,149 @@
       "definition_uri": "https://w3id.org/chemrof/molecular_replacement",
       "title": "molecular replacement",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000251"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000251",
+      "slot_uri": "https://w3id.org/chemrof/molecular_replacement",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_mass",
       "definition_uri": "https://w3id.org/chemrof/molecular_mass",
+      "description": "The sum of the relative atomic masses of the constituent atoms of a molecule.",
       "title": "molecular mass",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
-        "http://purl.obolibrary.org/obo/FIX_0000270"
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/NCIT_C28272",
+        "http://purl.obolibrary.org/obo/FIX_0000270",
+        "http://purl.obolibrary.org/obo/chebi/mass"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000270",
-      "range": "string",
+      "slot_uri": "https://w3id.org/chemrof/molecular_mass",
+      "owner": "ChemicalEntity",
+      "domain_of": [
+        "ChemicalEntity"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "u",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_size",
       "definition_uri": "https://w3id.org/chemrof/molecular_size",
+      "description": "A property reflecting the spatial dimensions or volume occupied by a molecule.",
       "title": "molecular size",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000271"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000271",
-      "range": "string",
+      "slot_uri": "https://w3id.org/chemrof/molecular_size",
+      "range": "float",
+      "unit": {
+        "ucum_code": "nm",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_hydration",
       "definition_uri": "https://w3id.org/chemrof/molecular_hydration",
+      "description": "The number of water molecules associated with or bound to a molecule.",
       "title": "molecular hydration",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000272"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000272",
-      "range": "string",
+      "slot_uri": "https://w3id.org/chemrof/molecular_hydration",
+      "range": "integer",
+      "unit": {
+        "ucum_code": "{H2O}",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_shape",
       "definition_uri": "https://w3id.org/chemrof/molecular_shape",
+      "description": "The geometric configuration or three-dimensional arrangement of atoms within a molecule.",
       "title": "molecular shape",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000273"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000273",
+      "slot_uri": "https://w3id.org/chemrof/molecular_shape",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_charge",
       "definition_uri": "https://w3id.org/chemrof/molecular_charge",
+      "description": "The electric charge of a molecule, typically expressed as multiples of the elementary charge.",
       "title": "molecular charge",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000275"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000275",
-      "range": "string",
+      "slot_uri": "https://w3id.org/chemrof/molecular_charge",
+      "range": "integer",
+      "unit": {
+        "ucum_code": "e",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_structure",
       "definition_uri": "https://w3id.org/chemrof/molecular_structure",
+      "description": "The specific arrangement of atoms in a molecule, usually represented by chemical notation or structural formulas.",
       "title": "molecular structure",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000305"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000305",
+      "slot_uri": "https://w3id.org/chemrof/molecular_structure",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_heat_capacity",
       "definition_uri": "https://w3id.org/chemrof/molecular_heat_capacity",
+      "description": "The amount of heat required to raise the temperature of one mole of a molecule by one Kelvin.",
       "title": "molecular heat capacity",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000389"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000389",
-      "range": "string",
+      "slot_uri": "https://w3id.org/chemrof/molecular_heat_capacity",
+      "range": "float",
+      "unit": {
+        "ucum_code": "J/mol.K",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
       "name": "molecular_electronic_spectroscopy",
       "definition_uri": "https://w3id.org/chemrof/molecular_electronic_spectroscopy",
+      "description": "A molecular property describing absorption or emission of electromagnetic radiation due to electronic transitions.",
       "title": "molecular electronic spectroscopy",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
         "http://purl.obolibrary.org/obo/FIX_0000943"
       ],
       "is_a": "molecular_property",
-      "slot_uri": "http://purl.obolibrary.org/obo/FIX_0000943",
+      "slot_uri": "https://w3id.org/chemrof/molecular_electronic_spectroscopy",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -6892,6 +6932,7 @@
         "SEED",
         "MetaNetX.chemical",
         "bigg.metabolite",
+        "npatlas",
         "comptox"
       ],
       "definition_uri": "https://w3id.org/chemrof/ChemicalEntity",
@@ -6933,6 +6974,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of"
       ],
       "slot_usage": {},
@@ -7925,6 +7967,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -7951,6 +7994,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -7989,6 +8033,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8035,6 +8080,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8060,6 +8106,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8095,6 +8142,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8145,6 +8193,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8184,6 +8233,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8223,6 +8273,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "polymer_of",
@@ -8265,6 +8316,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8308,6 +8360,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8348,6 +8401,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8373,6 +8427,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8401,6 +8456,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8426,6 +8482,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8456,6 +8513,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8486,6 +8544,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8522,6 +8581,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8563,6 +8623,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "has_proportional_parts",
@@ -8621,6 +8682,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8655,6 +8717,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8696,6 +8759,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8726,6 +8790,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "has_sequence_representation"
@@ -8752,6 +8817,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "AminoAcidSequenceInterval_has_sequence_representation"
@@ -8778,6 +8844,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -8804,6 +8871,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -8830,6 +8898,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -8856,6 +8925,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "FunctionalGroup_is_substitutent_group_from"
@@ -8883,6 +8953,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8915,6 +8986,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8951,6 +9023,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8993,6 +9066,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9035,6 +9109,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9080,6 +9155,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9125,6 +9201,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9162,6 +9239,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9199,6 +9277,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9247,6 +9326,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9296,14 +9376,15 @@
         "ChemicalEntity_inchi_chemical_sublayer",
         "smiles_string",
         "empirical_formula",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "ChemicalElement_symbol",
         "ChemicalElement_in_periodic_table_group",
         "ChemicalElement_in_periodic_table_block",
+        "ChemicalElement_symbol",
         "ChemicalElement_boiling_point_in_celcius",
         "ChemicalElement_melting_point_in_celcius",
         "ChemicalElement_standard_atomic_weight",
@@ -9360,6 +9441,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9400,6 +9482,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9440,6 +9523,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9494,6 +9578,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9543,6 +9628,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9595,6 +9681,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9638,6 +9725,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9672,6 +9760,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9716,6 +9805,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9751,6 +9841,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9794,6 +9885,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10191,6 +10283,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ChemicalSalt_elemental_charge",
@@ -10227,6 +10320,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10264,6 +10358,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10304,6 +10399,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10360,6 +10456,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "RacemicMixture_has_left_enantiomer",
@@ -10404,6 +10501,7 @@
         "smiles_string",
         "empirical_formula",
         "has_physiologically_stable_form",
+        "molecular_mass",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10698,9 +10796,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-04-22T08:57:29",
-  "source_file_size": 107850,
-  "generation_date": "2025-04-22T08:57:40",
+  "source_file_date": "2025-04-23T09:52:24",
+  "source_file_size": 109416,
+  "generation_date": "2025-04-23T09:53:34",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

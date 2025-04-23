@@ -17,6 +17,7 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
   RO: http://purl.obolibrary.org/obo/RO_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  chebi.property: http://purl.obolibrary.org/obo/chebi/
   CHEMINF: http://semanticscience.org/resource/CHEMINF_
   RXNO: http://purl.obolibrary.org/obo/RXNO_
   MOP: http://purl.obolibrary.org/obo/MOP_
@@ -110,6 +111,7 @@ classes:
     - smiles_string
     - empirical_formula
     - has_physiologically_stable_form
+    - molecular_mass
     slot_usage:
       inchi_chemical_sublayer:
         required: false
@@ -139,6 +141,7 @@ classes:
     - SEED
     - MetaNetX.chemical
     - bigg.metabolite
+    - npatlas
     - comptox
     title: chemical entity
   SubatomicParticle:
@@ -987,6 +990,9 @@ classes:
       #  unique_key_slots:
       #  - in_periodic_table_group
       #  - in_periodic_table_block
+    slots:
+      - in_periodic_table_group
+      - in_periodic_table_block
     slot_usage:
       symbol:
         aliases:
@@ -2148,56 +2154,103 @@ slots:
     title: has cyclic structure
   molecular_property:
     is_a: chemical_property
-    slot_uri: FIX:0000276
+    exact_mappings:
+    - FIX:0000276
     title: molecular property
   molecular_electronic_absorption_spectroscopy:
     is_a: molecular_property
-    slot_uri: FIX:0000011
+    exact_mappings:
+    - FIX:0000011
     title: molecular electronic absorption spectroscopy
   molecular_spectroscopy_by_energy_state:
     is_a: molecular_property
-    slot_uri: FIX:0000030
+    exact_mappings:
+    - FIX:0000030
     title: molecular spectroscopy by energy state
   molecular_spectroscopy:
     is_a: molecular_property
-    slot_uri: FIX:0000063
+    exact_mappings:
+    - FIX:0000063
     title: molecular spectroscopy
   molecular_replacement:
     is_a: molecular_property
-    slot_uri: FIX:0000251
+    exact_mappings:
+    - FIX:0000251
     title: molecular replacement
   molecular_mass:
+    description: The sum of the relative atomic masses of the constituent atoms of a molecule.
     is_a: molecular_property
-    slot_uri: FIX:0000270
     title: molecular mass
+    exact_mappings:
+      - NCIT:C28272
+      - FIX:0000270
+      - chebi.property:mass
+    range: float
+    unit:
+      ucum_code: u
   molecular_size:
+    description: A property reflecting the spatial dimensions or volume occupied by a molecule.
     is_a: molecular_property
-    slot_uri: FIX:0000271
     title: molecular size
+    exact_mappings:
+      - FIX:0000271
+    range: float
+    unit:
+      ucum_code: nm
+
   molecular_hydration:
+    description: The number of water molecules associated with or bound to a molecule.
     is_a: molecular_property
-    slot_uri: FIX:0000272
     title: molecular hydration
+    exact_mappings:
+      - FIX:0000272
+    range: integer
+    unit:
+      ucum_code: "{H2O}"
+
   molecular_shape:
+    description: The geometric configuration or three-dimensional arrangement of atoms within a molecule.
     is_a: molecular_property
-    slot_uri: FIX:0000273
     title: molecular shape
+    exact_mappings:
+      - FIX:0000273
+    range: string
+
   molecular_charge:
+    description: The electric charge of a molecule, typically expressed as multiples of the elementary charge.
     is_a: molecular_property
-    slot_uri: FIX:0000275
     title: molecular charge
+    exact_mappings:
+      - FIX:0000275
+    range: integer
+    unit:
+      ucum_code: "e"
+
   molecular_structure:
+    description: The specific arrangement of atoms in a molecule, usually represented by chemical notation or structural formulas.
     is_a: molecular_property
-    slot_uri: FIX:0000305
     title: molecular structure
+    exact_mappings:
+      - FIX:0000305
+    range: string
+
   molecular_heat_capacity:
+    description: The amount of heat required to raise the temperature of one mole of a molecule by one Kelvin.
     is_a: molecular_property
-    slot_uri: FIX:0000389
     title: molecular heat capacity
+    exact_mappings:
+      - FIX:0000389
+    range: float
+    unit:
+      ucum_code: "J/mol.K"
+
   molecular_electronic_spectroscopy:
+    description: A molecular property describing absorption or emission of electromagnetic radiation due to electronic transitions.
     is_a: molecular_property
-    slot_uri: FIX:0000943
     title: molecular electronic spectroscopy
+    exact_mappings:
+      - FIX:0000943
+    range: string
   chemical_representation:
     aliases:
     - has chemical encoding
