@@ -16,6 +16,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -238,6 +239,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -252,6 +254,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -266,6 +269,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -279,6 +283,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -293,6 +298,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -307,6 +313,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -321,6 +328,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -339,6 +347,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -354,6 +363,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -371,6 +381,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -389,6 +400,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -402,6 +414,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -415,6 +428,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -428,6 +442,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -441,6 +456,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -454,6 +470,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -467,6 +484,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -480,6 +498,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -495,6 +514,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -509,6 +529,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -523,6 +544,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -536,6 +558,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -550,6 +573,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -564,6 +588,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -578,6 +603,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -592,6 +618,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -606,6 +633,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -619,6 +647,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -633,6 +662,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -647,6 +677,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -662,6 +693,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -679,6 +711,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -697,6 +730,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -715,6 +749,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -731,6 +766,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -747,6 +783,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -763,6 +800,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -779,12 +817,15 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
 -- # Class: "ChemicalElement" Description: "generic form of an atom, with unspecified neutron or charge"
+--     * Slot: in_periodic_table_group Description: which number in periodic table column
+--     * Slot: in_periodic_table_block Description: block of periodic table unified by the orbitals their valence electrons or vacancies lie in
 --     * Slot: atomic_number Description: number of protons in an atom
 --     * Slot: symbol Description: E.g. O, K, Ge
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
@@ -794,6 +835,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -810,6 +852,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -826,6 +869,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -842,6 +886,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -866,6 +911,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -890,6 +936,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -906,6 +953,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -923,6 +971,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -940,6 +989,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -957,6 +1007,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -972,6 +1023,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -989,6 +1041,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -1080,6 +1133,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1094,6 +1148,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1108,6 +1163,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1122,6 +1178,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1135,6 +1192,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1149,6 +1207,7 @@
 --     * Slot: inchi_chemical_sublayer Description: The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -2074,6 +2133,7 @@ CREATE TABLE "ChemicalEntity" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2155,6 +2215,7 @@ CREATE TABLE "PolyatomicEntity" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2173,6 +2234,7 @@ CREATE TABLE "SmallMolecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2191,6 +2253,7 @@ CREATE TABLE "Macromolecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2208,6 +2271,7 @@ CREATE TABLE "MolecularComplex" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2226,6 +2290,7 @@ CREATE TABLE "Peptide" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2244,6 +2309,7 @@ CREATE TABLE "Protein" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2262,6 +2328,7 @@ CREATE TABLE "Glycan" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2279,6 +2346,7 @@ CREATE TABLE "MolecularComponent" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2296,6 +2364,7 @@ CREATE TABLE "PolymerPart" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2313,6 +2382,7 @@ CREATE TABLE "Monomer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2330,6 +2400,7 @@ CREATE TABLE "MolecularSubsequence" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2347,6 +2418,7 @@ CREATE TABLE "ChemicalGroup" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2364,6 +2436,7 @@ CREATE TABLE "ChemicalMixture" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2381,6 +2454,7 @@ CREATE TABLE "PreciseChemicalMixture" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2400,6 +2474,7 @@ CREATE TABLE "ImpreciseChemicalMixture" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2418,6 +2493,7 @@ CREATE TABLE "Molecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2436,6 +2512,7 @@ CREATE TABLE "NaturalProduct" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2453,6 +2530,7 @@ CREATE TABLE "Moiety" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2471,6 +2549,7 @@ CREATE TABLE "SequenceInterval" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2489,6 +2568,7 @@ CREATE TABLE "AminoAcidSequenceInterval" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2507,6 +2587,7 @@ CREATE TABLE "NucleotideSequenceInterval" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2525,6 +2606,7 @@ CREATE TABLE "DNASequenceInterval" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2543,6 +2625,7 @@ CREATE TABLE "RNASequenceInterval" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2560,6 +2643,7 @@ CREATE TABLE "FunctionalGroup" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2578,6 +2662,7 @@ CREATE TABLE "MolecularSpecies" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2596,6 +2681,7 @@ CREATE TABLE "NonSpeciesMolecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2615,6 +2701,7 @@ CREATE TABLE "MoleculeByChargeState" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2636,6 +2723,7 @@ CREATE TABLE "PolyatomicIon" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2660,6 +2748,7 @@ CREATE TABLE "MolecularCation" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2684,6 +2773,7 @@ CREATE TABLE "MolecularAnion" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2706,6 +2796,7 @@ CREATE TABLE "NetUnchargedMolecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2726,6 +2817,7 @@ CREATE TABLE "Zwitterion" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2746,6 +2838,7 @@ CREATE TABLE "NeutralMolecule" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2766,6 +2859,7 @@ CREATE TABLE "Atom" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2777,6 +2871,8 @@ CREATE TABLE "Atom" (
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );
 CREATE TABLE "ChemicalElement" (
+	in_periodic_table_group INTEGER, 
+	in_periodic_table_block VARCHAR(7), 
 	atomic_number INTEGER, 
 	symbol TEXT, 
 	name TEXT, 
@@ -2786,6 +2882,7 @@ CREATE TABLE "ChemicalElement" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2809,6 +2906,7 @@ CREATE TABLE "UnchargedAtom" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2830,6 +2928,7 @@ CREATE TABLE "Nuclide" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2851,6 +2950,7 @@ CREATE TABLE "Radionuclide" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2872,6 +2972,7 @@ CREATE TABLE "AtomIonicForm" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2892,6 +2993,7 @@ CREATE TABLE "PartiallySpecifiedAtom" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2914,6 +3016,7 @@ CREATE TABLE "FullySpecifiedAtom" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2932,6 +3035,7 @@ CREATE TABLE "ChemicalSalt" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2950,6 +3054,7 @@ CREATE TABLE "Ester" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2968,6 +3073,7 @@ CREATE TABLE "Stereoisomer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2986,6 +3092,7 @@ CREATE TABLE "Enantiomer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3003,6 +3110,7 @@ CREATE TABLE "RacemicMixture" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3021,6 +3129,7 @@ CREATE TABLE "Allotrope" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3211,6 +3320,7 @@ CREATE TABLE "MonomolecularPolymer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3232,6 +3342,7 @@ CREATE TABLE "SupramolecularPolymer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3255,6 +3366,7 @@ CREATE TABLE "Copolymer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3278,6 +3390,7 @@ CREATE TABLE "Homopolymer" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3308,6 +3421,7 @@ CREATE TABLE "Isotope" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3333,6 +3447,7 @@ CREATE TABLE "MonoatomicIon" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3356,6 +3471,7 @@ CREATE TABLE "AtomAnion" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3379,6 +3495,7 @@ CREATE TABLE "AtomCation" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -4073,6 +4190,7 @@ CREATE TABLE "Isobar" (
 	inchi_chemical_sublayer TEXT, 
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
+	molecular_mass FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
