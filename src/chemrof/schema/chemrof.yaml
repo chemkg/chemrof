@@ -110,7 +110,7 @@ classes:
     - inchi_chemical_sublayer
     - smiles_string
     - empirical_formula
-    - has_physiologically_stable_form
+    - has_major_microspecies_at_pH7_3
     - molecular_mass
     slot_usage:
       inchi_chemical_sublayer:
@@ -1027,14 +1027,8 @@ classes:
       has_stereocenter:
         range: Stereocenter
         multivalued: true
-      has_physiologically_stable_form:
-        description: connects an element to the equivalent form that is physiologically
-          stable at pH 7.3
-        aliases:
-        - has Ph 7.3 mapping
-        - has_major_microspecies_at_pH_7_3
-        see_also:
-        - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
+      has_major_microspecies_at_pH7_3:
+        range: ChemicalElement
     examples:
     - value: carbon
     - value: nickel
@@ -1937,17 +1931,10 @@ slots:
     range: ChemicalEntity
     title: acid form of
   has_physiologically_stable_form:
-    aliases:
-    - protonation neutral form of
-    - has Ph 7.3 mapping
-    is_a: acid_form_of
-    description: connects an acid to the form that is stable at physiological pH (7.3).
-      E.g. citric acid has physiological base citrate(3-)
-    multivalued: false
-    see_also:
-      - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
-    title: has physiologically stable form
-    range: ChemicalEntity
+   deprecated: true
+   description: Different term for the concept of a major microspecies at pH 7.3.
+   see_also: has_major_microspecies_at_pH7_3
+   title: has physiologically stable form (Deprecated)
   has_acid_form:
     is_a: conjugate_base_of
     description: connects a base to the acid form. E.g. citrate(3-) has acid form
@@ -2835,6 +2822,25 @@ slots:
     is_a: chemical_to_chemical_relationship
     inverse: subtype_of
     title: has subtype
+  has_major_microspecies_at_pH7_3:
+    aliases:
+    - protonation neutral form of
+    - has Ph 7.3 mapping
+    multivalued: false
+    see_also:
+      - https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv
+    title: has physiologically stable form
+    is_a: acid_form_of
+    inverse: major_microspecies_at_pH7_3_of
+    description: Links different variants of the same chemical in different protonation states,
+      where the target of this link is the (predicited) to be most common protonation state for this chemical at 
+      a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3).
+      E.g. citric acid has physiological base citrate(3-)
+    range: ChemicalEntity
+  major_microspecies_at_pH7_3_of:
+    is_a: acid_form_of
+    description: The subject of this link is the most common protonation state for this chemical at a pH of 7.3. The      link may point to it's source.
+    inverse: has_major_microspecies_at_pH7_3
   classified_by:
     is_a: chemical_to_chemical_relationship
     mixins:
