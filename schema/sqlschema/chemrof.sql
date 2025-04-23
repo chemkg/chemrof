@@ -1267,9 +1267,9 @@
 -- # Class: "EntityWithIsotopeSpecified" Description: "A mixin for an entity where the charge is explicitly specified (corresponding to the /q layer in InChI)"
 --     * Slot: id Description: 
 --     * Slot: inchi_isotopic_layer Description: 
--- # Class: "ChemicalEntity_has_physiologically_stable_form" Description: ""
+-- # Class: "ChemicalEntity_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalEntity_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "GroupingClass_subtype_of" Description: ""
 --     * Slot: GroupingClass_id Description: Autocreated FK slot
 --     * Slot: subtype_of_id Description: A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class
@@ -1345,9 +1345,9 @@
 -- # Class: "AtomGroupingByProperty_subtype_of" Description: ""
 --     * Slot: AtomGroupingByProperty_id Description: Autocreated FK slot
 --     * Slot: subtype_of_id Description: A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class
--- # Class: "PolyatomicEntity_has_physiologically_stable_form" Description: ""
+-- # Class: "PolyatomicEntity_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolyatomicEntity_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "SmallMolecule_has_bonds" Description: ""
 --     * Slot: SmallMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1357,9 +1357,9 @@
 -- # Class: "SmallMolecule_has_atoms" Description: ""
 --     * Slot: SmallMolecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "SmallMolecule_has_physiologically_stable_form" Description: ""
+-- # Class: "SmallMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SmallMolecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Macromolecule_has_bonds" Description: ""
 --     * Slot: Macromolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1369,12 +1369,12 @@
 -- # Class: "Macromolecule_has_atoms" Description: ""
 --     * Slot: Macromolecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Macromolecule_has_physiologically_stable_form" Description: ""
+-- # Class: "Macromolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Macromolecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "MolecularComplex_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularComplex_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularComplex_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Peptide_has_bonds" Description: ""
 --     * Slot: Peptide_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1384,9 +1384,9 @@
 -- # Class: "Peptide_has_atoms" Description: ""
 --     * Slot: Peptide_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Peptide_has_physiologically_stable_form" Description: ""
+-- # Class: "Peptide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Peptide_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Protein_has_bonds" Description: ""
 --     * Slot: Protein_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1396,9 +1396,9 @@
 -- # Class: "Protein_has_atoms" Description: ""
 --     * Slot: Protein_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Protein_has_physiologically_stable_form" Description: ""
+-- # Class: "Protein_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Protein_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Glycan_has_bonds" Description: ""
 --     * Slot: Glycan_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1408,9 +1408,9 @@
 -- # Class: "Glycan_has_atoms" Description: ""
 --     * Slot: Glycan_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Glycan_has_physiologically_stable_form" Description: ""
+-- # Class: "Glycan_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Glycan_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "MonomolecularPolymer_has_bonds" Description: ""
 --     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1420,12 +1420,12 @@
 -- # Class: "MonomolecularPolymer_has_atoms" Description: ""
 --     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "MonomolecularPolymer_has_physiologically_stable_form" Description: ""
+-- # Class: "MonomolecularPolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "SupramolecularPolymer_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "SupramolecularPolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SupramolecularPolymer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Copolymer_polymer_of" Description: ""
 --     * Slot: Copolymer_id Description: Autocreated FK slot
 --     * Slot: polymer_of_id Description: 
@@ -1438,9 +1438,9 @@
 -- # Class: "Copolymer_has_atoms" Description: ""
 --     * Slot: Copolymer_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Copolymer_has_physiologically_stable_form" Description: ""
+-- # Class: "Copolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Copolymer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Homopolymer_has_bonds" Description: ""
 --     * Slot: Homopolymer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1450,36 +1450,36 @@
 -- # Class: "Homopolymer_has_atoms" Description: ""
 --     * Slot: Homopolymer_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Homopolymer_has_physiologically_stable_form" Description: ""
+-- # Class: "Homopolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Homopolymer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "MolecularComponent_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularComponent_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularComponent_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "PolymerPart_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PolymerPart_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolymerPart_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Monomer_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Monomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Monomer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "MolecularSubsequence_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularSubsequence_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularSubsequence_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "ChemicalGroup_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalGroup_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalGroup_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "ChemicalMixture_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalMixture_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "PreciseChemicalMixture_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PreciseChemicalMixture_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "ImpreciseChemicalMixture_has_proportional_parts" Description: ""
 --     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
 --     * Slot: has_proportional_parts_id Description: Relationship between a complex mixture and its parts
--- # Class: "ImpreciseChemicalMixture_has_physiologically_stable_form" Description: ""
+-- # Class: "ImpreciseChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Molecule_has_bonds" Description: ""
 --     * Slot: Molecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1489,9 +1489,9 @@
 -- # Class: "Molecule_has_atoms" Description: ""
 --     * Slot: Molecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Molecule_has_physiologically_stable_form" Description: ""
+-- # Class: "Molecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Molecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "NaturalProduct_derived_from_organisms" Description: ""
 --     * Slot: NaturalProduct_id Description: Autocreated FK slot
 --     * Slot: derived_from_organisms Description: 
@@ -1504,30 +1504,30 @@
 -- # Class: "NaturalProduct_has_atoms" Description: ""
 --     * Slot: NaturalProduct_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "NaturalProduct_has_physiologically_stable_form" Description: ""
+-- # Class: "NaturalProduct_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NaturalProduct_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Moiety_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Moiety_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Moiety_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "SequenceInterval_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "SequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SequenceInterval_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "AminoAcidSequenceInterval_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AminoAcidSequenceInterval_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "NucleotideSequenceInterval_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NucleotideSequenceInterval_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "DNASequenceInterval_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "DNASequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: DNASequenceInterval_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "RNASequenceInterval_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "RNASequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: RNASequenceInterval_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "FunctionalGroup_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "FunctionalGroup_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: FunctionalGroup_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "MolecularSpecies_has_bonds" Description: ""
 --     * Slot: MolecularSpecies_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1537,9 +1537,9 @@
 -- # Class: "MolecularSpecies_has_atoms" Description: ""
 --     * Slot: MolecularSpecies_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "MolecularSpecies_has_physiologically_stable_form" Description: ""
+-- # Class: "MolecularSpecies_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularSpecies_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "NonSpeciesMolecule_has_bonds" Description: ""
 --     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1549,9 +1549,9 @@
 -- # Class: "NonSpeciesMolecule_has_atoms" Description: ""
 --     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "NonSpeciesMolecule_has_physiologically_stable_form" Description: ""
+-- # Class: "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "MoleculeByChargeState_has_bonds" Description: ""
 --     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1561,9 +1561,9 @@
 -- # Class: "MoleculeByChargeState_has_atoms" Description: ""
 --     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "MoleculeByChargeState_has_physiologically_stable_form" Description: ""
+-- # Class: "MoleculeByChargeState_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "PolyatomicIon_has_bonds" Description: ""
 --     * Slot: PolyatomicIon_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1573,9 +1573,9 @@
 -- # Class: "PolyatomicIon_has_atoms" Description: ""
 --     * Slot: PolyatomicIon_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "PolyatomicIon_has_physiologically_stable_form" Description: ""
+-- # Class: "PolyatomicIon_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolyatomicIon_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "MolecularCation_has_bonds" Description: ""
 --     * Slot: MolecularCation_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1585,9 +1585,9 @@
 -- # Class: "MolecularCation_has_atoms" Description: ""
 --     * Slot: MolecularCation_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "MolecularCation_has_physiologically_stable_form" Description: ""
+-- # Class: "MolecularCation_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularCation_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "MolecularAnion_has_bonds" Description: ""
 --     * Slot: MolecularAnion_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1597,9 +1597,9 @@
 -- # Class: "MolecularAnion_has_atoms" Description: ""
 --     * Slot: MolecularAnion_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "MolecularAnion_has_physiologically_stable_form" Description: ""
+-- # Class: "MolecularAnion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularAnion_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "NetUnchargedMolecule_has_bonds" Description: ""
 --     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1609,9 +1609,9 @@
 -- # Class: "NetUnchargedMolecule_has_atoms" Description: ""
 --     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "NetUnchargedMolecule_has_physiologically_stable_form" Description: ""
+-- # Class: "NetUnchargedMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Zwitterion_has_bonds" Description: ""
 --     * Slot: Zwitterion_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1621,9 +1621,9 @@
 -- # Class: "Zwitterion_has_atoms" Description: ""
 --     * Slot: Zwitterion_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Zwitterion_has_physiologically_stable_form" Description: ""
+-- # Class: "Zwitterion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Zwitterion_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "NeutralMolecule_has_bonds" Description: ""
 --     * Slot: NeutralMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1633,51 +1633,51 @@
 -- # Class: "NeutralMolecule_has_atoms" Description: ""
 --     * Slot: NeutralMolecule_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "NeutralMolecule_has_physiologically_stable_form" Description: ""
+-- # Class: "NeutralMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NeutralMolecule_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Atom_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Atom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Atom_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "ChemicalElement_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalElement_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalElement_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an element to the equivalent form that is physiologically stable at pH 7.3
--- # Class: "UnchargedAtom_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "UnchargedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: UnchargedAtom_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Nuclide_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Nuclide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Nuclide_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Radionuclide_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Radionuclide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Radionuclide_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Isotope_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Isotope_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Isotope_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "Isobar_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Isobar_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Isobar_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "AtomIonicForm_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomIonicForm_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomIonicForm_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "MonoatomicIon_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MonoatomicIon_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MonoatomicIon_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "AtomAnion_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomAnion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomAnion_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "AtomCation_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomCation_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomCation_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "PartiallySpecifiedAtom_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PartiallySpecifiedAtom_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "FullySpecifiedAtom_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: FullySpecifiedAtom_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "ChemicalSalt_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalSalt_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalSalt_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Ester_has_bonds" Description: ""
 --     * Slot: Ester_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1687,9 +1687,9 @@
 -- # Class: "Ester_has_atoms" Description: ""
 --     * Slot: Ester_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Ester_has_physiologically_stable_form" Description: ""
+-- # Class: "Ester_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Ester_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Stereoisomer_has_bonds" Description: ""
 --     * Slot: Stereoisomer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1699,9 +1699,9 @@
 -- # Class: "Stereoisomer_has_atoms" Description: ""
 --     * Slot: Stereoisomer_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Stereoisomer_has_physiologically_stable_form" Description: ""
+-- # Class: "Stereoisomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Stereoisomer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Enantiomer_has_bonds" Description: ""
 --     * Slot: Enantiomer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1711,12 +1711,12 @@
 -- # Class: "Enantiomer_has_atoms" Description: ""
 --     * Slot: Enantiomer_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Enantiomer_has_physiologically_stable_form" Description: ""
+-- # Class: "Enantiomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Enantiomer_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
--- # Class: "RacemicMixture_has_physiologically_stable_form" Description: ""
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "RacemicMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: RacemicMixture_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 -- # Class: "Allotrope_has_bonds" Description: ""
 --     * Slot: Allotrope_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1726,9 +1726,9 @@
 -- # Class: "Allotrope_has_atoms" Description: ""
 --     * Slot: Allotrope_id Description: Autocreated FK slot
 --     * Slot: has_atoms_id Description: Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences
--- # Class: "Allotrope_has_physiologically_stable_form" Description: ""
+-- # Class: "Allotrope_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Allotrope_id Description: Autocreated FK slot
---     * Slot: has_physiologically_stable_form_id Description: connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+--     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
 
 CREATE TABLE "Collection" (
 	id INTEGER NOT NULL, 
@@ -3507,12 +3507,12 @@ CREATE TABLE "AtomCation" (
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id), 
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );
-CREATE TABLE "ChemicalEntity_has_physiologically_stable_form" (
+CREATE TABLE "ChemicalEntity_has_major_microspecies_at_pH7_3" (
 	"ChemicalEntity_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ChemicalEntity_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ChemicalEntity_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MolecularDerivativeGroupingClass_subtype_of" (
 	"MolecularDerivativeGroupingClass_id" TEXT, 
@@ -3549,12 +3549,12 @@ CREATE TABLE "AcidBaseConflationClass_subtype_of" (
 	FOREIGN KEY("AcidBaseConflationClass_id") REFERENCES "AcidBaseConflationClass" (id), 
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
 );
-CREATE TABLE "PolyatomicEntity_has_physiologically_stable_form" (
+CREATE TABLE "PolyatomicEntity_has_major_microspecies_at_pH7_3" (
 	"PolyatomicEntity_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("PolyatomicEntity_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("PolyatomicEntity_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "SmallMolecule_has_submolecules" (
 	"SmallMolecule_id" TEXT, 
@@ -3570,12 +3570,12 @@ CREATE TABLE "SmallMolecule_has_atoms" (
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "SmallMolecule_has_physiologically_stable_form" (
+CREATE TABLE "SmallMolecule_has_major_microspecies_at_pH7_3" (
 	"SmallMolecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("SmallMolecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("SmallMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Macromolecule_has_submolecules" (
 	"Macromolecule_id" TEXT, 
@@ -3591,19 +3591,19 @@ CREATE TABLE "Macromolecule_has_atoms" (
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Macromolecule_has_physiologically_stable_form" (
+CREATE TABLE "Macromolecule_has_major_microspecies_at_pH7_3" (
 	"Macromolecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Macromolecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Macromolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "MolecularComplex_has_physiologically_stable_form" (
+CREATE TABLE "MolecularComplex_has_major_microspecies_at_pH7_3" (
 	"MolecularComplex_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularComplex_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularComplex_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularComplex_id") REFERENCES "MolecularComplex" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Peptide_has_submolecules" (
 	"Peptide_id" TEXT, 
@@ -3619,12 +3619,12 @@ CREATE TABLE "Peptide_has_atoms" (
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Peptide_has_physiologically_stable_form" (
+CREATE TABLE "Peptide_has_major_microspecies_at_pH7_3" (
 	"Peptide_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Peptide_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Peptide_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Protein_has_submolecules" (
 	"Protein_id" TEXT, 
@@ -3640,12 +3640,12 @@ CREATE TABLE "Protein_has_atoms" (
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Protein_has_physiologically_stable_form" (
+CREATE TABLE "Protein_has_major_microspecies_at_pH7_3" (
 	"Protein_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Protein_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Protein_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Glycan_has_submolecules" (
 	"Glycan_id" TEXT, 
@@ -3661,61 +3661,61 @@ CREATE TABLE "Glycan_has_atoms" (
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Glycan_has_physiologically_stable_form" (
+CREATE TABLE "Glycan_has_major_microspecies_at_pH7_3" (
 	"Glycan_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Glycan_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Glycan_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "MolecularComponent_has_physiologically_stable_form" (
+CREATE TABLE "MolecularComponent_has_major_microspecies_at_pH7_3" (
 	"MolecularComponent_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularComponent_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularComponent_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularComponent_id") REFERENCES "MolecularComponent" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "PolymerPart_has_physiologically_stable_form" (
+CREATE TABLE "PolymerPart_has_major_microspecies_at_pH7_3" (
 	"PolymerPart_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("PolymerPart_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("PolymerPart_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Monomer_has_physiologically_stable_form" (
+CREATE TABLE "Monomer_has_major_microspecies_at_pH7_3" (
 	"Monomer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Monomer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Monomer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "MolecularSubsequence_has_physiologically_stable_form" (
+CREATE TABLE "MolecularSubsequence_has_major_microspecies_at_pH7_3" (
 	"MolecularSubsequence_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularSubsequence_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularSubsequence_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "ChemicalGroup_has_physiologically_stable_form" (
+CREATE TABLE "ChemicalGroup_has_major_microspecies_at_pH7_3" (
 	"ChemicalGroup_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ChemicalGroup_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ChemicalGroup_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "ChemicalMixture_has_physiologically_stable_form" (
+CREATE TABLE "ChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"ChemicalMixture_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ChemicalMixture_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalMixture_id") REFERENCES "ChemicalMixture" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "PreciseChemicalMixture_has_physiologically_stable_form" (
+CREATE TABLE "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"PreciseChemicalMixture_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("PreciseChemicalMixture_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("PreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "ImpreciseChemicalMixture_has_proportional_parts" (
 	"ImpreciseChemicalMixture_id" TEXT, 
@@ -3724,12 +3724,12 @@ CREATE TABLE "ImpreciseChemicalMixture_has_proportional_parts" (
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id), 
 	FOREIGN KEY(has_proportional_parts_id) REFERENCES "ProportionalPart" (id)
 );
-CREATE TABLE "ImpreciseChemicalMixture_has_physiologically_stable_form" (
+CREATE TABLE "ImpreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"ImpreciseChemicalMixture_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ImpreciseChemicalMixture_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ImpreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Molecule_has_submolecules" (
 	"Molecule_id" TEXT, 
@@ -3745,12 +3745,12 @@ CREATE TABLE "Molecule_has_atoms" (
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Molecule_has_physiologically_stable_form" (
+CREATE TABLE "Molecule_has_major_microspecies_at_pH7_3" (
 	"Molecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Molecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Molecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "NaturalProduct_derived_from_organisms" (
 	"NaturalProduct_id" TEXT, 
@@ -3772,61 +3772,61 @@ CREATE TABLE "NaturalProduct_has_atoms" (
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "NaturalProduct_has_physiologically_stable_form" (
+CREATE TABLE "NaturalProduct_has_major_microspecies_at_pH7_3" (
 	"NaturalProduct_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("NaturalProduct_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("NaturalProduct_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Moiety_has_physiologically_stable_form" (
+CREATE TABLE "Moiety_has_major_microspecies_at_pH7_3" (
 	"Moiety_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Moiety_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Moiety_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "SequenceInterval_has_physiologically_stable_form" (
+CREATE TABLE "SequenceInterval_has_major_microspecies_at_pH7_3" (
 	"SequenceInterval_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("SequenceInterval_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("SequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("SequenceInterval_id") REFERENCES "SequenceInterval" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "AminoAcidSequenceInterval_has_physiologically_stable_form" (
+CREATE TABLE "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" (
 	"AminoAcidSequenceInterval_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("AminoAcidSequenceInterval_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("AminoAcidSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "NucleotideSequenceInterval_has_physiologically_stable_form" (
+CREATE TABLE "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" (
 	"NucleotideSequenceInterval_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("NucleotideSequenceInterval_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("NucleotideSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "DNASequenceInterval_has_physiologically_stable_form" (
+CREATE TABLE "DNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"DNASequenceInterval_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("DNASequenceInterval_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("DNASequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "RNASequenceInterval_has_physiologically_stable_form" (
+CREATE TABLE "RNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"RNASequenceInterval_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("RNASequenceInterval_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("RNASequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "FunctionalGroup_has_physiologically_stable_form" (
+CREATE TABLE "FunctionalGroup_has_major_microspecies_at_pH7_3" (
 	"FunctionalGroup_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("FunctionalGroup_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("FunctionalGroup_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MolecularSpecies_has_submolecules" (
 	"MolecularSpecies_id" TEXT, 
@@ -3842,12 +3842,12 @@ CREATE TABLE "MolecularSpecies_has_atoms" (
 	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "MolecularSpecies_has_physiologically_stable_form" (
+CREATE TABLE "MolecularSpecies_has_major_microspecies_at_pH7_3" (
 	"MolecularSpecies_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularSpecies_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularSpecies_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "NonSpeciesMolecule_has_submolecules" (
 	"NonSpeciesMolecule_id" TEXT, 
@@ -3863,12 +3863,12 @@ CREATE TABLE "NonSpeciesMolecule_has_atoms" (
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "NonSpeciesMolecule_has_physiologically_stable_form" (
+CREATE TABLE "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" (
 	"NonSpeciesMolecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("NonSpeciesMolecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("NonSpeciesMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MoleculeByChargeState_has_submolecules" (
 	"MoleculeByChargeState_id" TEXT, 
@@ -3884,12 +3884,12 @@ CREATE TABLE "MoleculeByChargeState_has_atoms" (
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "MoleculeByChargeState_has_physiologically_stable_form" (
+CREATE TABLE "MoleculeByChargeState_has_major_microspecies_at_pH7_3" (
 	"MoleculeByChargeState_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MoleculeByChargeState_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MoleculeByChargeState_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "PolyatomicIon_has_submolecules" (
 	"PolyatomicIon_id" TEXT, 
@@ -3905,12 +3905,12 @@ CREATE TABLE "PolyatomicIon_has_atoms" (
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "PolyatomicIon_has_physiologically_stable_form" (
+CREATE TABLE "PolyatomicIon_has_major_microspecies_at_pH7_3" (
 	"PolyatomicIon_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("PolyatomicIon_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("PolyatomicIon_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MolecularCation_has_submolecules" (
 	"MolecularCation_id" TEXT, 
@@ -3926,12 +3926,12 @@ CREATE TABLE "MolecularCation_has_atoms" (
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "MolecularCation_has_physiologically_stable_form" (
+CREATE TABLE "MolecularCation_has_major_microspecies_at_pH7_3" (
 	"MolecularCation_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularCation_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularCation_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MolecularAnion_has_submolecules" (
 	"MolecularAnion_id" TEXT, 
@@ -3947,12 +3947,12 @@ CREATE TABLE "MolecularAnion_has_atoms" (
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "MolecularAnion_has_physiologically_stable_form" (
+CREATE TABLE "MolecularAnion_has_major_microspecies_at_pH7_3" (
 	"MolecularAnion_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MolecularAnion_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MolecularAnion_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "NetUnchargedMolecule_has_submolecules" (
 	"NetUnchargedMolecule_id" TEXT, 
@@ -3968,12 +3968,12 @@ CREATE TABLE "NetUnchargedMolecule_has_atoms" (
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "NetUnchargedMolecule_has_physiologically_stable_form" (
+CREATE TABLE "NetUnchargedMolecule_has_major_microspecies_at_pH7_3" (
 	"NetUnchargedMolecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("NetUnchargedMolecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("NetUnchargedMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Zwitterion_has_submolecules" (
 	"Zwitterion_id" TEXT, 
@@ -3989,12 +3989,12 @@ CREATE TABLE "Zwitterion_has_atoms" (
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Zwitterion_has_physiologically_stable_form" (
+CREATE TABLE "Zwitterion_has_major_microspecies_at_pH7_3" (
 	"Zwitterion_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Zwitterion_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Zwitterion_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "NeutralMolecule_has_submolecules" (
 	"NeutralMolecule_id" TEXT, 
@@ -4010,75 +4010,75 @@ CREATE TABLE "NeutralMolecule_has_atoms" (
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "NeutralMolecule_has_physiologically_stable_form" (
+CREATE TABLE "NeutralMolecule_has_major_microspecies_at_pH7_3" (
 	"NeutralMolecule_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("NeutralMolecule_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("NeutralMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Atom_has_physiologically_stable_form" (
+CREATE TABLE "Atom_has_major_microspecies_at_pH7_3" (
 	"Atom_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Atom_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Atom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "ChemicalElement_has_physiologically_stable_form" (
+CREATE TABLE "ChemicalElement_has_major_microspecies_at_pH7_3" (
 	"ChemicalElement_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ChemicalElement_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ChemicalElement_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalElement" (id)
 );
-CREATE TABLE "UnchargedAtom_has_physiologically_stable_form" (
+CREATE TABLE "UnchargedAtom_has_major_microspecies_at_pH7_3" (
 	"UnchargedAtom_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("UnchargedAtom_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("UnchargedAtom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Nuclide_has_physiologically_stable_form" (
+CREATE TABLE "Nuclide_has_major_microspecies_at_pH7_3" (
 	"Nuclide_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Nuclide_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Nuclide_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Radionuclide_has_physiologically_stable_form" (
+CREATE TABLE "Radionuclide_has_major_microspecies_at_pH7_3" (
 	"Radionuclide_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Radionuclide_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Radionuclide_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "AtomIonicForm_has_physiologically_stable_form" (
+CREATE TABLE "AtomIonicForm_has_major_microspecies_at_pH7_3" (
 	"AtomIonicForm_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("AtomIonicForm_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("AtomIonicForm_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "PartiallySpecifiedAtom_has_physiologically_stable_form" (
+CREATE TABLE "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"PartiallySpecifiedAtom_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("PartiallySpecifiedAtom_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("PartiallySpecifiedAtom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "FullySpecifiedAtom_has_physiologically_stable_form" (
+CREATE TABLE "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"FullySpecifiedAtom_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("FullySpecifiedAtom_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("FullySpecifiedAtom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "ChemicalSalt_has_physiologically_stable_form" (
+CREATE TABLE "ChemicalSalt_has_major_microspecies_at_pH7_3" (
 	"ChemicalSalt_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("ChemicalSalt_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("ChemicalSalt_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalSalt_id") REFERENCES "ChemicalSalt" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Ester_has_submolecules" (
 	"Ester_id" TEXT, 
@@ -4094,12 +4094,12 @@ CREATE TABLE "Ester_has_atoms" (
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Ester_has_physiologically_stable_form" (
+CREATE TABLE "Ester_has_major_microspecies_at_pH7_3" (
 	"Ester_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Ester_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Ester_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Stereoisomer_has_submolecules" (
 	"Stereoisomer_id" TEXT, 
@@ -4115,12 +4115,12 @@ CREATE TABLE "Stereoisomer_has_atoms" (
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Stereoisomer_has_physiologically_stable_form" (
+CREATE TABLE "Stereoisomer_has_major_microspecies_at_pH7_3" (
 	"Stereoisomer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Stereoisomer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Stereoisomer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Enantiomer_has_submolecules" (
 	"Enantiomer_id" TEXT, 
@@ -4136,19 +4136,19 @@ CREATE TABLE "Enantiomer_has_atoms" (
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Enantiomer_has_physiologically_stable_form" (
+CREATE TABLE "Enantiomer_has_major_microspecies_at_pH7_3" (
 	"Enantiomer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Enantiomer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Enantiomer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "RacemicMixture_has_physiologically_stable_form" (
+CREATE TABLE "RacemicMixture_has_major_microspecies_at_pH7_3" (
 	"RacemicMixture_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("RacemicMixture_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("RacemicMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Allotrope_has_submolecules" (
 	"Allotrope_id" TEXT, 
@@ -4164,12 +4164,12 @@ CREATE TABLE "Allotrope_has_atoms" (
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Allotrope_has_physiologically_stable_form" (
+CREATE TABLE "Allotrope_has_major_microspecies_at_pH7_3" (
 	"Allotrope_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Allotrope_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Allotrope_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Isobar" (
 	has_element TEXT, 
@@ -4283,19 +4283,19 @@ CREATE TABLE "MonomolecularPolymer_has_atoms" (
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "MonomolecularPolymer_has_physiologically_stable_form" (
+CREATE TABLE "MonomolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"MonomolecularPolymer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MonomolecularPolymer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MonomolecularPolymer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "SupramolecularPolymer_has_physiologically_stable_form" (
+CREATE TABLE "SupramolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"SupramolecularPolymer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("SupramolecularPolymer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("SupramolecularPolymer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Copolymer_polymer_of" (
 	"Copolymer_id" TEXT, 
@@ -4318,12 +4318,12 @@ CREATE TABLE "Copolymer_has_atoms" (
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Copolymer_has_physiologically_stable_form" (
+CREATE TABLE "Copolymer_has_major_microspecies_at_pH7_3" (
 	"Copolymer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Copolymer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Copolymer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "Homopolymer_has_submolecules" (
 	"Homopolymer_id" TEXT, 
@@ -4339,40 +4339,40 @@ CREATE TABLE "Homopolymer_has_atoms" (
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id), 
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
 );
-CREATE TABLE "Homopolymer_has_physiologically_stable_form" (
+CREATE TABLE "Homopolymer_has_major_microspecies_at_pH7_3" (
 	"Homopolymer_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Homopolymer_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Homopolymer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "Isotope_has_physiologically_stable_form" (
+CREATE TABLE "Isotope_has_major_microspecies_at_pH7_3" (
 	"Isotope_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Isotope_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Isotope_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "MonoatomicIon_has_physiologically_stable_form" (
+CREATE TABLE "MonoatomicIon_has_major_microspecies_at_pH7_3" (
 	"MonoatomicIon_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("MonoatomicIon_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("MonoatomicIon_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "AtomAnion_has_physiologically_stable_form" (
+CREATE TABLE "AtomAnion_has_major_microspecies_at_pH7_3" (
 	"AtomAnion_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("AtomAnion_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("AtomAnion_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
-CREATE TABLE "AtomCation_has_physiologically_stable_form" (
+CREATE TABLE "AtomCation_has_major_microspecies_at_pH7_3" (
 	"AtomCation_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("AtomCation_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("AtomCation_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AtomCation_id") REFERENCES "AtomCation" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "AtomicBond" (
 	id INTEGER NOT NULL, 
@@ -4391,12 +4391,12 @@ CREATE TABLE "AtomicBond" (
 	FOREIGN KEY(object) REFERENCES "AtomOccurrence" (name), 
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );
-CREATE TABLE "Isobar_has_physiologically_stable_form" (
+CREATE TABLE "Isobar_has_major_microspecies_at_pH7_3" (
 	"Isobar_id" TEXT, 
-	has_physiologically_stable_form_id TEXT, 
-	PRIMARY KEY ("Isobar_id", has_physiologically_stable_form_id), 
+	"has_major_microspecies_at_pH7_3_id" TEXT, 
+	PRIMARY KEY ("Isobar_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Isobar_id") REFERENCES "Isobar" (id), 
-	FOREIGN KEY(has_physiologically_stable_form_id) REFERENCES "ChemicalEntity" (id)
+	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "SmallMolecule_has_bonds" (
 	"SmallMolecule_id" TEXT, 
