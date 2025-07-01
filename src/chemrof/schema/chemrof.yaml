@@ -2257,7 +2257,8 @@ slots:
   has_rinchi_representation:
     aliases:
     - RInChi
-    is_a: chemical_formula
+    is_a: chemical_representation
+
     description: Proposed Reactions InChI
     examples:
     - value: RInChI=1.00.1S /layer2<>layer3<>layer4/d+/u2-0-1
@@ -2270,11 +2271,27 @@ slots:
     - A half-reaction, such as a RInChI with starting materials and no identified
       products, is a valid RInChI
     title: has rinchi representation
+  has_reaction_representation:
+    is_a: chemical_representation
+    abstract: true
   has_reaction_smiles_representation:
     aliases:
     - reaction SMILES
-    is_a: chemical_formula
-    title: has reaction smiles representation
+    is_a: has_reaction_representation
+    title: has reaction SMILES representation
+  has_reaction_smarts_representation:
+    aliases:
+    - reaction SMARTS
+    is_a: has_reaction_representation
+    title: has reaction SMARTS representation
+  has_smirks_representation:
+    aliases:
+    - SMIRKS
+    description: A reaction transform language that is a superset of reaction SMILES and a subset of reaction SMARTS
+    see_also:
+      - https://daylight.com/dayhtml_tutorials/languages/smirks/
+    is_a: has_reaction_representation
+    title: has reaction SMILES representation
   has_rauxinfo_representation:
     aliases:
     - RAuxInfo
@@ -2671,6 +2688,8 @@ slots:
     title: next in homologous series from
   isotopologue_of:
     is_a: alternate_form_of
+    aliases:
+      - isotopolog_of
     description: a relationship that holds between two forms of a parent molecule
       with identical chemical formulas but are differentiated by the number of neutrons
       in at least one atom
@@ -2678,6 +2697,8 @@ slots:
     range: Molecule
     see_also:
     - https://en.wikipedia.org/wiki/Isotopologue
+    - https://doi.org/10.1093/gigascience/giae071
+    -  https://doi.org/10.1002/rcm.5129
     multivalued: true
     examples:
     - description: light water is an isotopologue of heavy water (CHEBI:41981)
@@ -2705,6 +2726,13 @@ slots:
     - https://en.wikipedia.org/wiki/Structural_isomer
     - https://goldbook.iupac.org/terms/view/C01285
     title: structural isomer of
+  isotopomer_of:
+    is_a: chemical_isomer_of
+    aliases:
+      - isotopic_isomer_of
+    description:  isomers which differ by isotopic substitution, and which have the same number of atoms of each isotope but in a different arrangement.
+    see_also:
+    - https://en.wikipedia.org/wiki/Isotopomer
   skeletal_isomer_of:
     aliases:
     - chain isomer of
