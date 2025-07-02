@@ -1,30 +1,57 @@
-[tool.poetry]
+[project]
 name = "chemrof"
 version = "0.0.0"
 description = "Chemical Entities, Materials, and Reactions Ontological Framework"
-authors = ["cmungall <cjm@berkeleybop.org>"]
+authors = [
+    {name = "cmungall", email = "cjm@berkeleybop.org"},
+]
+requires-python = ">=3.10"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-linkml-runtime = ">=1.7.0"
-oaklib = "^0.5.20"
-linkml-transformer = "^0.2.2"
-linkml = "^1.6.7"
-linkml-owl = "^0.3.0"
-duckdb-engine = "^0.11.2"
-toml = "^0.10.2"
-rdkit = "^2024.3.5"
+# let's convert this to uv
 
-[tool.poetry.group.dev.dependencies]
-linkml-owl = ">=0.2.0"
-linkml = ">=1.8.0"
-mkdocs = ">=1.2.3"
-mkdocs-material = ">=8.1.8"
-mkdocs-mermaid2-plugin = ">=1.2.1"
-linkml-datalog = ">=0.2.0"
-jupyter = "*"
-jupysql = "*"
+dependencies = [
+    "linkml-runtime>=1.9.0",
+    "oaklib>=0.5.20",
+    "linkml-transformer>=0.2.2",
+    "linkml>=1.6.7",
+    "linkml-owl>=0.3.0",
+    "duckdb-engine >=0.11.2",
+    "toml>=0.10.2",
+    "rdkit>=2024.3.5",
+]
 
+[tool.uv]
+package = true
+
+
+[dependency-groups]
+dev = [
+    
+    "linkml-owl>=0.2.0",
+    "linkml>=1.8.0",
+    "mkdocs>=1.2.3",
+    "mkdocs-material>=8.1.8",
+    "mkdocs-mermaid2-plugin>=1.2.1",
+    "linkml-datalog>=0.2.0",
+    "jupyter",
+    "jupysql",
+]
+
+[tool.deptry]
+known_first_party = ["chemrof"]
+extend_exclude = ["docs"]
+
+# See https://hatch.pypa.io/latest/config/build/#file-selection for how to
+# explicitly include files other than default into the build distributions.
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+# Ref.: https://github.com/ninoseki/uv-dynamic-versioning/
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+fallback-version = "0.0.0"

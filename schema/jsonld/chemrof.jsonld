@@ -1652,9 +1652,9 @@
       "is_a": "conjugate_acid_of",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/acid_form_of",
-      "multivalued": true,
       "owner": "acid_form_of",
       "range": "ChemicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1759,8 +1759,8 @@
       "title": "has polymer repeat units",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_polymer_repeat_units",
-      "multivalued": true,
       "range": "PolymerRepeatUnit",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1806,12 +1806,12 @@
       "is_a": "has_part",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/has_atoms",
-      "multivalued": true,
       "owner": "Molecule",
       "domain_of": [
         "Molecule"
       ],
       "range": "Atom",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1823,12 +1823,12 @@
       "is_a": "has_part",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/has_submolecules",
-      "multivalued": true,
       "owner": "Molecule",
       "domain_of": [
         "Molecule"
       ],
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1881,9 +1881,9 @@
       "is_a": "has_submolecules",
       "domain": "Atom",
       "slot_uri": "https://w3id.org/chemrof/has_group",
-      "multivalued": true,
       "owner": "has_group",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1897,12 +1897,12 @@
       ],
       "domain": "ImpreciseChemicalMixture",
       "slot_uri": "https://w3id.org/chemrof/has_proportional_parts",
-      "multivalued": true,
       "owner": "ImpreciseChemicalMixture",
       "domain_of": [
         "ImpreciseChemicalMixture"
       ],
       "range": "ProportionalPart",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1930,12 +1930,12 @@
       "title": "has atom occurrences",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_atom_occurrences",
-      "multivalued": true,
       "owner": "Molecule",
       "domain_of": [
         "Molecule"
       ],
       "range": "AtomOccurrence",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -1947,12 +1947,12 @@
       "from_schema": "https://w3id.org/chemrof",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/has_bonds",
-      "multivalued": true,
       "owner": "Molecule",
       "domain_of": [
         "Molecule"
       ],
       "range": "AtomicBond",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -2476,7 +2476,7 @@
       "aliases": [
         "RInChi"
       ],
-      "is_a": "chemical_formula",
+      "is_a": "chemical_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/has_rinchi_representation",
       "owner": "Reaction",
@@ -2487,20 +2487,66 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "has_reaction_representation",
+      "definition_uri": "https://w3id.org/chemrof/has_reaction_representation",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_representation",
+      "abstract": true,
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/has_reaction_representation",
+      "owner": "has_reaction_representation",
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "has_reaction_smiles_representation",
       "definition_uri": "https://w3id.org/chemrof/has_reaction_smiles_representation",
-      "title": "has reaction smiles representation",
+      "title": "has reaction SMILES representation",
       "from_schema": "https://w3id.org/chemrof",
       "aliases": [
         "reaction SMILES"
       ],
-      "is_a": "chemical_formula",
+      "is_a": "has_reaction_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/has_reaction_smiles_representation",
       "owner": "Reaction",
       "domain_of": [
         "Reaction"
       ],
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_reaction_smarts_representation",
+      "definition_uri": "https://w3id.org/chemrof/has_reaction_smarts_representation",
+      "title": "has reaction SMARTS representation",
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "reaction SMARTS"
+      ],
+      "is_a": "has_reaction_representation",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/has_reaction_smarts_representation",
+      "owner": "has_reaction_smarts_representation",
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_smirks_representation",
+      "definition_uri": "https://w3id.org/chemrof/has_smirks_representation",
+      "description": "A reaction transform language that is a superset of reaction SMILES and a subset of reaction SMARTS",
+      "title": "has reaction SMILES representation",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://daylight.com/dayhtml_tutorials/languages/smirks/"
+      ],
+      "aliases": [
+        "SMIRKS"
+      ],
+      "is_a": "has_reaction_representation",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/has_smirks_representation",
+      "owner": "has_smirks_representation",
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3415,9 +3461,9 @@
       "from_schema": "https://w3id.org/chemrof",
       "domain": "AtomOccurrence",
       "slot_uri": "https://w3id.org/chemrof/atomically_connected_to",
-      "multivalued": true,
       "owner": "atomically_connected_to",
       "range": "AtomOccurrence",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3480,14 +3526,19 @@
       ],
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
-        "https://en.wikipedia.org/wiki/Isotopologue"
+        "https://en.wikipedia.org/wiki/Isotopologue",
+        "https://doi.org/10.1093/gigascience/giae071",
+        "https://doi.org/10.1002/rcm.5129"
+      ],
+      "aliases": [
+        "isotopolog_of"
       ],
       "is_a": "alternate_form_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/isotopologue_of",
-      "multivalued": true,
       "owner": "isotopologue_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3505,9 +3556,9 @@
       "is_a": "alternate_form_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/chemical_isomer_of",
-      "multivalued": true,
       "owner": "chemical_isomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3526,9 +3577,28 @@
       "is_a": "chemical_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/structural_isomer_of",
-      "multivalued": true,
       "owner": "structural_isomer_of",
       "range": "Molecule",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "isotopomer_of",
+      "definition_uri": "https://w3id.org/chemrof/isotopomer_of",
+      "description": "isomers which differ by isotopic substitution, and which have the same number of atoms of each isotope but in a different arrangement.",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://en.wikipedia.org/wiki/Isotopomer"
+      ],
+      "aliases": [
+        "isotopic_isomer_of"
+      ],
+      "is_a": "chemical_isomer_of",
+      "domain": "Molecule",
+      "slot_uri": "https://w3id.org/chemrof/isotopomer_of",
+      "owner": "isotopomer_of",
+      "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3543,9 +3613,9 @@
       "is_a": "structural_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/skeletal_isomer_of",
-      "multivalued": true,
       "owner": "skeletal_isomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3560,9 +3630,9 @@
       "is_a": "structural_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/position_isomer_of",
-      "multivalued": true,
       "owner": "position_isomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3577,9 +3647,9 @@
       "is_a": "structural_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/functional_isomer_of",
-      "multivalued": true,
       "owner": "functional_isomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3597,9 +3667,9 @@
       "is_a": "structural_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/tautomer_of",
-      "multivalued": true,
       "owner": "tautomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3614,9 +3684,9 @@
       "is_a": "chemical_isomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/stereoisomer_of",
-      "multivalued": true,
       "owner": "stereoisomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3634,9 +3704,9 @@
       "is_a": "stereoisomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/diastereoisomers_of",
-      "multivalued": true,
       "owner": "diastereoisomers_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3648,9 +3718,9 @@
       "is_a": "diastereoisomers_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/epimer_of",
-      "multivalued": true,
       "owner": "epimer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3665,9 +3735,9 @@
       "is_a": "stereoisomer_of",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/enantiomer_of",
-      "multivalued": true,
       "owner": "enantiomer_of",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3756,13 +3826,13 @@
       ],
       "domain": "OwlClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "owner": "subtype_of",
       "domain_of": [
         "GroupingClass"
       ],
       "inverse": "has_subtype",
       "range": "OwlClass",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -3810,10 +3880,10 @@
       "is_a": "acid_form_of",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/major_microspecies_at_pH7_3_of",
-      "multivalued": true,
       "owner": "major_microspecies_at_pH7_3_of",
       "inverse": "has_major_microspecies_at_pH7_3",
       "range": "ChemicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3952,8 +4022,8 @@
       "title": "has stereocenter",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_stereocenter",
-      "multivalued": true,
       "range": "Stereocenter",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -4260,8 +4330,8 @@
       "title": "left participants",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/left_participants",
-      "multivalued": true,
       "range": "ReactionParticipant",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -4271,8 +4341,8 @@
       "title": "right participants",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/right_participants",
-      "multivalued": true,
       "range": "ReactionParticipant",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -4436,13 +4506,13 @@
       "name": "collection__entities",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/entities",
-      "multivalued": true,
       "alias": "entities",
       "owner": "Collection",
       "domain_of": [
         "Collection"
       ],
       "range": "DomainEntity",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -4451,13 +4521,13 @@
       "name": "naturalProduct__derived_from_organisms",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/derived_from_organisms",
-      "multivalued": true,
       "alias": "derived_from_organisms",
       "owner": "NaturalProduct",
       "domain_of": [
         "NaturalProduct"
       ],
       "range": "uriorcurie",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4762,7 +4832,6 @@
       ],
       "domain": "GroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "GroupingClass",
       "domain_of": [
@@ -4771,6 +4840,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "GroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4794,7 +4864,6 @@
       ],
       "domain": "PhysicochemicalEntityGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "PhysicochemicalEntityGroupingClass",
       "domain_of": [
@@ -4803,6 +4872,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "PhysicochemicalEntityGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4826,7 +4896,6 @@
       ],
       "domain": "ChemicalGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "ChemicalGroupingClass",
       "domain_of": [
@@ -4835,6 +4904,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "ChemicalGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4876,7 +4946,6 @@
       ],
       "domain": "ReactionGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "ReactionGroupingClass",
       "domain_of": [
@@ -4885,6 +4954,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "ReactionGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4926,7 +4996,6 @@
       ],
       "domain": "MaterialGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "MaterialGroupingClass",
       "domain_of": [
@@ -4935,6 +5004,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "MaterialGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4976,7 +5046,6 @@
       ],
       "domain": "ChemicalGroupingByCharge",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "ChemicalGroupingByCharge",
       "domain_of": [
@@ -4985,6 +5054,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "MoleculeGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5044,7 +5114,6 @@
       ],
       "domain": "MoleculeGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "MoleculeGroupingClass",
       "domain_of": [
@@ -5053,6 +5122,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "MoleculeGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5094,7 +5164,6 @@
       ],
       "domain": "MolecularComponentGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "MolecularComponentGroupingClass",
       "domain_of": [
@@ -5103,6 +5172,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "MolecularComponentGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5200,7 +5270,6 @@
       "is_a": "has_group",
       "domain": "MoleculeGroupingClassDefinedByAdditionOfAGroup",
       "slot_uri": "https://w3id.org/chemrof/has_group",
-      "multivalued": true,
       "alias": "has_group",
       "owner": "MoleculeGroupingClassDefinedByAdditionOfAGroup",
       "domain_of": [
@@ -5209,6 +5278,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_group",
       "range": "ChemicalGroup",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5372,7 +5442,6 @@
       ],
       "domain": "AtomGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/subtype_of",
-      "multivalued": true,
       "alias": "subtype_of",
       "owner": "AtomGroupingClass",
       "domain_of": [
@@ -5381,6 +5450,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "subtype_of",
       "range": "MoleculeGroupingClass",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5544,7 +5614,6 @@
       "is_a": "has_submolecules",
       "domain": "Macromolecule",
       "slot_uri": "https://w3id.org/chemrof/has_submolecules",
-      "multivalued": true,
       "alias": "has_submolecules",
       "owner": "Macromolecule",
       "domain_of": [
@@ -5553,6 +5622,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_submolecules",
       "range": "Molecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5567,7 +5637,6 @@
       "is_a": "polymer_of",
       "domain": "Copolymer",
       "slot_uri": "https://w3id.org/chemrof/polymer_of",
-      "multivalued": true,
       "alias": "polymer_of",
       "owner": "Copolymer",
       "domain_of": [
@@ -5576,6 +5645,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "polymer_of",
       "range": "Macromolecule",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5609,7 +5679,6 @@
       "is_a": "has_atom_occurrences",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/has_atom_occurrences",
-      "multivalued": true,
       "alias": "has_atom_occurrences",
       "owner": "Molecule",
       "domain_of": [
@@ -5618,6 +5687,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_atom_occurrences",
       "range": "AtomOccurrence",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "minimum_cardinality": 2,
@@ -5635,7 +5705,6 @@
       "is_a": "has_bonds",
       "domain": "Molecule",
       "slot_uri": "https://w3id.org/chemrof/has_bonds",
-      "multivalued": true,
       "alias": "has_bonds",
       "owner": "Molecule",
       "domain_of": [
@@ -5644,6 +5713,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_bonds",
       "range": "AtomicBond",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -5774,7 +5844,6 @@
       "is_a": "acid_form_of",
       "domain": "MoleculeByChargeState",
       "slot_uri": "https://w3id.org/chemrof/acid_form_of",
-      "multivalued": true,
       "alias": "acid_form_of",
       "owner": "MoleculeByChargeState",
       "domain_of": [
@@ -5783,6 +5852,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "acid_form_of",
       "range": "MoleculeByChargeState",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5997,7 +6067,6 @@
       "is_a": "has_stereocenter",
       "domain": "ChemicalElement",
       "slot_uri": "https://w3id.org/chemrof/has_stereocenter",
-      "multivalued": true,
       "alias": "has_stereocenter",
       "owner": "ChemicalElement",
       "domain_of": [
@@ -6006,6 +6075,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_stereocenter",
       "range": "Stereocenter",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -6527,7 +6597,6 @@
       "is_a": "left_participants",
       "domain": "Reaction",
       "slot_uri": "https://w3id.org/chemrof/left_participants",
-      "multivalued": true,
       "alias": "left_participants",
       "owner": "Reaction",
       "domain_of": [
@@ -6536,6 +6605,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "left_participants",
       "range": "ReactionParticipant",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -6547,7 +6617,6 @@
       "is_a": "right_participants",
       "domain": "Reaction",
       "slot_uri": "https://w3id.org/chemrof/right_participants",
-      "multivalued": true,
       "alias": "right_participants",
       "owner": "Reaction",
       "domain_of": [
@@ -6556,6 +6625,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "right_participants",
       "range": "ReactionParticipant",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -6901,8 +6971,8 @@
       "attributes": [
         {
           "name": "entities",
-          "multivalued": true,
           "range": "DomainEntity",
+          "multivalued": true,
           "inlined": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
@@ -8156,6 +8226,7 @@
         "PR"
       ],
       "definition_uri": "https://w3id.org/chemrof/Protein",
+      "description": "A macromolecule composed of one or more polypeptide chains of amino acids that fold into a specific three-dimensional structure and perform biological functions",
       "title": "protein",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "Macromolecule",
@@ -8761,8 +8832,8 @@
       "attributes": [
         {
           "name": "derived_from_organisms",
-          "multivalued": true,
           "range": "uriorcurie",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -10825,9 +10896,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-04-23T12:44:46",
-  "source_file_size": 109934,
-  "generation_date": "2025-04-23T12:44:58",
+  "source_file_date": "2025-06-30T22:52:28",
+  "source_file_size": 111132,
+  "generation_date": "2025-06-30T22:56:22",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",
