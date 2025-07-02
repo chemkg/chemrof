@@ -1,15 +1,15 @@
 -- # Class: "Collection" Description: ""
 --     * Slot: id Description: 
--- # Class: "DomainEntity" Description: "A discrete, specific named entity in the domain of chemistry."
+-- # Abstract Class: "DomainEntity" Description: "A discrete, specific named entity in the domain of chemistry."
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
 --     * Slot: Collection_id Description: Autocreated FK slot
--- # Class: "PhysicochemicalEntity" Description: "A discrete chemical structure, material structure, or subatomic particle type"
+-- # Abstract Class: "PhysicochemicalEntity" Description: "A discrete chemical structure, material structure, or subatomic particle type"
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
--- # Class: "ChemicalEntity" Description: "A discrete structure that is one or more atoms that can be described by a chemical formula."
+-- # Abstract Class: "ChemicalEntity" Description: "A discrete structure that is one or more atoms that can be described by a chemical formula."
 --     * Slot: IUPAC_name Description: 
 --     * Slot: is_radical Description: 
 --     * Slot: inchi_string Description: 
@@ -30,15 +30,15 @@
 -- # Class: "OwlClass" Description: "instances of this class mixin are OWL Classes"
 --     * Slot: id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "GroupingClass" Description: "Instances of this class represent generic  concepts that can be used to group more specific concepts, or to classify entities"
+-- # Abstract Class: "GroupingClass" Description: "Instances of this class represent generic  concepts that can be used to group more specific concepts, or to classify entities"
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "PhysicochemicalEntityGroupingClass" Description: ""
+-- # Abstract Class: "PhysicochemicalEntityGroupingClass" Description: ""
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "ChemicalGroupingClass" Description: "Instances of this class represent generic chemical concepts that can be used to group more specific concepts, or to classify entities. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc"
+-- # Abstract Class: "ChemicalGroupingClass" Description: "Instances of this class represent generic chemical concepts that can be used to group more specific concepts, or to classify entities. For example "amino acid" is a grouping for "serine", "leucine" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc"
 --     * Slot: id Description: 
 --     * Slot: smarts_string Description: a molecular pattern matching language, related to the popular SMILES molecular language, that can be used to specify sub-structural patterns in molecules.
 --     * Slot: markush_string Description: 
@@ -127,7 +127,7 @@
 --     * Slot: markush_string Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "GroupingClassForAcidsOrBases" Description: ""
+-- # Abstract Class: "GroupingClassForAcidsOrBases" Description: ""
 --     * Slot: conjugate_base_of Description: connects the base form of an acid to an acid. Also connects the different charge states of the base. Example: the different charge states of lactate (CHEBI:24996) conjugate base of lactic acid (CHEBI:28358)
 --     * Slot: conjugate_acid_of Description: 
 --     * Slot: id Description: 
@@ -165,7 +165,7 @@
 --     * Slot: markush_string Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "AtomGroupingByPeriodicTablePlacement" Description: ""
+-- # Abstract Class: "AtomGroupingByPeriodicTablePlacement" Description: ""
 --     * Slot: id Description: 
 --     * Slot: smarts_string Description: a molecular pattern matching language, related to the popular SMILES molecular language, that can be used to specify sub-structural patterns in molecules.
 --     * Slot: markush_string Description: 
@@ -208,13 +208,13 @@
 --     * Slot: type Description: 
 -- # Class: "ChemicalEntityOrGrouping" Description: ""
 --     * Slot: id Description: 
--- # Class: "Connectivity" Description: "Abstract grouping for slots that related chemical entities via a connectivity relationships"
+-- # Abstract Class: "Connectivity" Description: "Abstract grouping for slots that related chemical entities via a connectivity relationships"
 --     * Slot: id Description: 
 -- # Class: "FullyCovalentlyBonded" Description: "All pairs of atoms in this entity are transitively connected via covalent bonds"
 --     * Slot: id Description: 
 -- # Class: "WeaklyBonded" Description: "Not covalently bonded"
 --     * Slot: id Description: 
--- # Class: "State" Description: ""
+-- # Abstract Class: "State" Description: ""
 --     * Slot: id Description: 
 -- # Class: "ChargeState" Description: "Applies to entities that have a charge state, which may be positive, negative, or neutral"
 --     * Slot: id Description: 
@@ -231,7 +231,7 @@
 -- # Class: "Charged" Description: "Applies to entities that are charged, either positive or negative"
 --     * Slot: id Description: 
 --     * Slot: elemental_charge Description: number of protons minus number of electrons
--- # Class: "PolyatomicEntity" Description: "Any chemical entity consisting of more than one atom."
+-- # Abstract Class: "PolyatomicEntity" Description: "Any chemical entity consisting of more than one atom."
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 --     * Slot: IUPAC_name Description: 
 --     * Slot: is_radical Description: 
@@ -304,7 +304,7 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "Protein" Description: ""
+-- # Class: "Protein" Description: "A macromolecule composed of one or more polypeptide chains of amino acids that fold into a specific three-dimensional structure and perform biological functions"
 --     * Slot: is_organic Description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 --     * Slot: IUPAC_name Description: 
@@ -476,7 +476,7 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "ChemicalMixture" Description: "A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry"
+-- # Abstract Class: "ChemicalMixture" Description: "A polyatomic entity that consists of two or more parts that are weakly bound, may be of known or unknown stoichiometry"
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 --     * Slot: IUPAC_name Description: 
 --     * Slot: is_radical Description: 
@@ -490,7 +490,7 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "PreciseChemicalMixture" Description: "A polyatomic entity that consists of two or more parts that are weakly bound, and of known stoichiometry"
+-- # Abstract Class: "PreciseChemicalMixture" Description: "A polyatomic entity that consists of two or more parts that are weakly bound, and of known stoichiometry"
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 --     * Slot: IUPAC_name Description: 
 --     * Slot: is_radical Description: 
@@ -564,7 +564,7 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "SequenceInterval" Description: "a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence."
+-- # Abstract Class: "SequenceInterval" Description: "a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence."
 --     * Slot: has_sequence_representation Description: 
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
 --     * Slot: IUPAC_name Description: 
@@ -683,7 +683,7 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "MoleculeByChargeState" Description: "A molecule that has a charge state specified"
+-- # Abstract Class: "MoleculeByChargeState" Description: "A molecule that has a charge state specified"
 --     * Slot: bronsted_acid_base_role Description: 
 --     * Slot: is_organic Description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
@@ -807,7 +807,7 @@
 --     * Slot: elemental_charge Description: number of protons minus number of electrons
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "Atom" Description: "A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it."
+-- # Abstract Class: "Atom" Description: "A chemical entity consisting of exactly one atomic nucleus and the electron(s) orbiting it."
 --     * Slot: atomic_number Description: number of protons in an atom
 --     * Slot: symbol Description: short symbol for chemical entity, e.g. K, C-16
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
@@ -942,7 +942,7 @@
 --     * Slot: has_nuclear_parts_id Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "AtomIonicForm" Description: "an atom type in which only charge state is specified, designated by the element followed by charge"
+-- # Abstract Class: "AtomIonicForm" Description: "an atom type in which only charge state is specified, designated by the element followed by charge"
 --     * Slot: elemental_charge Description: number of protons minus number of electrons
 --     * Slot: atomic_number Description: number of protons in an atom
 --     * Slot: symbol Description: short symbol for chemical entity, e.g. K, C-16
@@ -1013,7 +1013,7 @@
 --     * Slot: has_nuclear_parts_id Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "PartiallySpecifiedAtom" Description: "An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated"
+-- # Abstract Class: "PartiallySpecifiedAtom" Description: "An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated"
 --     * Slot: atomic_number Description: number of protons in an atom
 --     * Slot: symbol Description: short symbol for chemical entity, e.g. K, C-16
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
@@ -1047,11 +1047,11 @@
 --     * Slot: has_nuclear_parts_id Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "ChemicalInformation" Description: ""
+-- # Abstract Class: "ChemicalInformation" Description: ""
 --     * Slot: id Description: 
--- # Class: "PeriodicTablePlacement" Description: ""
+-- # Abstract Class: "PeriodicTablePlacement" Description: ""
 --     * Slot: id Description: 
--- # Class: "InchiObject" Description: "A representation of an InChI string as an object, composed of distinct sublayers"
+-- # Abstract Class: "InchiObject" Description: "A representation of an InChI string as an object, composed of distinct sublayers"
 --     * Slot: id Description: 
 -- # Class: "StandardInchiObject" Description: ""
 --     * Slot: id Description: 
@@ -1065,13 +1065,13 @@
 --     * Slot: inchi_tetrahedral_stereochemical_sublayer Description: 
 --     * Slot: inchi_stereochemical_type_sublayer Description: 
 --     * Slot: inchi_isotopic_layer Description: 
--- # Class: "ChemicalRelationship" Description: "A reified relationship"
+-- # Abstract Class: "ChemicalRelationship" Description: "A reified relationship"
 --     * Slot: id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
 -- # Class: "ChemicalRole" Description: "A characteristic of a chemical entity that is realized under particular conditions"
 --     * Slot: id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "Location" Description: "Abstract grouping for entities that represent abstract or concrete locations of chemical entities or their parts."
+-- # Abstract Class: "Location" Description: "Abstract grouping for entities that represent abstract or concrete locations of chemical entities or their parts."
 --     * Slot: id Description: 
 -- # Class: "Stereocenter" Description: "a geometric point in a molecule in which the interchanging of two substituents creates a stereoisomer."
 --     * Slot: id Description: 
@@ -1247,7 +1247,7 @@
 -- # Class: "TanimotoSimilarity" Description: ""
 --     * Slot: id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
--- # Class: "SpecificityMixin" Description: ""
+-- # Abstract Class: "SpecificityMixin" Description: ""
 --     * Slot: id Description: 
 -- # Class: "EntityWithAtomsEnumerated" Description: "A mixin for an entity that consists of one or more atoms where the atoms and the number of occurrences is counted (corresponding to the chemical layer in InChI)"
 --     * Slot: id Description: 

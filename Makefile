@@ -6,7 +6,7 @@ SHELL := bash
 .SUFFIXES:
 .SECONDARY:
 
-RUN = poetry run
+RUN = uv run
 SRC_DIR = src
 SCHEMA_DIR = $(SRC_DIR)/chemrof/schema
 SOURCE_FILES := $(shell find $(SCHEMA_DIR) -name '*.yaml')
@@ -47,7 +47,7 @@ echo:
 	echo $(patsubst %,gen-%,$(TGTS))
 
 #test: all
-test: test-examples
+test: gen test-examples
 
 install:
 	. environment.sh
