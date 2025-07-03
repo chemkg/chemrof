@@ -283,6 +283,32 @@ smiles_string: '[NH4+]'
 type: chemrof:PolyatomicIon
 
 ```
+## Ester-ethyl_acetate
+### Input
+```yaml
+empirical_formula: C4H8O2
+has_atoms:
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- O
+- O
+id: CHEBI:27750
+is_organic: true
+name: ethyl acetate
+smiles_string: CC(=O)OCC
+type: chemrof:Ester
+
+```
 ## ChemicalElement-carbon
 ### Input
 ```yaml
@@ -365,6 +391,42 @@ inchi_string: InChI=1S/Bk
 name: berkelium
 smiles_string: '[Bk]'
 symbol: Bk
+
+```
+## NaturalProduct-caffeine
+### Input
+```yaml
+empirical_formula: C8H10N4O2
+has_atoms:
+- C
+- C
+- C
+- C
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- N
+- N
+- N
+- N
+- O
+- O
+id: CHEBI:27732
+is_organic: true
+name: caffeine
+smiles_string: CN1C=NC2=C1C(=O)N(C(=O)N2C)C
+type: chemrof:NaturalProduct
 
 ```
 ## ChemicalSalt-sodium_carbonate
@@ -454,5 +516,17 @@ id: CHEBI:24636
 name: proton
 subatomic_particle_type: proton
 type: chemrof:SubatomicParticle
+
+```
+## Macromolecule-polyethylene
+### Input
+```yaml
+empirical_formula: C2H4
+has_submolecules:
+- ethylene
+id: CHEBI:60034
+is_organic: true
+name: polyethylene polymer
+type: chemrof:Macromolecule
 
 ```
