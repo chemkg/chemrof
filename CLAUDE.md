@@ -71,3 +71,18 @@ When creating examples for ionic species:
 - `grep -A 10 -B 5 "SlotName:" schema.yaml` - Find slot definitions
 - Use `grep` to find mixins and inheritance relationships before creating examples (or look at generated docs)
 
+## GitHub Contribution Process
+- most requests from users should follow one of two patterns:
+    - you are not confident how to proceed, in which case end with asking a clarifying question (via `gh`)
+    - you are confident how to proceed, you make changes, commit on a branch, and open a PR for the user to review
+- Check existing elements before adding new elements
+- always commit in a branch, e.g. issue-NNN
+- always make clear detailed commit messages, saying what you did and why
+- always sign your commits `@dragon-ai-agent`
+- create PRs using `gh pr create ...`
+- File PRs with clear descriptions, and sign your PR
+- For tasks that can be broken down, make a PR immediately after the first task, then keep working on the same branch, committing and pushing
+
+## Handling GitHub issues and requests
+- Use `gh` to read and write issues/PRs
+- Sign all commits and PRs as `@dragon-ai-agent`
