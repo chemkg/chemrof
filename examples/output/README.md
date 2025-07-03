@@ -99,6 +99,16 @@ smiles_string: C[NH3+]
 type: chemrof:MolecularCation
 
 ```
+## Protein-insulin
+### Input
+```yaml
+empirical_formula: C257H383N65O77S6
+id: UniProtKB:P01308
+is_organic: true
+name: insulin
+type: chemrof:Protein
+
+```
 ## UnchargedAtom-hydrogen
 ### Input
 ```yaml
@@ -137,6 +147,35 @@ id: CHEBI:33316
 name: helium(2+)
 symbol: He
 type: chemrof:AtomCation
+
+```
+## Peptide-glycylglycine
+### Input
+```yaml
+empirical_formula: C4H8N2O3
+has_atoms:
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- N
+- N
+- O
+- O
+- O
+id: CHEBI:17201
+is_organic: true
+name: glycylglycine
+smiles_string: C(C(=O)NCC(=O)O)N
+type: chemrof:Peptide
 
 ```
 ## MonoatomicIon-copper2
@@ -516,6 +555,15 @@ id: CHEBI:24636
 name: proton
 subatomic_particle_type: proton
 type: chemrof:SubatomicParticle
+
+```
+## FunctionalGroup-carboxyl
+### Input
+```yaml
+empirical_formula: CO2H
+id: CHEBI:46883
+name: carboxy group
+type: chemrof:FunctionalGroup
 
 ```
 ## Macromolecule-polyethylene
