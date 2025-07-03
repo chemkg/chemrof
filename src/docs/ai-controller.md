@@ -48,34 +48,11 @@ The AI agent will **only** respond to requests from authorized controllers.
 
 ### Check if you're authorized
 
-To see who is currently authorized, check the file `.github/ai-controllers.json` in this repository. Currently authorized controllers are:
-- @cmungall
+To see who is currently authorized, check the file [.github/ai-controllers.json[(https://github.com/chemkg/chemrof/blob/main/.github/ai-controllers.json) in this repository.
 
-### Adding yourself as a controller
+If you want to add yourself, edit this file and make a PR in the normal way
 
-To request authorization as a controller:
-
-1. Fork this repository
-2. Create a new branch (e.g., `add-controller-yourname`)
-3. Edit `.github/ai-controllers.json` to add your GitHub username to the JSON array:
-   
-   ```json
-   ["cmungall", "yourusername"]
-   ```
-   
-   **Important**: Follow proper JSON syntax with quotes around usernames and commas between entries.
-
-4. Commit your changes with a clear message:
-   ```
-   Add @yourusername to AI controllers list
-   
-   Requesting authorization to use @dragon-ai-agent for ChemROF development tasks.
-   ```
-
-5. Submit a pull request with:
-   - Clear title: "Add @yourusername to AI controllers"
-   - Description explaining why you need controller access
-   - Tag the repository maintainer (@cmungall) for review
+**Important**: Follow proper JSON syntax with quotes around usernames and commas between entries.
 
 **Note**: Controller access should only be requested by trusted contributors who understand the schema development process and will use the AI agent responsibly.
 
