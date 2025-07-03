@@ -421,6 +421,16 @@ subatomic_particle_type: neutron
 type: chemrof:SubatomicParticle
 
 ```
+## AtomCation-sodium
+### Input
+```yaml
+elemental_charge: 1
+has_element: Na
+id: CHEBI:29101
+name: sodium (1+)
+type: chemrof:AtomCation
+
+```
 ## ChemicalElement-berkelium
 ### Input
 ```yaml
@@ -466,6 +476,16 @@ is_organic: true
 name: caffeine
 smiles_string: CN1C=NC2=C1C(=O)N(C(=O)N2C)C
 type: chemrof:NaturalProduct
+
+```
+## AtomAnion-fluoride
+### Input
+```yaml
+elemental_charge: -1
+has_element: F
+id: CHEBI:17051
+name: fluoride
+type: chemrof:AtomAnion
 
 ```
 ## ChemicalSalt-sodium_carbonate
@@ -555,6 +575,14 @@ id: CHEBI:24636
 name: proton
 subatomic_particle_type: proton
 type: chemrof:SubatomicParticle
+
+```
+## IsomeraseReaction-glucose_isomerase
+### Input
+```yaml
+id: RHEA:28549
+name: glucose isomerase reaction
+type: chemrof:IsomeraseReaction
 
 ```
 ## FunctionalGroup-carboxyl
