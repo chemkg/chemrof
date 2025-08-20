@@ -1541,6 +1541,7 @@ classes:
     - has_reaction_smiles_representation
     - reaction_rate_coefficient
     - reaction_rate
+    - reaction_type
     slot_usage:
       left_participants:
         multivalued: true
@@ -1574,6 +1575,10 @@ classes:
   IsomeraseReaction:
     is_a: Reaction
     description: A reaction that converts a molecule from one isomer to another.
+    deprecated: true
+    deprecated_element_has_exact_replacement: reaction_type
+    comments:
+    - This class is deprecated. Use the reaction_type slot with value 'isomerization' instead.
     todos:
     - create rules for this
     title: isomerase reaction
@@ -2358,6 +2363,10 @@ slots:
     - reaction rate constant
     range: float
     title: reaction rate coefficient
+  reaction_type:
+    description: Classification of the chemical reaction based on mechanistic and functional categories
+    range: ReactionTypeEnum
+    title: reaction type
   kcat:
     description: The maximum number of substrate molecules converted to product per enzyme molecule per unit time, when the enzyme is saturated with substrate.
       It represents the maximum catalytic efficiency of an enzyme under ideal conditions.
@@ -3260,6 +3269,54 @@ enums:
       acid: CHEBI:39141
       base: CHEBI:39142
     title: bronsted_acid_base_role_enum
+  ReactionTypeEnum:
+    description: Classification of chemical reactions based on mechanistic and functional categories
+    permissible_values:
+      oxidation:
+        meaning: RXNO:0000109
+        description: A reaction that involves the loss of electrons or increase in oxidation state
+      reduction:
+        meaning: RXNO:0000110
+        description: A reaction that involves the gain of electrons or decrease in oxidation state
+      acylation:
+        meaning: RXNO:0000016
+        description: Formation of an acyl group bond, typically involving carboxylic acid derivatives
+      carbon_carbon_bond_formation:
+        meaning: RXNO:0000018
+        description: Reactions that form new carbon-carbon bonds
+      heteroatom_alkylation_arylation:
+        meaning: RXNO:0000019
+        description: Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur
+      functional_group_interconversion:
+        meaning: RXNO:0000057
+        description: Conversion of one functional group to another without changing the carbon skeleton
+      functional_group_addition:
+        description: Addition of functional groups to unsaturated bonds or reactive centers
+      aromatic_heterocycle_formation:
+        description: Formation of aromatic rings containing heteroatoms
+      protection:
+        description: Introduction of protecting groups to temporarily mask reactive functionalities
+      deprotection:
+        description: Removal of protecting groups to restore original functionalities
+      resolution:
+        description: Separation of enantiomers or other stereoisomers
+      isomerization:
+        description: Rearrangement reactions that convert one isomer to another
+      elimination:
+        description: Reactions that remove atoms or groups from molecules, often forming double bonds
+      substitution:
+        description: Replacement of one atom or group with another
+      addition:
+        description: Reactions that add atoms or groups across multiple bonds
+      cyclization:
+        description: Formation of cyclic structures from linear precursors
+      ring_opening:
+        description: Cleavage of cyclic structures to form linear products
+      hydrolysis:
+        description: Cleavage of bonds through reaction with water
+      condensation:
+        description: Formation of bonds with elimination of small molecules like water
+    title: reaction_type_enum
   SubatomicParticleEnum:
     permissible_values:
       proton:
