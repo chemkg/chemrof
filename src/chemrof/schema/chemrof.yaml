@@ -112,6 +112,8 @@ classes:
     - empirical_formula
     - has_major_microspecies_at_pH7_3
     - molecular_mass
+    - water_solubility
+    - pka_ionization_constant
     slot_usage:
       inchi_chemical_sublayer:
         required: false
@@ -2239,6 +2241,28 @@ slots:
     exact_mappings:
       - FIX:0000943
     range: string
+
+  water_solubility:
+    description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+    is_a: molecular_property
+    title: water solubility
+    range: float
+    unit:
+      ucum_code: "g/L"
+    comments:
+      - "Standard temperature is 25°C (298.15 K)"
+      - "This property represents the maximum equilibrium solubility in pure water"
+
+  pka_ionization_constant:
+    description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
+    is_a: molecular_property
+    title: pKa ionization constant
+    range: float
+    multivalued: true
+    comments:
+      - "Lower pKa values indicate stronger acids"
+      - "For molecules with multiple ionizable groups, this field can contain multiple values"
+      - "Standard conditions: aqueous solution at 25°C"
   chemical_representation:
     aliases:
     - has chemical encoding
