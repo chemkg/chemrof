@@ -3272,24 +3272,73 @@ enums:
   ReactionTypeEnum:
     description: Classification of chemical reactions based on mechanistic and functional categories
     permissible_values:
-      oxidation:
-        meaning: RXNO:0000012
-        description: A functional group modification reaction where a functional group is oxidised
-      reduction:
-        meaning: RXNO:0000037
-        description: A functional group modification reaction where a functional group is reduced
-      acylation:
-        meaning: RXNO:0000016
-        description: Formation of an acyl group bond, typically involving carboxylic acid derivatives
-      carbon_carbon_bond_formation:
-        meaning: RXNO:0000018
-        description: Reactions that form new carbon-carbon bonds
-      heteroatom_alkylation_arylation:
-        meaning: RXNO:0000019
-        description: Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur
+      # High-level functional categories
       functional_group_interconversion:
         meaning: RXNO:0000057
         description: Conversion of one functional group to another without changing the carbon skeleton
+      bond_formation:
+        description: Reactions that create new bonds between atoms or groups
+      bond_breaking:
+        description: Reactions that break existing bonds to form fragments or rearrange structures
+      
+      # Specific functional group interconversions
+      oxidation:
+        is_a: functional_group_interconversion
+        meaning: RXNO:0000012
+        description: A functional group modification reaction where a functional group is oxidised
+      reduction:
+        is_a: functional_group_interconversion
+        meaning: RXNO:0000037
+        description: A functional group modification reaction where a functional group is reduced
+      
+      # Specific bond formation reactions
+      acylation:
+        is_a: bond_formation
+        meaning: RXNO:0000016
+        description: Formation of an acyl group bond, typically involving carboxylic acid derivatives
+      carbon_carbon_bond_formation:
+        is_a: bond_formation
+        meaning: RXNO:0000018
+        description: Reactions that form new carbon-carbon bonds
+      heteroatom_alkylation_arylation:
+        is_a: bond_formation
+        meaning: RXNO:0000019
+        description: Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur
+      addition:
+        is_a: bond_formation
+        meaning: RXNO:0000041
+        description: Reactions that add atoms or groups across multiple bonds
+      cyclization:
+        is_a: bond_formation
+        meaning: RXNO:0000005
+        description: Formation of cyclic structures from linear precursors
+      condensation:
+        is_a: bond_formation
+        meaning: MOP:0000627
+        description: A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule
+      
+      # Specific bond breaking reactions
+      elimination:
+        is_a: bond_breaking
+        meaning: RXNO:0000656
+        description: A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring
+      ring_opening:
+        is_a: bond_breaking
+        description: Cleavage of cyclic structures to form linear products
+      hydrolysis:
+        is_a: bond_breaking
+        meaning: RXNO:0000619
+        description: A solvolysis reaction where the solvent material is water
+      
+      # General reaction mechanisms
+      substitution:
+        meaning: RXNO:0000331
+        description: A reaction step where one atom or group is replaced with another
+      isomerization:
+        meaning: RXNO:0000025
+        description: Rearrangement reactions that convert one isomer to another
+      
+      # Functional additions without bond formation categorization
       functional_group_addition:
         description: Addition of functional groups to unsaturated bonds or reactive centers
       aromatic_heterocycle_formation:
@@ -3300,29 +3349,6 @@ enums:
         description: Removal of protecting groups to restore original functionalities
       resolution:
         description: Separation of enantiomers or other stereoisomers
-      isomerization:
-        meaning: RXNO:0000025
-        description: Rearrangement reactions that convert one isomer to another
-      elimination:
-        meaning: RXNO:0000656
-        description: A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring
-      substitution:
-        meaning: RXNO:0000331
-        description: A reaction step where one atom or group is replaced with another
-      addition:
-        meaning: RXNO:0000041
-        description: Reactions that add atoms or groups across multiple bonds
-      cyclization:
-        meaning: RXNO:0000005
-        description: Formation of cyclic structures from linear precursors
-      ring_opening:
-        description: Cleavage of cyclic structures to form linear products
-      hydrolysis:
-        meaning: RXNO:0000619
-        description: A solvolysis reaction where the solvent material is water
-      condensation:
-        meaning: MOP:0000627
-        description: A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule
     title: reaction_type_enum
   SubatomicParticleEnum:
     permissible_values:
