@@ -562,6 +562,26 @@ type: chemrof:SmallMolecule
 water_solubility: 1000000.0
 
 ```
+## Molecule-citric_acid_with_pka_context
+### Input
+```yaml
+empirical_formula: C6H8O7
+id: CHEBI:30769
+inchi_string: InChI=1S/C6H8O7/c7-3(8)1-6(13,5(11)12)2-4(9)10/h13H,1-2H2,(H,7,8)(H,9,10)(H,11,12)
+molecular_mass: 192.124
+name: citric acid
+pka_ionic_strength: 0.0
+pka_ionization_constant:
+- 3.13
+- 4.76
+- 6.4
+pka_pressure: 1.0
+pka_solvent: water
+pka_temperature: 25.0
+smiles_string: OC(=O)CC(O)(C(=O)O)CC(=O)O
+type: chemrof:Molecule
+
+```
 ## AtomCation-sodium
 ### Input
 ```yaml

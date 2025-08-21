@@ -17,6 +17,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -240,6 +245,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -255,6 +265,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -270,6 +285,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -284,6 +304,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -299,6 +324,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -314,6 +344,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -329,6 +364,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -348,6 +388,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -364,6 +409,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -382,6 +432,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -401,6 +456,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -415,6 +475,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -429,6 +494,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -443,6 +513,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -457,6 +532,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -471,6 +551,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -485,6 +570,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -499,6 +589,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -515,6 +610,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -530,6 +630,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -545,6 +650,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -559,6 +669,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -574,6 +689,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -589,6 +709,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -604,6 +729,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -619,6 +749,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -634,6 +769,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -648,6 +788,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -663,6 +808,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -678,6 +828,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -694,6 +849,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -712,6 +872,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -731,6 +896,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -750,6 +920,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -767,6 +942,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -784,6 +964,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -801,6 +986,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -818,6 +1008,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -836,6 +1031,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -853,6 +1053,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -870,6 +1075,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -887,6 +1097,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -912,6 +1127,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -937,6 +1157,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -954,6 +1179,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -972,6 +1202,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -990,6 +1225,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -1008,6 +1248,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -1024,6 +1269,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -1042,6 +1292,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: type Description: 
 --     * Slot: has_nuclear_parts_id Description: 
@@ -1134,6 +1389,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1149,6 +1409,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1164,6 +1429,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1179,6 +1449,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1193,6 +1468,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1208,6 +1488,11 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
+--     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
+--     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+--     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+--     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+--     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1270,6 +1555,9 @@
 -- # Class: "ChemicalEntity_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalEntity_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalEntity_pka_ionization_constant" Description: ""
+--     * Slot: ChemicalEntity_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "GroupingClass_subtype_of" Description: ""
 --     * Slot: GroupingClass_id Description: Autocreated FK slot
 --     * Slot: subtype_of_id Description: A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class
@@ -1348,6 +1636,9 @@
 -- # Class: "PolyatomicEntity_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolyatomicEntity_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PolyatomicEntity_pka_ionization_constant" Description: ""
+--     * Slot: PolyatomicEntity_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "SmallMolecule_has_bonds" Description: ""
 --     * Slot: SmallMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1360,6 +1651,9 @@
 -- # Class: "SmallMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SmallMolecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "SmallMolecule_pka_ionization_constant" Description: ""
+--     * Slot: SmallMolecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Macromolecule_has_bonds" Description: ""
 --     * Slot: Macromolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1372,9 +1666,15 @@
 -- # Class: "Macromolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Macromolecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Macromolecule_pka_ionization_constant" Description: ""
+--     * Slot: Macromolecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularComplex_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularComplex_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularComplex_pka_ionization_constant" Description: ""
+--     * Slot: MolecularComplex_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Peptide_has_bonds" Description: ""
 --     * Slot: Peptide_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1387,6 +1687,9 @@
 -- # Class: "Peptide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Peptide_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Peptide_pka_ionization_constant" Description: ""
+--     * Slot: Peptide_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Protein_has_bonds" Description: ""
 --     * Slot: Protein_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1399,6 +1702,9 @@
 -- # Class: "Protein_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Protein_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Protein_pka_ionization_constant" Description: ""
+--     * Slot: Protein_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Glycan_has_bonds" Description: ""
 --     * Slot: Glycan_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1411,6 +1717,9 @@
 -- # Class: "Glycan_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Glycan_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Glycan_pka_ionization_constant" Description: ""
+--     * Slot: Glycan_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MonomolecularPolymer_has_bonds" Description: ""
 --     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1423,9 +1732,15 @@
 -- # Class: "MonomolecularPolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MonomolecularPolymer_pka_ionization_constant" Description: ""
+--     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "SupramolecularPolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SupramolecularPolymer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "SupramolecularPolymer_pka_ionization_constant" Description: ""
+--     * Slot: SupramolecularPolymer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Copolymer_polymer_of" Description: ""
 --     * Slot: Copolymer_id Description: Autocreated FK slot
 --     * Slot: polymer_of_id Description: 
@@ -1441,6 +1756,9 @@
 -- # Class: "Copolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Copolymer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Copolymer_pka_ionization_constant" Description: ""
+--     * Slot: Copolymer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Homopolymer_has_bonds" Description: ""
 --     * Slot: Homopolymer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1453,33 +1771,60 @@
 -- # Class: "Homopolymer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Homopolymer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Homopolymer_pka_ionization_constant" Description: ""
+--     * Slot: Homopolymer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularComponent_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularComponent_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularComponent_pka_ionization_constant" Description: ""
+--     * Slot: MolecularComponent_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "PolymerPart_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolymerPart_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PolymerPart_pka_ionization_constant" Description: ""
+--     * Slot: PolymerPart_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Monomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Monomer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Monomer_pka_ionization_constant" Description: ""
+--     * Slot: Monomer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularSubsequence_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularSubsequence_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularSubsequence_pka_ionization_constant" Description: ""
+--     * Slot: MolecularSubsequence_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "ChemicalGroup_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalGroup_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalGroup_pka_ionization_constant" Description: ""
+--     * Slot: ChemicalGroup_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "ChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalMixture_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalMixture_pka_ionization_constant" Description: ""
+--     * Slot: ChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PreciseChemicalMixture_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PreciseChemicalMixture_pka_ionization_constant" Description: ""
+--     * Slot: PreciseChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "ImpreciseChemicalMixture_has_proportional_parts" Description: ""
 --     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
 --     * Slot: has_proportional_parts_id Description: Relationship between a complex mixture and its parts
 -- # Class: "ImpreciseChemicalMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ImpreciseChemicalMixture_pka_ionization_constant" Description: ""
+--     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Molecule_has_bonds" Description: ""
 --     * Slot: Molecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1492,6 +1837,9 @@
 -- # Class: "Molecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Molecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Molecule_pka_ionization_constant" Description: ""
+--     * Slot: Molecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "NaturalProduct_derived_from_organisms" Description: ""
 --     * Slot: NaturalProduct_id Description: Autocreated FK slot
 --     * Slot: derived_from_organisms Description: 
@@ -1507,27 +1855,51 @@
 -- # Class: "NaturalProduct_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NaturalProduct_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NaturalProduct_pka_ionization_constant" Description: ""
+--     * Slot: NaturalProduct_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Moiety_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Moiety_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Moiety_pka_ionization_constant" Description: ""
+--     * Slot: Moiety_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "SequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: SequenceInterval_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "SequenceInterval_pka_ionization_constant" Description: ""
+--     * Slot: SequenceInterval_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AminoAcidSequenceInterval_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AminoAcidSequenceInterval_pka_ionization_constant" Description: ""
+--     * Slot: AminoAcidSequenceInterval_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NucleotideSequenceInterval_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NucleotideSequenceInterval_pka_ionization_constant" Description: ""
+--     * Slot: NucleotideSequenceInterval_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "DNASequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: DNASequenceInterval_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "DNASequenceInterval_pka_ionization_constant" Description: ""
+--     * Slot: DNASequenceInterval_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "RNASequenceInterval_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: RNASequenceInterval_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "RNASequenceInterval_pka_ionization_constant" Description: ""
+--     * Slot: RNASequenceInterval_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "FunctionalGroup_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: FunctionalGroup_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "FunctionalGroup_pka_ionization_constant" Description: ""
+--     * Slot: FunctionalGroup_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularSpecies_has_bonds" Description: ""
 --     * Slot: MolecularSpecies_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1540,6 +1912,9 @@
 -- # Class: "MolecularSpecies_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularSpecies_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularSpecies_pka_ionization_constant" Description: ""
+--     * Slot: MolecularSpecies_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "NonSpeciesMolecule_has_bonds" Description: ""
 --     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1552,6 +1927,9 @@
 -- # Class: "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NonSpeciesMolecule_pka_ionization_constant" Description: ""
+--     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MoleculeByChargeState_has_bonds" Description: ""
 --     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1564,6 +1942,9 @@
 -- # Class: "MoleculeByChargeState_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MoleculeByChargeState_pka_ionization_constant" Description: ""
+--     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "PolyatomicIon_has_bonds" Description: ""
 --     * Slot: PolyatomicIon_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1576,6 +1957,9 @@
 -- # Class: "PolyatomicIon_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PolyatomicIon_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PolyatomicIon_pka_ionization_constant" Description: ""
+--     * Slot: PolyatomicIon_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularCation_has_bonds" Description: ""
 --     * Slot: MolecularCation_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1588,6 +1972,9 @@
 -- # Class: "MolecularCation_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularCation_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularCation_pka_ionization_constant" Description: ""
+--     * Slot: MolecularCation_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MolecularAnion_has_bonds" Description: ""
 --     * Slot: MolecularAnion_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1600,6 +1987,9 @@
 -- # Class: "MolecularAnion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MolecularAnion_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MolecularAnion_pka_ionization_constant" Description: ""
+--     * Slot: MolecularAnion_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "NetUnchargedMolecule_has_bonds" Description: ""
 --     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1612,6 +2002,9 @@
 -- # Class: "NetUnchargedMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NetUnchargedMolecule_pka_ionization_constant" Description: ""
+--     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Zwitterion_has_bonds" Description: ""
 --     * Slot: Zwitterion_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1624,6 +2017,9 @@
 -- # Class: "Zwitterion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Zwitterion_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Zwitterion_pka_ionization_constant" Description: ""
+--     * Slot: Zwitterion_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "NeutralMolecule_has_bonds" Description: ""
 --     * Slot: NeutralMolecule_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1636,48 +2032,93 @@
 -- # Class: "NeutralMolecule_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: NeutralMolecule_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "NeutralMolecule_pka_ionization_constant" Description: ""
+--     * Slot: NeutralMolecule_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Atom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Atom_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Atom_pka_ionization_constant" Description: ""
+--     * Slot: Atom_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "ChemicalElement_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalElement_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalElement_pka_ionization_constant" Description: ""
+--     * Slot: ChemicalElement_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "UnchargedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: UnchargedAtom_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "UnchargedAtom_pka_ionization_constant" Description: ""
+--     * Slot: UnchargedAtom_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Nuclide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Nuclide_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Nuclide_pka_ionization_constant" Description: ""
+--     * Slot: Nuclide_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Radionuclide_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Radionuclide_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Radionuclide_pka_ionization_constant" Description: ""
+--     * Slot: Radionuclide_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Isotope_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Isotope_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Isotope_pka_ionization_constant" Description: ""
+--     * Slot: Isotope_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Isobar_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Isobar_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Isobar_pka_ionization_constant" Description: ""
+--     * Slot: Isobar_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "AtomIonicForm_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomIonicForm_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomIonicForm_pka_ionization_constant" Description: ""
+--     * Slot: AtomIonicForm_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "MonoatomicIon_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: MonoatomicIon_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "MonoatomicIon_pka_ionization_constant" Description: ""
+--     * Slot: MonoatomicIon_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "AtomAnion_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomAnion_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomAnion_pka_ionization_constant" Description: ""
+--     * Slot: AtomAnion_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "AtomCation_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: AtomCation_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "AtomCation_pka_ionization_constant" Description: ""
+--     * Slot: AtomCation_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: PartiallySpecifiedAtom_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "PartiallySpecifiedAtom_pka_ionization_constant" Description: ""
+--     * Slot: PartiallySpecifiedAtom_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: FullySpecifiedAtom_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "FullySpecifiedAtom_pka_ionization_constant" Description: ""
+--     * Slot: FullySpecifiedAtom_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "ChemicalSalt_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: ChemicalSalt_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "ChemicalSalt_pka_ionization_constant" Description: ""
+--     * Slot: ChemicalSalt_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Ester_has_bonds" Description: ""
 --     * Slot: Ester_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1690,6 +2131,9 @@
 -- # Class: "Ester_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Ester_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Ester_pka_ionization_constant" Description: ""
+--     * Slot: Ester_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Stereoisomer_has_bonds" Description: ""
 --     * Slot: Stereoisomer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1702,6 +2146,9 @@
 -- # Class: "Stereoisomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Stereoisomer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Stereoisomer_pka_ionization_constant" Description: ""
+--     * Slot: Stereoisomer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Enantiomer_has_bonds" Description: ""
 --     * Slot: Enantiomer_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1714,9 +2161,15 @@
 -- # Class: "Enantiomer_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Enantiomer_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Enantiomer_pka_ionization_constant" Description: ""
+--     * Slot: Enantiomer_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "RacemicMixture_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: RacemicMixture_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "RacemicMixture_pka_ionization_constant" Description: ""
+--     * Slot: RacemicMixture_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 -- # Class: "Allotrope_has_bonds" Description: ""
 --     * Slot: Allotrope_id Description: Autocreated FK slot
 --     * Slot: has_bonds_id Description: The set of all bonds connecting atoms in a molecule
@@ -1729,6 +2182,9 @@
 -- # Class: "Allotrope_has_major_microspecies_at_pH7_3" Description: ""
 --     * Slot: Allotrope_id Description: Autocreated FK slot
 --     * Slot: has_major_microspecies_at_pH7_3_id Description: Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)
+-- # Class: "Allotrope_pka_ionization_constant" Description: ""
+--     * Slot: Allotrope_id Description: Autocreated FK slot
+--     * Slot: pka_ionization_constant Description: The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.
 
 CREATE TABLE "Collection" (
 	id INTEGER NOT NULL, 
@@ -2134,6 +2590,11 @@ CREATE TABLE "ChemicalEntity" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2216,6 +2677,11 @@ CREATE TABLE "PolyatomicEntity" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2235,6 +2701,11 @@ CREATE TABLE "SmallMolecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2254,6 +2725,11 @@ CREATE TABLE "Macromolecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2272,6 +2748,11 @@ CREATE TABLE "MolecularComplex" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2291,6 +2772,11 @@ CREATE TABLE "Peptide" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2310,6 +2796,11 @@ CREATE TABLE "Protein" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2329,6 +2820,11 @@ CREATE TABLE "Glycan" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2347,6 +2843,11 @@ CREATE TABLE "MolecularComponent" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2365,6 +2866,11 @@ CREATE TABLE "PolymerPart" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2383,6 +2889,11 @@ CREATE TABLE "Monomer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2401,6 +2912,11 @@ CREATE TABLE "MolecularSubsequence" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2419,6 +2935,11 @@ CREATE TABLE "ChemicalGroup" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2437,6 +2958,11 @@ CREATE TABLE "ChemicalMixture" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2455,6 +2981,11 @@ CREATE TABLE "PreciseChemicalMixture" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2475,6 +3006,11 @@ CREATE TABLE "ImpreciseChemicalMixture" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2494,6 +3030,11 @@ CREATE TABLE "Molecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2513,6 +3054,11 @@ CREATE TABLE "NaturalProduct" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2531,6 +3077,11 @@ CREATE TABLE "Moiety" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2550,6 +3101,11 @@ CREATE TABLE "SequenceInterval" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2569,6 +3125,11 @@ CREATE TABLE "AminoAcidSequenceInterval" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2588,6 +3149,11 @@ CREATE TABLE "NucleotideSequenceInterval" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2607,6 +3173,11 @@ CREATE TABLE "DNASequenceInterval" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2626,6 +3197,11 @@ CREATE TABLE "RNASequenceInterval" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2644,6 +3220,11 @@ CREATE TABLE "FunctionalGroup" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2663,6 +3244,11 @@ CREATE TABLE "MolecularSpecies" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2682,6 +3268,11 @@ CREATE TABLE "NonSpeciesMolecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2702,6 +3293,11 @@ CREATE TABLE "MoleculeByChargeState" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2724,6 +3320,11 @@ CREATE TABLE "PolyatomicIon" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2749,6 +3350,11 @@ CREATE TABLE "MolecularCation" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2774,6 +3380,11 @@ CREATE TABLE "MolecularAnion" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2797,6 +3408,11 @@ CREATE TABLE "NetUnchargedMolecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2818,6 +3434,11 @@ CREATE TABLE "Zwitterion" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2839,6 +3460,11 @@ CREATE TABLE "NeutralMolecule" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2860,6 +3486,11 @@ CREATE TABLE "Atom" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2883,6 +3514,11 @@ CREATE TABLE "ChemicalElement" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2907,6 +3543,11 @@ CREATE TABLE "UnchargedAtom" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2929,6 +3570,11 @@ CREATE TABLE "Nuclide" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2951,6 +3597,11 @@ CREATE TABLE "Radionuclide" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2973,6 +3624,11 @@ CREATE TABLE "AtomIonicForm" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -2994,6 +3650,11 @@ CREATE TABLE "PartiallySpecifiedAtom" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3017,6 +3678,11 @@ CREATE TABLE "FullySpecifiedAtom" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3036,6 +3702,11 @@ CREATE TABLE "ChemicalSalt" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3055,6 +3726,11 @@ CREATE TABLE "Ester" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3074,6 +3750,11 @@ CREATE TABLE "Stereoisomer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3093,6 +3774,11 @@ CREATE TABLE "Enantiomer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3111,6 +3797,11 @@ CREATE TABLE "RacemicMixture" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3130,6 +3821,11 @@ CREATE TABLE "Allotrope" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3321,6 +4017,11 @@ CREATE TABLE "MonomolecularPolymer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3343,6 +4044,11 @@ CREATE TABLE "SupramolecularPolymer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3367,6 +4073,11 @@ CREATE TABLE "Copolymer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3391,6 +4102,11 @@ CREATE TABLE "Homopolymer" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -3422,6 +4138,11 @@ CREATE TABLE "Isotope" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3448,6 +4169,11 @@ CREATE TABLE "MonoatomicIon" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3472,6 +4198,11 @@ CREATE TABLE "AtomAnion" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3496,6 +4227,11 @@ CREATE TABLE "AtomCation" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -3513,6 +4249,12 @@ CREATE TABLE "ChemicalEntity_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("ChemicalEntity_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "ChemicalEntity_pka_ionization_constant" (
+	"ChemicalEntity_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ChemicalEntity_id", pka_ionization_constant), 
+	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id)
 );
 CREATE TABLE "MolecularDerivativeGroupingClass_subtype_of" (
 	"MolecularDerivativeGroupingClass_id" TEXT, 
@@ -3556,6 +4298,12 @@ CREATE TABLE "PolyatomicEntity_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "PolyatomicEntity_pka_ionization_constant" (
+	"PolyatomicEntity_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("PolyatomicEntity_id", pka_ionization_constant), 
+	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id)
+);
 CREATE TABLE "SmallMolecule_has_submolecules" (
 	"SmallMolecule_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3576,6 +4324,12 @@ CREATE TABLE "SmallMolecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("SmallMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "SmallMolecule_pka_ionization_constant" (
+	"SmallMolecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("SmallMolecule_id", pka_ionization_constant), 
+	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id)
 );
 CREATE TABLE "Macromolecule_has_submolecules" (
 	"Macromolecule_id" TEXT, 
@@ -3598,12 +4352,24 @@ CREATE TABLE "Macromolecule_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Macromolecule_pka_ionization_constant" (
+	"Macromolecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Macromolecule_id", pka_ionization_constant), 
+	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id)
+);
 CREATE TABLE "MolecularComplex_has_major_microspecies_at_pH7_3" (
 	"MolecularComplex_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("MolecularComplex_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularComplex_id") REFERENCES "MolecularComplex" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "MolecularComplex_pka_ionization_constant" (
+	"MolecularComplex_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularComplex_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularComplex_id") REFERENCES "MolecularComplex" (id)
 );
 CREATE TABLE "Peptide_has_submolecules" (
 	"Peptide_id" TEXT, 
@@ -3626,6 +4392,12 @@ CREATE TABLE "Peptide_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Peptide_pka_ionization_constant" (
+	"Peptide_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Peptide_id", pka_ionization_constant), 
+	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id)
+);
 CREATE TABLE "Protein_has_submolecules" (
 	"Protein_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3646,6 +4418,12 @@ CREATE TABLE "Protein_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Protein_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Protein_pka_ionization_constant" (
+	"Protein_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Protein_id", pka_ionization_constant), 
+	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id)
 );
 CREATE TABLE "Glycan_has_submolecules" (
 	"Glycan_id" TEXT, 
@@ -3668,12 +4446,24 @@ CREATE TABLE "Glycan_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Glycan_pka_ionization_constant" (
+	"Glycan_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Glycan_id", pka_ionization_constant), 
+	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id)
+);
 CREATE TABLE "MolecularComponent_has_major_microspecies_at_pH7_3" (
 	"MolecularComponent_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("MolecularComponent_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularComponent_id") REFERENCES "MolecularComponent" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "MolecularComponent_pka_ionization_constant" (
+	"MolecularComponent_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularComponent_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularComponent_id") REFERENCES "MolecularComponent" (id)
 );
 CREATE TABLE "PolymerPart_has_major_microspecies_at_pH7_3" (
 	"PolymerPart_id" TEXT, 
@@ -3682,12 +4472,24 @@ CREATE TABLE "PolymerPart_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "PolymerPart_pka_ionization_constant" (
+	"PolymerPart_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("PolymerPart_id", pka_ionization_constant), 
+	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id)
+);
 CREATE TABLE "Monomer_has_major_microspecies_at_pH7_3" (
 	"Monomer_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("Monomer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Monomer_pka_ionization_constant" (
+	"Monomer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Monomer_id", pka_ionization_constant), 
+	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id)
 );
 CREATE TABLE "MolecularSubsequence_has_major_microspecies_at_pH7_3" (
 	"MolecularSubsequence_id" TEXT, 
@@ -3696,12 +4498,24 @@ CREATE TABLE "MolecularSubsequence_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MolecularSubsequence_pka_ionization_constant" (
+	"MolecularSubsequence_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularSubsequence_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id)
+);
 CREATE TABLE "ChemicalGroup_has_major_microspecies_at_pH7_3" (
 	"ChemicalGroup_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("ChemicalGroup_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "ChemicalGroup_pka_ionization_constant" (
+	"ChemicalGroup_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ChemicalGroup_id", pka_ionization_constant), 
+	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id)
 );
 CREATE TABLE "ChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"ChemicalMixture_id" TEXT, 
@@ -3710,12 +4524,24 @@ CREATE TABLE "ChemicalMixture_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("ChemicalMixture_id") REFERENCES "ChemicalMixture" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "ChemicalMixture_pka_ionization_constant" (
+	"ChemicalMixture_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ChemicalMixture_id", pka_ionization_constant), 
+	FOREIGN KEY("ChemicalMixture_id") REFERENCES "ChemicalMixture" (id)
+);
 CREATE TABLE "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"PreciseChemicalMixture_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("PreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "PreciseChemicalMixture_pka_ionization_constant" (
+	"PreciseChemicalMixture_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("PreciseChemicalMixture_id", pka_ionization_constant), 
+	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id)
 );
 CREATE TABLE "ImpreciseChemicalMixture_has_proportional_parts" (
 	"ImpreciseChemicalMixture_id" TEXT, 
@@ -3730,6 +4556,12 @@ CREATE TABLE "ImpreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("ImpreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "ImpreciseChemicalMixture_pka_ionization_constant" (
+	"ImpreciseChemicalMixture_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ImpreciseChemicalMixture_id", pka_ionization_constant), 
+	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id)
 );
 CREATE TABLE "Molecule_has_submolecules" (
 	"Molecule_id" TEXT, 
@@ -3751,6 +4583,12 @@ CREATE TABLE "Molecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Molecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Molecule_pka_ionization_constant" (
+	"Molecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Molecule_id", pka_ionization_constant), 
+	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id)
 );
 CREATE TABLE "NaturalProduct_derived_from_organisms" (
 	"NaturalProduct_id" TEXT, 
@@ -3779,12 +4617,24 @@ CREATE TABLE "NaturalProduct_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "NaturalProduct_pka_ionization_constant" (
+	"NaturalProduct_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("NaturalProduct_id", pka_ionization_constant), 
+	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id)
+);
 CREATE TABLE "Moiety_has_major_microspecies_at_pH7_3" (
 	"Moiety_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("Moiety_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Moiety_pka_ionization_constant" (
+	"Moiety_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Moiety_id", pka_ionization_constant), 
+	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id)
 );
 CREATE TABLE "SequenceInterval_has_major_microspecies_at_pH7_3" (
 	"SequenceInterval_id" TEXT, 
@@ -3793,12 +4643,24 @@ CREATE TABLE "SequenceInterval_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("SequenceInterval_id") REFERENCES "SequenceInterval" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "SequenceInterval_pka_ionization_constant" (
+	"SequenceInterval_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("SequenceInterval_id", pka_ionization_constant), 
+	FOREIGN KEY("SequenceInterval_id") REFERENCES "SequenceInterval" (id)
+);
 CREATE TABLE "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" (
 	"AminoAcidSequenceInterval_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("AminoAcidSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "AminoAcidSequenceInterval_pka_ionization_constant" (
+	"AminoAcidSequenceInterval_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("AminoAcidSequenceInterval_id", pka_ionization_constant), 
+	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id)
 );
 CREATE TABLE "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" (
 	"NucleotideSequenceInterval_id" TEXT, 
@@ -3807,12 +4669,24 @@ CREATE TABLE "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "NucleotideSequenceInterval_pka_ionization_constant" (
+	"NucleotideSequenceInterval_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("NucleotideSequenceInterval_id", pka_ionization_constant), 
+	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id)
+);
 CREATE TABLE "DNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"DNASequenceInterval_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("DNASequenceInterval_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "DNASequenceInterval_pka_ionization_constant" (
+	"DNASequenceInterval_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("DNASequenceInterval_id", pka_ionization_constant), 
+	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id)
 );
 CREATE TABLE "RNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"RNASequenceInterval_id" TEXT, 
@@ -3821,12 +4695,24 @@ CREATE TABLE "RNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "RNASequenceInterval_pka_ionization_constant" (
+	"RNASequenceInterval_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("RNASequenceInterval_id", pka_ionization_constant), 
+	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id)
+);
 CREATE TABLE "FunctionalGroup_has_major_microspecies_at_pH7_3" (
 	"FunctionalGroup_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("FunctionalGroup_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "FunctionalGroup_pka_ionization_constant" (
+	"FunctionalGroup_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("FunctionalGroup_id", pka_ionization_constant), 
+	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id)
 );
 CREATE TABLE "MolecularSpecies_has_submolecules" (
 	"MolecularSpecies_id" TEXT, 
@@ -3849,6 +4735,12 @@ CREATE TABLE "MolecularSpecies_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MolecularSpecies_pka_ionization_constant" (
+	"MolecularSpecies_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularSpecies_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id)
+);
 CREATE TABLE "NonSpeciesMolecule_has_submolecules" (
 	"NonSpeciesMolecule_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3869,6 +4761,12 @@ CREATE TABLE "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("NonSpeciesMolecule_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "NonSpeciesMolecule_pka_ionization_constant" (
+	"NonSpeciesMolecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("NonSpeciesMolecule_id", pka_ionization_constant), 
+	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id)
 );
 CREATE TABLE "MoleculeByChargeState_has_submolecules" (
 	"MoleculeByChargeState_id" TEXT, 
@@ -3891,6 +4789,12 @@ CREATE TABLE "MoleculeByChargeState_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MoleculeByChargeState_pka_ionization_constant" (
+	"MoleculeByChargeState_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MoleculeByChargeState_id", pka_ionization_constant), 
+	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id)
+);
 CREATE TABLE "PolyatomicIon_has_submolecules" (
 	"PolyatomicIon_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3911,6 +4815,12 @@ CREATE TABLE "PolyatomicIon_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PolyatomicIon_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "PolyatomicIon_pka_ionization_constant" (
+	"PolyatomicIon_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("PolyatomicIon_id", pka_ionization_constant), 
+	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id)
 );
 CREATE TABLE "MolecularCation_has_submolecules" (
 	"MolecularCation_id" TEXT, 
@@ -3933,6 +4843,12 @@ CREATE TABLE "MolecularCation_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MolecularCation_pka_ionization_constant" (
+	"MolecularCation_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularCation_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id)
+);
 CREATE TABLE "MolecularAnion_has_submolecules" (
 	"MolecularAnion_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3953,6 +4869,12 @@ CREATE TABLE "MolecularAnion_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("MolecularAnion_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "MolecularAnion_pka_ionization_constant" (
+	"MolecularAnion_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MolecularAnion_id", pka_ionization_constant), 
+	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id)
 );
 CREATE TABLE "NetUnchargedMolecule_has_submolecules" (
 	"NetUnchargedMolecule_id" TEXT, 
@@ -3975,6 +4897,12 @@ CREATE TABLE "NetUnchargedMolecule_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "NetUnchargedMolecule_pka_ionization_constant" (
+	"NetUnchargedMolecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("NetUnchargedMolecule_id", pka_ionization_constant), 
+	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id)
+);
 CREATE TABLE "Zwitterion_has_submolecules" (
 	"Zwitterion_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -3995,6 +4923,12 @@ CREATE TABLE "Zwitterion_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Zwitterion_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Zwitterion_pka_ionization_constant" (
+	"Zwitterion_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Zwitterion_id", pka_ionization_constant), 
+	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id)
 );
 CREATE TABLE "NeutralMolecule_has_submolecules" (
 	"NeutralMolecule_id" TEXT, 
@@ -4017,12 +4951,24 @@ CREATE TABLE "NeutralMolecule_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "NeutralMolecule_pka_ionization_constant" (
+	"NeutralMolecule_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("NeutralMolecule_id", pka_ionization_constant), 
+	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id)
+);
 CREATE TABLE "Atom_has_major_microspecies_at_pH7_3" (
 	"Atom_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("Atom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Atom_pka_ionization_constant" (
+	"Atom_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Atom_id", pka_ionization_constant), 
+	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id)
 );
 CREATE TABLE "ChemicalElement_has_major_microspecies_at_pH7_3" (
 	"ChemicalElement_id" TEXT, 
@@ -4031,12 +4977,24 @@ CREATE TABLE "ChemicalElement_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalElement" (id)
 );
+CREATE TABLE "ChemicalElement_pka_ionization_constant" (
+	"ChemicalElement_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ChemicalElement_id", pka_ionization_constant), 
+	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id)
+);
 CREATE TABLE "UnchargedAtom_has_major_microspecies_at_pH7_3" (
 	"UnchargedAtom_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("UnchargedAtom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "UnchargedAtom_pka_ionization_constant" (
+	"UnchargedAtom_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("UnchargedAtom_id", pka_ionization_constant), 
+	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id)
 );
 CREATE TABLE "Nuclide_has_major_microspecies_at_pH7_3" (
 	"Nuclide_id" TEXT, 
@@ -4045,12 +5003,24 @@ CREATE TABLE "Nuclide_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Nuclide_pka_ionization_constant" (
+	"Nuclide_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Nuclide_id", pka_ionization_constant), 
+	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id)
+);
 CREATE TABLE "Radionuclide_has_major_microspecies_at_pH7_3" (
 	"Radionuclide_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("Radionuclide_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Radionuclide_pka_ionization_constant" (
+	"Radionuclide_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Radionuclide_id", pka_ionization_constant), 
+	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id)
 );
 CREATE TABLE "AtomIonicForm_has_major_microspecies_at_pH7_3" (
 	"AtomIonicForm_id" TEXT, 
@@ -4059,12 +5029,24 @@ CREATE TABLE "AtomIonicForm_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "AtomIonicForm_pka_ionization_constant" (
+	"AtomIonicForm_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("AtomIonicForm_id", pka_ionization_constant), 
+	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id)
+);
 CREATE TABLE "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"PartiallySpecifiedAtom_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("PartiallySpecifiedAtom_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "PartiallySpecifiedAtom_pka_ionization_constant" (
+	"PartiallySpecifiedAtom_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("PartiallySpecifiedAtom_id", pka_ionization_constant), 
+	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id)
 );
 CREATE TABLE "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"FullySpecifiedAtom_id" TEXT, 
@@ -4073,12 +5055,24 @@ CREATE TABLE "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "FullySpecifiedAtom_pka_ionization_constant" (
+	"FullySpecifiedAtom_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("FullySpecifiedAtom_id", pka_ionization_constant), 
+	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id)
+);
 CREATE TABLE "ChemicalSalt_has_major_microspecies_at_pH7_3" (
 	"ChemicalSalt_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("ChemicalSalt_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("ChemicalSalt_id") REFERENCES "ChemicalSalt" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "ChemicalSalt_pka_ionization_constant" (
+	"ChemicalSalt_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("ChemicalSalt_id", pka_ionization_constant), 
+	FOREIGN KEY("ChemicalSalt_id") REFERENCES "ChemicalSalt" (id)
 );
 CREATE TABLE "Ester_has_submolecules" (
 	"Ester_id" TEXT, 
@@ -4101,6 +5095,12 @@ CREATE TABLE "Ester_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Ester_pka_ionization_constant" (
+	"Ester_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Ester_id", pka_ionization_constant), 
+	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id)
+);
 CREATE TABLE "Stereoisomer_has_submolecules" (
 	"Stereoisomer_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -4121,6 +5121,12 @@ CREATE TABLE "Stereoisomer_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Stereoisomer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Stereoisomer_pka_ionization_constant" (
+	"Stereoisomer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Stereoisomer_id", pka_ionization_constant), 
+	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id)
 );
 CREATE TABLE "Enantiomer_has_submolecules" (
 	"Enantiomer_id" TEXT, 
@@ -4143,12 +5149,24 @@ CREATE TABLE "Enantiomer_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Enantiomer_pka_ionization_constant" (
+	"Enantiomer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Enantiomer_id", pka_ionization_constant), 
+	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id)
+);
 CREATE TABLE "RacemicMixture_has_major_microspecies_at_pH7_3" (
 	"RacemicMixture_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("RacemicMixture_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "RacemicMixture_pka_ionization_constant" (
+	"RacemicMixture_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("RacemicMixture_id", pka_ionization_constant), 
+	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id)
 );
 CREATE TABLE "Allotrope_has_submolecules" (
 	"Allotrope_id" TEXT, 
@@ -4171,6 +5189,12 @@ CREATE TABLE "Allotrope_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Allotrope_pka_ionization_constant" (
+	"Allotrope_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Allotrope_id", pka_ionization_constant), 
+	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id)
+);
 CREATE TABLE "Isobar" (
 	has_element TEXT, 
 	nucleon_number INTEGER, 
@@ -4191,6 +5215,11 @@ CREATE TABLE "Isobar" (
 	smiles_string TEXT, 
 	empirical_formula TEXT, 
 	molecular_mass FLOAT, 
+	water_solubility FLOAT, 
+	pka_temperature FLOAT, 
+	pka_ionic_strength FLOAT, 
+	pka_solvent TEXT, 
+	pka_pressure FLOAT, 
 	id TEXT NOT NULL, 
 	type TEXT, 
 	has_nuclear_parts_id INTEGER, 
@@ -4290,12 +5319,24 @@ CREATE TABLE "MonomolecularPolymer_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MonomolecularPolymer_pka_ionization_constant" (
+	"MonomolecularPolymer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MonomolecularPolymer_id", pka_ionization_constant), 
+	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id)
+);
 CREATE TABLE "SupramolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"SupramolecularPolymer_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("SupramolecularPolymer_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "SupramolecularPolymer_pka_ionization_constant" (
+	"SupramolecularPolymer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("SupramolecularPolymer_id", pka_ionization_constant), 
+	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id)
 );
 CREATE TABLE "Copolymer_polymer_of" (
 	"Copolymer_id" TEXT, 
@@ -4325,6 +5366,12 @@ CREATE TABLE "Copolymer_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Copolymer_pka_ionization_constant" (
+	"Copolymer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Copolymer_id", pka_ionization_constant), 
+	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id)
+);
 CREATE TABLE "Homopolymer_has_submolecules" (
 	"Homopolymer_id" TEXT, 
 	has_submolecules_id TEXT, 
@@ -4346,12 +5393,24 @@ CREATE TABLE "Homopolymer_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "Homopolymer_pka_ionization_constant" (
+	"Homopolymer_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Homopolymer_id", pka_ionization_constant), 
+	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id)
+);
 CREATE TABLE "Isotope_has_major_microspecies_at_pH7_3" (
 	"Isotope_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("Isotope_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Isotope_pka_ionization_constant" (
+	"Isotope_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Isotope_id", pka_ionization_constant), 
+	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id)
 );
 CREATE TABLE "MonoatomicIon_has_major_microspecies_at_pH7_3" (
 	"MonoatomicIon_id" TEXT, 
@@ -4360,6 +5419,12 @@ CREATE TABLE "MonoatomicIon_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "MonoatomicIon_pka_ionization_constant" (
+	"MonoatomicIon_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("MonoatomicIon_id", pka_ionization_constant), 
+	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id)
+);
 CREATE TABLE "AtomAnion_has_major_microspecies_at_pH7_3" (
 	"AtomAnion_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
@@ -4367,12 +5432,24 @@ CREATE TABLE "AtomAnion_has_major_microspecies_at_pH7_3" (
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
 );
+CREATE TABLE "AtomAnion_pka_ionization_constant" (
+	"AtomAnion_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("AtomAnion_id", pka_ionization_constant), 
+	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id)
+);
 CREATE TABLE "AtomCation_has_major_microspecies_at_pH7_3" (
 	"AtomCation_id" TEXT, 
 	"has_major_microspecies_at_pH7_3_id" TEXT, 
 	PRIMARY KEY ("AtomCation_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("AtomCation_id") REFERENCES "AtomCation" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "AtomCation_pka_ionization_constant" (
+	"AtomCation_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("AtomCation_id", pka_ionization_constant), 
+	FOREIGN KEY("AtomCation_id") REFERENCES "AtomCation" (id)
 );
 CREATE TABLE "AtomicBond" (
 	id INTEGER NOT NULL, 
@@ -4397,6 +5474,12 @@ CREATE TABLE "Isobar_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Isobar_id", "has_major_microspecies_at_pH7_3_id"), 
 	FOREIGN KEY("Isobar_id") REFERENCES "Isobar" (id), 
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
+);
+CREATE TABLE "Isobar_pka_ionization_constant" (
+	"Isobar_id" TEXT, 
+	pka_ionization_constant FLOAT, 
+	PRIMARY KEY ("Isobar_id", pka_ionization_constant), 
+	FOREIGN KEY("Isobar_id") REFERENCES "Isobar" (id)
 );
 CREATE TABLE "SmallMolecule_has_bonds" (
 	"SmallMolecule_id" TEXT, 
