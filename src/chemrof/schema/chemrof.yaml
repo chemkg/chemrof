@@ -114,6 +114,10 @@ classes:
     - molecular_mass
     - water_solubility
     - pka_ionization_constant
+    - pka_temperature
+    - pka_ionic_strength
+    - pka_solvent
+    - pka_pressure
     slot_usage:
       inchi_chemical_sublayer:
         required: false
@@ -2268,6 +2272,48 @@ slots:
       - "Lower pKa values indicate stronger acids"
       - "For molecules with multiple ionizable groups, this field can contain multiple values"
       - "Standard conditions: aqueous solution at 25°C"
+
+  pka_temperature:
+    description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
+    is_a: molecular_property
+    title: pKa temperature
+    range: float
+    unit:
+      ucum_code: "Cel"
+    comments:
+      - "Standard temperature is 25°C (298.15 K)"
+      - "pKa values can shift significantly with temperature following the van't Hoff equation"
+
+  pka_ionic_strength:
+    description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
+    is_a: molecular_property
+    title: pKa ionic strength
+    range: float
+    unit:
+      ucum_code: "mol/L"
+    comments:
+      - "Standard ionic strength is 0.0 M (zero ionic strength corresponding to distilled water)"
+      - "Salt concentration affects pKa through electrostatic shielding of charges"
+
+  pka_solvent:
+    description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
+    is_a: molecular_property
+    title: pKa solvent
+    range: string
+    comments:
+      - "Standard solvent is water (H₂O)"
+      - "pKa values in non-aqueous solvents can be dramatically different due to polarity effects"
+
+  pka_pressure:
+    description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+    is_a: molecular_property
+    title: pKa pressure
+    range: float
+    unit:
+      ucum_code: "atm"
+    comments:
+      - "Standard pressure is 1 atm"
+      - "Generally minor effect under standard laboratory conditions"
   chemical_representation:
     aliases:
     - has chemical encoding
