@@ -49,6 +49,7 @@ message Allotrope
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -80,6 +81,7 @@ message AminoAcidSequenceInterval
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   aminoAcidSequenceString hasSequenceRepresentation = 0
@@ -104,6 +106,7 @@ message AtomAnion
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -133,6 +136,7 @@ message AtomCation
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -232,6 +236,7 @@ message ChemicalElement
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string name = 0
@@ -269,6 +274,7 @@ message ChemicalGroup
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -311,6 +317,7 @@ message ChemicalSalt
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   integer elementalCharge = 0
@@ -386,6 +393,7 @@ message Copolymer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -419,6 +427,7 @@ message DNASequenceInterval
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -444,6 +453,7 @@ message Enantiomer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -479,6 +489,7 @@ message Ester
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -510,6 +521,7 @@ message FullySpecifiedAtom
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -539,6 +551,7 @@ message FunctionalGroup
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   molecule isSubstitutentGroupFrom = 0
@@ -588,6 +601,7 @@ message Glycan
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -618,6 +632,7 @@ message Homopolymer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -652,11 +667,23 @@ message ImpreciseChemicalMixture
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  proportionalPart hasProportionalParts = 0
   fileLocation hasMixfileLocation = 0
   chemicalEncoding hasMinchiRepresentation = 0
+ }
+// Represents a specific ionizable functional group instance within a molecule, paired with its pKa value and optional position information. This class enables sophisticated modeling of molecules with multiple ionizable groups.
+message IonizableGroup
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string functionalGroupType = 0
+  float pkaValue = 0
+  string groupPosition = 0
+  string groupDescription = 0
  }
 // Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.
 message Isobar
@@ -678,6 +705,7 @@ message Isobar
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -704,6 +732,7 @@ message IsomeraseReaction
   chemicalEncoding hasReactionSmilesRepresentation = 0
   float reactionRateCoefficient = 0
   float reactionRate = 0
+  reactionTypeEnum reactionType = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -735,6 +764,7 @@ message Isotope
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -772,6 +802,7 @@ message Macromolecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -828,6 +859,7 @@ message Moiety
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -852,6 +884,7 @@ message MolecularAnion
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -889,6 +922,7 @@ message MolecularCation
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -926,6 +960,7 @@ message MolecularComplex
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -950,6 +985,7 @@ message MolecularComponent
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -997,6 +1033,7 @@ message MolecularSpecies
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1026,6 +1063,7 @@ message MolecularSubsequence
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -1050,6 +1088,7 @@ message Molecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1122,6 +1161,7 @@ message MonoatomicIon
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1151,6 +1191,7 @@ message Monomer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -1186,6 +1227,7 @@ message MonomolecularPolymer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1229,6 +1271,7 @@ message NaturalProduct
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1260,6 +1303,7 @@ message NetUnchargedMolecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1295,6 +1339,7 @@ message NeutralMolecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1330,6 +1375,7 @@ message NonSpeciesMolecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1359,6 +1405,7 @@ message NucleotideSequenceInterval
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -1383,6 +1430,7 @@ message Nuclide
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1411,6 +1459,7 @@ message Peptide
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1441,6 +1490,7 @@ message PolyatomicIon
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1477,6 +1527,7 @@ message PolymerPart
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -1518,6 +1569,7 @@ message Protein
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1547,6 +1599,7 @@ message RacemicMixture
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   enantiomer hasLeftEnantiomer = 0
@@ -1574,6 +1627,7 @@ message Radionuclide
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1592,6 +1646,7 @@ message Reaction
   chemicalEncoding hasReactionSmilesRepresentation = 0
   float reactionRateCoefficient = 0
   float reactionRate = 0
+  reactionTypeEnum reactionType = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -1639,6 +1694,7 @@ message RNASequenceInterval
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -1664,6 +1720,7 @@ message SmallMolecule
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1706,6 +1763,7 @@ message Stereoisomer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1751,6 +1809,7 @@ message SupramolecularPolymer
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   macromolecule polymerOf = 0
@@ -1783,6 +1842,7 @@ message UnchargedAtom
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1812,6 +1872,7 @@ message Zwitterion
   float pkaIonicStrength = 0
   string pkaSolvent = 0
   float pkaPressure = 0
+ repeated  ionizableGroup hasIonizableGroups = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0

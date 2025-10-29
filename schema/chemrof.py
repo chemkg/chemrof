@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-08-21T00:24:36
+# Generation date: 2025-10-29T04:08:25
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -433,6 +433,10 @@ class FunctionalGroupId(MolecularComponentId):
     pass
 
 
+class IonizableGroupId(DomainEntityId):
+    pass
+
+
 class MolecularSpeciesId(MoleculeId):
     pass
 
@@ -677,6 +681,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     pka_ionic_strength: Optional[float] = None
     pka_solvent: Optional[str] = None
     pka_pressure: Optional[float] = None
+    has_ionizable_groups: Optional[Union[dict[Union[str, IonizableGroupId], Union[dict, "IonizableGroup"]], list[Union[dict, "IonizableGroup"]]]] = empty_dict()
     owl_subclass_of: Optional[Union[dict, "OwlClass"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -725,6 +730,8 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.pka_pressure is not None and not isinstance(self.pka_pressure, float):
             self.pka_pressure = float(self.pka_pressure)
+
+        self._normalize_inlined_as_list(slot_name="has_ionizable_groups", slot_type=IonizableGroup, key_name="id", keyed=True)
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
@@ -2472,6 +2479,50 @@ class FunctionalGroup(MolecularComponent):
 
 
 @dataclass(repr=False)
+class IonizableGroup(DomainEntity):
+    """
+    Represents a specific ionizable functional group instance within a molecule, paired with its pKa value and
+    optional position information. This class enables sophisticated modeling of molecules with multiple ionizable
+    groups.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["IonizableGroup"]
+    class_class_curie: ClassVar[str] = "chemrof:IonizableGroup"
+    class_name: ClassVar[str] = "IonizableGroup"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.IonizableGroup
+
+    id: Union[str, IonizableGroupId] = None
+    pka_value: float = None
+    functional_group_type: Optional[str] = None
+    group_position: Optional[str] = None
+    group_description: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, IonizableGroupId):
+            self.id = IonizableGroupId(self.id)
+
+        if self._is_empty(self.pka_value):
+            self.MissingRequiredField("pka_value")
+        if not isinstance(self.pka_value, float):
+            self.pka_value = float(self.pka_value)
+
+        if self.functional_group_type is not None and not isinstance(self.functional_group_type, str):
+            self.functional_group_type = str(self.functional_group_type)
+
+        if self.group_position is not None and not isinstance(self.group_position, str):
+            self.group_position = str(self.group_position)
+
+        if self.group_description is not None and not isinstance(self.group_description, str):
+            self.group_description = str(self.group_description)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
 class MolecularSpecies(Molecule):
     """
     A molecule in which the units are identical. Example: methyl
@@ -3739,6 +3790,7 @@ class Reaction(DomainEntity):
     has_reaction_smiles_representation: Optional[str] = None
     reaction_rate_coefficient: Optional[float] = None
     reaction_rate: Optional[float] = None
+    reaction_type: Optional[Union[str, "ReactionTypeEnum"]] = None
     left_participants: Optional[Union[Union[dict, "ReactionParticipant"], list[Union[dict, "ReactionParticipant"]]]] = empty_list()
     right_participants: Optional[Union[Union[dict, "ReactionParticipant"], list[Union[dict, "ReactionParticipant"]]]] = empty_list()
     direction: Optional[str] = None
@@ -3767,6 +3819,9 @@ class Reaction(DomainEntity):
 
         if self.reaction_rate is not None and not isinstance(self.reaction_rate, float):
             self.reaction_rate = float(self.reaction_rate)
+
+        if self.reaction_type is not None and not isinstance(self.reaction_type, ReactionTypeEnum):
+            self.reaction_type = ReactionTypeEnum(self.reaction_type)
 
         if not isinstance(self.left_participants, list):
             self.left_participants = [self.left_participants] if self.left_participants is not None else []
@@ -4292,6 +4347,92 @@ class BronstedAcidBaseRoleEnum(EnumDefinitionImpl):
         name="BronstedAcidBaseRoleEnum",
     )
 
+class ReactionTypeEnum(EnumDefinitionImpl):
+    """
+    Classification of chemical reactions based on mechanistic and functional categories
+    """
+    functional_group_interconversion = PermissibleValue(
+        text="functional_group_interconversion",
+        description="Conversion of one functional group to another without changing the carbon skeleton",
+        meaning=RXNO["0000057"])
+    bond_formation = PermissibleValue(
+        text="bond_formation",
+        description="Reactions that create new bonds between atoms or groups")
+    bond_breaking = PermissibleValue(
+        text="bond_breaking",
+        description="Reactions that break existing bonds to form fragments or rearrange structures")
+    oxidation = PermissibleValue(
+        text="oxidation",
+        description="A functional group modification reaction where a functional group is oxidised",
+        meaning=RXNO["0000012"])
+    reduction = PermissibleValue(
+        text="reduction",
+        description="A functional group modification reaction where a functional group is reduced",
+        meaning=RXNO["0000037"])
+    acylation = PermissibleValue(
+        text="acylation",
+        description="Formation of an acyl group bond, typically involving carboxylic acid derivatives",
+        meaning=RXNO["0000016"])
+    carbon_carbon_bond_formation = PermissibleValue(
+        text="carbon_carbon_bond_formation",
+        description="Reactions that form new carbon-carbon bonds",
+        meaning=RXNO["0000018"])
+    heteroatom_alkylation_arylation = PermissibleValue(
+        text="heteroatom_alkylation_arylation",
+        description="Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur",
+        meaning=RXNO["0000019"])
+    addition = PermissibleValue(
+        text="addition",
+        description="Reactions that add atoms or groups across multiple bonds",
+        meaning=RXNO["0000041"])
+    cyclization = PermissibleValue(
+        text="cyclization",
+        description="Formation of cyclic structures from linear precursors",
+        meaning=RXNO["0000005"])
+    condensation = PermissibleValue(
+        text="condensation",
+        description="""A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule""",
+        meaning=MOP["0000627"])
+    elimination = PermissibleValue(
+        text="elimination",
+        description="""A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring""",
+        meaning=RXNO["0000656"])
+    ring_opening = PermissibleValue(
+        text="ring_opening",
+        description="Cleavage of cyclic structures to form linear products")
+    hydrolysis = PermissibleValue(
+        text="hydrolysis",
+        description="A solvolysis reaction where the solvent material is water",
+        meaning=RXNO["0000619"])
+    substitution = PermissibleValue(
+        text="substitution",
+        description="A reaction step where one atom or group is replaced with another",
+        meaning=RXNO["0000331"])
+    isomerization = PermissibleValue(
+        text="isomerization",
+        description="Rearrangement reactions that convert one isomer to another",
+        meaning=RXNO["0000025"])
+    functional_group_addition = PermissibleValue(
+        text="functional_group_addition",
+        description="Addition of functional groups to unsaturated bonds or reactive centers")
+    aromatic_heterocycle_formation = PermissibleValue(
+        text="aromatic_heterocycle_formation",
+        description="Formation of aromatic rings containing heteroatoms")
+    protection = PermissibleValue(
+        text="protection",
+        description="Introduction of protecting groups to temporarily mask reactive functionalities")
+    deprotection = PermissibleValue(
+        text="deprotection",
+        description="Removal of protecting groups to restore original functionalities")
+    resolution = PermissibleValue(
+        text="resolution",
+        description="Separation of enantiomers or other stereoisomers")
+
+    _defn = EnumDefinition(
+        name="ReactionTypeEnum",
+        description="Classification of chemical reactions based on mechanistic and functional categories",
+    )
+
 class SubatomicParticleEnum(EnumDefinitionImpl):
 
     proton = PermissibleValue(
@@ -4766,6 +4907,21 @@ slots.pka_solvent = Slot(uri=CHEMROF.pka_solvent, name="pka_solvent", curie=CHEM
 slots.pka_pressure = Slot(uri=CHEMROF.pka_pressure, name="pka_pressure", curie=CHEMROF.curie('pka_pressure'),
                    model_uri=CHEMROF.pka_pressure, domain=None, range=Optional[float])
 
+slots.has_ionizable_groups = Slot(uri=CHEMROF.has_ionizable_groups, name="has_ionizable_groups", curie=CHEMROF.curie('has_ionizable_groups'),
+                   model_uri=CHEMROF.has_ionizable_groups, domain=ChemicalEntity, range=Optional[Union[dict[Union[str, IonizableGroupId], Union[dict, "IonizableGroup"]], list[Union[dict, "IonizableGroup"]]]])
+
+slots.functional_group_type = Slot(uri=CHEMROF.functional_group_type, name="functional_group_type", curie=CHEMROF.curie('functional_group_type'),
+                   model_uri=CHEMROF.functional_group_type, domain=None, range=Optional[str])
+
+slots.pka_value = Slot(uri=CHEMROF.pka_value, name="pka_value", curie=CHEMROF.curie('pka_value'),
+                   model_uri=CHEMROF.pka_value, domain=None, range=float)
+
+slots.group_position = Slot(uri=CHEMROF.group_position, name="group_position", curie=CHEMROF.curie('group_position'),
+                   model_uri=CHEMROF.group_position, domain=None, range=Optional[str])
+
+slots.group_description = Slot(uri=CHEMROF.group_description, name="group_description", curie=CHEMROF.curie('group_description'),
+                   model_uri=CHEMROF.group_description, domain=None, range=Optional[str])
+
 slots.chemical_representation = Slot(uri=CHEMROF.chemical_representation, name="chemical_representation", curie=CHEMROF.curie('chemical_representation'),
                    model_uri=CHEMROF.chemical_representation, domain=ChemicalEntity, range=Optional[str])
 
@@ -4804,6 +4960,9 @@ slots.reaction_rate = Slot(uri=CHEMROF.reaction_rate, name="reaction_rate", curi
 
 slots.reaction_rate_coefficient = Slot(uri=CHEMROF.reaction_rate_coefficient, name="reaction_rate_coefficient", curie=CHEMROF.curie('reaction_rate_coefficient'),
                    model_uri=CHEMROF.reaction_rate_coefficient, domain=None, range=Optional[float])
+
+slots.reaction_type = Slot(uri=CHEMROF.reaction_type, name="reaction_type", curie=CHEMROF.curie('reaction_type'),
+                   model_uri=CHEMROF.reaction_type, domain=None, range=Optional[Union[str, "ReactionTypeEnum"]])
 
 slots.kcat = Slot(uri=CHEMROF.kcat, name="kcat", curie=CHEMROF.curie('kcat'),
                    model_uri=CHEMROF.kcat, domain=None, range=Optional[str])

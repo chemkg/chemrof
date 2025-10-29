@@ -118,6 +118,7 @@ classes:
     - pka_ionic_strength
     - pka_solvent
     - pka_pressure
+    - has_ionizable_groups
     slot_usage:
       inchi_chemical_sublayer:
         required: false
@@ -886,6 +887,19 @@ classes:
       is_substitutent_group_from:
         range: Molecule
     title: functional group
+  IonizableGroup:
+    is_a: DomainEntity
+    description: Represents a specific ionizable functional group instance within a molecule, paired with its pKa value and optional position information. This class enables sophisticated modeling of molecules with multiple ionizable groups.
+    title: ionizable group
+    slots:
+      - functional_group_type
+      - pka_value
+      - group_position
+      - group_description
+    comments:
+      - "Use this class to explicitly associate pKa values with specific functional groups"
+      - "For molecules with multiple identical groups, use group_position or group_description to distinguish them"
+      - "Example: citric acid has three IonizableGroup instances, each with a carboxyl functional group and distinct pKa values"
   MolecularSpecies:
     is_a: Molecule
     description: 'A molecule in which the units are identical. Example: methyl'
@@ -2314,6 +2328,53 @@ slots:
     comments:
       - "Standard pressure is 1 atm"
       - "Generally minor effect under standard laboratory conditions"
+
+  has_ionizable_groups:
+    description: Links a molecule to its ionizable functional groups, each paired with a specific pKa value. This enables detailed modeling of molecules with multiple ionizable groups where the association between group type and pKa value matters.
+    title: has ionizable groups
+    domain: ChemicalEntity
+    range: IonizableGroup
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    comments:
+      - "Use this slot for sophisticated modeling where you need to associate specific pKa values with functional groups"
+      - "For simple cases with a single pKa or where group-pKa association is not needed, use pka_ionization_constant"
+      - "This provides backwards compatibility while enabling complex modeling scenarios"
+
+  functional_group_type:
+    description: The type of functional group (e.g., carboxyl, amino, phosphate). Can reference a FunctionalGroup entity or use a standard chemical group identifier.
+    title: functional group type
+    range: string
+    comments:
+      - "Examples: 'carboxyl', 'amino', 'phosphate', 'hydroxyl'"
+      - "Can use CHEBI identifiers for functional groups (e.g., CHEBI:46883 for carboxyl)"
+
+  pka_value:
+    description: The pKa value for this specific ionizable group instance.
+    title: pKa value
+    range: float
+    required: true
+    comments:
+      - "This is the primary pKa value for this ionizable group"
+      - "Measured under conditions specified by pka_temperature, pka_ionic_strength, etc. at the molecule level"
+
+  group_position:
+    description: Optional position or location identifier for this functional group within the molecule. Useful for distinguishing between multiple identical groups.
+    title: group position
+    range: string
+    comments:
+      - "Examples: 'C2', 'N-terminal', 'alpha', 'position 1', 'proximal'"
+      - "Use IUPAC nomenclature conventions where applicable"
+
+  group_description:
+    description: Optional human-readable description to distinguish this ionizable group from others in the molecule.
+    title: group description
+    range: string
+    comments:
+      - "Examples: 'central carboxyl', 'primary amino group', 'most acidic carboxyl'"
+      - "Useful when position notation alone is insufficient"
+
   chemical_representation:
     aliases:
     - has chemical encoding

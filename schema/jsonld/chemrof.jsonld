@@ -862,6 +862,123 @@
       ]
     },
     {
+      "name": "ReactionTypeEnum",
+      "definition_uri": "https://w3id.org/chemrof/ReactionTypeEnum",
+      "description": "Classification of chemical reactions based on mechanistic and functional categories",
+      "title": "reaction_type_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "functional_group_interconversion",
+          "description": "Conversion of one functional group to another without changing the carbon skeleton",
+          "meaning": "RXNO:0000057"
+        },
+        {
+          "text": "bond_formation",
+          "description": "Reactions that create new bonds between atoms or groups"
+        },
+        {
+          "text": "bond_breaking",
+          "description": "Reactions that break existing bonds to form fragments or rearrange structures"
+        },
+        {
+          "text": "oxidation",
+          "description": "A functional group modification reaction where a functional group is oxidised",
+          "meaning": "RXNO:0000012",
+          "is_a": "functional_group_interconversion"
+        },
+        {
+          "text": "reduction",
+          "description": "A functional group modification reaction where a functional group is reduced",
+          "meaning": "RXNO:0000037",
+          "is_a": "functional_group_interconversion"
+        },
+        {
+          "text": "acylation",
+          "description": "Formation of an acyl group bond, typically involving carboxylic acid derivatives",
+          "meaning": "RXNO:0000016",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "carbon_carbon_bond_formation",
+          "description": "Reactions that form new carbon-carbon bonds",
+          "meaning": "RXNO:0000018",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "heteroatom_alkylation_arylation",
+          "description": "Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur",
+          "meaning": "RXNO:0000019",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "addition",
+          "description": "Reactions that add atoms or groups across multiple bonds",
+          "meaning": "RXNO:0000041",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "cyclization",
+          "description": "Formation of cyclic structures from linear precursors",
+          "meaning": "RXNO:0000005",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "condensation",
+          "description": "A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule",
+          "meaning": "MOP:0000627",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "elimination",
+          "description": "A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring",
+          "meaning": "RXNO:0000656",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "ring_opening",
+          "description": "Cleavage of cyclic structures to form linear products",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "hydrolysis",
+          "description": "A solvolysis reaction where the solvent material is water",
+          "meaning": "RXNO:0000619",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "substitution",
+          "description": "A reaction step where one atom or group is replaced with another",
+          "meaning": "RXNO:0000331"
+        },
+        {
+          "text": "isomerization",
+          "description": "Rearrangement reactions that convert one isomer to another",
+          "meaning": "RXNO:0000025"
+        },
+        {
+          "text": "functional_group_addition",
+          "description": "Addition of functional groups to unsaturated bonds or reactive centers"
+        },
+        {
+          "text": "aromatic_heterocycle_formation",
+          "description": "Formation of aromatic rings containing heteroatoms"
+        },
+        {
+          "text": "protection",
+          "description": "Introduction of protecting groups to temporarily mask reactive functionalities"
+        },
+        {
+          "text": "deprotection",
+          "description": "Removal of protecting groups to restore original functionalities"
+        },
+        {
+          "text": "resolution",
+          "description": "Separation of enantiomers or other stereoisomers"
+        }
+      ]
+    },
+    {
       "name": "SubatomicParticleEnum",
       "definition_uri": "https://w3id.org/chemrof/SubatomicParticleEnum",
       "title": "subatomic_particle_enum",
@@ -2545,6 +2662,102 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "has_ionizable_groups",
+      "definition_uri": "https://w3id.org/chemrof/has_ionizable_groups",
+      "description": "Links a molecule to its ionizable functional groups, each paired with a specific pKa value. This enables detailed modeling of molecules with multiple ionizable groups where the association between group type and pKa value matters.",
+      "title": "has ionizable groups",
+      "comments": [
+        "Use this slot for sophisticated modeling where you need to associate specific pKa values with functional groups",
+        "For simple cases with a single pKa or where group-pKa association is not needed, use pka_ionization_constant",
+        "This provides backwards compatibility while enabling complex modeling scenarios"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/has_ionizable_groups",
+      "owner": "ChemicalEntity",
+      "domain_of": [
+        "ChemicalEntity"
+      ],
+      "range": "IonizableGroup",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "functional_group_type",
+      "definition_uri": "https://w3id.org/chemrof/functional_group_type",
+      "description": "The type of functional group (e.g., carboxyl, amino, phosphate). Can reference a FunctionalGroup entity or use a standard chemical group identifier.",
+      "title": "functional group type",
+      "comments": [
+        "Examples: 'carboxyl', 'amino', 'phosphate', 'hydroxyl'",
+        "Can use CHEBI identifiers for functional groups (e.g., CHEBI:46883 for carboxyl)"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/functional_group_type",
+      "owner": "IonizableGroup",
+      "domain_of": [
+        "IonizableGroup"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pka_value",
+      "definition_uri": "https://w3id.org/chemrof/pka_value",
+      "description": "The pKa value for this specific ionizable group instance.",
+      "title": "pKa value",
+      "comments": [
+        "This is the primary pKa value for this ionizable group",
+        "Measured under conditions specified by pka_temperature, pka_ionic_strength, etc. at the molecule level"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/pka_value",
+      "owner": "IonizableGroup",
+      "domain_of": [
+        "IonizableGroup"
+      ],
+      "range": "float",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "group_position",
+      "definition_uri": "https://w3id.org/chemrof/group_position",
+      "description": "Optional position or location identifier for this functional group within the molecule. Useful for distinguishing between multiple identical groups.",
+      "title": "group position",
+      "comments": [
+        "Examples: 'C2', 'N-terminal', 'alpha', 'position 1', 'proximal'",
+        "Use IUPAC nomenclature conventions where applicable"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/group_position",
+      "owner": "IonizableGroup",
+      "domain_of": [
+        "IonizableGroup"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "group_description",
+      "definition_uri": "https://w3id.org/chemrof/group_description",
+      "description": "Optional human-readable description to distinguish this ionizable group from others in the molecule.",
+      "title": "group description",
+      "comments": [
+        "Examples: 'central carboxyl', 'primary amino group', 'most acidic carboxyl'",
+        "Useful when position notation alone is insufficient"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/group_description",
+      "owner": "IonizableGroup",
+      "domain_of": [
+        "IonizableGroup"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "chemical_representation",
       "definition_uri": "https://w3id.org/chemrof/chemical_representation",
       "title": "chemical representation",
@@ -2792,6 +3005,20 @@
         "Reaction"
       ],
       "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "reaction_type",
+      "definition_uri": "https://w3id.org/chemrof/reaction_type",
+      "description": "Classification of the chemical reaction based on mechanistic and functional categories",
+      "title": "reaction type",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/reaction_type",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "ReactionTypeEnum",
       "@type": "SlotDefinition"
     },
     {
@@ -7212,6 +7439,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of"
       ],
       "slot_usage": {},
@@ -8211,6 +8439,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8244,6 +8473,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8289,6 +8519,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8342,6 +8573,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8374,6 +8606,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8417,6 +8650,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8474,6 +8708,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8520,6 +8755,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8566,6 +8802,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "polymer_of",
@@ -8615,6 +8852,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8665,6 +8903,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -8712,6 +8951,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8744,6 +8984,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8779,6 +9020,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8811,6 +9053,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8848,6 +9091,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8885,6 +9129,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8928,6 +9173,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -8976,6 +9222,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "has_proportional_parts",
@@ -9041,6 +9288,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9082,6 +9330,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9130,6 +9379,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9167,6 +9417,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "has_sequence_representation"
@@ -9200,6 +9451,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "AminoAcidSequenceInterval_has_sequence_representation"
@@ -9233,6 +9485,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -9266,6 +9519,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -9299,6 +9553,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -9332,12 +9587,38 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "FunctionalGroup_is_substitutent_group_from"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/FunctionalGroup",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "IonizableGroup",
+      "definition_uri": "https://w3id.org/chemrof/IonizableGroup",
+      "description": "Represents a specific ionizable functional group instance within a molecule, paired with its pKa value and optional position information. This class enables sophisticated modeling of molecules with multiple ionizable groups.",
+      "title": "ionizable group",
+      "comments": [
+        "Use this class to explicitly associate pKa values with specific functional groups",
+        "For molecules with multiple identical groups, use group_position or group_description to distinguish them",
+        "Example: citric acid has three IonizableGroup instances, each with a carboxyl functional group and distinct pKa values"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "DomainEntity",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "functional_group_type",
+        "pka_value",
+        "group_position",
+        "group_description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/IonizableGroup",
       "@type": "ClassDefinition"
     },
     {
@@ -9366,6 +9647,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9405,6 +9687,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9448,6 +9731,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9497,6 +9781,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9546,6 +9831,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9598,6 +9884,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9650,6 +9937,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9694,6 +9982,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9738,6 +10027,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9793,6 +10083,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9849,6 +10140,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "name",
@@ -9920,6 +10212,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -9967,6 +10260,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10014,6 +10308,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10075,6 +10370,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10131,6 +10427,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10190,6 +10487,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10240,6 +10538,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10281,6 +10580,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10332,6 +10632,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10374,6 +10675,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10424,6 +10726,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -10828,6 +11131,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ChemicalSalt_elemental_charge",
@@ -10871,6 +11175,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10915,6 +11220,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10962,6 +11268,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -11025,6 +11332,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "RacemicMixture_has_left_enantiomer",
@@ -11076,6 +11384,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "has_ionizable_groups",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -11143,6 +11452,7 @@
         "has_reaction_smiles_representation",
         "reaction_rate_coefficient",
         "reaction_rate",
+        "reaction_type",
         "Reaction_left_participants",
         "Reaction_right_participants",
         "Reaction_direction",
@@ -11163,10 +11473,15 @@
       "definition_uri": "https://w3id.org/chemrof/IsomeraseReaction",
       "description": "A reaction that converts a molecule from one isomer to another.",
       "title": "isomerase reaction",
+      "deprecated": "True",
       "todos": [
         "create rules for this"
       ],
+      "comments": [
+        "This class is deprecated. Use the reaction_type slot with value 'isomerization' instead."
+      ],
       "from_schema": "https://w3id.org/chemrof",
+      "deprecated_element_has_exact_replacement": "reaction_type",
       "is_a": "Reaction",
       "slots": [
         "id",
@@ -11176,6 +11491,7 @@
         "has_reaction_smiles_representation",
         "reaction_rate_coefficient",
         "reaction_rate",
+        "reaction_type",
         "Reaction_left_participants",
         "Reaction_right_participants",
         "Reaction_direction",
@@ -11370,9 +11686,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-08-21T00:24:19",
-  "source_file_size": 113726,
-  "generation_date": "2025-08-21T00:24:30",
+  "source_file_date": "2025-10-29T04:08:07",
+  "source_file_size": 120801,
+  "generation_date": "2025-10-29T04:08:19",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

@@ -798,6 +798,71 @@
 --     * Slot: type Description: 
 --     * Slot: has_chemical_role_id Description: 
 --     * Slot: owl_subclass_of_id Description: Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)
+-- # Class: "IonizableGroup" Description: "Represents a specific ionizable functional group instance within a molecule, paired with its pKa value and optional position information. This class enables sophisticated modeling of molecules with multiple ionizable groups."
+--     * Slot: functional_group_type Description: The type of functional group (e.g., carboxyl, amino, phosphate). Can reference a FunctionalGroup entity or use a standard chemical group identifier.
+--     * Slot: pka_value Description: The pKa value for this specific ionizable group instance.
+--     * Slot: group_position Description: Optional position or location identifier for this functional group within the molecule. Useful for distinguishing between multiple identical groups.
+--     * Slot: group_description Description: Optional human-readable description to distinguish this ionizable group from others in the molecule.
+--     * Slot: id Description: 
+--     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
+--     * Slot: type Description: 
+--     * Slot: ChemicalEntity_id Description: Autocreated FK slot
+--     * Slot: PolyatomicEntity_id Description: Autocreated FK slot
+--     * Slot: SmallMolecule_id Description: Autocreated FK slot
+--     * Slot: Macromolecule_id Description: Autocreated FK slot
+--     * Slot: MolecularComplex_id Description: Autocreated FK slot
+--     * Slot: Peptide_id Description: Autocreated FK slot
+--     * Slot: Protein_id Description: Autocreated FK slot
+--     * Slot: Glycan_id Description: Autocreated FK slot
+--     * Slot: MonomolecularPolymer_id Description: Autocreated FK slot
+--     * Slot: SupramolecularPolymer_id Description: Autocreated FK slot
+--     * Slot: Copolymer_id Description: Autocreated FK slot
+--     * Slot: Homopolymer_id Description: Autocreated FK slot
+--     * Slot: MolecularComponent_id Description: Autocreated FK slot
+--     * Slot: PolymerPart_id Description: Autocreated FK slot
+--     * Slot: Monomer_id Description: Autocreated FK slot
+--     * Slot: MolecularSubsequence_id Description: Autocreated FK slot
+--     * Slot: ChemicalGroup_id Description: Autocreated FK slot
+--     * Slot: ChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: PreciseChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: ImpreciseChemicalMixture_id Description: Autocreated FK slot
+--     * Slot: Molecule_id Description: Autocreated FK slot
+--     * Slot: NaturalProduct_id Description: Autocreated FK slot
+--     * Slot: Moiety_id Description: Autocreated FK slot
+--     * Slot: SequenceInterval_id Description: Autocreated FK slot
+--     * Slot: AminoAcidSequenceInterval_id Description: Autocreated FK slot
+--     * Slot: NucleotideSequenceInterval_id Description: Autocreated FK slot
+--     * Slot: DNASequenceInterval_id Description: Autocreated FK slot
+--     * Slot: RNASequenceInterval_id Description: Autocreated FK slot
+--     * Slot: FunctionalGroup_id Description: Autocreated FK slot
+--     * Slot: MolecularSpecies_id Description: Autocreated FK slot
+--     * Slot: NonSpeciesMolecule_id Description: Autocreated FK slot
+--     * Slot: MoleculeByChargeState_id Description: Autocreated FK slot
+--     * Slot: PolyatomicIon_id Description: Autocreated FK slot
+--     * Slot: MolecularCation_id Description: Autocreated FK slot
+--     * Slot: MolecularAnion_id Description: Autocreated FK slot
+--     * Slot: NetUnchargedMolecule_id Description: Autocreated FK slot
+--     * Slot: Zwitterion_id Description: Autocreated FK slot
+--     * Slot: NeutralMolecule_id Description: Autocreated FK slot
+--     * Slot: Atom_id Description: Autocreated FK slot
+--     * Slot: ChemicalElement_id Description: Autocreated FK slot
+--     * Slot: UnchargedAtom_id Description: Autocreated FK slot
+--     * Slot: Nuclide_id Description: Autocreated FK slot
+--     * Slot: Radionuclide_id Description: Autocreated FK slot
+--     * Slot: Isotope_id Description: Autocreated FK slot
+--     * Slot: Isobar_id Description: Autocreated FK slot
+--     * Slot: AtomIonicForm_id Description: Autocreated FK slot
+--     * Slot: MonoatomicIon_id Description: Autocreated FK slot
+--     * Slot: AtomAnion_id Description: Autocreated FK slot
+--     * Slot: AtomCation_id Description: Autocreated FK slot
+--     * Slot: PartiallySpecifiedAtom_id Description: Autocreated FK slot
+--     * Slot: FullySpecifiedAtom_id Description: Autocreated FK slot
+--     * Slot: ChemicalSalt_id Description: Autocreated FK slot
+--     * Slot: Ester_id Description: Autocreated FK slot
+--     * Slot: Stereoisomer_id Description: Autocreated FK slot
+--     * Slot: Enantiomer_id Description: Autocreated FK slot
+--     * Slot: RacemicMixture_id Description: Autocreated FK slot
+--     * Slot: Allotrope_id Description: Autocreated FK slot
 -- # Class: "MolecularSpecies" Description: "A molecule in which the units are identical. Example: methyl"
 --     * Slot: is_organic Description: An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
 --     * Slot: inchi_atom_connections_sublayer Description: The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.
@@ -1506,6 +1571,7 @@
 --     * Slot: has_reaction_smiles_representation Description: 
 --     * Slot: reaction_rate_coefficient Description: a proportionality constant that relates the reaction rate to reactant concentrations.
 --     * Slot: reaction_rate Description: the overall speed of a reaction, typically measured in concentration change per unit time
+--     * Slot: reaction_type Description: Classification of the chemical reaction based on mechanistic and functional categories
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -1514,6 +1580,7 @@
 --     * Slot: has_reaction_smiles_representation Description: 
 --     * Slot: reaction_rate_coefficient Description: a proportionality constant that relates the reaction rate to reactant concentrations.
 --     * Slot: reaction_rate Description: the overall speed of a reaction, typically measured in concentration change per unit time
+--     * Slot: reaction_type Description: Classification of the chemical reaction based on mechanistic and functional categories
 --     * Slot: id Description: 
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type Description: 
@@ -2297,6 +2364,7 @@ CREATE TABLE "Reaction" (
 	has_reaction_smiles_representation TEXT, 
 	reaction_rate_coefficient FLOAT, 
 	reaction_rate FLOAT, 
+	reaction_type VARCHAR(32), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -2307,6 +2375,7 @@ CREATE TABLE "IsomeraseReaction" (
 	has_reaction_smiles_representation TEXT, 
 	reaction_rate_coefficient FLOAT, 
 	reaction_rate FLOAT, 
+	reaction_type VARCHAR(32), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
@@ -5450,6 +5519,130 @@ CREATE TABLE "AtomCation_pka_ionization_constant" (
 	pka_ionization_constant FLOAT, 
 	PRIMARY KEY ("AtomCation_id", pka_ionization_constant), 
 	FOREIGN KEY("AtomCation_id") REFERENCES "AtomCation" (id)
+);
+CREATE TABLE "IonizableGroup" (
+	functional_group_type TEXT, 
+	pka_value FLOAT NOT NULL, 
+	group_position TEXT, 
+	group_description TEXT, 
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	"ChemicalEntity_id" TEXT, 
+	"PolyatomicEntity_id" TEXT, 
+	"SmallMolecule_id" TEXT, 
+	"Macromolecule_id" TEXT, 
+	"MolecularComplex_id" TEXT, 
+	"Peptide_id" TEXT, 
+	"Protein_id" TEXT, 
+	"Glycan_id" TEXT, 
+	"MonomolecularPolymer_id" TEXT, 
+	"SupramolecularPolymer_id" TEXT, 
+	"Copolymer_id" TEXT, 
+	"Homopolymer_id" TEXT, 
+	"MolecularComponent_id" TEXT, 
+	"PolymerPart_id" TEXT, 
+	"Monomer_id" TEXT, 
+	"MolecularSubsequence_id" TEXT, 
+	"ChemicalGroup_id" TEXT, 
+	"ChemicalMixture_id" TEXT, 
+	"PreciseChemicalMixture_id" TEXT, 
+	"ImpreciseChemicalMixture_id" TEXT, 
+	"Molecule_id" TEXT, 
+	"NaturalProduct_id" TEXT, 
+	"Moiety_id" TEXT, 
+	"SequenceInterval_id" TEXT, 
+	"AminoAcidSequenceInterval_id" TEXT, 
+	"NucleotideSequenceInterval_id" TEXT, 
+	"DNASequenceInterval_id" TEXT, 
+	"RNASequenceInterval_id" TEXT, 
+	"FunctionalGroup_id" TEXT, 
+	"MolecularSpecies_id" TEXT, 
+	"NonSpeciesMolecule_id" TEXT, 
+	"MoleculeByChargeState_id" TEXT, 
+	"PolyatomicIon_id" TEXT, 
+	"MolecularCation_id" TEXT, 
+	"MolecularAnion_id" TEXT, 
+	"NetUnchargedMolecule_id" TEXT, 
+	"Zwitterion_id" TEXT, 
+	"NeutralMolecule_id" TEXT, 
+	"Atom_id" TEXT, 
+	"ChemicalElement_id" TEXT, 
+	"UnchargedAtom_id" TEXT, 
+	"Nuclide_id" TEXT, 
+	"Radionuclide_id" TEXT, 
+	"Isotope_id" TEXT, 
+	"Isobar_id" TEXT, 
+	"AtomIonicForm_id" TEXT, 
+	"MonoatomicIon_id" TEXT, 
+	"AtomAnion_id" TEXT, 
+	"AtomCation_id" TEXT, 
+	"PartiallySpecifiedAtom_id" TEXT, 
+	"FullySpecifiedAtom_id" TEXT, 
+	"ChemicalSalt_id" TEXT, 
+	"Ester_id" TEXT, 
+	"Stereoisomer_id" TEXT, 
+	"Enantiomer_id" TEXT, 
+	"RacemicMixture_id" TEXT, 
+	"Allotrope_id" TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id), 
+	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id), 
+	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id), 
+	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id), 
+	FOREIGN KEY("MolecularComplex_id") REFERENCES "MolecularComplex" (id), 
+	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id), 
+	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id), 
+	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id), 
+	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id), 
+	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id), 
+	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id), 
+	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id), 
+	FOREIGN KEY("MolecularComponent_id") REFERENCES "MolecularComponent" (id), 
+	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id), 
+	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id), 
+	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id), 
+	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id), 
+	FOREIGN KEY("ChemicalMixture_id") REFERENCES "ChemicalMixture" (id), 
+	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id), 
+	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id), 
+	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id), 
+	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id), 
+	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id), 
+	FOREIGN KEY("SequenceInterval_id") REFERENCES "SequenceInterval" (id), 
+	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id), 
+	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id), 
+	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id), 
+	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id), 
+	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id), 
+	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id), 
+	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id), 
+	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id), 
+	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id), 
+	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id), 
+	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id), 
+	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id), 
+	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id), 
+	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id), 
+	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id), 
+	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id), 
+	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id), 
+	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id), 
+	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id), 
+	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id), 
+	FOREIGN KEY("Isobar_id") REFERENCES "Isobar" (id), 
+	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id), 
+	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id), 
+	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id), 
+	FOREIGN KEY("AtomCation_id") REFERENCES "AtomCation" (id), 
+	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id), 
+	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id), 
+	FOREIGN KEY("ChemicalSalt_id") REFERENCES "ChemicalSalt" (id), 
+	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id), 
+	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id), 
+	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id), 
+	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id), 
+	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id)
 );
 CREATE TABLE "AtomicBond" (
 	id INTEGER NOT NULL, 
