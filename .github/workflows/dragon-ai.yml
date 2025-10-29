@@ -21,7 +21,11 @@ jobs:
       result: ${{ steps.check.outputs.result }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        # this seems to be necessary to ensure actions uses the latest; see
+        # https://github.com/actions/checkout/issues/439
+        with:
+          ref: ${{ github.ref }}
         
       - name: Check for qualifying mention
         id: check
@@ -97,9 +101,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: ${{ github.ref }}
           token: ${{ secrets.PAT_FOR_PR }}  # Use PAT for checkout to allow committing later
 
       - name: Configure Git
@@ -119,22 +123,12 @@ jobs:
         run: |
           npm install -g @anthropic-ai/claude-code
 
-
-      - name: Set up environment
+      
+      - name: Add tools to PATH
         run: |
-          echo "BRANCH_NAME=dragon_ai_agent_${{ fromJSON(needs.check-mention.outputs.result).itemNumber }}" >> $GITHUB_ENV
-          # Safely write prompt to file
-          mkdir -p /tmp/claude-input
-          echo "${{ fromJSON(needs.check-mention.outputs.result).prompt }}" > /tmp/claude-input/prompt.txt
-          
-      - name: Set up Anthropic API key and GitHub token
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GH_TOKEN: ${{ secrets.PAT_FOR_PR }}  # Kept PAT as requested
-        run: |
-          echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> $GITHUB_ENV
-          echo "GH_TOKEN=$GH_TOKEN" >> $GITHUB_ENV
-          echo "LOGFIRE_SEND_TO_LOGFIRE=false" >> $GITHUB_ENV
+          echo "${{ env.TOOLS_DIR }}" >> $GITHUB_PATH
+          ls -alt ${{ github.workspace }}
+          ls -alt ${{ env.TOOLS_DIR }}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
@@ -143,8 +137,18 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-        
+
+      - name: Set up environment
+        run: |
+          # Safely write prompt to file
+          mkdir -p /tmp/claude-input
+          echo "${{ fromJSON(needs.check-mention.outputs.result).prompt }}" > /tmp/claude-input/prompt.txt
+
       - name: Create structured Claude prompt
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.PAT_FOR_PR }} 
         run: |
           cat > /tmp/claude-input/claude_prompt.txt << EOL
           You are @dragon-ai-agent.
@@ -171,13 +175,16 @@ jobs:
       
       - name: Run Claude Code in headless mode
         id: claude-response
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Python env
-          source .venv/bin/activate
+
+          export PATH="${{ env.TOOLS_DIR }}:$PATH"
 
           # Run Claude with proper permissions
           claude -p "$(cat /tmp/claude-input/claude_prompt.txt)" \
+            --permission-mode bypassPermissions \
             --output-format stream-json \
-            --allowedTools "Bash(git:*)" "Bash(gh:*)" "FileSystem(*)" \
             --verbose 
           
