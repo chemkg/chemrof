@@ -1,153 +1,36 @@
-## SmallMolecule-glucose
+## AtomCation-sodium
 ### Input
 ```yaml
-has_atoms:
-- C
-- C
-- C
-- C
-- C
-- C
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- O
-- O
-- O
-- O
-- O
-- O
-id: CHEBI:17234
-is_organic: true
-name: glucose
-type: chemrof:SmallMolecule
-
-```
-## SubatomicParticle-proton
-### Input
-```yaml
-id: CHEBI:24636
-name: proton
-subatomic_particle_type: proton
-type: chemrof:SubatomicParticle
-
-```
-## AtomCation-helium2
-### Input
-```yaml
-atomic_number: 2
-elemental_charge: 2
-id: CHEBI:33316
-name: helium(2+)
-symbol: He
+elemental_charge: 1
+has_element: Na
+id: CHEBI:29101
+name: sodium (1+)
 type: chemrof:AtomCation
 
 ```
-## PolyatomicIon-ammonium
+## Isotope-protium
 ### Input
 ```yaml
-conjugate_base_of: CHEBI:16134
-empirical_formula: NH+4
-has_atom_occurrences:
-- name: ammonium-n
-  occurrence_of: N
-- name: ammonium-h1
-  occurrence_of: H
-- name: ammonium-h2
-  occurrence_of: H
-- name: ammonium-h3
-  occurrence_of: H
-- name: ammonium-h4
-  occurrence_of: H
-has_bonds:
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h1
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h2
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h3
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h4
-  subject: ammonium-n
-id: CHEBI:28938
-name: ammonium
-smiles_string: '[NH4+]'
-type: chemrof:PolyatomicIon
+atomic_number: 1
+has_element: H
+id: CHEBI:29236
+isotope_of: CHEBI:49637
+name: protium atom
+neutron_number: 0
+symbol: H
+type: chemrof:Isotope
 
 ```
-## FunctionalGroup-hydroxyl
+## Macromolecule-polyethylene
 ### Input
 ```yaml
-empirical_formula: OH
-id: CHEBI:43176
-name: hydroxy group
-type: chemrof:FunctionalGroup
-
-```
-## Molecule-dioxygen
-### Input
-```yaml
-empirical_formula: O2
-has_atom_occurrences:
-- name: dioxygen-o1
-  occurrence_of: O
-- name: dioxygen-o2
-  occurrence_of: O
-has_atoms:
-- O
-- O
-has_bonds:
-- bond_order: 2
-  bond_type: covalent
-  object: dioxygen-o2
-  subject: dioxygen-o1
-id: CHEBI:15379
-is_organic: false
-name: dioxygen
-smiles_string: O=O
-type: chemrof:Molecule
-
-```
-## Ester-ethyl_acetate
-### Input
-```yaml
-empirical_formula: C4H8O2
-has_atoms:
-- C
-- C
-- C
-- C
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- O
-- O
-id: CHEBI:27750
+empirical_formula: C2H4
+has_submolecules:
+- ethylene
+id: CHEBI:60034
 is_organic: true
-name: ethyl acetate
-smiles_string: CC(=O)OCC
-type: chemrof:Ester
+name: polyethylene polymer
+type: chemrof:Macromolecule
 
 ```
 ## AtomAnion-chloride
@@ -159,240 +42,6 @@ id: CHEBI:17996
 name: chloride
 symbol: Cl
 type: chemrof:AtomAnion
-
-```
-## NeutralMolecule-water
-### Input
-```yaml
-elemental_charge: 0
-has_atoms:
-- H
-- H
-- O
-id: CHEBI:15377
-is_organic: false
-name: water
-type: chemrof:NeutralMolecule
-
-```
-## Protein-insulin
-### Input
-```yaml
-empirical_formula: C257H383N65O77S6
-id: UniProtKB:P01308
-is_organic: true
-name: insulin
-type: chemrof:Protein
-
-```
-## MolecularAnion-acetate
-### Input
-```yaml
-elemental_charge: -1
-empirical_formula: C2H3O2
-has_atom_occurrences:
-- name: acetate-c1
-  occurrence_of: C
-- name: acetate-c2
-  occurrence_of: C
-- name: acetate-h1
-  occurrence_of: H
-- name: acetate-h2
-  occurrence_of: H
-- name: acetate-h3
-  occurrence_of: H
-- name: acetate-o1
-  occurrence_of: O
-- name: acetate-o2
-  occurrence_of: O
-has_atoms:
-- C
-- C
-- H
-- H
-- H
-- O
-- O
-has_bonds:
-- bond_order: 1
-  bond_type: covalent
-  object: acetate-h1
-  subject: acetate-c1
-- bond_order: 1
-  bond_type: covalent
-  object: acetate-h2
-  subject: acetate-c1
-- bond_order: 1
-  bond_type: covalent
-  object: acetate-h3
-  subject: acetate-c1
-- bond_order: 1
-  bond_type: covalent
-  object: acetate-c2
-  subject: acetate-c1
-- bond_order: 2
-  bond_type: covalent
-  object: acetate-o1
-  subject: acetate-c2
-- bond_order: 1
-  bond_type: covalent
-  object: acetate-o2
-  subject: acetate-c2
-id: CHEBI:30089
-is_organic: true
-name: acetate
-smiles_string: CC(=O)[O-]
-type: chemrof:MolecularAnion
-
-```
-## MonoatomicIon-copper2
-### Input
-```yaml
-elemental_charge: 2
-has_element: Cu
-id: CHEBI:29036
-name: copper(2+)
-type: chemrof:MonoatomicIon
-
-```
-## IsomeraseReaction-glucose_isomerase
-### Input
-```yaml
-id: RHEA:28549
-name: glucose isomerase reaction
-type: chemrof:IsomeraseReaction
-
-```
-## Molecule-water
-### Input
-```yaml
-empirical_formula: H2O
-has_atom_occurrences:
-- name: water-o1
-  occurrence_of: O
-- name: water-h1
-  occurrence_of: H
-- name: water-h2
-  occurrence_of: H
-has_atoms:
-- H
-- H
-- O
-has_bonds:
-- bond_order: 1
-  bond_type: polar covalent
-  object: water-h1
-  subject: water-o1
-- bond_order: 1
-  bond_type: polar covalent
-  object: water-h2
-  subject: water-o1
-id: CHEBI:15377
-is_organic: false
-name: water
-smiles_string: O
-type: chemrof:Molecule
-
-```
-## AtomAnion-fluoride
-### Input
-```yaml
-elemental_charge: -1
-has_element: F
-id: CHEBI:17051
-name: fluoride
-type: chemrof:AtomAnion
-
-```
-## ChemicalElement-carbon
-### Input
-```yaml
-atomic_number: 6
-id: CHEBI:27594
-inchi_string: InChI=1S/C
-name: carbon
-smiles_string: '[C]'
-symbol: C
-
-```
-## ChemicalSalt-sodium_carbonate
-### Input
-```yaml
-empirical_formula: Na2CO3
-id: CHEBI:29377
-name: sodium carbonate
-type: chemrof:ChemicalSalt
-
-```
-## SubatomicParticle-neutron
-### Input
-```yaml
-id: CHEBI:30222
-name: neutron
-subatomic_particle_type: neutron
-type: chemrof:SubatomicParticle
-
-```
-## Collection-nitrites
-### Input
-```yaml
-entities:
-- empirical_formula: "NO\u22122"
-  has_atom_occurrences:
-  - name: _:nitrite-o1
-    occurrence_of: oxygen
-  - name: _:nitrite-o2
-    occurrence_of: oxygen
-  - name: _:nitrite-n1
-    occurrence_of: nitrogen
-  has_bonds:
-  - bond_order: 2
-    bond_type: sigma
-    object: _:nitrite-n1
-    subject: _:nitrite-o1
-  - bond_order: 1
-    bond_type: sigma
-    object: _:nitrite-n1
-    subject: _:nitrite-o2
-  id: CHEBI:16301
-  molecular_mass: 46.005
-  name: nitrite
-  smiles_string: N(=O)[O-]
-  type: chemrof:PolyatomicIon
-- empirical_formula: HNO2
-  has_atom_occurrences:
-  - name: _:nitrous_acid-o1
-    occurrence_of: oxygen
-  - name: _:nitrous_acid-o2
-    occurrence_of: oxygen
-  - name: _:nitrous_acid-n1
-    occurrence_of: nitrogen
-  - name: _:nitrous_acid-h1
-    occurrence_of: hydrogen
-  has_bonds:
-  - bond_order: 2
-    object: _:nitrous_acid-n1
-    subject: _:nitrous_acid-o1
-  - bond_order: 1
-    object: _:nitrous_acid-n1
-    subject: _:nitrous_acid-o2
-  - bond_order: 1
-    object: _:nitrous_acid-h1
-    subject: _:nitrous_acid-o2
-  id: CHEBI:25567
-  molecular_mass: 47.013
-  name: nitrous acid
-  smiles_string: N(=O)O
-  type: chemrof:PolyatomicIon
-
-```
-## SubatomicParticle-electron
-### Input
-```yaml
-id: CHEBI:10545
-name: electron
-subatomic_particle_type: electron
-type: chemrof:SubatomicParticle
 
 ```
 ## MolecularCation-methylammonium
@@ -462,6 +111,332 @@ smiles_string: C[NH3+]
 type: chemrof:MolecularCation
 
 ```
+## AtomAnion-fluoride
+### Input
+```yaml
+elemental_charge: -1
+has_element: F
+id: CHEBI:17051
+name: fluoride
+type: chemrof:AtomAnion
+
+```
+## IsomeraseReaction-glucose_isomerase
+### Input
+```yaml
+id: RHEA:28549
+name: glucose isomerase reaction
+type: chemrof:IsomeraseReaction
+
+```
+## SubatomicParticle-proton
+### Input
+```yaml
+id: CHEBI:24636
+name: proton
+subatomic_particle_type: proton
+type: chemrof:SubatomicParticle
+
+```
+## MolecularAnion-acetate
+### Input
+```yaml
+elemental_charge: -1
+empirical_formula: C2H3O2
+has_atom_occurrences:
+- name: acetate-c1
+  occurrence_of: C
+- name: acetate-c2
+  occurrence_of: C
+- name: acetate-h1
+  occurrence_of: H
+- name: acetate-h2
+  occurrence_of: H
+- name: acetate-h3
+  occurrence_of: H
+- name: acetate-o1
+  occurrence_of: O
+- name: acetate-o2
+  occurrence_of: O
+has_atoms:
+- C
+- C
+- H
+- H
+- H
+- O
+- O
+has_bonds:
+- bond_order: 1
+  bond_type: covalent
+  object: acetate-h1
+  subject: acetate-c1
+- bond_order: 1
+  bond_type: covalent
+  object: acetate-h2
+  subject: acetate-c1
+- bond_order: 1
+  bond_type: covalent
+  object: acetate-h3
+  subject: acetate-c1
+- bond_order: 1
+  bond_type: covalent
+  object: acetate-c2
+  subject: acetate-c1
+- bond_order: 2
+  bond_type: covalent
+  object: acetate-o1
+  subject: acetate-c2
+- bond_order: 1
+  bond_type: covalent
+  object: acetate-o2
+  subject: acetate-c2
+id: CHEBI:30089
+is_organic: true
+name: acetate
+smiles_string: CC(=O)[O-]
+type: chemrof:MolecularAnion
+
+```
+## NeutralMolecule-water
+### Input
+```yaml
+elemental_charge: 0
+has_atoms:
+- H
+- H
+- O
+id: CHEBI:15377
+is_organic: false
+name: water
+type: chemrof:NeutralMolecule
+
+```
+## ChemicalElement-carbon
+### Input
+```yaml
+atomic_number: 6
+id: CHEBI:27594
+inchi_string: InChI=1S/C
+name: carbon
+smiles_string: '[C]'
+symbol: C
+
+```
+## Molecule-dioxygen
+### Input
+```yaml
+empirical_formula: O2
+has_atom_occurrences:
+- name: dioxygen-o1
+  occurrence_of: O
+- name: dioxygen-o2
+  occurrence_of: O
+has_atoms:
+- O
+- O
+has_bonds:
+- bond_order: 2
+  bond_type: covalent
+  object: dioxygen-o2
+  subject: dioxygen-o1
+id: CHEBI:15379
+is_organic: false
+name: dioxygen
+smiles_string: O=O
+type: chemrof:Molecule
+
+```
+## PolyatomicIon-ammonium
+### Input
+```yaml
+conjugate_base_of: CHEBI:16134
+empirical_formula: NH+4
+has_atom_occurrences:
+- name: ammonium-n
+  occurrence_of: N
+- name: ammonium-h1
+  occurrence_of: H
+- name: ammonium-h2
+  occurrence_of: H
+- name: ammonium-h3
+  occurrence_of: H
+- name: ammonium-h4
+  occurrence_of: H
+has_bonds:
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h1
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h2
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h3
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h4
+  subject: ammonium-n
+id: CHEBI:28938
+name: ammonium
+smiles_string: '[NH4+]'
+type: chemrof:PolyatomicIon
+
+```
+## Molecule-citric_acid_with_ionizable_groups
+### Input
+```yaml
+empirical_formula: C6H8O7
+has_ionizable_groups:
+- functional_group_type: carboxyl
+  group_description: most acidic carboxyl (C-3 position, central)
+  id: CHEBI:30769-ionizable-1
+  pka_value: 3.13
+- functional_group_type: carboxyl
+  group_description: second carboxyl (C-1 position)
+  id: CHEBI:30769-ionizable-2
+  pka_value: 4.76
+- functional_group_type: carboxyl
+  group_description: least acidic carboxyl (C-5 position)
+  id: CHEBI:30769-ionizable-3
+  pka_value: 6.4
+id: CHEBI:30769
+inchi_string: InChI=1S/C6H8O7/c7-3(8)1-6(13,5(11)12)2-4(9)10/h13H,1-2H2,(H,7,8)(H,9,10)(H,11,12)
+molecular_mass: 192.124
+name: citric acid
+pka_ionic_strength: 0.0
+pka_pressure: 1.0
+pka_solvent: water
+pka_temperature: 25.0
+smiles_string: OC(=O)CC(O)(C(=O)O)CC(=O)O
+type: chemrof:Molecule
+
+```
+## SmallMolecule-glucose
+### Input
+```yaml
+has_atoms:
+- C
+- C
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- O
+- O
+- O
+- O
+- O
+- O
+id: CHEBI:17234
+is_organic: true
+name: glucose
+type: chemrof:SmallMolecule
+
+```
+## Collection-nitrites
+### Input
+```yaml
+entities:
+- empirical_formula: "NO\u22122"
+  has_atom_occurrences:
+  - name: _:nitrite-o1
+    occurrence_of: oxygen
+  - name: _:nitrite-o2
+    occurrence_of: oxygen
+  - name: _:nitrite-n1
+    occurrence_of: nitrogen
+  has_bonds:
+  - bond_order: 2
+    bond_type: sigma
+    object: _:nitrite-n1
+    subject: _:nitrite-o1
+  - bond_order: 1
+    bond_type: sigma
+    object: _:nitrite-n1
+    subject: _:nitrite-o2
+  id: CHEBI:16301
+  molecular_mass: 46.005
+  name: nitrite
+  smiles_string: N(=O)[O-]
+  type: chemrof:PolyatomicIon
+- empirical_formula: HNO2
+  has_atom_occurrences:
+  - name: _:nitrous_acid-o1
+    occurrence_of: oxygen
+  - name: _:nitrous_acid-o2
+    occurrence_of: oxygen
+  - name: _:nitrous_acid-n1
+    occurrence_of: nitrogen
+  - name: _:nitrous_acid-h1
+    occurrence_of: hydrogen
+  has_bonds:
+  - bond_order: 2
+    object: _:nitrous_acid-n1
+    subject: _:nitrous_acid-o1
+  - bond_order: 1
+    object: _:nitrous_acid-n1
+    subject: _:nitrous_acid-o2
+  - bond_order: 1
+    object: _:nitrous_acid-h1
+    subject: _:nitrous_acid-o2
+  id: CHEBI:25567
+  molecular_mass: 47.013
+  name: nitrous acid
+  smiles_string: N(=O)O
+  type: chemrof:PolyatomicIon
+
+```
+## SmallMolecule-glutamic_acid_with_ionizable_groups
+### Input
+```yaml
+empirical_formula: C5H9NO4
+has_ionizable_groups:
+- functional_group_type: carboxyl
+  group_description: alpha-carboxyl (most acidic)
+  id: CHEBI:16015-ionizable-1
+  pka_value: 2.1
+- functional_group_type: carboxyl
+  group_description: gamma-carboxyl (side chain)
+  id: CHEBI:16015-ionizable-2
+  pka_value: 4.07
+- functional_group_type: amino
+  group_description: alpha-amino group
+  id: CHEBI:16015-ionizable-3
+  pka_value: 9.47
+id: CHEBI:16015
+molecular_mass: 147.13
+name: L-glutamic acid
+pka_solvent: water
+pka_temperature: 25.0
+smiles_string: C(CC(=O)O)C(C(=O)O)N
+type: chemrof:SmallMolecule
+
+```
+## SubatomicParticle-electron
+### Input
+```yaml
+id: CHEBI:10545
+name: electron
+subatomic_particle_type: electron
+type: chemrof:SubatomicParticle
+
+```
 ## FunctionalGroup-carboxyl
 ### Input
 ```yaml
@@ -471,41 +446,39 @@ name: carboxy group
 type: chemrof:FunctionalGroup
 
 ```
-## ChemicalElement-berkelium
+## FunctionalGroup-hydroxyl
 ### Input
 ```yaml
-atomic_number: 97
-id: CHEBI:33391
-inchi_string: InChI=1S/Bk
-name: berkelium
-smiles_string: '[Bk]'
-symbol: Bk
+empirical_formula: OH
+id: CHEBI:43176
+name: hydroxy group
+type: chemrof:FunctionalGroup
 
 ```
-## Isotope-deuterium
+## AtomCation-helium2
 ### Input
 ```yaml
-atomic_number: 1
-has_element: H
-id: CHEBI:29237
-isotope_of: CHEBI:49637
-name: deuterium atom
-neutron_number: 1
-symbol: H
-type: chemrof:Isotope
+atomic_number: 2
+elemental_charge: 2
+id: CHEBI:33316
+name: helium(2+)
+symbol: He
+type: chemrof:AtomCation
 
 ```
-## SmallMolecule-glucose-with-solubility
+## SmallMolecule-acetic-acid-with-pka
 ### Input
 ```yaml
-IUPAC_name: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal
-empirical_formula: CH2O
-id: CHEBI:17234
-molecular_mass: 180.16
-name: glucose
-smiles_string: C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O
+IUPAC_name: acetic acid
+empirical_formula: C2H4O2
+id: CHEBI:15365
+molecular_mass: 60.05
+name: acetic acid
+pka_ionization_constant:
+- 4.74
+smiles_string: CC(=O)O
 type: chemrof:SmallMolecule
-water_solubility: 909.0
+water_solubility: 1000000.0
 
 ```
 ## NaturalProduct-caffeine
@@ -547,21 +520,6 @@ type: chemrof:NaturalProduct
 water_solubility: 20.0
 
 ```
-## SmallMolecule-acetic-acid-with-pka
-### Input
-```yaml
-IUPAC_name: acetic acid
-empirical_formula: C2H4O2
-id: CHEBI:15365
-molecular_mass: 60.05
-name: acetic acid
-pka_ionization_constant:
-- 4.74
-smiles_string: CC(=O)O
-type: chemrof:SmallMolecule
-water_solubility: 1000000.0
-
-```
 ## Molecule-citric_acid_with_pka_context
 ### Input
 ```yaml
@@ -582,25 +540,145 @@ smiles_string: OC(=O)CC(O)(C(=O)O)CC(=O)O
 type: chemrof:Molecule
 
 ```
-## AtomCation-sodium
+## Molecule-water
 ### Input
 ```yaml
-elemental_charge: 1
-has_element: Na
-id: CHEBI:29101
-name: sodium (1+)
-type: chemrof:AtomCation
+empirical_formula: H2O
+has_atom_occurrences:
+- name: water-o1
+  occurrence_of: O
+- name: water-h1
+  occurrence_of: H
+- name: water-h2
+  occurrence_of: H
+has_atoms:
+- H
+- H
+- O
+has_bonds:
+- bond_order: 1
+  bond_type: polar covalent
+  object: water-h1
+  subject: water-o1
+- bond_order: 1
+  bond_type: polar covalent
+  object: water-h2
+  subject: water-o1
+id: CHEBI:15377
+is_organic: false
+name: water
+smiles_string: O
+type: chemrof:Molecule
 
 ```
-## Isotope-protium
+## SubatomicParticle-neutron
+### Input
+```yaml
+id: CHEBI:30222
+name: neutron
+subatomic_particle_type: neutron
+type: chemrof:SubatomicParticle
+
+```
+## ChemicalElement-berkelium
+### Input
+```yaml
+atomic_number: 97
+id: CHEBI:33391
+inchi_string: InChI=1S/Bk
+name: berkelium
+smiles_string: '[Bk]'
+symbol: Bk
+
+```
+## ChemicalSalt-sodium_carbonate
+### Input
+```yaml
+empirical_formula: Na2CO3
+id: CHEBI:29377
+name: sodium carbonate
+type: chemrof:ChemicalSalt
+
+```
+## SmallMolecule-glucose-with-solubility
+### Input
+```yaml
+IUPAC_name: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal
+empirical_formula: CH2O
+id: CHEBI:17234
+molecular_mass: 180.16
+name: glucose
+smiles_string: C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O
+type: chemrof:SmallMolecule
+water_solubility: 909.0
+
+```
+## MonoatomicIon-copper2
+### Input
+```yaml
+elemental_charge: 2
+has_element: Cu
+id: CHEBI:29036
+name: copper(2+)
+type: chemrof:MonoatomicIon
+
+```
+## UnchargedAtom-hydrogen
+### Input
+```yaml
+atomic_number: 1
+elemental_charge: 0
+id: CHEBI:49637
+name: hydrogen atom
+symbol: H
+type: chemrof:UnchargedAtom
+
+```
+## Ester-ethyl_acetate
+### Input
+```yaml
+empirical_formula: C4H8O2
+has_atoms:
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- O
+- O
+id: CHEBI:27750
+is_organic: true
+name: ethyl acetate
+smiles_string: CC(=O)OCC
+type: chemrof:Ester
+
+```
+## Protein-insulin
+### Input
+```yaml
+empirical_formula: C257H383N65O77S6
+id: UniProtKB:P01308
+is_organic: true
+name: insulin
+type: chemrof:Protein
+
+```
+## Isotope-deuterium
 ### Input
 ```yaml
 atomic_number: 1
 has_element: H
-id: CHEBI:29236
+id: CHEBI:29237
 isotope_of: CHEBI:49637
-name: protium atom
-neutron_number: 0
+name: deuterium atom
+neutron_number: 1
 symbol: H
 type: chemrof:Isotope
 
@@ -632,28 +710,5 @@ is_organic: true
 name: glycylglycine
 smiles_string: C(C(=O)NCC(=O)O)N
 type: chemrof:Peptide
-
-```
-## UnchargedAtom-hydrogen
-### Input
-```yaml
-atomic_number: 1
-elemental_charge: 0
-id: CHEBI:49637
-name: hydrogen atom
-symbol: H
-type: chemrof:UnchargedAtom
-
-```
-## Macromolecule-polyethylene
-### Input
-```yaml
-empirical_formula: C2H4
-has_submolecules:
-- ethylene
-id: CHEBI:60034
-is_organic: true
-name: polyethylene polymer
-type: chemrof:Macromolecule
 
 ```

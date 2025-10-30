@@ -326,7 +326,8 @@ linkml:Sparqlpath xsd:string
           <pka_temperature> @linkml:Float ? ;
           <pka_ionic_strength> @linkml:Float ? ;
           <pka_solvent> @linkml:String ? ;
-          <pka_pressure> @linkml:Float ?
+          <pka_pressure> @linkml:Float ? ;
+          <has_ionizable_groups> @<IonizableGroup> *
        ) ;
        rdf:type [ <ChemicalEntity> ]
     )
@@ -513,7 +514,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <DomainEntity>  (
-    @<PhysicochemicalEntity> OR @<Reaction>
+    @<IonizableGroup> OR @<PhysicochemicalEntity> OR @<Reaction>
 )
 
 <DomainEntity_struct> {
@@ -704,6 +705,18 @@ linkml:Sparqlpath xsd:string
        )
     } OR @<StandardInchiObject>
 )
+
+<IonizableGroup> CLOSED {
+    (  $<IonizableGroup_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ? ;
+          <functional_group_type> @linkml:String ? ;
+          <pka_value> @linkml:Float ;
+          <group_position> @linkml:String ? ;
+          <group_description> @linkml:String ?
+       ) ;
+       rdf:type [ <IonizableGroup> ]
+    )
+}
 
 <Isobar> CLOSED {
     (  $<Isobar_tes> (  &<Nuclide_tes> ;
@@ -1251,6 +1264,19 @@ linkml:Sparqlpath xsd:string
              <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
              <reaction_rate_coefficient> @linkml:Float ? ;
              <reaction_rate> @linkml:Float ? ;
+             <reaction_type> [ <http://purl.obolibrary.org/obo/RXNO_0000057>
+                <https://w3id.org/chemrof/ReactionTypeEnum#bond_formation>
+                <https://w3id.org/chemrof/ReactionTypeEnum#bond_breaking> <http://purl.obolibrary.org/obo/RXNO_0000012>
+                <http://purl.obolibrary.org/obo/RXNO_0000037> <http://purl.obolibrary.org/obo/RXNO_0000016>
+                <http://purl.obolibrary.org/obo/RXNO_0000018> <http://purl.obolibrary.org/obo/RXNO_0000019>
+                <http://purl.obolibrary.org/obo/RXNO_0000041> <http://purl.obolibrary.org/obo/RXNO_0000005>
+                <http://purl.obolibrary.org/obo/MOP_0000627> <http://purl.obolibrary.org/obo/RXNO_0000656>
+                <https://w3id.org/chemrof/ReactionTypeEnum#ring_opening> <http://purl.obolibrary.org/obo/RXNO_0000619>
+                <http://purl.obolibrary.org/obo/RXNO_0000331> <http://purl.obolibrary.org/obo/RXNO_0000025>
+                <https://w3id.org/chemrof/ReactionTypeEnum#functional_group_addition>
+                <https://w3id.org/chemrof/ReactionTypeEnum#aromatic_heterocycle_formation>
+                <https://w3id.org/chemrof/ReactionTypeEnum#protection> <https://w3id.org/chemrof/ReactionTypeEnum#deprotection>
+                <https://w3id.org/chemrof/ReactionTypeEnum#resolution> ] ? ;
              <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
              <direction> @linkml:String ? ;

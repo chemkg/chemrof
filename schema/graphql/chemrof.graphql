@@ -99,6 +99,31 @@ enum PeriodicTableBlockEnum
     g__HYPHEN_MINUS__block
   }
 
+enum ReactionTypeEnum
+  {
+    functional_group_interconversion
+    bond_formation
+    bond_breaking
+    oxidation
+    reduction
+    acylation
+    carbon_carbon_bond_formation
+    heteroatom_alkylation_arylation
+    addition
+    cyclization
+    condensation
+    elimination
+    ring_opening
+    hydrolysis
+    substitution
+    isomerization
+    functional_group_addition
+    aromatic_heterocycle_formation
+    protection
+    deprotection
+    resolution
+  }
+
 enum SubatomicParticleEnum
   {
     proton
@@ -191,6 +216,7 @@ type Allotrope
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -223,6 +249,7 @@ type AminoAcidSequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: AminoAcidSequenceString
@@ -252,6 +279,7 @@ interface Atom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -279,6 +307,7 @@ type AtomAnion implements AnionState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -308,6 +337,7 @@ type AtomCation implements CationState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -408,6 +438,7 @@ interface AtomIonicForm
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -461,6 +492,7 @@ type ChemicalElement
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     name: String
@@ -499,6 +531,7 @@ type ChemicalEntity implements OwlClass
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
   }
 
@@ -526,6 +559,7 @@ type ChemicalGroup
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -578,6 +612,7 @@ interface ChemicalMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -612,6 +647,7 @@ type ChemicalSalt
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     elementalCharge: Integer
@@ -696,6 +732,7 @@ type Copolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -730,6 +767,7 @@ type DNASequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -762,6 +800,7 @@ type Enantiomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -825,6 +864,7 @@ type Ester
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -860,6 +900,7 @@ type FullySpecifiedAtom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -890,6 +931,7 @@ type FunctionalGroup
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     isSubstitutentGroupFrom: Molecule
@@ -939,6 +981,7 @@ type Glycan
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -990,6 +1033,7 @@ type Homopolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1024,6 +1068,7 @@ type ImpreciseChemicalMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasProportionalParts: [ProportionalPart]
@@ -1033,6 +1078,17 @@ type ImpreciseChemicalMixture
 
 interface InchiObject
   {
+  }
+
+type IonizableGroup
+  {
+    id: String!
+    name: String
+    type: Uriorcurie
+    functionalGroupType: String
+    pkaValue: Float!
+    groupPosition: String
+    groupDescription: String
   }
 
 type Isobar
@@ -1054,6 +1110,7 @@ type Isobar
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1080,6 +1137,7 @@ type IsomeraseReaction
     hasReactionSmilesRepresentation: ChemicalEncoding
     reactionRateCoefficient: Float
     reactionRate: Float
+    reactionType: ReactionTypeEnum
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
@@ -1111,6 +1169,7 @@ type Isotope
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1152,6 +1211,7 @@ type Macromolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1209,6 +1269,7 @@ type Moiety
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1233,6 +1294,7 @@ type MolecularAnion implements AnionState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1270,6 +1332,7 @@ type MolecularCation implements CationState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1307,6 +1370,7 @@ type MolecularComplex
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1331,6 +1395,7 @@ type MolecularComponent
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1378,6 +1443,7 @@ type MolecularSpecies
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1408,6 +1474,7 @@ type MolecularSubsequence
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1432,6 +1499,7 @@ type Molecule implements FullyCovalentlyBonded
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1462,6 +1530,7 @@ interface MoleculeByChargeState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1539,6 +1608,7 @@ type MonoatomicIon implements Charged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1569,6 +1639,7 @@ type Monomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1605,6 +1676,7 @@ type MonomolecularPolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1649,6 +1721,7 @@ type NaturalProduct
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1680,6 +1753,7 @@ type NetUnchargedMolecule implements Uncharged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1715,6 +1789,7 @@ type NeutralMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1750,6 +1825,7 @@ type NonSpeciesMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1780,6 +1856,7 @@ type NucleotideSequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -1804,6 +1881,7 @@ type Nuclide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1837,6 +1915,7 @@ interface PartiallySpecifiedAtom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1865,6 +1944,7 @@ type Peptide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1914,6 +1994,7 @@ interface PolyatomicEntity
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1938,6 +2019,7 @@ type PolyatomicIon implements Charged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1975,6 +2057,7 @@ type PolymerPart
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -2007,6 +2090,7 @@ type PreciseChemicalMixture implements WeaklyBonded
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -2040,6 +2124,7 @@ type Protein
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2069,6 +2154,7 @@ type RacemicMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasLeftEnantiomer: Enantiomer!
@@ -2096,6 +2182,7 @@ type Radionuclide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2114,6 +2201,7 @@ type Reaction
     hasReactionSmilesRepresentation: ChemicalEncoding
     reactionRateCoefficient: Float
     reactionRate: Float
+    reactionType: ReactionTypeEnum
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
@@ -2162,6 +2250,7 @@ type RNASequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -2187,6 +2276,7 @@ interface SequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: SequenceString
@@ -2212,6 +2302,7 @@ type SmallMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2268,6 +2359,7 @@ type Stereoisomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2314,6 +2406,7 @@ type SupramolecularPolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     polymerOf: Macromolecule
@@ -2352,6 +2445,7 @@ type UnchargedAtom implements Uncharged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2385,6 +2479,7 @@ type Zwitterion
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    hasIonizableGroups: [IonizableGroup]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
