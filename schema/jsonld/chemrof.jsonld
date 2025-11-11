@@ -862,6 +862,123 @@
       ]
     },
     {
+      "name": "ReactionTypeEnum",
+      "definition_uri": "https://w3id.org/chemrof/ReactionTypeEnum",
+      "description": "Classification of chemical reactions based on mechanistic and functional categories",
+      "title": "reaction_type_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "functional_group_interconversion",
+          "description": "Conversion of one functional group to another without changing the carbon skeleton",
+          "meaning": "RXNO:0000057"
+        },
+        {
+          "text": "bond_formation",
+          "description": "Reactions that create new bonds between atoms or groups"
+        },
+        {
+          "text": "bond_breaking",
+          "description": "Reactions that break existing bonds to form fragments or rearrange structures"
+        },
+        {
+          "text": "oxidation",
+          "description": "A functional group modification reaction where a functional group is oxidised",
+          "meaning": "RXNO:0000012",
+          "is_a": "functional_group_interconversion"
+        },
+        {
+          "text": "reduction",
+          "description": "A functional group modification reaction where a functional group is reduced",
+          "meaning": "RXNO:0000037",
+          "is_a": "functional_group_interconversion"
+        },
+        {
+          "text": "acylation",
+          "description": "Formation of an acyl group bond, typically involving carboxylic acid derivatives",
+          "meaning": "RXNO:0000016",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "carbon_carbon_bond_formation",
+          "description": "Reactions that form new carbon-carbon bonds",
+          "meaning": "RXNO:0000018",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "heteroatom_alkylation_arylation",
+          "description": "Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur",
+          "meaning": "RXNO:0000019",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "addition",
+          "description": "Reactions that add atoms or groups across multiple bonds",
+          "meaning": "RXNO:0000041",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "cyclization",
+          "description": "Formation of cyclic structures from linear precursors",
+          "meaning": "RXNO:0000005",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "condensation",
+          "description": "A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule",
+          "meaning": "MOP:0000627",
+          "is_a": "bond_formation"
+        },
+        {
+          "text": "elimination",
+          "description": "A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring",
+          "meaning": "RXNO:0000656",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "ring_opening",
+          "description": "Cleavage of cyclic structures to form linear products",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "hydrolysis",
+          "description": "A solvolysis reaction where the solvent material is water",
+          "meaning": "RXNO:0000619",
+          "is_a": "bond_breaking"
+        },
+        {
+          "text": "substitution",
+          "description": "A reaction step where one atom or group is replaced with another",
+          "meaning": "RXNO:0000331"
+        },
+        {
+          "text": "isomerization",
+          "description": "Rearrangement reactions that convert one isomer to another",
+          "meaning": "RXNO:0000025"
+        },
+        {
+          "text": "functional_group_addition",
+          "description": "Addition of functional groups to unsaturated bonds or reactive centers"
+        },
+        {
+          "text": "aromatic_heterocycle_formation",
+          "description": "Formation of aromatic rings containing heteroatoms"
+        },
+        {
+          "text": "protection",
+          "description": "Introduction of protecting groups to temporarily mask reactive functionalities"
+        },
+        {
+          "text": "deprotection",
+          "description": "Removal of protecting groups to restore original functionalities"
+        },
+        {
+          "text": "resolution",
+          "description": "Separation of enantiomers or other stereoisomers"
+        }
+      ]
+    },
+    {
       "name": "SubatomicParticleEnum",
       "definition_uri": "https://w3id.org/chemrof/SubatomicParticleEnum",
       "title": "subatomic_particle_enum",
@@ -1217,14 +1334,12 @@
       "definition_uri": "https://w3id.org/chemrof/IUPAC_name",
       "title": "IUPAC name",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/MI_2007",
         "http://semanticscience.org/resource/CHEMINF_000107"
       ],
-      "exact_mappings": [
-        "http://purl.obolibrary.org/obo/MI_2007"
-      ],
       "is_a": "information_property",
-      "slot_uri": "http://semanticscience.org/resource/CHEMINF_000107",
+      "slot_uri": "https://w3id.org/chemrof/IUPAC_name",
       "owner": "ChemicalEntity",
       "domain_of": [
         "ChemicalEntity"
@@ -1272,6 +1387,7 @@
       ],
       "range": "SubatomicParticleOccurrence",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1689,13 +1805,17 @@
       "definition_uri": "https://w3id.org/chemrof/has_chemical_role",
       "title": "has chemical role",
       "from_schema": "https://w3id.org/chemrof",
-      "slot_uri": "https://w3id.org/chemrof/has_chemical_role",
+      "mappings": [
+        "http://purl.obolibrary.org/obo/RO_0000087"
+      ],
+      "slot_uri": "http://purl.obolibrary.org/obo/RO_0000087",
       "owner": "ChemicalEntity",
       "domain_of": [
         "ChemicalEntity"
       ],
       "range": "ChemicalRole",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1705,11 +1825,15 @@
       "title": "has part",
       "from_schema": "https://w3id.org/chemrof",
       "mappings": [
+        "http://purl.obolibrary.org/obo/BFO_0000051",
         "http://purl.obolibrary.org/obo/BFO_0000050",
         "http://schema.org/hasBioChemEntityPart"
       ],
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002131"
+      ],
       "is_a": "chemical_to_chemical_relationship",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
+      "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
       "owner": "MoleculeGroupingClassDefinedByComponents",
       "domain_of": [
         "MoleculeGroupingClassDefinedByComponents"
@@ -1762,6 +1886,7 @@
       "range": "PolymerRepeatUnit",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1904,6 +2029,7 @@
       "range": "ProportionalPart",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1954,6 +2080,7 @@
       "range": "AtomicBond",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2283,7 +2410,8 @@
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/NCIT_C28272",
         "http://purl.obolibrary.org/obo/FIX_0000270",
-        "http://purl.obolibrary.org/obo/chebi/mass"
+        "http://purl.obolibrary.org/obo/chebi/mass",
+        "http://semanticscience.org/resource/CHEMINF_000198"
       ],
       "is_a": "molecular_property",
       "slot_uri": "https://w3id.org/chemrof/molecular_mass",
@@ -2795,6 +2923,20 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "reaction_type",
+      "definition_uri": "https://w3id.org/chemrof/reaction_type",
+      "description": "Classification of the chemical reaction based on mechanistic and functional categories",
+      "title": "reaction type",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/reaction_type",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "ReactionTypeEnum",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "kcat",
       "definition_uri": "https://w3id.org/chemrof/kcat",
       "description": "The maximum number of substrate molecules converted to product per enzyme molecule per unit time, when the enzyme is saturated with substrate. It represents the maximum catalytic efficiency of an enzyme under ideal conditions.",
@@ -3024,6 +3166,9 @@
       "description": "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose",
       "title": "empirical formula",
       "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "http://semanticscience.org/resource/CHEMINF_000042"
+      ],
       "is_a": "chemical_formula",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/empirical_formula",
@@ -3115,7 +3260,8 @@
         "InChi"
       ],
       "exact_mappings": [
-        "http://www.semanticweb.com/OntoRxn#hasInChi"
+        "http://www.semanticweb.com/OntoRxn#hasInChi",
+        "http://semanticscience.org/resource/CHEMINF_000113"
       ],
       "is_a": "chemical_formula",
       "domain": "ChemicalEntity",
@@ -3199,6 +3345,9 @@
         "a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see \u201cLimitations of molecular graph representations\u201d section), such as organometallic compounds and ionic salts."
       ],
       "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "http://semanticscience.org/resource/CHEMINF_000018"
+      ],
       "is_a": "chemical_formula",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/smiles_string",
@@ -3446,6 +3595,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_atom_connections_sublayer",
       "owner": "EntityWithConnectivitySpecificied",
       "domain_of": [
+        "ChemicalEntity",
         "PolyatomicEntity",
         "StandardInchiObject",
         "EntityWithConnectivitySpecificied"
@@ -3464,6 +3614,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_hydrogen_connections_sublayer",
       "owner": "EntityWithConnectivitySpecificied",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithConnectivitySpecificied"
       ],
@@ -3480,6 +3631,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_charge_sublayer",
       "owner": "EntityWithChargeSpecified",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithChargeSpecified"
       ],
@@ -3496,6 +3648,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_proton_sublayer",
       "owner": "StandardInchiObject",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject"
       ],
       "range": "string",
@@ -3511,6 +3664,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_stereochemical_double_bond_sublayer",
       "owner": "EntityWithStereochemistrySpecified",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithStereochemistrySpecified"
       ],
@@ -3527,6 +3681,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_tetrahedral_stereochemical_sublayer",
       "owner": "EntityWithStereochemistrySpecified",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithStereochemistrySpecified"
       ],
@@ -3543,6 +3698,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_stereochemical_type_sublayer",
       "owner": "EntityWithStereochemistrySpecified",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithStereochemistrySpecified"
       ],
@@ -3559,6 +3715,7 @@
       "slot_uri": "https://w3id.org/chemrof/inchi_isotopic_layer",
       "owner": "EntityWithIsotopeSpecified",
       "domain_of": [
+        "ChemicalEntity",
         "StandardInchiObject",
         "EntityWithIsotopeSpecified"
       ],
@@ -3935,6 +4092,7 @@
       ],
       "range": "OwlClass",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3966,6 +4124,7 @@
       "range": "OwlClass",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4043,6 +4202,7 @@
       "inverse": "classifies",
       "range": "OwlClass",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4157,6 +4317,7 @@
       "range": "Stereocenter",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4399,6 +4560,10 @@
       "title": "has left enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_left_enantiomer",
+      "owner": "RacemicMixture",
+      "domain_of": [
+        "RacemicMixture"
+      ],
       "range": "Enantiomer",
       "required": true,
       "@type": "SlotDefinition"
@@ -4409,6 +4574,10 @@
       "title": "has right enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_right_enantiomer",
+      "owner": "RacemicMixture",
+      "domain_of": [
+        "RacemicMixture"
+      ],
       "range": "Enantiomer",
       "required": true,
       "@type": "SlotDefinition"
@@ -4419,6 +4588,10 @@
       "title": "chirality agnostic form",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/chirality_agnostic_form",
+      "owner": "RacemicMixture",
+      "domain_of": [
+        "RacemicMixture"
+      ],
       "range": "Molecule",
       "recommended": true,
       "@type": "SlotDefinition"
@@ -4462,9 +4635,14 @@
       "title": "left participants",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/left_participants",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "ReactionParticipant",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4473,9 +4651,14 @@
       "title": "right participants",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/right_participants",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "ReactionParticipant",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4485,6 +4668,10 @@
       "title": "direction",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/direction",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -4494,6 +4681,10 @@
       "title": "is diastereoselective",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_diastereoselective",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
@@ -4503,6 +4694,10 @@
       "title": "is stereo",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_stereo",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
@@ -4512,6 +4707,10 @@
       "title": "is balanced",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_balanced",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
@@ -4521,6 +4720,10 @@
       "title": "is transport",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_transport",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
@@ -4531,6 +4734,10 @@
       "title": "is fully characterized",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/is_fully_characterized",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
@@ -4540,6 +4747,10 @@
       "title": "reaction center",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/reaction_center",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -5008,6 +5219,24 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "PhysicochemicalEntityGroupingClass_classifies",
+      "definition_uri": "https://w3id.org/chemrof/classifies",
+      "title": "classifies",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "classifies",
+      "domain": "PhysicochemicalEntityGroupingClass",
+      "slot_uri": "https://w3id.org/chemrof/classifies",
+      "alias": "classifies",
+      "owner": "PhysicochemicalEntityGroupingClass",
+      "domain_of": [
+        "PhysicochemicalEntityGroupingClass"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classifies",
+      "range": "PhysicochemicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "ChemicalGroupingClass_subtype_of",
       "definition_uri": "https://w3id.org/chemrof/subtype_of",
       "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
@@ -5044,7 +5273,7 @@
       "definition_uri": "https://w3id.org/chemrof/classifies",
       "title": "classifies",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "classifies",
+      "is_a": "PhysicochemicalEntityGroupingClass_classifies",
       "domain": "ChemicalGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/classifies",
       "alias": "classifies",
@@ -5144,7 +5373,7 @@
       "definition_uri": "https://w3id.org/chemrof/classifies",
       "title": "classifies",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "classifies",
+      "is_a": "PhysicochemicalEntityGroupingClass_classifies",
       "domain": "MaterialGroupingClass",
       "slot_uri": "https://w3id.org/chemrof/classifies",
       "alias": "classifies",
@@ -5376,12 +5605,16 @@
       "title": "has part",
       "from_schema": "https://w3id.org/chemrof",
       "mappings": [
+        "http://purl.obolibrary.org/obo/BFO_0000051",
         "http://purl.obolibrary.org/obo/BFO_0000050",
         "http://schema.org/hasBioChemEntityPart"
       ],
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002131"
+      ],
       "is_a": "has_part",
       "domain": "MoleculeGroupingClassDefinedByComponents",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
+      "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
       "alias": "has_part",
       "owner": "MoleculeGroupingClassDefinedByComponents",
       "domain_of": [
@@ -5391,6 +5624,7 @@
       "usage_slot_name": "has_part",
       "range": "ChemicalEntityOrGrouping",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5610,12 +5844,16 @@
       "title": "has part",
       "from_schema": "https://w3id.org/chemrof",
       "mappings": [
+        "http://purl.obolibrary.org/obo/BFO_0000051",
         "http://purl.obolibrary.org/obo/BFO_0000050",
         "http://schema.org/hasBioChemEntityPart"
       ],
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002131"
+      ],
       "is_a": "has_part",
       "domain": "Material",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
+      "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
       "alias": "has_part",
       "owner": "Material",
       "domain_of": [
@@ -5847,6 +6085,7 @@
       "range": "AtomicBond",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5856,12 +6095,16 @@
       "title": "has part",
       "from_schema": "https://w3id.org/chemrof",
       "mappings": [
+        "http://purl.obolibrary.org/obo/BFO_0000051",
         "http://purl.obolibrary.org/obo/BFO_0000050",
         "http://schema.org/hasBioChemEntityPart"
       ],
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002131"
+      ],
       "is_a": "has_part",
       "domain": "Molecule",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
+      "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
       "alias": "has_part",
       "owner": "Molecule",
       "domain_of": [
@@ -5994,12 +6237,16 @@
       "title": "has part",
       "from_schema": "https://w3id.org/chemrof",
       "mappings": [
+        "http://purl.obolibrary.org/obo/BFO_0000051",
         "http://purl.obolibrary.org/obo/BFO_0000050",
         "http://schema.org/hasBioChemEntityPart"
       ],
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002131"
+      ],
       "is_a": "has_part",
       "domain": "Atom",
-      "slot_uri": "https://w3id.org/chemrof/has_part",
+      "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
       "alias": "has_part",
       "owner": "Atom",
       "domain_of": [
@@ -6209,6 +6456,7 @@
       "range": "Stereocenter",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -6381,6 +6629,7 @@
       "usage_slot_name": "has_cationic_component",
       "range": "CationState",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -6400,6 +6649,7 @@
       "usage_slot_name": "has_anionic_component",
       "range": "AnionState",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -6541,6 +6791,46 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "Enantiomer_inchi_tetrahedral_stereochemical_sublayer",
+      "definition_uri": "https://w3id.org/chemrof/inchi_tetrahedral_stereochemical_sublayer",
+      "title": "inchi tetrahedral stereochemical sublayer",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "inchi_tetrahedral_stereochemical_sublayer",
+      "domain": "Enantiomer",
+      "slot_uri": "https://w3id.org/chemrof/inchi_tetrahedral_stereochemical_sublayer",
+      "alias": "inchi_tetrahedral_stereochemical_sublayer",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "inchi_tetrahedral_stereochemical_sublayer",
+      "range": "string",
+      "required": true,
+      "pattern": "^[tm].*",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Enantiomer_inchi_stereochemical_type_sublayer",
+      "definition_uri": "https://w3id.org/chemrof/inchi_stereochemical_type_sublayer",
+      "title": "inchi stereochemical type sublayer",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "inchi_stereochemical_type_sublayer",
+      "domain": "Enantiomer",
+      "slot_uri": "https://w3id.org/chemrof/inchi_stereochemical_type_sublayer",
+      "alias": "inchi_stereochemical_type_sublayer",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "inchi_stereochemical_type_sublayer",
+      "range": "string",
+      "required": true,
+      "pattern": "^s.*",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "RacemicMixture_has_left_enantiomer",
       "definition_uri": "https://w3id.org/chemrof/has_left_enantiomer",
       "title": "has left enantiomer",
@@ -6556,6 +6846,21 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_left_enantiomer",
       "range": "Enantiomer",
+      "range_expression": {
+        "slot_conditions": [
+          {
+            "name": "inchi_tetrahedral_stereochemical_sublayer",
+            "pattern": "^[tm].*",
+            "@type": "SlotDefinition"
+          },
+          {
+            "name": "inchi_stereochemical_type_sublayer",
+            "pattern": "^s.*",
+            "@type": "SlotDefinition"
+          }
+        ],
+        "@type": "AnonymousClassExpression"
+      },
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -6575,6 +6880,21 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_right_enantiomer",
       "range": "Enantiomer",
+      "range_expression": {
+        "slot_conditions": [
+          {
+            "name": "inchi_tetrahedral_stereochemical_sublayer",
+            "pattern": "^[tm].*",
+            "@type": "SlotDefinition"
+          },
+          {
+            "name": "inchi_stereochemical_type_sublayer",
+            "pattern": "^s.*",
+            "@type": "SlotDefinition"
+          }
+        ],
+        "@type": "AnonymousClassExpression"
+      },
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -6594,6 +6914,21 @@
       "is_usage_slot": true,
       "usage_slot_name": "chirality_agnostic_form",
       "range": "Molecule",
+      "range_expression": {
+        "slot_conditions": [
+          {
+            "name": "inchi_tetrahedral_stereochemical_sublayer",
+            "pattern": "^$",
+            "@type": "SlotDefinition"
+          },
+          {
+            "name": "inchi_stereochemical_type_sublayer",
+            "pattern": "^$",
+            "@type": "SlotDefinition"
+          }
+        ],
+        "@type": "AnonymousClassExpression"
+      },
       "recommended": true,
       "@type": "SlotDefinition"
     },
@@ -6602,15 +6937,13 @@
       "definition_uri": "https://w3id.org/chemrof/IUPAC_name",
       "title": "IUPAC name",
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
-        "http://semanticscience.org/resource/CHEMINF_000107"
-      ],
       "exact_mappings": [
-        "http://purl.obolibrary.org/obo/MI_2007"
+        "http://purl.obolibrary.org/obo/MI_2007",
+        "http://semanticscience.org/resource/CHEMINF_000107"
       ],
       "is_a": "IUPAC_name",
       "domain": "RacemicMixture",
-      "slot_uri": "http://semanticscience.org/resource/CHEMINF_000107",
+      "slot_uri": "https://w3id.org/chemrof/IUPAC_name",
       "alias": "IUPAC_name",
       "owner": "RacemicMixture",
       "domain_of": [
@@ -6739,6 +7072,7 @@
       "range": "ReactionParticipant",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -6759,6 +7093,7 @@
       "range": "ReactionParticipant",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -7095,6 +7430,7 @@
     {
       "name": "Collection",
       "definition_uri": "https://w3id.org/chemrof/Collection",
+      "description": "This utility class serves to collect a set of domain entities, and to be the top level object in tree-based representations such as JSON.",
       "from_schema": "https://w3id.org/chemrof",
       "slots": [
         "collection__entities"
@@ -7181,12 +7517,14 @@
       ],
       "mappings": [
         "CHEBI:24431",
+        "CHEBI:24431",
         "CHEMINF:000000",
         "OntoRxn:ChemSpecies"
       ],
       "exact_mappings": [
         "SIO:010004",
-        "wdeschema:E239"
+        "wdeschema:E239",
+        "BFO:0000040"
       ],
       "is_a": "PhysicochemicalEntity",
       "abstract": true,
@@ -7202,6 +7540,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -7215,7 +7561,7 @@
         "owl_subclass_of"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/ChemicalEntity",
+      "class_uri": "http://purl.obolibrary.org/obo/CHEBI_24431",
       "unique_keys": [
         {
           "unique_key_name": "smiles_string",
@@ -7312,7 +7658,8 @@
         "id",
         "name",
         "owl_subclass_of",
-        "PhysicochemicalEntityGroupingClass_subtype_of"
+        "PhysicochemicalEntityGroupingClass_subtype_of",
+        "PhysicochemicalEntityGroupingClass_classifies"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/PhysicochemicalEntityGroupingClass",
@@ -7613,6 +7960,7 @@
       "examples": [
         {
           "value": "sodium salt",
+          "description": "Any salt having carbonate as the anion",
           "@type": "Example"
         }
       ],
@@ -7644,6 +7992,11 @@
       "examples": [
         {
           "value": "chloride salt",
+          "@type": "Example"
+        },
+        {
+          "value": "carbonate salt",
+          "description": "Any alkali metal salt having sodium(1+) as the cation.",
           "@type": "Example"
         }
       ],
@@ -8201,6 +8554,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8234,6 +8594,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8279,6 +8646,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8332,6 +8706,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8364,6 +8745,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8407,6 +8795,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8464,6 +8859,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8510,6 +8912,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8556,6 +8965,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8605,6 +9021,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8655,6 +9078,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8702,6 +9132,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8734,6 +9171,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8769,6 +9213,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8801,6 +9252,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8838,6 +9296,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8875,6 +9340,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8918,6 +9390,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -8966,6 +9445,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9014,6 +9500,7 @@
         "COB:0000013"
       ],
       "exact_mappings": [
+        "CHEBI:25367",
         "SIO:011125",
         "biotop:MonoMolecularEntity",
         "gc:Molecule"
@@ -9031,6 +9518,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9072,6 +9566,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9120,6 +9621,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9157,6 +9665,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9190,6 +9705,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9223,6 +9745,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9256,6 +9785,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9289,6 +9825,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9322,6 +9865,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9356,6 +9906,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9395,6 +9952,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9438,6 +10002,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9487,6 +10058,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9536,6 +10114,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9588,6 +10173,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9640,6 +10232,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9684,6 +10283,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9728,6 +10334,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9773,6 +10386,10 @@
         "COB:0000011",
         "SIO:010044"
       ],
+      "exact_mappings": [
+        "CHEBI:33250",
+        "SIO:010003"
+      ],
       "is_a": "ChemicalEntity",
       "abstract": true,
       "slots": [
@@ -9783,6 +10400,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9840,6 +10465,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "molecular_mass",
@@ -9910,6 +10543,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -9957,6 +10598,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10004,6 +10653,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10065,6 +10722,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10121,6 +10786,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10180,6 +10853,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10230,6 +10911,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10271,6 +10960,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10322,6 +11019,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10364,6 +11069,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10414,6 +11127,14 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_atom_connections_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10527,6 +11248,13 @@
       "aliases": [
         "role"
       ],
+      "mappings": [
+        "CHEBI:50906"
+      ],
+      "exact_mappings": [
+        "SIO:000016",
+        "BFO:0000017"
+      ],
       "mixins": [
         "OwlClass"
       ],
@@ -10534,7 +11262,7 @@
         "owl_subclass_of"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/ChemicalRole",
+      "class_uri": "http://purl.obolibrary.org/obo/CHEBI_50906",
       "@type": "ClassDefinition"
     },
     {
@@ -10818,6 +11546,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10861,6 +11596,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10905,6 +11647,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10952,6 +11701,11 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -10974,7 +11728,9 @@
         "Enantiomer_relative_configuration",
         "Enantiomer_optical_configuration",
         "Enantiomer_absolute_configuration",
-        "Enantiomer_enantiomer_form_of"
+        "Enantiomer_enantiomer_form_of",
+        "Enantiomer_inchi_tetrahedral_stereochemical_sublayer",
+        "Enantiomer_inchi_stereochemical_type_sublayer"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Enantiomer",
@@ -11015,6 +11771,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -11066,6 +11829,13 @@
         "has_chemical_role",
         "inchi_string",
         "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
         "smiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
@@ -11134,15 +11904,18 @@
         "Align with https://docs.open-reaction-database.org/en/latest/schema.html"
       ],
       "from_schema": "https://w3id.org/chemrof",
+      "mappings": [
+        "RXNO:0000000"
+      ],
+      "exact_mappings": [
+        "MOP:0000010",
+        "BFO:0000015"
+      ],
       "is_a": "DomainEntity",
       "slots": [
         "id",
         "name",
         "type",
-        "has_rinchi_representation",
-        "has_reaction_smiles_representation",
-        "reaction_rate_coefficient",
-        "reaction_rate",
         "Reaction_left_participants",
         "Reaction_right_participants",
         "Reaction_direction",
@@ -11152,10 +11925,15 @@
         "Reaction_is_transport",
         "Reaction_is_fully_characterized",
         "Reaction_reaction_center",
+        "has_rinchi_representation",
+        "has_reaction_smiles_representation",
+        "reaction_rate_coefficient",
+        "reaction_rate",
+        "reaction_type",
         "Reaction_description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/chemrof/Reaction",
+      "class_uri": "http://purl.obolibrary.org/obo/RXNO_0000000",
       "@type": "ClassDefinition"
     },
     {
@@ -11163,19 +11941,20 @@
       "definition_uri": "https://w3id.org/chemrof/IsomeraseReaction",
       "description": "A reaction that converts a molecule from one isomer to another.",
       "title": "isomerase reaction",
+      "deprecated": "True",
       "todos": [
         "create rules for this"
       ],
+      "comments": [
+        "This class is deprecated. Use the reaction_type slot with value 'isomerization' instead."
+      ],
       "from_schema": "https://w3id.org/chemrof",
+      "deprecated_element_has_exact_replacement": "reaction_type",
       "is_a": "Reaction",
       "slots": [
         "id",
         "name",
         "type",
-        "has_rinchi_representation",
-        "has_reaction_smiles_representation",
-        "reaction_rate_coefficient",
-        "reaction_rate",
         "Reaction_left_participants",
         "Reaction_right_participants",
         "Reaction_direction",
@@ -11185,6 +11964,11 @@
         "Reaction_is_transport",
         "Reaction_is_fully_characterized",
         "Reaction_reaction_center",
+        "has_rinchi_representation",
+        "has_reaction_smiles_representation",
+        "reaction_rate_coefficient",
+        "reaction_rate",
+        "reaction_type",
         "Reaction_description"
       ],
       "slot_usage": {},
@@ -11370,9 +12154,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-08-21T00:24:19",
-  "source_file_size": 113726,
-  "generation_date": "2025-08-21T00:24:30",
+  "source_file_date": "2025-11-09T19:21:43",
+  "source_file_size": 120000,
+  "generation_date": "2025-11-09T19:21:51",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",
