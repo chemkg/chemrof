@@ -143,18 +143,8 @@ has_proportional_parts:
   concentration:
     unit: mM
     value: 30.0
-- composed_of: CHEBI:32599
-  concentration:
-    unit: g/L
-    value: 0.03
-- composed_of: CHEBI:16709
-  concentration:
-    unit: mg/L
-    value: 0.1
-- composed_of: CHEBI:15956
-  concentration:
-    unit: mg/L
-    value: 0.02
+- composed_of: ex:wolfes_mineral_mix
+- composed_of: ex:wolfes_vitamin_mix
 id: ex:RCH2_alphaKG_medium
 name: RCH2 defined medium with alpha-ketoglutaric acid
 ph: 7.0
@@ -442,6 +432,55 @@ symbol: Cl
 type: chemrof:AtomAnion
 
 ```
+## ImpreciseChemicalMixture-wolfes_vitamin_mix
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:16709
+  concentration:
+    unit: mg/L
+    value: 10.0
+- composed_of: CHEBI:30753
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:30314
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15940
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:17015
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:49105
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:7916
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15956
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:27470
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:17439
+  concentration:
+    unit: mg/L
+    value: 0.1
+id: ex:wolfes_vitamin_mix
+name: Wolfe's vitamin mix
+type: chemrof:ImpreciseChemicalMixture
+
+```
 ## AtomAnion-fluoride
 ### Input
 ```yaml
@@ -697,5 +736,54 @@ has_element: Cu
 id: CHEBI:29036
 name: copper(2+)
 type: chemrof:MonoatomicIon
+
+```
+## ImpreciseChemicalMixture-wolfes_mineral_mix
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:32599
+  concentration:
+    unit: g/L
+    value: 3.0
+- composed_of: CHEBI:44557
+  concentration:
+    unit: g/L
+    value: 1.5
+- composed_of: CHEBI:26710
+  concentration:
+    unit: g/L
+    value: 1.0
+- composed_of: CHEBI:86362
+  concentration:
+    unit: g/L
+    value: 0.5
+- composed_of: CHEBI:86362
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:35176
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:86146
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:75832
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:33118
+  concentration:
+    unit: g/L
+    value: 0.01
+- composed_of: CHEBI:86357
+  concentration:
+    unit: g/L
+    value: 0.01
+id: ex:wolfes_mineral_mix
+name: Wolfe's mineral mix
+type: chemrof:ImpreciseChemicalMixture
 
 ```

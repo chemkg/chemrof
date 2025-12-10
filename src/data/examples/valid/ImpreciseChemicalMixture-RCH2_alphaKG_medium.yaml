@@ -5,7 +5,7 @@
 # This example demonstrates:
 # - ImpreciseChemicalMixture with ph slot
 # - ProportionalPart with concentration (value + unit)
-# - Nested mixtures via composed_of referencing other mixtures
+# - Nested mixtures via composed_of referencing other mixtures (ex:wolfes_mineral_mix)
 type: chemrof:ImpreciseChemicalMixture
 id: ex:RCH2_alphaKG_medium
 name: RCH2 defined medium with alpha-ketoglutaric acid
@@ -36,18 +36,7 @@ has_proportional_parts:
     concentration:
       value: 30.0
       unit: mM
-  # Magnesium sulfate heptahydrate from Wolfe's mineral mix (0.03 g/L)
-  - composed_of: CHEBI:32599
-    concentration:
-      value: 0.03
-      unit: g/L
-  # Pyridoxine HCl from Wolfe's vitamin mix (0.1 mg/L)
-  - composed_of: CHEBI:16709
-    concentration:
-      value: 0.1
-      unit: mg/L
-  # Biotin from Wolfe's vitamin mix (0.02 mg/L)
-  - composed_of: CHEBI:15956
-    concentration:
-      value: 0.02
-      unit: mg/L
+  # Wolfe's mineral mix - a nested mixture reference
+  - composed_of: ex:wolfes_mineral_mix
+  # Wolfe's vitamin mix - another nested mixture reference
+  - composed_of: ex:wolfes_vitamin_mix
