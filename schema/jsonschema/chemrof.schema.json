@@ -2496,6 +2496,9 @@
                     "items": {
                         "anyOf": [
                             {
+                                "$ref": "#/$defs/DecaySeries"
+                            },
+                            {
                                 "$ref": "#/$defs/Reaction"
                             },
                             {
@@ -3171,6 +3174,67 @@
                 "id"
             ],
             "title": "DNASequenceInterval",
+            "type": "object"
+        },
+        "DecaySeries": {
+            "additionalProperties": false,
+            "description": "A sequential chain of radioactive decays from a parent radionuclide through multiple daughter products to a stable end product",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name of chemical entity. E.g. nickel, carbon-16",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parent_nuclide": {
+                    "description": "The primordial radionuclide that starts the decay series",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "series_members": {
+                    "description": "Ordered list of isotopes in the decay chain",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "series_name": {
+                    "description": "Common name for the decay series (e.g. Uranium series, Thorium series, Actinium series)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stable_end_product": {
+                    "description": "The stable isotope where the decay series ends",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "chemrof:DecaySeries"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "DecaySeries",
             "type": "object"
         },
         "ElementFamilyEnum": {
@@ -5527,6 +5591,13 @@
                         "null"
                     ]
                 },
+                "branching_ratio": {
+                    "description": "For isotopes with multiple decay modes, the fraction of decays that follow each path (value between 0 and 1)",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
                 "decay_energy": {
                     "type": [
                         "string",
@@ -5540,6 +5611,13 @@
                     ]
                 },
                 "decay_product": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "decay_series": {
+                    "description": "Which decay series this isotope belongs to, if any",
                     "type": [
                         "string",
                         "null"
@@ -5762,6 +5840,13 @@
                     "description": "Temperature in Celsius at which pKa was measured. Default is 25\u00b0C if not specified.",
                     "type": [
                         "number",
+                        "null"
+                    ]
+                },
+                "position_in_series": {
+                    "description": "Ordinal position in the decay chain (1 for parent nuclide)",
+                    "type": [
+                        "integer",
                         "null"
                     ]
                 },
@@ -14254,6 +14339,9 @@
         "entities": {
             "items": {
                 "anyOf": [
+                    {
+                        "$ref": "#/$defs/DecaySeries"
+                    },
                     {
                         "$ref": "#/$defs/Reaction"
                     },

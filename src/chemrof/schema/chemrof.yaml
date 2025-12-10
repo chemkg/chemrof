@@ -1095,6 +1095,25 @@ classes:
     examples:
     - value: radioactive isotope
     title: radionuclide
+  DecaySeries:
+    is_a: DomainEntity
+    description: A sequential chain of radioactive decays from a parent radionuclide through multiple daughter products to a stable end product
+    comments:
+      - The three naturally occurring decay series are the Uranium-238 series, Thorium-232 series, and Actinium (Uranium-235) series
+      - Each natural decay series involves 10-15 radioactive isotopes in sequence
+    slots:
+      - parent_nuclide
+      - stable_end_product
+      - series_members
+      - series_name
+    examples:
+      - value: Uranium-238 decay series
+        description: U-238 → Th-234 → Pa-234m → U-234 → Th-230 → Ra-226 → Rn-222 → Po-218 → Pb-214 → Bi-214 → Po-214 → Pb-210 → Bi-210 → Po-210 → Pb-206 (stable)
+      - value: Thorium-232 decay series
+        description: Th-232 → Ra-228 → Ac-228 → Th-228 → Ra-224 → Rn-220 → Po-216 → Pb-212 → Bi-212 → Pb-208 (stable)
+      - value: Actinium (Uranium-235) decay series
+        description: U-235 → Th-231 → Pa-231 → Ac-227 → ... → Pb-207 (stable)
+    title: decay series
   Isotope:
     is_a: Nuclide
     description: A specific subtype of an atom with a specified neutron number
@@ -1109,6 +1128,9 @@ classes:
     - decay_mode
     - decay_energy
     - mode_of_formation
+    - decay_series
+    - position_in_series
+    - branching_ratio
     defining_slots:
     - has_element
     - neutron_number
@@ -2138,6 +2160,49 @@ slots:
     domain: Isotope
     range: string
     title: mode of formation
+  parent_nuclide:
+    is_a: chemical_property
+    domain: DecaySeries
+    range: Isotope
+    description: The primordial radionuclide that starts the decay series
+    title: parent nuclide
+  stable_end_product:
+    is_a: chemical_property
+    domain: DecaySeries
+    range: Isotope
+    description: The stable isotope where the decay series ends
+    title: stable end product
+  series_members:
+    is_a: chemical_property
+    domain: DecaySeries
+    range: Isotope
+    multivalued: true
+    description: Ordered list of isotopes in the decay chain
+    title: series members
+  series_name:
+    is_a: information_property
+    domain: DecaySeries
+    range: string
+    description: Common name for the decay series (e.g. Uranium series, Thorium series, Actinium series)
+    title: series name
+  decay_series:
+    is_a: chemical_property
+    domain: Isotope
+    range: DecaySeries
+    description: Which decay series this isotope belongs to, if any
+    title: decay series
+  position_in_series:
+    is_a: chemical_property
+    domain: Isotope
+    range: integer
+    description: Ordinal position in the decay chain (1 for parent nuclide)
+    title: position in series
+  branching_ratio:
+    is_a: chemical_property
+    domain: Isotope
+    range: float
+    description: For isotopes with multiple decay modes, the fraction of decays that follow each path (value between 0 and 1)
+    title: branching ratio
   number_of_heavy_atoms:
     is_a: chemical_property
     source: https://www.lipidmaps.org/data/PhyschemPropHelp.html

@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-09T19:21:55
+# Generation date: 2025-12-10T03:15:34
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -470,6 +470,10 @@ class NeutralMoleculeId(NetUnchargedMoleculeId):
 
 
 class AtomId(ChemicalEntityId):
+    pass
+
+
+class DecaySeriesId(DomainEntityId):
     pass
 
 
@@ -2803,6 +2807,48 @@ class Atom(ChemicalEntity):
 
 
 @dataclass(repr=False)
+class DecaySeries(DomainEntity):
+    """
+    A sequential chain of radioactive decays from a parent radionuclide through multiple daughter products to a stable
+    end product
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["DecaySeries"]
+    class_class_curie: ClassVar[str] = "chemrof:DecaySeries"
+    class_name: ClassVar[str] = "DecaySeries"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.DecaySeries
+
+    id: Union[str, DecaySeriesId] = None
+    parent_nuclide: Optional[Union[str, IsotopeId]] = None
+    stable_end_product: Optional[Union[str, IsotopeId]] = None
+    series_members: Optional[Union[Union[str, IsotopeId], list[Union[str, IsotopeId]]]] = empty_list()
+    series_name: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DecaySeriesId):
+            self.id = DecaySeriesId(self.id)
+
+        if self.parent_nuclide is not None and not isinstance(self.parent_nuclide, IsotopeId):
+            self.parent_nuclide = IsotopeId(self.parent_nuclide)
+
+        if self.stable_end_product is not None and not isinstance(self.stable_end_product, IsotopeId):
+            self.stable_end_product = IsotopeId(self.stable_end_product)
+
+        if not isinstance(self.series_members, list):
+            self.series_members = [self.series_members] if self.series_members is not None else []
+        self.series_members = [v if isinstance(v, IsotopeId) else IsotopeId(v) for v in self.series_members]
+
+        if self.series_name is not None and not isinstance(self.series_name, str):
+            self.series_name = str(self.series_name)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
 class PartiallySpecifiedAtom(Atom):
     """
     An atom type that only has a subset of properties (has atomic number, charge, and neutron number) stated
@@ -2964,6 +3010,9 @@ class Isotope(Nuclide):
     decay_mode: Optional[str] = None
     decay_energy: Optional[str] = None
     mode_of_formation: Optional[str] = None
+    decay_series: Optional[Union[str, DecaySeriesId]] = None
+    position_in_series: Optional[int] = None
+    branching_ratio: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2994,6 +3043,15 @@ class Isotope(Nuclide):
 
         if self.mode_of_formation is not None and not isinstance(self.mode_of_formation, str):
             self.mode_of_formation = str(self.mode_of_formation)
+
+        if self.decay_series is not None and not isinstance(self.decay_series, DecaySeriesId):
+            self.decay_series = DecaySeriesId(self.decay_series)
+
+        if self.position_in_series is not None and not isinstance(self.position_in_series, int):
+            self.position_in_series = int(self.position_in_series)
+
+        if self.branching_ratio is not None and not isinstance(self.branching_ratio, float):
+            self.branching_ratio = float(self.branching_ratio)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -4808,6 +4866,27 @@ slots.decay_energy = Slot(uri=CHEMROF.decay_energy, name="decay_energy", curie=C
 
 slots.mode_of_formation = Slot(uri=CHEMROF.mode_of_formation, name="mode_of_formation", curie=CHEMROF.curie('mode_of_formation'),
                    model_uri=CHEMROF.mode_of_formation, domain=Isotope, range=Optional[str])
+
+slots.parent_nuclide = Slot(uri=CHEMROF.parent_nuclide, name="parent_nuclide", curie=CHEMROF.curie('parent_nuclide'),
+                   model_uri=CHEMROF.parent_nuclide, domain=DecaySeries, range=Optional[Union[str, IsotopeId]])
+
+slots.stable_end_product = Slot(uri=CHEMROF.stable_end_product, name="stable_end_product", curie=CHEMROF.curie('stable_end_product'),
+                   model_uri=CHEMROF.stable_end_product, domain=DecaySeries, range=Optional[Union[str, IsotopeId]])
+
+slots.series_members = Slot(uri=CHEMROF.series_members, name="series_members", curie=CHEMROF.curie('series_members'),
+                   model_uri=CHEMROF.series_members, domain=DecaySeries, range=Optional[Union[Union[str, IsotopeId], list[Union[str, IsotopeId]]]])
+
+slots.series_name = Slot(uri=CHEMROF.series_name, name="series_name", curie=CHEMROF.curie('series_name'),
+                   model_uri=CHEMROF.series_name, domain=DecaySeries, range=Optional[str])
+
+slots.decay_series = Slot(uri=CHEMROF.decay_series, name="decay_series", curie=CHEMROF.curie('decay_series'),
+                   model_uri=CHEMROF.decay_series, domain=Isotope, range=Optional[Union[str, DecaySeriesId]])
+
+slots.position_in_series = Slot(uri=CHEMROF.position_in_series, name="position_in_series", curie=CHEMROF.curie('position_in_series'),
+                   model_uri=CHEMROF.position_in_series, domain=Isotope, range=Optional[int])
+
+slots.branching_ratio = Slot(uri=CHEMROF.branching_ratio, name="branching_ratio", curie=CHEMROF.curie('branching_ratio'),
+                   model_uri=CHEMROF.branching_ratio, domain=Isotope, range=Optional[float])
 
 slots.number_of_heavy_atoms = Slot(uri=CHEMROF.number_of_heavy_atoms, name="number_of_heavy_atoms", curie=CHEMROF.curie('number_of_heavy_atoms'),
                    model_uri=CHEMROF.number_of_heavy_atoms, domain=None, range=Optional[str])

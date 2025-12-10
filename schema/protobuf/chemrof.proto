@@ -459,6 +459,17 @@ message Copolymer
   string polymerArchitectureType = 0
  repeated  macromolecule polymerOf = 0
  }
+// A sequential chain of radioactive decays from a parent radionuclide through multiple daughter products to a stable end product
+message DecaySeries
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  isotope parentNuclide = 0
+  isotope stableEndProduct = 0
+ repeated  isotope seriesMembers = 0
+  string seriesName = 0
+ }
 message DNASequenceInterval
  {
   string id = 0
@@ -884,6 +895,9 @@ message Isotope
   string decayMode = 0
   string decayEnergy = 0
   string modeOfFormation = 0
+  decaySeries decaySeries = 0
+  integer positionInSeries = 0
+  float branchingRatio = 0
  }
 // A large molecule, such as a polymer, lipid, or macrocycle
 message Macromolecule

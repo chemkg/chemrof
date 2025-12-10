@@ -512,6 +512,18 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<DecaySeries> CLOSED {
+    (  $<DecaySeries_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ? ;
+          <parent_nuclide> @<Isotope> ? ;
+          <stable_end_product> @<Isotope> ? ;
+          <series_members> @<Isotope> * ;
+          <series_name> @linkml:String ?
+       ) ;
+       rdf:type [ <DecaySeries> ]
+    )
+}
+
 <DNASequenceInterval> CLOSED {
     (  $<DNASequenceInterval_tes> (  &<NucleotideSequenceInterval_tes> ;
           rdf:type [ <NucleotideSequenceInterval> ] ?
@@ -521,7 +533,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <DomainEntity>  (
-    @<PhysicochemicalEntity> OR @<Reaction>
+    @<DecaySeries> OR @<PhysicochemicalEntity> OR @<Reaction>
 )
 
 <DomainEntity_struct> {
@@ -749,7 +761,10 @@ linkml:Sparqlpath xsd:string
           <decay_product> @<Isotope> ? ;
           <decay_mode> @linkml:String ? ;
           <decay_energy> @linkml:String ? ;
-          <mode_of_formation> @linkml:String ?
+          <mode_of_formation> @linkml:String ? ;
+          <decay_series> @<DecaySeries> ? ;
+          <position_in_series> @linkml:Integer ? ;
+          <branching_ratio> @linkml:Float ?
        ) ;
        rdf:type [ <Isotope> ]
     )

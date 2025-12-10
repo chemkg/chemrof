@@ -2164,6 +2164,119 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "parent_nuclide",
+      "definition_uri": "https://w3id.org/chemrof/parent_nuclide",
+      "description": "The primordial radionuclide that starts the decay series",
+      "title": "parent nuclide",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "DecaySeries",
+      "slot_uri": "https://w3id.org/chemrof/parent_nuclide",
+      "owner": "DecaySeries",
+      "domain_of": [
+        "DecaySeries"
+      ],
+      "range": "Isotope",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "stable_end_product",
+      "definition_uri": "https://w3id.org/chemrof/stable_end_product",
+      "description": "The stable isotope where the decay series ends",
+      "title": "stable end product",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "DecaySeries",
+      "slot_uri": "https://w3id.org/chemrof/stable_end_product",
+      "owner": "DecaySeries",
+      "domain_of": [
+        "DecaySeries"
+      ],
+      "range": "Isotope",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "series_members",
+      "definition_uri": "https://w3id.org/chemrof/series_members",
+      "description": "Ordered list of isotopes in the decay chain",
+      "title": "series members",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "DecaySeries",
+      "slot_uri": "https://w3id.org/chemrof/series_members",
+      "owner": "DecaySeries",
+      "domain_of": [
+        "DecaySeries"
+      ],
+      "range": "Isotope",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "series_name",
+      "definition_uri": "https://w3id.org/chemrof/series_name",
+      "description": "Common name for the decay series (e.g. Uranium series, Thorium series, Actinium series)",
+      "title": "series name",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "information_property",
+      "domain": "DecaySeries",
+      "slot_uri": "https://w3id.org/chemrof/series_name",
+      "owner": "DecaySeries",
+      "domain_of": [
+        "DecaySeries"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "decay_series",
+      "definition_uri": "https://w3id.org/chemrof/decay_series",
+      "description": "Which decay series this isotope belongs to, if any",
+      "title": "decay series",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "Isotope",
+      "slot_uri": "https://w3id.org/chemrof/decay_series",
+      "owner": "Isotope",
+      "domain_of": [
+        "Isotope"
+      ],
+      "range": "DecaySeries",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "position_in_series",
+      "definition_uri": "https://w3id.org/chemrof/position_in_series",
+      "description": "Ordinal position in the decay chain (1 for parent nuclide)",
+      "title": "position in series",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "Isotope",
+      "slot_uri": "https://w3id.org/chemrof/position_in_series",
+      "owner": "Isotope",
+      "domain_of": [
+        "Isotope"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "branching_ratio",
+      "definition_uri": "https://w3id.org/chemrof/branching_ratio",
+      "description": "For isotopes with multiple decay modes, the fraction of decays that follow each path (value between 0 and 1)",
+      "title": "branching ratio",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_property",
+      "domain": "Isotope",
+      "slot_uri": "https://w3id.org/chemrof/branching_ratio",
+      "owner": "Isotope",
+      "domain_of": [
+        "Isotope"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "number_of_heavy_atoms",
       "definition_uri": "https://w3id.org/chemrof/number_of_heavy_atoms",
       "description": "number of of non-hydrogen atoms",
@@ -10684,6 +10797,47 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "DecaySeries",
+      "definition_uri": "https://w3id.org/chemrof/DecaySeries",
+      "description": "A sequential chain of radioactive decays from a parent radionuclide through multiple daughter products to a stable end product",
+      "title": "decay series",
+      "comments": [
+        "The three naturally occurring decay series are the Uranium-238 series, Thorium-232 series, and Actinium (Uranium-235) series",
+        "Each natural decay series involves 10-15 radioactive isotopes in sequence"
+      ],
+      "examples": [
+        {
+          "value": "Uranium-238 decay series",
+          "description": "U-238 \u2192 Th-234 \u2192 Pa-234m \u2192 U-234 \u2192 Th-230 \u2192 Ra-226 \u2192 Rn-222 \u2192 Po-218 \u2192 Pb-214 \u2192 Bi-214 \u2192 Po-214 \u2192 Pb-210 \u2192 Bi-210 \u2192 Po-210 \u2192 Pb-206 (stable)",
+          "@type": "Example"
+        },
+        {
+          "value": "Thorium-232 decay series",
+          "description": "Th-232 \u2192 Ra-228 \u2192 Ac-228 \u2192 Th-228 \u2192 Ra-224 \u2192 Rn-220 \u2192 Po-216 \u2192 Pb-212 \u2192 Bi-212 \u2192 Pb-208 (stable)",
+          "@type": "Example"
+        },
+        {
+          "value": "Actinium (Uranium-235) decay series",
+          "description": "U-235 \u2192 Th-231 \u2192 Pa-231 \u2192 Ac-227 \u2192 ... \u2192 Pb-207 (stable)",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "DomainEntity",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "parent_nuclide",
+        "stable_end_product",
+        "series_members",
+        "series_name"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/DecaySeries",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Isotope",
       "definition_uri": "https://w3id.org/chemrof/Isotope",
       "description": "A specific subtype of an atom with a specified neutron number",
@@ -10754,7 +10908,10 @@
         "decay_product",
         "decay_mode",
         "decay_energy",
-        "mode_of_formation"
+        "mode_of_formation",
+        "decay_series",
+        "position_in_series",
+        "branching_ratio"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Isotope",
@@ -12154,9 +12311,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-11-09T19:21:43",
-  "source_file_size": 120000,
-  "generation_date": "2025-11-09T19:21:51",
+  "source_file_date": "2025-12-10T03:15:18",
+  "source_file_size": 122565,
+  "generation_date": "2025-12-10T03:15:28",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",
