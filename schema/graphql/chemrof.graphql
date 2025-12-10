@@ -35,6 +35,23 @@ enum ClassificationLevelEnum
     MolecularSubspecies
   }
 
+enum ConcentrationUnitEnum
+  {
+    M
+    mM
+    uM
+    nM
+    g__SOLIDUS__L
+    mg__SOLIDUS__L
+    ug__SOLIDUS__L
+    ng__SOLIDUS__L
+    percent_w__SOLIDUS__v
+    percent_v__SOLIDUS__v
+    percent_w__SOLIDUS__w
+    ppm
+    ppb
+  }
+
 enum ElementFamilyEnum
   {
     Alkali_Earth
@@ -499,6 +516,11 @@ type AtomOccurrence implements OwlClass
     coordinationNumber: Int
   }
 
+type BufferRole
+  {
+    owlSubclassOf: OwlClass
+  }
+
 interface CationState
   {
     elementalCharge: Int
@@ -681,6 +703,7 @@ interface ChemicalMixture
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
   }
 
 type ChemicalRelationship implements OwlClass
@@ -722,6 +745,7 @@ type ChemicalSalt
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
     elementalCharge: Int
     hasCationicComponent: CationState
     hasAnionicComponent: AnionState
@@ -778,6 +802,12 @@ type ChiralityCenter
 type Collection
   {
     entities: [DomainEntity]
+  }
+
+type Concentration
+  {
+    value: Float!
+    unit: ConcentrationUnitEnum!
   }
 
 interface Connectivity
@@ -862,6 +892,12 @@ interface DomainEntity
     id: String!
     name: String
     type: String
+  }
+
+type ElementSourceRole
+  {
+    owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
   }
 
 type Enantiomer
@@ -1198,6 +1234,7 @@ type ImpreciseChemicalMixture
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
     hasProportionalParts: [ProportionalPart]
     hasMixfileLocation: FileLocation
     hasMinchiRepresentation: ChemicalEncoding
@@ -1205,6 +1242,11 @@ type ImpreciseChemicalMixture
 
 interface InchiObject
   {
+  }
+
+type IngredientRole
+  {
+    owlSubclassOf: OwlClass
   }
 
 type Isobar
@@ -1385,6 +1427,11 @@ type Mineral
     hasPart: ChemicalEntity
   }
 
+type MineralNutrientRole
+  {
+    owlSubclassOf: OwlClass
+  }
+
 type Moiety
   {
     id: String!
@@ -1533,6 +1580,7 @@ type MolecularComplex
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
   }
 
 type MolecularComponent
@@ -2137,6 +2185,11 @@ type Nuclide
     energyLevel: String
   }
 
+type NutrientRole
+  {
+    owlSubclassOf: OwlClass
+  }
+
 interface OwlClass
   {
     owlSubclassOf: OwlClass
@@ -2377,11 +2430,14 @@ type PreciseChemicalMixture implements WeaklyBonded
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
   }
 
 type ProportionalPart
   {
     owlSubclassOf: OwlClass
+    hasIngredientRole: IngredientRole
+    concentration: Concentration
     hasRole: IngredientRoleEnum
     composedOf: ChemicalEntity
     minimalPercentage: Float
@@ -2453,6 +2509,7 @@ type RacemicMixture
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
     hasLeftEnantiomer: Enantiomer!
     hasRightEnantiomer: Enantiomer!
     chiralityAgnosticForm: Molecule
@@ -2634,6 +2691,11 @@ type SmallMolecule
     hasPart: String
   }
 
+type SolventRole
+  {
+    owlSubclassOf: OwlClass
+  }
+
 interface SpecificityMixin
   {
   }
@@ -2742,6 +2804,7 @@ type SupramolecularPolymer
     pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
+    ph: Float
     polymerOf: Macromolecule
     hasRepeatUnit: ChemicalEntity
   }
@@ -2793,6 +2856,11 @@ type UnchargedAtom implements Uncharged
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
     elementalCharge: Int
+  }
+
+type VitaminRole
+  {
+    owlSubclassOf: OwlClass
   }
 
 interface WeaklyBonded

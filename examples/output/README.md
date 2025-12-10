@@ -119,6 +119,48 @@ name: insulin
 type: chemrof:Protein
 
 ```
+## ImpreciseChemicalMixture-RCH2_alphaKG_medium
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:30915
+  concentration:
+    unit: mM
+    value: 20.0
+- composed_of: CHEBI:31206
+  concentration:
+    unit: g/L
+    value: 0.25
+- composed_of: CHEBI:32588
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:37585
+  concentration:
+    unit: g/L
+    value: 0.6
+- composed_of: CHEBI:44872
+  concentration:
+    unit: mM
+    value: 30.0
+- composed_of: CHEBI:32599
+  concentration:
+    unit: g/L
+    value: 0.03
+- composed_of: CHEBI:16709
+  concentration:
+    unit: mg/L
+    value: 0.1
+- composed_of: CHEBI:15956
+  concentration:
+    unit: mg/L
+    value: 0.02
+id: ex:RCH2_alphaKG_medium
+name: RCH2 defined medium with alpha-ketoglutaric acid
+ph: 7.0
+type: chemrof:ImpreciseChemicalMixture
+
+```
 ## Ester-ethyl_acetate
 ### Input
 ```yaml

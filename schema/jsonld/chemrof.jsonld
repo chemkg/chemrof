@@ -756,6 +756,7 @@
     {
       "name": "IngredientRoleEnum",
       "definition_uri": "https://w3id.org/chemrof/IngredientRoleEnum",
+      "description": "DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.",
       "title": "ingredient_role_enum",
       "from_schema": "https://w3id.org/chemrof",
       "permissible_values": [
@@ -770,6 +771,67 @@
         },
         {
           "text": "solvent"
+        }
+      ]
+    },
+    {
+      "name": "ConcentrationUnitEnum",
+      "definition_uri": "https://w3id.org/chemrof/ConcentrationUnitEnum",
+      "description": "Units for expressing concentration of a substance.",
+      "title": "concentration_unit_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "M",
+          "description": "Molar (mol/L)"
+        },
+        {
+          "text": "mM",
+          "description": "Millimolar (mmol/L)"
+        },
+        {
+          "text": "uM",
+          "description": "Micromolar (\u00b5mol/L)"
+        },
+        {
+          "text": "nM",
+          "description": "Nanomolar (nmol/L)"
+        },
+        {
+          "text": "g/L",
+          "description": "Grams per liter"
+        },
+        {
+          "text": "mg/L",
+          "description": "Milligrams per liter"
+        },
+        {
+          "text": "ug/L",
+          "description": "Micrograms per liter"
+        },
+        {
+          "text": "ng/L",
+          "description": "Nanograms per liter"
+        },
+        {
+          "text": "percent_w/v",
+          "description": "Weight per volume percentage (g/100mL)"
+        },
+        {
+          "text": "percent_v/v",
+          "description": "Volume per volume percentage"
+        },
+        {
+          "text": "percent_w/w",
+          "description": "Weight per weight percentage"
+        },
+        {
+          "text": "ppm",
+          "description": "Parts per million"
+        },
+        {
+          "text": "ppb",
+          "description": "Parts per billion"
         }
       ]
     },
@@ -1816,6 +1878,68 @@
       "range": "ChemicalRole",
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "source_element",
+      "definition_uri": "https://w3id.org/chemrof/source_element",
+      "description": "The element that is provided by an element source role. For example, carbon for a carbon source, nitrogen for a nitrogen source.",
+      "title": "source element",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/source_element",
+      "owner": "ElementSourceRole",
+      "domain_of": [
+        "ElementSourceRole"
+      ],
+      "range": "ChemicalElement",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_ingredient_role",
+      "definition_uri": "https://w3id.org/chemrof/has_ingredient_role",
+      "description": "The role that an ingredient plays in a mixture.",
+      "title": "has ingredient role",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_ingredient_role",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
+      "range": "IngredientRole",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "concentration",
+      "definition_uri": "https://w3id.org/chemrof/concentration",
+      "description": "The concentration of a component in a mixture.",
+      "title": "concentration",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/concentration",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
+      "range": "Concentration",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ph",
+      "definition_uri": "https://w3id.org/chemrof/ph",
+      "description": "The pH value of a mixture or solution.",
+      "title": "pH",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/ph",
+      "owner": "ChemicalMixture",
+      "domain_of": [
+        "ChemicalMixture"
+      ],
+      "range": "float",
+      "minimum_value": 0,
+      "maximum_value": 14,
       "@type": "SlotDefinition"
     },
     {
@@ -4874,6 +4998,34 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "concentration__value",
+      "description": "The numeric value of the concentration.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/value",
+      "alias": "value",
+      "owner": "Concentration",
+      "domain_of": [
+        "Concentration"
+      ],
+      "range": "float",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "concentration__unit",
+      "description": "The unit of concentration.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/unit",
+      "alias": "unit",
+      "owner": "Concentration",
+      "domain_of": [
+        "Concentration"
+      ],
+      "range": "ConcentrationUnitEnum",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "atomicBond__subject",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/subject",
@@ -7282,6 +7434,7 @@
     {
       "name": "ProportionalPart_has_role",
       "definition_uri": "https://w3id.org/chemrof/has_role",
+      "description": "DEPRECATED - use has_ingredient_role instead",
       "title": "has role",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "has_role",
@@ -7300,6 +7453,7 @@
     {
       "name": "ProportionalPart_composed_of",
       "definition_uri": "https://w3id.org/chemrof/composed_of",
+      "description": "The chemical entity that is a component of the mixture. Can be a simple chemical or another mixture (for nested mixtures).",
       "title": "composed of",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "composed_of",
@@ -7318,6 +7472,7 @@
     {
       "name": "ProportionalPart_minimal_percentage",
       "definition_uri": "https://w3id.org/chemrof/minimal_percentage",
+      "description": "Minimum percentage by mass or volume. Use concentration slot for molar or mass/volume concentrations.",
       "title": "minimal percentage",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "minimal_percentage",
@@ -7336,6 +7491,7 @@
     {
       "name": "ProportionalPart_maximum_percentage",
       "definition_uri": "https://w3id.org/chemrof/maximum_percentage",
+      "description": "Maximum percentage by mass or volume. Use concentration slot for molar or mass/volume concentrations.",
       "title": "maximum percentage",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "maximum_percentage",
@@ -8724,7 +8880,8 @@
         "pka_solvent",
         "pka_pressure",
         "owl_subclass_of",
-        "PolyatomicEntity_inchi_atom_connections_sublayer"
+        "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MolecularComplex",
@@ -8984,6 +9141,7 @@
         "pka_pressure",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph",
         "polymer_of",
         "has_repeat_unit"
       ],
@@ -9358,7 +9516,8 @@
         "pka_solvent",
         "pka_pressure",
         "owl_subclass_of",
-        "PolyatomicEntity_inchi_atom_connections_sublayer"
+        "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/ChemicalMixture",
@@ -9408,7 +9567,8 @@
         "pka_solvent",
         "pka_pressure",
         "owl_subclass_of",
-        "PolyatomicEntity_inchi_atom_connections_sublayer"
+        "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/PreciseChemicalMixture",
@@ -9464,6 +9624,7 @@
         "pka_pressure",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph",
         "has_proportional_parts",
         "has_mixfile_location",
         "has_minchi_representation"
@@ -11240,6 +11401,36 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Concentration",
+      "definition_uri": "https://w3id.org/chemrof/Concentration",
+      "description": "A measurement of the amount of a substance in a given volume or mass.",
+      "title": "concentration",
+      "from_schema": "https://w3id.org/chemrof",
+      "slots": [
+        "concentration__value",
+        "concentration__unit"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "value",
+          "description": "The numeric value of the concentration.",
+          "range": "float",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "unit",
+          "description": "The unit of concentration.",
+          "range": "ConcentrationUnitEnum",
+          "required": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/chemrof/Concentration",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ChemicalRole",
       "definition_uri": "https://w3id.org/chemrof/ChemicalRole",
       "description": "A characteristic of a chemical entity that is realized under particular conditions",
@@ -11263,6 +11454,114 @@
       ],
       "slot_usage": {},
       "class_uri": "http://purl.obolibrary.org/obo/CHEBI_50906",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "IngredientRole",
+      "definition_uri": "https://w3id.org/chemrof/IngredientRole",
+      "description": "A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.",
+      "title": "ingredient role",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "ChemicalRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/IngredientRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ElementSourceRole",
+      "definition_uri": "https://w3id.org/chemrof/ElementSourceRole",
+      "description": "Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen source, phosphorus source.",
+      "title": "element source role",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "IngredientRole",
+      "slots": [
+        "owl_subclass_of",
+        "source_element"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/ElementSourceRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BufferRole",
+      "definition_uri": "https://w3id.org/chemrof/BufferRole",
+      "description": "Role of maintaining pH in a solution or mixture.",
+      "title": "buffer role",
+      "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "CHEBI:35225"
+      ],
+      "is_a": "IngredientRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/BufferRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SolventRole",
+      "definition_uri": "https://w3id.org/chemrof/SolventRole",
+      "description": "Role of dissolving other components in a mixture.",
+      "title": "solvent role",
+      "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "CHEBI:46787"
+      ],
+      "is_a": "IngredientRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/SolventRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NutrientRole",
+      "definition_uri": "https://w3id.org/chemrof/NutrientRole",
+      "description": "Role of providing nutritional value, such as vitamins or minerals.",
+      "title": "nutrient role",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "IngredientRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/NutrientRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "VitaminRole",
+      "definition_uri": "https://w3id.org/chemrof/VitaminRole",
+      "description": "Role of providing a vitamin component.",
+      "title": "vitamin role",
+      "from_schema": "https://w3id.org/chemrof",
+      "exact_mappings": [
+        "CHEBI:33229"
+      ],
+      "is_a": "NutrientRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/VitaminRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MineralNutrientRole",
+      "definition_uri": "https://w3id.org/chemrof/MineralNutrientRole",
+      "description": "Role of providing a mineral nutrient, often as a trace element.",
+      "title": "mineral nutrient role",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "NutrientRole",
+      "slots": [
+        "owl_subclass_of"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/MineralNutrientRole",
       "@type": "ClassDefinition"
     },
     {
@@ -11565,6 +11864,7 @@
         "pka_pressure",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph",
         "ChemicalSalt_elemental_charge",
         "ChemicalSalt_has_cationic_component",
         "ChemicalSalt_has_anionic_component"
@@ -11790,6 +12090,7 @@
         "pka_pressure",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "ph",
         "RacemicMixture_has_left_enantiomer",
         "RacemicMixture_has_right_enantiomer",
         "RacemicMixture_chirality_agnostic_form",
@@ -11994,12 +12295,14 @@
     {
       "name": "ProportionalPart",
       "definition_uri": "https://w3id.org/chemrof/ProportionalPart",
-      "description": "A part of a complex mixture that is of uniform composition",
+      "description": "A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration.",
       "title": "proportional part",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "ChemicalRelationship",
       "slots": [
         "owl_subclass_of",
+        "has_ingredient_role",
+        "concentration",
         "ProportionalPart_has_role",
         "ProportionalPart_composed_of",
         "ProportionalPart_minimal_percentage",
@@ -12154,9 +12457,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-11-09T19:21:43",
-  "source_file_size": 120000,
-  "generation_date": "2025-11-09T19:21:51",
+  "source_file_date": "2025-12-09T17:48:19",
+  "source_file_size": 123955,
+  "generation_date": "2025-12-09T17:50:53",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

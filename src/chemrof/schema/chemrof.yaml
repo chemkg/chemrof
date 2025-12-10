@@ -783,6 +783,8 @@ classes:
     is_a: PolyatomicEntity
     description: A polyatomic entity that consists of two or more parts that are weakly
       bound, may be of known or unknown stoichiometry
+    slots:
+    - ph
     exact_mappings:
     - CHEBI:60004
     title: chemical mixture
@@ -1265,6 +1267,18 @@ classes:
     close_mappings:
     - biolink:Association
     title: chemical relationship
+  Concentration:
+    description: A measurement of the amount of a substance in a given volume or mass.
+    attributes:
+      value:
+        range: float
+        description: The numeric value of the concentration.
+        required: true
+      unit:
+        range: ConcentrationUnitEnum
+        description: The unit of concentration.
+        required: true
+    title: concentration
   ChemicalRole:
     class_uri: CHEBI:50906
     aliases:
@@ -1277,6 +1291,44 @@ classes:
     - SIO:000016
     - BFO:0000017
     title: chemical role
+  IngredientRole:
+    is_a: ChemicalRole
+    description: A role that a chemical entity plays as an ingredient in a mixture,
+      such as carbon source, buffer, or solvent.
+    title: ingredient role
+  ElementSourceRole:
+    is_a: IngredientRole
+    description: Role of providing a specific element to a biological or chemical system.
+      Examples include carbon source, nitrogen source, phosphorus source.
+    slots:
+    - source_element
+    title: element source role
+  BufferRole:
+    is_a: IngredientRole
+    description: Role of maintaining pH in a solution or mixture.
+    exact_mappings:
+    - CHEBI:35225
+    title: buffer role
+  SolventRole:
+    is_a: IngredientRole
+    description: Role of dissolving other components in a mixture.
+    exact_mappings:
+    - CHEBI:46787
+    title: solvent role
+  NutrientRole:
+    is_a: IngredientRole
+    description: Role of providing nutritional value, such as vitamins or minerals.
+    title: nutrient role
+  VitaminRole:
+    is_a: NutrientRole
+    description: Role of providing a vitamin component.
+    exact_mappings:
+    - CHEBI:33229
+    title: vitamin role
+  MineralNutrientRole:
+    is_a: NutrientRole
+    description: Role of providing a mineral nutrient, often as a trace element.
+    title: mineral nutrient role
   Location:
     abstract: true
     description: Abstract grouping for entities that represent abstract or concrete
@@ -1661,16 +1713,31 @@ classes:
     title: reaction participant
   ProportionalPart:
     is_a: ChemicalRelationship
-    description: A part of a complex mixture that is of uniform composition
+    description: A part of a complex mixture that is of uniform composition.
+      Each part specifies a chemical entity, its role in the mixture, and its concentration.
+    slots:
+    - composed_of
+    - has_role
+    - has_ingredient_role
+    - concentration
+    - minimal_percentage
+    - maximum_percentage
     slot_usage:
       has_role:
+        description: DEPRECATED - use has_ingredient_role instead
         range: IngredientRoleEnum
       composed_of:
         range: ChemicalEntity
+        description: The chemical entity that is a component of the mixture.
+          Can be a simple chemical or another mixture (for nested mixtures).
       minimal_percentage:
         range: float
+        description: Minimum percentage by mass or volume. Use concentration slot for
+          molar or mass/volume concentrations.
       maximum_percentage:
         range: float
+        description: Maximum percentage by mass or volume. Use concentration slot for
+          molar or mass/volume concentrations.
     title: proportional part
   ChemicalSimilarity:
     is_a: ChemicalRelationship
@@ -2023,6 +2090,27 @@ slots:
     range: ChemicalRole
     title: has chemical role
     slot_uri: RO:0000087
+  source_element:
+    range: ChemicalElement
+    description: The element that is provided by an element source role.
+      For example, carbon for a carbon source, nitrogen for a nitrogen source.
+    title: source element
+  has_ingredient_role:
+    range: IngredientRole
+    description: The role that an ingredient plays in a mixture.
+    title: has ingredient role
+    inlined: true
+  concentration:
+    range: Concentration
+    description: The concentration of a component in a mixture.
+    title: concentration
+    inlined: true
+  ph:
+    range: float
+    description: The pH value of a mixture or solution.
+    minimum_value: 0
+    maximum_value: 14
+    title: pH
   has_part:
     is_a: chemical_to_chemical_relationship
     slot_uri: BFO:0000051
@@ -3346,12 +3434,43 @@ enums:
         meaning: damlpt:Semi-Metallic
     title: element_metallic_classification
   IngredientRoleEnum:
+    description: DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.
     permissible_values:
       active ingredient: null
       inactive ingredient: null
       excipient: null
       solvent: null
     title: ingredient_role_enum
+  ConcentrationUnitEnum:
+    description: Units for expressing concentration of a substance.
+    permissible_values:
+      M:
+        description: Molar (mol/L)
+      mM:
+        description: Millimolar (mmol/L)
+      uM:
+        description: Micromolar (µmol/L)
+      nM:
+        description: Nanomolar (nmol/L)
+      g/L:
+        description: Grams per liter
+      mg/L:
+        description: Milligrams per liter
+      ug/L:
+        description: Micrograms per liter
+      ng/L:
+        description: Nanograms per liter
+      percent_w/v:
+        description: Weight per volume percentage (g/100mL)
+      percent_v/v:
+        description: Volume per volume percentage
+      percent_w/w:
+        description: Weight per weight percentage
+      ppm:
+        description: Parts per million
+      ppb:
+        description: Parts per billion
+    title: concentration_unit_enum
   BondTypeEnum:
     permissible_values:
       covalent:

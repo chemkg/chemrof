@@ -1504,6 +1504,25 @@
             "title": "BronstedAcidBaseRoleEnum",
             "type": "string"
         },
+        "BufferRole": {
+            "additionalProperties": false,
+            "description": "Role of maintaining pH in a solution or mixture.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "BufferRole",
+            "type": "object"
+        },
         "ChemicalElement": {
             "additionalProperties": false,
             "description": "generic form of an atom, with unspecified neutron or charge",
@@ -2179,6 +2198,15 @@
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
                 },
+                "ph": {
+                    "description": "The pH value of a mixture or solution.",
+                    "maximum": 14,
+                    "minimum": 0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
                 "pka_ionic_strength": {
                     "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
                     "type": [
@@ -2667,6 +2695,46 @@
             },
             "title": "Collection",
             "type": "object"
+        },
+        "Concentration": {
+            "additionalProperties": false,
+            "description": "A measurement of the amount of a substance in a given volume or mass.",
+            "properties": {
+                "unit": {
+                    "$ref": "#/$defs/ConcentrationUnitEnum",
+                    "description": "The unit of concentration."
+                },
+                "value": {
+                    "description": "The numeric value of the concentration.",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "value",
+                "unit"
+            ],
+            "title": "Concentration",
+            "type": "object"
+        },
+        "ConcentrationUnitEnum": {
+            "description": "Units for expressing concentration of a substance.",
+            "enum": [
+                "M",
+                "mM",
+                "uM",
+                "nM",
+                "g/L",
+                "mg/L",
+                "ug/L",
+                "ng/L",
+                "percent_w/v",
+                "percent_v/v",
+                "percent_w/w",
+                "ppm",
+                "ppb"
+            ],
+            "title": "ConcentrationUnitEnum",
+            "type": "string"
         },
         "Copolymer": {
             "additionalProperties": false,
@@ -3198,6 +3266,32 @@
             ],
             "title": "ElementMetallicClassification",
             "type": "string"
+        },
+        "ElementSourceRole": {
+            "additionalProperties": false,
+            "description": "Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen source, phosphorus source.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "source_element": {
+                    "description": "The element that is provided by an element source role. For example, carbon for a carbon source, nitrogen for a nitrogen source.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ElementSourceRole",
+            "type": "object"
         },
         "Enantiomer": {
             "additionalProperties": false,
@@ -5016,6 +5110,15 @@
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
                 },
+                "ph": {
+                    "description": "The pH value of a mixture or solution.",
+                    "maximum": 14,
+                    "minimum": 0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
                 "pka_ionic_strength": {
                     "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
                     "type": [
@@ -5084,8 +5187,27 @@
             "title": "ImpreciseChemicalMixture",
             "type": "object"
         },
+        "IngredientRole": {
+            "additionalProperties": false,
+            "description": "A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "IngredientRole",
+            "type": "object"
+        },
         "IngredientRoleEnum": {
-            "description": "",
+            "description": "DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.",
             "enum": [
                 "active ingredient",
                 "inactive ingredient",
@@ -6175,6 +6297,25 @@
             "title": "Mineral",
             "type": "object"
         },
+        "MineralNutrientRole": {
+            "additionalProperties": false,
+            "description": "Role of providing a mineral nutrient, often as a trace element.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "MineralNutrientRole",
+            "type": "object"
+        },
         "Moiety": {
             "additionalProperties": false,
             "description": "a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups",
@@ -7094,6 +7235,15 @@
                         }
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "ph": {
+                    "description": "The pH value of a mixture or solution.",
+                    "maximum": 14,
+                    "minimum": 0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
                 },
                 "pka_ionic_strength": {
                     "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
@@ -10809,6 +10959,25 @@
             "title": "Nuclide",
             "type": "object"
         },
+        "NutrientRole": {
+            "additionalProperties": false,
+            "description": "Role of providing nutritional value, such as vitamins or minerals.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "NutrientRole",
+            "type": "object"
+        },
         "Peptide": {
             "additionalProperties": false,
             "description": "",
@@ -11594,8 +11763,30 @@
         },
         "ProportionalPart": {
             "additionalProperties": false,
-            "description": "A part of a complex mixture that is of uniform composition",
+            "description": "A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration.",
             "properties": {
+                "concentration": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Concentration"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The concentration of a component in a mixture."
+                },
+                "has_ingredient_role": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/IngredientRole"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The role that an ingredient plays in a mixture."
+                },
                 "owl_subclass_of": {
                     "anyOf": [
                         {
@@ -12243,6 +12434,15 @@
                         }
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "ph": {
+                    "description": "The pH value of a mixture or solution.",
+                    "maximum": 14,
+                    "minimum": 0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
                 },
                 "pka_ionic_strength": {
                     "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
@@ -13027,6 +13227,25 @@
             "title": "SmallMolecule",
             "type": "object"
         },
+        "SolventRole": {
+            "additionalProperties": false,
+            "description": "Role of dissolving other components in a mixture.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "SolventRole",
+            "type": "object"
+        },
         "StandardInchiObject": {
             "additionalProperties": false,
             "description": "",
@@ -13636,6 +13855,15 @@
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
                 },
+                "ph": {
+                    "description": "The pH value of a mixture or solution.",
+                    "maximum": 14,
+                    "minimum": 0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
                 "pka_ionic_strength": {
                     "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
                     "type": [
@@ -13971,6 +14199,25 @@
                 "id"
             ],
             "title": "UnchargedAtom",
+            "type": "object"
+        },
+        "VitaminRole": {
+            "additionalProperties": false,
+            "description": "Role of providing a vitamin component.",
+            "properties": {
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                }
+            },
+            "title": "VitaminRole",
             "type": "object"
         },
         "Zwitterion": {
