@@ -759,7 +759,7 @@ type: chemrof:MonoatomicIon
 ### Input
 ```yaml
 has_proportional_parts:
-- composed_of: CHEBI:32599
+- composed_of: CHEBI:31795
   concentration:
     unit: g/L
     value: 3.0
@@ -771,23 +771,23 @@ has_proportional_parts:
   concentration:
     unit: g/L
     value: 1.0
-- composed_of: CHEBI:86362
+- composed_of: CHEBI:86364
   concentration:
     unit: g/L
     value: 0.5
-- composed_of: CHEBI:86362
+- composed_of: CHEBI:53503
   concentration:
     unit: g/L
     value: 0.1
-- composed_of: CHEBI:35176
+- composed_of: CHEBI:32312
   concentration:
     unit: g/L
     value: 0.1
-- composed_of: CHEBI:86146
+- composed_of: CHEBI:86158
   concentration:
     unit: g/L
     value: 0.1
-- composed_of: CHEBI:75832
+- composed_of: CHEBI:75836
   concentration:
     unit: g/L
     value: 0.1
@@ -795,7 +795,7 @@ has_proportional_parts:
   concentration:
     unit: g/L
     value: 0.01
-- composed_of: CHEBI:86357
+- composed_of: CHEBI:75213
   concentration:
     unit: g/L
     value: 0.01
