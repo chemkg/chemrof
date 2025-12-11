@@ -1295,13 +1295,17 @@ classes:
     is_a: ChemicalRole
     description: A role that a chemical entity plays as an ingredient in a mixture,
       such as carbon source, buffer, or solvent.
+    slots:
+    - source_element
+    attributes:
+      role_type:
+        range: IngredientRoleTypeEnum
+        description: The type of ingredient role.
     title: ingredient role
   ElementSourceRole:
     is_a: IngredientRole
     description: Role of providing a specific element to a biological or chemical system.
       Examples include carbon source, nitrogen source, phosphorus source.
-    slots:
-    - source_element
     title: element source role
   BufferRole:
     is_a: IngredientRole
@@ -3471,6 +3475,40 @@ enums:
       ppb:
         description: Parts per billion
     title: concentration_unit_enum
+  IngredientRoleTypeEnum:
+    description: Types of roles that ingredients can play in a mixture.
+    permissible_values:
+      carbon_source:
+        description: Provides carbon for biosynthesis
+      nitrogen_source:
+        description: Provides nitrogen for biosynthesis
+      phosphorus_source:
+        description: Provides phosphorus for biosynthesis
+      sulfur_source:
+        description: Provides sulfur for biosynthesis
+      electron_donor:
+        description: Provides electrons in redox reactions
+      electron_acceptor:
+        description: Accepts electrons in redox reactions
+      buffer:
+        description: Maintains pH stability
+      solvent:
+        description: Dissolves other components
+      vitamin:
+        description: Provides essential vitamin micronutrient
+      mineral:
+        description: Provides essential mineral micronutrient
+      trace_element:
+        description: Provides trace element micronutrient
+      growth_factor:
+        description: Promotes or enables growth
+      antibiotic:
+        description: Selects for or against certain organisms
+      inducer:
+        description: Induces gene expression
+      substrate:
+        description: Primary substrate for enzymatic reactions
+    title: ingredient_role_type_enum
   BondTypeEnum:
     permissible_values:
       covalent:

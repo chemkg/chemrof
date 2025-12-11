@@ -127,24 +127,41 @@ has_proportional_parts:
   concentration:
     unit: mM
     value: 20.0
+  has_ingredient_role:
+    role_type: carbon_source
+    source_element: CHEBI:27594
 - composed_of: CHEBI:31206
   concentration:
     unit: g/L
     value: 0.25
+  has_ingredient_role:
+    role_type: nitrogen_source
+    source_element: CHEBI:25555
 - composed_of: CHEBI:32588
   concentration:
     unit: g/L
     value: 0.1
+  has_ingredient_role:
+    role_type: mineral
 - composed_of: CHEBI:37585
   concentration:
     unit: g/L
     value: 0.6
+  has_ingredient_role:
+    role_type: phosphorus_source
+    source_element: CHEBI:28659
 - composed_of: CHEBI:44872
   concentration:
     unit: mM
     value: 30.0
+  has_ingredient_role:
+    role_type: buffer
 - composed_of: ex:wolfes_mineral_mix
+  has_ingredient_role:
+    role_type: trace_element
 - composed_of: ex:wolfes_vitamin_mix
+  has_ingredient_role:
+    role_type: vitamin
 id: ex:RCH2_alphaKG_medium
 name: RCH2 defined medium with alpha-ketoglutaric acid
 ph: 7.0

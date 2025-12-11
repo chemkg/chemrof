@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-09T17:50:57
+# Generation date: 2025-12-11T10:01:53
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -3378,6 +3378,7 @@ class ChemicalRole(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
 class IngredientRole(ChemicalRole):
     """
     A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.
@@ -3389,8 +3390,19 @@ class IngredientRole(ChemicalRole):
     class_name: ClassVar[str] = "IngredientRole"
     class_model_uri: ClassVar[URIRef] = CHEMROF.IngredientRole
 
+    source_element: Optional[Union[str, ChemicalElementId]] = None
+    role_type: Optional[Union[str, "IngredientRoleTypeEnum"]] = None
 
-@dataclass(repr=False)
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.source_element is not None and not isinstance(self.source_element, ChemicalElementId):
+            self.source_element = ChemicalElementId(self.source_element)
+
+        if self.role_type is not None and not isinstance(self.role_type, IngredientRoleTypeEnum):
+            self.role_type = IngredientRoleTypeEnum(self.role_type)
+
+        super().__post_init__(**kwargs)
+
+
 class ElementSourceRole(IngredientRole):
     """
     Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen
@@ -3402,14 +3414,6 @@ class ElementSourceRole(IngredientRole):
     class_class_curie: ClassVar[str] = "chemrof:ElementSourceRole"
     class_name: ClassVar[str] = "ElementSourceRole"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ElementSourceRole
-
-    source_element: Optional[Union[str, ChemicalElementId]] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.source_element is not None and not isinstance(self.source_element, ChemicalElementId):
-            self.source_element = ChemicalElementId(self.source_element)
-
-        super().__post_init__(**kwargs)
 
 
 class BufferRole(IngredientRole):
@@ -4048,25 +4052,25 @@ class ProportionalPart(ChemicalRelationship):
     class_name: ClassVar[str] = "ProportionalPart"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ProportionalPart
 
+    composed_of: Optional[Union[str, ChemicalEntityId]] = None
+    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
     has_ingredient_role: Optional[Union[dict, IngredientRole]] = None
     concentration: Optional[Union[dict, Concentration]] = None
-    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
-    composed_of: Optional[Union[str, ChemicalEntityId]] = None
     minimal_percentage: Optional[float] = None
     maximum_percentage: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
+            self.composed_of = ChemicalEntityId(self.composed_of)
+
+        if self.has_role is not None and not isinstance(self.has_role, IngredientRoleEnum):
+            self.has_role = IngredientRoleEnum(self.has_role)
+
         if self.has_ingredient_role is not None and not isinstance(self.has_ingredient_role, IngredientRole):
             self.has_ingredient_role = IngredientRole(**as_dict(self.has_ingredient_role))
 
         if self.concentration is not None and not isinstance(self.concentration, Concentration):
             self.concentration = Concentration(**as_dict(self.concentration))
-
-        if self.has_role is not None and not isinstance(self.has_role, IngredientRoleEnum):
-            self.has_role = IngredientRoleEnum(self.has_role)
-
-        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
-            self.composed_of = ChemicalEntityId(self.composed_of)
 
         if self.minimal_percentage is not None and not isinstance(self.minimal_percentage, float):
             self.minimal_percentage = float(self.minimal_percentage)
@@ -4480,6 +4484,61 @@ class ConcentrationUnitEnum(EnumDefinitionImpl):
             PermissibleValue(
                 text="percent_w/w",
                 description="Weight per weight percentage"))
+
+class IngredientRoleTypeEnum(EnumDefinitionImpl):
+    """
+    Types of roles that ingredients can play in a mixture.
+    """
+    carbon_source = PermissibleValue(
+        text="carbon_source",
+        description="Provides carbon for biosynthesis")
+    nitrogen_source = PermissibleValue(
+        text="nitrogen_source",
+        description="Provides nitrogen for biosynthesis")
+    phosphorus_source = PermissibleValue(
+        text="phosphorus_source",
+        description="Provides phosphorus for biosynthesis")
+    sulfur_source = PermissibleValue(
+        text="sulfur_source",
+        description="Provides sulfur for biosynthesis")
+    electron_donor = PermissibleValue(
+        text="electron_donor",
+        description="Provides electrons in redox reactions")
+    electron_acceptor = PermissibleValue(
+        text="electron_acceptor",
+        description="Accepts electrons in redox reactions")
+    buffer = PermissibleValue(
+        text="buffer",
+        description="Maintains pH stability")
+    solvent = PermissibleValue(
+        text="solvent",
+        description="Dissolves other components")
+    vitamin = PermissibleValue(
+        text="vitamin",
+        description="Provides essential vitamin micronutrient")
+    mineral = PermissibleValue(
+        text="mineral",
+        description="Provides essential mineral micronutrient")
+    trace_element = PermissibleValue(
+        text="trace_element",
+        description="Provides trace element micronutrient")
+    growth_factor = PermissibleValue(
+        text="growth_factor",
+        description="Promotes or enables growth")
+    antibiotic = PermissibleValue(
+        text="antibiotic",
+        description="Selects for or against certain organisms")
+    inducer = PermissibleValue(
+        text="inducer",
+        description="Induces gene expression")
+    substrate = PermissibleValue(
+        text="substrate",
+        description="Primary substrate for enzymatic reactions")
+
+    _defn = EnumDefinition(
+        name="IngredientRoleTypeEnum",
+        description="Types of roles that ingredients can play in a mixture.",
+    )
 
 class BondTypeEnum(EnumDefinitionImpl):
 
@@ -5574,6 +5633,9 @@ slots.concentration__value = Slot(uri=CHEMROF.value, name="concentration__value"
 
 slots.concentration__unit = Slot(uri=CHEMROF.unit, name="concentration__unit", curie=CHEMROF.curie('unit'),
                    model_uri=CHEMROF.concentration__unit, domain=None, range=Union[str, "ConcentrationUnitEnum"])
+
+slots.ingredientRole__role_type = Slot(uri=CHEMROF.role_type, name="ingredientRole__role_type", curie=CHEMROF.curie('role_type'),
+                   model_uri=CHEMROF.ingredientRole__role_type, domain=None, range=Optional[Union[str, "IngredientRoleTypeEnum"]])
 
 slots.atomicBond__subject = Slot(uri=CHEMROF.subject, name="atomicBond__subject", curie=CHEMROF.curie('subject'),
                    model_uri=CHEMROF.atomicBond__subject, domain=None, range=Optional[Union[str, AtomOccurrenceName]])

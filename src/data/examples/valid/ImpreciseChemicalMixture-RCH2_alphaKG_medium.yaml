@@ -5,6 +5,7 @@
 # This example demonstrates:
 # - ImpreciseChemicalMixture with ph slot
 # - ProportionalPart with concentration (value + unit)
+# - has_ingredient_role with role_type enum and source_element for element sources
 # - Nested mixtures via composed_of referencing other mixtures (ex:wolfes_mineral_mix)
 type: chemrof:ImpreciseChemicalMixture
 id: ex:RCH2_alphaKG_medium
@@ -13,30 +14,47 @@ ph: 7.0
 has_proportional_parts:
   # Carbon source - alpha-ketoglutaric acid disodium salt hydrate (20 mM)
   - composed_of: CHEBI:30915
+    has_ingredient_role:
+      role_type: carbon_source
+      source_element: CHEBI:27594  # carbon atom
     concentration:
       value: 20.0
       unit: mM
   # Nitrogen source - ammonium chloride (0.25 g/L)
   - composed_of: CHEBI:31206
+    has_ingredient_role:
+      role_type: nitrogen_source
+      source_element: CHEBI:25555  # nitrogen atom
     concentration:
       value: 0.25
       unit: g/L
   # Potassium chloride (0.1 g/L)
   - composed_of: CHEBI:32588
+    has_ingredient_role:
+      role_type: mineral
     concentration:
       value: 0.1
       unit: g/L
   # Sodium phosphate monobasic monohydrate (0.6 g/L)
   - composed_of: CHEBI:37585
+    has_ingredient_role:
+      role_type: phosphorus_source
+      source_element: CHEBI:28659  # phosphorus atom
     concentration:
       value: 0.6
       unit: g/L
   # PIPES buffer (30 mM)
   - composed_of: CHEBI:44872
+    has_ingredient_role:
+      role_type: buffer
     concentration:
       value: 30.0
       unit: mM
   # Wolfe's mineral mix - a nested mixture reference
   - composed_of: ex:wolfes_mineral_mix
+    has_ingredient_role:
+      role_type: trace_element
   # Wolfe's vitamin mix - another nested mixture reference
   - composed_of: ex:wolfes_vitamin_mix
+    has_ingredient_role:
+      role_type: vitamin

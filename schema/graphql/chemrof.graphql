@@ -87,6 +87,25 @@ enum IngredientRoleEnum
     solvent
   }
 
+enum IngredientRoleTypeEnum
+  {
+    carbon_source
+    nitrogen_source
+    phosphorus_source
+    sulfur_source
+    electron_donor
+    electron_acceptor
+    buffer
+    solvent
+    vitamin
+    mineral
+    trace_element
+    growth_factor
+    antibiotic
+    inducer
+    substrate
+  }
+
 enum MoleculeClassificationEnum
   {
     lipid
@@ -519,6 +538,8 @@ type AtomOccurrence implements OwlClass
 type BufferRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 interface CationState
@@ -898,6 +919,7 @@ type ElementSourceRole
   {
     owlSubclassOf: OwlClass
     sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 type Enantiomer
@@ -1247,6 +1269,8 @@ interface InchiObject
 type IngredientRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 type Isobar
@@ -1430,6 +1454,8 @@ type Mineral
 type MineralNutrientRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 type Moiety
@@ -2188,6 +2214,8 @@ type Nuclide
 type NutrientRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 interface OwlClass
@@ -2436,10 +2464,10 @@ type PreciseChemicalMixture implements WeaklyBonded
 type ProportionalPart
   {
     owlSubclassOf: OwlClass
+    composedOf: ChemicalEntity
+    hasRole: IngredientRoleEnum
     hasIngredientRole: IngredientRole
     concentration: Concentration
-    hasRole: IngredientRoleEnum
-    composedOf: ChemicalEntity
     minimalPercentage: Float
     maximumPercentage: Float
   }
@@ -2694,6 +2722,8 @@ type SmallMolecule
 type SolventRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 interface SpecificityMixin
@@ -2861,6 +2891,8 @@ type UnchargedAtom implements Uncharged
 type VitaminRole
   {
     owlSubclassOf: OwlClass
+    sourceElement: ChemicalElement
+    roleType: IngredientRoleTypeEnum
   }
 
 interface WeaklyBonded

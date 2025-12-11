@@ -836,6 +836,75 @@
       ]
     },
     {
+      "name": "IngredientRoleTypeEnum",
+      "definition_uri": "https://w3id.org/chemrof/IngredientRoleTypeEnum",
+      "description": "Types of roles that ingredients can play in a mixture.",
+      "title": "ingredient_role_type_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "carbon_source",
+          "description": "Provides carbon for biosynthesis"
+        },
+        {
+          "text": "nitrogen_source",
+          "description": "Provides nitrogen for biosynthesis"
+        },
+        {
+          "text": "phosphorus_source",
+          "description": "Provides phosphorus for biosynthesis"
+        },
+        {
+          "text": "sulfur_source",
+          "description": "Provides sulfur for biosynthesis"
+        },
+        {
+          "text": "electron_donor",
+          "description": "Provides electrons in redox reactions"
+        },
+        {
+          "text": "electron_acceptor",
+          "description": "Accepts electrons in redox reactions"
+        },
+        {
+          "text": "buffer",
+          "description": "Maintains pH stability"
+        },
+        {
+          "text": "solvent",
+          "description": "Dissolves other components"
+        },
+        {
+          "text": "vitamin",
+          "description": "Provides essential vitamin micronutrient"
+        },
+        {
+          "text": "mineral",
+          "description": "Provides essential mineral micronutrient"
+        },
+        {
+          "text": "trace_element",
+          "description": "Provides trace element micronutrient"
+        },
+        {
+          "text": "growth_factor",
+          "description": "Promotes or enables growth"
+        },
+        {
+          "text": "antibiotic",
+          "description": "Selects for or against certain organisms"
+        },
+        {
+          "text": "inducer",
+          "description": "Induces gene expression"
+        },
+        {
+          "text": "substrate",
+          "description": "Primary substrate for enzymatic reactions"
+        }
+      ]
+    },
+    {
       "name": "BondTypeEnum",
       "definition_uri": "https://w3id.org/chemrof/BondTypeEnum",
       "title": "bond_type_enum",
@@ -1887,9 +1956,9 @@
       "title": "source element",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/source_element",
-      "owner": "ElementSourceRole",
+      "owner": "IngredientRole",
       "domain_of": [
-        "ElementSourceRole"
+        "IngredientRole"
       ],
       "range": "ChemicalElement",
       "@type": "SlotDefinition"
@@ -4912,6 +4981,10 @@
       "title": "has role",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/has_role",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
       "range": "IngredientRoleEnum",
       "@type": "SlotDefinition"
     },
@@ -4921,6 +4994,10 @@
       "title": "composed of",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/composed_of",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
       "range": "ChemicalEntity",
       "@type": "SlotDefinition"
     },
@@ -4930,6 +5007,10 @@
       "title": "minimal percentage",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/minimal_percentage",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
       "range": "float",
       "@type": "SlotDefinition"
     },
@@ -4939,6 +5020,10 @@
       "title": "maximum percentage",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/maximum_percentage",
+      "owner": "ProportionalPart",
+      "domain_of": [
+        "ProportionalPart"
+      ],
       "range": "float",
       "@type": "SlotDefinition"
     },
@@ -5023,6 +5108,19 @@
       ],
       "range": "ConcentrationUnitEnum",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ingredientRole__role_type",
+      "description": "The type of ingredient role.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/role_type",
+      "alias": "role_type",
+      "owner": "IngredientRole",
+      "domain_of": [
+        "IngredientRole"
+      ],
+      "range": "IngredientRoleTypeEnum",
       "@type": "SlotDefinition"
     },
     {
@@ -11464,9 +11562,19 @@
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "ChemicalRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "role_type",
+          "description": "The type of ingredient role.",
+          "range": "IngredientRoleTypeEnum",
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "https://w3id.org/chemrof/IngredientRole",
       "@type": "ClassDefinition"
     },
@@ -11479,7 +11587,8 @@
       "is_a": "IngredientRole",
       "slots": [
         "owl_subclass_of",
-        "source_element"
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/ElementSourceRole",
@@ -11496,7 +11605,9 @@
       ],
       "is_a": "IngredientRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/BufferRole",
@@ -11513,7 +11624,9 @@
       ],
       "is_a": "IngredientRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/SolventRole",
@@ -11527,7 +11640,9 @@
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "IngredientRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/NutrientRole",
@@ -11544,7 +11659,9 @@
       ],
       "is_a": "NutrientRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/VitaminRole",
@@ -11558,7 +11675,9 @@
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "NutrientRole",
       "slots": [
-        "owl_subclass_of"
+        "owl_subclass_of",
+        "source_element",
+        "ingredientRole__role_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MineralNutrientRole",
@@ -12301,10 +12420,10 @@
       "is_a": "ChemicalRelationship",
       "slots": [
         "owl_subclass_of",
+        "ProportionalPart_composed_of",
+        "ProportionalPart_has_role",
         "has_ingredient_role",
         "concentration",
-        "ProportionalPart_has_role",
-        "ProportionalPart_composed_of",
         "ProportionalPart_minimal_percentage",
         "ProportionalPart_maximum_percentage"
       ],
@@ -12457,9 +12576,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-12-09T17:48:19",
-  "source_file_size": 123955,
-  "generation_date": "2025-12-09T17:50:53",
+  "source_file_date": "2025-12-11T10:01:00",
+  "source_file_size": 125437,
+  "generation_date": "2025-12-11T10:01:48",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

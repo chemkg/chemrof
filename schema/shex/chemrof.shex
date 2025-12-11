@@ -560,8 +560,7 @@ linkml:Sparqlpath xsd:string
 
 <ElementSourceRole> CLOSED {
     (  $<ElementSourceRole_tes> (  &<IngredientRole_tes> ;
-          rdf:type [ <IngredientRole> ] ? ;
-          <source_element> @<ChemicalElement> ?
+          rdf:type [ <IngredientRole> ] ?
        ) ;
        rdf:type [ <ElementSourceRole> ] ?
     )
@@ -753,7 +752,21 @@ linkml:Sparqlpath xsd:string
 <IngredientRole>  (
     CLOSED {
        (  $<IngredientRole_tes> (  &<ChemicalRole_tes> ;
-             rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ?
+             rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ? ;
+             <source_element> @<ChemicalElement> ? ;
+             <role_type> [ <https://w3id.org/chemrof/IngredientRoleTypeEnum#carbon_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#nitrogen_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#phosphorus_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#sulfur_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#electron_donor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#electron_acceptor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#buffer> <https://w3id.org/chemrof/IngredientRoleTypeEnum#solvent>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#vitamin> <https://w3id.org/chemrof/IngredientRoleTypeEnum#mineral>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#trace_element>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#growth_factor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#antibiotic>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#inducer>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#substrate> ] ?
           ) ;
           rdf:type [ <IngredientRole> ] ?
        )
@@ -1278,12 +1291,12 @@ linkml:Sparqlpath xsd:string
 <ProportionalPart> CLOSED {
     (  $<ProportionalPart_tes> (  &<ChemicalRelationship_tes> ;
           rdf:type [ <ChemicalRelationship> ] ? ;
-          <has_ingredient_role> @<IngredientRole> ? ;
-          <concentration> @<Concentration> ? ;
+          <composed_of> @<ChemicalEntity> ? ;
           <has_role> [ <https://w3id.org/chemrof/IngredientRoleEnum#active%20ingredient>
              <https://w3id.org/chemrof/IngredientRoleEnum#inactive%20ingredient>
              <https://w3id.org/chemrof/IngredientRoleEnum#excipient> <https://w3id.org/chemrof/IngredientRoleEnum#solvent> ] ? ;
-          <composed_of> @<ChemicalEntity> ? ;
+          <has_ingredient_role> @<IngredientRole> ? ;
+          <concentration> @<Concentration> ? ;
           <minimal_percentage> @linkml:Float ? ;
           <maximum_percentage> @linkml:Float ?
        ) ;
