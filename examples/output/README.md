@@ -1,190 +1,3 @@
-## SmallMolecule-glucose
-### Input
-```yaml
-has_atoms:
-- C
-- C
-- C
-- C
-- C
-- C
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- O
-- O
-- O
-- O
-- O
-- O
-id: CHEBI:17234
-is_organic: true
-name: glucose
-type: chemrof:SmallMolecule
-
-```
-## SubatomicParticle-proton
-### Input
-```yaml
-id: CHEBI:24636
-name: proton
-subatomic_particle_type: proton
-type: chemrof:SubatomicParticle
-
-```
-## AtomCation-helium2
-### Input
-```yaml
-atomic_number: 2
-elemental_charge: 2
-id: CHEBI:33316
-name: helium(2+)
-symbol: He
-type: chemrof:AtomCation
-
-```
-## PolyatomicIon-ammonium
-### Input
-```yaml
-conjugate_base_of: CHEBI:16134
-empirical_formula: NH+4
-has_atom_occurrences:
-- name: ammonium-n
-  occurrence_of: N
-- name: ammonium-h1
-  occurrence_of: H
-- name: ammonium-h2
-  occurrence_of: H
-- name: ammonium-h3
-  occurrence_of: H
-- name: ammonium-h4
-  occurrence_of: H
-has_bonds:
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h1
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h2
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h3
-  subject: ammonium-n
-- bond_order: 1
-  bond_type: polar covalent
-  object: ammonium-h4
-  subject: ammonium-n
-id: CHEBI:28938
-name: ammonium
-smiles_string: '[NH4+]'
-type: chemrof:PolyatomicIon
-
-```
-## FunctionalGroup-hydroxyl
-### Input
-```yaml
-empirical_formula: OH
-id: CHEBI:43176
-name: hydroxy group
-type: chemrof:FunctionalGroup
-
-```
-## Molecule-dioxygen
-### Input
-```yaml
-empirical_formula: O2
-has_atom_occurrences:
-- name: dioxygen-o1
-  occurrence_of: O
-- name: dioxygen-o2
-  occurrence_of: O
-has_atoms:
-- O
-- O
-has_bonds:
-- bond_order: 2
-  bond_type: covalent
-  object: dioxygen-o2
-  subject: dioxygen-o1
-id: CHEBI:15379
-is_organic: false
-name: dioxygen
-smiles_string: O=O
-type: chemrof:Molecule
-
-```
-## Ester-ethyl_acetate
-### Input
-```yaml
-empirical_formula: C4H8O2
-has_atoms:
-- C
-- C
-- C
-- C
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- O
-- O
-id: CHEBI:27750
-is_organic: true
-name: ethyl acetate
-smiles_string: CC(=O)OCC
-type: chemrof:Ester
-
-```
-## AtomAnion-chloride
-### Input
-```yaml
-atomic_number: 17
-elemental_charge: -1
-id: CHEBI:17996
-name: chloride
-symbol: Cl
-type: chemrof:AtomAnion
-
-```
-## NeutralMolecule-water
-### Input
-```yaml
-elemental_charge: 0
-has_atoms:
-- H
-- H
-- O
-id: CHEBI:15377
-is_organic: false
-name: water
-type: chemrof:NeutralMolecule
-
-```
-## Protein-insulin
-### Input
-```yaml
-empirical_formula: C257H383N65O77S6
-id: UniProtKB:P01308
-is_organic: true
-name: insulin
-type: chemrof:Protein
-
-```
 ## MolecularAnion-acetate
 ### Input
 ```yaml
@@ -245,14 +58,165 @@ smiles_string: CC(=O)[O-]
 type: chemrof:MolecularAnion
 
 ```
-## MonoatomicIon-copper2
+## SubatomicParticle-electron
 ### Input
 ```yaml
-elemental_charge: 2
-has_element: Cu
-id: CHEBI:29036
-name: copper(2+)
-type: chemrof:MonoatomicIon
+id: CHEBI:10545
+name: electron
+subatomic_particle_type: electron
+type: chemrof:SubatomicParticle
+
+```
+## FunctionalGroup-carboxyl
+### Input
+```yaml
+empirical_formula: CO2H
+id: CHEBI:46883
+name: carboxy group
+type: chemrof:FunctionalGroup
+
+```
+## Isotope-deuterium
+### Input
+```yaml
+atomic_number: 1
+has_element: H
+id: CHEBI:29237
+isotope_of: CHEBI:49637
+name: deuterium atom
+neutron_number: 1
+symbol: H
+type: chemrof:Isotope
+
+```
+## UnchargedAtom-hydrogen
+### Input
+```yaml
+atomic_number: 1
+elemental_charge: 0
+id: CHEBI:49637
+name: hydrogen atom
+symbol: H
+type: chemrof:UnchargedAtom
+
+```
+## FunctionalGroup-hydroxyl
+### Input
+```yaml
+empirical_formula: OH
+id: CHEBI:43176
+name: hydroxy group
+type: chemrof:FunctionalGroup
+
+```
+## Protein-insulin
+### Input
+```yaml
+empirical_formula: C257H383N65O77S6
+id: UniProtKB:P01308
+is_organic: true
+name: insulin
+type: chemrof:Protein
+
+```
+## ImpreciseChemicalMixture-RCH2_alphaKG_medium
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:30915
+  concentration:
+    unit: mM
+    value: 20.0
+  has_ingredient_role:
+    role_type: carbon_source
+    source_element: CHEBI:27594
+- composed_of: CHEBI:31206
+  concentration:
+    unit: g/L
+    value: 0.25
+  has_ingredient_role:
+    role_type: nitrogen_source
+    source_element: CHEBI:25555
+- composed_of: CHEBI:32588
+  concentration:
+    unit: g/L
+    value: 0.1
+  has_ingredient_role:
+    role_type: mineral
+- composed_of: CHEBI:37585
+  concentration:
+    unit: g/L
+    value: 0.6
+  has_ingredient_role:
+    role_type: phosphorus_source
+    source_element: CHEBI:28659
+- composed_of: CHEBI:44872
+  concentration:
+    unit: mM
+    value: 30.0
+  has_ingredient_role:
+    role_type: buffer
+- composed_of: ex:wolfes_mineral_mix
+  has_ingredient_role:
+    role_type: trace_element
+- composed_of: ex:wolfes_vitamin_mix
+  has_ingredient_role:
+    role_type: vitamin
+id: ex:RCH2_alphaKG_medium
+name: RCH2 defined medium with alpha-ketoglutaric acid
+ph: 7.0
+type: chemrof:ImpreciseChemicalMixture
+
+```
+## Ester-ethyl_acetate
+### Input
+```yaml
+empirical_formula: C4H8O2
+has_atoms:
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- O
+- O
+id: CHEBI:27750
+is_organic: true
+name: ethyl acetate
+smiles_string: CC(=O)OCC
+type: chemrof:Ester
+
+```
+## AtomCation-sodium
+### Input
+```yaml
+elemental_charge: 1
+has_element: Na
+id: CHEBI:29101
+name: sodium (1+)
+type: chemrof:AtomCation
+
+```
+## SmallMolecule-acetic-acid-with-pka
+### Input
+```yaml
+IUPAC_name: acetic acid
+empirical_formula: C2H4O2
+id: CHEBI:15365
+molecular_mass: 60.05
+name: acetic acid
+pka_ionization_constant:
+- 4.74
+smiles_string: CC(=O)O
+type: chemrof:SmallMolecule
+water_solubility: 1000000.0
 
 ```
 ## IsomeraseReaction-glucose_isomerase
@@ -294,14 +258,43 @@ smiles_string: O
 type: chemrof:Molecule
 
 ```
-## AtomAnion-fluoride
+## PolyatomicIon-ammonium
 ### Input
 ```yaml
-elemental_charge: -1
-has_element: F
-id: CHEBI:17051
-name: fluoride
-type: chemrof:AtomAnion
+conjugate_base_of: CHEBI:16134
+empirical_formula: NH+4
+has_atom_occurrences:
+- name: ammonium-n
+  occurrence_of: N
+- name: ammonium-h1
+  occurrence_of: H
+- name: ammonium-h2
+  occurrence_of: H
+- name: ammonium-h3
+  occurrence_of: H
+- name: ammonium-h4
+  occurrence_of: H
+has_bonds:
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h1
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h2
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h3
+  subject: ammonium-n
+- bond_order: 1
+  bond_type: polar covalent
+  object: ammonium-h4
+  subject: ammonium-n
+id: CHEBI:28938
+name: ammonium
+smiles_string: '[NH4+]'
+type: chemrof:PolyatomicIon
 
 ```
 ## ChemicalElement-carbon
@@ -315,22 +308,72 @@ smiles_string: '[C]'
 symbol: C
 
 ```
-## ChemicalSalt-sodium_carbonate
+## NaturalProduct-caffeine
 ### Input
 ```yaml
-empirical_formula: Na2CO3
-id: CHEBI:29377
-name: sodium carbonate
-type: chemrof:ChemicalSalt
+empirical_formula: C8H10N4O2
+has_atoms:
+- C
+- C
+- C
+- C
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- N
+- N
+- N
+- N
+- O
+- O
+id: CHEBI:27732
+is_organic: true
+name: caffeine
+pka_ionization_constant:
+- 10.4
+smiles_string: CN1C=NC2=C1C(=O)N(C(=O)N2C)C
+type: chemrof:NaturalProduct
+water_solubility: 20.0
 
 ```
-## SubatomicParticle-neutron
+## Peptide-glycylglycine
 ### Input
 ```yaml
-id: CHEBI:30222
-name: neutron
-subatomic_particle_type: neutron
-type: chemrof:SubatomicParticle
+empirical_formula: C4H8N2O3
+has_atoms:
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- N
+- N
+- O
+- O
+- O
+id: CHEBI:17201
+is_organic: true
+name: glycylglycine
+smiles_string: C(C(=O)NCC(=O)O)N
+type: chemrof:Peptide
 
 ```
 ## Collection-nitrites
@@ -386,13 +429,83 @@ entities:
   type: chemrof:PolyatomicIon
 
 ```
-## SubatomicParticle-electron
+## SubatomicParticle-proton
 ### Input
 ```yaml
-id: CHEBI:10545
-name: electron
-subatomic_particle_type: electron
+id: CHEBI:24636
+name: proton
+subatomic_particle_type: proton
 type: chemrof:SubatomicParticle
+
+```
+## AtomAnion-chloride
+### Input
+```yaml
+atomic_number: 17
+elemental_charge: -1
+id: CHEBI:17996
+name: chloride
+symbol: Cl
+type: chemrof:AtomAnion
+
+```
+## ImpreciseChemicalMixture-wolfes_vitamin_mix
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:16709
+  concentration:
+    unit: mg/L
+    value: 10.0
+- composed_of: CHEBI:30753
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:30314
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15940
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:17015
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:49105
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:7916
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15956
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:27470
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:17439
+  concentration:
+    unit: mg/L
+    value: 0.1
+id: ex:wolfes_vitamin_mix
+name: Wolfe's vitamin mix
+type: chemrof:ImpreciseChemicalMixture
+
+```
+## AtomAnion-fluoride
+### Input
+```yaml
+elemental_charge: -1
+has_element: F
+id: CHEBI:17051
+name: fluoride
+type: chemrof:AtomAnion
 
 ```
 ## MolecularCation-methylammonium
@@ -462,13 +575,107 @@ smiles_string: C[NH3+]
 type: chemrof:MolecularCation
 
 ```
-## FunctionalGroup-carboxyl
+## SubatomicParticle-neutron
 ### Input
 ```yaml
-empirical_formula: CO2H
-id: CHEBI:46883
-name: carboxy group
-type: chemrof:FunctionalGroup
+id: CHEBI:30222
+name: neutron
+subatomic_particle_type: neutron
+type: chemrof:SubatomicParticle
+
+```
+## Isotope-protium
+### Input
+```yaml
+atomic_number: 1
+has_element: H
+id: CHEBI:29236
+isotope_of: CHEBI:49637
+name: protium atom
+neutron_number: 0
+symbol: H
+type: chemrof:Isotope
+
+```
+## Macromolecule-polyethylene
+### Input
+```yaml
+empirical_formula: C2H4
+has_submolecules:
+- ethylene
+id: CHEBI:60034
+is_organic: true
+name: polyethylene polymer
+type: chemrof:Macromolecule
+
+```
+## SmallMolecule-glucose
+### Input
+```yaml
+has_atoms:
+- C
+- C
+- C
+- C
+- C
+- C
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- H
+- O
+- O
+- O
+- O
+- O
+- O
+id: CHEBI:17234
+is_organic: true
+name: glucose
+type: chemrof:SmallMolecule
+
+```
+## Molecule-dioxygen
+### Input
+```yaml
+empirical_formula: O2
+has_atom_occurrences:
+- name: dioxygen-o1
+  occurrence_of: O
+- name: dioxygen-o2
+  occurrence_of: O
+has_atoms:
+- O
+- O
+has_bonds:
+- bond_order: 2
+  bond_type: covalent
+  object: dioxygen-o2
+  subject: dioxygen-o1
+id: CHEBI:15379
+is_organic: false
+name: dioxygen
+smiles_string: O=O
+type: chemrof:Molecule
+
+```
+## AtomCation-helium2
+### Input
+```yaml
+atomic_number: 2
+elemental_charge: 2
+id: CHEBI:33316
+name: helium(2+)
+symbol: He
+type: chemrof:AtomCation
 
 ```
 ## ChemicalElement-berkelium
@@ -482,84 +689,27 @@ smiles_string: '[Bk]'
 symbol: Bk
 
 ```
-## Isotope-deuterium
+## ChemicalSalt-sodium_carbonate
 ### Input
 ```yaml
-atomic_number: 1
-has_element: H
-id: CHEBI:29237
-isotope_of: CHEBI:49637
-name: deuterium atom
-neutron_number: 1
-symbol: H
-type: chemrof:Isotope
+empirical_formula: Na2CO3
+id: CHEBI:29377
+name: sodium carbonate
+type: chemrof:ChemicalSalt
 
 ```
-## SmallMolecule-glucose-with-solubility
+## NeutralMolecule-water
 ### Input
 ```yaml
-IUPAC_name: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal
-empirical_formula: CH2O
-id: CHEBI:17234
-molecular_mass: 180.16
-name: glucose
-smiles_string: C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O
-type: chemrof:SmallMolecule
-water_solubility: 909.0
-
-```
-## NaturalProduct-caffeine
-### Input
-```yaml
-empirical_formula: C8H10N4O2
+elemental_charge: 0
 has_atoms:
-- C
-- C
-- C
-- C
-- C
-- C
-- C
-- C
 - H
 - H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- N
-- N
-- N
-- N
 - O
-- O
-id: CHEBI:27732
-is_organic: true
-name: caffeine
-pka_ionization_constant:
-- 10.4
-smiles_string: CN1C=NC2=C1C(=O)N(C(=O)N2C)C
-type: chemrof:NaturalProduct
-water_solubility: 20.0
-
-```
-## SmallMolecule-acetic-acid-with-pka
-### Input
-```yaml
-IUPAC_name: acetic acid
-empirical_formula: C2H4O2
-id: CHEBI:15365
-molecular_mass: 60.05
-name: acetic acid
-pka_ionization_constant:
-- 4.74
-smiles_string: CC(=O)O
-type: chemrof:SmallMolecule
-water_solubility: 1000000.0
+id: CHEBI:15377
+is_organic: false
+name: water
+type: chemrof:NeutralMolecule
 
 ```
 ## Molecule-citric_acid_with_pka_context
@@ -582,78 +732,75 @@ smiles_string: OC(=O)CC(O)(C(=O)O)CC(=O)O
 type: chemrof:Molecule
 
 ```
-## AtomCation-sodium
+## SmallMolecule-glucose-with-solubility
 ### Input
 ```yaml
-elemental_charge: 1
-has_element: Na
-id: CHEBI:29101
-name: sodium (1+)
-type: chemrof:AtomCation
+IUPAC_name: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal
+empirical_formula: CH2O
+id: CHEBI:17234
+molecular_mass: 180.16
+name: glucose
+smiles_string: C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O
+type: chemrof:SmallMolecule
+water_solubility: 909.0
 
 ```
-## Isotope-protium
+## MonoatomicIon-copper2
 ### Input
 ```yaml
-atomic_number: 1
-has_element: H
-id: CHEBI:29236
-isotope_of: CHEBI:49637
-name: protium atom
-neutron_number: 0
-symbol: H
-type: chemrof:Isotope
+elemental_charge: 2
+has_element: Cu
+id: CHEBI:29036
+name: copper(2+)
+type: chemrof:MonoatomicIon
 
 ```
-## Peptide-glycylglycine
+## ImpreciseChemicalMixture-wolfes_mineral_mix
 ### Input
 ```yaml
-empirical_formula: C4H8N2O3
-has_atoms:
-- C
-- C
-- C
-- C
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- H
-- N
-- N
-- O
-- O
-- O
-id: CHEBI:17201
-is_organic: true
-name: glycylglycine
-smiles_string: C(C(=O)NCC(=O)O)N
-type: chemrof:Peptide
-
-```
-## UnchargedAtom-hydrogen
-### Input
-```yaml
-atomic_number: 1
-elemental_charge: 0
-id: CHEBI:49637
-name: hydrogen atom
-symbol: H
-type: chemrof:UnchargedAtom
-
-```
-## Macromolecule-polyethylene
-### Input
-```yaml
-empirical_formula: C2H4
-has_submolecules:
-- ethylene
-id: CHEBI:60034
-is_organic: true
-name: polyethylene polymer
-type: chemrof:Macromolecule
+has_proportional_parts:
+- composed_of: CHEBI:31795
+  concentration:
+    unit: g/L
+    value: 3.0
+- composed_of: CHEBI:44557
+  concentration:
+    unit: g/L
+    value: 1.5
+- composed_of: CHEBI:26710
+  concentration:
+    unit: g/L
+    value: 1.0
+- composed_of: CHEBI:86364
+  concentration:
+    unit: g/L
+    value: 0.5
+- composed_of: CHEBI:53503
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:32312
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:86158
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:75836
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:33118
+  concentration:
+    unit: g/L
+    value: 0.01
+- composed_of: CHEBI:75213
+  concentration:
+    unit: g/L
+    value: 0.01
+id: ex:wolfes_mineral_mix
+name: Wolfe's mineral mix
+type: chemrof:ImpreciseChemicalMixture
 
 ```

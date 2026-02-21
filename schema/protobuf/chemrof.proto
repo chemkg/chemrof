@@ -39,6 +39,13 @@ message Allotrope
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -70,6 +77,13 @@ message AminoAcidSequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -94,6 +108,14 @@ message AtomAnion
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -123,6 +145,14 @@ message AtomCation
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -213,6 +243,13 @@ message AtomOccurrence
   integer formalCharge = 0
   integer coordinationNumber = 0
  }
+// Role of maintaining pH in a solution or mixture.
+message BufferRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
+ }
 // generic form of an atom, with unspecified neutron or charge
 message ChemicalElement
  {
@@ -223,6 +260,14 @@ message ChemicalElement
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   float molecularMass = 0
@@ -259,6 +304,13 @@ message ChemicalGroup
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -301,6 +353,13 @@ message ChemicalSalt
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -313,6 +372,7 @@ message ChemicalSalt
   float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+  float ph = 0
   integer elementalCharge = 0
   cationState hasCationicComponent = 0
   anionState hasAnionicComponent = 0
@@ -361,9 +421,16 @@ message ChemicalSimilarity
  {
   owlClass owlSubclassOf = 0
  }
+// This utility class serves to collect a set of domain entities, and to be the top level object in tree-based representations such as JSON.
 message Collection
  {
  repeated  domainEntity entities = 0
+ }
+// A measurement of the amount of a substance in a given volume or mass.
+message Concentration
+ {
+  float value = 0
+  concentrationUnitEnum unit = 0
  }
 // a polymer with a more than one type of repeating unit
 message Copolymer
@@ -376,6 +443,13 @@ message Copolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -409,6 +483,13 @@ message DNASequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -423,6 +504,13 @@ message DNASequenceInterval
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
  }
+// Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen source, phosphorus source.
+message ElementSourceRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
+ }
 // one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide
 message Enantiomer
  {
@@ -434,6 +522,11 @@ message Enantiomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -457,6 +550,8 @@ message Enantiomer
   string opticalConfiguration = 0
   string absoluteConfiguration = 0
   molecule enantiomerFormOf = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
  }
 // An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group
 message Ester
@@ -469,6 +564,13 @@ message Ester
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -500,6 +602,14 @@ message FullySpecifiedAtom
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -529,6 +639,13 @@ message FunctionalGroup
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -578,6 +695,13 @@ message Glycan
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -608,6 +732,13 @@ message Homopolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -642,6 +773,13 @@ message ImpreciseChemicalMixture
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -654,9 +792,17 @@ message ImpreciseChemicalMixture
   float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+  float ph = 0
  repeated  proportionalPart hasProportionalParts = 0
   fileLocation hasMixfileLocation = 0
   chemicalEncoding hasMinchiRepresentation = 0
+ }
+// A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.
+message IngredientRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
  }
 // Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons.
 message Isobar
@@ -668,6 +814,14 @@ message Isobar
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -700,10 +854,6 @@ message IsomeraseReaction
   string id = 0
   string name = 0
   uriorcurie type = 0
-  chemicalEncoding hasRinchiRepresentation = 0
-  chemicalEncoding hasReactionSmilesRepresentation = 0
-  float reactionRateCoefficient = 0
-  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -713,6 +863,11 @@ message IsomeraseReaction
   boolean isTransport = 0
   boolean isFullyCharacterized = 0
   string reactionCenter = 0
+  chemicalEncoding hasRinchiRepresentation = 0
+  chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
+  reactionTypeEnum reactionType = 0
   string description = 0
  }
 // A specific subtype of an atom with a specified neutron number
@@ -725,6 +880,14 @@ message Isotope
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -762,6 +925,13 @@ message Macromolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -807,6 +977,13 @@ message Mineral
   chemicalEntity hasRepeatUnit = 0
   chemicalEntity hasPart = 0
  }
+// Role of providing a mineral nutrient, often as a trace element.
+message MineralNutrientRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
+ }
 // a named part of a molecule. In some instances moieties may be composed of yet smaller moieties and functional groups
 message Moiety
  {
@@ -818,6 +995,13 @@ message Moiety
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -842,6 +1026,13 @@ message MolecularAnion
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -879,6 +1070,13 @@ message MolecularCation
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -916,6 +1114,13 @@ message MolecularComplex
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -928,6 +1133,7 @@ message MolecularComplex
   float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+  float ph = 0
  }
 // A proper part of a molecule that is larger than an atom
 message MolecularComponent
@@ -940,6 +1146,13 @@ message MolecularComponent
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -987,6 +1200,13 @@ message MolecularSpecies
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1016,6 +1236,13 @@ message MolecularSubsequence
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1040,6 +1267,13 @@ message Molecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1112,6 +1346,14 @@ message MonoatomicIon
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1141,6 +1383,13 @@ message Monomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1176,6 +1425,13 @@ message MonomolecularPolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1219,6 +1475,13 @@ message NaturalProduct
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1250,6 +1513,13 @@ message NetUnchargedMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1285,6 +1555,13 @@ message NeutralMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1320,6 +1597,13 @@ message NonSpeciesMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1349,6 +1633,13 @@ message NucleotideSequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1373,6 +1664,14 @@ message Nuclide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1391,6 +1690,13 @@ message Nuclide
   subatomicParticle hasPart = 0
   string energyLevel = 0
  }
+// Role of providing nutritional value, such as vitamins or minerals.
+message NutrientRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
+ }
 message Peptide
  {
   string id = 0
@@ -1401,6 +1707,13 @@ message Peptide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1431,6 +1744,13 @@ message PolyatomicIon
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1467,6 +1787,13 @@ message PolymerPart
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1488,12 +1815,14 @@ message PolymerRepeatUnit
   count degreeOfPolymerization = 0
   float mass = 0
  }
-// A part of a complex mixture that is of uniform composition
+// A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration.
 message ProportionalPart
  {
   owlClass owlSubclassOf = 0
-  ingredientRoleEnum hasRole = 0
   chemicalEntity composedOf = 0
+  ingredientRoleEnum hasRole = 0
+  ingredientRole hasIngredientRole = 0
+  concentration concentration = 0
   float minimalPercentage = 0
   float maximumPercentage = 0
  }
@@ -1508,6 +1837,13 @@ message Protein
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1537,6 +1873,13 @@ message RacemicMixture
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1549,6 +1892,7 @@ message RacemicMixture
   float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+  float ph = 0
   enantiomer hasLeftEnantiomer = 0
   enantiomer hasRightEnantiomer = 0
   molecule chiralityAgnosticForm = 0
@@ -1564,6 +1908,14 @@ message Radionuclide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1588,10 +1940,6 @@ message Reaction
   string id = 0
   string name = 0
   uriorcurie type = 0
-  chemicalEncoding hasRinchiRepresentation = 0
-  chemicalEncoding hasReactionSmilesRepresentation = 0
-  float reactionRateCoefficient = 0
-  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
@@ -1601,6 +1949,11 @@ message Reaction
   boolean isTransport = 0
   boolean isFullyCharacterized = 0
   string reactionCenter = 0
+  chemicalEncoding hasRinchiRepresentation = 0
+  chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
+  reactionTypeEnum reactionType = 0
   string description = 0
  }
 // A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
@@ -1629,6 +1982,13 @@ message RNASequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1654,6 +2014,13 @@ message SmallMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1672,6 +2039,13 @@ message SmallMolecule
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
+ }
+// Role of dissolving other components in a mixture.
+message SolventRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
  }
 message StandardInchiObject
  {
@@ -1696,6 +2070,13 @@ message Stereoisomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1741,6 +2122,13 @@ message SupramolecularPolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1753,6 +2141,7 @@ message SupramolecularPolymer
   float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
+  float ph = 0
   macromolecule polymerOf = 0
   chemicalEntity hasRepeatUnit = 0
  }
@@ -1773,6 +2162,14 @@ message UnchargedAtom
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0
@@ -1791,6 +2188,13 @@ message UnchargedAtom
   subatomicParticle hasPart = 0
   integer elementalCharge = 0
  }
+// Role of providing a vitamin component.
+message VitaminRole
+ {
+  owlClass owlSubclassOf = 0
+  chemicalElement sourceElement = 0
+  ingredientRoleTypeEnum roleType = 0
+ }
 // A molecule that has both a positive and negative charges but is net neutral
 message Zwitterion
  {
@@ -1802,6 +2206,13 @@ message Zwitterion
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
   chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
   chemicalEntity hasMajorMicrospeciesAtPH73 = 0

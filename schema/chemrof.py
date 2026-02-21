@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-08-21T00:24:36
+# Generation date: 2025-12-11T10:01:53
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -559,6 +559,10 @@ class IsomeraseReactionId(ReactionId):
 
 @dataclass(repr=False)
 class Collection(YAMLRoot):
+    """
+    This utility class serves to collect a set of domain entities, and to be the top level object in tree-based
+    representations such as JSON.
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = CHEMROF["Collection"]
@@ -656,8 +660,8 @@ class ChemicalEntity(PhysicochemicalEntity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMROF["ChemicalEntity"]
-    class_class_curie: ClassVar[str] = "chemrof:ChemicalEntity"
+    class_class_uri: ClassVar[URIRef] = CHEBI["24431"]
+    class_class_curie: ClassVar[str] = "CHEBI:24431"
     class_name: ClassVar[str] = "ChemicalEntity"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ChemicalEntity
 
@@ -667,6 +671,14 @@ class ChemicalEntity(PhysicochemicalEntity):
     has_chemical_role: Optional[Union[dict, "ChemicalRole"]] = None
     inchi_string: Optional[str] = None
     inchi_chemical_sublayer: Optional[str] = None
+    inchi_atom_connections_sublayer: Optional[str] = None
+    inchi_hydrogen_connections_sublayer: Optional[str] = None
+    inchi_charge_sublayer: Optional[str] = None
+    inchi_proton_sublayer: Optional[str] = None
+    inchi_stereochemical_double_bond_sublayer: Optional[str] = None
+    inchi_tetrahedral_stereochemical_sublayer: Optional[str] = None
+    inchi_stereochemical_type_sublayer: Optional[str] = None
+    inchi_isotopic_layer: Optional[str] = None
     smiles_string: Optional[str] = None
     empirical_formula: Optional[str] = None
     has_major_microspecies_at_pH7_3: Optional[Union[str, ChemicalEntityId]] = None
@@ -694,6 +706,30 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.inchi_chemical_sublayer is not None and not isinstance(self.inchi_chemical_sublayer, str):
             self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
+
+        if self.inchi_atom_connections_sublayer is not None and not isinstance(self.inchi_atom_connections_sublayer, str):
+            self.inchi_atom_connections_sublayer = str(self.inchi_atom_connections_sublayer)
+
+        if self.inchi_hydrogen_connections_sublayer is not None and not isinstance(self.inchi_hydrogen_connections_sublayer, str):
+            self.inchi_hydrogen_connections_sublayer = str(self.inchi_hydrogen_connections_sublayer)
+
+        if self.inchi_charge_sublayer is not None and not isinstance(self.inchi_charge_sublayer, str):
+            self.inchi_charge_sublayer = str(self.inchi_charge_sublayer)
+
+        if self.inchi_proton_sublayer is not None and not isinstance(self.inchi_proton_sublayer, str):
+            self.inchi_proton_sublayer = str(self.inchi_proton_sublayer)
+
+        if self.inchi_stereochemical_double_bond_sublayer is not None and not isinstance(self.inchi_stereochemical_double_bond_sublayer, str):
+            self.inchi_stereochemical_double_bond_sublayer = str(self.inchi_stereochemical_double_bond_sublayer)
+
+        if self.inchi_tetrahedral_stereochemical_sublayer is not None and not isinstance(self.inchi_tetrahedral_stereochemical_sublayer, str):
+            self.inchi_tetrahedral_stereochemical_sublayer = str(self.inchi_tetrahedral_stereochemical_sublayer)
+
+        if self.inchi_stereochemical_type_sublayer is not None and not isinstance(self.inchi_stereochemical_type_sublayer, str):
+            self.inchi_stereochemical_type_sublayer = str(self.inchi_stereochemical_type_sublayer)
+
+        if self.inchi_isotopic_layer is not None and not isinstance(self.inchi_isotopic_layer, str):
+            self.inchi_isotopic_layer = str(self.inchi_isotopic_layer)
 
         if self.smiles_string is not None and not isinstance(self.smiles_string, str):
             self.smiles_string = str(self.smiles_string)
@@ -830,11 +866,15 @@ class PhysicochemicalEntityGroupingClass(GroupingClass):
 
     id: Union[str, PhysicochemicalEntityGroupingClassId] = None
     subtype_of: Optional[Union[Union[str, PhysicochemicalEntityGroupingClassId], list[Union[str, PhysicochemicalEntityGroupingClassId]]]] = empty_list()
+    classifies: Optional[Union[str, PhysicochemicalEntityId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if not isinstance(self.subtype_of, list):
             self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
         self.subtype_of = [v if isinstance(v, PhysicochemicalEntityGroupingClassId) else PhysicochemicalEntityGroupingClassId(v) for v in self.subtype_of]
+
+        if self.classifies is not None and not isinstance(self.classifies, PhysicochemicalEntityId):
+            self.classifies = PhysicochemicalEntityId(self.classifies)
 
         super().__post_init__(**kwargs)
 
@@ -1885,8 +1925,11 @@ class ChemicalMixture(PolyatomicEntity):
     class_model_uri: ClassVar[URIRef] = CHEMROF.ChemicalMixture
 
     id: Union[str, ChemicalMixtureId] = None
+    ph: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self.ph is not None and not isinstance(self.ph, float):
+            self.ph = float(self.ph)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3286,14 +3329,43 @@ class ChemicalRelationship(YAMLRoot):
 
 
 @dataclass(repr=False)
+class Concentration(YAMLRoot):
+    """
+    A measurement of the amount of a substance in a given volume or mass.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["Concentration"]
+    class_class_curie: ClassVar[str] = "chemrof:Concentration"
+    class_name: ClassVar[str] = "Concentration"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.Concentration
+
+    value: float = None
+    unit: Union[str, "ConcentrationUnitEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.value):
+            self.MissingRequiredField("value")
+        if not isinstance(self.value, float):
+            self.value = float(self.value)
+
+        if self._is_empty(self.unit):
+            self.MissingRequiredField("unit")
+        if not isinstance(self.unit, ConcentrationUnitEnum):
+            self.unit = ConcentrationUnitEnum(self.unit)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class ChemicalRole(YAMLRoot):
     """
     A characteristic of a chemical entity that is realized under particular conditions
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMROF["ChemicalRole"]
-    class_class_curie: ClassVar[str] = "chemrof:ChemicalRole"
+    class_class_uri: ClassVar[URIRef] = CHEBI["50906"]
+    class_class_curie: ClassVar[str] = "CHEBI:50906"
     class_name: ClassVar[str] = "ChemicalRole"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ChemicalRole
 
@@ -3304,6 +3376,104 @@ class ChemicalRole(YAMLRoot):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
 
         super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class IngredientRole(ChemicalRole):
+    """
+    A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["IngredientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:IngredientRole"
+    class_name: ClassVar[str] = "IngredientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.IngredientRole
+
+    source_element: Optional[Union[str, ChemicalElementId]] = None
+    role_type: Optional[Union[str, "IngredientRoleTypeEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.source_element is not None and not isinstance(self.source_element, ChemicalElementId):
+            self.source_element = ChemicalElementId(self.source_element)
+
+        if self.role_type is not None and not isinstance(self.role_type, IngredientRoleTypeEnum):
+            self.role_type = IngredientRoleTypeEnum(self.role_type)
+
+        super().__post_init__(**kwargs)
+
+
+class ElementSourceRole(IngredientRole):
+    """
+    Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen
+    source, phosphorus source.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["ElementSourceRole"]
+    class_class_curie: ClassVar[str] = "chemrof:ElementSourceRole"
+    class_name: ClassVar[str] = "ElementSourceRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.ElementSourceRole
+
+
+class BufferRole(IngredientRole):
+    """
+    Role of maintaining pH in a solution or mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["BufferRole"]
+    class_class_curie: ClassVar[str] = "chemrof:BufferRole"
+    class_name: ClassVar[str] = "BufferRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.BufferRole
+
+
+class SolventRole(IngredientRole):
+    """
+    Role of dissolving other components in a mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["SolventRole"]
+    class_class_curie: ClassVar[str] = "chemrof:SolventRole"
+    class_name: ClassVar[str] = "SolventRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.SolventRole
+
+
+class NutrientRole(IngredientRole):
+    """
+    Role of providing nutritional value, such as vitamins or minerals.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["NutrientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:NutrientRole"
+    class_name: ClassVar[str] = "NutrientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.NutrientRole
+
+
+class VitaminRole(NutrientRole):
+    """
+    Role of providing a vitamin component.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["VitaminRole"]
+    class_class_curie: ClassVar[str] = "chemrof:VitaminRole"
+    class_name: ClassVar[str] = "VitaminRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.VitaminRole
+
+
+class MineralNutrientRole(NutrientRole):
+    """
+    Role of providing a mineral nutrient, often as a trace element.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["MineralNutrientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:MineralNutrientRole"
+    class_name: ClassVar[str] = "MineralNutrientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.MineralNutrientRole
 
 
 class Location(YAMLRoot):
@@ -3585,6 +3755,8 @@ class Enantiomer(Stereoisomer):
     class_model_uri: ClassVar[URIRef] = CHEMROF.Enantiomer
 
     id: Union[str, EnantiomerId] = None
+    inchi_tetrahedral_stereochemical_sublayer: str = None
+    inchi_stereochemical_type_sublayer: str = None
     relative_configuration: Optional[str] = None
     optical_configuration: Optional[str] = None
     absolute_configuration: Optional[str] = None
@@ -3595,6 +3767,16 @@ class Enantiomer(Stereoisomer):
             self.MissingRequiredField("id")
         if not isinstance(self.id, EnantiomerId):
             self.id = EnantiomerId(self.id)
+
+        if self._is_empty(self.inchi_tetrahedral_stereochemical_sublayer):
+            self.MissingRequiredField("inchi_tetrahedral_stereochemical_sublayer")
+        if not isinstance(self.inchi_tetrahedral_stereochemical_sublayer, str):
+            self.inchi_tetrahedral_stereochemical_sublayer = str(self.inchi_tetrahedral_stereochemical_sublayer)
+
+        if self._is_empty(self.inchi_stereochemical_type_sublayer):
+            self.MissingRequiredField("inchi_stereochemical_type_sublayer")
+        if not isinstance(self.inchi_stereochemical_type_sublayer, str):
+            self.inchi_stereochemical_type_sublayer = str(self.inchi_stereochemical_type_sublayer)
 
         if self.relative_configuration is not None and not isinstance(self.relative_configuration, str):
             self.relative_configuration = str(self.relative_configuration)
@@ -3729,16 +3911,12 @@ class Reaction(DomainEntity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = CHEMROF["Reaction"]
-    class_class_curie: ClassVar[str] = "chemrof:Reaction"
+    class_class_uri: ClassVar[URIRef] = RXNO["0000000"]
+    class_class_curie: ClassVar[str] = "RXNO:0000000"
     class_name: ClassVar[str] = "Reaction"
     class_model_uri: ClassVar[URIRef] = CHEMROF.Reaction
 
     id: Union[str, ReactionId] = None
-    has_rinchi_representation: Optional[str] = None
-    has_reaction_smiles_representation: Optional[str] = None
-    reaction_rate_coefficient: Optional[float] = None
-    reaction_rate: Optional[float] = None
     left_participants: Optional[Union[Union[dict, "ReactionParticipant"], list[Union[dict, "ReactionParticipant"]]]] = empty_list()
     right_participants: Optional[Union[Union[dict, "ReactionParticipant"], list[Union[dict, "ReactionParticipant"]]]] = empty_list()
     direction: Optional[str] = None
@@ -3748,6 +3926,11 @@ class Reaction(DomainEntity):
     is_transport: Optional[Union[bool, Bool]] = None
     is_fully_characterized: Optional[Union[bool, Bool]] = None
     reaction_center: Optional[str] = None
+    has_rinchi_representation: Optional[str] = None
+    has_reaction_smiles_representation: Optional[str] = None
+    reaction_rate_coefficient: Optional[float] = None
+    reaction_rate: Optional[float] = None
+    reaction_type: Optional[Union[str, "ReactionTypeEnum"]] = None
     description: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -3755,18 +3938,6 @@ class Reaction(DomainEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ReactionId):
             self.id = ReactionId(self.id)
-
-        if self.has_rinchi_representation is not None and not isinstance(self.has_rinchi_representation, str):
-            self.has_rinchi_representation = str(self.has_rinchi_representation)
-
-        if self.has_reaction_smiles_representation is not None and not isinstance(self.has_reaction_smiles_representation, str):
-            self.has_reaction_smiles_representation = str(self.has_reaction_smiles_representation)
-
-        if self.reaction_rate_coefficient is not None and not isinstance(self.reaction_rate_coefficient, float):
-            self.reaction_rate_coefficient = float(self.reaction_rate_coefficient)
-
-        if self.reaction_rate is not None and not isinstance(self.reaction_rate, float):
-            self.reaction_rate = float(self.reaction_rate)
 
         if not isinstance(self.left_participants, list):
             self.left_participants = [self.left_participants] if self.left_participants is not None else []
@@ -3796,6 +3967,21 @@ class Reaction(DomainEntity):
 
         if self.reaction_center is not None and not isinstance(self.reaction_center, str):
             self.reaction_center = str(self.reaction_center)
+
+        if self.has_rinchi_representation is not None and not isinstance(self.has_rinchi_representation, str):
+            self.has_rinchi_representation = str(self.has_rinchi_representation)
+
+        if self.has_reaction_smiles_representation is not None and not isinstance(self.has_reaction_smiles_representation, str):
+            self.has_reaction_smiles_representation = str(self.has_reaction_smiles_representation)
+
+        if self.reaction_rate_coefficient is not None and not isinstance(self.reaction_rate_coefficient, float):
+            self.reaction_rate_coefficient = float(self.reaction_rate_coefficient)
+
+        if self.reaction_rate is not None and not isinstance(self.reaction_rate, float):
+            self.reaction_rate = float(self.reaction_rate)
+
+        if self.reaction_type is not None and not isinstance(self.reaction_type, ReactionTypeEnum):
+            self.reaction_type = ReactionTypeEnum(self.reaction_type)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -3856,7 +4042,8 @@ class ReactionParticipant(ChemicalRelationship):
 @dataclass(repr=False)
 class ProportionalPart(ChemicalRelationship):
     """
-    A part of a complex mixture that is of uniform composition
+    A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the
+    mixture, and its concentration.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -3865,17 +4052,25 @@ class ProportionalPart(ChemicalRelationship):
     class_name: ClassVar[str] = "ProportionalPart"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ProportionalPart
 
-    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
     composed_of: Optional[Union[str, ChemicalEntityId]] = None
+    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
+    has_ingredient_role: Optional[Union[dict, IngredientRole]] = None
+    concentration: Optional[Union[dict, Concentration]] = None
     minimal_percentage: Optional[float] = None
     maximum_percentage: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
+            self.composed_of = ChemicalEntityId(self.composed_of)
+
         if self.has_role is not None and not isinstance(self.has_role, IngredientRoleEnum):
             self.has_role = IngredientRoleEnum(self.has_role)
 
-        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
-            self.composed_of = ChemicalEntityId(self.composed_of)
+        if self.has_ingredient_role is not None and not isinstance(self.has_ingredient_role, IngredientRole):
+            self.has_ingredient_role = IngredientRole(**as_dict(self.has_ingredient_role))
+
+        if self.concentration is not None and not isinstance(self.concentration, Concentration):
+            self.concentration = Concentration(**as_dict(self.concentration))
 
         if self.minimal_percentage is not None and not isinstance(self.minimal_percentage, float):
             self.minimal_percentage = float(self.minimal_percentage)
@@ -4213,12 +4408,15 @@ class ElementMetallicClassification(EnumDefinitionImpl):
                 meaning=DAMLPT["Semi-Metallic"]))
 
 class IngredientRoleEnum(EnumDefinitionImpl):
-
+    """
+    DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.
+    """
     excipient = PermissibleValue(text="excipient")
     solvent = PermissibleValue(text="solvent")
 
     _defn = EnumDefinition(
         name="IngredientRoleEnum",
+        description="DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.",
     )
 
     @classmethod
@@ -4227,6 +4425,120 @@ class IngredientRoleEnum(EnumDefinitionImpl):
             PermissibleValue(text="active ingredient"))
         setattr(cls, "inactive ingredient",
             PermissibleValue(text="inactive ingredient"))
+
+class ConcentrationUnitEnum(EnumDefinitionImpl):
+    """
+    Units for expressing concentration of a substance.
+    """
+    M = PermissibleValue(
+        text="M",
+        description="Molar (mol/L)")
+    mM = PermissibleValue(
+        text="mM",
+        description="Millimolar (mmol/L)")
+    uM = PermissibleValue(
+        text="uM",
+        description="Micromolar (µmol/L)")
+    nM = PermissibleValue(
+        text="nM",
+        description="Nanomolar (nmol/L)")
+    ppm = PermissibleValue(
+        text="ppm",
+        description="Parts per million")
+    ppb = PermissibleValue(
+        text="ppb",
+        description="Parts per billion")
+
+    _defn = EnumDefinition(
+        name="ConcentrationUnitEnum",
+        description="Units for expressing concentration of a substance.",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "g/L",
+            PermissibleValue(
+                text="g/L",
+                description="Grams per liter"))
+        setattr(cls, "mg/L",
+            PermissibleValue(
+                text="mg/L",
+                description="Milligrams per liter"))
+        setattr(cls, "ug/L",
+            PermissibleValue(
+                text="ug/L",
+                description="Micrograms per liter"))
+        setattr(cls, "ng/L",
+            PermissibleValue(
+                text="ng/L",
+                description="Nanograms per liter"))
+        setattr(cls, "percent_w/v",
+            PermissibleValue(
+                text="percent_w/v",
+                description="Weight per volume percentage (g/100mL)"))
+        setattr(cls, "percent_v/v",
+            PermissibleValue(
+                text="percent_v/v",
+                description="Volume per volume percentage"))
+        setattr(cls, "percent_w/w",
+            PermissibleValue(
+                text="percent_w/w",
+                description="Weight per weight percentage"))
+
+class IngredientRoleTypeEnum(EnumDefinitionImpl):
+    """
+    Types of roles that ingredients can play in a mixture.
+    """
+    carbon_source = PermissibleValue(
+        text="carbon_source",
+        description="Provides carbon for biosynthesis")
+    nitrogen_source = PermissibleValue(
+        text="nitrogen_source",
+        description="Provides nitrogen for biosynthesis")
+    phosphorus_source = PermissibleValue(
+        text="phosphorus_source",
+        description="Provides phosphorus for biosynthesis")
+    sulfur_source = PermissibleValue(
+        text="sulfur_source",
+        description="Provides sulfur for biosynthesis")
+    electron_donor = PermissibleValue(
+        text="electron_donor",
+        description="Provides electrons in redox reactions")
+    electron_acceptor = PermissibleValue(
+        text="electron_acceptor",
+        description="Accepts electrons in redox reactions")
+    buffer = PermissibleValue(
+        text="buffer",
+        description="Maintains pH stability")
+    solvent = PermissibleValue(
+        text="solvent",
+        description="Dissolves other components")
+    vitamin = PermissibleValue(
+        text="vitamin",
+        description="Provides essential vitamin micronutrient")
+    mineral = PermissibleValue(
+        text="mineral",
+        description="Provides essential mineral micronutrient")
+    trace_element = PermissibleValue(
+        text="trace_element",
+        description="Provides trace element micronutrient")
+    growth_factor = PermissibleValue(
+        text="growth_factor",
+        description="Promotes or enables growth")
+    antibiotic = PermissibleValue(
+        text="antibiotic",
+        description="Selects for or against certain organisms")
+    inducer = PermissibleValue(
+        text="inducer",
+        description="Induces gene expression")
+    substrate = PermissibleValue(
+        text="substrate",
+        description="Primary substrate for enzymatic reactions")
+
+    _defn = EnumDefinition(
+        name="IngredientRoleTypeEnum",
+        description="Types of roles that ingredients can play in a mixture.",
+    )
 
 class BondTypeEnum(EnumDefinitionImpl):
 
@@ -4290,6 +4602,92 @@ class BronstedAcidBaseRoleEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="BronstedAcidBaseRoleEnum",
+    )
+
+class ReactionTypeEnum(EnumDefinitionImpl):
+    """
+    Classification of chemical reactions based on mechanistic and functional categories
+    """
+    functional_group_interconversion = PermissibleValue(
+        text="functional_group_interconversion",
+        description="Conversion of one functional group to another without changing the carbon skeleton",
+        meaning=RXNO["0000057"])
+    bond_formation = PermissibleValue(
+        text="bond_formation",
+        description="Reactions that create new bonds between atoms or groups")
+    bond_breaking = PermissibleValue(
+        text="bond_breaking",
+        description="Reactions that break existing bonds to form fragments or rearrange structures")
+    oxidation = PermissibleValue(
+        text="oxidation",
+        description="A functional group modification reaction where a functional group is oxidised",
+        meaning=RXNO["0000012"])
+    reduction = PermissibleValue(
+        text="reduction",
+        description="A functional group modification reaction where a functional group is reduced",
+        meaning=RXNO["0000037"])
+    acylation = PermissibleValue(
+        text="acylation",
+        description="Formation of an acyl group bond, typically involving carboxylic acid derivatives",
+        meaning=RXNO["0000016"])
+    carbon_carbon_bond_formation = PermissibleValue(
+        text="carbon_carbon_bond_formation",
+        description="Reactions that form new carbon-carbon bonds",
+        meaning=RXNO["0000018"])
+    heteroatom_alkylation_arylation = PermissibleValue(
+        text="heteroatom_alkylation_arylation",
+        description="Alkylation or arylation of heteroatoms such as nitrogen, oxygen, or sulfur",
+        meaning=RXNO["0000019"])
+    addition = PermissibleValue(
+        text="addition",
+        description="Reactions that add atoms or groups across multiple bonds",
+        meaning=RXNO["0000041"])
+    cyclization = PermissibleValue(
+        text="cyclization",
+        description="Formation of cyclic structures from linear precursors",
+        meaning=RXNO["0000005"])
+    condensation = PermissibleValue(
+        text="condensation",
+        description="""A reaction in which two or more reactants yield a single main product with accompanying formation of a small molecule""",
+        meaning=MOP["0000627"])
+    elimination = PermissibleValue(
+        text="elimination",
+        description="""A molecular process where two groups are lost with concomitant formation of an unsaturation in the molecule or formation of a new ring""",
+        meaning=RXNO["0000656"])
+    ring_opening = PermissibleValue(
+        text="ring_opening",
+        description="Cleavage of cyclic structures to form linear products")
+    hydrolysis = PermissibleValue(
+        text="hydrolysis",
+        description="A solvolysis reaction where the solvent material is water",
+        meaning=RXNO["0000619"])
+    substitution = PermissibleValue(
+        text="substitution",
+        description="A reaction step where one atom or group is replaced with another",
+        meaning=RXNO["0000331"])
+    isomerization = PermissibleValue(
+        text="isomerization",
+        description="Rearrangement reactions that convert one isomer to another",
+        meaning=RXNO["0000025"])
+    functional_group_addition = PermissibleValue(
+        text="functional_group_addition",
+        description="Addition of functional groups to unsaturated bonds or reactive centers")
+    aromatic_heterocycle_formation = PermissibleValue(
+        text="aromatic_heterocycle_formation",
+        description="Formation of aromatic rings containing heteroatoms")
+    protection = PermissibleValue(
+        text="protection",
+        description="Introduction of protecting groups to temporarily mask reactive functionalities")
+    deprotection = PermissibleValue(
+        text="deprotection",
+        description="Removal of protecting groups to restore original functionalities")
+    resolution = PermissibleValue(
+        text="resolution",
+        description="Separation of enantiomers or other stereoisomers")
+
+    _defn = EnumDefinition(
+        name="ReactionTypeEnum",
+        description="Classification of chemical reactions based on mechanistic and functional categories",
     )
 
 class SubatomicParticleEnum(EnumDefinitionImpl):
@@ -4517,7 +4915,7 @@ slots.symbol = Slot(uri=BO.symbol, name="symbol", curie=BO.curie('symbol'),
 slots.type = Slot(uri=CHEMROF.type, name="type", curie=CHEMROF.curie('type'),
                    model_uri=CHEMROF.type, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.IUPAC_name = Slot(uri=CHEMINF['000107'], name="IUPAC_name", curie=CHEMINF.curie('000107'),
+slots.IUPAC_name = Slot(uri=CHEMROF.IUPAC_name, name="IUPAC_name", curie=CHEMROF.curie('IUPAC_name'),
                    model_uri=CHEMROF.IUPAC_name, domain=None, range=Optional[str])
 
 slots.property_of_atom = Slot(uri=CHEMROF.property_of_atom, name="property_of_atom", curie=CHEMROF.curie('property_of_atom'),
@@ -4601,10 +4999,22 @@ slots.has_physiologically_stable_form = Slot(uri=CHEMROF.has_physiologically_sta
 slots.has_acid_form = Slot(uri=CHEMROF.has_acid_form, name="has_acid_form", curie=CHEMROF.curie('has_acid_form'),
                    model_uri=CHEMROF.has_acid_form, domain=MoleculeByChargeState, range=Optional[Union[str, MoleculeByChargeStateId]])
 
-slots.has_chemical_role = Slot(uri=CHEMROF.has_chemical_role, name="has_chemical_role", curie=CHEMROF.curie('has_chemical_role'),
+slots.has_chemical_role = Slot(uri=RO['0000087'], name="has_chemical_role", curie=RO.curie('0000087'),
                    model_uri=CHEMROF.has_chemical_role, domain=None, range=Optional[Union[dict, ChemicalRole]])
 
-slots.has_part = Slot(uri=CHEMROF.has_part, name="has_part", curie=CHEMROF.curie('has_part'),
+slots.source_element = Slot(uri=CHEMROF.source_element, name="source_element", curie=CHEMROF.curie('source_element'),
+                   model_uri=CHEMROF.source_element, domain=None, range=Optional[Union[str, ChemicalElementId]])
+
+slots.has_ingredient_role = Slot(uri=CHEMROF.has_ingredient_role, name="has_ingredient_role", curie=CHEMROF.curie('has_ingredient_role'),
+                   model_uri=CHEMROF.has_ingredient_role, domain=None, range=Optional[Union[dict, IngredientRole]])
+
+slots.concentration = Slot(uri=CHEMROF.concentration, name="concentration", curie=CHEMROF.curie('concentration'),
+                   model_uri=CHEMROF.concentration, domain=None, range=Optional[Union[dict, Concentration]])
+
+slots.ph = Slot(uri=CHEMROF.ph, name="ph", curie=CHEMROF.curie('ph'),
+                   model_uri=CHEMROF.ph, domain=None, range=Optional[float])
+
+slots.has_part = Slot(uri=BFO['0000051'], name="has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.has_part, domain=None, range=Optional[str], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
 
 slots.has_repeat_unit = Slot(uri=CHEMROF.has_repeat_unit, name="has_repeat_unit", curie=CHEMROF.curie('has_repeat_unit'),
@@ -4804,6 +5214,9 @@ slots.reaction_rate = Slot(uri=CHEMROF.reaction_rate, name="reaction_rate", curi
 
 slots.reaction_rate_coefficient = Slot(uri=CHEMROF.reaction_rate_coefficient, name="reaction_rate_coefficient", curie=CHEMROF.curie('reaction_rate_coefficient'),
                    model_uri=CHEMROF.reaction_rate_coefficient, domain=None, range=Optional[float])
+
+slots.reaction_type = Slot(uri=CHEMROF.reaction_type, name="reaction_type", curie=CHEMROF.curie('reaction_type'),
+                   model_uri=CHEMROF.reaction_type, domain=None, range=Optional[Union[str, "ReactionTypeEnum"]])
 
 slots.kcat = Slot(uri=CHEMROF.kcat, name="kcat", curie=CHEMROF.curie('kcat'),
                    model_uri=CHEMROF.kcat, domain=None, range=Optional[str])
@@ -5215,6 +5628,15 @@ slots.collection__entities = Slot(uri=CHEMROF.entities, name="collection__entiti
 slots.naturalProduct__derived_from_organisms = Slot(uri=CHEMROF.derived_from_organisms, name="naturalProduct__derived_from_organisms", curie=CHEMROF.curie('derived_from_organisms'),
                    model_uri=CHEMROF.naturalProduct__derived_from_organisms, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
+slots.concentration__value = Slot(uri=CHEMROF.value, name="concentration__value", curie=CHEMROF.curie('value'),
+                   model_uri=CHEMROF.concentration__value, domain=None, range=float)
+
+slots.concentration__unit = Slot(uri=CHEMROF.unit, name="concentration__unit", curie=CHEMROF.curie('unit'),
+                   model_uri=CHEMROF.concentration__unit, domain=None, range=Union[str, "ConcentrationUnitEnum"])
+
+slots.ingredientRole__role_type = Slot(uri=CHEMROF.role_type, name="ingredientRole__role_type", curie=CHEMROF.curie('role_type'),
+                   model_uri=CHEMROF.ingredientRole__role_type, domain=None, range=Optional[Union[str, "IngredientRoleTypeEnum"]])
+
 slots.atomicBond__subject = Slot(uri=CHEMROF.subject, name="atomicBond__subject", curie=CHEMROF.curie('subject'),
                    model_uri=CHEMROF.atomicBond__subject, domain=None, range=Optional[Union[str, AtomOccurrenceName]])
 
@@ -5276,6 +5698,9 @@ slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClas
 slots.PhysicochemicalEntityGroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="PhysicochemicalEntityGroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.PhysicochemicalEntityGroupingClass_subtype_of, domain=PhysicochemicalEntityGroupingClass, range=Optional[Union[Union[str, PhysicochemicalEntityGroupingClassId], list[Union[str, PhysicochemicalEntityGroupingClassId]]]])
 
+slots.PhysicochemicalEntityGroupingClass_classifies = Slot(uri=CHEMROF.classifies, name="PhysicochemicalEntityGroupingClass_classifies", curie=CHEMROF.curie('classifies'),
+                   model_uri=CHEMROF.PhysicochemicalEntityGroupingClass_classifies, domain=PhysicochemicalEntityGroupingClass, range=Optional[Union[str, PhysicochemicalEntityId]])
+
 slots.ChemicalGroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="ChemicalGroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.ChemicalGroupingClass_subtype_of, domain=ChemicalGroupingClass, range=Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]])
 
@@ -5321,7 +5746,7 @@ slots.MolecularDerivativeGroupingClass_name = Slot(uri=RDFS.label, name="Molecul
 slots.MolecularDerivativeGroupingClass_classifies = Slot(uri=CHEMROF.classifies, name="MolecularDerivativeGroupingClass_classifies", curie=CHEMROF.curie('classifies'),
                    model_uri=CHEMROF.MolecularDerivativeGroupingClass_classifies, domain=MolecularDerivativeGroupingClass, range=Optional[Union[str, MoleculeId]])
 
-slots.MoleculeGroupingClassDefinedByComponents_has_part = Slot(uri=CHEMROF.has_part, name="MoleculeGroupingClassDefinedByComponents_has_part", curie=CHEMROF.curie('has_part'),
+slots.MoleculeGroupingClassDefinedByComponents_has_part = Slot(uri=BFO['0000051'], name="MoleculeGroupingClassDefinedByComponents_has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.MoleculeGroupingClassDefinedByComponents_has_part, domain=MoleculeGroupingClassDefinedByComponents, range=Optional[Union[dict, "ChemicalEntityOrGrouping"]], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
 
 slots.MoleculeGroupingClassDefinedByAdditionOfAGroup_has_group = Slot(uri=CHEMROF.has_group, name="MoleculeGroupingClassDefinedByAdditionOfAGroup_has_group", curie=CHEMROF.curie('has_group'),
@@ -5352,7 +5777,7 @@ slots.AtomGroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="AtomGrou
 slots.AtomGroupingClass_classifies = Slot(uri=CHEMROF.classifies, name="AtomGroupingClass_classifies", curie=CHEMROF.curie('classifies'),
                    model_uri=CHEMROF.AtomGroupingClass_classifies, domain=AtomGroupingClass, range=Optional[Union[str, AtomId]])
 
-slots.Material_has_part = Slot(uri=CHEMROF.has_part, name="Material_has_part", curie=CHEMROF.curie('has_part'),
+slots.Material_has_part = Slot(uri=BFO['0000051'], name="Material_has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.Material_has_part, domain=Material, range=Optional[Union[str, ChemicalEntityId]], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
 
 slots.Nanomaterial_has_morphological_category = Slot(uri=CHEMROF.has_morphological_category, name="Nanomaterial_has_morphological_category", curie=CHEMROF.curie('has_morphological_category'),
@@ -5386,7 +5811,7 @@ slots.Molecule_has_atom_occurrences = Slot(uri=CHEMROF.has_atom_occurrences, nam
 slots.Molecule_has_bonds = Slot(uri=CHEMROF.has_bonds, name="Molecule_has_bonds", curie=CHEMROF.curie('has_bonds'),
                    model_uri=CHEMROF.Molecule_has_bonds, domain=Molecule, range=Optional[Union[Union[dict, "AtomicBond"], list[Union[dict, "AtomicBond"]]]])
 
-slots.Molecule_has_part = Slot(uri=CHEMROF.has_part, name="Molecule_has_part", curie=CHEMROF.curie('has_part'),
+slots.Molecule_has_part = Slot(uri=BFO['0000051'], name="Molecule_has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.Molecule_has_part, domain=Molecule, range=Optional[str], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
 
 slots.AminoAcidSequenceInterval_has_sequence_representation = Slot(uri=CHEMROF.has_sequence_representation, name="AminoAcidSequenceInterval_has_sequence_representation", curie=CHEMROF.curie('has_sequence_representation'),
@@ -5407,7 +5832,7 @@ slots.MoleculeByChargeState_hard_or_soft = Slot(uri=CHEMROF.hard_or_soft, name="
 slots.MoleculeByChargeState_acid_form_of = Slot(uri=CHEMROF.acid_form_of, name="MoleculeByChargeState_acid_form_of", curie=CHEMROF.curie('acid_form_of'),
                    model_uri=CHEMROF.MoleculeByChargeState_acid_form_of, domain=MoleculeByChargeState, range=Optional[Union[Union[str, MoleculeByChargeStateId], list[Union[str, MoleculeByChargeStateId]]]])
 
-slots.Atom_has_part = Slot(uri=CHEMROF.has_part, name="Atom_has_part", curie=CHEMROF.curie('has_part'),
+slots.Atom_has_part = Slot(uri=BFO['0000051'], name="Atom_has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.Atom_has_part, domain=Atom, range=Optional[Union[str, SubatomicParticleId]], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
 
 slots.ChemicalElement_symbol = Slot(uri=BO.symbol, name="ChemicalElement_symbol", curie=BO.curie('symbol'),
@@ -5487,6 +5912,14 @@ slots.Enantiomer_absolute_configuration = Slot(uri=CHEMROF.absolute_configuratio
 slots.Enantiomer_enantiomer_form_of = Slot(uri=CHEMROF.enantiomer_form_of, name="Enantiomer_enantiomer_form_of", curie=CHEMROF.curie('enantiomer_form_of'),
                    model_uri=CHEMROF.Enantiomer_enantiomer_form_of, domain=Enantiomer, range=Optional[Union[str, MoleculeId]])
 
+slots.Enantiomer_inchi_tetrahedral_stereochemical_sublayer = Slot(uri=CHEMROF.inchi_tetrahedral_stereochemical_sublayer, name="Enantiomer_inchi_tetrahedral_stereochemical_sublayer", curie=CHEMROF.curie('inchi_tetrahedral_stereochemical_sublayer'),
+                   model_uri=CHEMROF.Enantiomer_inchi_tetrahedral_stereochemical_sublayer, domain=Enantiomer, range=str,
+                   pattern=re.compile(r'^[tm].*'))
+
+slots.Enantiomer_inchi_stereochemical_type_sublayer = Slot(uri=CHEMROF.inchi_stereochemical_type_sublayer, name="Enantiomer_inchi_stereochemical_type_sublayer", curie=CHEMROF.curie('inchi_stereochemical_type_sublayer'),
+                   model_uri=CHEMROF.Enantiomer_inchi_stereochemical_type_sublayer, domain=Enantiomer, range=str,
+                   pattern=re.compile(r'^s.*'))
+
 slots.RacemicMixture_has_left_enantiomer = Slot(uri=CHEMROF.has_left_enantiomer, name="RacemicMixture_has_left_enantiomer", curie=CHEMROF.curie('has_left_enantiomer'),
                    model_uri=CHEMROF.RacemicMixture_has_left_enantiomer, domain=RacemicMixture, range=Union[str, EnantiomerId])
 
@@ -5496,7 +5929,7 @@ slots.RacemicMixture_has_right_enantiomer = Slot(uri=CHEMROF.has_right_enantiome
 slots.RacemicMixture_chirality_agnostic_form = Slot(uri=CHEMROF.chirality_agnostic_form, name="RacemicMixture_chirality_agnostic_form", curie=CHEMROF.curie('chirality_agnostic_form'),
                    model_uri=CHEMROF.RacemicMixture_chirality_agnostic_form, domain=RacemicMixture, range=Optional[Union[str, MoleculeId]])
 
-slots.RacemicMixture_IUPAC_name = Slot(uri=CHEMINF['000107'], name="RacemicMixture_IUPAC_name", curie=CHEMINF.curie('000107'),
+slots.RacemicMixture_IUPAC_name = Slot(uri=CHEMROF.IUPAC_name, name="RacemicMixture_IUPAC_name", curie=CHEMROF.curie('IUPAC_name'),
                    model_uri=CHEMROF.RacemicMixture_IUPAC_name, domain=RacemicMixture, range=Optional[str],
                    pattern=re.compile(r'^rac-'))
 

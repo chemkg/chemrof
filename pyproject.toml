@@ -1,13 +1,14 @@
 [project]
 name = "chemrof"
-version = "0.0.0"
 description = "Chemical Entities, Materials, and Reactions Ontological Framework"
 authors = [
     {name = "cmungall", email = "cjm@berkeleybop.org"},
 ]
+license = "CC0-1.0"
+license-files = ["LICENSE"]
+readme = "README.md"
 requires-python = ">=3.10"
-
-# let's convert this to uv
+dynamic = ["version"]
 
 dependencies = [
     "linkml-runtime>=1.9.0",
@@ -27,8 +28,7 @@ package = true
 [dependency-groups]
 dev = [
     
-    "linkml-owl>=0.2.0",
-    "linkml>=1.8.0",
+    "linkml>=1.9.5",
     "mkdocs>=1.2.3",
     "mkdocs-material>=8.1.8",
     "mkdocs-mermaid2-plugin>=1.2.1",
@@ -55,3 +55,32 @@ source = "uv-dynamic-versioning"
 vcs = "git"
 style = "pep440"
 fallback-version = "0.0.0"
+
+# Ref.: https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# Ref.: https://github.com/codespell-project/codespell
+[tool.codespell]
+skip = [
+  "LICENSE",
+  "pyproject.toml",
+  "uv.lock",
+  "project/*",
+  "src/chemrof/datamodel/chemrof_pydantic.py",
+  "src/chemrof/datamodel/chemrof.py",
+]
+quiet-level = 3
+
+# Ref.: https://github.com/crate-ci/typos (spell checker)
+[tool.typos.default.extend-words]
+linke = "linke"
+[tool.typos.files]
+extend-exclude = [
+  "LICENSE",
+  "uv.lock",
+  "pyproject.toml",
+  "project/*",
+  "src/chemrof/datamodel/chemrof_pydantic.py",
+  "src/chemrof/datamodel/chemrof.py",
+]

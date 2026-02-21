@@ -63,6 +63,8 @@ imports:
 classes:
 
   Collection:
+    description: This utility class serves to collect a set of domain entities, and to be the top
+      level object in tree-based representations such as JSON.
     tree_root: true
     attributes:
       entities:
@@ -87,6 +89,7 @@ classes:
     title: physicochemical entity
   ChemicalEntity:
     is_a: PhysicochemicalEntity
+    class_uri: CHEBI:24431
     aliases:
     - specific chemical entity
     - chemical
@@ -108,6 +111,14 @@ classes:
     - has_chemical_role
     - inchi_string
     - inchi_chemical_sublayer
+    - inchi_atom_connections_sublayer
+    - inchi_hydrogen_connections_sublayer
+    - inchi_charge_sublayer
+    - inchi_proton_sublayer
+    - inchi_stereochemical_double_bond_sublayer
+    - inchi_tetrahedral_stereochemical_sublayer
+    - inchi_stereochemical_type_sublayer
+    - inchi_isotopic_layer
     - smiles_string
     - empirical_formula
     - has_major_microspecies_at_pH7_3
@@ -133,6 +144,7 @@ classes:
     exact_mappings:
     - SIO:010004
     - wdeschema:E239
+    - BFO:0000040
     id_prefixes:
     - CHEBI
     - CHEMBL.COMPOUND
@@ -198,6 +210,8 @@ classes:
     slot_usage:
       subtype_of:
         range: PhysicochemicalEntityGroupingClass
+      classifies:
+        range: PhysicochemicalEntity
     title: physicochemical entity grouping class
   ChemicalGroupingClass:
     is_a: PhysicochemicalEntityGroupingClass
@@ -370,6 +384,7 @@ classes:
     - has_cationic_component
     examples:
     - value: sodium salt
+      description: Any salt having carbonate as the anion
     title: chemical salt by cation
   ChemicalSaltByAnion:
     is_a: ChemicalSaltGroupingClass
@@ -383,6 +398,8 @@ classes:
     - has_anionic_component
     examples:
     - value: chloride salt
+    - value: carbonate salt
+      description: Any alkali metal salt having sodium(1+) as the cation.
     title: chemical salt by anion
   GeneralizedMolecularStructureClass:
     is_a: MoleculeGroupingClass
@@ -766,6 +783,8 @@ classes:
     is_a: PolyatomicEntity
     description: A polyatomic entity that consists of two or more parts that are weakly
       bound, may be of known or unknown stoichiometry
+    slots:
+    - ph
     exact_mappings:
     - CHEBI:60004
     title: chemical mixture
@@ -828,6 +847,7 @@ classes:
     mappings:
     - COB:0000013
     exact_mappings:
+    - CHEBI:25367
     - SIO:011125
     - biotop:MonoMolecularEntity
     - gc:Molecule
@@ -976,6 +996,9 @@ classes:
     mappings:
     - COB:0000011
     - SIO:010044
+    exact_mappings:
+    - CHEBI:33250
+    - SIO:010003
     title: atom
   ChemicalElement:
     is_a: PartiallySpecifiedAtom
@@ -1244,14 +1267,72 @@ classes:
     close_mappings:
     - biolink:Association
     title: chemical relationship
+  Concentration:
+    description: A measurement of the amount of a substance in a given volume or mass.
+    attributes:
+      value:
+        range: float
+        description: The numeric value of the concentration.
+        required: true
+      unit:
+        range: ConcentrationUnitEnum
+        description: The unit of concentration.
+        required: true
+    title: concentration
   ChemicalRole:
+    class_uri: CHEBI:50906
     aliases:
     - role
     mixins:
     - OwlClass
     description: A characteristic of a chemical entity that is realized under particular
       conditions
+    exact_mappings:
+    - SIO:000016
+    - BFO:0000017
     title: chemical role
+  IngredientRole:
+    is_a: ChemicalRole
+    description: A role that a chemical entity plays as an ingredient in a mixture,
+      such as carbon source, buffer, or solvent.
+    slots:
+    - source_element
+    attributes:
+      role_type:
+        range: IngredientRoleTypeEnum
+        description: The type of ingredient role.
+    title: ingredient role
+  ElementSourceRole:
+    is_a: IngredientRole
+    description: Role of providing a specific element to a biological or chemical system.
+      Examples include carbon source, nitrogen source, phosphorus source.
+    title: element source role
+  BufferRole:
+    is_a: IngredientRole
+    description: Role of maintaining pH in a solution or mixture.
+    exact_mappings:
+    - CHEBI:35225
+    title: buffer role
+  SolventRole:
+    is_a: IngredientRole
+    description: Role of dissolving other components in a mixture.
+    exact_mappings:
+    - CHEBI:46787
+    title: solvent role
+  NutrientRole:
+    is_a: IngredientRole
+    description: Role of providing nutritional value, such as vitamins or minerals.
+    title: nutrient role
+  VitaminRole:
+    is_a: NutrientRole
+    description: Role of providing a vitamin component.
+    exact_mappings:
+    - CHEBI:33229
+    title: vitamin role
+  MineralNutrientRole:
+    is_a: NutrientRole
+    description: Role of providing a mineral nutrient, often as a trace element.
+    title: mineral nutrient role
   Location:
     abstract: true
     description: Abstract grouping for entities that represent abstract or concrete
@@ -1448,6 +1529,10 @@ classes:
         range: Molecule
         is_a: owl_subclass_of
         description: 'Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione'
+      inchi_tetrahedral_stereochemical_sublayer:
+        required: true
+      inchi_stereochemical_type_sublayer:
+        required: true
     comments:
     - key= (enantiomer form of, absolute configuration)
     - key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)
@@ -1465,15 +1550,37 @@ classes:
       has_left_enantiomer:
         required: true
         range: Enantiomer
+        range_expression:
+          slot_conditions:
+            inchi_tetrahedral_stereochemical_sublayer:
+              pattern: "^[tm].*"
+            inchi_stereochemical_type_sublayer:
+              pattern: "^s.*"
       has_right_enantiomer:
         required: true
         range: Enantiomer
+        range_expression:
+          slot_conditions:
+            inchi_tetrahedral_stereochemical_sublayer:
+              pattern: "^[tm].*"
+            inchi_stereochemical_type_sublayer:
+              pattern: "^s.*"
       chirality_agnostic_form:
         recommended: true
         required: false
         range: Molecule
+        range_expression:
+          slot_conditions:
+            inchi_tetrahedral_stereochemical_sublayer:
+              pattern: "^$"
+            inchi_stereochemical_type_sublayer:
+              pattern: "^$"
       IUPAC_name:
         pattern: ^rac-
+    slots:
+    - has_left_enantiomer
+    - has_right_enantiomer
+    - chirality_agnostic_form
     defining_slots:
     - has_left_enantiomer
     - has_right_enantiomer
@@ -1526,7 +1633,11 @@ classes:
     title: polymer repeat unit
   Reaction:
     is_a: DomainEntity
+    class_uri: RXNO:0000000
     description: Reaction
+    exact_mappings:
+    - MOP:0000010
+    - BFO:0000015
     id_prefixes:
     - RHEA
     - KEGG.REACTION
@@ -1541,6 +1652,15 @@ classes:
     - MOP
     - REX
     slots:
+    - left_participants
+    - right_participants
+    - direction
+    - is_diastereoselective
+    - is_stereo
+    - is_balanced
+    - is_transport
+    - is_fully_characterized
+    - reaction_center
     - has_rinchi_representation
     - has_reaction_smiles_representation
     - reaction_rate_coefficient
@@ -1597,16 +1717,31 @@ classes:
     title: reaction participant
   ProportionalPart:
     is_a: ChemicalRelationship
-    description: A part of a complex mixture that is of uniform composition
+    description: A part of a complex mixture that is of uniform composition.
+      Each part specifies a chemical entity, its role in the mixture, and its concentration.
+    slots:
+    - composed_of
+    - has_role
+    - has_ingredient_role
+    - concentration
+    - minimal_percentage
+    - maximum_percentage
     slot_usage:
       has_role:
+        description: DEPRECATED - use has_ingredient_role instead
         range: IngredientRoleEnum
       composed_of:
         range: ChemicalEntity
+        description: The chemical entity that is a component of the mixture.
+          Can be a simple chemical or another mixture (for nested mixtures).
       minimal_percentage:
         range: float
+        description: Minimum percentage by mass or volume. Use concentration slot for
+          molar or mass/volume concentrations.
       maximum_percentage:
         range: float
+        description: Maximum percentage by mass or volume. Use concentration slot for
+          molar or mass/volume concentrations.
     title: proportional part
   ChemicalSimilarity:
     is_a: ChemicalRelationship
@@ -1764,9 +1899,9 @@ slots:
   IUPAC_name:
     is_a: information_property
     range: string
-    slot_uri: CHEMINF:000107
     exact_mappings:
     - MI:2007
+    - CHEMINF:000107
     title: IUPAC name
   property_of_atom:
     abstract: true
@@ -1958,12 +2093,37 @@ slots:
   has_chemical_role:
     range: ChemicalRole
     title: has chemical role
+    slot_uri: RO:0000087
+  source_element:
+    range: ChemicalElement
+    description: The element that is provided by an element source role.
+      For example, carbon for a carbon source, nitrogen for a nitrogen source.
+    title: source element
+  has_ingredient_role:
+    range: IngredientRole
+    description: The role that an ingredient plays in a mixture.
+    title: has ingredient role
+    inlined: true
+  concentration:
+    range: Concentration
+    description: The concentration of a component in a mixture.
+    title: concentration
+    inlined: true
+  ph:
+    range: float
+    description: The pH value of a mixture or solution.
+    minimum_value: 0
+    maximum_value: 14
+    title: pH
   has_part:
     is_a: chemical_to_chemical_relationship
+    slot_uri: BFO:0000051
     description: basic parthood relations
     mappings:
     - BFO:0000050
     - schema:hasBioChemEntityPart
+    exact_mappings:
+    - RO:0002131
     title: has part
   has_repeat_unit:
     range: ChemicalEntity
@@ -2184,6 +2344,7 @@ slots:
       - NCIT:C28272
       - FIX:0000270
       - chebi.property:mass
+      - CHEMINF:000198
     range: float
     unit:
       ucum_code: u
@@ -2528,6 +2689,8 @@ slots:
     title: molecular formula
   empirical_formula:
     is_a: chemical_formula
+    exact_mappings:
+    - CHEMINF:000042
     description: A chemical formula where numbers denote relative proportion of atoms.
       E.g. CH2O for glucose
     title: empirical formula
@@ -2561,6 +2724,7 @@ slots:
     - https://chemistry.stackexchange.com/questions/151072/can-cis-trans-isomers-have-same-inchi
     exact_mappings:
     - OntoRXN:hasInChi
+    - CHEMINF:000113
   inchi_key_string:
     is_a: hashed_chemical_formula
     description: A hashed representation of an InChi string
@@ -2588,6 +2752,8 @@ slots:
       - inchi2d key
   smiles_string:
     is_a: chemical_formula
+    exact_mappings:
+    - CHEMINF:000018
     description: A string encoding of a molecular graph, no chiral or isotopic information.
       There are usually a large number of valid SMILES which represent a given structure.
       For example, CCO, OCC and C(O)C all specify the structure of ethanol.
@@ -3272,12 +3438,77 @@ enums:
         meaning: damlpt:Semi-Metallic
     title: element_metallic_classification
   IngredientRoleEnum:
+    description: DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.
     permissible_values:
       active ingredient: null
       inactive ingredient: null
       excipient: null
       solvent: null
     title: ingredient_role_enum
+  ConcentrationUnitEnum:
+    description: Units for expressing concentration of a substance.
+    permissible_values:
+      M:
+        description: Molar (mol/L)
+      mM:
+        description: Millimolar (mmol/L)
+      uM:
+        description: Micromolar (µmol/L)
+      nM:
+        description: Nanomolar (nmol/L)
+      g/L:
+        description: Grams per liter
+      mg/L:
+        description: Milligrams per liter
+      ug/L:
+        description: Micrograms per liter
+      ng/L:
+        description: Nanograms per liter
+      percent_w/v:
+        description: Weight per volume percentage (g/100mL)
+      percent_v/v:
+        description: Volume per volume percentage
+      percent_w/w:
+        description: Weight per weight percentage
+      ppm:
+        description: Parts per million
+      ppb:
+        description: Parts per billion
+    title: concentration_unit_enum
+  IngredientRoleTypeEnum:
+    description: Types of roles that ingredients can play in a mixture.
+    permissible_values:
+      carbon_source:
+        description: Provides carbon for biosynthesis
+      nitrogen_source:
+        description: Provides nitrogen for biosynthesis
+      phosphorus_source:
+        description: Provides phosphorus for biosynthesis
+      sulfur_source:
+        description: Provides sulfur for biosynthesis
+      electron_donor:
+        description: Provides electrons in redox reactions
+      electron_acceptor:
+        description: Accepts electrons in redox reactions
+      buffer:
+        description: Maintains pH stability
+      solvent:
+        description: Dissolves other components
+      vitamin:
+        description: Provides essential vitamin micronutrient
+      mineral:
+        description: Provides essential mineral micronutrient
+      trace_element:
+        description: Provides trace element micronutrient
+      growth_factor:
+        description: Promotes or enables growth
+      antibiotic:
+        description: Selects for or against certain organisms
+      inducer:
+        description: Induces gene expression
+      substrate:
+        description: Primary substrate for enzymatic reactions
+    title: ingredient_role_type_enum
   BondTypeEnum:
     permissible_values:
       covalent:
