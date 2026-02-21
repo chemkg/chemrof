@@ -1,3 +1,5 @@
+# metamodel_version: 1.7.0
+# version: 0.0.1
 BASE <https://w3id.org/chemrof/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -70,19 +72,9 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<AcidBase> CLOSED {
-    (  $<AcidBase_tes> (  &<MolecularAnion_tes> ;
-          rdf:type [ <MolecularAnion> ] ? ;
-          <has_acid_form> @<BronstedAcid> ?
-       ) ;
-       rdf:type [ <AcidBase> ]
-    )
-}
-
 <AcidBaseConflationClass> CLOSED {
     (  $<AcidBaseConflationClass_tes> (  &<GroupingClassForAcidsOrBases_tes> ;
-          rdf:type [ <GroupingClassForAcidsOrBases> ] ? ;
-          <has_physiological_base> @<AcidBase> ?
+          rdf:type [ <GroupingClassForAcidsOrBases> ] ?
        ) ;
        rdf:type [ <AcidBaseConflationClass> ]
     )
@@ -122,11 +114,11 @@ linkml:Sparqlpath xsd:string
 
 <Atom_struct> {
     (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
-          rdf:type [ <ChemicalEntity> ] ? ;
+          rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_24431> ] ? ;
           <http://www.blueobelisk.org/dict/terminologyatomicNumber> @<Count> ? ;
           <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <has_nuclear_parts> @<SubatomicParticleOccurrence> ? ;
-          <has_part> @<SubatomicParticle> ?
+          <http://purl.obolibrary.org/obo/BFO_0000051> @<SubatomicParticle> ?
        ) ;
        rdf:type [ <Atom> ]
     )
@@ -256,18 +248,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<BronstedAcid> CLOSED {
-    (  $<BronstedAcid_tes> (  &<Molecule_tes> ;
-          rdf:type [ <Molecule> ] ? ;
-          <acidity> @linkml:Float ? ;
-          <hard_or_soft> [ <https://w3id.org/chemrof/HardOrSoftEnum#hard> <https://w3id.org/chemrof/HardOrSoftEnum#soft>
-             <https://w3id.org/chemrof/HardOrSoftEnum#borderline> ] ? ;
-          <acid_form_of> @<AcidBase> *
-       ) ;
-       rdf:type [ <BronstedAcid> ]
-    )
-}
-
 <CationState> {
     (  $<CationState_tes> (  &<Charged_tes> ;
           rdf:type [ <Charged> ] ? ;
@@ -305,11 +285,11 @@ linkml:Sparqlpath xsd:string
 <ChemicalElement> CLOSED {
     (  $<ChemicalElement_tes> (  &<PartiallySpecifiedAtom_tes> ;
           rdf:type [ <PartiallySpecifiedAtom> ] ? ;
-          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <in_periodic_table_group> @<PeriodicTableGroup> ? ;
           <in_periodic_table_block> [ <http://purl.obolibrary.org/obo/CHEBI_33674> <http://purl.obolibrary.org/obo/CHEBI_33675>
              <http://purl.obolibrary.org/obo/CHEBI_33561> <http://purl.obolibrary.org/obo/CHEBI_33562>
              <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ] ? ;
+          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
           <boiling_point_in_celcius> @linkml:Float ? ;
           <melting_point_in_celcius> @linkml:Float ? ;
           <standard_atomic_weight> @linkml:Float ? ;
@@ -317,7 +297,7 @@ linkml:Sparqlpath xsd:string
           <monoisotopic_mass> @linkml:Float ? ;
           <electron_configuration> @linkml:String ? ;
           <has_stereocenter> @<Stereocenter> * ;
-          <has_physiologically_stable_form> @linkml:String ?
+          <has_major_microspecies_at_pH7_3> @<ChemicalElement> ?
        ) ;
        rdf:type [ <ChemicalElement> ]
     )
@@ -332,15 +312,31 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <PhysicochemicalEntity> ] ? ;
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
-          <http://semanticscience.org/resource/CHEMINF_000107> @linkml:String ? ;
+          <IUPAC_name> @linkml:String ? ;
           <is_radical> @linkml:Boolean ? ;
-          <has_chemical_role> @<ChemicalRole> ? ;
+          <http://purl.obolibrary.org/obo/RO_0000087> @<ChemicalRole> ? ;
           <inchi_string> @<ChemicalEncoding> ? ;
           <inchi_chemical_sublayer> @linkml:String ? ;
-          <smiles_string> @<ChemicalEncoding> * ;
-          <empirical_formula> @<ChemicalEncoding> ?
+          <inchi_atom_connections_sublayer> @linkml:String ? ;
+          <inchi_hydrogen_connections_sublayer> @linkml:String ? ;
+          <inchi_charge_sublayer> @linkml:String ? ;
+          <inchi_proton_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_double_bond_sublayer> @linkml:String ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_type_sublayer> @linkml:String ? ;
+          <inchi_isotopic_layer> @linkml:String ? ;
+          <smiles_string> @<ChemicalEncoding> ? ;
+          <empirical_formula> @<ChemicalEncoding> ? ;
+          <has_major_microspecies_at_pH7_3> @<ChemicalEntity> ? ;
+          <molecular_mass> @linkml:Float ? ;
+          <water_solubility> @linkml:Float ? ;
+          <pka_ionization_constant> @linkml:Float * ;
+          <pka_temperature> @linkml:Float ? ;
+          <pka_ionic_strength> @linkml:Float ? ;
+          <pka_solvent> @linkml:String ? ;
+          <pka_pressure> @linkml:Float ?
        ) ;
-       rdf:type [ <ChemicalEntity> ]
+       rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_24431> ]
     )
 }
 
@@ -378,6 +374,8 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <PhysicochemicalEntityGroupingClass> ] ? ;
           &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ? ;
+          <smarts_string> @<ChemicalEncoding> ? ;
+          <markush_string> @<ChemicalEncoding> ? ;
           <subtype_of> @<ChemicalGroupingClass> * ;
           <classifies> @<ChemicalEntity> ?
        ) ;
@@ -424,7 +422,7 @@ linkml:Sparqlpath xsd:string
     (  $<ChemicalRole_tes> (  &<OwlClass_tes> ;
           rdf:type [ owl:Class ] ?
        ) ;
-       rdf:type [ <ChemicalRole> ] ?
+       rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ?
     )
 }
 
@@ -540,7 +538,9 @@ linkml:Sparqlpath xsd:string
           <relative_configuration> @linkml:String ? ;
           <optical_configuration> @linkml:String ? ;
           <absolute_configuration> @linkml:String ? ;
-          <enantiomer_form_of> @<Molecule> ?
+          <enantiomer_form_of> @<Molecule> ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @linkml:String ;
+          <inchi_stereochemical_type_sublayer> @linkml:String
        ) ;
        rdf:type [ <Enantiomer> ]
     )
@@ -598,7 +598,7 @@ linkml:Sparqlpath xsd:string
     (  $<Ester_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
           <has_parent_alcohol> @<ChemicalEntity> ? ;
-          <has_parent_acid> @<BronstedAcid> ?
+          <has_parent_acid> @<MoleculeByChargeState> ?
        ) ;
        rdf:type [ <Ester> ]
     )
@@ -678,8 +678,8 @@ linkml:Sparqlpath xsd:string
 <GroupingClassForAcidsOrBases_struct> {
     (  $<GroupingClassForAcidsOrBases_tes> (  &<MoleculeGroupingClass_tes> ;
           rdf:type [ <MoleculeGroupingClass> ] ? ;
-          <conjugate_base_of> @<ChemicalEntity> ? ;
-          <conjugate_acid_of> @<ChemicalEntity> ?
+          <conjugate_base_of> @<DomainEntity> ? ;
+          <conjugate_acid_of> @<DomainEntity> ?
        ) ;
        rdf:type [ <GroupingClassForAcidsOrBases> ]
     )
@@ -733,7 +733,7 @@ linkml:Sparqlpath xsd:string
 
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
-          rdf:type [ <Reaction> ] ?
+          rdf:type [ <http://purl.obolibrary.org/obo/RXNO_0000000> ] ?
        ) ;
        rdf:type [ <IsomeraseReaction> ]
     )
@@ -755,14 +755,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Lipid> CLOSED {
-    (  $<Lipid_tes> (  &<Macromolecule_tes> ;
-          rdf:type [ <Macromolecule> ] ?
-       ) ;
-       rdf:type [ <Lipid> ]
-    )
-}
-
 <Location>  (
     {
        (  $<Location_tes> rdf:type . * ;
@@ -779,7 +771,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Macromolecule> ]
        )
-    } OR @<Glycan> OR @<Lipid> OR @<MonomolecularPolymer> OR @<Peptide> OR @<Protein>
+    } OR @<Glycan> OR @<MonomolecularPolymer> OR @<Peptide> OR @<Protein>
 )
 
 <Material>  (
@@ -787,7 +779,7 @@ linkml:Sparqlpath xsd:string
        (  $<Material_tes> (  &<PhysicochemicalEntity_tes> ;
              rdf:type [ <PhysicochemicalEntity> ] ? ;
              <has_repeat_unit> @<ChemicalEntity> ? ;
-             <has_part> @<ChemicalEntity> ?
+             <http://purl.obolibrary.org/obo/BFO_0000051> @<ChemicalEntity> ?
           ) ;
           rdf:type [ <Material> ]
        )
@@ -820,17 +812,15 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<MolecularAnion>  (
-    CLOSED {
-       (  $<MolecularAnion_tes> (  &<PolyatomicIon_tes> ;
-             rdf:type [ <PolyatomicIon> ] ? ;
-             &<AnionState_tes> ;
-             rdf:type [ <AnionState> ] ?
-          ) ;
-          rdf:type [ <MolecularAnion> ]
-       )
-    } OR @<AcidBase>
-)
+<MolecularAnion> CLOSED {
+    (  $<MolecularAnion_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ?
+       ) ;
+       rdf:type [ <MolecularAnion> ]
+    )
+}
 
 <MolecularCation> CLOSED {
     (  $<MolecularCation_tes> (  &<PolyatomicIon_tes> ;
@@ -875,7 +865,7 @@ linkml:Sparqlpath xsd:string
 <MolecularDerivativeGroupingClass> CLOSED {
     (  $<MolecularDerivativeGroupingClass_tes> (  &<MoleculeGroupingClass_tes> ;
           rdf:type [ <MoleculeGroupingClass> ] ? ;
-          <derivative_of> @<ChemicalEntity> ? ;
+          <derivative_of> @<DomainEntity> ? ;
           rdfs:label @linkml:String ? ;
           <classifies> @<Molecule> ?
        ) ;
@@ -910,13 +900,31 @@ linkml:Sparqlpath xsd:string
              <has_submolecules> @<Molecule> * ;
              <has_atoms> @<Atom> * ;
              <is_organic> @linkml:Boolean ? ;
-             <has_part> @linkml:String ?
+             <http://purl.obolibrary.org/obo/BFO_0000051> @linkml:String ?
           ) ;
           rdf:type [ <Molecule> ]
        )
-    } OR @<Allotrope> OR @<BronstedAcid> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
-    @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<SmallMolecule> OR @<Stereoisomer> OR @<UnchargedMolecule>
+    } OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<MoleculeByChargeState> OR @<NaturalProduct> OR
+    @<NonSpeciesMolecule> OR @<SmallMolecule> OR @<Stereoisomer>
 )
+
+<MoleculeByChargeState>  (
+    @<NetUnchargedMolecule> OR @<PolyatomicIon>
+)
+
+<MoleculeByChargeState_struct> {
+    (  $<MoleculeByChargeState_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <bronsted_acid_base_role> [ <https://w3id.org/chemrof/BronstedAcidBaseRoleEnum#acid>
+             <https://w3id.org/chemrof/BronstedAcidBaseRoleEnum#base> ] ? ;
+          <acidity> @linkml:Float ? ;
+          <hard_or_soft> [ <https://w3id.org/chemrof/HardOrSoftEnum#hard> <https://w3id.org/chemrof/HardOrSoftEnum#soft>
+             <https://w3id.org/chemrof/HardOrSoftEnum#borderline> ] ? ;
+          <acid_form_of> @<MoleculeByChargeState> *
+       ) ;
+       rdf:type [ <MoleculeByChargeState> ]
+    )
+}
 
 <MoleculeGroupingClass>  (
     CLOSED {
@@ -945,7 +953,7 @@ linkml:Sparqlpath xsd:string
 <MoleculeGroupingClassDefinedByComponents> CLOSED {
     (  $<MoleculeGroupingClassDefinedByComponents_tes> (  &<MoleculeGroupingClass_tes> ;
           rdf:type [ <MoleculeGroupingClass> ] ? ;
-          <has_part> @<ChemicalEntityOrGrouping> ?
+          <http://purl.obolibrary.org/obo/BFO_0000051> @<ChemicalEntityOrGrouping> ?
        ) ;
        rdf:type [ <MoleculeGroupingClassDefinedByComponents> ]
     )
@@ -1027,6 +1035,27 @@ linkml:Sparqlpath xsd:string
           <derived_from_organisms> @linkml:Uriorcurie *
        ) ;
        rdf:type [ <NaturalProduct> ]
+    )
+}
+
+<NetUnchargedMolecule>  (
+    CLOSED {
+       (  $<NetUnchargedMolecule_tes> (  &<MoleculeByChargeState_tes> ;
+             rdf:type [ <MoleculeByChargeState> ] ? ;
+             &<Uncharged_tes> ;
+             rdf:type [ <Uncharged> ] ? ;
+             <elemental_charge> @linkml:Integer ?
+          ) ;
+          rdf:type [ <NetUnchargedMolecule> ]
+       )
+    } OR @<NeutralMolecule> OR @<Zwitterion>
+)
+
+<NeutralMolecule> CLOSED {
+    (  $<NeutralMolecule_tes> (  &<NetUnchargedMolecule_tes> ;
+          rdf:type [ <NetUnchargedMolecule> ] ?
+       ) ;
+       rdf:type [ <NeutralMolecule> ]
     )
 }
 
@@ -1113,7 +1142,8 @@ linkml:Sparqlpath xsd:string
 <PhysicochemicalEntityGroupingClass_struct> {
     (  $<PhysicochemicalEntityGroupingClass_tes> (  &<GroupingClass_tes> ;
           rdf:type [ <GroupingClass> ] ? ;
-          <subtype_of> @<PhysicochemicalEntityGroupingClass> *
+          <subtype_of> @<PhysicochemicalEntityGroupingClass> * ;
+          <classifies> @<PhysicochemicalEntity> ?
        ) ;
        rdf:type [ <PhysicochemicalEntityGroupingClass> ]
     )
@@ -1125,7 +1155,7 @@ linkml:Sparqlpath xsd:string
 
 <PolyatomicEntity_struct> {
     (  $<PolyatomicEntity_tes> (  &<ChemicalEntity_tes> ;
-          rdf:type [ <ChemicalEntity> ] ? ;
+          rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_24431> ] ? ;
           <inchi_atom_connections_sublayer> @linkml:String ?
        ) ;
        rdf:type [ <PolyatomicEntity> ]
@@ -1134,12 +1164,12 @@ linkml:Sparqlpath xsd:string
 
 <PolyatomicIon>  (
     CLOSED {
-       (  $<PolyatomicIon_tes> (  &<Molecule_tes> ;
-             rdf:type [ <Molecule> ] ? ;
+       (  $<PolyatomicIon_tes> (  &<MoleculeByChargeState_tes> ;
+             rdf:type [ <MoleculeByChargeState> ] ? ;
              &<Charged_tes> ;
              rdf:type [ <Charged> ] ? ;
-             <conjugate_base_of> @<ChemicalEntity> ? ;
-             <conjugate_acid_of> @<ChemicalEntity> ? ;
+             <conjugate_base_of> @<DomainEntity> ? ;
+             <conjugate_acid_of> @<DomainEntity> ? ;
              <elemental_charge> @linkml:Integer ?
           ) ;
           rdf:type [ <PolyatomicIon> ]
@@ -1210,7 +1240,7 @@ linkml:Sparqlpath xsd:string
           <has_left_enantiomer> @<Enantiomer> ;
           <has_right_enantiomer> @<Enantiomer> ;
           <chirality_agnostic_form> @<Molecule> ? ;
-          <http://semanticscience.org/resource/CHEMINF_000107> @linkml:String ?
+          <IUPAC_name> @linkml:String ?
        ) ;
        rdf:type [ <RacemicMixture> ]
     )
@@ -1228,23 +1258,35 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<Reaction_tes> (  &<DomainEntity_tes> ;
              rdf:type [ <DomainEntity> ] ? ;
-             <has_rinchi_representation> @<ChemicalEncoding> ? ;
-             <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
-             <reaction_rate_coefficient> @linkml:Float ? ;
-             <reaction_rate> @linkml:Float ? ;
              <left_participants> @<ReactionParticipant> * ;
              <right_participants> @<ReactionParticipant> * ;
              <direction> @linkml:String ? ;
-             <smarts_string> @linkml:String ? ;
              <is_diastereoselective> @linkml:Boolean ? ;
              <is_stereo> @linkml:Boolean ? ;
              <is_balanced> @linkml:Boolean ? ;
              <is_transport> @linkml:Boolean ? ;
              <is_fully_characterized> @linkml:Boolean ? ;
              <reaction_center> @linkml:String ? ;
+             <has_rinchi_representation> @<ChemicalEncoding> ? ;
+             <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
+             <reaction_rate_coefficient> @linkml:Float ? ;
+             <reaction_rate> @linkml:Float ? ;
+             <reaction_type> [ <http://purl.obolibrary.org/obo/RXNO_0000057>
+                <https://w3id.org/chemrof/ReactionTypeEnum#bond_formation>
+                <https://w3id.org/chemrof/ReactionTypeEnum#bond_breaking> <http://purl.obolibrary.org/obo/RXNO_0000012>
+                <http://purl.obolibrary.org/obo/RXNO_0000037> <http://purl.obolibrary.org/obo/RXNO_0000016>
+                <http://purl.obolibrary.org/obo/RXNO_0000018> <http://purl.obolibrary.org/obo/RXNO_0000019>
+                <http://purl.obolibrary.org/obo/RXNO_0000041> <http://purl.obolibrary.org/obo/RXNO_0000005>
+                <http://purl.obolibrary.org/obo/MOP_0000627> <http://purl.obolibrary.org/obo/RXNO_0000656>
+                <https://w3id.org/chemrof/ReactionTypeEnum#ring_opening> <http://purl.obolibrary.org/obo/RXNO_0000619>
+                <http://purl.obolibrary.org/obo/RXNO_0000331> <http://purl.obolibrary.org/obo/RXNO_0000025>
+                <https://w3id.org/chemrof/ReactionTypeEnum#functional_group_addition>
+                <https://w3id.org/chemrof/ReactionTypeEnum#aromatic_heterocycle_formation>
+                <https://w3id.org/chemrof/ReactionTypeEnum#protection> <https://w3id.org/chemrof/ReactionTypeEnum#deprotection>
+                <https://w3id.org/chemrof/ReactionTypeEnum#resolution> ] ? ;
              <description> @linkml:String ?
           ) ;
-          rdf:type [ <Reaction> ]
+          rdf:type [ <http://purl.obolibrary.org/obo/RXNO_0000000> ]
        )
     } OR @<IsomeraseReaction>
 )
@@ -1349,7 +1391,7 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<Stereoisomer_tes> (  &<Molecule_tes> ;
              rdf:type [ <Molecule> ] ? ;
-             <isomeric_smiles_string> @<ChemicalEncoding> *
+             <isomeric_smiles_string> @<ChemicalEncoding> ?
           ) ;
           rdf:type [ <Stereoisomer> ]
        )
@@ -1435,17 +1477,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<UnchargedMolecule> CLOSED {
-    (  $<UnchargedMolecule_tes> (  &<Molecule_tes> ;
-          rdf:type [ <Molecule> ] ? ;
-          &<Uncharged_tes> ;
-          rdf:type [ <Uncharged> ] ? ;
-          <elemental_charge> @linkml:Integer ?
-       ) ;
-       rdf:type [ <UnchargedMolecule> ]
-    )
-}
-
 <WeaklyBonded> {
     (  $<WeaklyBonded_tes> (  &<Connectivity_tes> ;
           rdf:type [ <Connectivity> ] ?
@@ -1454,4 +1485,10 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-
+<Zwitterion> CLOSED {
+    (  $<Zwitterion_tes> (  &<NetUnchargedMolecule_tes> ;
+          rdf:type [ <NetUnchargedMolecule> ] ?
+       ) ;
+       rdf:type [ <Zwitterion> ]
+    )
+}

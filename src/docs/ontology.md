@@ -5,8 +5,8 @@ representing chemical entities and their groupings, where these are
 database instances, and to use this for aligning across different
 chemical databases.
 
-A **secondary objective** is to be able to generate an ontology from the
-datamodel, and to use this to help advance the development of CHEBI.
+A **secondary objective** is to be able to generate an OBO-style ontology from the
+data model, and to use this to help advance the development of CHEBI.
 
 ## Download OWL
 
@@ -23,7 +23,7 @@ example `carbon` is an instance of the ChemicalElement class, and
 `carbon-12` is an instance of the sibling Isotope class) into classes,
 and to use reasoning to classify.
 
-Currently this is done via SPARQL construct (see [owlgen folder](https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen)
+Currently this is done via SPARQL construct (see [owlgen folder](https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen))
 
 Conversion to use [linkml-owl](https://linkml.io/linkml-owl) is in progress.
 

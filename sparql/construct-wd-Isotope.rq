@@ -1,5 +1,6 @@
+# Isotopes from Wikidata
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX chem: <https://w3id.org/chemschema/>
+PREFIX chemrof: <https://w3id.org/chemrof/>
 PREFIX type: <http://www.wikidata.org/prop/direct/P31>
 PREFIX subClassOf: <http://www.wikidata.org/prop/direct/P279>
 PREFIX Isotope: <http://www.wikidata.org/entity/Q25276>
@@ -9,10 +10,10 @@ PREFIX atomic_number: <http://www.wikidata.org/prop/direct/P1086>
 PREFIX neutron_number: <http://www.wikidata.org/prop/direct/P1148>
 
 CONSTRUCT {
-    ?iri a chem:Isotope ;
+    ?iri a chemrof:Isotope ;
       rdfs:label ?label ;
-      chem:neutron_number ?nn ;
-      chem:has_element ?element_iri
+      chemrof:neutron_number ?nn ;
+      chemrof:has_element ?element_iri
 }
 WHERE {
     ?i (type:/subClassOf:*) Isotope: ;
@@ -25,7 +26,7 @@ WHERE {
 
     FILTER (LANG(?label) = "en")
 
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
-   BIND(IRI(CONCAT("https://w3id.org/chemschema/Isotope/", STR(?element_symbol), "/", STR(?nn))) AS ?iri)
+   BIND(IRI(CONCAT("https://w3id.org/chemrof/data/ChemicalElement/", STR(?element_symbol))) AS ?element_iri)
+   BIND(IRI(CONCAT("https://w3id.org/chemrof/data/Isotope/", STR(?element_symbol), "/", STR(?nn))) AS ?iri)
 
 }

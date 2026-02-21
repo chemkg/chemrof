@@ -1,39 +1,19 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// version: 0.0.1
 // A molecule grouping class that groups the different ion forms of the base of an acid
 message AcidAnionGroupingClass
  {
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
   string name = 0
- }
-// A conugate base of an acid with charge specified. Example: citrate(3-)
-message AcidBase
- {
-  string id = 0
-  string name = 0
-  uriorcurie type = 0
-  string iUPACName = 0
-  boolean isRadical = 0
-  chemicalRole hasChemicalRole = 0
-  chemicalEncoding inchiString = 0
-  string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
-  chemicalEncoding empiricalFormula = 0
-  owlClass owlSubclassOf = 0
-  string inchiAtomConnectionsSublayer = 0
- repeated  atomOccurrence hasAtomOccurrences = 0
- repeated  atomicBond hasBonds = 0
- repeated  molecule hasSubmolecules = 0
- repeated  atom hasAtoms = 0
-  boolean isOrganic = 0
-  string hasPart = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
-  integer elementalCharge = 0
-  bronstedAcid hasAcidForm = 0
  }
 // A molecule grouping class that can groups an acid together with all its conjugate bases. physiological
 message AcidBaseConflationClass
@@ -41,11 +21,12 @@ message AcidBaseConflationClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
-  acidBase hasPhysiologicalBase = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
  }
 // A molecule consisting of atoms of the same element
 message Allotrope
@@ -58,8 +39,23 @@ message Allotrope
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -81,8 +77,23 @@ message AminoAcidSequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   aminoAcidSequenceString hasSequenceRepresentation = 0
@@ -97,8 +108,24 @@ message AtomAnion
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -118,8 +145,24 @@ message AtomCation
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -135,6 +178,8 @@ message AtomGroupingByPeriodicTableBlock
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
   periodicTableBlockEnum inPeriodicTableBlock = 0
@@ -145,6 +190,8 @@ message AtomGroupingByPeriodicTableGroup
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
   periodicTableGroup inPeriodicTableGroup = 0
@@ -155,6 +202,8 @@ message AtomGroupingByProperty
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
  }
@@ -164,6 +213,8 @@ message AtomGroupingClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   atom classifies = 0
  }
@@ -192,31 +243,6 @@ message AtomOccurrence
   integer formalCharge = 0
   integer coordinationNumber = 0
  }
-// A molecule capable of donating a hydron to an acceptor. Example: citric acid
-message BronstedAcid
- {
-  string id = 0
-  string name = 0
-  uriorcurie type = 0
-  string iUPACName = 0
-  boolean isRadical = 0
-  chemicalRole hasChemicalRole = 0
-  chemicalEncoding inchiString = 0
-  string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
-  chemicalEncoding empiricalFormula = 0
-  owlClass owlSubclassOf = 0
-  string inchiAtomConnectionsSublayer = 0
- repeated  atomOccurrence hasAtomOccurrences = 0
- repeated  atomicBond hasBonds = 0
- repeated  molecule hasSubmolecules = 0
- repeated  atom hasAtoms = 0
-  boolean isOrganic = 0
-  string hasPart = 0
-  float acidity = 0
-  hardOrSoftEnum hardOrSoft = 0
- repeated  acidBase acidFormOf = 0
- }
 // generic form of an atom, with unspecified neutron or charge
 message ChemicalElement
  {
@@ -227,16 +253,31 @@ message ChemicalElement
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string name = 0
   subatomicParticleOccurrence hasNuclearParts = 0
   subatomicParticle hasPart = 0
-  string symbol = 0
   periodicTableGroup inPeriodicTableGroup = 0
   periodicTableBlockEnum inPeriodicTableBlock = 0
+  string symbol = 0
   float boilingPointInCelcius = 0
   float meltingPointInCelcius = 0
   float standardAtomicWeight = 0
@@ -244,7 +285,7 @@ message ChemicalElement
   float monoisotopicMass = 0
   string electronConfiguration = 0
  repeated  stereocenter hasStereocenter = 0
-  string hasPhysiologicallyStableForm = 0
+  chemicalElement hasMajorMicrospeciesAtPH73 = 0
  }
 message ChemicalGroup
  {
@@ -256,8 +297,23 @@ message ChemicalGroup
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -267,6 +323,8 @@ message ChemicalGroupingByCharge
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
   chemicalEntity classifies = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   uriorcurie hasChargeState = 0
@@ -288,8 +346,23 @@ message ChemicalSalt
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   integer elementalCharge = 0
@@ -301,6 +374,8 @@ message ChemicalSaltByAnion
  {
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasCationicComponent = 0
   chemicalSalt classifies = 0
@@ -312,6 +387,8 @@ message ChemicalSaltByCation
  {
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasAnionicComponent = 0
   chemicalSalt classifies = 0
@@ -323,6 +400,8 @@ message ChemicalSaltGroupingClass
  {
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   string hasAnionicComponent = 0
   string hasCationicComponent = 0
@@ -334,6 +413,7 @@ message ChemicalSimilarity
  {
   owlClass owlSubclassOf = 0
  }
+// This utility class serves to collect a set of domain entities, and to be the top level object in tree-based representations such as JSON.
 message Collection
  {
  repeated  domainEntity entities = 0
@@ -349,8 +429,23 @@ message Copolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -374,8 +469,23 @@ message DNASequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -391,8 +501,21 @@ message Enantiomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -401,11 +524,13 @@ message Enantiomer
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
- repeated  chemicalEncoding isomericSmilesString = 0
+  chemicalEncoding isomericSmilesString = 0
   string relativeConfiguration = 0
   string opticalConfiguration = 0
   string absoluteConfiguration = 0
   molecule enantiomerFormOf = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
  }
 // An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group
 message Ester
@@ -418,8 +543,23 @@ message Ester
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -429,7 +569,7 @@ message Ester
   boolean isOrganic = 0
   string hasPart = 0
   chemicalEntity hasParentAlcohol = 0
-  bronstedAcid hasParentAcid = 0
+  moleculeByChargeState hasParentAcid = 0
  }
 // An atom type that has atomic number, charge, and neutron number stated (equivalently: protons + mass + charge)
 message FullySpecifiedAtom
@@ -441,8 +581,24 @@ message FullySpecifiedAtom
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -462,8 +618,23 @@ message FunctionalGroup
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   molecule isSubstitutentGroupFrom = 0
@@ -474,10 +645,12 @@ message GeneralAcidBaseGroupingClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
  }
 // A molecule grouping class that can be written using a chemical formula using variables (e.g. n), or arithmetic expressions uing variables (e.g. 2n+2), plus optionally constraints on those variables (e.g. n>3). An example is alkane; CnH2n+2, which groups specific molecules such as methane
 message GeneralizedMolecularStructureClass
@@ -485,6 +658,8 @@ message GeneralizedMolecularStructureClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  }
@@ -499,8 +674,23 @@ message Glycan
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -521,8 +711,23 @@ message Homopolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -547,8 +752,23 @@ message ImpreciseChemicalMixture
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  proportionalPart hasProportionalParts = 0
@@ -565,8 +785,24 @@ message Isobar
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -589,20 +825,20 @@ message IsomeraseReaction
   string id = 0
   string name = 0
   uriorcurie type = 0
-  chemicalEncoding hasRinchiRepresentation = 0
-  chemicalEncoding hasReactionSmilesRepresentation = 0
-  float reactionRateCoefficient = 0
-  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
-  string smartsString = 0
   boolean isDiastereoselective = 0
   boolean isStereo = 0
   boolean isBalanced = 0
   boolean isTransport = 0
   boolean isFullyCharacterized = 0
   string reactionCenter = 0
+  chemicalEncoding hasRinchiRepresentation = 0
+  chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
+  reactionTypeEnum reactionType = 0
   string description = 0
  }
 // A specific subtype of an atom with a specified neutron number
@@ -615,8 +851,24 @@ message Isotope
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -633,27 +885,6 @@ message Isotope
   string decayEnergy = 0
   string modeOfFormation = 0
  }
-message Lipid
- {
-  string id = 0
-  string name = 0
-  uriorcurie type = 0
-  string iUPACName = 0
-  boolean isRadical = 0
-  chemicalRole hasChemicalRole = 0
-  chemicalEncoding inchiString = 0
-  string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
-  chemicalEncoding empiricalFormula = 0
-  owlClass owlSubclassOf = 0
-  string inchiAtomConnectionsSublayer = 0
- repeated  atomOccurrence hasAtomOccurrences = 0
- repeated  atomicBond hasBonds = 0
- repeated  atom hasAtoms = 0
-  boolean isOrganic = 0
-  string hasPart = 0
- repeated  molecule hasSubmolecules = 0
- }
 // A large molecule, such as a polymer, lipid, or macrocycle
 message Macromolecule
  {
@@ -665,8 +896,23 @@ message Macromolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -713,8 +959,23 @@ message Moiety
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -729,8 +990,23 @@ message MolecularAnion
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -739,8 +1015,12 @@ message MolecularAnion
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
   integer elementalCharge = 0
  }
 // A polyatomic ion that is positive
@@ -754,8 +1034,23 @@ message MolecularCation
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -764,8 +1059,12 @@ message MolecularCation
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
   integer elementalCharge = 0
  }
 // A molecular complex is a chemical complex composed of at least one weakly interacting molecule.[SIO] Examples: chromosome, double-standed DNA, protein-containing macromolecular complex
@@ -779,8 +1078,23 @@ message MolecularComplex
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -795,8 +1109,23 @@ message MolecularComponent
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -806,6 +1135,8 @@ message MolecularComponentGroupingClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  molecularComponentGroupingClass subtypeOf = 0
   molecularComponent classifies = 0
  }
@@ -814,8 +1145,10 @@ message MolecularDerivativeGroupingClass
  {
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
-  chemicalEntity derivativeOf = 0
+  domainEntity derivativeOf = 0
   string name = 0
   molecule classifies = 0
  }
@@ -830,8 +1163,23 @@ message MolecularSpecies
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -851,8 +1199,23 @@ message MolecularSubsequence
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -867,8 +1230,23 @@ message Molecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -884,6 +1262,8 @@ message MoleculeGroupingClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  }
@@ -893,6 +1273,8 @@ message MoleculeGroupingClassDefinedByAdditionOfAGroup
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  repeated  chemicalGroup hasGroup = 0
@@ -904,6 +1286,8 @@ message MoleculeGroupingClassDefinedByComponents
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntityOrGrouping hasPart = 0
@@ -925,8 +1309,24 @@ message MonoatomicIon
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -946,8 +1346,23 @@ message Monomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -956,6 +1371,8 @@ message MonomericPolymericGroupingClass
   string name = 0
   owlClass owlSubclassOf = 0
   string id = 0
+  chemicalEncoding smartsString = 0
+  chemicalEncoding markushString = 0
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
   chemicalEntity hasRepeatUnit = 0
@@ -971,8 +1388,23 @@ message MonomolecularPolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1006,8 +1438,23 @@ message NaturalProduct
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1017,6 +1464,90 @@ message NaturalProduct
   boolean isOrganic = 0
   string hasPart = 0
  repeated  uriorcurie derivedFromOrganisms = 0
+ }
+// A molecule that has no net charge
+message NetUnchargedMolecule
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string iUPACName = 0
+  boolean isRadical = 0
+  chemicalRole hasChemicalRole = 0
+  chemicalEncoding inchiString = 0
+  string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
+  owlClass owlSubclassOf = 0
+  string inchiAtomConnectionsSublayer = 0
+ repeated  atomOccurrence hasAtomOccurrences = 0
+ repeated  atomicBond hasBonds = 0
+ repeated  molecule hasSubmolecules = 0
+ repeated  atom hasAtoms = 0
+  boolean isOrganic = 0
+  string hasPart = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
+  integer elementalCharge = 0
+ }
+// A molecule that has no net charge and is not a zwitterion
+message NeutralMolecule
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string iUPACName = 0
+  boolean isRadical = 0
+  chemicalRole hasChemicalRole = 0
+  chemicalEncoding inchiString = 0
+  string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
+  chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
+  owlClass owlSubclassOf = 0
+  string inchiAtomConnectionsSublayer = 0
+ repeated  atomOccurrence hasAtomOccurrences = 0
+ repeated  atomicBond hasBonds = 0
+ repeated  molecule hasSubmolecules = 0
+ repeated  atom hasAtoms = 0
+  boolean isOrganic = 0
+  string hasPart = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
+  integer elementalCharge = 0
  }
 // A molecule in which the units are not identical. TODO: move this higher
 message NonSpeciesMolecule
@@ -1029,8 +1560,23 @@ message NonSpeciesMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1050,8 +1596,23 @@ message NucleotideSequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -1066,8 +1627,24 @@ message Nuclide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1086,8 +1663,23 @@ message Peptide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1097,7 +1689,7 @@ message Peptide
   string hasPart = 0
  repeated  molecule hasSubmolecules = 0
  }
-// A molecule that has a charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
+// A molecule that has a net charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-).
 message PolyatomicIon
  {
   string id = 0
@@ -1108,8 +1700,23 @@ message PolyatomicIon
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1118,8 +1725,12 @@ message PolyatomicIon
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
-  chemicalEntity conjugateBaseOf = 0
-  chemicalEntity conjugateAcidOf = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
+  domainEntity conjugateBaseOf = 0
+  domainEntity conjugateAcidOf = 0
   integer elementalCharge = 0
  }
 message PolymerPart
@@ -1132,8 +1743,23 @@ message PolymerPart
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  }
@@ -1154,6 +1780,7 @@ message ProportionalPart
   float minimalPercentage = 0
   float maximumPercentage = 0
  }
+// A macromolecule composed of one or more polypeptide chains of amino acids that fold into a specific three-dimensional structure and perform biological functions
 message Protein
  {
   string id = 0
@@ -1164,8 +1791,23 @@ message Protein
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1185,8 +1827,23 @@ message RacemicMixture
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   enantiomer hasLeftEnantiomer = 0
@@ -1204,8 +1861,24 @@ message Radionuclide
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1220,20 +1893,20 @@ message Reaction
   string id = 0
   string name = 0
   uriorcurie type = 0
-  chemicalEncoding hasRinchiRepresentation = 0
-  chemicalEncoding hasReactionSmilesRepresentation = 0
-  float reactionRateCoefficient = 0
-  float reactionRate = 0
  repeated  reactionParticipant leftParticipants = 0
  repeated  reactionParticipant rightParticipants = 0
   string direction = 0
-  string smartsString = 0
   boolean isDiastereoselective = 0
   boolean isStereo = 0
   boolean isBalanced = 0
   boolean isTransport = 0
   boolean isFullyCharacterized = 0
   string reactionCenter = 0
+  chemicalEncoding hasRinchiRepresentation = 0
+  chemicalEncoding hasReactionSmilesRepresentation = 0
+  float reactionRateCoefficient = 0
+  float reactionRate = 0
+  reactionTypeEnum reactionType = 0
   string description = 0
  }
 // A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
@@ -1262,8 +1935,23 @@ message RNASequenceInterval
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   dNASequenceString hasSequenceRepresentation = 0
@@ -1279,8 +1967,23 @@ message SmallMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1313,8 +2016,23 @@ message Stereoisomer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1323,7 +2041,7 @@ message Stereoisomer
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
- repeated  chemicalEncoding isomericSmilesString = 0
+  chemicalEncoding isomericSmilesString = 0
  }
 // A chemical entity below the granularity of an atom.
 message SubatomicParticle
@@ -1350,8 +2068,23 @@ message SupramolecularPolymer
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
   macromolecule polymerOf = 0
@@ -1374,8 +2107,24 @@ message UnchargedAtom
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiAtomConnectionsSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   count atomicNumber = 0
   string symbol = 0
@@ -1384,8 +2133,8 @@ message UnchargedAtom
   subatomicParticle hasPart = 0
   integer elementalCharge = 0
  }
-// A molecule that has no charge
-message UnchargedMolecule
+// A molecule that has both a positive and negative charges but is net neutral
+message Zwitterion
  {
   string id = 0
   string name = 0
@@ -1395,8 +2144,23 @@ message UnchargedMolecule
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
   string inchiChemicalSublayer = 0
- repeated  chemicalEncoding smilesString = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
   chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
   owlClass owlSubclassOf = 0
   string inchiAtomConnectionsSublayer = 0
  repeated  atomOccurrence hasAtomOccurrences = 0
@@ -1405,5 +2169,9 @@ message UnchargedMolecule
  repeated  atom hasAtoms = 0
   boolean isOrganic = 0
   string hasPart = 0
+  bronstedAcidBaseRoleEnum bronstedAcidBaseRole = 0
+  float acidity = 0
+  hardOrSoftEnum hardOrSoft = 0
+ repeated  moleculeByChargeState acidFormOf = 0
   integer elementalCharge = 0
  }

@@ -1,0 +1,1457 @@
+BASE <https://w3id.org/chemrof/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX gc: <http://purl.org/gc/>
+
+
+<PeriodicTableGroup> xsd:int
+
+<Count> xsd:int
+
+<NumberOfYears> xsd:int
+
+<ChemicalEncoding> xsd:string
+
+<SequenceString> xsd:string
+
+<AminoAcidSequenceString> xsd:string
+
+<DNASequenceString> xsd:string
+
+<FileLocation> IRI
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<AcidAnionGroupingClass> CLOSED {
+    (  $<AcidAnionGroupingClass_tes> (  &<GroupingClassForAcidsOrBases_tes> ;
+          rdf:type [ <GroupingClassForAcidsOrBases> ] ? ;
+          rdfs:label @linkml:String ?
+       ) ;
+       rdf:type [ <AcidAnionGroupingClass> ]
+    )
+}
+
+<AcidBase> CLOSED {
+    (  $<AcidBase_tes> (  &<MolecularAnion_tes> ;
+          rdf:type [ <MolecularAnion> ] ? ;
+          <has_acid_form> @<BronstedAcid> ?
+       ) ;
+       rdf:type [ <AcidBase> ]
+    )
+}
+
+<AcidBaseConflationClass> CLOSED {
+    (  $<AcidBaseConflationClass_tes> (  &<GroupingClassForAcidsOrBases_tes> ;
+          rdf:type [ <GroupingClassForAcidsOrBases> ] ? ;
+          <has_physiological_base> @<AcidBase> ?
+       ) ;
+       rdf:type [ <AcidBaseConflationClass> ]
+    )
+}
+
+<Allotrope> CLOSED {
+    (  $<Allotrope_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <allotropic_analog_of> @<ChemicalElement> ;
+          <has_bonding_structure> @linkml:String
+       ) ;
+       rdf:type [ <Allotrope> ]
+    )
+}
+
+<AminoAcidSequenceInterval> CLOSED {
+    (  $<AminoAcidSequenceInterval_tes> (  &<SequenceInterval_tes> ;
+          rdf:type [ <SequenceInterval> ] ? ;
+          <has_sequence_representation> @<AminoAcidSequenceString> ?
+       ) ;
+       rdf:type [ <AminoAcidSequenceInterval> ]
+    )
+}
+
+<AnionState> {
+    (  $<AnionState_tes> (  &<Charged_tes> ;
+          rdf:type [ <Charged> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <AnionState> ] ?
+    )
+}
+
+<Atom>  (
+    @<FullySpecifiedAtom> OR @<PartiallySpecifiedAtom>
+)
+
+<Atom_struct> {
+    (  $<Atom_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <http://www.blueobelisk.org/dict/terminologyatomicNumber> @<Count> ? ;
+          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
+          <has_nuclear_parts> @<SubatomicParticleOccurrence> ? ;
+          <has_part> @<SubatomicParticle> ?
+       ) ;
+       rdf:type [ <Atom> ]
+    )
+}
+
+<AtomAnion> CLOSED {
+    (  $<AtomAnion_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<AnionState_tes> ;
+          rdf:type [ <AnionState> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <AtomAnion> ]
+    )
+}
+
+<AtomCation> CLOSED {
+    (  $<AtomCation_tes> (  &<MonoatomicIon_tes> ;
+          rdf:type [ <MonoatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <AtomCation> ]
+    )
+}
+
+<AtomGroupingByPeriodicTableBlock> CLOSED {
+    (  $<AtomGroupingByPeriodicTableBlock_tes> (  &<AtomGroupingByPeriodicTablePlacement_tes> ;
+          rdf:type [ <AtomGroupingByPeriodicTablePlacement> ] ? ;
+          <in_periodic_table_block> [ <http://purl.obolibrary.org/obo/CHEBI_33674> <http://purl.obolibrary.org/obo/CHEBI_33675>
+             <http://purl.obolibrary.org/obo/CHEBI_33561> <http://purl.obolibrary.org/obo/CHEBI_33562>
+             <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ] ?
+       ) ;
+       rdf:type [ <AtomGroupingByPeriodicTableBlock> ]
+    )
+}
+
+<AtomGroupingByPeriodicTableGroup> CLOSED {
+    (  $<AtomGroupingByPeriodicTableGroup_tes> (  &<AtomGroupingByPeriodicTablePlacement_tes> ;
+          rdf:type [ <AtomGroupingByPeriodicTablePlacement> ] ? ;
+          <in_periodic_table_group> @<PeriodicTableGroup> ?
+       ) ;
+       rdf:type [ <AtomGroupingByPeriodicTableGroup> ]
+    )
+}
+
+<AtomGroupingByPeriodicTablePlacement>  (
+    @<AtomGroupingByPeriodicTableBlock> OR @<AtomGroupingByPeriodicTableGroup>
+)
+
+<AtomGroupingByPeriodicTablePlacement_struct> {
+    (  $<AtomGroupingByPeriodicTablePlacement_tes> (  &<AtomGroupingClass_tes> ;
+          rdf:type [ <AtomGroupingClass> ] ?
+       ) ;
+       rdf:type [ <AtomGroupingByPeriodicTablePlacement> ]
+    )
+}
+
+<AtomGroupingByProperty> CLOSED {
+    (  $<AtomGroupingByProperty_tes> (  &<AtomGroupingClass_tes> ;
+          rdf:type [ <AtomGroupingClass> ] ?
+       ) ;
+       rdf:type [ <AtomGroupingByProperty> ]
+    )
+}
+
+<AtomGroupingClass>  (
+    CLOSED {
+       (  $<AtomGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+             rdf:type [ <ChemicalGroupingClass> ] ? ;
+             <subtype_of> @<MoleculeGroupingClass> * ;
+             <classifies> @<Atom> ?
+          ) ;
+          rdf:type [ <AtomGroupingClass> ]
+       )
+    } OR @<AtomGroupingByPeriodicTablePlacement> OR @<AtomGroupingByProperty>
+)
+
+<AtomicBond> CLOSED {
+    (  $<AtomicBond_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <subject> @<AtomOccurrence> ? ;
+          <object> @<AtomOccurrence> ? ;
+          <bond_type> [ gc:NormalBond gc:AromaticBond gc:Single gc:Double gc:Triple gc:Quadruple gc:HydrogenBond
+             <https://w3id.org/chemrof/BondTypeEnum#ionic> <https://w3id.org/chemrof/BondTypeEnum#polycentric>
+             <https://w3id.org/chemrof/BondTypeEnum#metal-metal> <https://w3id.org/chemrof/BondTypeEnum#salt%20bridge>
+             <https://w3id.org/chemrof/BondTypeEnum#polar%20covalent> <https://w3id.org/chemrof/BondTypeEnum#sigma> ] ? ;
+          <bond_order> @linkml:Integer ? ;
+          <bond_length> @linkml:Float ? ;
+          <bond_energy> @linkml:Float ? ;
+          <bond_length_in_angstroms> @linkml:Float ? ;
+          <bond_angle> @linkml:Float ? ;
+          <torsional_angle> @linkml:Float ?
+       ) ;
+       rdf:type [ gc:Bond ] ?
+    )
+}
+
+<AtomIonicForm>  (
+    @<MonoatomicIon> OR @<UnchargedAtom>
+)
+
+<AtomIonicForm_struct> {
+    (  $<AtomIonicForm_tes> (  &<PartiallySpecifiedAtom_tes> ;
+          rdf:type [ <PartiallySpecifiedAtom> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <AtomIonicForm> ]
+    )
+}
+
+<AtomOccurrence> CLOSED {
+    (  $<AtomOccurrence_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <occurrence_of> @<Atom> ;
+          <valence> @linkml:Integer ? ;
+          <oxidation_number> @linkml:Integer ? ;
+          <formal_charge> @linkml:Integer ? ;
+          <coordination_number> @linkml:Integer ?
+       ) ;
+       rdf:type [ <AtomOccurrence> ]
+    )
+}
+
+<BronstedAcid> CLOSED {
+    (  $<BronstedAcid_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <acidity> @linkml:Float ? ;
+          <hard_or_soft> [ <https://w3id.org/chemrof/HardOrSoftEnum#hard> <https://w3id.org/chemrof/HardOrSoftEnum#soft>
+             <https://w3id.org/chemrof/HardOrSoftEnum#borderline> ] ? ;
+          <acid_form_of> @<AcidBase> *
+       ) ;
+       rdf:type [ <BronstedAcid> ]
+    )
+}
+
+<CationState> {
+    (  $<CationState_tes> (  &<Charged_tes> ;
+          rdf:type [ <Charged> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <CationState> ] ?
+    )
+}
+
+<Charged>  (
+    @<AnionState> OR @<CationState>
+)
+
+<Charged_struct> {
+    (  $<Charged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ?
+       ) ;
+       rdf:type [ <Charged> ] ?
+    )
+}
+
+<ChargeState>  (
+    @<Charged> OR @<Uncharged>
+)
+
+<ChargeState_struct> {
+    (  $<ChargeState_tes> (  &<State_tes> ;
+          rdf:type [ <State> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <ChargeState> ] ?
+    )
+}
+
+<ChemicalElement> CLOSED {
+    (  $<ChemicalElement_tes> (  &<PartiallySpecifiedAtom_tes> ;
+          rdf:type [ <PartiallySpecifiedAtom> ] ? ;
+          <http://www.blueobelisk.org/dict/terminologysymbol> @linkml:String ? ;
+          <in_periodic_table_group> @<PeriodicTableGroup> ? ;
+          <in_periodic_table_block> [ <http://purl.obolibrary.org/obo/CHEBI_33674> <http://purl.obolibrary.org/obo/CHEBI_33675>
+             <http://purl.obolibrary.org/obo/CHEBI_33561> <http://purl.obolibrary.org/obo/CHEBI_33562>
+             <https://w3id.org/chemrof/PeriodicTableBlockEnum#g-block> ] ? ;
+          <boiling_point_in_celcius> @linkml:Float ? ;
+          <melting_point_in_celcius> @linkml:Float ? ;
+          <standard_atomic_weight> @linkml:Float ? ;
+          <mass> @linkml:Float ? ;
+          <monoisotopic_mass> @linkml:Float ? ;
+          <electron_configuration> @linkml:String ? ;
+          <has_stereocenter> @<Stereocenter> * ;
+          <has_physiologically_stable_form> @linkml:String ?
+       ) ;
+       rdf:type [ <ChemicalElement> ]
+    )
+}
+
+<ChemicalEntity>  (
+    @<Atom> OR @<PolyatomicEntity>
+)
+
+<ChemicalEntity_struct> {
+    (  $<ChemicalEntity_tes> (  &<PhysicochemicalEntity_tes> ;
+          rdf:type [ <PhysicochemicalEntity> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <http://semanticscience.org/resource/CHEMINF_000107> @linkml:String ? ;
+          <is_radical> @linkml:Boolean ? ;
+          <has_chemical_role> @<ChemicalRole> ? ;
+          <inchi_string> @<ChemicalEncoding> ? ;
+          <inchi_chemical_sublayer> @linkml:String ? ;
+          <smiles_string> @<ChemicalEncoding> * ;
+          <empirical_formula> @<ChemicalEncoding> ?
+       ) ;
+       rdf:type [ <ChemicalEntity> ]
+    )
+}
+
+<ChemicalEntityOrGrouping> {
+    (  $<ChemicalEntityOrGrouping_tes> rdf:type . * ;
+       rdf:type [ <ChemicalEntityOrGrouping> ] ?
+    )
+}
+
+<ChemicalGroup> CLOSED {
+    (  $<ChemicalGroup_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ?
+       ) ;
+       rdf:type [ <ChemicalGroup> ]
+    )
+}
+
+<ChemicalGroupingByCharge> CLOSED {
+    (  $<ChemicalGroupingByCharge_tes> (  &<ChemicalGroupingClass_tes> ;
+          rdf:type [ <ChemicalGroupingClass> ] ? ;
+          <subtype_of> @<MoleculeGroupingClass> * ;
+          <has_charge_state> @linkml:Uriorcurie ? ;
+          <charge_agnostic_entity> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <ChemicalGroupingByCharge> ]
+    )
+}
+
+<ChemicalGroupingClass>  (
+    @<AtomGroupingClass> OR @<ChemicalGroupingByCharge> OR @<MolecularComponentGroupingClass> OR @<MoleculeGroupingClass>
+)
+
+<ChemicalGroupingClass_struct> {
+    (  $<ChemicalGroupingClass_tes> (  &<PhysicochemicalEntityGroupingClass_tes> ;
+          rdf:type [ <PhysicochemicalEntityGroupingClass> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <subtype_of> @<ChemicalGroupingClass> * ;
+          <classifies> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <ChemicalGroupingClass> ]
+    )
+}
+
+<ChemicalInformation>  (
+    @<InchiObject> OR @<PeriodicTablePlacement>
+)
+
+<ChemicalInformation_struct> {
+    (  $<ChemicalInformation_tes> rdf:type . * ;
+       rdf:type [ <ChemicalInformation> ] ?
+    )
+}
+
+<ChemicalMixture>  (
+    @<ImpreciseChemicalMixture> OR @<PreciseChemicalMixture>
+)
+
+<ChemicalMixture_struct> {
+    (  $<ChemicalMixture_tes> (  &<PolyatomicEntity_tes> ;
+          rdf:type [ <PolyatomicEntity> ] ?
+       ) ;
+       rdf:type [ <ChemicalMixture> ]
+    )
+}
+
+<ChemicalRelationship>  (
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalSimilarity> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR
+    @<ReactionParticipant> OR @<SubatomicParticleOccurrence>
+)
+
+<ChemicalRelationship_struct> {
+    (  $<ChemicalRelationship_tes> (  &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ?
+       ) ;
+       rdf:type [ <ChemicalRelationship> ] ?
+    )
+}
+
+<ChemicalRole> CLOSED {
+    (  $<ChemicalRole_tes> (  &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ?
+       ) ;
+       rdf:type [ <ChemicalRole> ] ?
+    )
+}
+
+<ChemicalSalt> CLOSED {
+    (  $<ChemicalSalt_tes> (  &<PreciseChemicalMixture_tes> ;
+          rdf:type [ <PreciseChemicalMixture> ] ? ;
+          <elemental_charge> @linkml:Integer ? ;
+          <has_cationic_component> @<CationState> ? ;
+          <has_anionic_component> @<AnionState> ?
+       ) ;
+       rdf:type [ <ChemicalSalt> ]
+    )
+}
+
+<ChemicalSaltByAnion> CLOSED {
+    (  $<ChemicalSaltByAnion_tes> (  &<ChemicalSaltGroupingClass_tes> ;
+          rdf:type [ <ChemicalSaltGroupingClass> ] ? ;
+          rdfs:label @linkml:String ?
+       ) ;
+       rdf:type [ <ChemicalSaltByAnion> ]
+    )
+}
+
+<ChemicalSaltByCation> CLOSED {
+    (  $<ChemicalSaltByCation_tes> (  &<ChemicalSaltGroupingClass_tes> ;
+          rdf:type [ <ChemicalSaltGroupingClass> ] ? ;
+          rdfs:label @linkml:String ?
+       ) ;
+       rdf:type [ <ChemicalSaltByCation> ]
+    )
+}
+
+<ChemicalSaltGroupingClass>  (
+    CLOSED {
+       (  $<ChemicalSaltGroupingClass_tes> (  &<MoleculeGroupingClass_tes> ;
+             rdf:type [ <MoleculeGroupingClass> ] ? ;
+             <has_anionic_component> @linkml:String ? ;
+             <has_cationic_component> @linkml:String ? ;
+             rdfs:label @linkml:String ? ;
+             <classifies> @<ChemicalSalt> ?
+          ) ;
+          rdf:type [ <ChemicalSaltGroupingClass> ]
+       )
+    } OR @<ChemicalSaltByAnion> OR @<ChemicalSaltByCation>
+)
+
+<ChemicalSimilarity>  (
+    CLOSED {
+       (  $<ChemicalSimilarity_tes> (  &<ChemicalRelationship_tes> ;
+             rdf:type [ <ChemicalRelationship> ] ?
+          ) ;
+          rdf:type [ <ChemicalSimilarity> ] ?
+       )
+    } OR @<MoleculePairwiseSimilarity>
+)
+
+<ChiralityCenter> CLOSED {
+    (  $<ChiralityCenter_tes> (  &<Stereocenter_tes> ;
+          rdf:type [ <Stereocenter> ] ?
+       ) ;
+       rdf:type [ <ChiralityCenter> ] ?
+    )
+}
+
+<Collection> CLOSED {
+    (  $<Collection_tes> <entities> @<DomainEntity> * ;
+       rdf:type [ <Collection> ] ?
+    )
+}
+
+<Connectivity>  (
+    @<FullyCovalentlyBonded> OR @<WeaklyBonded>
+)
+
+<Connectivity_struct> {
+    (  $<Connectivity_tes> rdf:type . * ;
+       rdf:type [ <Connectivity> ] ?
+    )
+}
+
+<Copolymer> CLOSED {
+    (  $<Copolymer_tes> (  &<MonomolecularPolymer_tes> ;
+          rdf:type [ <MonomolecularPolymer> ] ? ;
+          <polymer_of> @<Macromolecule> *
+       ) ;
+       rdf:type [ <Copolymer> ]
+    )
+}
+
+<DNASequenceInterval> CLOSED {
+    (  $<DNASequenceInterval_tes> (  &<NucleotideSequenceInterval_tes> ;
+          rdf:type [ <NucleotideSequenceInterval> ] ?
+       ) ;
+       rdf:type [ <DNASequenceInterval> ]
+    )
+}
+
+<DomainEntity>  (
+    @<PhysicochemicalEntity> OR @<Reaction>
+)
+
+<DomainEntity_struct> {
+    (  $<DomainEntity_tes> (  rdfs:label @linkml:String ? ;
+          <type> @linkml:Uriorcurie ?
+       ) ;
+       rdf:type [ <DomainEntity> ]
+    )
+}
+
+<Enantiomer> CLOSED {
+    (  $<Enantiomer_tes> (  &<Stereoisomer_tes> ;
+          rdf:type [ <Stereoisomer> ] ? ;
+          <relative_configuration> @linkml:String ? ;
+          <optical_configuration> @linkml:String ? ;
+          <absolute_configuration> @linkml:String ? ;
+          <enantiomer_form_of> @<Molecule> ?
+       ) ;
+       rdf:type [ <Enantiomer> ]
+    )
+}
+
+<EntityWithAtomsEnumerated> {
+    (  $<EntityWithAtomsEnumerated_tes> (  &<SpecificityMixin_tes> ;
+          rdf:type [ <SpecificityMixin> ] ? ;
+          <inchi_chemical_sublayer> @linkml:String ?
+       ) ;
+       rdf:type [ <EntityWithAtomsEnumerated> ] ?
+    )
+}
+
+<EntityWithChargeSpecified> {
+    (  $<EntityWithChargeSpecified_tes> (  &<SpecificityMixin_tes> ;
+          rdf:type [ <SpecificityMixin> ] ? ;
+          <inchi_charge_sublayer> @linkml:String ?
+       ) ;
+       rdf:type [ <EntityWithChargeSpecified> ] ?
+    )
+}
+
+<EntityWithConnectivitySpecificied> {
+    (  $<EntityWithConnectivitySpecificied_tes> (  &<SpecificityMixin_tes> ;
+          rdf:type [ <SpecificityMixin> ] ? ;
+          <inchi_atom_connections_sublayer> @linkml:String ? ;
+          <inchi_hydrogen_connections_sublayer> @linkml:String ?
+       ) ;
+       rdf:type [ <EntityWithConnectivitySpecificied> ] ?
+    )
+}
+
+<EntityWithIsotopeSpecified> {
+    (  $<EntityWithIsotopeSpecified_tes> (  &<SpecificityMixin_tes> ;
+          rdf:type [ <SpecificityMixin> ] ? ;
+          <inchi_isotopic_layer> @linkml:String ?
+       ) ;
+       rdf:type [ <EntityWithIsotopeSpecified> ] ?
+    )
+}
+
+<EntityWithStereochemistrySpecified> {
+    (  $<EntityWithStereochemistrySpecified_tes> (  &<SpecificityMixin_tes> ;
+          rdf:type [ <SpecificityMixin> ] ? ;
+          <inchi_stereochemical_double_bond_sublayer> @linkml:String ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_type_sublayer> @linkml:String ?
+       ) ;
+       rdf:type [ <EntityWithStereochemistrySpecified> ] ?
+    )
+}
+
+<Ester> CLOSED {
+    (  $<Ester_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <has_parent_alcohol> @<ChemicalEntity> ? ;
+          <has_parent_acid> @<BronstedAcid> ?
+       ) ;
+       rdf:type [ <Ester> ]
+    )
+}
+
+<FullyCovalentlyBonded> {
+    (  $<FullyCovalentlyBonded_tes> (  &<Connectivity_tes> ;
+          rdf:type [ <Connectivity> ] ?
+       ) ;
+       rdf:type [ <FullyCovalentlyBonded> ] ?
+    )
+}
+
+<FullySpecifiedAtom> CLOSED {
+    (  $<FullySpecifiedAtom_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ? ;
+          <elemental_charge> @linkml:Integer ? ;
+          <neutron_number> @<Count> ?
+       ) ;
+       rdf:type [ <FullySpecifiedAtom> ]
+    )
+}
+
+<FunctionalGroup> CLOSED {
+    (  $<FunctionalGroup_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ? ;
+          <is_substitutent_group_from> @<Molecule> ?
+       ) ;
+       rdf:type [ <FunctionalGroup> ]
+    )
+}
+
+<GeneralAcidBaseGroupingClass> CLOSED {
+    (  $<GeneralAcidBaseGroupingClass_tes> (  &<GroupingClassForAcidsOrBases_tes> ;
+          rdf:type [ <GroupingClassForAcidsOrBases> ] ?
+       ) ;
+       rdf:type [ <GeneralAcidBaseGroupingClass> ]
+    )
+}
+
+<GeneralizedMolecularStructureClass>  (
+    CLOSED {
+       (  $<GeneralizedMolecularStructureClass_tes> (  &<MoleculeGroupingClass_tes> ;
+             rdf:type [ <MoleculeGroupingClass> ] ?
+          ) ;
+          rdf:type [ <GeneralizedMolecularStructureClass> ]
+       )
+    } OR @<MonomericPolymericGroupingClass>
+)
+
+<Glycan> CLOSED {
+    (  $<Glycan_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Glycan> ]
+    )
+}
+
+<GroupingClass>  (
+    @<PhysicochemicalEntityGroupingClass> OR @<ReactionGroupingClass>
+)
+
+<GroupingClass_struct> {
+    (  $<GroupingClass_tes> (  &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          rdfs:label @linkml:String ? ;
+          <subtype_of> @<GroupingClass> *
+       ) ;
+       rdf:type [ <GroupingClass> ]
+    )
+}
+
+<GroupingClassForAcidsOrBases>  (
+    @<AcidAnionGroupingClass> OR @<AcidBaseConflationClass> OR @<GeneralAcidBaseGroupingClass>
+)
+
+<GroupingClassForAcidsOrBases_struct> {
+    (  $<GroupingClassForAcidsOrBases_tes> (  &<MoleculeGroupingClass_tes> ;
+          rdf:type [ <MoleculeGroupingClass> ] ? ;
+          <conjugate_base_of> @<ChemicalEntity> ? ;
+          <conjugate_acid_of> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <GroupingClassForAcidsOrBases> ]
+    )
+}
+
+<Homopolymer> CLOSED {
+    (  $<Homopolymer_tes> (  &<MonomolecularPolymer_tes> ;
+          rdf:type [ <MonomolecularPolymer> ] ? ;
+          <polymer_of> @<Macromolecule> ?
+       ) ;
+       rdf:type [ <Homopolymer> ]
+    )
+}
+
+<ImpreciseChemicalMixture> CLOSED {
+    (  $<ImpreciseChemicalMixture_tes> (  &<ChemicalMixture_tes> ;
+          rdf:type [ <ChemicalMixture> ] ? ;
+          <has_proportional_parts> @<ProportionalPart> * ;
+          <has_mixfile_location> @<FileLocation> ? ;
+          <has_minchi_representation> @<ChemicalEncoding> ?
+       ) ;
+       rdf:type [ <ImpreciseChemicalMixture> ]
+    )
+}
+
+<InchiObject>  (
+    {
+       (  $<InchiObject_tes> (  &<ChemicalInformation_tes> ;
+             rdf:type [ <ChemicalInformation> ] ?
+          ) ;
+          rdf:type [ <InchiObject> ] ?
+       )
+    } OR @<StandardInchiObject>
+)
+
+<Isobar> CLOSED {
+    (  $<Isobar_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ? ;
+          <has_element> @<ChemicalElement> ? ;
+          <nucleon_number> @<Count> ? ;
+          <isobar_of> @<ChemicalEntity> ? ;
+          <half_life> @<NumberOfYears> ? ;
+          <decay_product> @<Isotope> ? ;
+          <decay_mode> @linkml:String ? ;
+          <decay_energy> @linkml:String ? ;
+          <mode_of_formation> @linkml:String ?
+       ) ;
+       rdf:type [ <Isobar> ]
+    )
+}
+
+<IsomeraseReaction> CLOSED {
+    (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
+          rdf:type [ <Reaction> ] ?
+       ) ;
+       rdf:type [ <IsomeraseReaction> ]
+    )
+}
+
+<Isotope> CLOSED {
+    (  $<Isotope_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ? ;
+          <has_element> @<ChemicalElement> ? ;
+          <neutron_number> @<Count> ? ;
+          <isotope_of> @<Isotope> ? ;
+          <half_life> @<NumberOfYears> ? ;
+          <decay_product> @<Isotope> ? ;
+          <decay_mode> @linkml:String ? ;
+          <decay_energy> @linkml:String ? ;
+          <mode_of_formation> @linkml:String ?
+       ) ;
+       rdf:type [ <Isotope> ]
+    )
+}
+
+<Lipid> CLOSED {
+    (  $<Lipid_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Lipid> ]
+    )
+}
+
+<Location>  (
+    {
+       (  $<Location_tes> rdf:type . * ;
+          rdf:type [ <Location> ] ?
+       )
+    } OR @<Stereocenter>
+)
+
+<Macromolecule>  (
+    CLOSED {
+       (  $<Macromolecule_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ? ;
+             <has_submolecules> @<Molecule> *
+          ) ;
+          rdf:type [ <Macromolecule> ]
+       )
+    } OR @<Glycan> OR @<Lipid> OR @<MonomolecularPolymer> OR @<Peptide> OR @<Protein>
+)
+
+<Material>  (
+    CLOSED {
+       (  $<Material_tes> (  &<PhysicochemicalEntity_tes> ;
+             rdf:type [ <PhysicochemicalEntity> ] ? ;
+             <has_repeat_unit> @<ChemicalEntity> ? ;
+             <has_part> @<ChemicalEntity> ?
+          ) ;
+          rdf:type [ <Material> ]
+       )
+    } OR @<Mineral> OR @<Nanomaterial>
+)
+
+<MaterialGroupingClass> CLOSED {
+    (  $<MaterialGroupingClass_tes> (  &<PhysicochemicalEntityGroupingClass_tes> ;
+          rdf:type [ <PhysicochemicalEntityGroupingClass> ] ? ;
+          <subtype_of> @<MaterialGroupingClass> * ;
+          <classifies> @<Material> ?
+       ) ;
+       rdf:type [ <MaterialGroupingClass> ]
+    )
+}
+
+<Mineral> CLOSED {
+    (  $<Mineral_tes> (  &<Material_tes> ;
+          rdf:type [ <Material> ] ?
+       ) ;
+       rdf:type [ <Mineral> ]
+    )
+}
+
+<Moiety> CLOSED {
+    (  $<Moiety_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ?
+       ) ;
+       rdf:type [ <Moiety> ]
+    )
+}
+
+<MolecularAnion>  (
+    CLOSED {
+       (  $<MolecularAnion_tes> (  &<PolyatomicIon_tes> ;
+             rdf:type [ <PolyatomicIon> ] ? ;
+             &<AnionState_tes> ;
+             rdf:type [ <AnionState> ] ?
+          ) ;
+          rdf:type [ <MolecularAnion> ]
+       )
+    } OR @<AcidBase>
+)
+
+<MolecularCation> CLOSED {
+    (  $<MolecularCation_tes> (  &<PolyatomicIon_tes> ;
+          rdf:type [ <PolyatomicIon> ] ? ;
+          &<CationState_tes> ;
+          rdf:type [ <CationState> ] ?
+       ) ;
+       rdf:type [ <MolecularCation> ]
+    )
+}
+
+<MolecularComplex>  (
+    CLOSED {
+       (  $<MolecularComplex_tes> (  &<PreciseChemicalMixture_tes> ;
+             rdf:type [ <PreciseChemicalMixture> ] ?
+          ) ;
+          rdf:type [ <MolecularComplex> ]
+       )
+    } OR @<SupramolecularPolymer>
+)
+
+<MolecularComponent>  (
+    CLOSED {
+       (  $<MolecularComponent_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ?
+          ) ;
+          rdf:type [ <MolecularComponent> ]
+       )
+    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<PolymerPart> OR @<SequenceInterval>
+)
+
+<MolecularComponentGroupingClass> CLOSED {
+    (  $<MolecularComponentGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+          rdf:type [ <ChemicalGroupingClass> ] ? ;
+          <subtype_of> @<MolecularComponentGroupingClass> * ;
+          <classifies> @<MolecularComponent> ?
+       ) ;
+       rdf:type [ <MolecularComponentGroupingClass> ]
+    )
+}
+
+<MolecularDerivativeGroupingClass> CLOSED {
+    (  $<MolecularDerivativeGroupingClass_tes> (  &<MoleculeGroupingClass_tes> ;
+          rdf:type [ <MoleculeGroupingClass> ] ? ;
+          <derivative_of> @<ChemicalEntity> ? ;
+          rdfs:label @linkml:String ? ;
+          <classifies> @<Molecule> ?
+       ) ;
+       rdf:type [ <MolecularDerivativeGroupingClass> ]
+    )
+}
+
+<MolecularSpecies> CLOSED {
+    (  $<MolecularSpecies_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <MolecularSpecies> ]
+    )
+}
+
+<MolecularSubsequence> CLOSED {
+    (  $<MolecularSubsequence_tes> (  &<PolymerPart_tes> ;
+          rdf:type [ <PolymerPart> ] ?
+       ) ;
+       rdf:type [ <MolecularSubsequence> ]
+    )
+}
+
+<Molecule>  (
+    CLOSED {
+       (  $<Molecule_tes> (  &<PolyatomicEntity_tes> ;
+             rdf:type [ <PolyatomicEntity> ] ? ;
+             &<FullyCovalentlyBonded_tes> ;
+             rdf:type [ <FullyCovalentlyBonded> ] ? ;
+             <has_atom_occurrences> @<AtomOccurrence> * ;
+             <has_bonds> @<AtomicBond> * ;
+             <has_submolecules> @<Molecule> * ;
+             <has_atoms> @<Atom> * ;
+             <is_organic> @linkml:Boolean ? ;
+             <has_part> @linkml:String ?
+          ) ;
+          rdf:type [ <Molecule> ]
+       )
+    } OR @<Allotrope> OR @<BronstedAcid> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<NaturalProduct> OR
+    @<NonSpeciesMolecule> OR @<PolyatomicIon> OR @<SmallMolecule> OR @<Stereoisomer> OR @<UnchargedMolecule>
+)
+
+<MoleculeGroupingClass>  (
+    CLOSED {
+       (  $<MoleculeGroupingClass_tes> (  &<ChemicalGroupingClass_tes> ;
+             rdf:type [ <ChemicalGroupingClass> ] ? ;
+             <subtype_of> @<MoleculeGroupingClass> * ;
+             <classifies> @<Molecule> ?
+          ) ;
+          rdf:type [ <MoleculeGroupingClass> ]
+       )
+    } OR @<ChemicalSaltGroupingClass> OR @<GeneralizedMolecularStructureClass> OR @<GroupingClassForAcidsOrBases> OR
+    @<MolecularDerivativeGroupingClass> OR @<MoleculeGroupingClassDefinedByAdditionOfAGroup> OR
+    @<MoleculeGroupingClassDefinedByComponents>
+)
+
+<MoleculeGroupingClassDefinedByAdditionOfAGroup> CLOSED {
+    (  $<MoleculeGroupingClassDefinedByAdditionOfAGroup_tes> (  &<MoleculeGroupingClass_tes> ;
+          rdf:type [ <MoleculeGroupingClass> ] ? ;
+          <has_group> @<ChemicalGroup> * ;
+          <derivative_of> @<PolyatomicEntity> ?
+       ) ;
+       rdf:type [ <MoleculeGroupingClassDefinedByAdditionOfAGroup> ]
+    )
+}
+
+<MoleculeGroupingClassDefinedByComponents> CLOSED {
+    (  $<MoleculeGroupingClassDefinedByComponents_tes> (  &<MoleculeGroupingClass_tes> ;
+          rdf:type [ <MoleculeGroupingClass> ] ? ;
+          <has_part> @<ChemicalEntityOrGrouping> ?
+       ) ;
+       rdf:type [ <MoleculeGroupingClassDefinedByComponents> ]
+    )
+}
+
+<MoleculePairwiseSimilarity>  (
+    CLOSED {
+       (  $<MoleculePairwiseSimilarity_tes> (  &<ChemicalSimilarity_tes> ;
+             rdf:type [ <ChemicalSimilarity> ] ? ;
+             <left_molecule> @<Molecule> ? ;
+             <right_molecule> @<Molecule> ? ;
+             <score> @linkml:Float ?
+          ) ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ?
+       )
+    } OR @<TanimotoSimilarity>
+)
+
+<MonoatomicIon>  (
+    CLOSED {
+       (  $<MonoatomicIon_tes> (  &<AtomIonicForm_tes> ;
+             rdf:type [ <AtomIonicForm> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ? ;
+             <has_element> @<ChemicalElement> ?
+          ) ;
+          rdf:type [ <MonoatomicIon> ]
+       )
+    } OR @<AtomAnion> OR @<AtomCation>
+)
+
+<Monomer> CLOSED {
+    (  $<Monomer_tes> (  &<PolymerPart_tes> ;
+          rdf:type [ <PolymerPart> ] ?
+       ) ;
+       rdf:type [ <Monomer> ]
+    )
+}
+
+<MonomericPolymericGroupingClass> CLOSED {
+    (  $<MonomericPolymericGroupingClass_tes> (  &<GeneralizedMolecularStructureClass_tes> ;
+          rdf:type [ <GeneralizedMolecularStructureClass> ] ? ;
+          <has_repeat_unit> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <MonomericPolymericGroupingClass> ]
+    )
+}
+
+<MonomolecularPolymer>  (
+    CLOSED {
+       (  $<MonomolecularPolymer_tes> (  &<Macromolecule_tes> ;
+             rdf:type [ <Macromolecule> ] ? ;
+             <polymer_of> @<Macromolecule> ? ;
+             <has_repeat_unit> @<ChemicalEntity> ? ;
+             <is_branched> @linkml:Boolean ? ;
+             <polymer_architecture_type> @linkml:String ?
+          ) ;
+          rdf:type [ <MonomolecularPolymer> ]
+       )
+    } OR @<Copolymer> OR @<Homopolymer>
+)
+
+<Nanomaterial> CLOSED {
+    (  $<Nanomaterial_tes> (  &<Material_tes> ;
+          rdf:type [ <Material> ] ? ;
+          <has_morphological_category> [ <http://purl.obolibrary.org/obo/CHEBI_50796> <http://purl.obolibrary.org/obo/CHEBI_50803>
+             <http://purl.obolibrary.org/obo/CHEBI_50805> <http://purl.obolibrary.org/obo/CHEBI_50806>
+             <http://purl.obolibrary.org/obo/CHEBI_50853> <http://purl.obolibrary.org/obo/CHEBI_52518>
+             <http://purl.obolibrary.org/obo/CHEBI_52529> <http://purl.obolibrary.org/obo/CHEBI_52530>
+             <http://purl.obolibrary.org/obo/CHEBI_52531> <http://purl.obolibrary.org/obo/CHEBI_52593> ] ?
+       ) ;
+       rdf:type [ <Nanomaterial> ]
+    )
+}
+
+<NaturalProduct> CLOSED {
+    (  $<NaturalProduct_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <derived_from_organisms> @linkml:Uriorcurie *
+       ) ;
+       rdf:type [ <NaturalProduct> ]
+    )
+}
+
+<NonSpeciesMolecule> CLOSED {
+    (  $<NonSpeciesMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <NonSpeciesMolecule> ]
+    )
+}
+
+<NucleotideSequenceInterval>  (
+    CLOSED {
+       (  $<NucleotideSequenceInterval_tes> (  &<SequenceInterval_tes> ;
+             rdf:type [ <SequenceInterval> ] ? ;
+             <has_sequence_representation> @<DNASequenceString> ?
+          ) ;
+          rdf:type [ <NucleotideSequenceInterval> ]
+       )
+    } OR @<DNASequenceInterval> OR @<RNASequenceInterval>
+)
+
+<Nuclide>  (
+    CLOSED {
+       (  $<Nuclide_tes> (  &<PartiallySpecifiedAtom_tes> ;
+             rdf:type [ <PartiallySpecifiedAtom> ] ? ;
+             <energy_level> @linkml:String ?
+          ) ;
+          rdf:type [ <Nuclide> ]
+       )
+    } OR @<Isobar> OR @<Isotope> OR @<Radionuclide>
+)
+
+<OwlClass> {
+    (  $<OwlClass_tes> rdf:type . * ;
+       rdf:type [ owl:Class ] ?
+    )
+}
+
+<PartiallySpecifiedAtom>  (
+    @<AtomIonicForm> OR @<ChemicalElement> OR @<Nuclide>
+)
+
+<PartiallySpecifiedAtom_struct> {
+    (  $<PartiallySpecifiedAtom_tes> (  &<Atom_tes> ;
+          rdf:type [ <Atom> ] ?
+       ) ;
+       rdf:type [ <PartiallySpecifiedAtom> ]
+    )
+}
+
+<Peptide> CLOSED {
+    (  $<Peptide_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Peptide> ]
+    )
+}
+
+<PeriodicTablePlacement> {
+    (  $<PeriodicTablePlacement_tes> (  &<ChemicalInformation_tes> ;
+          rdf:type [ <ChemicalInformation> ] ?
+       ) ;
+       rdf:type [ <PeriodicTablePlacement> ] ?
+    )
+}
+
+<PhysicochemicalEntity>  (
+    @<ChemicalEntity> OR @<Material> OR @<SubatomicParticle>
+)
+
+<PhysicochemicalEntity_struct> {
+    (  $<PhysicochemicalEntity_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ?
+       ) ;
+       rdf:type [ <PhysicochemicalEntity> ]
+    )
+}
+
+<PhysicochemicalEntityGroupingClass>  (
+    @<ChemicalGroupingClass> OR @<MaterialGroupingClass>
+)
+
+<PhysicochemicalEntityGroupingClass_struct> {
+    (  $<PhysicochemicalEntityGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<PhysicochemicalEntityGroupingClass> *
+       ) ;
+       rdf:type [ <PhysicochemicalEntityGroupingClass> ]
+    )
+}
+
+<PolyatomicEntity>  (
+    @<ChemicalMixture> OR @<MolecularComponent> OR @<Molecule>
+)
+
+<PolyatomicEntity_struct> {
+    (  $<PolyatomicEntity_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          <inchi_atom_connections_sublayer> @linkml:String ?
+       ) ;
+       rdf:type [ <PolyatomicEntity> ]
+    )
+}
+
+<PolyatomicIon>  (
+    CLOSED {
+       (  $<PolyatomicIon_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ? ;
+             &<Charged_tes> ;
+             rdf:type [ <Charged> ] ? ;
+             <conjugate_base_of> @<ChemicalEntity> ? ;
+             <conjugate_acid_of> @<ChemicalEntity> ? ;
+             <elemental_charge> @linkml:Integer ?
+          ) ;
+          rdf:type [ <PolyatomicIon> ]
+       )
+    } OR @<MolecularAnion> OR @<MolecularCation>
+)
+
+<PolymerPart>  (
+    CLOSED {
+       (  $<PolymerPart_tes> (  &<MolecularComponent_tes> ;
+             rdf:type [ <MolecularComponent> ] ?
+          ) ;
+          rdf:type [ <PolymerPart> ]
+       )
+    } OR @<MolecularSubsequence> OR @<Monomer>
+)
+
+<PolymerRepeatUnit> CLOSED {
+    (  $<PolymerRepeatUnit_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          <repetition_of> @<Molecule> ? ;
+          <degree_of_polymerization> @<Count> ? ;
+          <mass> @linkml:Float ?
+       ) ;
+       rdf:type [ <PolymerRepeatUnit> ] ?
+    )
+}
+
+<PreciseChemicalMixture>  (
+    @<ChemicalSalt> OR @<MolecularComplex> OR @<RacemicMixture>
+)
+
+<PreciseChemicalMixture_struct> {
+    (  $<PreciseChemicalMixture_tes> (  &<ChemicalMixture_tes> ;
+          rdf:type [ <ChemicalMixture> ] ? ;
+          &<WeaklyBonded_tes> ;
+          rdf:type [ <WeaklyBonded> ] ?
+       ) ;
+       rdf:type [ <PreciseChemicalMixture> ]
+    )
+}
+
+<ProportionalPart> CLOSED {
+    (  $<ProportionalPart_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          <has_role> [ <https://w3id.org/chemrof/IngredientRoleEnum#active%20ingredient>
+             <https://w3id.org/chemrof/IngredientRoleEnum#inactive%20ingredient>
+             <https://w3id.org/chemrof/IngredientRoleEnum#excipient> <https://w3id.org/chemrof/IngredientRoleEnum#solvent> ] ? ;
+          <composed_of> @<ChemicalEntity> ? ;
+          <minimal_percentage> @linkml:Float ? ;
+          <maximum_percentage> @linkml:Float ?
+       ) ;
+       rdf:type [ <ProportionalPart> ] ?
+    )
+}
+
+<Protein> CLOSED {
+    (  $<Protein_tes> (  &<Macromolecule_tes> ;
+          rdf:type [ <Macromolecule> ] ?
+       ) ;
+       rdf:type [ <Protein> ]
+    )
+}
+
+<RacemicMixture> CLOSED {
+    (  $<RacemicMixture_tes> (  &<PreciseChemicalMixture_tes> ;
+          rdf:type [ <PreciseChemicalMixture> ] ? ;
+          <has_left_enantiomer> @<Enantiomer> ;
+          <has_right_enantiomer> @<Enantiomer> ;
+          <chirality_agnostic_form> @<Molecule> ? ;
+          <http://semanticscience.org/resource/CHEMINF_000107> @linkml:String ?
+       ) ;
+       rdf:type [ <RacemicMixture> ]
+    )
+}
+
+<Radionuclide> CLOSED {
+    (  $<Radionuclide_tes> (  &<Nuclide_tes> ;
+          rdf:type [ <Nuclide> ] ?
+       ) ;
+       rdf:type [ <Radionuclide> ]
+    )
+}
+
+<Reaction>  (
+    CLOSED {
+       (  $<Reaction_tes> (  &<DomainEntity_tes> ;
+             rdf:type [ <DomainEntity> ] ? ;
+             <has_rinchi_representation> @<ChemicalEncoding> ? ;
+             <has_reaction_smiles_representation> @<ChemicalEncoding> ? ;
+             <reaction_rate_coefficient> @linkml:Float ? ;
+             <reaction_rate> @linkml:Float ? ;
+             <left_participants> @<ReactionParticipant> * ;
+             <right_participants> @<ReactionParticipant> * ;
+             <direction> @linkml:String ? ;
+             <smarts_string> @linkml:String ? ;
+             <is_diastereoselective> @linkml:Boolean ? ;
+             <is_stereo> @linkml:Boolean ? ;
+             <is_balanced> @linkml:Boolean ? ;
+             <is_transport> @linkml:Boolean ? ;
+             <is_fully_characterized> @linkml:Boolean ? ;
+             <reaction_center> @linkml:String ? ;
+             <description> @linkml:String ?
+          ) ;
+          rdf:type [ <Reaction> ]
+       )
+    } OR @<IsomeraseReaction>
+)
+
+<ReactionGroupingClass> CLOSED {
+    (  $<ReactionGroupingClass_tes> (  &<GroupingClass_tes> ;
+          rdf:type [ <GroupingClass> ] ? ;
+          <subtype_of> @<ReactionGroupingClass> * ;
+          <classifies> @<Reaction> ?
+       ) ;
+       rdf:type [ <ReactionGroupingClass> ]
+    )
+}
+
+<ReactionParticipant> CLOSED {
+    (  $<ReactionParticipant_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          <participant> @<ChemicalEntity> ? ;
+          <stoichiometry> @linkml:Integer ?
+       ) ;
+       rdf:type [ <ReactionParticipant> ] ?
+    )
+}
+
+<RNASequenceInterval> CLOSED {
+    (  $<RNASequenceInterval_tes> (  &<NucleotideSequenceInterval_tes> ;
+          rdf:type [ <NucleotideSequenceInterval> ] ?
+       ) ;
+       rdf:type [ <RNASequenceInterval> ]
+    )
+}
+
+<SequenceInterval>  (
+    @<AminoAcidSequenceInterval> OR @<NucleotideSequenceInterval>
+)
+
+<SequenceInterval_struct> {
+    (  $<SequenceInterval_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ? ;
+          <has_sequence_representation> @<SequenceString> ?
+       ) ;
+       rdf:type [ <SequenceInterval> ]
+    )
+}
+
+<SmallMolecule> CLOSED {
+    (  $<SmallMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ?
+       ) ;
+       rdf:type [ <SmallMolecule> ]
+    )
+}
+
+<SpecificityMixin>  (
+    @<EntityWithAtomsEnumerated> OR @<EntityWithChargeSpecified> OR @<EntityWithConnectivitySpecificied> OR
+    @<EntityWithIsotopeSpecified> OR @<EntityWithStereochemistrySpecified>
+)
+
+<SpecificityMixin_struct> {
+    (  $<SpecificityMixin_tes> rdf:type . * ;
+       rdf:type [ <SpecificityMixin> ] ?
+    )
+}
+
+<StandardInchiObject> CLOSED {
+    (  $<StandardInchiObject_tes> (  &<InchiObject_tes> ;
+          rdf:type [ <InchiObject> ] ? ;
+          <inchi_version_string> @linkml:String ;
+          <inchi_chemical_sublayer> @linkml:String ? ;
+          <inchi_atom_connections_sublayer> @linkml:String ? ;
+          <inchi_hydrogen_connections_sublayer> @linkml:String ? ;
+          <inchi_charge_sublayer> @linkml:String ? ;
+          <inchi_proton_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_double_bond_sublayer> @linkml:String ? ;
+          <inchi_tetrahedral_stereochemical_sublayer> @linkml:String ? ;
+          <inchi_stereochemical_type_sublayer> @linkml:String ? ;
+          <inchi_isotopic_layer> @linkml:String ?
+       ) ;
+       rdf:type [ <StandardInchiObject> ] ?
+    )
+}
+
+<State>  (
+    {
+       (  $<State_tes> rdf:type . * ;
+          rdf:type [ <State> ] ?
+       )
+    } OR @<ChargeState>
+)
+
+<Stereocenter>  (
+    CLOSED {
+       (  $<Stereocenter_tes> (  &<Location_tes> ;
+             rdf:type [ <Location> ] ?
+          ) ;
+          rdf:type [ <Stereocenter> ] ?
+       )
+    } OR @<ChiralityCenter>
+)
+
+<Stereoisomer>  (
+    CLOSED {
+       (  $<Stereoisomer_tes> (  &<Molecule_tes> ;
+             rdf:type [ <Molecule> ] ? ;
+             <isomeric_smiles_string> @<ChemicalEncoding> *
+          ) ;
+          rdf:type [ <Stereoisomer> ]
+       )
+    } OR @<Enantiomer>
+)
+
+<SubatomicParticle> CLOSED {
+    (  $<SubatomicParticle_tes> (  &<PhysicochemicalEntity_tes> ;
+          rdf:type [ <PhysicochemicalEntity> ] ? ;
+          <subatomic_particle_type> [ <http://purl.obolibrary.org/obo/CHEBI_24636> <http://purl.obolibrary.org/obo/CHEBI_30216>
+             <http://purl.obolibrary.org/obo/CHEBI_36354> <http://purl.obolibrary.org/obo/CHEBI_30225>
+             <http://purl.obolibrary.org/obo/CHEBI_36356> <http://purl.obolibrary.org/obo/CHEBI_36365>
+             <http://purl.obolibrary.org/obo/CHEBI_36341> <http://purl.obolibrary.org/obo/CHEBI_36340>
+             <http://purl.obolibrary.org/obo/CHEBI_36339> <http://purl.obolibrary.org/obo/CHEBI_36371>
+             <http://purl.obolibrary.org/obo/CHEBI_15378> <http://purl.obolibrary.org/obo/CHEBI_36353>
+             <http://purl.obolibrary.org/obo/CHEBI_36347> <http://purl.obolibrary.org/obo/CHEBI_36350>
+             <http://purl.obolibrary.org/obo/CHEBI_36348> <http://purl.obolibrary.org/obo/CHEBI_33253>
+             <http://purl.obolibrary.org/obo/CHEBI_29234> <http://purl.obolibrary.org/obo/CHEBI_29233>
+             <http://purl.obolibrary.org/obo/CHEBI_36352> <http://purl.obolibrary.org/obo/CHEBI_36345>
+             <http://purl.obolibrary.org/obo/CHEBI_36346> <http://purl.obolibrary.org/obo/CHEBI_146278>
+             <http://purl.obolibrary.org/obo/CHEBI_33233> <http://purl.obolibrary.org/obo/CHEBI_30223>
+             <http://purl.obolibrary.org/obo/CHEBI_36342> <http://purl.obolibrary.org/obo/CHEBI_36355>
+             <http://purl.obolibrary.org/obo/CHEBI_30212> <http://purl.obolibrary.org/obo/CHEBI_36366>
+             <http://purl.obolibrary.org/obo/CHEBI_30214> <http://purl.obolibrary.org/obo/CHEBI_36368>
+             <http://purl.obolibrary.org/obo/CHEBI_36375> <http://purl.obolibrary.org/obo/CHEBI_36351>
+             <http://purl.obolibrary.org/obo/CHEBI_36344> <http://purl.obolibrary.org/obo/CHEBI_36370>
+             <http://purl.obolibrary.org/obo/CHEBI_36343> <http://purl.obolibrary.org/obo/CHEBI_10545>
+             <http://purl.obolibrary.org/obo/CHEBI_30222> <http://purl.obolibrary.org/obo/CHEBI_36338>
+             <http://purl.obolibrary.org/obo/CHEBI_30220> <http://purl.obolibrary.org/obo/CHEBI_36369>
+             <http://purl.obolibrary.org/obo/CHEBI_36367> <http://purl.obolibrary.org/obo/CHEBI_36349> ] ?
+       ) ;
+       rdf:type [ <SubatomicParticle> ]
+    )
+}
+
+<SubatomicParticleOccurrence> CLOSED {
+    (  $<SubatomicParticleOccurrence_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          &<OwlClass_tes> ;
+          rdf:type [ owl:Class ] ? ;
+          <occurrence_of> @<SubatomicParticle> ;
+          <Count> @linkml:Integer ?
+       ) ;
+       rdf:type [ <SubatomicParticleOccurrence> ] ?
+    )
+}
+
+<SupramolecularPolymer> CLOSED {
+    (  $<SupramolecularPolymer_tes> (  &<MolecularComplex_tes> ;
+          rdf:type [ <MolecularComplex> ] ? ;
+          <polymer_of> @<Macromolecule> ? ;
+          <has_repeat_unit> @<ChemicalEntity> ?
+       ) ;
+       rdf:type [ <SupramolecularPolymer> ]
+    )
+}
+
+<TanimotoSimilarity> CLOSED {
+    (  $<TanimotoSimilarity_tes> (  &<MoleculePairwiseSimilarity_tes> ;
+          rdf:type [ <MoleculePairwiseSimilarity> ] ? ;
+          <score> @linkml:Float ?
+       ) ;
+       rdf:type [ <TanimotoSimilarity> ] ?
+    )
+}
+
+<Uncharged> {
+    (  $<Uncharged_tes> (  &<ChargeState_tes> ;
+          rdf:type [ <ChargeState> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <Uncharged> ] ?
+    )
+}
+
+<UnchargedAtom> CLOSED {
+    (  $<UnchargedAtom_tes> (  &<AtomIonicForm_tes> ;
+          rdf:type [ <AtomIonicForm> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ?
+       ) ;
+       rdf:type [ <UnchargedAtom> ]
+    )
+}
+
+<UnchargedMolecule> CLOSED {
+    (  $<UnchargedMolecule_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          &<Uncharged_tes> ;
+          rdf:type [ <Uncharged> ] ? ;
+          <elemental_charge> @linkml:Integer ?
+       ) ;
+       rdf:type [ <UnchargedMolecule> ]
+    )
+}
+
+<WeaklyBonded> {
+    (  $<WeaklyBonded_tes> (  &<Connectivity_tes> ;
+          rdf:type [ <Connectivity> ] ?
+       ) ;
+       rdf:type [ <WeaklyBonded> ] ?
+    )
+}
+
+

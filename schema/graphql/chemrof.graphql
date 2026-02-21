@@ -1,38 +1,186 @@
+# metamodel_version: 1.7.0
+# version: 0.0.1
+enum BondTypeEnum
+  {
+    covalent
+    aromatic
+    single
+    double
+    triple
+    quadruple
+    hydrogen
+    ionic
+    polycentric
+    metal__HYPHEN_MINUS__metal
+    salt_bridge
+    polar_covalent
+    sigma
+  }
+
+enum BronstedAcidBaseRoleEnum
+  {
+    acid
+    base
+  }
+
+enum ClassificationLevelEnum
+  {
+    Uncategorized
+    Class
+    Species
+    Category
+    Subspecies
+    StructuralSubspecies
+    IsomericSubspecies
+    MolecularSubspecies
+  }
+
+enum ElementFamilyEnum
+  {
+    Alkali_Earth
+    Alkaline_Earth
+    Halogen
+    Metalloids
+    Noblegas
+    Non__HYPHEN_MINUS__Metal
+    Other_Metal
+    Rare_Earth
+    Transition
+  }
+
+enum ElementMetallicClassification
+  {
+    Metallic
+    Non__HYPHEN_MINUS__Metallic
+    Semi__HYPHEN_MINUS__Metallic
+  }
+
+enum HardOrSoftEnum
+  {
+    hard
+    soft
+    borderline
+  }
+
+enum IngredientRoleEnum
+  {
+    active_ingredient
+    inactive_ingredient
+    excipient
+    solvent
+  }
+
+enum MoleculeClassificationEnum
+  {
+    lipid
+    ester
+  }
+
+enum NanostructureMorphologyEnum
+  {
+    nanotube
+    nanoparticle
+    nanorod
+    nanotubosome
+    quantum_dot
+    nanofibre
+    nanocrystal
+    nanoribbon
+    nanosheet
+    nanowire
+  }
+
+enum PeriodicTableBlockEnum
+  {
+    s__HYPHEN_MINUS__block
+    p__HYPHEN_MINUS__block
+    d__HYPHEN_MINUS__block
+    f__HYPHEN_MINUS__block
+    g__HYPHEN_MINUS__block
+  }
+
+enum ReactionTypeEnum
+  {
+    functional_group_interconversion
+    bond_formation
+    bond_breaking
+    oxidation
+    reduction
+    acylation
+    carbon_carbon_bond_formation
+    heteroatom_alkylation_arylation
+    addition
+    cyclization
+    condensation
+    elimination
+    ring_opening
+    hydrolysis
+    substitution
+    isomerization
+    functional_group_addition
+    aromatic_heterocycle_formation
+    protection
+    deprotection
+    resolution
+  }
+
+enum SubatomicParticleEnum
+  {
+    proton
+    alpha_particle
+    tau_neutrino
+    positron
+    muon
+    hyperon
+    boson
+    fermion
+    baryon
+    top_quark
+    hydron
+    muon_neutrino
+    nuclear_particle
+    pi_minus_meson
+    pi_meson
+    nucleon
+    triton
+    deuteron
+    neutrino
+    meson
+    quark
+    Higgs_boson
+    fundamental_particle
+    electron_neutrino
+    SubatomicParticle
+    tau_lepton
+    photon
+    up_quark
+    antimuon
+    strange_quark
+    Delta_baryon
+    pi_zero_meson
+    hadron
+    bottom_quark
+    composite_particle
+    electron
+    neutron
+    lepton
+    helion
+    charm_quark
+    down_quark
+    pi_positive_meson
+  }
+
 type AcidAnionGroupingClass
   {
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
     name: String
-  }
-
-type AcidBase
-  {
-    id: String!
-    name: String
-    type: Uriorcurie
-    iUPACName: String
-    isRadical: Boolean
-    hasChemicalRole: ChemicalRole
-    inchiString: ChemicalEncoding
-    inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
-    empiricalFormula: ChemicalEncoding
-    owlSubclassOf: OwlClass
-    inchiAtomConnectionsSublayer: String
-    hasAtomOccurrences: [AtomOccurrence]
-    hasBonds: [AtomicBond]
-    hasSubmolecules: [Molecule]
-    hasAtoms: [Atom]
-    isOrganic: Boolean
-    hasPart: String
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
-    elementalCharge: Integer
-    hasAcidForm: BronstedAcid
   }
 
 type AcidBaseConflationClass
@@ -40,25 +188,41 @@ type AcidBaseConflationClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
-    hasPhysiologicalBase: AcidBase
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
   }
 
 type Allotrope
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -75,14 +239,29 @@ type AminoAcidSequenceInterval
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: AminoAcidSequenceString
@@ -90,20 +269,36 @@ type AminoAcidSequenceInterval
 
 interface AnionState
   {
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 interface Atom
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -115,14 +310,30 @@ interface Atom
 type AtomAnion implements AnionState
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -130,20 +341,36 @@ type AtomAnion implements AnionState
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
     hasElement: ChemicalElement
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 type AtomCation implements CationState
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -151,7 +378,7 @@ type AtomCation implements CationState
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
     hasElement: ChemicalElement
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 type AtomGroupingByPeriodicTableBlock
@@ -159,6 +386,8 @@ type AtomGroupingByPeriodicTableBlock
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
     inPeriodicTableBlock: PeriodicTableBlockEnum
@@ -169,6 +398,8 @@ type AtomGroupingByPeriodicTableGroup
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
     inPeriodicTableGroup: PeriodicTableGroup
@@ -179,6 +410,8 @@ interface AtomGroupingByPeriodicTablePlacement
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -188,6 +421,8 @@ type AtomGroupingByProperty
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -197,6 +432,8 @@ type AtomGroupingClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -207,7 +444,7 @@ type AtomicBond implements OwlClass
     subject: AtomOccurrence
     object: AtomOccurrence
     bondType: BondTypeEnum
-    bondOrder: Integer
+    bondOrder: Int
     bondLength: Float
     bondEnergy: Float
     bondLengthInAngstroms: Float
@@ -218,21 +455,37 @@ type AtomicBond implements OwlClass
 interface AtomIonicForm
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 type AtomOccurrence implements OwlClass
@@ -240,71 +493,61 @@ type AtomOccurrence implements OwlClass
     owlSubclassOf: OwlClass
     name: String!
     occurrenceOf: Atom!
-    valence: Integer
-    oxidationNumber: Integer
-    formalCharge: Integer
-    coordinationNumber: Integer
-  }
-
-type BronstedAcid
-  {
-    id: String!
-    name: String
-    type: Uriorcurie
-    iUPACName: String
-    isRadical: Boolean
-    hasChemicalRole: ChemicalRole
-    inchiString: ChemicalEncoding
-    inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
-    empiricalFormula: ChemicalEncoding
-    owlSubclassOf: OwlClass
-    inchiAtomConnectionsSublayer: String
-    hasAtomOccurrences: [AtomOccurrence]
-    hasBonds: [AtomicBond]
-    hasSubmolecules: [Molecule]
-    hasAtoms: [Atom]
-    isOrganic: Boolean
-    hasPart: String
-    acidity: Float
-    hardOrSoft: HardOrSoftEnum
-    acidFormOf: [AcidBase]
+    valence: Int
+    oxidationNumber: Int
+    formalCharge: Int
+    coordinationNumber: Int
   }
 
 interface CationState
   {
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 interface Charged
   {
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 interface ChargeState
   {
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 type ChemicalElement
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    symbol: String
     inPeriodicTableGroup: PeriodicTableGroup
     inPeriodicTableBlock: PeriodicTableBlockEnum
+    symbol: String
     boilingPointInCelcius: Float
     meltingPointInCelcius: Float
     standardAtomicWeight: Float
@@ -312,21 +555,37 @@ type ChemicalElement
     monoisotopicMass: Float
     electronConfiguration: String
     hasStereocenter: [Stereocenter]
-    hasPhysiologicallyStableForm: String
+    hasMajorMicrospeciesAtPH73: ChemicalElement
   }
 
 type ChemicalEntity implements OwlClass
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
   }
 
@@ -338,14 +597,29 @@ type ChemicalGroup
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -355,9 +629,11 @@ type ChemicalGroupingByCharge
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     classifies: ChemicalEntity
     subtypeOf: [MoleculeGroupingClass]
-    hasChargeState: Uriorcurie
+    hasChargeState: String
     chargeAgnosticEntity: ChemicalEntity
   }
 
@@ -366,6 +642,8 @@ type ChemicalGroupingClass implements OwlClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [ChemicalGroupingClass]
     classifies: ChemicalEntity
   }
@@ -378,14 +656,29 @@ interface ChemicalMixture
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -404,17 +697,32 @@ type ChemicalSalt
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
-    elementalCharge: Integer
+    elementalCharge: Int
     hasCationicComponent: CationState
     hasAnionicComponent: AnionState
   }
@@ -423,6 +731,8 @@ type ChemicalSaltByAnion
   {
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasCationicComponent: String
     classifies: ChemicalSalt
@@ -434,6 +744,8 @@ type ChemicalSaltByCation
   {
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasAnionicComponent: String
     classifies: ChemicalSalt
@@ -445,6 +757,8 @@ type ChemicalSaltGroupingClass
   {
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasAnionicComponent: String
     hasCationicComponent: String
@@ -474,14 +788,29 @@ type Copolymer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -500,14 +829,29 @@ type DNASequenceInterval
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -517,21 +861,34 @@ interface DomainEntity
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
   }
 
 type Enantiomer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -540,11 +897,13 @@ type Enantiomer
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    isomericSmilesString: [ChemicalEncoding]
+    isomericSmilesString: ChemicalEncoding
     relativeConfiguration: String
     opticalConfiguration: String
     absoluteConfiguration: String
     enantiomerFormOf: Molecule
+    inchiTetrahedralStereochemicalSublayer: String!
+    inchiStereochemicalTypeSublayer: String!
   }
 
 interface EntityWithAtomsEnumerated
@@ -579,14 +938,29 @@ type Ester
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -596,7 +970,7 @@ type Ester
     isOrganic: Boolean
     hasPart: String
     hasParentAlcohol: ChemicalEntity
-    hasParentAcid: BronstedAcid
+    hasParentAcid: MoleculeByChargeState
   }
 
 interface FullyCovalentlyBonded
@@ -606,21 +980,37 @@ interface FullyCovalentlyBonded
 type FullySpecifiedAtom
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    elementalCharge: Integer
+    elementalCharge: Int
     neutronNumber: Count
   }
 
@@ -628,14 +1018,29 @@ type FunctionalGroup
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     isSubstitutentGroupFrom: Molecule
@@ -646,10 +1051,12 @@ type GeneralAcidBaseGroupingClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
   }
 
 type GeneralizedMolecularStructureClass
@@ -657,6 +1064,8 @@ type GeneralizedMolecularStructureClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
@@ -665,14 +1074,29 @@ type Glycan
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -696,24 +1120,41 @@ interface GroupingClassForAcidsOrBases
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
   }
 
 type Homopolymer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -732,14 +1173,29 @@ type ImpreciseChemicalMixture
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasProportionalParts: [ProportionalPart]
@@ -754,14 +1210,30 @@ interface InchiObject
 type Isobar
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -783,35 +1255,51 @@ type IsomeraseReaction
   {
     id: String!
     name: String
-    type: Uriorcurie
-    hasRinchiRepresentation: ChemicalEncoding
-    hasReactionSmilesRepresentation: ChemicalEncoding
-    reactionRateCoefficient: Float
-    reactionRate: Float
+    type: String
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
-    smartsString: String
     isDiastereoselective: Boolean
     isStereo: Boolean
     isBalanced: Boolean
     isTransport: Boolean
     isFullyCharacterized: Boolean
     reactionCenter: String
+    hasRinchiRepresentation: ChemicalEncoding
+    hasReactionSmilesRepresentation: ChemicalEncoding
+    reactionRateCoefficient: Float
+    reactionRate: Float
+    reactionType: ReactionTypeEnum
     description: String
   }
 
 type Isotope
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -829,28 +1317,6 @@ type Isotope
     modeOfFormation: String
   }
 
-type Lipid
-  {
-    id: String!
-    name: String
-    type: Uriorcurie
-    iUPACName: String
-    isRadical: Boolean
-    hasChemicalRole: ChemicalRole
-    inchiString: ChemicalEncoding
-    inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
-    empiricalFormula: ChemicalEncoding
-    owlSubclassOf: OwlClass
-    inchiAtomConnectionsSublayer: String
-    hasAtomOccurrences: [AtomOccurrence]
-    hasBonds: [AtomicBond]
-    hasAtoms: [Atom]
-    isOrganic: Boolean
-    hasPart: String
-    hasSubmolecules: [Molecule]
-  }
-
 interface Location
   {
   }
@@ -859,14 +1325,29 @@ type Macromolecule
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -881,7 +1362,7 @@ type Material
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     hasRepeatUnit: ChemicalEntity
     hasPart: ChemicalEntity
   }
@@ -899,7 +1380,7 @@ type Mineral
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     hasRepeatUnit: ChemicalEntity
     hasPart: ChemicalEntity
   }
@@ -908,14 +1389,29 @@ type Moiety
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -924,14 +1420,29 @@ type MolecularAnion implements AnionState
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -940,23 +1451,42 @@ type MolecularAnion implements AnionState
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
-    elementalCharge: Integer
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
+    elementalCharge: Int
   }
 
 type MolecularCation implements CationState
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -965,23 +1495,42 @@ type MolecularCation implements CationState
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
-    elementalCharge: Integer
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
+    elementalCharge: Int
   }
 
 type MolecularComplex
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -990,14 +1539,29 @@ type MolecularComponent
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1007,6 +1571,8 @@ type MolecularComponentGroupingClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MolecularComponentGroupingClass]
     classifies: MolecularComponent
   }
@@ -1015,8 +1581,10 @@ type MolecularDerivativeGroupingClass
   {
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
-    derivativeOf: ChemicalEntity
+    derivativeOf: DomainEntity
     name: String
     classifies: Molecule
   }
@@ -1025,14 +1593,29 @@ type MolecularSpecies
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1047,14 +1630,29 @@ type MolecularSubsequence
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1063,14 +1661,29 @@ type Molecule implements FullyCovalentlyBonded
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1081,11 +1694,54 @@ type Molecule implements FullyCovalentlyBonded
     hasPart: String
   }
 
+interface MoleculeByChargeState
+  {
+    id: String!
+    name: String
+    type: String
+    iUPACName: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
+    empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    isOrganic: Boolean
+    hasPart: String
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+  }
+
 type MoleculeGroupingClass
   {
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
@@ -1095,6 +1751,8 @@ type MoleculeGroupingClassDefinedByAdditionOfAGroup
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasGroup: [ChemicalGroup]
@@ -1106,6 +1764,8 @@ type MoleculeGroupingClassDefinedByComponents
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasPart: ChemicalEntityOrGrouping
@@ -1122,21 +1782,37 @@ type MoleculePairwiseSimilarity
 type MonoatomicIon implements Charged
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    elementalCharge: Integer
+    elementalCharge: Int
     hasElement: ChemicalElement
   }
 
@@ -1144,14 +1820,29 @@ type Monomer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1161,6 +1852,8 @@ type MonomericPolymericGroupingClass
     name: String
     owlSubclassOf: OwlClass
     id: String!
+    smartsString: ChemicalEncoding
+    markushString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasRepeatUnit: ChemicalEntity
@@ -1170,14 +1863,29 @@ type MonomolecularPolymer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1196,7 +1904,7 @@ type Nanomaterial
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     hasRepeatUnit: ChemicalEntity
     hasPart: ChemicalEntity
     hasMorphologicalCategory: NanostructureMorphologyEnum
@@ -1206,14 +1914,29 @@ type NaturalProduct
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1222,21 +1945,120 @@ type NaturalProduct
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    derivedFromOrganisms: [Uriorcurie]
+    derivedFromOrganisms: [String]
+  }
+
+type NetUnchargedMolecule implements Uncharged
+  {
+    id: String!
+    name: String
+    type: String
+    iUPACName: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
+    empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    isOrganic: Boolean
+    hasPart: String
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    elementalCharge: Int
+  }
+
+type NeutralMolecule
+  {
+    id: String!
+    name: String
+    type: String
+    iUPACName: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
+    empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    isOrganic: Boolean
+    hasPart: String
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    elementalCharge: Int
   }
 
 type NonSpeciesMolecule
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1251,14 +2073,29 @@ type NucleotideSequenceInterval
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -1267,14 +2104,30 @@ type NucleotideSequenceInterval
 type Nuclide
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1292,14 +2145,30 @@ interface OwlClass
 interface PartiallySpecifiedAtom
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1312,14 +2181,29 @@ type Peptide
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1338,7 +2222,7 @@ interface PhysicochemicalEntity
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
   }
 
 interface PhysicochemicalEntityGroupingClass
@@ -1347,20 +2231,36 @@ interface PhysicochemicalEntityGroupingClass
     name: String
     owlSubclassOf: OwlClass
     subtypeOf: [PhysicochemicalEntityGroupingClass]
+    classifies: PhysicochemicalEntity
   }
 
 interface PolyatomicEntity
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1369,14 +2269,29 @@ type PolyatomicIon implements Charged
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1385,23 +2300,42 @@ type PolyatomicIon implements Charged
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    conjugateBaseOf: ChemicalEntity
-    conjugateAcidOf: ChemicalEntity
-    elementalCharge: Integer
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    conjugateBaseOf: DomainEntity
+    conjugateAcidOf: DomainEntity
+    elementalCharge: Int
   }
 
 type PolymerPart
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1418,14 +2352,29 @@ type PreciseChemicalMixture implements WeaklyBonded
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1443,14 +2392,29 @@ type Protein
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1465,13 +2429,28 @@ type RacemicMixture
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasLeftEnantiomer: Enantiomer!
@@ -1483,14 +2462,30 @@ type RacemicMixture
 type Radionuclide
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1504,21 +2499,21 @@ type Reaction
   {
     id: String!
     name: String
-    type: Uriorcurie
-    hasRinchiRepresentation: ChemicalEncoding
-    hasReactionSmilesRepresentation: ChemicalEncoding
-    reactionRateCoefficient: Float
-    reactionRate: Float
+    type: String
     leftParticipants: [ReactionParticipant]
     rightParticipants: [ReactionParticipant]
     direction: String
-    smartsString: String
     isDiastereoselective: Boolean
     isStereo: Boolean
     isBalanced: Boolean
     isTransport: Boolean
     isFullyCharacterized: Boolean
     reactionCenter: String
+    hasRinchiRepresentation: ChemicalEncoding
+    hasReactionSmilesRepresentation: ChemicalEncoding
+    reactionRateCoefficient: Float
+    reactionRate: Float
+    reactionType: ReactionTypeEnum
     description: String
   }
 
@@ -1535,21 +2530,36 @@ type ReactionParticipant
   {
     owlSubclassOf: OwlClass
     participant: ChemicalEntity
-    stoichiometry: Integer
+    stoichiometry: Int
   }
 
 type RNASequenceInterval
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -1559,14 +2569,29 @@ interface SequenceInterval
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: SequenceString
@@ -1576,14 +2601,29 @@ type SmallMolecule
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1624,14 +2664,29 @@ type Stereoisomer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1640,14 +2695,14 @@ type Stereoisomer
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    isomericSmilesString: [ChemicalEncoding]
+    isomericSmilesString: ChemicalEncoding
   }
 
 type SubatomicParticle
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     subatomicParticleType: SubatomicParticleEnum
   }
 
@@ -1655,21 +2710,36 @@ type SubatomicParticleOccurrence implements OwlClass
   {
     owlSubclassOf: OwlClass
     occurrenceOf: SubatomicParticle!
-    count: Integer
+    count: Int
   }
 
 type SupramolecularPolymer
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     polymerOf: Macromolecule
@@ -1686,41 +2756,76 @@ type TanimotoSimilarity
 
 interface Uncharged
   {
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
 type UnchargedAtom implements Uncharged
   {
     id: String!
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiAtomConnectionsSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    elementalCharge: Integer
+    elementalCharge: Int
   }
 
-type UnchargedMolecule implements Uncharged
+interface WeaklyBonded
+  {
+  }
+
+type Zwitterion
   {
     id: String!
     name: String
-    type: Uriorcurie
+    type: String
     iUPACName: String
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
     inchiChemicalSublayer: String
-    smilesString: [ChemicalEncoding]
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1729,10 +2834,9 @@ type UnchargedMolecule implements Uncharged
     hasAtoms: [Atom]
     isOrganic: Boolean
     hasPart: String
-    elementalCharge: Integer
+    bronstedAcidBaseRole: BronstedAcidBaseRoleEnum
+    acidity: Float
+    hardOrSoft: HardOrSoftEnum
+    acidFormOf: [MoleculeByChargeState]
+    elementalCharge: Int
   }
-
-interface WeaklyBonded
-  {
-  }
-

@@ -6,9 +6,9 @@ SHELL := bash
 .SUFFIXES:
 .SECONDARY:
 
-RUN = poetry run
+RUN = uv run
 SRC_DIR = src
-SCHEMA_DIR = $(SRC_DIR)/schema
+SCHEMA_DIR = $(SRC_DIR)/chemrof/schema
 SOURCE_FILES := $(shell find $(SCHEMA_DIR) -name '*.yaml')
 SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
@@ -47,7 +47,7 @@ echo:
 	echo $(patsubst %,gen-%,$(TGTS))
 
 #test: all
-test: test-examples
+test: gen test-examples
 
 install:
 	. environment.sh
@@ -55,13 +55,21 @@ install:
 
 tdir-%:
 	mkdir -p target/$*
-docs:
-	mkdir $@
 
-docs/index.md: $(SOURCE_FILES)
-	cp src/docs/*.md docs/ ; \
+gendoc: docs docs/index.md
+
+docs:
+	mkdir -p $@
+
+docs/index.md: $(SOURCE_FILES) src/docs
+	cp -pr src/docs/*.md docs/ ; \
 	$(RUN) gen-doc -d docs $<
-	#$(RUN) gen-markdown -I $@ -d docs $<
+
+
+MKDOCS = $(RUN) mkdocs
+mkd-%:
+	$(MKDOCS) $*
+
 
 #project: project1 schema/owl/chemrof.owl.ttl
 project: $(SOURCE_FILES)
@@ -86,7 +94,7 @@ examples/output: $(SCHEMA_SRC)
 .PHONY: examples/output
 
 
-schema/sssom/chemrof.sssom.tsv: src/schema/chemrof.yaml
+schema/sssom/chemrof.sssom.tsv: src/chemrof/schema/chemrof.yaml
 	$(RUN) gen-sssom $< -o $@
 
 # test docs locally.
@@ -96,4 +104,4 @@ docserve:
 gh-deploy:
 	$(RUN) mkdocs gh-deploy
 
-include Makefile.etl
+include etl.mk
