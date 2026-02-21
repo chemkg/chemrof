@@ -100,6 +100,18 @@ symbol: H
 type: chemrof:UnchargedAtom
 
 ```
+## AtomCation-calcium2
+### Input
+```yaml
+elemental_charge: 2
+has_element: Ca
+id: CHEBI:29108
+inchi_chemical_sublayer: Ca
+inchi_string: InChI=1S/Ca/q+2
+name: calcium(2+)
+type: chemrof:AtomCation
+
+```
 ## FunctionalGroup-hydroxyl
 ### Input
 ```yaml
@@ -143,6 +155,19 @@ is_organic: true
 name: ethyl acetate
 smiles_string: CC(=O)OCC
 type: chemrof:Ester
+
+```
+## AtomCation-copper2
+### Input
+```yaml
+IUPAC_name: cupric ion
+elemental_charge: 2
+has_element: Cu
+id: CHEBI:29036
+inchi_chemical_sublayer: Cu
+inchi_string: InChI=1S/Cu/q+2
+name: copper(2+)
+type: chemrof:AtomCation
 
 ```
 ## AtomCation-sodium
@@ -577,6 +602,19 @@ elemental_charge: 2
 id: CHEBI:33316
 name: helium(2+)
 symbol: He
+type: chemrof:AtomCation
+
+```
+## AtomCation-copper1
+### Input
+```yaml
+IUPAC_name: cuprous ion
+elemental_charge: 1
+has_element: Cu
+id: CHEBI:49552
+inchi_chemical_sublayer: Cu
+inchi_string: InChI=1S/Cu/q+1
+name: copper(1+)
 type: chemrof:AtomCation
 
 ```
