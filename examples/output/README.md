@@ -119,6 +119,55 @@ name: insulin
 type: chemrof:Protein
 
 ```
+## ImpreciseChemicalMixture-RCH2_alphaKG_medium
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:30915
+  concentration:
+    unit: mM
+    value: 20.0
+  has_ingredient_role:
+    role_type: carbon_source
+    source_element: CHEBI:27594
+- composed_of: CHEBI:31206
+  concentration:
+    unit: g/L
+    value: 0.25
+  has_ingredient_role:
+    role_type: nitrogen_source
+    source_element: CHEBI:25555
+- composed_of: CHEBI:32588
+  concentration:
+    unit: g/L
+    value: 0.1
+  has_ingredient_role:
+    role_type: mineral
+- composed_of: CHEBI:37585
+  concentration:
+    unit: g/L
+    value: 0.6
+  has_ingredient_role:
+    role_type: phosphorus_source
+    source_element: CHEBI:28659
+- composed_of: CHEBI:44872
+  concentration:
+    unit: mM
+    value: 30.0
+  has_ingredient_role:
+    role_type: buffer
+- composed_of: ex:wolfes_mineral_mix
+  has_ingredient_role:
+    role_type: trace_element
+- composed_of: ex:wolfes_vitamin_mix
+  has_ingredient_role:
+    role_type: vitamin
+id: ex:RCH2_alphaKG_medium
+name: RCH2 defined medium with alpha-ketoglutaric acid
+ph: 7.0
+type: chemrof:ImpreciseChemicalMixture
+
+```
 ## Ester-ethyl_acetate
 ### Input
 ```yaml
@@ -400,6 +449,55 @@ symbol: Cl
 type: chemrof:AtomAnion
 
 ```
+## ImpreciseChemicalMixture-wolfes_vitamin_mix
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:16709
+  concentration:
+    unit: mg/L
+    value: 10.0
+- composed_of: CHEBI:30753
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:30314
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15940
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:17015
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:49105
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:7916
+  concentration:
+    unit: mg/L
+    value: 5.0
+- composed_of: CHEBI:15956
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:27470
+  concentration:
+    unit: mg/L
+    value: 2.0
+- composed_of: CHEBI:17439
+  concentration:
+    unit: mg/L
+    value: 0.1
+id: ex:wolfes_vitamin_mix
+name: Wolfe's vitamin mix
+type: chemrof:ImpreciseChemicalMixture
+
+```
 ## AtomAnion-fluoride
 ### Input
 ```yaml
@@ -655,5 +753,54 @@ has_element: Cu
 id: CHEBI:29036
 name: copper(2+)
 type: chemrof:MonoatomicIon
+
+```
+## ImpreciseChemicalMixture-wolfes_mineral_mix
+### Input
+```yaml
+has_proportional_parts:
+- composed_of: CHEBI:31795
+  concentration:
+    unit: g/L
+    value: 3.0
+- composed_of: CHEBI:44557
+  concentration:
+    unit: g/L
+    value: 1.5
+- composed_of: CHEBI:26710
+  concentration:
+    unit: g/L
+    value: 1.0
+- composed_of: CHEBI:86364
+  concentration:
+    unit: g/L
+    value: 0.5
+- composed_of: CHEBI:53503
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:32312
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:86158
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:75836
+  concentration:
+    unit: g/L
+    value: 0.1
+- composed_of: CHEBI:33118
+  concentration:
+    unit: g/L
+    value: 0.01
+- composed_of: CHEBI:75213
+  concentration:
+    unit: g/L
+    value: 0.01
+id: ex:wolfes_mineral_mix
+name: Wolfe's mineral mix
+type: chemrof:ImpreciseChemicalMixture
 
 ```

@@ -248,6 +248,14 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<BufferRole> CLOSED {
+    (  $<BufferRole_tes> (  &<IngredientRole_tes> ;
+          rdf:type [ <IngredientRole> ] ?
+       ) ;
+       rdf:type [ <BufferRole> ] ?
+    )
+}
+
 <CationState> {
     (  $<CationState_tes> (  &<Charged_tes> ;
           rdf:type [ <Charged> ] ? ;
@@ -399,7 +407,8 @@ linkml:Sparqlpath xsd:string
 
 <ChemicalMixture_struct> {
     (  $<ChemicalMixture_tes> (  &<PolyatomicEntity_tes> ;
-          rdf:type [ <PolyatomicEntity> ] ?
+          rdf:type [ <PolyatomicEntity> ] ? ;
+          <ph> @linkml:Float ?
        ) ;
        rdf:type [ <ChemicalMixture> ]
     )
@@ -418,13 +427,15 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<ChemicalRole> CLOSED {
-    (  $<ChemicalRole_tes> (  &<OwlClass_tes> ;
-          rdf:type [ owl:Class ] ?
-       ) ;
-       rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ?
-    )
-}
+<ChemicalRole>  (
+    CLOSED {
+       (  $<ChemicalRole_tes> (  &<OwlClass_tes> ;
+             rdf:type [ owl:Class ] ?
+          ) ;
+          rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ?
+       )
+    } OR @<IngredientRole>
+)
 
 <ChemicalSalt> CLOSED {
     (  $<ChemicalSalt_tes> (  &<PreciseChemicalMixture_tes> ;
@@ -493,6 +504,21 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Concentration> CLOSED {
+    (  $<Concentration_tes> (  <value> @linkml:Float ;
+          <unit> [ <https://w3id.org/chemrof/ConcentrationUnitEnum#M> <https://w3id.org/chemrof/ConcentrationUnitEnum#mM>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#uM> <https://w3id.org/chemrof/ConcentrationUnitEnum#nM>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#g/L> <https://w3id.org/chemrof/ConcentrationUnitEnum#mg/L>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#ug/L> <https://w3id.org/chemrof/ConcentrationUnitEnum#ng/L>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#percent_w/v>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#percent_v/v>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#percent_w/w> <https://w3id.org/chemrof/ConcentrationUnitEnum#ppm>
+             <https://w3id.org/chemrof/ConcentrationUnitEnum#ppb> ]
+       ) ;
+       rdf:type [ <Concentration> ] ?
+    )
+}
+
 <Connectivity>  (
     @<FullyCovalentlyBonded> OR @<WeaklyBonded>
 )
@@ -529,6 +555,14 @@ linkml:Sparqlpath xsd:string
           <type> @linkml:Uriorcurie ?
        ) ;
        rdf:type [ <DomainEntity> ]
+    )
+}
+
+<ElementSourceRole> CLOSED {
+    (  $<ElementSourceRole_tes> (  &<IngredientRole_tes> ;
+          rdf:type [ <IngredientRole> ] ?
+       ) ;
+       rdf:type [ <ElementSourceRole> ] ?
     )
 }
 
@@ -715,6 +749,30 @@ linkml:Sparqlpath xsd:string
     } OR @<StandardInchiObject>
 )
 
+<IngredientRole>  (
+    CLOSED {
+       (  $<IngredientRole_tes> (  &<ChemicalRole_tes> ;
+             rdf:type [ <http://purl.obolibrary.org/obo/CHEBI_50906> ] ? ;
+             <source_element> @<ChemicalElement> ? ;
+             <role_type> [ <https://w3id.org/chemrof/IngredientRoleTypeEnum#carbon_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#nitrogen_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#phosphorus_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#sulfur_source>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#electron_donor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#electron_acceptor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#buffer> <https://w3id.org/chemrof/IngredientRoleTypeEnum#solvent>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#vitamin> <https://w3id.org/chemrof/IngredientRoleTypeEnum#mineral>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#trace_element>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#growth_factor>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#antibiotic>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#inducer>
+                <https://w3id.org/chemrof/IngredientRoleTypeEnum#substrate> ] ?
+          ) ;
+          rdf:type [ <IngredientRole> ] ?
+       )
+    } OR @<BufferRole> OR @<ElementSourceRole> OR @<NutrientRole> OR @<SolventRole>
+)
+
 <Isobar> CLOSED {
     (  $<Isobar_tes> (  &<Nuclide_tes> ;
           rdf:type [ <Nuclide> ] ? ;
@@ -801,6 +859,14 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <Material> ] ?
        ) ;
        rdf:type [ <Mineral> ]
+    )
+}
+
+<MineralNutrientRole> CLOSED {
+    (  $<MineralNutrientRole_tes> (  &<NutrientRole_tes> ;
+          rdf:type [ <NutrientRole> ] ?
+       ) ;
+       rdf:type [ <MineralNutrientRole> ] ?
     )
 }
 
@@ -1089,6 +1155,16 @@ linkml:Sparqlpath xsd:string
     } OR @<Isobar> OR @<Isotope> OR @<Radionuclide>
 )
 
+<NutrientRole>  (
+    CLOSED {
+       (  $<NutrientRole_tes> (  &<IngredientRole_tes> ;
+             rdf:type [ <IngredientRole> ] ?
+          ) ;
+          rdf:type [ <NutrientRole> ] ?
+       )
+    } OR @<MineralNutrientRole> OR @<VitaminRole>
+)
+
 <OwlClass> {
     (  $<OwlClass_tes> rdf:type . * ;
        rdf:type [ owl:Class ] ?
@@ -1215,10 +1291,12 @@ linkml:Sparqlpath xsd:string
 <ProportionalPart> CLOSED {
     (  $<ProportionalPart_tes> (  &<ChemicalRelationship_tes> ;
           rdf:type [ <ChemicalRelationship> ] ? ;
+          <composed_of> @<ChemicalEntity> ? ;
           <has_role> [ <https://w3id.org/chemrof/IngredientRoleEnum#active%20ingredient>
              <https://w3id.org/chemrof/IngredientRoleEnum#inactive%20ingredient>
              <https://w3id.org/chemrof/IngredientRoleEnum#excipient> <https://w3id.org/chemrof/IngredientRoleEnum#solvent> ] ? ;
-          <composed_of> @<ChemicalEntity> ? ;
+          <has_ingredient_role> @<IngredientRole> ? ;
+          <concentration> @<Concentration> ? ;
           <minimal_percentage> @linkml:Float ? ;
           <maximum_percentage> @linkml:Float ?
        ) ;
@@ -1337,6 +1415,14 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <Molecule> ] ?
        ) ;
        rdf:type [ <SmallMolecule> ]
+    )
+}
+
+<SolventRole> CLOSED {
+    (  $<SolventRole_tes> (  &<IngredientRole_tes> ;
+          rdf:type [ <IngredientRole> ] ?
+       ) ;
+       rdf:type [ <SolventRole> ] ?
     )
 }
 
@@ -1474,6 +1560,14 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <Uncharged> ] ?
        ) ;
        rdf:type [ <UnchargedAtom> ]
+    )
+}
+
+<VitaminRole> CLOSED {
+    (  $<VitaminRole_tes> (  &<NutrientRole_tes> ;
+          rdf:type [ <NutrientRole> ] ?
+       ) ;
+       rdf:type [ <VitaminRole> ] ?
     )
 }
 
