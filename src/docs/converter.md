@@ -17,6 +17,9 @@ chemrof from-smiles "CCO"
 # Multiple molecules, JSON output
 chemrof from-smiles "CCO" "c1ccccc1" "[Ca+2]" --format json
 
+# OWL output (OWL Functional Syntax)
+chemrof from-smiles "CCO" "[Ca+2]" --format owl
+
 # Pull names from PubChem
 chemrof from-smiles "CCO" --enrichers pubchem
 ```
@@ -107,6 +110,30 @@ from chemrof.converter.smiles import SmilesConverter
 
 converter = SmilesConverter(enrichers=[MyEnricher()])
 result = converter.convert("CCO")
+```
+
+## OWL output
+
+The `--format owl` option emits an OWL ontology in Functional Syntax.
+Each entity becomes an OWL Class with a `SubClassOf` axiom linking it to
+its chemrof type, plus annotation assertions for each structural property:
+
+```
+Declaration(Class(chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N))
+SubClassOf(chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N chemrof:SmallMolecule)
+AnnotationAssertion(rdfs:label chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N "C2H6O")
+AnnotationAssertion(chemrof:smiles_string chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N "CCO")
+```
+
+The Python API equivalent:
+
+```python
+from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.owl_output import dicts_to_owl
+
+converter = SmilesConverter()
+objs = [converter.convert(s) for s in ["CCO", "[Ca+2]"]]
+print(dicts_to_owl(objs))
 ```
 
 ## Python API

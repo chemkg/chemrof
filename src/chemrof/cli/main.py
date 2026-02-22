@@ -28,6 +28,7 @@ def _main_callback() -> None:
 class OutputFormat(str, Enum):
     yaml = "yaml"
     json = "json"
+    owl = "owl"
 
 
 _ENRICHER_HELP = """Optionally pull extra data from external databases.
@@ -86,6 +87,12 @@ def from_smiles(
     for smi in smiles:
         result = converter.convert(smi)
         results.append(result)
+
+    if format == OutputFormat.owl:
+        from chemrof.converter.owl_output import dicts_to_owl
+
+        typer.echo(dicts_to_owl(results))
+        return
 
     output = results if len(results) > 1 else results[0]
 
