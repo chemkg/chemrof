@@ -6,7 +6,6 @@ Fills: name (IUPAC preferred), pubchem_cid (cross-reference).
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 import httpx
 
