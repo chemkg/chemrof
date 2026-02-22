@@ -30,18 +30,50 @@ class OutputFormat(str, Enum):
     json = "json"
 
 
+_ENRICHER_HELP = """Optionally pull extra data from external databases.
+
+Pass a comma-separated list of source names. Available sources:
+
+  pubchem   -- Look up the compound in PubChem by InChIKey.
+               Fills in the preferred IUPAC name and PubChem CID.
+
+  chebi     -- (stub) Will resolve CHEBI identifiers via OLS.
+
+  wikidata  -- (stub) Will resolve Wikidata QIDs via SPARQL.
+
+Example: --enrichers pubchem"""
+
+
 @app.command()
 def from_smiles(
-    smiles: list[str] = typer.Argument(help="One or more SMILES strings to convert."),
-    format: OutputFormat = typer.Option(OutputFormat.yaml, "--format", "-f", help="Output format."),
+    smiles: list[str] = typer.Argument(
+        help="One or more SMILES strings (e.g. 'CCO' for ethanol, '[Ca+2]' for calcium ion).",
+    ),
+    format: OutputFormat = typer.Option(
+        OutputFormat.yaml, "--format", "-f", help="Output format.",
+    ),
     enrichers: Optional[str] = typer.Option(
         None,
         "--enrichers",
         "-e",
-        help="Comma-separated enricher names.",
+        help=_ENRICHER_HELP,
     ),
 ):
-    """Convert SMILES strings to chemrof-compliant YAML or JSON."""
+    """Convert SMILES to chemrof data.
+
+    Parses each SMILES string with RDKit, auto-detects the entity type
+    (SmallMolecule, AtomCation, MolecularAnion, etc.), and outputs a
+    chemrof-compliant record with structural properties filled in:
+    InChI, molecular formula, exact mass, and more.
+
+    Examples:
+
+        chemrof from-smiles CCO
+
+        chemrof from-smiles CCO c1ccccc1 --format json
+
+        chemrof from-smiles "[Ca+2]" --enrichers pubchem
+    """
     enricher_instances = []
     if enrichers:
         for name in enrichers.split(","):
