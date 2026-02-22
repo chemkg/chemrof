@@ -34,3 +34,37 @@ class Enricher(Protocol):
     name: str
 
     def enrich(self, obj: dict, context: EnrichmentContext) -> dict: ...
+
+
+# --- Registry ---
+
+
+def _build_registry() -> dict[str, type]:
+    """Lazily import enricher classes to avoid circular imports."""
+    from chemrof.converter.enrichers.pubchem import PubChemEnricher
+    from chemrof.converter.enrichers.chebi import ChebiEnricher
+    from chemrof.converter.enrichers.wikidata import WikidataEnricher
+
+    return {
+        "pubchem": PubChemEnricher,
+        "chebi": ChebiEnricher,
+        "wikidata": WikidataEnricher,
+    }
+
+
+def list_enrichers() -> list[str]:
+    """Return names of all registered enrichers."""
+    return list(_build_registry().keys())
+
+
+def get_enricher(name: str) -> Enricher:
+    """Instantiate an enricher by name.
+
+    >>> e = get_enricher("pubchem")
+    >>> e.name
+    'pubchem'
+    """
+    registry = _build_registry()
+    if name not in registry:
+        raise KeyError(f"Unknown enricher: {name!r}. Available: {list(registry)}")
+    return registry[name]()
