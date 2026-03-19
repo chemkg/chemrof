@@ -71,6 +71,10 @@ When creating examples for ionic species:
 - `grep -A 10 -B 5 "SlotName:" schema.yaml` - Find slot definitions
 - Use `grep` to find mixins and inheritance relationships before creating examples (or look at generated docs)
 
+## Default Branch
+
+The default branch is `main`. Always target PRs to `main`.
+
 ## GitHub Contribution Process
 - most requests from users should follow one of two patterns:
     - you are not confident how to proceed, in which case end with asking a clarifying question (via `gh`)

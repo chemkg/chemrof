@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-09T19:21:55
+# Generation date: 2025-12-11T10:01:53
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -1925,8 +1925,11 @@ class ChemicalMixture(PolyatomicEntity):
     class_model_uri: ClassVar[URIRef] = CHEMROF.ChemicalMixture
 
     id: Union[str, ChemicalMixtureId] = None
+    ph: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self.ph is not None and not isinstance(self.ph, float):
+            self.ph = float(self.ph)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3326,6 +3329,35 @@ class ChemicalRelationship(YAMLRoot):
 
 
 @dataclass(repr=False)
+class Concentration(YAMLRoot):
+    """
+    A measurement of the amount of a substance in a given volume or mass.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["Concentration"]
+    class_class_curie: ClassVar[str] = "chemrof:Concentration"
+    class_name: ClassVar[str] = "Concentration"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.Concentration
+
+    value: float = None
+    unit: Union[str, "ConcentrationUnitEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.value):
+            self.MissingRequiredField("value")
+        if not isinstance(self.value, float):
+            self.value = float(self.value)
+
+        if self._is_empty(self.unit):
+            self.MissingRequiredField("unit")
+        if not isinstance(self.unit, ConcentrationUnitEnum):
+            self.unit = ConcentrationUnitEnum(self.unit)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class ChemicalRole(YAMLRoot):
     """
     A characteristic of a chemical entity that is realized under particular conditions
@@ -3344,6 +3376,104 @@ class ChemicalRole(YAMLRoot):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
 
         super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class IngredientRole(ChemicalRole):
+    """
+    A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["IngredientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:IngredientRole"
+    class_name: ClassVar[str] = "IngredientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.IngredientRole
+
+    source_element: Optional[Union[str, ChemicalElementId]] = None
+    role_type: Optional[Union[str, "IngredientRoleTypeEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.source_element is not None and not isinstance(self.source_element, ChemicalElementId):
+            self.source_element = ChemicalElementId(self.source_element)
+
+        if self.role_type is not None and not isinstance(self.role_type, IngredientRoleTypeEnum):
+            self.role_type = IngredientRoleTypeEnum(self.role_type)
+
+        super().__post_init__(**kwargs)
+
+
+class ElementSourceRole(IngredientRole):
+    """
+    Role of providing a specific element to a biological or chemical system. Examples include carbon source, nitrogen
+    source, phosphorus source.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["ElementSourceRole"]
+    class_class_curie: ClassVar[str] = "chemrof:ElementSourceRole"
+    class_name: ClassVar[str] = "ElementSourceRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.ElementSourceRole
+
+
+class BufferRole(IngredientRole):
+    """
+    Role of maintaining pH in a solution or mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["BufferRole"]
+    class_class_curie: ClassVar[str] = "chemrof:BufferRole"
+    class_name: ClassVar[str] = "BufferRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.BufferRole
+
+
+class SolventRole(IngredientRole):
+    """
+    Role of dissolving other components in a mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["SolventRole"]
+    class_class_curie: ClassVar[str] = "chemrof:SolventRole"
+    class_name: ClassVar[str] = "SolventRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.SolventRole
+
+
+class NutrientRole(IngredientRole):
+    """
+    Role of providing nutritional value, such as vitamins or minerals.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["NutrientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:NutrientRole"
+    class_name: ClassVar[str] = "NutrientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.NutrientRole
+
+
+class VitaminRole(NutrientRole):
+    """
+    Role of providing a vitamin component.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["VitaminRole"]
+    class_class_curie: ClassVar[str] = "chemrof:VitaminRole"
+    class_name: ClassVar[str] = "VitaminRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.VitaminRole
+
+
+class MineralNutrientRole(NutrientRole):
+    """
+    Role of providing a mineral nutrient, often as a trace element.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["MineralNutrientRole"]
+    class_class_curie: ClassVar[str] = "chemrof:MineralNutrientRole"
+    class_name: ClassVar[str] = "MineralNutrientRole"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.MineralNutrientRole
 
 
 class Location(YAMLRoot):
@@ -3912,7 +4042,8 @@ class ReactionParticipant(ChemicalRelationship):
 @dataclass(repr=False)
 class ProportionalPart(ChemicalRelationship):
     """
-    A part of a complex mixture that is of uniform composition
+    A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the
+    mixture, and its concentration.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -3921,17 +4052,25 @@ class ProportionalPart(ChemicalRelationship):
     class_name: ClassVar[str] = "ProportionalPart"
     class_model_uri: ClassVar[URIRef] = CHEMROF.ProportionalPart
 
-    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
     composed_of: Optional[Union[str, ChemicalEntityId]] = None
+    has_role: Optional[Union[str, "IngredientRoleEnum"]] = None
+    has_ingredient_role: Optional[Union[dict, IngredientRole]] = None
+    concentration: Optional[Union[dict, Concentration]] = None
     minimal_percentage: Optional[float] = None
     maximum_percentage: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
+            self.composed_of = ChemicalEntityId(self.composed_of)
+
         if self.has_role is not None and not isinstance(self.has_role, IngredientRoleEnum):
             self.has_role = IngredientRoleEnum(self.has_role)
 
-        if self.composed_of is not None and not isinstance(self.composed_of, ChemicalEntityId):
-            self.composed_of = ChemicalEntityId(self.composed_of)
+        if self.has_ingredient_role is not None and not isinstance(self.has_ingredient_role, IngredientRole):
+            self.has_ingredient_role = IngredientRole(**as_dict(self.has_ingredient_role))
+
+        if self.concentration is not None and not isinstance(self.concentration, Concentration):
+            self.concentration = Concentration(**as_dict(self.concentration))
 
         if self.minimal_percentage is not None and not isinstance(self.minimal_percentage, float):
             self.minimal_percentage = float(self.minimal_percentage)
@@ -4269,12 +4408,15 @@ class ElementMetallicClassification(EnumDefinitionImpl):
                 meaning=DAMLPT["Semi-Metallic"]))
 
 class IngredientRoleEnum(EnumDefinitionImpl):
-
+    """
+    DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.
+    """
     excipient = PermissibleValue(text="excipient")
     solvent = PermissibleValue(text="solvent")
 
     _defn = EnumDefinition(
         name="IngredientRoleEnum",
+        description="DEPRECATED - use IngredientRole class hierarchy instead for richer modeling.",
     )
 
     @classmethod
@@ -4283,6 +4425,120 @@ class IngredientRoleEnum(EnumDefinitionImpl):
             PermissibleValue(text="active ingredient"))
         setattr(cls, "inactive ingredient",
             PermissibleValue(text="inactive ingredient"))
+
+class ConcentrationUnitEnum(EnumDefinitionImpl):
+    """
+    Units for expressing concentration of a substance.
+    """
+    M = PermissibleValue(
+        text="M",
+        description="Molar (mol/L)")
+    mM = PermissibleValue(
+        text="mM",
+        description="Millimolar (mmol/L)")
+    uM = PermissibleValue(
+        text="uM",
+        description="Micromolar (µmol/L)")
+    nM = PermissibleValue(
+        text="nM",
+        description="Nanomolar (nmol/L)")
+    ppm = PermissibleValue(
+        text="ppm",
+        description="Parts per million")
+    ppb = PermissibleValue(
+        text="ppb",
+        description="Parts per billion")
+
+    _defn = EnumDefinition(
+        name="ConcentrationUnitEnum",
+        description="Units for expressing concentration of a substance.",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "g/L",
+            PermissibleValue(
+                text="g/L",
+                description="Grams per liter"))
+        setattr(cls, "mg/L",
+            PermissibleValue(
+                text="mg/L",
+                description="Milligrams per liter"))
+        setattr(cls, "ug/L",
+            PermissibleValue(
+                text="ug/L",
+                description="Micrograms per liter"))
+        setattr(cls, "ng/L",
+            PermissibleValue(
+                text="ng/L",
+                description="Nanograms per liter"))
+        setattr(cls, "percent_w/v",
+            PermissibleValue(
+                text="percent_w/v",
+                description="Weight per volume percentage (g/100mL)"))
+        setattr(cls, "percent_v/v",
+            PermissibleValue(
+                text="percent_v/v",
+                description="Volume per volume percentage"))
+        setattr(cls, "percent_w/w",
+            PermissibleValue(
+                text="percent_w/w",
+                description="Weight per weight percentage"))
+
+class IngredientRoleTypeEnum(EnumDefinitionImpl):
+    """
+    Types of roles that ingredients can play in a mixture.
+    """
+    carbon_source = PermissibleValue(
+        text="carbon_source",
+        description="Provides carbon for biosynthesis")
+    nitrogen_source = PermissibleValue(
+        text="nitrogen_source",
+        description="Provides nitrogen for biosynthesis")
+    phosphorus_source = PermissibleValue(
+        text="phosphorus_source",
+        description="Provides phosphorus for biosynthesis")
+    sulfur_source = PermissibleValue(
+        text="sulfur_source",
+        description="Provides sulfur for biosynthesis")
+    electron_donor = PermissibleValue(
+        text="electron_donor",
+        description="Provides electrons in redox reactions")
+    electron_acceptor = PermissibleValue(
+        text="electron_acceptor",
+        description="Accepts electrons in redox reactions")
+    buffer = PermissibleValue(
+        text="buffer",
+        description="Maintains pH stability")
+    solvent = PermissibleValue(
+        text="solvent",
+        description="Dissolves other components")
+    vitamin = PermissibleValue(
+        text="vitamin",
+        description="Provides essential vitamin micronutrient")
+    mineral = PermissibleValue(
+        text="mineral",
+        description="Provides essential mineral micronutrient")
+    trace_element = PermissibleValue(
+        text="trace_element",
+        description="Provides trace element micronutrient")
+    growth_factor = PermissibleValue(
+        text="growth_factor",
+        description="Promotes or enables growth")
+    antibiotic = PermissibleValue(
+        text="antibiotic",
+        description="Selects for or against certain organisms")
+    inducer = PermissibleValue(
+        text="inducer",
+        description="Induces gene expression")
+    substrate = PermissibleValue(
+        text="substrate",
+        description="Primary substrate for enzymatic reactions")
+
+    _defn = EnumDefinition(
+        name="IngredientRoleTypeEnum",
+        description="Types of roles that ingredients can play in a mixture.",
+    )
 
 class BondTypeEnum(EnumDefinitionImpl):
 
@@ -4745,6 +5001,18 @@ slots.has_acid_form = Slot(uri=CHEMROF.has_acid_form, name="has_acid_form", curi
 
 slots.has_chemical_role = Slot(uri=RO['0000087'], name="has_chemical_role", curie=RO.curie('0000087'),
                    model_uri=CHEMROF.has_chemical_role, domain=None, range=Optional[Union[dict, ChemicalRole]])
+
+slots.source_element = Slot(uri=CHEMROF.source_element, name="source_element", curie=CHEMROF.curie('source_element'),
+                   model_uri=CHEMROF.source_element, domain=None, range=Optional[Union[str, ChemicalElementId]])
+
+slots.has_ingredient_role = Slot(uri=CHEMROF.has_ingredient_role, name="has_ingredient_role", curie=CHEMROF.curie('has_ingredient_role'),
+                   model_uri=CHEMROF.has_ingredient_role, domain=None, range=Optional[Union[dict, IngredientRole]])
+
+slots.concentration = Slot(uri=CHEMROF.concentration, name="concentration", curie=CHEMROF.curie('concentration'),
+                   model_uri=CHEMROF.concentration, domain=None, range=Optional[Union[dict, Concentration]])
+
+slots.ph = Slot(uri=CHEMROF.ph, name="ph", curie=CHEMROF.curie('ph'),
+                   model_uri=CHEMROF.ph, domain=None, range=Optional[float])
 
 slots.has_part = Slot(uri=BFO['0000051'], name="has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMROF.has_part, domain=None, range=Optional[str], mappings = [BFO["0000050"], SCHEMA["hasBioChemEntityPart"]])
@@ -5359,6 +5627,15 @@ slots.collection__entities = Slot(uri=CHEMROF.entities, name="collection__entiti
 
 slots.naturalProduct__derived_from_organisms = Slot(uri=CHEMROF.derived_from_organisms, name="naturalProduct__derived_from_organisms", curie=CHEMROF.curie('derived_from_organisms'),
                    model_uri=CHEMROF.naturalProduct__derived_from_organisms, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.concentration__value = Slot(uri=CHEMROF.value, name="concentration__value", curie=CHEMROF.curie('value'),
+                   model_uri=CHEMROF.concentration__value, domain=None, range=float)
+
+slots.concentration__unit = Slot(uri=CHEMROF.unit, name="concentration__unit", curie=CHEMROF.curie('unit'),
+                   model_uri=CHEMROF.concentration__unit, domain=None, range=Union[str, "ConcentrationUnitEnum"])
+
+slots.ingredientRole__role_type = Slot(uri=CHEMROF.role_type, name="ingredientRole__role_type", curie=CHEMROF.curie('role_type'),
+                   model_uri=CHEMROF.ingredientRole__role_type, domain=None, range=Optional[Union[str, "IngredientRoleTypeEnum"]])
 
 slots.atomicBond__subject = Slot(uri=CHEMROF.subject, name="atomicBond__subject", curie=CHEMROF.curie('subject'),
                    model_uri=CHEMROF.atomicBond__subject, domain=None, range=Optional[Union[str, AtomOccurrenceName]])
