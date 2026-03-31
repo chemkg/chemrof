@@ -13,19 +13,20 @@ This installs the `chemrof` command from the project's entry point.
 
 ## Commands
 
-### `chemrof from-smiles`
+### `chemrof convert`
 
-Convert one or more SMILES strings into chemrof-compliant records.
+Convert one or more chemical input strings (SMILES or InChI, auto-detected)
+into chemrof-compliant records.
 
 ```
-chemrof from-smiles [OPTIONS] SMILES...
+chemrof convert [OPTIONS] INPUTS...
 ```
 
 **Arguments:**
 
 | Argument | Description |
 |----------|-------------|
-| `SMILES` | One or more SMILES strings (required). Quote ions: `"[Ca+2]"` |
+| `INPUTS` | One or more SMILES or InChI strings (required). Quote ions: `"[Ca+2]"` |
 
 **Options:**
 
@@ -33,13 +34,26 @@ chemrof from-smiles [OPTIONS] SMILES...
 |--------|---------|-------------|
 | `--format`, `-f` | `yaml` | Output format: `yaml`, `json`, or `owl` |
 | `--enrichers`, `-e` | _(none)_ | Comma-separated list of enricher sources |
+| `--classes`, `-c` | _(none)_ | Target chemrof classes (implies `--autochain`) |
+| `--autochain` | `false` | Generate interlinked dependent entities |
+
+### Input format detection
+
+The converter auto-detects the input format:
+
+- Starts with `InChI=` → parsed as InChI
+- Otherwise → parsed as SMILES
+
+Non-standard InChI with `/s3` (racemic) automatically triggers `--autochain`
+with `--classes RacemicMixture`.
 
 ### Output formats
 
-**YAML** (default) — one document per SMILES, or a list for multiple inputs:
+**YAML** (default) — one document per entity, or multi-document YAML for
+autochain output:
 
 ```bash
-chemrof from-smiles CCO
+chemrof convert CCO
 ```
 
 ```yaml
@@ -56,22 +70,46 @@ is_organic: true
 **JSON** — same structure, JSON-encoded:
 
 ```bash
-chemrof from-smiles CCO --format json
+chemrof convert CCO --format json
 ```
 
-**OWL** — OWL Functional Syntax ontology. Each entity becomes an OWL
-class with `SubClassOf` to its chemrof type and annotation assertions
-for structural properties:
+**OWL** — OWL Functional Syntax ontology via linkml-data2owl. Types with
+`owl.template` annotations (MonoatomicIon, Enantiomer, RacemicMixture)
+produce `EquivalentClasses` axioms. Others produce annotation assertions:
 
 ```bash
-chemrof from-smiles CCO "[Ca+2]" --format owl
+chemrof convert "[Ca+2]" --format owl
 ```
 
 ```
-SubClassOf(chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N chemrof:SmallMolecule)
-AnnotationAssertion(rdfs:label chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N "C2H6O")
-AnnotationAssertion(chemrof:smiles_string chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N "CCO")
+EquivalentClasses(INCHIKEY:... ObjectIntersectionOf(
+  chemrof:MonoatomicIon
+  ObjectSomeValuesFrom(chemrof:has_element chemrof:Ca)
+  DataHasValue(chemrof:elemental_charge "2"^^xsd:integer)
+))
 ```
+
+### Autochain
+
+The `--classes` option generates interlinked entity graphs. Requesting
+`RacemicMixture` generates the chirality-agnostic form, both enantiomers,
+and the racemic mixture entity — all with relationship slots populated.
+
+```bash
+# Generate full racemate graph from stereo-neutral alanine
+chemrof convert "CC(N)C(=O)O" --classes RacemicMixture --format json
+
+# Enantiomers only (no mixture entity)
+chemrof convert "CC(N)C(=O)O" --classes Enantiomer
+
+# From a specific enantiomer — generates agnostic + mirror + mixture
+chemrof convert "C[C@@H](N)C(=O)O" --classes RacemicMixture
+
+# Racemic InChI auto-triggers autochain
+chemrof convert "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3"
+```
+
+v1 limitation: autochain only supports single-stereocenter molecules.
 
 ### Enrichers
 
@@ -79,8 +117,8 @@ Enrichers pull additional data from external databases after RDKit
 computes the structural properties. Pass a comma-separated list:
 
 ```bash
-chemrof from-smiles CCO --enrichers pubchem
-chemrof from-smiles CCO --enrichers pubchem,chebi
+chemrof convert CCO --enrichers pubchem
+chemrof convert CCO --enrichers pubchem,chebi
 ```
 
 | Source | Status | What it adds |
@@ -99,25 +137,40 @@ chemrof class:
 | Single atom, positive (e.g. `[Ca+2]`) | `AtomCation` |
 | Single atom, negative (e.g. `[Cl-]`) | `AtomAnion` |
 | Single atom, neutral (e.g. `[He]`) | `UnchargedAtom` |
+| Multi-atom, all stereocenters assigned (e.g. `C[C@@H](N)C(=O)O`) | `Enantiomer` |
 | Multi-atom, positive (e.g. `[NH4+]`) | `MolecularCation` |
 | Multi-atom, negative (e.g. `CC([O-])=O`) | `MolecularAnion` |
 | Multi-atom, neutral (e.g. `CCO`) | `SmallMolecule` |
+
+### `chemrof from-smiles` (deprecated)
+
+Hidden alias for `chemrof convert`. Still works for backwards compatibility
+but does not support `--classes` or `--autochain`.
 
 ## Examples
 
 ```bash
 # Ethanol as YAML
-chemrof from-smiles CCO
+chemrof convert CCO
+
+# InChI input
+chemrof convert "InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3"
 
 # Benzene and water as JSON
-chemrof from-smiles c1ccccc1 O --format json
+chemrof convert c1ccccc1 O --format json
 
 # Calcium ion with PubChem enrichment
-chemrof from-smiles "[Ca+2]" --enrichers pubchem
+chemrof convert "[Ca+2]" --enrichers pubchem
+
+# Enantiomer detection
+chemrof convert "C[C@@H](N)C(=O)O" --format json
+
+# Full racemic mixture graph
+chemrof convert "CC(N)C(=O)O" --classes RacemicMixture --format json
 
 # Multiple ions as OWL
-chemrof from-smiles "[Ca+2]" "[Cl-]" "[NH4+]" --format owl
+chemrof convert "[Ca+2]" "[Cl-]" "[NH4+]" --format owl
 
 # Pipe OWL output to a file
-chemrof from-smiles CCO --format owl > ethanol.ofn
+chemrof convert CCO --format owl > ethanol.ofn
 ```
