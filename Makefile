@@ -63,6 +63,7 @@ docs:
 
 docs/index.md: $(SOURCE_FILES) src/docs
 	cp -pr src/docs/*.md docs/ ; \
+	find src/docs -mindepth 1 -type d -exec sh -c 'mkdir -p docs/$$(basename "{}") && cp -pr "{}/"*.md docs/$$(basename "{}")/' \; ; \
 	$(RUN) gen-doc -d docs $<
 
 
