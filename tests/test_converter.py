@@ -2,7 +2,7 @@
 
 import pytest
 
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter as SmilesConverter
 
 
 @pytest.fixture
@@ -103,3 +103,29 @@ class TestEnricherPipeline:
         converter.enrichers = [E1(), E2()]
         converter.convert("CCO")
         assert order == ["first", "second"]
+
+
+class TestInchiInput:
+    def test_ethanol_inchi(self):
+        """InChI input produces same result as SMILES."""
+        converter = SmilesConverter()
+        result = converter.convert("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
+        assert result["type"] == "chemrof:SmallMolecule"
+        assert result["empirical_formula"] == "C2H6O"
+
+    def test_enantiomer_classification(self):
+        """SMILES with assigned stereo classified as Enantiomer."""
+        converter = SmilesConverter()
+        result = converter.convert("C[C@@H](N)C(=O)O")
+        assert result["type"] == "chemrof:Enantiomer"
+        assert result["absolute_configuration"] == "(R)"
+        assert "isomeric_smiles_string" in result
+
+
+class TestBackwardsCompat:
+    def test_smiles_converter_alias(self):
+        """SmilesConverter still works as an alias."""
+        from chemrof.converter.convert import SmilesConverter
+        converter = SmilesConverter()
+        result = converter.convert("CCO")
+        assert result["type"] == "chemrof:SmallMolecule"

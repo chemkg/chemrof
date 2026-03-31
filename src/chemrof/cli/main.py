@@ -9,8 +9,8 @@ from typing import Optional
 import typer
 import yaml
 
-from chemrof.converter.smiles import SmilesConverter
-from chemrof.converter.enrichers.base import get_enricher, list_enrichers
+from chemrof.converter.convert import ChemConverter
+from chemrof.converter.enrichers.base import get_enricher
 
 app = typer.Typer(
     name="chemrof",
@@ -81,7 +81,7 @@ def from_smiles(
             name = name.strip()
             enricher_instances.append(get_enricher(name))
 
-    converter = SmilesConverter(enrichers=enricher_instances)
+    converter = ChemConverter(enrichers=enricher_instances)
 
     results = []
     for smi in smiles:

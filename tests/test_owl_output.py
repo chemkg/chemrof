@@ -2,7 +2,7 @@
 
 import pytest
 
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter as SmilesConverter
 from chemrof.converter.owl_output import dicts_to_owl
 
 
