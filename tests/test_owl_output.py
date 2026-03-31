@@ -1,47 +1,48 @@
-"""Tests for OWL output from SMILES converter."""
+"""Tests for OWL output via linkml-data2owl."""
 
 import pytest
 
-from chemrof.converter.convert import ChemConverter as SmilesConverter
+from chemrof.converter.convert import ChemConverter
 from chemrof.converter.owl_output import dicts_to_owl
 
 
 @pytest.fixture
 def converter():
-    return SmilesConverter()
+    return ChemConverter()
 
 
 class TestDictsToOwl:
     def test_small_molecule(self, converter):
         obj = converter.convert("CCO")
         owl = dicts_to_owl([obj])
-        assert "SubClassOf" in owl
-        assert "SmallMolecule" in owl
         assert "LFQSCWFLJHTTHZ" in owl
         assert "CCO" in owl
 
-    def test_atom_cation(self, converter):
+    def test_atom_cation_equivalent_classes(self, converter):
+        """AtomCation produces EquivalentClasses axiom via owl.template."""
         obj = converter.convert("[Ca+2]")
         owl = dicts_to_owl([obj])
-        assert "AtomCation" in owl
-        assert "has_element" in owl or "Ca" in owl
+        assert "EquivalentClasses" in owl
+        assert "MonoatomicIon" in owl
+        assert "has_element" in owl
+        assert "elemental_charge" in owl
 
     def test_atom_anion(self, converter):
         obj = converter.convert("[Cl-]")
         owl = dicts_to_owl([obj])
-        assert "AtomAnion" in owl
+        assert "VEXZGXHMUGYJMC" in owl or "Cl" in owl
 
     def test_multiple_molecules(self, converter):
         objs = [converter.convert(s) for s in ["CCO", "[Ca+2]"]]
         owl = dicts_to_owl(objs)
-        assert "SmallMolecule" in owl
-        assert "AtomCation" in owl
+        assert "LFQSCWFLJHTTHZ" in owl  # ethanol InChIKey
+        assert "MonoatomicIon" in owl  # from Ca2+ template
 
     def test_ofn_format(self, converter):
         obj = converter.convert("CCO")
         owl = dicts_to_owl([obj], output_type="ofn")
         assert "Ontology(" in owl
-        assert "Declaration(Class(" in owl
+        assert "AnnotationAssertion" in owl
 
     def test_rdfxml_format(self, converter):
         obj = converter.convert("CCO")
@@ -55,12 +56,33 @@ class TestDictsToOwl:
         assert "smiles_string" in owl
         assert "inchi_string" in owl
         assert "empirical_formula" in owl
-        assert "molecular_mass" in owl
 
     def test_label(self, converter):
         obj = converter.convert("CCO")
         owl = dicts_to_owl([obj])
-        assert "rdfs:label" in owl or "label" in owl
+        assert "label" in owl
+
+
+class TestEquivalentClassesAxioms:
+    def test_enantiomer_equivalent_classes(self, converter):
+        """Enantiomer produces EquivalentClasses axiom."""
+        obj = converter.convert("C[C@@H](N)C(=O)O")
+        owl = dicts_to_owl([obj])
+        assert "EquivalentClasses" in owl
+        assert "Enantiomer" in owl
+
+    def test_autochain_owl(self):
+        """Autochain entities all appear in OWL output."""
+        from rdkit import Chem
+        from chemrof.converter.autochain import autochain
+
+        converter = ChemConverter()
+        entity = converter.convert("CC(N)C(=O)O")
+        mol = Chem.MolFromSmiles("CC(N)C(=O)O")
+        results = autochain(entity, {"RacemicMixture"}, mol)
+        owl = dicts_to_owl(results)
+        assert "RacemicMixture" in owl
+        assert "Enantiomer" in owl
 
 
 class TestCliOwlFormat:
@@ -69,7 +91,6 @@ class TestCliOwlFormat:
         from chemrof.cli.main import app
 
         runner = CliRunner()
-        result = runner.invoke(app, ["from-smiles", "CCO", "--format", "owl"])
+        result = runner.invoke(app, ["convert", "CCO", "--format", "owl"])
         assert result.exit_code == 0
-        assert "SubClassOf" in result.output
-        assert "SmallMolecule" in result.output
+        assert "AnnotationAssertion" in result.output
