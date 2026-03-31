@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-11T10:01:53
+# Generation date: 2026-03-31T08:48:10
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -2069,8 +2069,8 @@ class Molecule(PolyatomicEntity):
     has_bonds: Optional[Union[Union[dict, "AtomicBond"], list[Union[dict, "AtomicBond"]]]] = empty_list()
     has_submolecules: Optional[Union[Union[str, MoleculeId], list[Union[str, MoleculeId]]]] = empty_list()
     has_atoms: Optional[Union[Union[str, AtomId], list[Union[str, AtomId]]]] = empty_list()
-    is_organic: Optional[Union[bool, Bool]] = None
     has_part: Optional[str] = None
+    is_organic: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2092,11 +2092,11 @@ class Molecule(PolyatomicEntity):
             self.has_atoms = [self.has_atoms] if self.has_atoms is not None else []
         self.has_atoms = [v if isinstance(v, AtomId) else AtomId(v) for v in self.has_atoms]
 
-        if self.is_organic is not None and not isinstance(self.is_organic, Bool):
-            self.is_organic = Bool(self.is_organic)
-
         if self.has_part is not None and not isinstance(self.has_part, str):
             self.has_part = str(self.has_part)
+
+        if self.is_organic is not None and not isinstance(self.is_organic, Bool):
+            self.is_organic = Bool(self.is_organic)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3119,6 +3119,8 @@ class MonoatomicIon(AtomIonicForm):
 
     id: Union[str, MonoatomicIonId] = None
     has_element: Optional[Union[str, ChemicalElementId]] = None
+    owl_subclass_of: Optional[Union[str, URIorCURIE]] = None
+    elemental_charge: Optional[int] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3128,6 +3130,12 @@ class MonoatomicIon(AtomIonicForm):
 
         if self.has_element is not None and not isinstance(self.has_element, ChemicalElementId):
             self.has_element = ChemicalElementId(self.has_element)
+
+        if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, URIorCURIE):
+            self.owl_subclass_of = URIorCURIE(self.owl_subclass_of)
+
+        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
+            self.elemental_charge = int(self.elemental_charge)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3757,10 +3765,10 @@ class Enantiomer(Stereoisomer):
     id: Union[str, EnantiomerId] = None
     inchi_tetrahedral_stereochemical_sublayer: str = None
     inchi_stereochemical_type_sublayer: str = None
+    enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
+    absolute_configuration: Optional[str] = None
     relative_configuration: Optional[str] = None
     optical_configuration: Optional[str] = None
-    absolute_configuration: Optional[str] = None
-    enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3778,14 +3786,17 @@ class Enantiomer(Stereoisomer):
         if not isinstance(self.inchi_stereochemical_type_sublayer, str):
             self.inchi_stereochemical_type_sublayer = str(self.inchi_stereochemical_type_sublayer)
 
+        if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, MoleculeId):
+            self.enantiomer_form_of = MoleculeId(self.enantiomer_form_of)
+
+        if self.absolute_configuration is not None and not isinstance(self.absolute_configuration, str):
+            self.absolute_configuration = str(self.absolute_configuration)
+
         if self.relative_configuration is not None and not isinstance(self.relative_configuration, str):
             self.relative_configuration = str(self.relative_configuration)
 
         if self.optical_configuration is not None and not isinstance(self.optical_configuration, str):
             self.optical_configuration = str(self.optical_configuration)
-
-        if self.absolute_configuration is not None and not isinstance(self.absolute_configuration, str):
-            self.absolute_configuration = str(self.absolute_configuration)
 
         if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, MoleculeId):
             self.enantiomer_form_of = MoleculeId(self.enantiomer_form_of)
@@ -5333,7 +5344,7 @@ slots.inchi_sublayer_in_main_layer = Slot(uri=CHEMROF.inchi_sublayer_in_main_lay
 
 slots.inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_sublayer, name="inchi_chemical_sublayer", curie=CHEMROF.curie('inchi_chemical_sublayer'),
                    model_uri=CHEMROF.inchi_chemical_sublayer, domain=None, range=Optional[str],
-                   pattern=re.compile(r'^[A-Z0-9\.]+$'))
+                   pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
 slots.inchi_atom_connections_sublayer = Slot(uri=CHEMROF.inchi_atom_connections_sublayer, name="inchi_atom_connections_sublayer", curie=CHEMROF.curie('inchi_atom_connections_sublayer'),
                    model_uri=CHEMROF.inchi_atom_connections_sublayer, domain=None, range=Optional[str],
@@ -5690,7 +5701,7 @@ slots.atomOccurrence__coordination_number = Slot(uri=CHEMROF.coordination_number
 
 slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_sublayer, name="ChemicalEntity_inchi_chemical_sublayer", curie=CHEMROF.curie('inchi_chemical_sublayer'),
                    model_uri=CHEMROF.ChemicalEntity_inchi_chemical_sublayer, domain=ChemicalEntity, range=Optional[str],
-                   pattern=re.compile(r'^[A-Z0-9\.]+$'))
+                   pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
 slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.GroupingClass_subtype_of, domain=GroupingClass, range=Optional[Union[Union[str, GroupingClassId], list[Union[str, GroupingClassId]]]])
@@ -5871,6 +5882,15 @@ slots.ChemicalElement_has_major_microspecies_at_pH7_3 = Slot(uri=CHEMROF.has_maj
 
 slots.AtomIonicForm_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="AtomIonicForm_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
                    model_uri=CHEMROF.AtomIonicForm_elemental_charge, domain=AtomIonicForm, range=Optional[int], mappings = [CHEMINF["000120"]])
+
+slots.MonoatomicIon_owl_subclass_of = Slot(uri=CHEMROF.owl_subclass_of, name="MonoatomicIon_owl_subclass_of", curie=CHEMROF.curie('owl_subclass_of'),
+                   model_uri=CHEMROF.MonoatomicIon_owl_subclass_of, domain=MonoatomicIon, range=Optional[Union[str, URIorCURIE]])
+
+slots.MonoatomicIon_has_element = Slot(uri=CHEMROF.has_element, name="MonoatomicIon_has_element", curie=CHEMROF.curie('has_element'),
+                   model_uri=CHEMROF.MonoatomicIon_has_element, domain=MonoatomicIon, range=Optional[Union[str, ChemicalElementId]])
+
+slots.MonoatomicIon_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="MonoatomicIon_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
+                   model_uri=CHEMROF.MonoatomicIon_elemental_charge, domain=MonoatomicIon, range=Optional[int], mappings = [CHEMINF["000120"]])
 
 slots.AtomAnion_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="AtomAnion_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
                    model_uri=CHEMROF.AtomAnion_elemental_charge, domain=AtomAnion, range=Optional[int], mappings = [CHEMINF["000120"]])

@@ -1408,6 +1408,13 @@
     {
       "name": "name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -1431,6 +1438,13 @@
     {
       "name": "symbol",
       "definition_uri": "https://w3id.org/chemrof/symbol",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "short symbol for chemical entity, e.g. K, C-16",
       "title": "symbol",
       "from_schema": "https://w3id.org/chemrof",
@@ -1449,6 +1463,13 @@
     {
       "name": "type",
       "definition_uri": "https://w3id.org/chemrof/type",
+      "annotations": [
+        {
+          "tag": "owl.ignore",
+          "value": "true",
+          "@type": "Annotation"
+        }
+      ],
       "title": "type",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/type",
@@ -1463,6 +1484,13 @@
     {
       "name": "IUPAC_name",
       "definition_uri": "https://w3id.org/chemrof/IUPAC_name",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "IUPAC name",
       "from_schema": "https://w3id.org/chemrof",
       "exact_mappings": [
@@ -1524,6 +1552,13 @@
     {
       "name": "atomic_number",
       "definition_uri": "https://w3id.org/chemrof/atomic_number",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "number of protons in an atom",
       "title": "atomic number",
       "from_schema": "https://w3id.org/chemrof",
@@ -2027,9 +2062,11 @@
       ],
       "is_a": "chemical_to_chemical_relationship",
       "slot_uri": "http://purl.obolibrary.org/obo/BFO_0000051",
-      "owner": "MoleculeGroupingClassDefinedByComponents",
+      "owner": "Atom",
       "domain_of": [
-        "MoleculeGroupingClassDefinedByComponents"
+        "MoleculeGroupingClassDefinedByComponents",
+        "Molecule",
+        "Atom"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -2597,6 +2634,13 @@
     {
       "name": "molecular_mass",
       "definition_uri": "https://w3id.org/chemrof/molecular_mass",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "The sum of the relative atomic masses of the constituent atoms of a molecule.",
       "title": "molecular mass",
       "from_schema": "https://w3id.org/chemrof",
@@ -2736,6 +2780,13 @@
     {
       "name": "water_solubility",
       "definition_uri": "https://w3id.org/chemrof/water_solubility",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "The maximum amount of a substance that can dissolve in water at 25\u00b0C, expressed in grams per liter (g/L).",
       "title": "water solubility",
       "comments": [
@@ -3356,6 +3407,13 @@
     {
       "name": "empirical_formula",
       "definition_uri": "https://w3id.org/chemrof/empirical_formula",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose",
       "title": "empirical formula",
       "from_schema": "https://w3id.org/chemrof",
@@ -3441,6 +3499,13 @@
     {
       "name": "inchi_string",
       "definition_uri": "https://w3id.org/chemrof/inchi_string",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "InChi",
       "todos": [
         "declare this as a key once compound_key is introduced to linkml"
@@ -3532,6 +3597,13 @@
     {
       "name": "smiles_string",
       "definition_uri": "https://w3id.org/chemrof/smiles_string",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.",
       "title": "smiles string",
       "comments": [
@@ -3585,7 +3657,10 @@
       "is_a": "smiles_string",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/isomeric_smiles_string",
-      "owner": "isomeric_smiles_string",
+      "owner": "Stereoisomer",
+      "domain_of": [
+        "Stereoisomer"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3755,6 +3830,11 @@
           "tag": "inchi.index",
           "value": 2,
           "@type": "Annotation"
+        },
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
         }
       ],
       "description": "The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose",
@@ -3775,12 +3855,19 @@
         "EntityWithAtomsEnumerated"
       ],
       "range": "string",
-      "pattern": "^[A-Z0-9\\.]+$",
+      "pattern": "^[A-Za-z0-9\\.]+$",
       "@type": "SlotDefinition"
     },
     {
       "name": "inchi_atom_connections_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_atom_connections_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
       "title": "inchi atom connections sublayer",
       "from_schema": "https://w3id.org/chemrof",
@@ -3800,6 +3887,13 @@
     {
       "name": "inchi_hydrogen_connections_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_hydrogen_connections_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "Describes how many hydrogen atoms are connected to each of the other atoms.",
       "title": "inchi hydrogen connections sublayer",
       "from_schema": "https://w3id.org/chemrof",
@@ -3818,6 +3912,13 @@
     {
       "name": "inchi_charge_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_charge_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi charge sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3835,6 +3936,13 @@
     {
       "name": "inchi_proton_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_proton_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi proton sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3851,6 +3959,13 @@
     {
       "name": "inchi_stereochemical_double_bond_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_stereochemical_double_bond_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi stereochemical double bond sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3868,6 +3983,13 @@
     {
       "name": "inchi_tetrahedral_stereochemical_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_tetrahedral_stereochemical_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi tetrahedral stereochemical sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3885,6 +4007,13 @@
     {
       "name": "inchi_stereochemical_type_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_stereochemical_type_sublayer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi stereochemical type sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3902,6 +4031,13 @@
     {
       "name": "inchi_isotopic_layer",
       "definition_uri": "https://w3id.org/chemrof/inchi_isotopic_layer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "inchi isotopic layer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_sublayer",
@@ -3951,6 +4087,13 @@
     {
       "name": "is_organic",
       "definition_uri": "https://w3id.org/chemrof/is_organic",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
       "title": "is organic",
       "from_schema": "https://w3id.org/chemrof",
@@ -3969,6 +4112,13 @@
     {
       "name": "is_radical",
       "definition_uri": "https://w3id.org/chemrof/is_radical",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "is radical",
       "from_schema": "https://w3id.org/chemrof",
       "domain": "ChemicalEntity",
@@ -4279,9 +4429,10 @@
       "mixin": true,
       "domain": "OwlClass",
       "slot_uri": "https://w3id.org/chemrof/owl_subclass_of",
-      "owner": "OwlClass",
+      "owner": "MonoatomicIon",
       "domain_of": [
-        "OwlClass"
+        "OwlClass",
+        "MonoatomicIon"
       ],
       "range": "OwlClass",
       "inlined": true,
@@ -4710,6 +4861,10 @@
       "title": "relative configuration",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/relative_configuration",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -4719,6 +4874,10 @@
       "title": "optical configuration",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/optical_configuration",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -4731,6 +4890,10 @@
         "https://en.wikipedia.org/wiki/Cahn%E2%80%93Ingold%E2%80%93Prelog_priority_rules"
       ],
       "slot_uri": "https://w3id.org/chemrof/absolute_configuration",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -4743,7 +4906,10 @@
       "is_a": "owl_subclass_of",
       "domain": "OwlClass",
       "slot_uri": "https://w3id.org/chemrof/enantiomer_form_of",
-      "owner": "enantiomer_form_of",
+      "owner": "Enantiomer",
+      "domain_of": [
+        "Enantiomer"
+      ],
       "range": "Molecule",
       "@type": "SlotDefinition"
     },
@@ -5378,6 +5544,12 @@
           "value": 2,
           "extensions": {},
           "annotations": {}
+        },
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
         }
       },
       "description": "The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose",
@@ -5401,7 +5573,7 @@
       "usage_slot_name": "inchi_chemical_sublayer",
       "range": "string",
       "recommended": true,
-      "pattern": "^[A-Z0-9\\.]+$",
+      "pattern": "^[A-Za-z0-9\\.]+$",
       "@type": "SlotDefinition"
     },
     {
@@ -5807,6 +5979,14 @@
     {
       "name": "MolecularDerivativeGroupingClass_name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -5918,6 +6098,14 @@
     {
       "name": "ChemicalSaltGroupingClass_name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -5962,6 +6150,14 @@
     {
       "name": "ChemicalSaltByCation_name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -5988,6 +6184,14 @@
     {
       "name": "ChemicalSaltByAnion_name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -6014,6 +6218,14 @@
     {
       "name": "AcidAnionGroupingClass_name",
       "definition_uri": "https://w3id.org/chemrof/name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "name of chemical entity. E.g. nickel, carbon-16",
       "title": "name",
       "from_schema": "https://w3id.org/chemrof",
@@ -6207,6 +6419,14 @@
     {
       "name": "PolyatomicEntity_inchi_atom_connections_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_atom_connections_sublayer",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
       "title": "inchi atom connections sublayer",
       "from_schema": "https://w3id.org/chemrof",
@@ -6510,6 +6730,14 @@
     {
       "name": "ChemicalElement_symbol",
       "definition_uri": "https://w3id.org/chemrof/symbol",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "description": "E.g. O, K, Ge",
       "title": "symbol",
       "from_schema": "https://w3id.org/chemrof",
@@ -6761,6 +6989,96 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "MonoatomicIon_owl_subclass_of",
+      "definition_uri": "https://w3id.org/chemrof/owl_subclass_of",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "EquivalentClasses, IntersectionOf",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)",
+      "title": "owl subclass of",
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "is a"
+      ],
+      "exact_mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+      ],
+      "narrow_mappings": [
+        "http://www.blueobelisk.org/dict/terminologyfamily"
+      ],
+      "is_a": "owl_subclass_of",
+      "mixin": true,
+      "domain": "MonoatomicIon",
+      "slot_uri": "https://w3id.org/chemrof/owl_subclass_of",
+      "alias": "owl_subclass_of",
+      "owner": "MonoatomicIon",
+      "domain_of": [
+        "MonoatomicIon"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "owl_subclass_of",
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "MonoatomicIon_has_element",
+      "definition_uri": "https://w3id.org/chemrof/has_element",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "EquivalentClasses, IntersectionOf, ObjectSomeValuesFrom",
+          "@type": "Annotation"
+        }
+      ],
+      "title": "has element",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "has_element",
+      "domain": "MonoatomicIon",
+      "slot_uri": "https://w3id.org/chemrof/has_element",
+      "alias": "has_element",
+      "owner": "MonoatomicIon",
+      "domain_of": [
+        "MonoatomicIon"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "has_element",
+      "range": "ChemicalElement",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "MonoatomicIon_elemental_charge",
+      "definition_uri": "https://w3id.org/chemrof/elemental_charge",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "EquivalentClasses, IntersectionOf, DataHasValue",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "number of protons minus number of electrons",
+      "title": "elemental charge",
+      "from_schema": "https://w3id.org/chemrof",
+      "mappings": [
+        "http://semanticscience.org/resource/CHEMINF_000120"
+      ],
+      "is_a": "AtomIonicForm_elemental_charge",
+      "domain": "MonoatomicIon",
+      "slot_uri": "https://w3id.org/chemrof/elemental_charge",
+      "alias": "elemental_charge",
+      "owner": "MonoatomicIon",
+      "domain_of": [
+        "MonoatomicIon"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "elemental_charge",
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "AtomAnion_elemental_charge",
       "definition_uri": "https://w3id.org/chemrof/elemental_charge",
       "description": "number of protons minus number of electrons",
@@ -6769,7 +7087,7 @@
       "mappings": [
         "http://semanticscience.org/resource/CHEMINF_000120"
       ],
-      "is_a": "AnionState_elemental_charge",
+      "is_a": "MonoatomicIon_elemental_charge",
       "domain": "AtomAnion",
       "slot_uri": "https://w3id.org/chemrof/elemental_charge",
       "alias": "elemental_charge",
@@ -6792,7 +7110,7 @@
       "mappings": [
         "http://semanticscience.org/resource/CHEMINF_000120"
       ],
-      "is_a": "CationState_elemental_charge",
+      "is_a": "MonoatomicIon_elemental_charge",
       "domain": "AtomCation",
       "slot_uri": "https://w3id.org/chemrof/elemental_charge",
       "alias": "elemental_charge",
@@ -7003,6 +7321,13 @@
     {
       "name": "Enantiomer_absolute_configuration",
       "definition_uri": "https://w3id.org/chemrof/absolute_configuration",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "DataHasValue",
+          "@type": "Annotation"
+        }
+      ],
       "title": "absolute configuration",
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
@@ -7024,6 +7349,13 @@
     {
       "name": "Enantiomer_enantiomer_form_of",
       "definition_uri": "https://w3id.org/chemrof/enantiomer_form_of",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "ObjectSomeValuesFrom",
+          "@type": "Annotation"
+        }
+      ],
       "description": "Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione",
       "title": "enantiomer form of",
       "from_schema": "https://w3id.org/chemrof",
@@ -7043,6 +7375,14 @@
     {
       "name": "Enantiomer_inchi_tetrahedral_stereochemical_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_tetrahedral_stereochemical_sublayer",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "title": "inchi tetrahedral stereochemical sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_tetrahedral_stereochemical_sublayer",
@@ -7063,6 +7403,14 @@
     {
       "name": "Enantiomer_inchi_stereochemical_type_sublayer",
       "definition_uri": "https://w3id.org/chemrof/inchi_stereochemical_type_sublayer",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "title": "inchi stereochemical type sublayer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "inchi_stereochemical_type_sublayer",
@@ -7083,6 +7431,13 @@
     {
       "name": "RacemicMixture_has_left_enantiomer",
       "definition_uri": "https://w3id.org/chemrof/has_left_enantiomer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "ObjectSomeValuesFrom",
+          "@type": "Annotation"
+        }
+      ],
       "title": "has left enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "has_left_enantiomer",
@@ -7117,6 +7472,13 @@
     {
       "name": "RacemicMixture_has_right_enantiomer",
       "definition_uri": "https://w3id.org/chemrof/has_right_enantiomer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "ObjectSomeValuesFrom",
+          "@type": "Annotation"
+        }
+      ],
       "title": "has right enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "has_right_enantiomer",
@@ -7151,6 +7513,13 @@
     {
       "name": "RacemicMixture_chirality_agnostic_form",
       "definition_uri": "https://w3id.org/chemrof/chirality_agnostic_form",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "ObjectSomeValuesFrom",
+          "@type": "Annotation"
+        }
+      ],
       "title": "chirality agnostic form",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "chirality_agnostic_form",
@@ -7185,6 +7554,14 @@
     {
       "name": "RacemicMixture_IUPAC_name",
       "definition_uri": "https://w3id.org/chemrof/IUPAC_name",
+      "annotations": {
+        "owl": {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "extensions": {},
+          "annotations": {}
+        }
+      },
       "title": "IUPAC name",
       "from_schema": "https://w3id.org/chemrof",
       "exact_mappings": [
@@ -8871,8 +9248,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "is_organic"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/SmallMolecule",
@@ -8922,8 +9299,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules"
       ],
       "slot_usage": {},
@@ -9022,8 +9399,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules"
       ],
       "slot_usage": {},
@@ -9072,8 +9449,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules"
       ],
       "slot_usage": {},
@@ -9136,8 +9513,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules"
       ],
       "slot_usage": {},
@@ -9189,8 +9566,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules",
         "polymer_of",
         "has_repeat_unit",
@@ -9299,8 +9676,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules",
         "has_repeat_unit",
         "is_branched",
@@ -9356,8 +9733,8 @@
         "Molecule_has_atom_occurrences",
         "Molecule_has_bonds",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Macromolecule_has_submolecules",
         "has_repeat_unit",
         "is_branched",
@@ -9800,8 +10177,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "is_organic"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Molecule",
@@ -9848,8 +10225,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "naturalProduct__derived_from_organisms"
       ],
       "slot_usage": {},
@@ -10188,8 +10565,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "is_organic"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MolecularSpecies",
@@ -10234,8 +10611,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
-        "Molecule_has_part"
+        "Molecule_has_part",
+        "is_organic"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/NonSpeciesMolecule",
@@ -10284,8 +10661,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10340,8 +10717,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10396,8 +10773,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10455,8 +10832,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10514,8 +10891,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10565,8 +10942,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -10616,8 +10993,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "bronsted_acid_base_role",
         "MoleculeByChargeState_acidity",
         "MoleculeByChargeState_hard_or_soft",
@@ -11188,14 +11565,14 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
-        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "AtomIonicForm_elemental_charge",
-        "has_element"
+        "MonoatomicIon_has_element",
+        "MonoatomicIon_owl_subclass_of",
+        "MonoatomicIon_elemental_charge"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MonoatomicIon",
@@ -11237,13 +11614,13 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
-        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "has_element",
+        "MonoatomicIon_has_element",
+        "MonoatomicIon_owl_subclass_of",
         "AtomAnion_elemental_charge"
       ],
       "slot_usage": {},
@@ -11296,13 +11673,13 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
-        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "has_element",
+        "MonoatomicIon_has_element",
+        "MonoatomicIon_owl_subclass_of",
         "AtomCation_elemental_charge"
       ],
       "slot_usage": {},
@@ -12038,8 +12415,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Ester_has_parent_alcohol",
         "Ester_has_parent_acid"
       ],
@@ -12089,8 +12466,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Stereoisomer_isomeric_smiles_string"
       ],
       "slot_usage": {},
@@ -12100,6 +12477,13 @@
     {
       "name": "Enantiomer",
       "definition_uri": "https://w3id.org/chemrof/Enantiomer",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "EquivalentClasses, IntersectionOf",
+          "@type": "Annotation"
+        }
+      ],
       "description": "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide",
       "title": "enantiomer",
       "comments": [
@@ -12141,12 +12525,13 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Stereoisomer_isomeric_smiles_string",
+        "enantiomer_form_of",
+        "Enantiomer_absolute_configuration",
         "Enantiomer_relative_configuration",
         "Enantiomer_optical_configuration",
-        "Enantiomer_absolute_configuration",
         "Enantiomer_enantiomer_form_of",
         "Enantiomer_inchi_tetrahedral_stereochemical_sublayer",
         "Enantiomer_inchi_stereochemical_type_sublayer"
@@ -12158,6 +12543,13 @@
     {
       "name": "RacemicMixture",
       "definition_uri": "https://w3id.org/chemrof/RacemicMixture",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "EquivalentClasses, IntersectionOf",
+          "@type": "Annotation"
+        }
+      ],
       "description": "a chemical compound that has equal amounts of left- and right-handed enantiomers of a chiral molecule. An example is Thalidomide",
       "title": "racemic mixture",
       "examples": [
@@ -12272,8 +12664,8 @@
         "Molecule_has_bonds",
         "has_submolecules",
         "has_atoms",
-        "is_organic",
         "Molecule_has_part",
+        "is_organic",
         "Allotrope_allotropic_analog_of",
         "Allotrope_has_bonding_structure"
       ],
@@ -12576,9 +12968,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2025-12-11T10:01:00",
-  "source_file_size": 125437,
-  "generation_date": "2025-12-11T10:01:48",
+  "source_file_date": "2026-03-31T08:47:36",
+  "source_file_size": 126631,
+  "generation_date": "2026-03-31T08:48:05",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",
