@@ -72,7 +72,9 @@ def _do_convert(
         target_classes = {c.strip() for c in classes.split(",")}
         autochain = True
 
-    converter = ChemConverter(enrichers=enricher_instances)
+    # Don't pass enrichers to converter — we run them after autochain
+    # so that generated entities also get enriched
+    converter = ChemConverter()
 
     all_results = []
     for raw in inputs:
@@ -92,6 +94,32 @@ def _do_convert(
             all_results.extend(chain)
         else:
             all_results.append(result)
+
+    # Run enrichers on all entities (including autochain-generated ones)
+    if enricher_instances:
+        from chemrof.converter.enrichers.base import EnrichmentContext
+
+        for i, obj in enumerate(all_results):
+            inchikey = obj.get("id", "").replace("INCHIKEY:", "")
+            context = EnrichmentContext(
+                mol=None,
+                inchikey=inchikey if obj.get("id", "").startswith("INCHIKEY:") else "",
+                smiles=obj.get("smiles_string", ""),
+                inchi=obj.get("inchi_string", ""),
+            )
+            for enricher in enricher_instances:
+                obj = enricher.enrich(obj, context)
+            all_results[i] = obj
+
+        # Update RacemicMixture names from agnostic form's enriched name
+        for obj in all_results:
+            if obj.get("type") == "chemrof:RacemicMixture":
+                agnostic_id = obj.get("chirality_agnostic_form")
+                agnostic = next(
+                    (r for r in all_results if r["id"] == agnostic_id), None
+                )
+                if agnostic and agnostic.get("name") != agnostic.get("empirical_formula"):
+                    obj["name"] = f"rac-{agnostic['name']}"
 
     if format == OutputFormat.owl:
         from chemrof.converter.owl_output import dicts_to_owl
