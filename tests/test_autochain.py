@@ -109,6 +109,67 @@ class TestAutochainEnantiomerOnly:
         assert "chemrof:RacemicMixture" not in types
 
 
+class TestAutochainSalt:
+    """Salt autochain decomposes into cation + anion + salt entity."""
+
+    def test_nacl_produces_three_entities(self, converter):
+        """NaCl -> Na+ entity, Cl- entity, salt entity."""
+        entity = converter.convert("[Na+].[Cl-]")
+        mol = Chem.MolFromSmiles("[Na+].[Cl-]")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        assert len(results) == 3
+        types = [r["type"] for r in results]
+        assert "chemrof:AtomCation" in types
+        assert "chemrof:AtomAnion" in types
+        assert "chemrof:ChemicalSalt" in types
+
+    def test_salt_links_components(self, converter):
+        """Salt entity has has_cationic_component and has_anionic_component."""
+        entity = converter.convert("[Na+].[Cl-]")
+        mol = Chem.MolFromSmiles("[Na+].[Cl-]")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        salt = [r for r in results if r["type"] == "chemrof:ChemicalSalt"][0]
+        cation = [r for r in results if r["type"] == "chemrof:AtomCation"][0]
+        anion = [r for r in results if r["type"] == "chemrof:AtomAnion"][0]
+
+        assert salt["has_cationic_component"] == cation["id"]
+        assert salt["has_anionic_component"] == anion["id"]
+        assert salt["elemental_charge"] == 0
+
+    def test_sodium_acetate(self, converter):
+        """Molecular anion salt: Na+ + acetate."""
+        entity = converter.convert("[Na+].CC([O-])=O")
+        mol = Chem.MolFromSmiles("[Na+].CC([O-])=O")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        types = [r["type"] for r in results]
+        assert "chemrof:AtomCation" in types
+        assert "chemrof:MolecularAnion" in types
+        assert "chemrof:ChemicalSalt" in types
+
+    def test_components_have_structural_data(self, converter):
+        """Component entities have their own InChI/SMILES."""
+        entity = converter.convert("[Na+].[Cl-]")
+        mol = Chem.MolFromSmiles("[Na+].[Cl-]")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        for comp in results[:-1]:  # all except salt
+            assert "inchi_string" in comp
+            assert "smiles_string" in comp
+
+    def test_salt_has_structural_data(self, converter):
+        """Salt entity itself has InChI/SMILES for the full compound."""
+        entity = converter.convert("[Na+].[Cl-]")
+        mol = Chem.MolFromSmiles("[Na+].[Cl-]")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        salt = [r for r in results if r["type"] == "chemrof:ChemicalSalt"][0]
+        assert "inchi_string" in salt
+        assert "smiles_string" in salt
+
+
 class TestAutochainMultipleStereocenters:
     """Multi-stereocenter molecules are not supported in v1."""
 

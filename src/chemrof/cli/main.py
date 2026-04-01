@@ -47,9 +47,10 @@ Example: --enrichers pubchem"""
 
 _CLASSES_HELP = """Target chemrof classes to generate (hint-based).
 
-Pass a comma-separated list. Supported: RacemicMixture, Enantiomer.
+Pass a comma-separated list. Supported: RacemicMixture, Enantiomer, ChemicalSalt.
 Implies --autochain. Requesting RacemicMixture automatically generates
-Enantiomer entities and the chirality-agnostic form.
+Enantiomer entities and the chirality-agnostic form. ChemicalSalt decomposes
+a salt into its cation and anion components.
 
 Example: --classes RacemicMixture"""
 
@@ -86,6 +87,11 @@ def _do_convert(
             autochain = True
 
         result = converter.convert_parsed(parsed)
+
+        # Salt input auto-triggers autochain
+        if result.get("type") == "chemrof:ChemicalSalt":
+            target_classes.add("ChemicalSalt")
+            autochain = True
 
         if autochain and target_classes:
             from chemrof.converter.autochain import autochain as do_autochain

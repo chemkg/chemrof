@@ -35,6 +35,10 @@ from chemrof.converter.classify import classify_entity
         ("CC(N)C(=O)O", "SmallMolecule"),     # alanine, no stereo annotation
         # Zwitterion with assigned stereo → Enantiomer (net charge 0, stereo wins)
         ("C[C@@H]([NH3+])C(=O)[O-]", "Enantiomer"),
+        # Chemical salts (multi-fragment, opposite charges, net 0)
+        ("[Na+].[Cl-]", "ChemicalSalt"),          # sodium chloride
+        ("[Na+].CC([O-])=O", "ChemicalSalt"),      # sodium acetate
+        ("[Ca+2].[Cl-].[Cl-]", "ChemicalSalt"),    # calcium chloride
     ],
 )
 def test_classify_entity(smiles: str, expected_type: str):
@@ -95,3 +99,25 @@ class TestStereoClassification:
     def test_none_mol_raises(self):
         with pytest.raises(ValueError):
             classify_entity(None)
+
+
+class TestSaltClassification:
+    """Salt detection for multi-fragment charged molecules."""
+
+    def test_nacl(self):
+        assert classify_entity(Chem.MolFromSmiles("[Na+].[Cl-]")) == "ChemicalSalt"
+
+    def test_sodium_acetate(self):
+        assert classify_entity(Chem.MolFromSmiles("[Na+].CC([O-])=O")) == "ChemicalSalt"
+
+    def test_calcium_chloride(self):
+        assert classify_entity(Chem.MolFromSmiles("[Ca+2].[Cl-].[Cl-]")) == "ChemicalSalt"
+
+    def test_single_fragment_not_salt(self):
+        """Single-fragment charged molecule is NOT a salt."""
+        assert classify_entity(Chem.MolFromSmiles("[Na+]")) == "AtomCation"
+
+    def test_neutral_multi_fragment_not_salt(self):
+        """Multi-fragment with no charges is NOT a salt (just a mixture)."""
+        mol = Chem.MolFromSmiles("CCO.O")
+        assert classify_entity(mol) == "SmallMolecule"

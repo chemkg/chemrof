@@ -24,8 +24,10 @@ from rdkit.Chem import (
     FindMolChiralCenters,
     inchi,
     rdMolDescriptors,
+    rdmolops,
 )
 
+from chemrof.converter.classify import classify_entity
 from chemrof.converter.inchi import parse_inchi_sublayers
 
 logger = logging.getLogger(__name__)
@@ -47,6 +49,10 @@ def autochain(entity: dict, target_classes: set[str], mol: Chem.Mol) -> list[dic
     Returns:
         List of interlinked chemrof dicts.
     """
+    # Salt autochain
+    if "ChemicalSalt" in target_classes or entity.get("type") == "chemrof:ChemicalSalt":
+        return _build_salt_graph(entity, mol)
+
     wants_racemate = "RacemicMixture" in target_classes
     wants_enantiomers = "Enantiomer" in target_classes or wants_racemate
 
@@ -141,3 +147,50 @@ def _build_stereo_graph(entity: dict, mol: Chem.Mol, include_mixture: bool) -> l
         results.append(mixture)
 
     return results
+
+
+def _build_salt_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
+    """Decompose a salt into cation/anion component entities plus the salt entity.
+
+    Returns [cation, anion, ..., salt] where:
+    - Each fragment becomes a typed entity (AtomCation, MolecularAnion, etc.)
+    - The salt entity links to components via has_cationic_component / has_anionic_component
+
+    >>> from rdkit import Chem
+    >>> from chemrof.converter.convert import ChemConverter
+    >>> entity = ChemConverter().convert("[Na+].[Cl-]")
+    >>> results = _build_salt_graph(entity, Chem.MolFromSmiles("[Na+].[Cl-]"))
+    >>> len(results)
+    3
+    >>> results[-1]["type"]
+    'chemrof:ChemicalSalt'
+    """
+    frags = rdmolops.GetMolFrags(mol, asMols=True)
+    cations = []
+    anions = []
+    components = []
+
+    for frag in frags:
+        frag_charge = sum(a.GetFormalCharge() for a in frag.GetAtoms())
+        frag_type = classify_entity(frag)
+        comp = _mol_to_entity(frag, frag_type)
+        if frag_type in ("AtomCation", "AtomAnion", "UnchargedAtom"):
+            comp["has_element"] = frag.GetAtomWithIdx(0).GetSymbol()
+        if frag_charge > 0:
+            comp["elemental_charge"] = frag_charge
+            cations.append(comp)
+        elif frag_charge < 0:
+            comp["elemental_charge"] = frag_charge
+            anions.append(comp)
+        components.append(comp)
+
+    # Build the salt entity — it keeps the full salt's structural data
+    salt = dict(entity)
+    salt["type"] = f"{_TYPE_PREFIX}ChemicalSalt"
+    salt["elemental_charge"] = 0
+    if cations:
+        salt["has_cationic_component"] = cations[0]["id"]
+    if anions:
+        salt["has_anionic_component"] = anions[0]["id"]
+
+    return components + [salt]

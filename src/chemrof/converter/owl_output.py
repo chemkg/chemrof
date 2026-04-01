@@ -35,6 +35,7 @@ _CLASS_MAP = {
     "UnchargedAtom": chemrof_module.UnchargedAtom,
     "Enantiomer": chemrof_module.Enantiomer,
     "RacemicMixture": chemrof_module.RacemicMixture,
+    "ChemicalSalt": chemrof_module.ChemicalSalt,
 }
 
 

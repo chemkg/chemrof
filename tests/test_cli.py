@@ -63,6 +63,26 @@ class TestAutochain:
         types = [d["type"] for d in docs]
         assert "chemrof:RacemicMixture" in types
 
+    def test_salt_auto_triggers(self):
+        """Salt SMILES auto-triggers salt autochain."""
+        result = runner.invoke(app, ["convert", "[Na+].[Cl-]", "--format", "json"])
+        assert result.exit_code == 0
+        data = json.loads(result.output)
+        assert isinstance(data, list)
+        types = [d["type"] for d in data]
+        assert "chemrof:ChemicalSalt" in types
+        assert "chemrof:AtomCation" in types
+        assert "chemrof:AtomAnion" in types
+
+    def test_salt_classes_flag(self):
+        """--classes ChemicalSalt explicitly decomposes a salt."""
+        result = runner.invoke(app, ["convert", "[Na+].CC([O-])=O", "--classes", "ChemicalSalt", "--format", "json"])
+        assert result.exit_code == 0
+        data = json.loads(result.output)
+        assert isinstance(data, list)
+        types = [d["type"] for d in data]
+        assert "chemrof:ChemicalSalt" in types
+
     def test_racemic_inchi_auto_triggers(self):
         """Non-standard InChI with /s3 auto-triggers autochain."""
         rac_inchi = "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3"
