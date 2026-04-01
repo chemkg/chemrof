@@ -26,6 +26,7 @@ from rdkit.Chem import (
     rdMolDescriptors,
     rdmolops,
 )
+from rdkit.Chem.MolStandardize import rdMolStandardize
 
 from chemrof.converter.classify import classify_entity
 from chemrof.converter.inchi import parse_inchi_sublayers
@@ -52,6 +53,10 @@ def autochain(entity: dict, target_classes: set[str], mol: Chem.Mol) -> list[dic
     # Salt autochain
     if "ChemicalSalt" in target_classes or entity.get("type") == "chemrof:ChemicalSalt":
         return _build_salt_graph(entity, mol)
+
+    # Tautomer autochain
+    if "Tautomer" in target_classes:
+        return _build_tautomer_graph(entity, mol)
 
     wants_racemate = "RacemicMixture" in target_classes
     wants_enantiomers = "Enantiomer" in target_classes or wants_racemate
@@ -194,3 +199,46 @@ def _build_salt_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
         salt["has_anionic_component"] = anions[0]["id"]
 
     return components + [salt]
+
+
+def _build_tautomer_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
+    """Enumerate tautomers and link them via tautomer_of.
+
+    Returns a list of SmallMolecule entities (one per tautomer),
+    each with a ``tautomer_of`` list of the other tautomers' IDs.
+
+    >>> from rdkit import Chem
+    >>> from chemrof.converter.convert import ChemConverter
+    >>> entity = ChemConverter().convert("Oc1ccccn1")
+    >>> results = _build_tautomer_graph(entity, Chem.MolFromSmiles("Oc1ccccn1"))
+    >>> len(results) >= 2
+    True
+    >>> all("tautomer_of" in r for r in results)
+    True
+    """
+    enumerator = rdMolStandardize.TautomerEnumerator()
+    taut_mols = list(enumerator.Enumerate(mol))
+
+    if len(taut_mols) <= 1:
+        return [entity]
+
+    # Build entity for each tautomer, deduplicate by ID (InChIKey)
+    seen_ids: set[str] = set()
+    entities = []
+    for t_mol in taut_mols:
+        t_type = classify_entity(t_mol)
+        ent = _mol_to_entity(t_mol, t_type)
+        if ent["id"] in seen_ids:
+            continue
+        seen_ids.add(ent["id"])
+        entities.append(ent)
+
+    if len(entities) <= 1:
+        return [entity]
+
+    # Cross-link: each tautomer references all others
+    for i, ent in enumerate(entities):
+        others = [e["id"] for j, e in enumerate(entities) if j != i]
+        ent["tautomer_of"] = others
+
+    return entities

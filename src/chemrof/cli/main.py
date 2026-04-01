@@ -47,10 +47,11 @@ Example: --enrichers pubchem"""
 
 _CLASSES_HELP = """Target chemrof classes to generate (hint-based).
 
-Pass a comma-separated list. Supported: RacemicMixture, Enantiomer, ChemicalSalt.
+Pass a comma-separated list. Supported: RacemicMixture, Enantiomer, ChemicalSalt, Tautomer.
 Implies --autochain. Requesting RacemicMixture automatically generates
 Enantiomer entities and the chirality-agnostic form. ChemicalSalt decomposes
-a salt into its cation and anion components.
+a salt into its cation and anion components. Tautomer enumerates tautomeric
+forms and links them via tautomer_of.
 
 Example: --classes RacemicMixture"""
 

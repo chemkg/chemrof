@@ -170,6 +170,53 @@ class TestAutochainSalt:
         assert "smiles_string" in salt
 
 
+class TestAutochainTautomer:
+    """Tautomer autochain enumerates tautomeric forms."""
+
+    def test_hydroxypyridine_tautomers(self, converter):
+        """2-hydroxypyridine has multiple tautomers."""
+        entity = converter.convert("Oc1ccccn1")
+        mol = Chem.MolFromSmiles("Oc1ccccn1")
+        results = autochain(entity, {"Tautomer"}, mol)
+
+        assert len(results) >= 2
+        # All should be linked via tautomer_of
+        for r in results:
+            assert "tautomer_of" in r
+            assert isinstance(r["tautomer_of"], list)
+
+    def test_tautomers_cross_linked(self, converter):
+        """Each tautomer references all others."""
+        entity = converter.convert("Oc1ccccn1")
+        mol = Chem.MolFromSmiles("Oc1ccccn1")
+        results = autochain(entity, {"Tautomer"}, mol)
+
+        all_ids = {r["id"] for r in results}
+        for r in results:
+            linked_ids = set(r["tautomer_of"])
+            # Should link to all OTHER tautomers
+            assert r["id"] not in linked_ids
+            assert linked_ids == all_ids - {r["id"]}
+
+    def test_no_tautomers_returns_original(self, converter):
+        """Molecule with no tautomers returns just the input."""
+        entity = converter.convert("C")  # methane — no tautomers
+        mol = Chem.MolFromSmiles("C")
+        results = autochain(entity, {"Tautomer"}, mol)
+
+        assert len(results) == 1
+        assert results[0]["id"] == entity["id"]
+
+    def test_tautomers_have_different_smiles(self, converter):
+        """Enumerated tautomers should have distinct SMILES."""
+        entity = converter.convert("Oc1ccccn1")
+        mol = Chem.MolFromSmiles("Oc1ccccn1")
+        results = autochain(entity, {"Tautomer"}, mol)
+
+        smiles_set = {r["smiles_string"] for r in results}
+        assert len(smiles_set) == len(results)
+
+
 class TestAutochainMultipleStereocenters:
     """Multi-stereocenter molecules are not supported in v1."""
 
