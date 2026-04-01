@@ -109,6 +109,27 @@ chemrof convert "C[C@@H](N)C(=O)O" --classes RacemicMixture
 chemrof convert "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3"
 ```
 
+**Chemical salts:** Salt SMILES (multi-fragment, opposite charges) are
+auto-detected and decomposed into cation + anion + salt entities:
+
+```bash
+# NaCl → Na+ entity, Cl- entity, NaCl salt entity
+chemrof convert "[Na+].[Cl-]" --format json
+
+# Sodium acetate
+chemrof convert "[Na+].CC([O-])=O" --format json
+
+# Explicit --classes flag
+chemrof convert "[Ca+2].[Cl-].[Cl-]" --classes ChemicalSalt --format json
+```
+
+**Tautomers:** Enumerate tautomeric forms and cross-link via `tautomer_of`:
+
+```bash
+# 2-hydroxypyridine / 2-pyridinone tautomers
+chemrof convert "Oc1ccccn1" --classes Tautomer --format json
+```
+
 v1 limitation: autochain only supports single-stereocenter molecules.
 
 ### Enrichers
@@ -137,6 +158,7 @@ chemrof class:
 | Single atom, positive (e.g. `[Ca+2]`) | `AtomCation` |
 | Single atom, negative (e.g. `[Cl-]`) | `AtomAnion` |
 | Single atom, neutral (e.g. `[He]`) | `UnchargedAtom` |
+| Multi-fragment salt (e.g. `[Na+].[Cl-]`) | `ChemicalSalt` |
 | Multi-atom, all stereocenters assigned (e.g. `C[C@@H](N)C(=O)O`) | `Enantiomer` |
 | Multi-atom, positive (e.g. `[NH4+]`) | `MolecularCation` |
 | Multi-atom, negative (e.g. `CC([O-])=O`) | `MolecularAnion` |
