@@ -159,6 +159,18 @@ class TestAutochainSalt:
             assert "inchi_string" in comp
             assert "smiles_string" in comp
 
+    def test_cacl2_deduplicates_chloride(self, converter):
+        """CaCl2 has two Cl- fragments but they share an InChIKey — dedup to one entity."""
+        entity = converter.convert("[Ca+2].[Cl-].[Cl-]")
+        mol = Chem.MolFromSmiles("[Ca+2].[Cl-].[Cl-]")
+        results = autochain(entity, {"ChemicalSalt"}, mol)
+
+        # Should be: Ca2+, Cl-, salt (3 entities, not 4)
+        types = [r["type"] for r in results]
+        assert types.count("chemrof:AtomAnion") == 1  # deduplicated
+        assert "chemrof:AtomCation" in types
+        assert "chemrof:ChemicalSalt" in types
+
     def test_salt_has_structural_data(self, converter):
         """Salt entity itself has InChI/SMILES for the full compound."""
         entity = converter.convert("[Na+].[Cl-]")
@@ -206,6 +218,17 @@ class TestAutochainTautomer:
 
         assert len(results) == 1
         assert results[0]["id"] == entity["id"]
+
+    def test_tautomer_preserves_original_metadata(self, converter):
+        """Tautomer matching input should preserve enriched fields."""
+        entity = converter.convert("Oc1ccccn1")
+        entity["custom_field"] = "test_value"  # simulate enrichment
+        mol = Chem.MolFromSmiles("Oc1ccccn1")
+        results = autochain(entity, {"Tautomer"}, mol)
+
+        matching = [r for r in results if r["id"] == entity["id"]]
+        if matching:
+            assert matching[0].get("custom_field") == "test_value"
 
     def test_tautomers_have_different_smiles(self, converter):
         """Enumerated tautomers should have distinct SMILES."""

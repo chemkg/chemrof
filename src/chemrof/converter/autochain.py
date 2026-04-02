@@ -49,6 +49,10 @@ def autochain(entity: dict, target_classes: set[str], mol: Chem.Mol) -> list[dic
 
     Returns:
         List of interlinked chemrof dicts.
+
+    Note: autochain patterns are mutually exclusive -- salt, tautomer, and
+    stereo/racemate each produce different entity graphs. Only one pattern
+    is applied per invocation.
     """
     # Salt autochain
     if "ChemicalSalt" in target_classes or entity.get("type") == "chemrof:ChemicalSalt":
@@ -171,8 +175,9 @@ def _build_salt_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
     'chemrof:ChemicalSalt'
     """
     frags = rdmolops.GetMolFrags(mol, asMols=True)
-    cations = []
-    anions = []
+    cation_id = None
+    anion_id = None
+    seen_ids: set[str] = set()
     components = []
 
     for frag in frags:
@@ -183,20 +188,25 @@ def _build_salt_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
             comp["has_element"] = frag.GetAtomWithIdx(0).GetSymbol()
         if frag_charge > 0:
             comp["elemental_charge"] = frag_charge
-            cations.append(comp)
+            if cation_id is None:
+                cation_id = comp["id"]
         elif frag_charge < 0:
             comp["elemental_charge"] = frag_charge
-            anions.append(comp)
-        components.append(comp)
+            if anion_id is None:
+                anion_id = comp["id"]
+        # Deduplicate identical fragments (e.g. two Cl- in CaCl2)
+        if comp["id"] not in seen_ids:
+            seen_ids.add(comp["id"])
+            components.append(comp)
 
     # Build the salt entity — it keeps the full salt's structural data
     salt = dict(entity)
     salt["type"] = f"{_TYPE_PREFIX}ChemicalSalt"
     salt["elemental_charge"] = 0
-    if cations:
-        salt["has_cationic_component"] = cations[0]["id"]
-    if anions:
-        salt["has_anionic_component"] = anions[0]["id"]
+    if cation_id:
+        salt["has_cationic_component"] = cation_id
+    if anion_id:
+        salt["has_anionic_component"] = anion_id
 
     return components + [salt]
 
@@ -222,7 +232,10 @@ def _build_tautomer_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
     if len(taut_mols) <= 1:
         return [entity]
 
-    # Build entity for each tautomer, deduplicate by ID (InChIKey)
+    # Build entity for each tautomer, deduplicate by ID (InChIKey).
+    # When a tautomer matches the original input, preserve its metadata
+    # (enriched names, CHEBI IDs, etc.) instead of building from scratch.
+    input_id = entity.get("id")
     seen_ids: set[str] = set()
     entities = []
     for t_mol in taut_mols:
@@ -231,6 +244,11 @@ def _build_tautomer_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
         if ent["id"] in seen_ids:
             continue
         seen_ids.add(ent["id"])
+        if ent["id"] == input_id:
+            # Merge: keep original entity's fields, overlay structural data
+            merged = dict(entity)
+            merged.update({k: v for k, v in ent.items() if k not in entity or k == "type"})
+            ent = merged
         entities.append(ent)
 
     if len(entities) <= 1:
