@@ -1,4 +1,4 @@
-"""chemrof CLI -- convert chemical structures to chemrof YAML/JSON."""
+"""chemrof CLI -- convert chemical structures to chemrof YAML/JSON/OWL."""
 
 from __future__ import annotations
 
@@ -9,8 +9,9 @@ from typing import Optional
 import typer
 import yaml
 
-from chemrof.converter.smiles import SmilesConverter
-from chemrof.converter.enrichers.base import get_enricher, list_enrichers
+from chemrof.converter.convert import ChemConverter
+from chemrof.converter.enrichers.base import get_enricher
+from chemrof.converter.parse import parse_input
 
 app = typer.Typer(
     name="chemrof",
@@ -44,59 +45,154 @@ Pass a comma-separated list of source names. Available sources:
 
 Example: --enrichers pubchem"""
 
+_CLASSES_HELP = """Target chemrof classes to generate (hint-based).
+
+Pass a comma-separated list. Supported: RacemicMixture, Enantiomer, ChemicalSalt, Tautomer.
+Implies --autochain. Requesting RacemicMixture automatically generates
+Enantiomer entities and the chirality-agnostic form. ChemicalSalt decomposes
+a salt into its cation and anion components. Tautomer enumerates tautomeric
+forms and links them via tautomer_of.
+
+Example: --classes RacemicMixture"""
+
+
+def _do_convert(
+    inputs: list[str],
+    format: OutputFormat,
+    enrichers: Optional[str],
+    classes: Optional[str],
+    autochain: bool,
+) -> None:
+    """Shared implementation for convert and from-smiles commands."""
+    enricher_instances = []
+    if enrichers:
+        for name in enrichers.split(","):
+            enricher_instances.append(get_enricher(name.strip()))
+
+    target_classes: set[str] = set()
+    if classes:
+        target_classes = {c.strip() for c in classes.split(",")}
+        autochain = True
+
+    # Don't pass enrichers to converter — we run them after autochain
+    # so that generated entities also get enriched
+    converter = ChemConverter()
+
+    all_results = []
+    for raw in inputs:
+        parsed = parse_input(raw)
+
+        # Non-standard racemic InChI auto-triggers autochain
+        if parsed.is_racemic:
+            target_classes.add("RacemicMixture")
+            autochain = True
+
+        result = converter.convert_parsed(parsed)
+
+        # Salt input auto-triggers autochain
+        if result.get("type") == "chemrof:ChemicalSalt":
+            target_classes.add("ChemicalSalt")
+            autochain = True
+
+        if autochain and target_classes:
+            from chemrof.converter.autochain import autochain as do_autochain
+
+            chain = do_autochain(result, target_classes, parsed.mol)
+            all_results.extend(chain)
+        else:
+            all_results.append(result)
+
+    # Run enrichers on all entities (including autochain-generated ones)
+    if enricher_instances:
+        from chemrof.converter.enrichers.base import EnrichmentContext
+
+        for i, obj in enumerate(all_results):
+            inchikey = obj.get("id", "").replace("INCHIKEY:", "")
+            context = EnrichmentContext(
+                mol=None,
+                inchikey=inchikey if obj.get("id", "").startswith("INCHIKEY:") else "",
+                smiles=obj.get("smiles_string", ""),
+                inchi=obj.get("inchi_string", ""),
+            )
+            for enricher in enricher_instances:
+                obj = enricher.enrich(obj, context)
+            all_results[i] = obj
+
+        # Update RacemicMixture names from agnostic form's enriched name
+        for obj in all_results:
+            if obj.get("type") == "chemrof:RacemicMixture":
+                agnostic_id = obj.get("chirality_agnostic_form")
+                agnostic = next(
+                    (r for r in all_results if r["id"] == agnostic_id), None
+                )
+                if agnostic and agnostic.get("name") != agnostic.get("empirical_formula"):
+                    obj["name"] = f"rac-{agnostic['name']}"
+
+    if format == OutputFormat.owl:
+        from chemrof.converter.owl_output import dicts_to_owl
+
+        typer.echo(dicts_to_owl(all_results))
+        return
+
+    output = all_results if len(all_results) > 1 else all_results[0]
+
+    if format == OutputFormat.json:
+        typer.echo(json.dumps(output, indent=2))
+    else:
+        if isinstance(output, list):
+            # Multi-document YAML
+            typer.echo(yaml.dump_all(output, default_flow_style=False, sort_keys=False).rstrip())
+        else:
+            typer.echo(yaml.dump(output, default_flow_style=False, sort_keys=False).rstrip())
+
 
 @app.command()
-def from_smiles(
-    smiles: list[str] = typer.Argument(
-        help="One or more SMILES strings (e.g. 'CCO' for ethanol, '[Ca+2]' for calcium ion).",
+def convert(
+    inputs: list[str] = typer.Argument(
+        help="One or more SMILES or InChI strings.",
     ),
     format: OutputFormat = typer.Option(
         OutputFormat.yaml, "--format", "-f", help="Output format.",
     ),
     enrichers: Optional[str] = typer.Option(
-        None,
-        "--enrichers",
-        "-e",
-        help=_ENRICHER_HELP,
+        None, "--enrichers", "-e", help=_ENRICHER_HELP,
+    ),
+    classes: Optional[str] = typer.Option(
+        None, "--classes", "-c", help=_CLASSES_HELP,
+    ),
+    autochain: bool = typer.Option(
+        False, "--autochain", help="Generate interlinked dependent entities.",
     ),
 ):
-    """Convert SMILES to chemrof data.
+    """Convert chemical inputs to chemrof data.
 
-    Parses each SMILES string with RDKit, auto-detects the entity type
-    (SmallMolecule, AtomCation, MolecularAnion, etc.), and outputs a
-    chemrof-compliant record with structural properties filled in:
-    InChI, molecular formula, exact mass, and more.
+    Parses each input string (SMILES or InChI, auto-detected) with RDKit,
+    classifies the entity type, and outputs chemrof-compliant records.
 
     Examples:
 
-        chemrof from-smiles CCO
+        chemrof convert CCO
 
-        chemrof from-smiles CCO c1ccccc1 --format json
+        chemrof convert "InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3" --format json
 
-        chemrof from-smiles "[Ca+2]" --enrichers pubchem
+        chemrof convert "CC(N)C(=O)O" --classes RacemicMixture
+
+        chemrof convert "[Ca+2]" --enrichers pubchem
     """
-    enricher_instances = []
-    if enrichers:
-        for name in enrichers.split(","):
-            name = name.strip()
-            enricher_instances.append(get_enricher(name))
+    _do_convert(inputs, format, enrichers, classes, autochain)
 
-    converter = SmilesConverter(enrichers=enricher_instances)
 
-    results = []
-    for smi in smiles:
-        result = converter.convert(smi)
-        results.append(result)
-
-    if format == OutputFormat.owl:
-        from chemrof.converter.owl_output import dicts_to_owl
-
-        typer.echo(dicts_to_owl(results))
-        return
-
-    output = results if len(results) > 1 else results[0]
-
-    if format == OutputFormat.json:
-        typer.echo(json.dumps(output, indent=2))
-    else:
-        typer.echo(yaml.dump(output, default_flow_style=False, sort_keys=False).rstrip())
+@app.command(hidden=True)
+def from_smiles(
+    smiles: list[str] = typer.Argument(
+        help="One or more SMILES strings.",
+    ),
+    format: OutputFormat = typer.Option(
+        OutputFormat.yaml, "--format", "-f", help="Output format.",
+    ),
+    enrichers: Optional[str] = typer.Option(
+        None, "--enrichers", "-e", help=_ENRICHER_HELP,
+    ),
+):
+    """(Deprecated) Convert SMILES to chemrof data. Use 'convert' instead."""
+    _do_convert(smiles, format, enrichers, classes=None, autochain=False)

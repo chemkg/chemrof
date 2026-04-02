@@ -1,21 +1,25 @@
-"""Convert SMILES strings to chemrof-compliant dicts.
+"""Convert chemical inputs to chemrof-compliant dicts.
 
->>> converter = SmilesConverter()
+>>> converter = ChemConverter()
 >>> result = converter.convert("CCO")
 >>> result["type"]
 'chemrof:SmallMolecule'
 >>> result["empirical_formula"]
 'C2H6O'
+>>> result = converter.convert("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
+>>> result["type"]
+'chemrof:SmallMolecule'
 """
 
 from __future__ import annotations
 
 from rdkit import Chem
-from rdkit.Chem import Descriptors, rdMolDescriptors, inchi
+from rdkit.Chem import Descriptors, rdMolDescriptors, inchi, FindMolChiralCenters
 
 from chemrof.converter.classify import classify_entity
 from chemrof.converter.enrichers.base import Enricher, EnrichmentContext
 from chemrof.converter.inchi import parse_inchi_sublayers
+from chemrof.converter.parse import ParsedInput, parse_input
 
 
 # chemrof type URI prefix
@@ -26,42 +30,44 @@ _ION_TYPES = {"AtomCation", "AtomAnion", "MolecularCation", "MolecularAnion"}
 _MONOATOMIC_TYPES = {"AtomCation", "AtomAnion", "UnchargedAtom"}
 
 
-class SmilesConverter:
-    """Converts SMILES strings to chemrof-compliant dicts.
+class ChemConverter:
+    """Converts chemical input strings to chemrof-compliant dicts.
 
-    Attributes:
-        enrichers: Ordered list of Enricher instances to run after
-            structural slot population.
+    Accepts SMILES or InChI strings (auto-detected).
+
+    >>> ChemConverter().convert("[Ca+2]")["type"]
+    'chemrof:AtomCation'
     """
 
     def __init__(self, enrichers: list[Enricher] | None = None):
         self.enrichers: list[Enricher] = enrichers or []
 
-    def convert(self, smiles: str) -> dict:
-        """Parse a SMILES string and return a chemrof dict.
+    def convert(self, raw: str) -> dict:
+        """Parse an input string and return a chemrof dict.
 
         Args:
-            smiles: A SMILES string.
+            raw: A SMILES or InChI string.
 
         Returns:
             A dict with chemrof slots populated.
 
         Raises:
-            ValueError: If RDKit cannot parse the SMILES.
+            ValueError: If RDKit cannot parse the input.
         """
-        mol = Chem.MolFromSmiles(smiles)
-        if mol is None:
-            raise ValueError(f"RDKit could not parse SMILES: {smiles!r}")
+        parsed = parse_input(raw)
+        return self.convert_parsed(parsed)
 
-        entity_type = classify_entity(mol)
-        obj = self._populate(mol, smiles, entity_type)
+    def convert_parsed(self, parsed: ParsedInput) -> dict:
+        """Convert a pre-parsed input to a chemrof dict."""
+        entity_type = classify_entity(parsed.mol)
+        obj = self._populate(parsed, entity_type)
 
         # Run enricher pipeline
         inchikey = obj.get("id", "").replace("INCHIKEY:", "")
         context = EnrichmentContext(
-            mol=mol,
+            mol=parsed.mol,
             inchikey=inchikey,
-            smiles=smiles,
+            smiles=obj.get("smiles_string", ""),
             inchi=obj.get("inchi_string", ""),
         )
         for enricher in self.enrichers:
@@ -69,8 +75,10 @@ class SmilesConverter:
 
         return obj
 
-    def _populate(self, mol: Chem.Mol, smiles: str, entity_type: str) -> dict:
-        """Fill chemrof slots from the RDKit mol."""
+    def _populate(self, parsed: ParsedInput, entity_type: str) -> dict:
+        """Fill chemrof slots from the parsed input."""
+        mol = parsed.mol
+
         # Canonical SMILES
         canonical = Chem.MolToSmiles(mol)
 
@@ -115,10 +123,21 @@ class SmilesConverter:
         if entity_type in _MONOATOMIC_TYPES:
             obj["has_element"] = mol.GetAtomWithIdx(0).GetSymbol()
 
-        # Boolean flags (only include if True, following existing example style)
+        # Boolean flags
         if has_carbon:
             obj["is_organic"] = True
         if has_radical:
             obj["is_radical"] = True
 
+        # Enantiomer-specific slots
+        if entity_type == "Enantiomer":
+            obj["isomeric_smiles_string"] = Chem.MolToSmiles(mol, isomericSmiles=True)
+            chiral_centers = FindMolChiralCenters(mol)
+            if len(chiral_centers) == 1:
+                obj["absolute_configuration"] = f"({chiral_centers[0][1]})"
+
         return obj
+
+
+# Backwards-compatible alias
+SmilesConverter = ChemConverter

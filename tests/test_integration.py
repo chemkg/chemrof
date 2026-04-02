@@ -3,7 +3,7 @@
 import pytest
 import yaml
 
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter as SmilesConverter
 
 
 @pytest.fixture

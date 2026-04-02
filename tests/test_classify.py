@@ -28,6 +28,17 @@ from chemrof.converter.classify import classify_entity
         # Molecular anions
         ("CC([O-])=O", "MolecularAnion"),   # acetate
         ("[OH-]", "MolecularAnion"),        # hydroxide (2 atoms)
+        # Enantiomers (assigned stereocenters)
+        ("C[C@@H](N)C(=O)O", "Enantiomer"),   # L-alanine
+        ("C[C@H](N)C(=O)O", "Enantiomer"),    # D-alanine
+        # Unassigned stereocenters stay SmallMolecule
+        ("CC(N)C(=O)O", "SmallMolecule"),     # alanine, no stereo annotation
+        # Zwitterion with assigned stereo → Enantiomer (net charge 0, stereo wins)
+        ("C[C@@H]([NH3+])C(=O)[O-]", "Enantiomer"),
+        # Chemical salts (multi-fragment, opposite charges, net 0)
+        ("[Na+].[Cl-]", "ChemicalSalt"),          # sodium chloride
+        ("[Na+].CC([O-])=O", "ChemicalSalt"),      # sodium acetate
+        ("[Ca+2].[Cl-].[Cl-]", "ChemicalSalt"),    # calcium chloride
     ],
 )
 def test_classify_entity(smiles: str, expected_type: str):
@@ -41,3 +52,72 @@ def test_classify_invalid_mol():
     """classify_entity raises ValueError on None mol."""
     with pytest.raises(ValueError, match="cannot classify"):
         classify_entity(None)
+
+
+class TestChargeClassification:
+    """Existing charge-based classification (regression)."""
+
+    def test_neutral_molecule(self):
+        assert classify_entity(Chem.MolFromSmiles("CCO")) == "SmallMolecule"
+
+    def test_atom_cation(self):
+        assert classify_entity(Chem.MolFromSmiles("[Ca+2]")) == "AtomCation"
+
+    def test_atom_anion(self):
+        assert classify_entity(Chem.MolFromSmiles("[Cl-]")) == "AtomAnion"
+
+    def test_molecular_cation(self):
+        assert classify_entity(Chem.MolFromSmiles("[NH4+]")) == "MolecularCation"
+
+    def test_molecular_anion(self):
+        assert classify_entity(Chem.MolFromSmiles("CC([O-])=O")) == "MolecularAnion"
+
+
+class TestStereoClassification:
+    """New stereochemistry-aware classification."""
+
+    def test_assigned_stereo_is_enantiomer(self):
+        """SMILES with all stereocenters assigned → Enantiomer."""
+        mol = Chem.MolFromSmiles("C[C@@H](N)C(=O)O")  # L-alanine
+        assert classify_entity(mol) == "Enantiomer"
+
+    def test_unassigned_stereo_stays_small_molecule(self):
+        """SMILES with unassigned stereocenters → SmallMolecule (agnostic)."""
+        mol = Chem.MolFromSmiles("CC(N)C(=O)O")  # alanine, no stereo
+        assert classify_entity(mol) == "SmallMolecule"
+
+    def test_no_stereocenters(self):
+        """Achiral molecule stays SmallMolecule."""
+        mol = Chem.MolFromSmiles("CCO")
+        assert classify_entity(mol) == "SmallMolecule"
+
+    def test_charged_enantiomer_stays_charged(self):
+        """Charged molecule with stereo keeps charge-based type (ions are more specific)."""
+        mol = Chem.MolFromSmiles("C[C@@H]([NH3+])C(=O)[O-]")  # zwitterion, net 0
+        assert classify_entity(mol) == "Enantiomer"
+
+    def test_none_mol_raises(self):
+        with pytest.raises(ValueError):
+            classify_entity(None)
+
+
+class TestSaltClassification:
+    """Salt detection for multi-fragment charged molecules."""
+
+    def test_nacl(self):
+        assert classify_entity(Chem.MolFromSmiles("[Na+].[Cl-]")) == "ChemicalSalt"
+
+    def test_sodium_acetate(self):
+        assert classify_entity(Chem.MolFromSmiles("[Na+].CC([O-])=O")) == "ChemicalSalt"
+
+    def test_calcium_chloride(self):
+        assert classify_entity(Chem.MolFromSmiles("[Ca+2].[Cl-].[Cl-]")) == "ChemicalSalt"
+
+    def test_single_fragment_not_salt(self):
+        """Single-fragment charged molecule is NOT a salt."""
+        assert classify_entity(Chem.MolFromSmiles("[Na+]")) == "AtomCation"
+
+    def test_neutral_multi_fragment_not_salt(self):
+        """Multi-fragment with no charges is NOT a salt (just a mixture)."""
+        mol = Chem.MolFromSmiles("CCO.O")
+        assert classify_entity(mol) == "SmallMolecule"
