@@ -341,9 +341,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#chemrof-from-smiles" class="md-nav__link">
+  <a href="#chemrof-convert" class="md-nav__link">
     <span class="md-ellipsis">
-      chemrof from-smiles
+      chemrof convert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-format-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input format detection
     </span>
   </a>
   
@@ -353,6 +362,15 @@
   <a href="#output-formats" class="md-nav__link">
     <span class="md-ellipsis">
       Output formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autochain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autochain
     </span>
   </a>
   
@@ -371,6 +389,15 @@
   <a href="#auto-classification" class="md-nav__link">
     <span class="md-ellipsis">
       Auto-classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemrof-from-smiles-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof from-smiles (deprecated)
     </span>
   </a>
   
@@ -688,9 +715,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#chemrof-from-smiles" class="md-nav__link">
+  <a href="#chemrof-convert" class="md-nav__link">
     <span class="md-ellipsis">
-      chemrof from-smiles
+      chemrof convert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-format-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input format detection
     </span>
   </a>
   
@@ -700,6 +736,15 @@
   <a href="#output-formats" class="md-nav__link">
     <span class="md-ellipsis">
       Output formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autochain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autochain
     </span>
   </a>
   
@@ -718,6 +763,15 @@
   <a href="#auto-classification" class="md-nav__link">
     <span class="md-ellipsis">
       Auto-classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemrof-from-smiles-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof from-smiles (deprecated)
     </span>
   </a>
   
@@ -764,9 +818,10 @@ chemical structure data in the chemrof framework.</p>
 </code></pre></div>
 <p>This installs the <code>chemrof</code> command from the project's entry point.</p>
 <h2 id="commands">Commands</h2>
-<h3 id="chemrof-from-smiles"><code>chemrof from-smiles</code></h3>
-<p>Convert one or more SMILES strings into chemrof-compliant records.</p>
-<div class="highlight"><pre><span></span><code>chemrof from-smiles [OPTIONS] SMILES...
+<h3 id="chemrof-convert"><code>chemrof convert</code></h3>
+<p>Convert one or more chemical input strings (SMILES or InChI, auto-detected)
+into chemrof-compliant records.</p>
+<div class="highlight"><pre><span></span><code>chemrof convert [OPTIONS] INPUTS...
 </code></pre></div>
 <p><strong>Arguments:</strong></p>
 <table>
@@ -778,8 +833,8 @@ chemical structure data in the chemrof framework.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>SMILES</code></td>
-<td>One or more SMILES strings (required). Quote ions: <code>"[Ca+2]"</code></td>
+<td><code>INPUTS</code></td>
+<td>One or more SMILES or InChI strings (required). Quote ions: <code>"[Ca+2]"</code></td>
 </tr>
 </tbody>
 </table>
@@ -803,11 +858,30 @@ chemical structure data in the chemrof framework.</p>
 <td><em>(none)</em></td>
 <td>Comma-separated list of enricher sources</td>
 </tr>
+<tr>
+<td><code>--classes</code>, <code>-c</code></td>
+<td><em>(none)</em></td>
+<td>Target chemrof classes (implies <code>--autochain</code>)</td>
+</tr>
+<tr>
+<td><code>--autochain</code></td>
+<td><code>false</code></td>
+<td>Generate interlinked dependent entities</td>
+</tr>
 </tbody>
 </table>
+<h3 id="input-format-detection">Input format detection</h3>
+<p>The converter auto-detects the input format:</p>
+<ul>
+<li>Starts with <code>InChI=</code> → parsed as InChI</li>
+<li>Otherwise → parsed as SMILES</li>
+</ul>
+<p>Non-standard InChI with <code>/s3</code> (racemic) automatically triggers <code>--autochain</code>
+with <code>--classes RacemicMixture</code>.</p>
 <h3 id="output-formats">Output formats</h3>
-<p><strong>YAML</strong> (default) — one document per SMILES, or a list for multiple inputs:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO
+<p><strong>YAML</strong> (default) — one document per entity, or multi-document YAML for
+autochain output:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C2H6O</span>
@@ -819,22 +893,56 @@ chemical structure data in the chemrof framework.</p>
 <span class="nt">is_organic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p><strong>JSON</strong> — same structure, JSON-encoded:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w"> </span>--format<span class="w"> </span>json
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--format<span class="w"> </span>json
 </code></pre></div>
-<p><strong>OWL</strong> — OWL Functional Syntax ontology. Each entity becomes an OWL
-class with <code>SubClassOf</code> to its chemrof type and annotation assertions
-for structural properties:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
+<p><strong>OWL</strong> — OWL Functional Syntax ontology via linkml-data2owl. Types with
+<code>owl.template</code> annotations (MonoatomicIon, Enantiomer, RacemicMixture)
+produce <code>EquivalentClasses</code> axioms. Others produce annotation assertions:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>SubClassOf(chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N chemrof:SmallMolecule)
-AnnotationAssertion(rdfs:label chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N &quot;C2H6O&quot;)
-AnnotationAssertion(chemrof:smiles_string chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N &quot;CCO&quot;)
+<div class="highlight"><pre><span></span><code>EquivalentClasses(INCHIKEY:... ObjectIntersectionOf(
+  chemrof:MonoatomicIon
+  ObjectSomeValuesFrom(chemrof:has_element chemrof:Ca)
+  DataHasValue(chemrof:elemental_charge &quot;2&quot;^^xsd:integer)
+))
 </code></pre></div>
+<h3 id="autochain">Autochain</h3>
+<p>The <code>--classes</code> option generates interlinked entity graphs. Requesting
+<code>RacemicMixture</code> generates the chirality-agnostic form, both enantiomers,
+and the racemic mixture entity — all with relationship slots populated.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate full racemate graph from stereo-neutral alanine</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture<span class="w"> </span>--format<span class="w"> </span>json
+
+<span class="c1"># Enantiomers only (no mixture entity)</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>Enantiomer
+
+<span class="c1"># From a specific enantiomer — generates agnostic + mirror + mixture</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture
+
+<span class="c1"># Racemic InChI auto-triggers autochain</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3&quot;</span>
+</code></pre></div>
+<p><strong>Chemical salts:</strong> Salt SMILES (multi-fragment, opposite charges) are
+auto-detected and decomposed into cation + anion + salt entities:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># NaCl → Na+ entity, Cl- entity, NaCl salt entity</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Na+].[Cl-]&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
+
+<span class="c1"># Sodium acetate</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Na+].CC([O-])=O&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
+
+<span class="c1"># Explicit --classes flag</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2].[Cl-].[Cl-]&quot;</span><span class="w"> </span>--classes<span class="w"> </span>ChemicalSalt<span class="w"> </span>--format<span class="w"> </span>json
+</code></pre></div>
+<p><strong>Tautomers:</strong> Enumerate tautomeric forms and cross-link via <code>tautomer_of</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 2-hydroxypyridine / 2-pyridinone tautomers</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;Oc1ccccn1&quot;</span><span class="w"> </span>--classes<span class="w"> </span>Tautomer<span class="w"> </span>--format<span class="w"> </span>json
+</code></pre></div>
+<p>v1 limitation: autochain only supports single-stereocenter molecules.</p>
 <h3 id="enrichers">Enrichers</h3>
 <p>Enrichers pull additional data from external databases after RDKit
 computes the structural properties. Pass a comma-separated list:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chebi
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chebi
 </code></pre></div>
 <table>
 <thead>
@@ -886,6 +994,14 @@ chemrof class:</p>
 <td><code>UnchargedAtom</code></td>
 </tr>
 <tr>
+<td>Multi-fragment salt (e.g. <code>[Na+].[Cl-]</code>)</td>
+<td><code>ChemicalSalt</code></td>
+</tr>
+<tr>
+<td>Multi-atom, all stereocenters assigned (e.g. <code>C[C@@H](N)C(=O)O</code>)</td>
+<td><code>Enantiomer</code></td>
+</tr>
+<tr>
 <td>Multi-atom, positive (e.g. <code>[NH4+]</code>)</td>
 <td><code>MolecularCation</code></td>
 </tr>
@@ -899,21 +1015,33 @@ chemrof class:</p>
 </tr>
 </tbody>
 </table>
+<h3 id="chemrof-from-smiles-deprecated"><code>chemrof from-smiles</code> (deprecated)</h3>
+<p>Hidden alias for <code>chemrof convert</code>. Still works for backwards compatibility
+but does not support <code>--classes</code> or <code>--autochain</code>.</p>
 <h2 id="examples">Examples</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Ethanol as YAML</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO
+
+<span class="c1"># InChI input</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;</span>
 
 <span class="c1"># Benzene and water as JSON</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span>c1ccccc1<span class="w"> </span>O<span class="w"> </span>--format<span class="w"> </span>json
+chemrof<span class="w"> </span>convert<span class="w"> </span>c1ccccc1<span class="w"> </span>O<span class="w"> </span>--format<span class="w"> </span>json
 
 <span class="c1"># Calcium ion with PubChem enrichment</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+
+<span class="c1"># Enantiomer detection</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
+
+<span class="c1"># Full racemic mixture graph</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture<span class="w"> </span>--format<span class="w"> </span>json
 
 <span class="c1"># Multiple ions as OWL</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span><span class="s2">&quot;[Cl-]&quot;</span><span class="w"> </span><span class="s2">&quot;[NH4+]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span><span class="s2">&quot;[Cl-]&quot;</span><span class="w"> </span><span class="s2">&quot;[NH4+]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
 
 <span class="c1"># Pipe OWL output to a file</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w"> </span>--format<span class="w"> </span>owl<span class="w"> </span>&gt;<span class="w"> </span>ethanol.ofn
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--format<span class="w"> </span>owl<span class="w"> </span>&gt;<span class="w"> </span>ethanol.ofn
 </code></pre></div>
 
 

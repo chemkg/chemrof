@@ -1,0 +1,1056 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chemkg.github.io/chemrof/superpowers/specs/2026-03-31-convert-command-design/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Design: chemrof convert command - CHEMROF</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#design-chemrof-convert-command" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CHEMROF" class="md-header__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CHEMROF
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design: chemrof convert command
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CHEMROF" class="md-nav__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CHEMROF
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../motivation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motivation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../converter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SMILES Converter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    URI Encoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ontology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ontology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../metaclasses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metaclasses
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Explanations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanations/clinical-assays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clinical Assays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai-controller/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Controller Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../credits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Credits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-detection-converterparsepy-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Detection — converter/parse.py (new)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-extend-converterclassifypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification — extend converter/classify.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converter-rename-convertersmilespy-to-converterconvertpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Converter — rename converter/smiles.py to converter/convert.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autochain-converterautochainpy-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autochain — converter/autochain.py (new)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autochain — converter/autochain.py (new)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autochain-logic-for-racemicmixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autochain logic for RacemicMixture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autochain-logic-for-enantiomer-without-racemicmixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autochain logic for Enantiomer (without RacemicMixture)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-from-a-specific-enantiomer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting from a specific enantiomer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owl-output-rewrite-converterowl_outputpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      OWL Output — rewrite converter/owl_output.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-climainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI — cli/main.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-limits-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope Limits (v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Strategy
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="design-chemrof-convert-command">Design: <code>chemrof convert</code> command</h1>
+<p><strong>Date:</strong> 2026-03-31
+<strong>Branch:</strong> (to be created from <code>linkml-owl-annotations</code>)
+<strong>Status:</strong> Approved</p>
+<h2 id="problem">Problem</h2>
+<p>The current <code>chemrof from-smiles</code> command only accepts SMILES input, cannot detect
+stereochemistry, and produces flat SubClassOf OWL output that lacks EquivalentClasses
+axioms. It also cannot generate interlinked entity graphs (e.g., a racemic mixture
+with its enantiomers and chirality-agnostic form).</p>
+<h2 id="goals">Goals</h2>
+<ol>
+<li>Rename <code>from-smiles</code> to <code>convert</code> (keep <code>from-smiles</code> as hidden alias)</li>
+<li>Accept both SMILES and InChI input with auto-detection</li>
+<li>Detect stereochemistry and classify Enantiomer vs chirality-agnostic forms</li>
+<li>Add <code>--autochain</code> flag + <code>--classes</code> hint to generate interlinked entity graphs</li>
+<li>Wire <code>--format owl</code> through linkml-data2owl for proper EquivalentClasses axioms</li>
+</ol>
+<h2 id="cli-interface">CLI Interface</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic conversion (same as today, new command name)</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
+
+<span class="c1"># Auto-detect InChI input</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;</span>
+
+<span class="c1"># Non-standard racemic InChI → auto-triggers autochain</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;InChI=1/.../t9-/s3&quot;</span>
+
+<span class="c1"># Explicit target classes (hint-based, generates full dependency graph)</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture,Enantiomer
+
+<span class="c1"># Combined with output format</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="w"> </span>--classes<span class="w"> </span>RacemicMixture<span class="w"> </span>--format<span class="w"> </span>owl
+
+<span class="c1"># Hidden alias preserved for backwards compat</span>
+chemrof<span class="w"> </span>from-smiles<span class="w"> </span>CCO<span class="w">  </span><span class="c1"># still works</span>
+</code></pre></div>
+<h3 id="options">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--format</code>, <code>-f</code></td>
+<td><code>yaml</code></td>
+<td>Output format: <code>yaml</code>, <code>json</code>, or <code>owl</code></td>
+</tr>
+<tr>
+<td><code>--enrichers</code>, <code>-e</code></td>
+<td><em>(none)</em></td>
+<td>Comma-separated enricher sources</td>
+</tr>
+<tr>
+<td><code>--classes</code>, <code>-c</code></td>
+<td><em>(none)</em></td>
+<td>Comma-separated target chemrof classes (hint-based)</td>
+</tr>
+<tr>
+<td><code>--autochain</code></td>
+<td><code>false</code></td>
+<td>Generate interlinked dependent entities</td>
+</tr>
+</tbody>
+</table>
+<p><code>--classes</code> implies <code>--autochain</code>. A non-standard InChI with <code>/s3</code> also implies
+<code>--autochain</code> with <code>--classes RacemicMixture</code>.</p>
+<h3 id="output">Output</h3>
+<p>Without <code>--autochain</code>: single entity dict (or list for multiple inputs), same as today.</p>
+<p>With <code>--autochain</code>: always a list of interlinked entity dicts. For YAML, each entity
+is a separate document. For JSON, a JSON array. For OWL, all entities in one ontology.</p>
+<h2 id="architecture">Architecture</h2>
+<h3 id="input-detection-converterparsepy-new">Input Detection — <code>converter/parse.py</code> (new)</h3>
+<p>Auto-detect input format and normalize to RDKit Mol + metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParsedInput</span><span class="p">:</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span>
+    <span class="n">input_format</span><span class="p">:</span> <span class="nb">str</span>          <span class="c1"># &quot;smiles&quot; | &quot;inchi&quot;</span>
+    <span class="n">original</span><span class="p">:</span> <span class="nb">str</span>              <span class="c1"># raw input string</span>
+    <span class="n">inchi_stereo_type</span><span class="p">:</span> <span class="nb">str</span>     <span class="c1"># &quot;&quot; | &quot;s1&quot; | &quot;s2&quot; | &quot;s3&quot;</span>
+    <span class="n">is_racemic</span><span class="p">:</span> <span class="nb">bool</span>           <span class="c1"># True if /s3 detected</span>
+</code></pre></div>
+<p>Detection rules:
+- Starts with <code>InChI=</code> → parse as InChI via <code>Chem.MolFromInchi()</code>
+- Otherwise → parse as SMILES via <code>Chem.MolFromSmiles()</code></p>
+<p>For InChI input, extract the <code>/s</code> layer value before parsing (since RDKit's
+<code>MolFromInchi</code> discards non-standard stereo metadata).</p>
+<h3 id="classification-extend-converterclassifypy">Classification — extend <code>converter/classify.py</code></h3>
+<p>Add stereochemistry awareness after existing charge-based classification:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># ... existing charge-based logic for ions ...</span>
+
+    <span class="c1"># Stereochemistry detection (multi-atom neutral/charged molecules)</span>
+    <span class="n">chiral_centers</span> <span class="o">=</span> <span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">includeUnassigned</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">chiral_centers</span><span class="p">:</span>
+        <span class="n">all_assigned</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;?&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chiral_centers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">all_assigned</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Enantiomer&quot;</span>   <span class="c1"># specific stereoisomer</span>
+        <span class="c1"># else: unassigned stereocenters = chirality-agnostic, keep current type</span>
+
+    <span class="c1"># ... existing fallthrough to SmallMolecule/MolecularCation/etc ...</span>
+</code></pre></div>
+<p>Note: Enantiomer classification only applies when ALL stereocenters are assigned.
+Mixed (some assigned, some not) stays as the base type.</p>
+<h3 id="converter-rename-convertersmilespy-to-converterconvertpy">Converter — rename <code>converter/smiles.py</code> to <code>converter/convert.py</code></h3>
+<p>The converter accepts a <code>ParsedInput</code> instead of a raw SMILES string. The
+<code>_populate</code> method gains new slots for stereochemistry:</p>
+<p>New slots populated for Enantiomer:
+- <code>enantiomer_form_of</code>: ID of chirality-agnostic form (populated during autochain)
+- <code>absolute_configuration</code>: R/S from <code>FindMolChiralCenters</code> (single-center only)
+- <code>isomeric_smiles_string</code>: SMILES with stereo (from <code>MolToSmiles</code>)
+- <code>inchi_tetrahedral_stereochemical_sublayer</code>: from InChI <code>/t</code> layer
+- <code>inchi_stereochemical_type_sublayer</code>: from InChI <code>/s</code> layer</p>
+<p>New slots populated for RacemicMixture:
+- <code>has_left_enantiomer</code>: ID of one enantiomer
+- <code>has_right_enantiomer</code>: ID of other enantiomer
+- <code>chirality_agnostic_form</code>: ID of agnostic form
+- No <code>inchi_string</code>, <code>smiles_string</code>, or <code>molecular_mass</code> (it's a mixture, not a molecule)</p>
+<h3 id="autochain-converterautochainpy-new">Autochain — <code>converter/autochain.py</code> (new)</h3>
+<p>Takes a single converted entity + target classes, returns a list of interlinked dicts.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate dependent entities for target classes.</span>
+
+<span class="sd">    Returns a list of chemrof dicts including the original entity</span>
+<span class="sd">    and all generated dependents, with relationship slots populated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<h4 id="autochain-logic-for-racemicmixture">Autochain logic for RacemicMixture</h4>
+<p>Input: any form (agnostic SMILES, specific enantiomer, or racemic InChI).</p>
+<ol>
+<li>
+<p><strong>Determine the agnostic mol</strong>: strip stereochemistry from input mol
+   (<code>Chem.RemoveAllHs</code> + clear stereo flags, or parse without stereo).</p>
+</li>
+<li>
+<p><strong>Generate enantiomers</strong>: <code>EnumerateStereoisomers(agnostic_mol)</code>.
+   Limited to single-stereocenter molecules in v1.
+   For each isomer, compute InChI with <code>-SAbs</code> flag (standard, absolute stereo).</p>
+</li>
+<li>
+<p><strong>Build entity dicts</strong>:</p>
+</li>
+</ol>
+<p>a. <strong>Agnostic form</strong> — <code>SmallMolecule</code> type, stereo-free InChI, no <code>/t</code>/<code>/s</code> layers.</p>
+<p>b. <strong>R-enantiomer</strong> — <code>Enantiomer</code> type, with:
+      - <code>enantiomer_form_of</code> → agnostic form ID
+      - <code>absolute_configuration</code> → <code>"(R)"</code>
+      - Full stereo InChI with <code>/t.../m1/s1</code></p>
+<p>c. <strong>S-enantiomer</strong> — <code>Enantiomer</code> type, same pattern with <code>"(S)"</code> and <code>/m0/s1</code>.</p>
+<p>d. <strong>RacemicMixture</strong> — with:
+      - <code>has_left_enantiomer</code> → S-enantiomer ID
+      - <code>has_right_enantiomer</code> → R-enantiomer ID
+      - <code>chirality_agnostic_form</code> → agnostic form ID
+      - <code>IUPAC_name</code> → <code>"rac-{name}"</code> if name available
+      - ID: synthesized from agnostic form's InChIKey: <code>chemrof:rac-{inchikey}</code>
+        (the agnostic form always has an InChIKey since it's a valid molecule)
+      - No InChI, SMILES, or mass (not a molecule)</p>
+<ol>
+<li><strong>Return</strong>: <code>[agnostic, r_enantiomer, s_enantiomer, racemic_mixture]</code></li>
+</ol>
+<h4 id="autochain-logic-for-enantiomer-without-racemicmixture">Autochain logic for Enantiomer (without RacemicMixture)</h4>
+<p>If <code>--classes Enantiomer</code> on a stereo-neutral input:
+1. Generate the agnostic form entity
+2. Enumerate enantiomers
+3. Return <code>[agnostic, r_enantiomer, s_enantiomer]</code> (no mixture entity)</p>
+<h4 id="starting-from-a-specific-enantiomer">Starting from a specific enantiomer</h4>
+<p>If input already has assigned stereo (e.g., <code>C[C@@H](N)C(=O)O</code>):
+1. The input IS one enantiomer
+2. Strip stereo → generate agnostic form
+3. Generate the mirror enantiomer via <code>EnumerateStereoisomers</code> on agnostic
+4. Build RacemicMixture linking both + agnostic form</p>
+<h3 id="owl-output-rewrite-converterowl_outputpy">OWL Output — rewrite <code>converter/owl_output.py</code></h3>
+<p>Replace direct pyhornedowl construction with linkml-data2owl:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">dicts_to_owl</span><span class="p">(</span><span class="n">objs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">output_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ofn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert chemrof dicts to OWL via linkml-data2owl.&quot;&quot;&quot;</span>
+    <span class="n">sv</span> <span class="o">=</span> <span class="n">SchemaView</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+    <span class="n">dumper</span> <span class="o">=</span> <span class="n">OWLDumper</span><span class="p">()</span>
+    <span class="n">dumper</span><span class="o">.</span><span class="n">schemaview</span> <span class="o">=</span> <span class="n">sv</span>
+
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">:</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;chemrof:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># Load as linkml instance</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">load_instance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">sv</span><span class="p">)</span>
+        <span class="n">dumper</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">sv</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">ontology</span><span class="o">.</span><span class="n">save_to_string</span><span class="p">(</span><span class="n">output_type</span><span class="p">)</span>
+</code></pre></div>
+<p>This means:
+- MonoatomicIon entities get EquivalentClasses axioms (from owl.template)
+- Enantiomer entities get EquivalentClasses axioms (from owl.template)
+- RacemicMixture entities get EquivalentClasses axioms (from owl.template)
+- Simple SmallMolecules get SubClassOf + AnnotationAssertions (from slot annotations)</p>
+<h3 id="cli-climainpy">CLI — <code>cli/main.py</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Argument</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">OutputFormat</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">),</span>
+    <span class="n">enrichers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;--enrichers&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">),</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;--classes&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">),</span>
+    <span class="n">autochain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;--autochain&quot;</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="c1"># Hidden alias for backwards compatibility</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_smiles</span><span class="p">(</span>
+    <span class="c1"># same signature, delegates to convert</span>
+<span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+<h2 id="module-layout">Module Layout</h2>
+<div class="highlight"><pre><span></span><code>src/chemrof/converter/
+  parse.py          # NEW: input detection (SMILES vs InChI), ParsedInput
+  classify.py       # EXTEND: add stereochemistry detection
+  convert.py        # RENAME from smiles.py: accept ParsedInput, populate dicts
+  autochain.py      # NEW: generate interlinked entity graphs
+  owl_output.py     # REWRITE: use linkml-data2owl
+  enrichers/        # UNCHANGED
+src/chemrof/cli/
+  main.py           # MODIFY: rename command, add --classes/--autochain options
+</code></pre></div>
+<h2 id="scope-limits-v1">Scope Limits (v1)</h2>
+<ul>
+<li>Autochain only for single-stereocenter molecules (classic racemates)</li>
+<li>Input formats: SMILES and InChI only (database ID lookup is future)</li>
+<li><code>--classes</code> only supports <code>RacemicMixture</code> and <code>Enantiomer</code> as targets</li>
+<li>Multi-stereocenter molecules warn and skip autochain</li>
+</ul>
+<h2 id="testing-strategy">Testing Strategy</h2>
+<ul>
+<li><strong>Unit tests for parse.py</strong>: SMILES vs InChI detection, <code>/s3</code> extraction</li>
+<li><strong>Unit tests for classify.py</strong>: Enantiomer detection, mixed-stereo fallthrough</li>
+<li><strong>Unit tests for autochain.py</strong>: entity graph generation, relationship linking,
+  starting from agnostic/enantiomer/racemic InChI</li>
+<li><strong>Integration test</strong>: full pipeline from SMILES → autochain → OWL output with
+  EquivalentClasses axioms</li>
+<li><strong>CLI tests</strong>: <code>convert</code> command, <code>from-smiles</code> alias, <code>--classes</code>, <code>--autochain</code></li>
+<li><strong>Doctest</strong>: key functions with inline examples</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

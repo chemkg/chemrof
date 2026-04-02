@@ -1,0 +1,2118 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chemkg.github.io/chemrof/superpowers/plans/2026-03-31-convert-command/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>chemrof convert Implementation Plan - CHEMROF</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chemrof-convert-implementation-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CHEMROF" class="md-header__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CHEMROF
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              chemrof convert Implementation Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CHEMROF" class="md-nav__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CHEMROF
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../motivation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motivation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../converter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SMILES Converter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    URI Encoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ontology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ontology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../metaclasses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metaclasses
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Explanations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanations/clinical-assays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clinical Assays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai-controller/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Controller Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../credits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Credits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#file-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Map
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-create-parsepy-input-detection-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 1: Create parse.py — input detection module
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-extend-classifypy-with-stereochemistry-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 2: Extend classify.py with stereochemistry detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-rename-smilespy-convertpy-and-accept-parsedinput" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 3: Rename smiles.py → convert.py and accept ParsedInput
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-4-create-autochainpy-entity-graph-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 4: Create autochain.py — entity graph generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-5-update-cli-convert-command-with-autochain-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 5: Update CLI — convert command with --autochain/--classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-6-rewrite-owl_outputpy-to-use-linkml-data2owl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 6: Rewrite owl_output.py to use linkml-data2owl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-7-update-cli-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 7: Update CLI docs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-8-run-full-test-suite-and-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 8: Run full test suite and push
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chemrof-convert-implementation-plan"><code>chemrof convert</code> Implementation Plan</h1>
+<blockquote>
+<p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p>
+</blockquote>
+<p><strong>Goal:</strong> Replace <code>from-smiles</code> with a general <code>convert</code> command that auto-detects input format (SMILES/InChI), classifies stereochemistry, and generates interlinked entity graphs (enantiomers, racemic mixtures) via <code>--autochain</code>/<code>--classes</code>.</p>
+<p><strong>Architecture:</strong> Input parsing → classification → entity population → optional autochain expansion → output (YAML/JSON/OWL). Each stage is a separate module. OWL output switches from direct pyhornedowl to linkml-data2owl for schema-driven axiom generation.</p>
+<p><strong>Tech Stack:</strong> Python 3.10+, RDKit (Chem, EnumerateStereoisomers), typer, linkml-owl (OWLDumper), pytest</p>
+<hr />
+<h2 id="file-map">File Map</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Action</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/chemrof/converter/parse.py</code></td>
+<td>CREATE</td>
+<td>Input detection (SMILES vs InChI), <code>ParsedInput</code> dataclass</td>
+</tr>
+<tr>
+<td><code>src/chemrof/converter/classify.py</code></td>
+<td>MODIFY</td>
+<td>Add stereochemistry detection to <code>classify_entity()</code></td>
+</tr>
+<tr>
+<td><code>src/chemrof/converter/smiles.py</code></td>
+<td>RENAME → <code>convert.py</code></td>
+<td>Accept <code>ParsedInput</code>, populate chemrof dicts</td>
+</tr>
+<tr>
+<td><code>src/chemrof/converter/autochain.py</code></td>
+<td>CREATE</td>
+<td>Generate interlinked entity graphs</td>
+</tr>
+<tr>
+<td><code>src/chemrof/converter/owl_output.py</code></td>
+<td>REWRITE</td>
+<td>Use linkml-data2owl OWLDumper</td>
+</tr>
+<tr>
+<td><code>src/chemrof/cli/main.py</code></td>
+<td>MODIFY</td>
+<td><code>convert</code> command + <code>from-smiles</code> alias + new options</td>
+</tr>
+<tr>
+<td><code>tests/test_parse.py</code></td>
+<td>CREATE</td>
+<td>Unit tests for input parsing</td>
+</tr>
+<tr>
+<td><code>tests/test_smiles_converter.py</code></td>
+<td>RENAME → <code>tests/test_converter.py</code></td>
+<td>Update imports, add stereo tests</td>
+</tr>
+<tr>
+<td><code>tests/test_autochain.py</code></td>
+<td>CREATE</td>
+<td>Unit tests for autochain</td>
+</tr>
+<tr>
+<td><code>tests/test_owl_output.py</code></td>
+<td>MODIFY</td>
+<td>Update for new OWL output path</td>
+</tr>
+<tr>
+<td><code>src/docs/cli.md</code></td>
+<td>MODIFY</td>
+<td>Update CLI docs for <code>convert</code> command</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="task-1-create-parsepy-input-detection-module">Task 1: Create <code>parse.py</code> — input detection module</h3>
+<p><strong>Files:</strong>
+- Create: <code>src/chemrof/converter/parse.py</code>
+- Create: <code>tests/test_parse.py</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write the failing tests</strong></li>
+</ul>
+<p>Create <code>tests/test_parse.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Tests for input format detection and parsing.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsedInput</span><span class="p">,</span> <span class="n">parse_input</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestParseSmiles</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_simple_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plain SMILES string is detected and parsed.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">input_format</span> <span class="o">==</span> <span class="s2">&quot;smiles&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">original</span> <span class="o">==</span> <span class="s2">&quot;CCO&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">inchi_stereo_type</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">is_racemic</span> <span class="ow">is</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ion_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;[Ca+2]&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">input_format</span> <span class="o">==</span> <span class="s2">&quot;smiles&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_stereo_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SMILES with stereo is parsed with mol retaining chirality.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">input_format</span> <span class="o">==</span> <span class="s2">&quot;smiles&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;parse&quot;</span><span class="p">):</span>
+            <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;not_a_molecule_XYZ&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestParseInchi</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_standard_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Standard InChI is detected and parsed.&quot;&quot;&quot;</span>
+        <span class="n">inchi</span> <span class="o">=</span> <span class="s2">&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">input_format</span> <span class="o">==</span> <span class="s2">&quot;inchi&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">original</span> <span class="o">==</span> <span class="n">inchi</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">inchi_stereo_type</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">is_racemic</span> <span class="ow">is</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_inchi_with_absolute_stereo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;InChI with /s1 (absolute) is detected.&quot;&quot;&quot;</span>
+        <span class="n">inchi</span> <span class="o">=</span> <span class="s2">&quot;InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m1/s1&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">inchi_stereo_type</span> <span class="o">==</span> <span class="s2">&quot;s1&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">is_racemic</span> <span class="ow">is</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_racemic_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Non-standard InChI with /s3 (racemic) is detected.&quot;&quot;&quot;</span>
+        <span class="n">inchi</span> <span class="o">=</span> <span class="s2">&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">input_format</span> <span class="o">==</span> <span class="s2">&quot;inchi&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">inchi_stereo_type</span> <span class="o">==</span> <span class="s2">&quot;s3&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">is_racemic</span> <span class="ow">is</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;parse&quot;</span><span class="p">):</span>
+            <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;InChI=1S/ZZZZZZ/invalid&quot;</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run tests to verify they fail</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_parse.py -v</code>
+Expected: FAIL — <code>ModuleNotFoundError: No module named 'chemrof.converter.parse'</code></p>
+<ul>
+<li>[ ] <strong>Step 3: Implement <code>parse.py</code></strong></li>
+</ul>
+<p>Create <code>src/chemrof/converter/parse.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Detect input format (SMILES vs InChI) and parse to RDKit Mol.</span>
+
+<span class="sd">&gt;&gt;&gt; parse_input(&quot;CCO&quot;).input_format</span>
+<span class="sd">&#39;smiles&#39;</span>
+<span class="sd">&gt;&gt;&gt; parse_input(&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;).input_format</span>
+<span class="sd">&#39;inchi&#39;</span>
+<span class="sd">&gt;&gt;&gt; parse_input(&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3&quot;).is_racemic</span>
+<span class="sd">True</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mol</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParsedInput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of parsing a chemical input string.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mol: RDKit Mol object.</span>
+<span class="sd">        input_format: Detected format — ``&quot;smiles&quot;`` or ``&quot;inchi&quot;``.</span>
+<span class="sd">        original: The raw input string.</span>
+<span class="sd">        inchi_stereo_type: The ``/s`` layer value (e.g. ``&quot;s1&quot;``, ``&quot;s3&quot;``), or ``&quot;&quot;`` if absent.</span>
+<span class="sd">        is_racemic: True when ``inchi_stereo_type`` is ``&quot;s3&quot;``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span>
+    <span class="n">input_format</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">original</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">inchi_stereo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">is_racemic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_extract_inchi_stereo_type</span><span class="p">(</span><span class="n">inchi</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the /s layer from an InChI string.</span>
+
+<span class="sd">    &gt;&gt;&gt; _extract_inchi_stereo_type(&quot;InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m1/s1&quot;)</span>
+<span class="sd">    &#39;s1&#39;</span>
+<span class="sd">    &gt;&gt;&gt; _extract_inchi_stereo_type(&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3&quot;)</span>
+<span class="sd">    &#39;s3&#39;</span>
+<span class="sd">    &gt;&gt;&gt; _extract_inchi_stereo_type(&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;)</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/(s\d+)&quot;</span><span class="p">,</span> <span class="n">inchi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_input</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParsedInput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a SMILES or InChI string into a ``ParsedInput``.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the string cannot be parsed by RDKit.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">raw</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;InChI=&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_parse_inchi</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_parse_smiles</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParsedInput</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RDKit could not parse SMILES: </span><span class="si">{</span><span class="n">smiles</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ParsedInput</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">input_format</span><span class="o">=</span><span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="n">original</span><span class="o">=</span><span class="n">smiles</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_inchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParsedInput</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">inchi</span> <span class="k">as</span> <span class="n">rdkit_inchi</span>
+
+    <span class="n">stereo_type</span> <span class="o">=</span> <span class="n">_extract_inchi_stereo_type</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">rdkit_inchi</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RDKit could not parse InChI: </span><span class="si">{</span><span class="n">inchi</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ParsedInput</span><span class="p">(</span>
+        <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+        <span class="n">input_format</span><span class="o">=</span><span class="s2">&quot;inchi&quot;</span><span class="p">,</span>
+        <span class="n">original</span><span class="o">=</span><span class="n">inchi</span><span class="p">,</span>
+        <span class="n">inchi_stereo_type</span><span class="o">=</span><span class="n">stereo_type</span><span class="p">,</span>
+        <span class="n">is_racemic</span><span class="o">=</span><span class="p">(</span><span class="n">stereo_type</span> <span class="o">==</span> <span class="s2">&quot;s3&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Run tests to verify they pass</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_parse.py -v</code>
+Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/chemrof/converter/parse.py<span class="w"> </span>tests/test_parse.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add parse.py for input format detection (SMILES/InChI)&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-2-extend-classifypy-with-stereochemistry-detection">Task 2: Extend <code>classify.py</code> with stereochemistry detection</h3>
+<p><strong>Files:</strong>
+- Modify: <code>src/chemrof/converter/classify.py</code>
+- Create: <code>tests/test_classify.py</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write the failing tests</strong></li>
+</ul>
+<p>Create <code>tests/test_classify.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Tests for entity classification including stereochemistry.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.classify</span><span class="w"> </span><span class="kn">import</span> <span class="n">classify_entity</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestChargeClassification</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Existing charge-based classification (regression).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_neutral_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;SmallMolecule&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_atom_cation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;[Ca+2]&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;AtomCation&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_atom_anion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;[Cl-]&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;AtomAnion&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_molecular_cation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;[NH4+]&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;MolecularCation&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_molecular_anion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC([O-])=O&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;MolecularAnion&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestStereoClassification</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;New stereochemistry-aware classification.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_assigned_stereo_is_enantiomer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SMILES with all stereocenters assigned → Enantiomer.&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>  <span class="c1"># L-alanine</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Enantiomer&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_unassigned_stereo_stays_small_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SMILES with unassigned stereocenters → SmallMolecule (agnostic).&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>  <span class="c1"># alanine, no stereo</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;SmallMolecule&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_no_stereocenters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Achiral molecule stays SmallMolecule.&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;SmallMolecule&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_charged_enantiomer_stays_charged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Charged molecule with stereo keeps charge-based type (ions are more specific).&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C[C@@H]([NH3+])C(=O)[O-]&quot;</span><span class="p">)</span>  <span class="c1"># zwitterion, net 0</span>
+        <span class="k">assert</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Enantiomer&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_none_mol_raises</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">classify_entity</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run tests to verify the new stereo tests fail</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_classify.py -v</code>
+Expected: <code>TestStereoClassification::test_assigned_stereo_is_enantiomer</code> FAILS (returns "SmallMolecule")</p>
+<ul>
+<li>[ ] <strong>Step 3: Update <code>classify.py</code></strong></li>
+</ul>
+<p>Replace the full contents of <code>src/chemrof/converter/classify.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Classify an RDKit Mol into the appropriate chemrof entity type.</span>
+
+<span class="sd">&gt;&gt;&gt; from rdkit import Chem</span>
+<span class="sd">&gt;&gt;&gt; classify_entity(Chem.MolFromSmiles(&quot;CCO&quot;))</span>
+<span class="sd">&#39;SmallMolecule&#39;</span>
+<span class="sd">&gt;&gt;&gt; classify_entity(Chem.MolFromSmiles(&quot;[Ca+2]&quot;))</span>
+<span class="sd">&#39;AtomCation&#39;</span>
+<span class="sd">&gt;&gt;&gt; classify_entity(Chem.MolFromSmiles(&quot;C[C@@H](N)C(=O)O&quot;))</span>
+<span class="sd">&#39;Enantiomer&#39;</span>
+<span class="sd">&gt;&gt;&gt; classify_entity(Chem.MolFromSmiles(&quot;CC(N)C(=O)O&quot;))</span>
+<span class="sd">&#39;SmallMolecule&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">AddHs</span><span class="p">,</span> <span class="n">FindMolChiralCenters</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mol</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">classify_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine the chemrof class name for an RDKit mol.</span>
+
+<span class="sd">    Classification priority:</span>
+<span class="sd">    1. Single-atom ions (AtomCation, AtomAnion, UnchargedAtom)</span>
+<span class="sd">    2. Multi-atom: stereochemistry check (Enantiomer if all centers assigned)</span>
+<span class="sd">    3. Multi-atom charge (MolecularCation, MolecularAnion)</span>
+<span class="sd">    4. Default: SmallMolecule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;cannot classify a None mol&quot;</span><span class="p">)</span>
+
+    <span class="n">mol_h</span> <span class="o">=</span> <span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">num_atoms</span> <span class="o">=</span> <span class="n">mol_h</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+    <span class="n">charge</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol_h</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+
+    <span class="c1"># Single-atom entities</span>
+    <span class="k">if</span> <span class="n">num_atoms</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">charge</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;AtomCation&quot;</span>
+        <span class="k">if</span> <span class="n">charge</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;AtomAnion&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;UnchargedAtom&quot;</span>
+
+    <span class="c1"># Multi-atom: check stereochemistry</span>
+    <span class="n">chiral_centers</span> <span class="o">=</span> <span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">includeUnassigned</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">chiral_centers</span><span class="p">:</span>
+        <span class="n">all_assigned</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;?&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chiral_centers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">all_assigned</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Enantiomer&quot;</span>
+
+    <span class="c1"># Multi-atom: charge-based</span>
+    <span class="k">if</span> <span class="n">charge</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;MolecularCation&quot;</span>
+    <span class="k">if</span> <span class="n">charge</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;MolecularAnion&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;SmallMolecule&quot;</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Run tests to verify they pass</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_classify.py -v</code>
+Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/chemrof/converter/classify.py<span class="w"> </span>tests/test_classify.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: classify Enantiomer when all stereocenters assigned&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-3-rename-smilespy-convertpy-and-accept-parsedinput">Task 3: Rename <code>smiles.py</code> → <code>convert.py</code> and accept <code>ParsedInput</code></h3>
+<p><strong>Files:</strong>
+- Rename: <code>src/chemrof/converter/smiles.py</code> → <code>src/chemrof/converter/convert.py</code>
+- Modify: <code>src/chemrof/converter/__init__.py</code>
+- Rename: <code>tests/test_smiles_converter.py</code> → <code>tests/test_converter.py</code>
+- Modify: <code>src/chemrof/cli/main.py</code> (update import)
+- Modify: <code>tests/test_owl_output.py</code> (update import)</p>
+<ul>
+<li>[ ] <strong>Step 1: Rename files with git mv</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>mv<span class="w"> </span>src/chemrof/converter/smiles.py<span class="w"> </span>src/chemrof/converter/convert.py
+git<span class="w"> </span>mv<span class="w"> </span>tests/test_smiles_converter.py<span class="w"> </span>tests/test_converter.py
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Update <code>convert.py</code> to accept <code>ParsedInput</code> while keeping the SMILES string interface</strong></li>
+</ul>
+<p>Replace the full contents of <code>src/chemrof/converter/convert.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Convert chemical inputs to chemrof-compliant dicts.</span>
+
+<span class="sd">&gt;&gt;&gt; converter = ChemConverter()</span>
+<span class="sd">&gt;&gt;&gt; result = converter.convert(&quot;CCO&quot;)</span>
+<span class="sd">&gt;&gt;&gt; result[&quot;type&quot;]</span>
+<span class="sd">&#39;chemrof:SmallMolecule&#39;</span>
+<span class="sd">&gt;&gt;&gt; result[&quot;empirical_formula&quot;]</span>
+<span class="sd">&#39;C2H6O&#39;</span>
+<span class="sd">&gt;&gt;&gt; result = converter.convert(&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;)</span>
+<span class="sd">&gt;&gt;&gt; result[&quot;type&quot;]</span>
+<span class="sd">&#39;chemrof:SmallMolecule&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Descriptors</span><span class="p">,</span> <span class="n">rdMolDescriptors</span><span class="p">,</span> <span class="n">inchi</span><span class="p">,</span> <span class="n">FindMolChiralCenters</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.classify</span><span class="w"> </span><span class="kn">import</span> <span class="n">classify_entity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.enrichers.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enricher</span><span class="p">,</span> <span class="n">EnrichmentContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.inchi</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_inchi_sublayers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsedInput</span><span class="p">,</span> <span class="n">parse_input</span>
+
+
+<span class="c1"># chemrof type URI prefix</span>
+<span class="n">_TYPE_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;chemrof:&quot;</span>
+
+<span class="c1"># Types where elemental_charge applies</span>
+<span class="n">_ION_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;AtomCation&quot;</span><span class="p">,</span> <span class="s2">&quot;AtomAnion&quot;</span><span class="p">,</span> <span class="s2">&quot;MolecularCation&quot;</span><span class="p">,</span> <span class="s2">&quot;MolecularAnion&quot;</span><span class="p">}</span>
+<span class="n">_MONOATOMIC_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;AtomCation&quot;</span><span class="p">,</span> <span class="s2">&quot;AtomAnion&quot;</span><span class="p">,</span> <span class="s2">&quot;UnchargedAtom&quot;</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ChemConverter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts chemical input strings to chemrof-compliant dicts.</span>
+
+<span class="sd">    Accepts SMILES or InChI strings (auto-detected).</span>
+
+<span class="sd">    &gt;&gt;&gt; ChemConverter().convert(&quot;[Ca+2]&quot;)[&quot;type&quot;]</span>
+<span class="sd">    &#39;chemrof:AtomCation&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enrichers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Enricher</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enrichers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Enricher</span><span class="p">]</span> <span class="o">=</span> <span class="n">enrichers</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse an input string and return a chemrof dict.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            raw: A SMILES or InChI string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dict with chemrof slots populated.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If RDKit cannot parse the input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_parsed</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_parsed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parsed</span><span class="p">:</span> <span class="n">ParsedInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a pre-parsed input to a chemrof dict.&quot;&quot;&quot;</span>
+        <span class="n">entity_type</span> <span class="o">=</span> <span class="n">classify_entity</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_populate</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">entity_type</span><span class="p">)</span>
+
+        <span class="c1"># Run enricher pipeline</span>
+        <span class="n">inchikey</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;INCHIKEY:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">EnrichmentContext</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="n">parsed</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">inchikey</span><span class="o">=</span><span class="n">inchikey</span><span class="p">,</span>
+            <span class="n">smiles</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;smiles_string&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">inchi</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inchi_string&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">enricher</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enrichers</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">enricher</span><span class="o">.</span><span class="n">enrich</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_populate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parsed</span><span class="p">:</span> <span class="n">ParsedInput</span><span class="p">,</span> <span class="n">entity_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fill chemrof slots from the parsed input.&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">mol</span>
+
+        <span class="c1"># Canonical SMILES</span>
+        <span class="n">canonical</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># InChI and InChIKey</span>
+        <span class="n">inchi_str</span> <span class="o">=</span> <span class="n">inchi</span><span class="o">.</span><span class="n">MolToInchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">inchikey</span> <span class="o">=</span> <span class="n">inchi</span><span class="o">.</span><span class="n">InchiToInchiKey</span><span class="p">(</span><span class="n">inchi_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">inchi_str</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># Molecular formula</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">CalcMolFormula</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># Molecular mass (exact)</span>
+        <span class="n">mass</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">ExactMolWt</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># Net formal charge</span>
+        <span class="n">charge</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+
+        <span class="c1"># Radical check</span>
+        <span class="n">has_radical</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetNumRadicalElectrons</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+
+        <span class="c1"># Is organic (contains carbon)</span>
+        <span class="n">has_carbon</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+
+        <span class="n">obj</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;INCHIKEY:</span><span class="si">{</span><span class="n">inchikey</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">inchikey</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;smiles:</span><span class="si">{</span><span class="n">canonical</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">formula</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_TYPE_PREFIX</span><span class="si">}{</span><span class="n">entity_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;smiles_string&quot;</span><span class="p">:</span> <span class="n">canonical</span><span class="p">,</span>
+            <span class="s2">&quot;inchi_string&quot;</span><span class="p">:</span> <span class="n">inchi_str</span><span class="p">,</span>
+            <span class="s2">&quot;empirical_formula&quot;</span><span class="p">:</span> <span class="n">formula</span><span class="p">,</span>
+            <span class="s2">&quot;molecular_mass&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># InChI sublayers</span>
+        <span class="n">sublayers</span> <span class="o">=</span> <span class="n">parse_inchi_sublayers</span><span class="p">(</span><span class="n">inchi_str</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sublayers</span><span class="p">)</span>
+
+        <span class="c1"># Charge-related slots</span>
+        <span class="k">if</span> <span class="n">entity_type</span> <span class="ow">in</span> <span class="n">_ION_TYPES</span><span class="p">:</span>
+            <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;elemental_charge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">charge</span>
+
+        <span class="c1"># Monoatomic: has_element</span>
+        <span class="k">if</span> <span class="n">entity_type</span> <span class="ow">in</span> <span class="n">_MONOATOMIC_TYPES</span><span class="p">:</span>
+            <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;has_element&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span>
+
+        <span class="c1"># Boolean flags</span>
+        <span class="k">if</span> <span class="n">has_carbon</span><span class="p">:</span>
+            <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;is_organic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">has_radical</span><span class="p">:</span>
+            <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;is_radical&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Enantiomer-specific slots</span>
+        <span class="k">if</span> <span class="n">entity_type</span> <span class="o">==</span> <span class="s2">&quot;Enantiomer&quot;</span><span class="p">:</span>
+            <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;isomeric_smiles_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">chiral_centers</span> <span class="o">=</span> <span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chiral_centers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;absolute_configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">chiral_centers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+
+<span class="c1"># Backwards-compatible alias</span>
+<span class="n">SmilesConverter</span> <span class="o">=</span> <span class="n">ChemConverter</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 3: Update <code>__init__.py</code></strong></li>
+</ul>
+<p>Read and update <code>src/chemrof/converter/__init__.py</code> — if it imports <code>SmilesConverter</code>, update the import path to point to <code>convert.py</code>. If it's empty, leave it.</p>
+<ul>
+<li>[ ] <strong>Step 4: Update test file imports</strong></li>
+</ul>
+<p>Replace imports in <code>tests/test_converter.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Old:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<span class="c1"># New:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span> <span class="k">as</span> <span class="n">SmilesConverter</span>
+</code></pre></div>
+<p>Also add a new test class at the end of <code>tests/test_converter.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TestInchiInput</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ethanol_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;InChI input produces same result as SMILES.&quot;&quot;&quot;</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;empirical_formula&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C2H6O&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enantiomer_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SMILES with assigned stereo classified as Enantiomer.&quot;&quot;&quot;</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:Enantiomer&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;absolute_configuration&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;(R)&quot;</span>
+        <span class="k">assert</span> <span class="s2">&quot;isomeric_smiles_string&quot;</span> <span class="ow">in</span> <span class="n">result</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestBackwardsCompat</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_smiles_converter_alias</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SmilesConverter still works as an alias.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 5: Update <code>cli/main.py</code> import</strong></li>
+</ul>
+<p>In <code>src/chemrof/cli/main.py</code>, change:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Old:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<span class="c1"># New:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+</code></pre></div>
+<p>And replace <code>SmilesConverter</code> with <code>ChemConverter</code> in the function body.</p>
+<ul>
+<li>[ ] <strong>Step 6: Update <code>tests/test_owl_output.py</code> import</strong></li>
+</ul>
+<p>In <code>tests/test_owl_output.py</code>, change:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Old:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<span class="c1"># New:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span> <span class="k">as</span> <span class="n">SmilesConverter</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 7: Run all tests</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_converter.py tests/test_owl_output.py tests/test_parse.py tests/test_classify.py -v</code>
+Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 8: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>-A
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;refactor: rename smiles.py → convert.py, accept SMILES and InChI input&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-4-create-autochainpy-entity-graph-generation">Task 4: Create <code>autochain.py</code> — entity graph generation</h3>
+<p><strong>Files:</strong>
+- Create: <code>src/chemrof/converter/autochain.py</code>
+- Create: <code>tests/test_autochain.py</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write the failing tests</strong></li>
+</ul>
+<p>Create <code>tests/test_autochain.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Tests for autochain entity graph generation.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.autochain</span><span class="w"> </span><span class="kn">import</span> <span class="n">autochain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">converter</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">ChemConverter</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestAutochainFromAgnostic</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Input is a stereo-neutral SMILES → generate full racemate graph.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_alanine_racemic_mixture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stereo-neutral alanine + RacemicMixture → 4 entities.&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span> <span class="ow">in</span> <span class="n">types</span>  <span class="c1"># agnostic</span>
+        <span class="k">assert</span> <span class="n">types</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enantiomers_have_enantiomer_form_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generated enantiomers link back to agnostic form.&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">agnostic</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">enantiomers</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enantiomers</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;enantiomer_form_of&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">agnostic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_racemic_mixture_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;RacemicMixture entity links enantiomers and agnostic form.&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">mixture</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">enantiomer_ids</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">}</span>
+        <span class="n">agnostic_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="k">assert</span> <span class="n">mixture</span><span class="p">[</span><span class="s2">&quot;has_left_enantiomer&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">enantiomer_ids</span>
+        <span class="k">assert</span> <span class="n">mixture</span><span class="p">[</span><span class="s2">&quot;has_right_enantiomer&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">enantiomer_ids</span>
+        <span class="k">assert</span> <span class="n">mixture</span><span class="p">[</span><span class="s2">&quot;has_left_enantiomer&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">mixture</span><span class="p">[</span><span class="s2">&quot;has_right_enantiomer&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">mixture</span><span class="p">[</span><span class="s2">&quot;chirality_agnostic_form&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">agnostic_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_racemic_mixture_has_no_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;RacemicMixture is a mixture — no InChI, SMILES, or mass.&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">mixture</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;inchi_string&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mixture</span>
+        <span class="k">assert</span> <span class="s2">&quot;smiles_string&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mixture</span>
+        <span class="k">assert</span> <span class="s2">&quot;molecular_mass&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mixture</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enantiomers_have_stereo_inchi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generated enantiomers have InChI with /t and /s layers.&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">enantiomers</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">]</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;absolute_configuration&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enantiomers</span><span class="p">}</span>
+        <span class="k">assert</span> <span class="n">configs</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;(R)&quot;</span><span class="p">,</span> <span class="s2">&quot;(S)&quot;</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enantiomers</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="s2">&quot;/t&quot;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;inchi_string&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="s2">&quot;inchi_tetrahedral_stereochemical_sublayer&quot;</span> <span class="ow">in</span> <span class="n">e</span>
+            <span class="k">assert</span> <span class="s2">&quot;inchi_stereochemical_type_sublayer&quot;</span> <span class="ow">in</span> <span class="n">e</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestAutochainFromEnantiomer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Input is a specific enantiomer → generate agnostic + mirror + mixture.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_from_specific_enantiomer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;L-alanine + RacemicMixture → 4 entities (agnostic + R + S + mixture).&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+        <span class="k">assert</span> <span class="n">types</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestAutochainEnantiomerOnly</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;--classes Enantiomer without RacemicMixture.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enantiomer_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stereo-neutral + Enantiomer → 3 entities (agnostic + R + S, no mixture).&quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Enantiomer&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+        <span class="k">assert</span> <span class="n">types</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestAutochainMultipleStereocenters</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multi-stereocenter molecules are not supported in v1.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_multi_stereo_warns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Molecule with &gt;1 stereocenter returns just the input entity.&quot;&quot;&quot;</span>
+        <span class="c1"># Tartaric acid: 2 stereocenters</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;OC(C(O)C(=O)O)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;OC(C(O)C(=O)O)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># Should return just the original entity (no expansion)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">entity</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run tests to verify they fail</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_autochain.py -v</code>
+Expected: FAIL — <code>ModuleNotFoundError: No module named 'chemrof.converter.autochain'</code></p>
+<ul>
+<li>[ ] <strong>Step 3: Implement <code>autochain.py</code></strong></li>
+</ul>
+<p>Create <code>src/chemrof/converter/autochain.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Generate interlinked entity graphs from a single chemical input.</span>
+
+<span class="sd">Given a chemrof entity dict and a set of target classes, autochain</span>
+<span class="sd">generates dependent entities (enantiomers, racemic mixtures) with</span>
+<span class="sd">proper relationship slots populated.</span>
+
+<span class="sd">&gt;&gt;&gt; from chemrof.converter.convert import ChemConverter</span>
+<span class="sd">&gt;&gt;&gt; from rdkit import Chem</span>
+<span class="sd">&gt;&gt;&gt; entity = ChemConverter().convert(&quot;CC(N)C(=O)O&quot;)</span>
+<span class="sd">&gt;&gt;&gt; mol = Chem.MolFromSmiles(&quot;CC(N)C(=O)O&quot;)</span>
+<span class="sd">&gt;&gt;&gt; results = autochain(entity, {&quot;RacemicMixture&quot;}, mol)</span>
+<span class="sd">&gt;&gt;&gt; len(results)</span>
+<span class="sd">4</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AllChem</span><span class="p">,</span>
+    <span class="n">Descriptors</span><span class="p">,</span>
+    <span class="n">EnumerateStereoisomers</span><span class="p">,</span>
+    <span class="n">FindMolChiralCenters</span><span class="p">,</span>
+    <span class="n">inchi</span><span class="p">,</span>
+    <span class="n">rdMolDescriptors</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.inchi</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_inchi_sublayers</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">_TYPE_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;chemrof:&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate dependent entities for target classes.</span>
+
+<span class="sd">    Returns a list of chemrof dicts including the original entity</span>
+<span class="sd">    and all generated dependents, with relationship slots populated.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        entity: The chemrof dict from the converter.</span>
+<span class="sd">        target_classes: Set of chemrof class names (e.g. ``{&quot;RacemicMixture&quot;}``).</span>
+<span class="sd">        mol: The RDKit Mol for the input.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of interlinked chemrof dicts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wants_racemate</span> <span class="o">=</span> <span class="s2">&quot;RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">target_classes</span>
+    <span class="n">wants_enantiomers</span> <span class="o">=</span> <span class="s2">&quot;Enantiomer&quot;</span> <span class="ow">in</span> <span class="n">target_classes</span> <span class="ow">or</span> <span class="n">wants_racemate</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">wants_enantiomers</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">entity</span><span class="p">]</span>
+
+    <span class="c1"># Check stereocenter count — v1 only supports single stereocenter</span>
+    <span class="n">chiral_centers</span> <span class="o">=</span> <span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">includeUnassigned</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chiral_centers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No stereocenters found — cannot generate enantiomers&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">entity</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chiral_centers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;Multiple stereocenters (</span><span class="si">%d</span><span class="s2">) — autochain v1 only supports single stereocenter&quot;</span><span class="p">,</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">chiral_centers</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">entity</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">_build_stereo_graph</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">wants_racemate</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_strip_stereo</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a copy of mol with all stereochemistry removed.&quot;&quot;&quot;</span>
+    <span class="n">mol_copy</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveStereochemistry</span><span class="p">(</span><span class="n">mol_copy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol_copy</span><span class="o">.</span><span class="n">GetMol</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_mol_to_entity</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">entity_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a basic chemrof dict from an RDKit mol.&quot;&quot;&quot;</span>
+    <span class="n">canonical</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">inchi_str</span> <span class="o">=</span> <span class="n">inchi</span><span class="o">.</span><span class="n">MolToInchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">inchikey</span> <span class="o">=</span> <span class="n">inchi</span><span class="o">.</span><span class="n">InchiToInchiKey</span><span class="p">(</span><span class="n">inchi_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">inchi_str</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">CalcMolFormula</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">ExactMolWt</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">has_carbon</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+
+    <span class="n">obj</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;INCHIKEY:</span><span class="si">{</span><span class="n">inchikey</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">inchikey</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;smiles:</span><span class="si">{</span><span class="n">canonical</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">formula</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_TYPE_PREFIX</span><span class="si">}{</span><span class="n">entity_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;smiles_string&quot;</span><span class="p">:</span> <span class="n">canonical</span><span class="p">,</span>
+        <span class="s2">&quot;inchi_string&quot;</span><span class="p">:</span> <span class="n">inchi_str</span><span class="p">,</span>
+        <span class="s2">&quot;empirical_formula&quot;</span><span class="p">:</span> <span class="n">formula</span><span class="p">,</span>
+        <span class="s2">&quot;molecular_mass&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="n">sublayers</span> <span class="o">=</span> <span class="n">parse_inchi_sublayers</span><span class="p">(</span><span class="n">inchi_str</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sublayers</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">has_carbon</span><span class="p">:</span>
+        <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;is_organic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">obj</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_stereo_graph</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">include_mixture</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the full stereoisomer entity graph for a single-stereocenter molecule.&quot;&quot;&quot;</span>
+    <span class="c1"># Step 1: Get the agnostic form</span>
+    <span class="n">agnostic_mol</span> <span class="o">=</span> <span class="n">_strip_stereo</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">agnostic</span> <span class="o">=</span> <span class="n">_mol_to_entity</span><span class="p">(</span><span class="n">agnostic_mol</span><span class="p">,</span> <span class="s2">&quot;SmallMolecule&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Step 2: Enumerate enantiomers from the agnostic mol</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="n">EnumerateStereoisomers</span><span class="o">.</span><span class="n">StereoEnumerationOptions</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">isomers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">EnumerateStereoisomers</span><span class="o">.</span><span class="n">EnumerateStereoisomers</span><span class="p">(</span><span class="n">agnostic_mol</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">opts</span><span class="p">))</span>
+
+    <span class="n">enantiomers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">iso_mol</span> <span class="ow">in</span> <span class="n">isomers</span><span class="p">:</span>
+        <span class="n">enantiomer</span> <span class="o">=</span> <span class="n">_mol_to_entity</span><span class="p">(</span><span class="n">iso_mol</span><span class="p">,</span> <span class="s2">&quot;Enantiomer&quot;</span><span class="p">)</span>
+        <span class="n">enantiomer</span><span class="p">[</span><span class="s2">&quot;enantiomer_form_of&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agnostic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">enantiomer</span><span class="p">[</span><span class="s2">&quot;isomeric_smiles_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">iso_mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">centers</span> <span class="o">=</span> <span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">iso_mol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">centers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">enantiomer</span><span class="p">[</span><span class="s2">&quot;absolute_configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">centers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="n">enantiomers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enantiomer</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">agnostic</span><span class="p">]</span> <span class="o">+</span> <span class="n">enantiomers</span>
+
+    <span class="c1"># Step 3: Build RacemicMixture if requested</span>
+    <span class="k">if</span> <span class="n">include_mixture</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">enantiomers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">agnostic_inchikey</span> <span class="o">=</span> <span class="n">agnostic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;INCHIKEY:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">mixture</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;chemrof:rac-</span><span class="si">{</span><span class="n">agnostic_inchikey</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;rac-</span><span class="si">{</span><span class="n">agnostic</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_TYPE_PREFIX</span><span class="si">}</span><span class="s2">RacemicMixture&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;has_left_enantiomer&quot;</span><span class="p">:</span> <span class="n">enantiomers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;has_right_enantiomer&quot;</span><span class="p">:</span> <span class="n">enantiomers</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;chirality_agnostic_form&quot;</span><span class="p">:</span> <span class="n">agnostic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mixture</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Run tests to verify they pass</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_autochain.py -v</code>
+Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/chemrof/converter/autochain.py<span class="w"> </span>tests/test_autochain.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add autochain for generating enantiomer/racemate entity graphs&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-5-update-cli-convert-command-with-autochain-classes">Task 5: Update CLI — <code>convert</code> command with <code>--autochain</code>/<code>--classes</code></h3>
+<p><strong>Files:</strong>
+- Modify: <code>src/chemrof/cli/main.py</code>
+- Create: <code>tests/test_cli.py</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write the failing tests</strong></li>
+</ul>
+<p>Create <code>tests/test_cli.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Tests for the chemrof CLI.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typer.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">CliRunner</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.cli.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">runner</span> <span class="o">=</span> <span class="n">CliRunner</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestConvertCommand</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_basic_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;CCO&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_json_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_inchi_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;empirical_formula&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C2H6O&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_owl_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;owl&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="s2">&quot;SubClassOf&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="ow">or</span> <span class="s2">&quot;AnnotationAssertion&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">output</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestFromSmilesAlias</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_alias_works</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;from-smiles&quot;</span><span class="p">,</span> <span class="s2">&quot;CCO&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestAutochain</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classes_implies_autochain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">,</span> <span class="s2">&quot;--classes&quot;</span><span class="p">,</span> <span class="s2">&quot;RacemicMixture&quot;</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+        <span class="k">assert</span> <span class="n">types</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;chemrof:Enantiomer&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_autochain_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">,</span> <span class="s2">&quot;--classes&quot;</span><span class="p">,</span> <span class="s2">&quot;RacemicMixture&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="c1"># YAML multi-doc: load all documents</span>
+        <span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_load_all</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">))</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_racemic_inchi_auto_triggers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Non-standard InChI with /s3 auto-triggers autochain.&quot;&quot;&quot;</span>
+        <span class="n">rac_inchi</span> <span class="o">=</span> <span class="s2">&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s3&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="n">rac_inchi</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;chemrof:RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">types</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run tests to verify they fail</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_cli.py -v</code>
+Expected: FAIL — <code>convert</code> command not found or wrong args</p>
+<ul>
+<li>[ ] <strong>Step 3: Rewrite <code>cli/main.py</code></strong></li>
+</ul>
+<p>Replace the full contents of <code>src/chemrof/cli/main.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;chemrof CLI -- convert chemical structures to chemrof YAML/JSON/OWL.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">typer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.enrichers.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_enricher</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_input</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;chemrof&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chemical Entities, Materials, and Reactions Ontological Framework -- CLI tools.&quot;</span><span class="p">,</span>
+    <span class="n">no_args_is_help</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">invoke_without_command</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_main_callback</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;chemrof CLI entry point.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OutputFormat</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">yaml</span> <span class="o">=</span> <span class="s2">&quot;yaml&quot;</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span>
+    <span class="n">owl</span> <span class="o">=</span> <span class="s2">&quot;owl&quot;</span>
+
+
+<span class="n">_ENRICHER_HELP</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Optionally pull extra data from external databases.</span>
+
+<span class="s2">Pass a comma-separated list of source names. Available sources:</span>
+
+<span class="s2">  pubchem   -- Look up the compound in PubChem by InChIKey.</span>
+<span class="s2">               Fills in the preferred IUPAC name and PubChem CID.</span>
+
+<span class="s2">  chebi     -- (stub) Will resolve CHEBI identifiers via OLS.</span>
+
+<span class="s2">  wikidata  -- (stub) Will resolve Wikidata QIDs via SPARQL.</span>
+
+<span class="s2">Example: --enrichers pubchem&quot;&quot;&quot;</span>
+
+<span class="n">_CLASSES_HELP</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Target chemrof classes to generate (hint-based).</span>
+
+<span class="s2">Pass a comma-separated list. Supported: RacemicMixture, Enantiomer.</span>
+<span class="s2">Implies --autochain. Requesting RacemicMixture automatically generates</span>
+<span class="s2">Enantiomer entities and the chirality-agnostic form.</span>
+
+<span class="s2">Example: --classes RacemicMixture&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_do_convert</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">OutputFormat</span><span class="p">,</span>
+    <span class="n">enrichers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">autochain</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shared implementation for convert and from-smiles commands.&quot;&quot;&quot;</span>
+    <span class="n">enricher_instances</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">enrichers</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">enrichers</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+            <span class="n">enricher_instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_enricher</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+
+    <span class="n">target_classes</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">classes</span><span class="p">:</span>
+        <span class="n">target_classes</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)}</span>
+        <span class="n">autochain</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">(</span><span class="n">enrichers</span><span class="o">=</span><span class="n">enricher_instances</span><span class="p">)</span>
+
+    <span class="n">all_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+
+        <span class="c1"># Non-standard racemic InChI auto-triggers autochain</span>
+        <span class="k">if</span> <span class="n">parsed</span><span class="o">.</span><span class="n">is_racemic</span><span class="p">:</span>
+            <span class="n">target_classes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">)</span>
+            <span class="n">autochain</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert_parsed</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">autochain</span> <span class="ow">and</span> <span class="n">target_classes</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.autochain</span><span class="w"> </span><span class="kn">import</span> <span class="n">autochain</span> <span class="k">as</span> <span class="n">do_autochain</span>
+
+            <span class="n">chain</span> <span class="o">=</span> <span class="n">do_autochain</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">,</span> <span class="n">parsed</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">all_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">all_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="n">OutputFormat</span><span class="o">.</span><span class="n">owl</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.owl_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">dicts_to_owl</span>
+
+        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">dicts_to_owl</span><span class="p">(</span><span class="n">all_results</span><span class="p">))</span>
+        <span class="k">return</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">all_results</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">all_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="n">OutputFormat</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="c1"># Multi-document YAML</span>
+            <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump_all</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Argument</span><span class="p">(</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;One or more SMILES or InChI strings.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">OutputFormat</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="n">OutputFormat</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output format.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">enrichers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;--enrichers&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">_ENRICHER_HELP</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;--classes&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">_CLASSES_HELP</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">autochain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;--autochain&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Generate interlinked dependent entities.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert chemical inputs to chemrof data.</span>
+
+<span class="sd">    Parses each input string (SMILES or InChI, auto-detected) with RDKit,</span>
+<span class="sd">    classifies the entity type, and outputs chemrof-compliant records.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        chemrof convert CCO</span>
+
+<span class="sd">        chemrof convert &quot;InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3&quot; --format json</span>
+
+<span class="sd">        chemrof convert &quot;CC(N)C(=O)O&quot; --classes RacemicMixture</span>
+
+<span class="sd">        chemrof convert &quot;[Ca+2]&quot; --enrichers pubchem</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_do_convert</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">enrichers</span><span class="p">,</span> <span class="n">classes</span><span class="p">,</span> <span class="n">autochain</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_smiles</span><span class="p">(</span>
+    <span class="n">smiles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Argument</span><span class="p">(</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;One or more SMILES strings.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">OutputFormat</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="n">OutputFormat</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="s2">&quot;--format&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output format.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">enrichers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;--enrichers&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">_ENRICHER_HELP</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;(Deprecated) Convert SMILES to chemrof data. Use &#39;convert&#39; instead.&quot;&quot;&quot;</span>
+    <span class="n">_do_convert</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">enrichers</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">autochain</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Run tests</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_cli.py tests/test_converter.py tests/test_owl_output.py -v</code>
+Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/chemrof/cli/main.py<span class="w"> </span>tests/test_cli.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add &#39;convert&#39; command with --autochain/--classes, keep from-smiles alias&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-6-rewrite-owl_outputpy-to-use-linkml-data2owl">Task 6: Rewrite <code>owl_output.py</code> to use linkml-data2owl</h3>
+<p><strong>Files:</strong>
+- Modify: <code>src/chemrof/converter/owl_output.py</code>
+- Modify: <code>tests/test_owl_output.py</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write the failing tests</strong></li>
+</ul>
+<p>Add new tests to <code>tests/test_owl_output.py</code> for EquivalentClasses axiom output:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TestEquivalentClassesAxioms</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_atom_cation_equivalent_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;AtomCation produces EquivalentClasses axiom via owl.template.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.owl_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">dicts_to_owl</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;[Ca+2]&quot;</span><span class="p">)</span>
+        <span class="n">owl</span> <span class="o">=</span> <span class="n">dicts_to_owl</span><span class="p">([</span><span class="n">obj</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="s2">&quot;EquivalentClasses&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;MonoatomicIon&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;has_element&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;elemental_charge&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enantiomer_equivalent_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enantiomer produces EquivalentClasses axiom.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.owl_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">dicts_to_owl</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">owl</span> <span class="o">=</span> <span class="n">dicts_to_owl</span><span class="p">([</span><span class="n">obj</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="s2">&quot;EquivalentClasses&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;Enantiomer&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_autochain_owl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Autochain entities all appear in OWL output.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.autochain</span><span class="w"> </span><span class="kn">import</span> <span class="n">autochain</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.owl_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">dicts_to_owl</span>
+
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC(N)C(=O)O&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">autochain</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;RacemicMixture&quot;</span><span class="p">},</span> <span class="n">mol</span><span class="p">)</span>
+        <span class="n">owl</span> <span class="o">=</span> <span class="n">dicts_to_owl</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s2">&quot;RacemicMixture&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;Enantiomer&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+        <span class="k">assert</span> <span class="s2">&quot;SmallMolecule&quot;</span> <span class="ow">in</span> <span class="n">owl</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run to verify new tests fail</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_owl_output.py::TestEquivalentClassesAxioms -v</code>
+Expected: FAIL — current owl_output.py only produces SubClassOf, not EquivalentClasses</p>
+<ul>
+<li>[ ] <strong>Step 3: Rewrite <code>owl_output.py</code></strong></li>
+</ul>
+<p>Replace the full contents of <code>src/chemrof/converter/owl_output.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Convert chemrof dicts to OWL ontology via linkml-data2owl.</span>
+
+<span class="sd">Uses the OWLDumper from linkml-owl with the annotated chemrof schema</span>
+<span class="sd">to generate proper OWL axioms including EquivalentClasses for types</span>
+<span class="sd">that have owl.template annotations (MonoatomicIon, Enantiomer,</span>
+<span class="sd">RacemicMixture).</span>
+
+<span class="sd">&gt;&gt;&gt; from chemrof.converter.convert import ChemConverter</span>
+<span class="sd">&gt;&gt;&gt; obj = ChemConverter().convert(&quot;CCO&quot;)</span>
+<span class="sd">&gt;&gt;&gt; owl = dicts_to_owl([obj])</span>
+<span class="sd">&gt;&gt;&gt; &quot;SmallMolecule&quot; in owl</span>
+<span class="sd">True</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">linkml_runtime.loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">json_loader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">linkml_runtime.utils.schemaview</span><span class="w"> </span><span class="kn">import</span> <span class="n">SchemaView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">linkml_owl.dumpers.owl_dumper</span><span class="w"> </span><span class="kn">import</span> <span class="n">OWLDumper</span>
+
+<span class="n">_SCHEMA_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;schema&quot;</span> <span class="o">/</span> <span class="s2">&quot;chemrof.yaml&quot;</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_schemaview</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SchemaView</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">SchemaView</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_SCHEMA_PATH</span><span class="p">))</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_python_module</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lazily load the generated Python datamodel.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linkml_owl.util.loader_wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_python_module</span>
+    <span class="n">sv</span> <span class="o">=</span> <span class="n">_get_schemaview</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">get_python_module</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_dict_to_instance</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sv</span><span class="p">:</span> <span class="n">SchemaView</span><span class="p">,</span> <span class="n">python_module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a chemrof dict to a linkml runtime instance.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linkml_owl.util.loader_wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">instantiate_object</span>
+    <span class="n">class_name</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;chemrof:SmallMolecule&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;chemrof:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">target_class</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">python_module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
+    <span class="c1"># Filter to only slots that the target class accepts</span>
+    <span class="k">return</span> <span class="n">instantiate_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">target_class</span><span class="p">,</span> <span class="n">python_module</span><span class="o">=</span><span class="n">python_module</span><span class="p">,</span> <span class="n">schemaview</span><span class="o">=</span><span class="n">sv</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dicts_to_owl</span><span class="p">(</span><span class="n">objs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">output_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ofn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert chemrof dicts to an OWL ontology string.</span>
+
+<span class="sd">    Uses linkml-owl OWLDumper with schema annotations to produce</span>
+<span class="sd">    EquivalentClasses axioms for annotated types and SubClassOf +</span>
+<span class="sd">    AnnotationAssertions for others.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        objs: List of chemrof dicts (from ChemConverter).</span>
+<span class="sd">        output_type: ``&quot;ofn&quot;`` (OWL Functional Syntax) or ``&quot;owl&quot;`` (RDF/XML).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        OWL string in the requested format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sv</span> <span class="o">=</span> <span class="n">_get_schemaview</span><span class="p">()</span>
+    <span class="n">python_module</span> <span class="o">=</span> <span class="n">_get_python_module</span><span class="p">()</span>
+
+    <span class="n">dumper</span> <span class="o">=</span> <span class="n">OWLDumper</span><span class="p">()</span>
+    <span class="n">dumper</span><span class="o">.</span><span class="n">schemaview</span> <span class="o">=</span> <span class="n">sv</span>
+
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">:</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">_dict_to_instance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">sv</span><span class="p">,</span> <span class="n">python_module</span><span class="p">)</span>
+        <span class="n">dumper</span><span class="o">.</span><span class="n">to_ontology_document</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">sv</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">ontology</span><span class="o">.</span><span class="n">save_to_string</span><span class="p">(</span><span class="n">output_type</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Run all OWL tests</strong></li>
+</ul>
+<p>Run: <code>uv run pytest tests/test_owl_output.py -v</code>
+Expected: all PASS (both old and new tests)</p>
+<p>Note: Some old tests may need adjustment if the new OWL output format differs
+(e.g., <code>Declaration(Class(</code> may no longer appear). If tests fail, update assertions
+to match the new linkml-owl output while preserving the semantic checks (SubClassOf,
+AnnotationAssertion, class name presence).</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/chemrof/converter/owl_output.py<span class="w"> </span>tests/test_owl_output.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: rewrite OWL output to use linkml-data2owl for EquivalentClasses axioms&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-7-update-cli-docs">Task 7: Update CLI docs</h3>
+<p><strong>Files:</strong>
+- Modify: <code>src/docs/cli.md</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Update CLI reference docs</strong></li>
+</ul>
+<p>Replace the contents of <code>src/docs/cli.md</code> to document the new <code>convert</code> command,
+InChI input support, <code>--autochain</code>, <code>--classes</code>, and the stereochemistry features.
+Key changes:</p>
+<ul>
+<li>Rename section from <code>chemrof from-smiles</code> to <code>chemrof convert</code></li>
+<li>Add InChI input examples</li>
+<li>Add <code>--classes</code> and <code>--autochain</code> options to the table</li>
+<li>Add autochain examples showing racemic mixture generation</li>
+<li>Update auto-classification table to include Enantiomer</li>
+<li>
+<p>Note that <code>from-smiles</code> still works as a hidden alias</p>
+</li>
+<li>
+<p>[ ] <strong>Step 2: Commit</strong></p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>src/docs/cli.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: update CLI reference for convert command and autochain&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-8-run-full-test-suite-and-push">Task 8: Run full test suite and push</h3>
+<p><strong>Files:</strong> none (verification only)</p>
+<ul>
+<li>[ ] <strong>Step 1: Run full test suite</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>-v
+</code></pre></div>
+<p>Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 2: Run doctests</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--doctest-modules<span class="w"> </span>src/chemrof/converter/parse.py<span class="w"> </span>src/chemrof/converter/classify.py<span class="w"> </span>src/chemrof/converter/convert.py<span class="w"> </span>src/chemrof/converter/autochain.py<span class="w"> </span>-v
+</code></pre></div>
+<p>Expected: all PASS</p>
+<ul>
+<li>[ ] <strong>Step 3: Run example tests</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>test-examples
+</code></pre></div>
+<p>Expected: exit code 0</p>
+<ul>
+<li>[ ] <strong>Step 4: Push and create PR</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>linkml-owl-annotations
+</code></pre></div>
+<p>Then create PR with <code>gh pr create</code> targeting <code>main</code>, summarizing all changes.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
