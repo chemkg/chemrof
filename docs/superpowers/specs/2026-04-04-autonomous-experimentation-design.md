@@ -1,6 +1,7 @@
 # Design: extending ChemROF toward autonomous experimentation
 
 **Date:** 2026-04-04
+**Updated:** 2026-04-12
 **Branch:** `feat/autonomous-experimentation-scout`
 **Status:** Scouting proposal
 
@@ -12,8 +13,10 @@ rendered into JSON Schema, SHACL, OWL, and other artifacts. That is a useful
 starting point for autonomous experimentation, but it is only one layer of the
 stack.
 
-Recent autonomous experimentation systems consistently separate at least five
-concerns:
+The literature now gives a fairly consistent answer about what the rest of the
+stack looks like. Across recent autonomous experimentation papers, orchestration
+frameworks, and adjacent standards, the recurring pattern is a separation
+between:
 
 1. stable identification of chemicals and formulations
 2. executable procedure definitions
@@ -21,30 +24,52 @@ concerns:
 4. measurements, observations, and derived outcomes
 5. campaign-level goals, constraints, and closed-loop decisions
 
-The seed paper on literature verification via chemputation and LLMs reinforces
-this layering: the system extracts procedures from papers, translates them into
-XDL, simulates execution on a target platform, and finally executes them on a
+That convergence shows up in different forms:
+
+- Pagel, Jirasek, and Cronin (published 2026-04-03) move from literature text,
+  to XDL procedure, to simulated execution, to robot execution.
+- ORD structures executed reactions around inputs, setup, conditions,
+  observations, workups, outcomes, and provenance.
+- LabOP separates reusable protocol definitions from execution traces, agents,
+  parameter values, and datasets.
+- SiLA 2 separates capability exposure and command transport from the domain
+  data exchanged through those capabilities.
+- HELAO-async, ChemOS 2.0, Atlas/Olympus, the dynamic knowledge graph work, and
+  recent closed-loop electrochemistry platforms all add campaign state,
+  asynchronous orchestration, and optimization history on top of chemistry and
+  measurements.
+
+The seed paper on literature verification via chemputation and LLMs is
+especially relevant because it reinforces the same layering in a chemistry-first
+setting: the system extracts procedures from papers, translates them into XDL,
+simulates execution on a target platform, and finally executes them on a
 robotic system. In other words, autonomous experimentation is not just about
 reactions; it is about the path from text to executable procedure to measured
 run to optimization loop.
 
-## Repo-Relevant Readout
+## Repo-State Readout
 
 ChemROF is already useful for autonomous experimentation in the following ways:
 
-- `ChemicalEntity`, `Material`, mixture classes, `IngredientRole`, and
-  `Concentration` provide a chemical identity layer for reagents, solvents,
-  additives, and stock formulations.
-- `Reaction` and `ReactionParticipant` already give a conceptual reaction layer,
-  and the schema explicitly carries a TODO to align with ORD.
-- The schema already values assay precision, as shown in
-  `docs/explanations/clinical-assays.md`; that same distinction between
-  analyte, measurement, and interpretation is central to autonomous workflows.
-- The CLI converter can normalize SMILES/InChI into ChemROF instances, which is
-  directly useful for reconciling reagent identities coming from procedure text,
-  robot software, or analytical pipelines.
-- LinkML generation gives ChemROF a practical validation path for future
-  autonomous-experiment records.
+- `src/chemrof/schema/chemrof.yaml` already defines a strong chemistry and
+  formulation layer through classes such as `ChemicalEntity`, `Material`,
+  `Concentration`, and `IngredientRole`. That is already enough to ground
+  reagents, solvents, additives, and stock formulations in a normalized schema.
+- The same schema defines `Reaction` and `ReactionParticipant` as an abstract
+  transformation layer, and it already contains an explicit TODO to align that
+  area with ORD. That is an important clue that the repo already recognizes the
+  need for an executed-reaction interchange target.
+- `docs/explanations/clinical-assays.md` already argues for separating analyte
+  identity from assay result and downstream interpretation. That is directly
+  relevant to autonomous experimentation, where the path from raw observation to
+  derived optimization metric must remain explicit.
+- `src/chemrof/cli/main.py` already exposes a practical ingest path: the
+  `chemrof convert` command can normalize SMILES or InChI into ChemROF records
+  and optionally enrich them. That is immediately useful for reconciling
+  reagent identities coming from procedure text, robot software, or analytical
+  pipelines.
+- LinkML generation already gives ChemROF a validation and artifact-generation
+  path for future autonomous-experiment records.
 
 What ChemROF does **not** currently model is the experiment/campaign layer:
 there are no first-class classes for procedures, steps, executions, samples,
@@ -86,6 +111,50 @@ Autonomous experimentation adds a different set of questions:
 
 Those questions currently have no canonical home in ChemROF.
 
+## Literature-Backed Design Principles
+
+The sources above support a fairly specific modeling strategy rather than a
+generic "more metadata" recommendation.
+
+### 1. Separate abstract chemistry from executed experiment records
+
+ORD, ChemOS-style orchestration, HELAO-async, and the closed-loop
+electrochemistry work all derive value from what was actually executed,
+measured, excluded, or retried. ChemROF's current `Reaction` class is best kept
+as the chemistry transformation layer; the autonomous extension should add a
+distinct executed-record layer rather than overloading `Reaction` itself.
+
+### 2. Keep executable payloads external, but surface semantic handles
+
+XDL and LabOP already provide richer procedure semantics than ChemROF should try
+to recreate. ChemROF should model the minimum needed for indexing, linking,
+querying, and validation: procedure identity, high-level step structure,
+parameter settings, execution status, and provenance. The full XDL or LabOP
+payload should remain external and authoritative.
+
+### 3. Model occurrences and lineage, not only classes of chemicals
+
+The autonomous systems in the literature operate on actual samples, aliquots,
+wells, vessels, flow segments, and datasets. A chemistry schema without a
+sample-occurrence layer cannot capture the difference between "acetone" as a
+chemical entity and "this 150 uL aliquot in well B3" as the thing a robot
+actually touched.
+
+### 4. Make the path from raw data to optimization metric explicit
+
+AnIML, ORD analyses, the clinical-assays note already in this repo, and the
+electrochemistry platform all point to the same requirement: the schema must be
+able to distinguish raw analytical artifacts, measurement events, intermediate
+results, and the derived metric that was finally used for ranking or Bayesian
+optimization.
+
+### 5. Treat orchestration state and exceptions as first-class
+
+HELAO-async, ChemOS 2.0, Atlas/Olympus, and dynamic-knowledge-graph systems all
+need explicit run status, objectives, constraints, exclusions, and agent/device
+provenance. A self-driving-lab data model that only records successful final
+outcomes is not enough to support auditability or closed-loop learning.
+
 ## Recommended Modeling Direction
 
 ChemROF should extend toward autonomous experimentation through a **separate
@@ -105,6 +174,11 @@ Recommended shape:
 
 This preserves ChemROF's current value while making it interoperable with
 autonomous systems.
+
+One concrete refinement follows from the literature and from the likely growth
+of the ecosystem: avoid adding one bespoke slot per external standard. A single
+typed `ExternalReference` pattern is more durable than parallel slots such as
+`xdl_id`, `ord_reaction_id`, `labop_id`, or `animl_uri`.
 
 ## Missing Schema Pieces
 
@@ -133,7 +207,7 @@ Minimum useful slots:
 - `has_output_sample`
 - `has_measurement`
 - `has_outcome`
-- `external_record`
+- `has_external_reference`
 
 Why this matters:
 
@@ -168,15 +242,15 @@ Minimum useful slots:
 - `uses_reagent`
 - `target_container`
 - `step_status`
-- `external_xdl_step_id`
-- `external_labop_node_id`
+- `has_external_reference`
 
 Do not start by modeling every XDL primitive as a dedicated ChemROF class.
 Instead:
 
 - begin with a small number of generic step families
 - support step typing via enums or a shallow hierarchy
-- preserve links to external XDL/LabOP identifiers
+- preserve links to external XDL/LabOP identifiers through `ExternalReference`
+  records
 
 ### 3. Sample, Container, and Material-Occurrence Layer
 
@@ -346,14 +420,17 @@ ReactionExperiment
   -> output_sample: Sample*
   -> measurement: MeasurementEvent*
   -> derived_metric: DerivedMetric*
+  -> external_reference: ExternalReference*
   -> run_status
 
 ProcedureDefinition
   -> step: ProcedureStep*
+  -> external_reference: ExternalReference*
 
 MeasurementEvent
   -> raw_dataset: AnalyticalDataset
   -> result: MeasurementResult*
+  -> external_reference: ExternalReference*
 
 Sample
   -> represents_entity: ChemicalEntity
@@ -388,15 +465,22 @@ Create a new extension schema with:
 - `Objective`
 - `Constraint`
 - `ExperimentRunStatusEnum`
+- `ExternalReference`
 
-Also add generic external reference slots for:
+Also add a reusable external-reference pattern instead of one slot per
+ecosystem. Recommended minimum slots:
 
-- `xdl_id`
-- `ord_reaction_id`
-- `sila_feature_id`
-- `animl_uri`
-- `allotrope_uri`
-- `labop_id`
+- `has_external_reference`
+- `reference_system`
+- `identifier`
+- `uri`
+- `artifact_role`
+- `media_type`
+
+This is a better first step than baking in dedicated `xdl_id`,
+`ord_reaction_id`, `sila_feature_id`, `animl_uri`, `allotrope_uri`, and
+`labop_id` slots because a single experiment may legitimately point to several
+external artifacts across procedure, execution, device, and analytics layers.
 
 This would be enough to make ChemROF a semantic hub without forcing it to own
 every downstream payload.
@@ -514,17 +598,19 @@ locking the project into a monolithic lab ontology.
 
 ## Key Sources
 
-- Seed paper: Pagel, Jirasek, Cronin. "Verification and execution of the scientific literature via chemputation augmented by large language models." Communications Chemistry (2026). https://www.nature.com/articles/s42004-026-01993-w
-- XDL standard docs: https://croningroup.gitlab.io/chemputer/xdl/standard/index.html
+- Pagel, Jirasek, Cronin. "Verification and execution of the scientific literature via chemputation augmented by large language models." Communications Chemistry (published 2026-04-03). https://www.nature.com/articles/s42004-026-01993-w
+- Tom et al. "Self-Driving Laboratories for Chemistry and Materials Science." Chemical Reviews (2024). https://doi.org/10.1021/acs.chemrev.4c00055
+- XDL 2.0 standard docs: https://croningroup.gitlab.io/chemputer/xdl/standard/index.html
 - XDL procedure sections: https://croningroup.gitlab.io/chemputer/xdl/usage/procedure_sections.html
+- XDL blueprints and parameters: https://croningroup.gitlab.io/chemputer/xdl/standard/xdl_blueprints.html and https://croningroup.gitlab.io/chemputer/xdl/standard/parameters.html
 - ORD schema docs: https://docs.open-reaction-database.org/en/latest/schema.html
 - ORD paper: Kearnes et al. "The open reaction database." JACS (2021). https://doi.org/10.1021/jacs.1c09820
-- LabOP repository and execution model: https://github.com/Bioprotocols/labop
+- LabOP overview and execution model: https://bioprotocols.github.io/labop/ and https://github.com/Bioprotocols/labop
 - SiLA 2 core specification: https://sila-standard.com/wp-content/uploads/2022/03/SiLA-2-Part-A-Overview-Concepts-and-Core-Specification-v1.1.pdf
-- AnIML overview: https://www.animl.org/files/pdf/2012_gwk_about_animl.pdf
+- AnIML document structure overview: https://www.animl.org/an-animl-document
 - Allotrope framework overview: https://www.allotrope.org/allotrope-framework
 - Atlas ask-tell optimization interface: https://pubs.rsc.org/en/content/articlehtml/2025/dd/d4dd00115j
-- ChemOS 2.0 DOI: https://doi.org/10.1016/j.matt.2024.04.022
-- HELAO-async preprint: https://chemrxiv.org/engage/chemrxiv/article-details/64e7b1c63fdae147fabf71f2
-- Dynamic knowledge graph for distributed self-driving laboratories: https://pmc.ncbi.nlm.nih.gov/articles/PMC10805810/
+- ChemOS 2.0: Sim et al. "ChemOS 2.0: An orchestration architecture for chemical self-driving laboratories." Matter (2024). https://doi.org/10.1016/j.matt.2024.04.022
+- HELAO-async: Guevarra et al. "Orchestrating nimble experiments across interconnected labs." Digital Discovery (2023). https://doi.org/10.1039/d3dd00166k
+- Bai et al. "A dynamic knowledge graph approach to distributed self-driving laboratories." Nature Communications (2024). https://www.nature.com/articles/s41467-023-44599-9
 - Autonomous closed-loop electrochemistry platform: https://www.nature.com/articles/s41467-024-47210-x
