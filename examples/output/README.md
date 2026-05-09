@@ -454,6 +454,15 @@ entities:
   type: chemrof:PolyatomicIon
 
 ```
+## MonomolecularPolymer-polymethylpentene
+### Input
+```yaml
+extended_smiles_string: '[*]C(CC(C)C)C[*] |Sg:n:1,2,3,4,5,6::ht|'
+id: wd:Q132059
+name: polymethylpentene
+type: chemrof:MonomolecularPolymer
+
+```
 ## SubatomicParticle-proton
 ### Input
 ```yaml

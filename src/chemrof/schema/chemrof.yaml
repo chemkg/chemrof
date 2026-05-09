@@ -109,6 +109,7 @@ classes:
       - inchi_stereochemical_type_sublayer
       - inchi_isotopic_layer
       - smiles_string
+      - extended_smiles_string
       - empirical_formula
       - has_major_microspecies_at_pH7_3
       - molecular_mass
@@ -211,6 +212,7 @@ classes:
       - id
       - smarts_string
       - markush_string
+      - extended_smiles_string
     slot_usage:
       subtype_of:
         range: ChemicalGroupingClass
@@ -2646,8 +2648,18 @@ slots:
   extended_smiles_string:
     aliases:
       - CXSMILES
+      - ChemAxon extended SMILES
+      - extended SMILES
     is_a: smiles_string
-    title: extended smiles string
+    description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
+    exact_mappings:
+      - wd:P10718
+    see_also:
+      - https://docs.chemaxon.com/latest/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.html
+    examples:
+      - value: '[*]C(CC(C)C)C[*] |Sg:n:1,2,3,4,5,6::ht|'
+        description: CXSMILES for polymethylpentene with an S-group annotation
+    title: CXSMILES string
   canonical_smiles_string:
     is_a: smiles_string
     abstract: true
