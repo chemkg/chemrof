@@ -109,6 +109,7 @@ classes:
       - inchi_stereochemical_type_sublayer
       - inchi_isotopic_layer
       - smiles_string
+      - cxsmiles_string
       - empirical_formula
       - has_major_microspecies_at_pH7_3
       - molecular_mass
@@ -211,6 +212,7 @@ classes:
       - id
       - smarts_string
       - markush_string
+      - cxsmiles_string
     slot_usage:
       subtype_of:
         range: ChemicalGroupingClass
@@ -2643,11 +2645,30 @@ slots:
     exact_mappings:
       - wd:P2017
     title: isomeric smiles string
-  extended_smiles_string:
+  cxsmiles_string:
     aliases:
       - CXSMILES
+      - ChemAxon extended SMILES
+      - extended SMILES
     is_a: smiles_string
-    title: extended smiles string
+    description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
+    exact_mappings:
+      - wd:P10718
+    see_also:
+      - https://docs.chemaxon.com/latest/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.html
+    examples:
+      - value: '[H][C@@](COC([*])=O)(COP(O)(=O)O[C@H]1[C@H](O)[C@@H](O)[C@H](O)[C@@H](OP(O)(O)=O)[C@H]1O)OC([*])=O |$;;;;;_R1;;;;;;;;;;;;;;;;;;;;;;;;;_R2$|'
+        description: CXSMILES for 1-phosphatidyl-1D-myo-inositol 3-phosphate (R1,R2)
+    title: CXSMILES string
+  extended_smiles_string:
+    aliases:
+      - extended SMILES
+    is_a: smiles_string
+    deprecated: Use cxsmiles_string instead.
+    deprecated_element_has_exact_replacement: cxsmiles_string
+    comments:
+      - This slot was previously used for CXSMILES, but the primary name was too broad.
+    title: extended smiles string (Deprecated)
   canonical_smiles_string:
     is_a: smiles_string
     abstract: true
