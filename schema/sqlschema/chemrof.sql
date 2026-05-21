@@ -30,6 +30,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -265,6 +266,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -292,6 +294,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -319,6 +322,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -346,6 +350,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -373,6 +378,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -400,6 +406,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -427,6 +434,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -458,6 +466,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -487,6 +496,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -517,6 +527,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -548,6 +559,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -574,6 +586,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -600,6 +613,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -626,6 +640,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -652,6 +667,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -678,6 +694,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -705,6 +722,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -732,6 +750,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -761,6 +780,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -788,6 +808,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -815,6 +836,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -841,6 +863,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -868,6 +891,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -895,6 +919,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -922,6 +947,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -949,6 +975,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -976,6 +1003,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1002,6 +1030,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1029,6 +1058,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1056,6 +1086,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1084,6 +1115,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1114,6 +1146,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1145,6 +1178,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1176,6 +1210,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1205,6 +1240,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1234,6 +1270,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1263,6 +1300,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1293,6 +1331,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1324,6 +1363,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1354,6 +1394,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1384,6 +1425,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1414,6 +1456,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1452,6 +1495,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1490,6 +1534,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1520,6 +1565,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1551,6 +1597,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1582,6 +1629,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1613,6 +1661,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1642,6 +1691,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1673,6 +1723,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: type
 --     * Slot: has_nuclear_parts_id
@@ -1817,6 +1868,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1844,6 +1896,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1871,6 +1924,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1898,6 +1952,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1928,6 +1983,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -1955,6 +2011,7 @@
 --     * Slot: pka_ionic_strength Description: Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.
 --     * Slot: pka_solvent Description: Solvent system for pKa measurement. Default is water (H₂O) if not specified.
 --     * Slot: pka_pressure Description: Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.
+--     * Slot: classified_by Description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
 --     * Slot: id
 --     * Slot: name Description: name of chemical entity. E.g. nickel, carbon-16
 --     * Slot: type
@@ -3115,6 +3172,7 @@ CREATE TABLE "ChemicalEntity" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -3122,9 +3180,10 @@ CREATE TABLE "ChemicalEntity" (
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
 	UNIQUE (smiles_string),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
-);CREATE INDEX "ix_ChemicalEntity_id" ON "ChemicalEntity" (id);CREATE INDEX "ChemicalEntity_smiles_string_idx" ON "ChemicalEntity" (smiles_string);
+);CREATE INDEX "ChemicalEntity_smiles_string_idx" ON "ChemicalEntity" (smiles_string);CREATE INDEX "ix_ChemicalEntity_id" ON "ChemicalEntity" (id);
 CREATE TABLE "MolecularDerivativeGroupingClass" (
 	derivative_of TEXT,
 	id TEXT NOT NULL,
@@ -3209,12 +3268,14 @@ CREATE TABLE "PolyatomicEntity" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_PolyatomicEntity_id" ON "PolyatomicEntity" (id);
@@ -3240,12 +3301,14 @@ CREATE TABLE "SmallMolecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_SmallMolecule_id" ON "SmallMolecule" (id);
@@ -3271,12 +3334,14 @@ CREATE TABLE "Macromolecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Macromolecule_id" ON "Macromolecule" (id);
@@ -3302,12 +3367,14 @@ CREATE TABLE "MolecularComplex" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularComplex_id" ON "MolecularComplex" (id);
@@ -3333,12 +3400,14 @@ CREATE TABLE "Peptide" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Peptide_id" ON "Peptide" (id);
@@ -3364,12 +3433,14 @@ CREATE TABLE "Protein" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Protein_id" ON "Protein" (id);
@@ -3395,12 +3466,14 @@ CREATE TABLE "Glycan" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Glycan_id" ON "Glycan" (id);
@@ -3425,12 +3498,14 @@ CREATE TABLE "MolecularComponent" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularComponent_id" ON "MolecularComponent" (id);
@@ -3455,12 +3530,14 @@ CREATE TABLE "PolymerPart" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_PolymerPart_id" ON "PolymerPart" (id);
@@ -3485,12 +3562,14 @@ CREATE TABLE "Monomer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Monomer_id" ON "Monomer" (id);
@@ -3515,12 +3594,14 @@ CREATE TABLE "MolecularSubsequence" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularSubsequence_id" ON "MolecularSubsequence" (id);
@@ -3545,12 +3626,14 @@ CREATE TABLE "ChemicalGroup" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_ChemicalGroup_id" ON "ChemicalGroup" (id);
@@ -3576,12 +3659,14 @@ CREATE TABLE "ChemicalMixture" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_ChemicalMixture_id" ON "ChemicalMixture" (id);
@@ -3607,12 +3692,14 @@ CREATE TABLE "PreciseChemicalMixture" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_PreciseChemicalMixture_id" ON "PreciseChemicalMixture" (id);
@@ -3640,12 +3727,14 @@ CREATE TABLE "ImpreciseChemicalMixture" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture" (id);
@@ -3671,12 +3760,14 @@ CREATE TABLE "Molecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Molecule_id" ON "Molecule" (id);
@@ -3702,12 +3793,14 @@ CREATE TABLE "NaturalProduct" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_NaturalProduct_id" ON "NaturalProduct" (id);
@@ -3732,12 +3825,14 @@ CREATE TABLE "Moiety" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Moiety_id" ON "Moiety" (id);
@@ -3763,12 +3858,14 @@ CREATE TABLE "SequenceInterval" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_SequenceInterval_id" ON "SequenceInterval" (id);
@@ -3794,12 +3891,14 @@ CREATE TABLE "AminoAcidSequenceInterval" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval" (id);
@@ -3825,12 +3924,14 @@ CREATE TABLE "NucleotideSequenceInterval" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval" (id);
@@ -3856,12 +3957,14 @@ CREATE TABLE "DNASequenceInterval" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_DNASequenceInterval_id" ON "DNASequenceInterval" (id);
@@ -3887,12 +3990,14 @@ CREATE TABLE "RNASequenceInterval" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_RNASequenceInterval_id" ON "RNASequenceInterval" (id);
@@ -3917,12 +4022,14 @@ CREATE TABLE "FunctionalGroup" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_FunctionalGroup_id" ON "FunctionalGroup" (id);
@@ -3948,12 +4055,14 @@ CREATE TABLE "MolecularSpecies" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularSpecies_id" ON "MolecularSpecies" (id);
@@ -3979,12 +4088,14 @@ CREATE TABLE "NonSpeciesMolecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_NonSpeciesMolecule_id" ON "NonSpeciesMolecule" (id);
@@ -4011,12 +4122,14 @@ CREATE TABLE "MoleculeByChargeState" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MoleculeByChargeState_id" ON "MoleculeByChargeState" (id);
@@ -4045,6 +4158,7 @@ CREATE TABLE "PolyatomicIon" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4054,6 +4168,7 @@ CREATE TABLE "PolyatomicIon" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(conjugate_base_of) REFERENCES "DomainEntity" (id),
 	FOREIGN KEY(conjugate_acid_of) REFERENCES "DomainEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_PolyatomicIon_id" ON "PolyatomicIon" (id);
@@ -4082,6 +4197,7 @@ CREATE TABLE "MolecularCation" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4091,6 +4207,7 @@ CREATE TABLE "MolecularCation" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(conjugate_base_of) REFERENCES "DomainEntity" (id),
 	FOREIGN KEY(conjugate_acid_of) REFERENCES "DomainEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularCation_id" ON "MolecularCation" (id);
@@ -4119,6 +4236,7 @@ CREATE TABLE "MolecularAnion" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4128,6 +4246,7 @@ CREATE TABLE "MolecularAnion" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(conjugate_base_of) REFERENCES "DomainEntity" (id),
 	FOREIGN KEY(conjugate_acid_of) REFERENCES "DomainEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MolecularAnion_id" ON "MolecularAnion" (id);
@@ -4154,6 +4273,7 @@ CREATE TABLE "NetUnchargedMolecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4161,6 +4281,7 @@ CREATE TABLE "NetUnchargedMolecule" (
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_NetUnchargedMolecule_id" ON "NetUnchargedMolecule" (id);
@@ -4187,6 +4308,7 @@ CREATE TABLE "Zwitterion" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4194,6 +4316,7 @@ CREATE TABLE "Zwitterion" (
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Zwitterion_id" ON "Zwitterion" (id);
@@ -4220,6 +4343,7 @@ CREATE TABLE "NeutralMolecule" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4227,6 +4351,7 @@ CREATE TABLE "NeutralMolecule" (
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_NeutralMolecule_id" ON "NeutralMolecule" (id);
@@ -4254,12 +4379,14 @@ CREATE TABLE "Atom" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4290,6 +4417,7 @@ CREATE TABLE "ChemicalElement" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -4298,10 +4426,11 @@ CREATE TABLE "ChemicalElement" (
 	PRIMARY KEY (id),
 	UNIQUE (atomic_number),
 	UNIQUE (atomic_number),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
-);CREATE INDEX "ChemicalElement_atomic_number_idx" ON "ChemicalElement" (atomic_number);CREATE INDEX "ix_ChemicalElement_id" ON "ChemicalElement" (id);
+);CREATE INDEX "ix_ChemicalElement_id" ON "ChemicalElement" (id);CREATE INDEX "ChemicalElement_atomic_number_idx" ON "ChemicalElement" (atomic_number);
 CREATE TABLE "UnchargedAtom" (
 	elemental_charge INTEGER,
 	atomic_number INTEGER,
@@ -4327,12 +4456,14 @@ CREATE TABLE "UnchargedAtom" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4362,12 +4493,14 @@ CREATE TABLE "Nuclide" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4397,12 +4530,14 @@ CREATE TABLE "Radionuclide" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4432,12 +4567,14 @@ CREATE TABLE "AtomIonicForm" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4466,12 +4603,14 @@ CREATE TABLE "PartiallySpecifiedAtom" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4502,12 +4641,14 @@ CREATE TABLE "FullySpecifiedAtom" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -4534,12 +4675,14 @@ CREATE TABLE "ChemicalSalt" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_ChemicalSalt_id" ON "ChemicalSalt" (id);
@@ -4565,12 +4708,14 @@ CREATE TABLE "Ester" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Ester_id" ON "Ester" (id);
@@ -4596,12 +4741,14 @@ CREATE TABLE "Stereoisomer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Stereoisomer_id" ON "Stereoisomer" (id);
@@ -4627,12 +4774,14 @@ CREATE TABLE "Enantiomer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Enantiomer_id" ON "Enantiomer" (id);
@@ -4658,12 +4807,14 @@ CREATE TABLE "Allotrope" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
 	has_chemical_role_id INTEGER,
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Allotrope_id" ON "Allotrope" (id);
@@ -4680,14 +4831,14 @@ CREATE TABLE "PhysicochemicalEntityGroupingClass_subtype_of" (
 	PRIMARY KEY ("PhysicochemicalEntityGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("PhysicochemicalEntityGroupingClass_id") REFERENCES "PhysicochemicalEntityGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "PhysicochemicalEntityGroupingClass" (id)
-);CREATE INDEX "ix_PhysicochemicalEntityGroupingClass_subtype_of_PhysicochemicalEntityGroupingClass_id" ON "PhysicochemicalEntityGroupingClass_subtype_of" ("PhysicochemicalEntityGroupingClass_id");CREATE INDEX "ix_PhysicochemicalEntityGroupingClass_subtype_of_subtype_of_id" ON "PhysicochemicalEntityGroupingClass_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_PhysicochemicalEntityGroupingClass_subtype_of_subtype_of_id" ON "PhysicochemicalEntityGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_PhysicochemicalEntityGroupingClass_subtype_of_PhysicochemicalEntityGroupingClass_id" ON "PhysicochemicalEntityGroupingClass_subtype_of" ("PhysicochemicalEntityGroupingClass_id");
 CREATE TABLE "ChemicalGroupingClass_subtype_of" (
 	"ChemicalGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
 	PRIMARY KEY ("ChemicalGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("ChemicalGroupingClass_id") REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_ChemicalGroupingClass_subtype_of_subtype_of_id" ON "ChemicalGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_ChemicalGroupingClass_subtype_of_ChemicalGroupingClass_id" ON "ChemicalGroupingClass_subtype_of" ("ChemicalGroupingClass_id");
+);CREATE INDEX "ix_ChemicalGroupingClass_subtype_of_ChemicalGroupingClass_id" ON "ChemicalGroupingClass_subtype_of" ("ChemicalGroupingClass_id");CREATE INDEX "ix_ChemicalGroupingClass_subtype_of_subtype_of_id" ON "ChemicalGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "ReactionGroupingClass_subtype_of" (
 	"ReactionGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -4715,7 +4866,7 @@ CREATE TABLE "MoleculeGroupingClass_subtype_of" (
 	PRIMARY KEY ("MoleculeGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("MoleculeGroupingClass_id") REFERENCES "MoleculeGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_MoleculeGroupingClass_subtype_of_subtype_of_id" ON "MoleculeGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_MoleculeGroupingClass_subtype_of_MoleculeGroupingClass_id" ON "MoleculeGroupingClass_subtype_of" ("MoleculeGroupingClass_id");
+);CREATE INDEX "ix_MoleculeGroupingClass_subtype_of_MoleculeGroupingClass_id" ON "MoleculeGroupingClass_subtype_of" ("MoleculeGroupingClass_id");CREATE INDEX "ix_MoleculeGroupingClass_subtype_of_subtype_of_id" ON "MoleculeGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "MolecularComponentGroupingClass_subtype_of" (
 	"MolecularComponentGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -4750,7 +4901,7 @@ CREATE TABLE "ChemicalSaltByCation_subtype_of" (
 	PRIMARY KEY ("ChemicalSaltByCation_id", subtype_of_id),
 	FOREIGN KEY("ChemicalSaltByCation_id") REFERENCES "ChemicalSaltByCation" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_ChemicalSaltByCation_subtype_of_ChemicalSaltByCation_id" ON "ChemicalSaltByCation_subtype_of" ("ChemicalSaltByCation_id");CREATE INDEX "ix_ChemicalSaltByCation_subtype_of_subtype_of_id" ON "ChemicalSaltByCation_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_ChemicalSaltByCation_subtype_of_subtype_of_id" ON "ChemicalSaltByCation_subtype_of" (subtype_of_id);CREATE INDEX "ix_ChemicalSaltByCation_subtype_of_ChemicalSaltByCation_id" ON "ChemicalSaltByCation_subtype_of" ("ChemicalSaltByCation_id");
 CREATE TABLE "ChemicalSaltByAnion_subtype_of" (
 	"ChemicalSaltByAnion_id" TEXT,
 	subtype_of_id TEXT,
@@ -4764,14 +4915,14 @@ CREATE TABLE "GeneralizedMolecularStructureClass_subtype_of" (
 	PRIMARY KEY ("GeneralizedMolecularStructureClass_id", subtype_of_id),
 	FOREIGN KEY("GeneralizedMolecularStructureClass_id") REFERENCES "GeneralizedMolecularStructureClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_subtype_of_id" ON "GeneralizedMolecularStructureClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_GeneralizedMolecularStructureClass_id" ON "GeneralizedMolecularStructureClass_subtype_of" ("GeneralizedMolecularStructureClass_id");
+);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_GeneralizedMolecularStructureClass_id" ON "GeneralizedMolecularStructureClass_subtype_of" ("GeneralizedMolecularStructureClass_id");CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_subtype_of_id" ON "GeneralizedMolecularStructureClass_subtype_of" (subtype_of_id);
 CREATE TABLE "AtomGroupingClass_subtype_of" (
 	"AtomGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
 	PRIMARY KEY ("AtomGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("AtomGroupingClass_id") REFERENCES "AtomGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AtomGroupingClass_subtype_of_subtype_of_id" ON "AtomGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_AtomGroupingClass_subtype_of_AtomGroupingClass_id" ON "AtomGroupingClass_subtype_of" ("AtomGroupingClass_id");
+);CREATE INDEX "ix_AtomGroupingClass_subtype_of_AtomGroupingClass_id" ON "AtomGroupingClass_subtype_of" ("AtomGroupingClass_id");CREATE INDEX "ix_AtomGroupingClass_subtype_of_subtype_of_id" ON "AtomGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "AtomGroupingByPeriodicTablePlacement_subtype_of" (
 	"AtomGroupingByPeriodicTablePlacement_id" TEXT,
 	subtype_of_id TEXT,
@@ -4799,7 +4950,7 @@ CREATE TABLE "AtomGroupingByProperty_subtype_of" (
 	PRIMARY KEY ("AtomGroupingByProperty_id", subtype_of_id),
 	FOREIGN KEY("AtomGroupingByProperty_id") REFERENCES "AtomGroupingByProperty" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_AtomGroupingByProperty_id" ON "AtomGroupingByProperty_subtype_of" ("AtomGroupingByProperty_id");CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_subtype_of_id" ON "AtomGroupingByProperty_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_subtype_of_id" ON "AtomGroupingByProperty_subtype_of" (subtype_of_id);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_AtomGroupingByProperty_id" ON "AtomGroupingByProperty_subtype_of" ("AtomGroupingByProperty_id");
 CREATE TABLE "Reaction_left_participants" (
 	"Reaction_id" TEXT,
 	left_participants_id INTEGER,
@@ -4813,21 +4964,21 @@ CREATE TABLE "Reaction_right_participants" (
 	PRIMARY KEY ("Reaction_id", right_participants_id),
 	FOREIGN KEY("Reaction_id") REFERENCES "Reaction" (id),
 	FOREIGN KEY(right_participants_id) REFERENCES "ReactionParticipant" (id)
-);CREATE INDEX "ix_Reaction_right_participants_Reaction_id" ON "Reaction_right_participants" ("Reaction_id");CREATE INDEX "ix_Reaction_right_participants_right_participants_id" ON "Reaction_right_participants" (right_participants_id);
+);CREATE INDEX "ix_Reaction_right_participants_right_participants_id" ON "Reaction_right_participants" (right_participants_id);CREATE INDEX "ix_Reaction_right_participants_Reaction_id" ON "Reaction_right_participants" ("Reaction_id");
 CREATE TABLE "IsomeraseReaction_left_participants" (
 	"IsomeraseReaction_id" TEXT,
 	left_participants_id INTEGER,
 	PRIMARY KEY ("IsomeraseReaction_id", left_participants_id),
 	FOREIGN KEY("IsomeraseReaction_id") REFERENCES "IsomeraseReaction" (id),
 	FOREIGN KEY(left_participants_id) REFERENCES "ReactionParticipant" (id)
-);CREATE INDEX "ix_IsomeraseReaction_left_participants_IsomeraseReaction_id" ON "IsomeraseReaction_left_participants" ("IsomeraseReaction_id");CREATE INDEX "ix_IsomeraseReaction_left_participants_left_participants_id" ON "IsomeraseReaction_left_participants" (left_participants_id);
+);CREATE INDEX "ix_IsomeraseReaction_left_participants_left_participants_id" ON "IsomeraseReaction_left_participants" (left_participants_id);CREATE INDEX "ix_IsomeraseReaction_left_participants_IsomeraseReaction_id" ON "IsomeraseReaction_left_participants" ("IsomeraseReaction_id");
 CREATE TABLE "IsomeraseReaction_right_participants" (
 	"IsomeraseReaction_id" TEXT,
 	right_participants_id INTEGER,
 	PRIMARY KEY ("IsomeraseReaction_id", right_participants_id),
 	FOREIGN KEY("IsomeraseReaction_id") REFERENCES "IsomeraseReaction" (id),
 	FOREIGN KEY(right_participants_id) REFERENCES "ReactionParticipant" (id)
-);CREATE INDEX "ix_IsomeraseReaction_right_participants_right_participants_id" ON "IsomeraseReaction_right_participants" (right_participants_id);CREATE INDEX "ix_IsomeraseReaction_right_participants_IsomeraseReaction_id" ON "IsomeraseReaction_right_participants" ("IsomeraseReaction_id");
+);CREATE INDEX "ix_IsomeraseReaction_right_participants_IsomeraseReaction_id" ON "IsomeraseReaction_right_participants" ("IsomeraseReaction_id");CREATE INDEX "ix_IsomeraseReaction_right_participants_right_participants_id" ON "IsomeraseReaction_right_participants" (right_participants_id);
 CREATE TABLE "MonomericPolymericGroupingClass" (
 	has_repeat_unit TEXT,
 	id TEXT NOT NULL,
@@ -4889,6 +5040,7 @@ CREATE TABLE "MonomolecularPolymer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4897,6 +5049,7 @@ CREATE TABLE "MonomolecularPolymer" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_repeat_unit) REFERENCES "ChemicalEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_MonomolecularPolymer_id" ON "MonomolecularPolymer" (id);
@@ -4924,6 +5077,7 @@ CREATE TABLE "SupramolecularPolymer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4932,6 +5086,7 @@ CREATE TABLE "SupramolecularPolymer" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_repeat_unit) REFERENCES "ChemicalEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_SupramolecularPolymer_id" ON "SupramolecularPolymer" (id);
@@ -4960,6 +5115,7 @@ CREATE TABLE "Copolymer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -4967,6 +5123,7 @@ CREATE TABLE "Copolymer" (
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY(has_repeat_unit) REFERENCES "ChemicalEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Copolymer_id" ON "Copolymer" (id);
@@ -4996,6 +5153,7 @@ CREATE TABLE "Homopolymer" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -5004,6 +5162,7 @@ CREATE TABLE "Homopolymer" (
 	PRIMARY KEY (id),
 	FOREIGN KEY(polymer_of) REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_repeat_unit) REFERENCES "ChemicalEntity" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_Homopolymer_id" ON "Homopolymer" (id);
@@ -5040,6 +5199,7 @@ CREATE TABLE "Isotope" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -5049,6 +5209,7 @@ CREATE TABLE "Isotope" (
 	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id),
 	FOREIGN KEY(isotope_of) REFERENCES "Isotope" (id),
 	FOREIGN KEY(decay_product) REFERENCES "Isotope" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -5079,6 +5240,7 @@ CREATE TABLE "MonoatomicIon" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -5086,6 +5248,7 @@ CREATE TABLE "MonoatomicIon" (
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -5116,6 +5279,7 @@ CREATE TABLE "AtomAnion" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -5123,6 +5287,7 @@ CREATE TABLE "AtomAnion" (
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -5153,6 +5318,7 @@ CREATE TABLE "AtomCation" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -5160,6 +5326,7 @@ CREATE TABLE "AtomCation" (
 	owl_subclass_of_id INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -5252,6 +5419,7 @@ CREATE TABLE "RacemicMixture" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	name TEXT,
 	type TEXT,
@@ -5261,6 +5429,7 @@ CREATE TABLE "RacemicMixture" (
 	FOREIGN KEY(has_left_enantiomer) REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(has_right_enantiomer) REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(chirality_agnostic_form) REFERENCES "Molecule" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
 );CREATE INDEX "ix_RacemicMixture_id" ON "RacemicMixture" (id);
@@ -5270,7 +5439,7 @@ CREATE TABLE "ChemicalEntity_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("ChemicalEntity_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_ChemicalEntity_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("ChemicalEntity_id");CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_ChemicalEntity_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("ChemicalEntity_id");
 CREATE TABLE "ChemicalEntity_pka_ionization_constant" (
 	"ChemicalEntity_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5297,14 +5466,14 @@ CREATE TABLE "AcidAnionGroupingClass_subtype_of" (
 	PRIMARY KEY ("AcidAnionGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("AcidAnionGroupingClass_id") REFERENCES "AcidAnionGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_subtype_of_id" ON "AcidAnionGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_AcidAnionGroupingClass_id" ON "AcidAnionGroupingClass_subtype_of" ("AcidAnionGroupingClass_id");
+);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_AcidAnionGroupingClass_id" ON "AcidAnionGroupingClass_subtype_of" ("AcidAnionGroupingClass_id");CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_subtype_of_id" ON "AcidAnionGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "GeneralAcidBaseGroupingClass_subtype_of" (
 	"GeneralAcidBaseGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
 	PRIMARY KEY ("GeneralAcidBaseGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("GeneralAcidBaseGroupingClass_id") REFERENCES "GeneralAcidBaseGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_GeneralAcidBaseGroupingClass_subtype_of_subtype_of_id" ON "GeneralAcidBaseGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_GeneralAcidBaseGroupingClass_subtype_of_GeneralAcidBaseGroupingClass_id" ON "GeneralAcidBaseGroupingClass_subtype_of" ("GeneralAcidBaseGroupingClass_id");
+);CREATE INDEX "ix_GeneralAcidBaseGroupingClass_subtype_of_GeneralAcidBaseGroupingClass_id" ON "GeneralAcidBaseGroupingClass_subtype_of" ("GeneralAcidBaseGroupingClass_id");CREATE INDEX "ix_GeneralAcidBaseGroupingClass_subtype_of_subtype_of_id" ON "GeneralAcidBaseGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "AcidBaseConflationClass_subtype_of" (
 	"AcidBaseConflationClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -5318,13 +5487,13 @@ CREATE TABLE "PolyatomicEntity_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PolyatomicEntity_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PolyatomicEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolyatomicEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PolyatomicEntity_has_major_microspecies_at_pH7_3_PolyatomicEntity_id" ON "PolyatomicEntity_has_major_microspecies_at_pH7_3" ("PolyatomicEntity_id");
+);CREATE INDEX "ix_PolyatomicEntity_has_major_microspecies_at_pH7_3_PolyatomicEntity_id" ON "PolyatomicEntity_has_major_microspecies_at_pH7_3" ("PolyatomicEntity_id");CREATE INDEX "ix_PolyatomicEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolyatomicEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "PolyatomicEntity_pka_ionization_constant" (
 	"PolyatomicEntity_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PolyatomicEntity_id", pka_ionization_constant),
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id)
-);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicEntity_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_PolyatomicEntity_id" ON "PolyatomicEntity_pka_ionization_constant" ("PolyatomicEntity_id");
+);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_PolyatomicEntity_id" ON "PolyatomicEntity_pka_ionization_constant" ("PolyatomicEntity_id");CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicEntity_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "SmallMolecule_has_submolecules" (
 	"SmallMolecule_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5345,13 +5514,13 @@ CREATE TABLE "SmallMolecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("SmallMolecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_SmallMolecule_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("SmallMolecule_id");CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_SmallMolecule_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("SmallMolecule_id");
 CREATE TABLE "SmallMolecule_pka_ionization_constant" (
 	"SmallMolecule_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("SmallMolecule_id", pka_ionization_constant),
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id)
-);CREATE INDEX "ix_SmallMolecule_pka_ionization_constant_SmallMolecule_id" ON "SmallMolecule_pka_ionization_constant" ("SmallMolecule_id");CREATE INDEX "ix_SmallMolecule_pka_ionization_constant_pka_ionization_constant" ON "SmallMolecule_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_SmallMolecule_pka_ionization_constant_pka_ionization_constant" ON "SmallMolecule_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_SmallMolecule_pka_ionization_constant_SmallMolecule_id" ON "SmallMolecule_pka_ionization_constant" ("SmallMolecule_id");
 CREATE TABLE "Macromolecule_has_submolecules" (
 	"Macromolecule_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5372,7 +5541,7 @@ CREATE TABLE "Macromolecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Macromolecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Macromolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Macromolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Macromolecule_has_major_microspecies_at_pH7_3_Macromolecule_id" ON "Macromolecule_has_major_microspecies_at_pH7_3" ("Macromolecule_id");
+);CREATE INDEX "ix_Macromolecule_has_major_microspecies_at_pH7_3_Macromolecule_id" ON "Macromolecule_has_major_microspecies_at_pH7_3" ("Macromolecule_id");CREATE INDEX "ix_Macromolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Macromolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Macromolecule_pka_ionization_constant" (
 	"Macromolecule_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5391,7 +5560,7 @@ CREATE TABLE "MolecularComplex_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MolecularComplex_id", pka_ionization_constant),
 	FOREIGN KEY("MolecularComplex_id") REFERENCES "MolecularComplex" (id)
-);CREATE INDEX "ix_MolecularComplex_pka_ionization_constant_pka_ionization_constant" ON "MolecularComplex_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MolecularComplex_pka_ionization_constant_MolecularComplex_id" ON "MolecularComplex_pka_ionization_constant" ("MolecularComplex_id");
+);CREATE INDEX "ix_MolecularComplex_pka_ionization_constant_MolecularComplex_id" ON "MolecularComplex_pka_ionization_constant" ("MolecularComplex_id");CREATE INDEX "ix_MolecularComplex_pka_ionization_constant_pka_ionization_constant" ON "MolecularComplex_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Peptide_has_submolecules" (
 	"Peptide_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5418,34 +5587,34 @@ CREATE TABLE "Peptide_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Peptide_id", pka_ionization_constant),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id)
-);CREATE INDEX "ix_Peptide_pka_ionization_constant_Peptide_id" ON "Peptide_pka_ionization_constant" ("Peptide_id");CREATE INDEX "ix_Peptide_pka_ionization_constant_pka_ionization_constant" ON "Peptide_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Peptide_pka_ionization_constant_pka_ionization_constant" ON "Peptide_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Peptide_pka_ionization_constant_Peptide_id" ON "Peptide_pka_ionization_constant" ("Peptide_id");
 CREATE TABLE "Protein_has_submolecules" (
 	"Protein_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Protein_id", has_submolecules_id),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Protein_has_submolecules_has_submolecules_id" ON "Protein_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Protein_has_submolecules_Protein_id" ON "Protein_has_submolecules" ("Protein_id");
+);CREATE INDEX "ix_Protein_has_submolecules_Protein_id" ON "Protein_has_submolecules" ("Protein_id");CREATE INDEX "ix_Protein_has_submolecules_has_submolecules_id" ON "Protein_has_submolecules" (has_submolecules_id);
 CREATE TABLE "Protein_has_atoms" (
 	"Protein_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Protein_id", has_atoms_id),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Protein_has_atoms_Protein_id" ON "Protein_has_atoms" ("Protein_id");CREATE INDEX "ix_Protein_has_atoms_has_atoms_id" ON "Protein_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Protein_has_atoms_has_atoms_id" ON "Protein_has_atoms" (has_atoms_id);CREATE INDEX "ix_Protein_has_atoms_Protein_id" ON "Protein_has_atoms" ("Protein_id");
 CREATE TABLE "Protein_has_major_microspecies_at_pH7_3" (
 	"Protein_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Protein_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Protein_has_major_microspecies_at_pH7_3_Protein_id" ON "Protein_has_major_microspecies_at_pH7_3" ("Protein_id");CREATE INDEX "ix_Protein_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Protein_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Protein_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Protein_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Protein_has_major_microspecies_at_pH7_3_Protein_id" ON "Protein_has_major_microspecies_at_pH7_3" ("Protein_id");
 CREATE TABLE "Protein_pka_ionization_constant" (
 	"Protein_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Protein_id", pka_ionization_constant),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id)
-);CREATE INDEX "ix_Protein_pka_ionization_constant_pka_ionization_constant" ON "Protein_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Protein_pka_ionization_constant_Protein_id" ON "Protein_pka_ionization_constant" ("Protein_id");
+);CREATE INDEX "ix_Protein_pka_ionization_constant_Protein_id" ON "Protein_pka_ionization_constant" ("Protein_id");CREATE INDEX "ix_Protein_pka_ionization_constant_pka_ionization_constant" ON "Protein_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Glycan_has_submolecules" (
 	"Glycan_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5472,7 +5641,7 @@ CREATE TABLE "Glycan_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Glycan_id", pka_ionization_constant),
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id)
-);CREATE INDEX "ix_Glycan_pka_ionization_constant_pka_ionization_constant" ON "Glycan_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Glycan_pka_ionization_constant_Glycan_id" ON "Glycan_pka_ionization_constant" ("Glycan_id");
+);CREATE INDEX "ix_Glycan_pka_ionization_constant_Glycan_id" ON "Glycan_pka_ionization_constant" ("Glycan_id");CREATE INDEX "ix_Glycan_pka_ionization_constant_pka_ionization_constant" ON "Glycan_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MolecularComponent_has_major_microspecies_at_pH7_3" (
 	"MolecularComponent_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5492,13 +5661,13 @@ CREATE TABLE "PolymerPart_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PolymerPart_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_PolymerPart_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("PolymerPart_id");CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_PolymerPart_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("PolymerPart_id");
 CREATE TABLE "PolymerPart_pka_ionization_constant" (
 	"PolymerPart_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PolymerPart_id", pka_ionization_constant),
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id)
-);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_pka_ionization_constant" ON "PolymerPart_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_PolymerPart_id" ON "PolymerPart_pka_ionization_constant" ("PolymerPart_id");
+);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_PolymerPart_id" ON "PolymerPart_pka_ionization_constant" ("PolymerPart_id");CREATE INDEX "ix_PolymerPart_pka_ionization_constant_pka_ionization_constant" ON "PolymerPart_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Monomer_has_major_microspecies_at_pH7_3" (
 	"Monomer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5511,14 +5680,14 @@ CREATE TABLE "Monomer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Monomer_id", pka_ionization_constant),
 	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id)
-);CREATE INDEX "ix_Monomer_pka_ionization_constant_pka_ionization_constant" ON "Monomer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Monomer_pka_ionization_constant_Monomer_id" ON "Monomer_pka_ionization_constant" ("Monomer_id");
+);CREATE INDEX "ix_Monomer_pka_ionization_constant_Monomer_id" ON "Monomer_pka_ionization_constant" ("Monomer_id");CREATE INDEX "ix_Monomer_pka_ionization_constant_pka_ionization_constant" ON "Monomer_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MolecularSubsequence_has_major_microspecies_at_pH7_3" (
 	"MolecularSubsequence_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("MolecularSubsequence_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MolecularSubsequence_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularSubsequence_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MolecularSubsequence_has_major_microspecies_at_pH7_3_MolecularSubsequence_id" ON "MolecularSubsequence_has_major_microspecies_at_pH7_3" ("MolecularSubsequence_id");
+);CREATE INDEX "ix_MolecularSubsequence_has_major_microspecies_at_pH7_3_MolecularSubsequence_id" ON "MolecularSubsequence_has_major_microspecies_at_pH7_3" ("MolecularSubsequence_id");CREATE INDEX "ix_MolecularSubsequence_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularSubsequence_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "MolecularSubsequence_pka_ionization_constant" (
 	"MolecularSubsequence_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5537,7 +5706,7 @@ CREATE TABLE "ChemicalGroup_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("ChemicalGroup_id", pka_ionization_constant),
 	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id)
-);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_ChemicalGroup_id" ON "ChemicalGroup_pka_ionization_constant" ("ChemicalGroup_id");CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_pka_ionization_constant" ON "ChemicalGroup_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_pka_ionization_constant" ON "ChemicalGroup_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_ChemicalGroup_id" ON "ChemicalGroup_pka_ionization_constant" ("ChemicalGroup_id");
 CREATE TABLE "ChemicalMixture_has_major_microspecies_at_pH7_3" (
 	"ChemicalMixture_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5557,7 +5726,7 @@ CREATE TABLE "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_PreciseChemicalMixture_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("PreciseChemicalMixture_id");CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_PreciseChemicalMixture_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("PreciseChemicalMixture_id");
 CREATE TABLE "PreciseChemicalMixture_pka_ionization_constant" (
 	"PreciseChemicalMixture_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5576,14 +5745,14 @@ CREATE TABLE "ImpreciseChemicalMixture_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("ImpreciseChemicalMixture_id", pka_ionization_constant),
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id)
-);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_pka_ionization_constant" ("ImpreciseChemicalMixture_id");CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_pka_ionization_constant" ON "ImpreciseChemicalMixture_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_pka_ionization_constant" ON "ImpreciseChemicalMixture_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_pka_ionization_constant" ("ImpreciseChemicalMixture_id");
 CREATE TABLE "Molecule_has_submolecules" (
 	"Molecule_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Molecule_id", has_submolecules_id),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Molecule_has_submolecules_Molecule_id" ON "Molecule_has_submolecules" ("Molecule_id");CREATE INDEX "ix_Molecule_has_submolecules_has_submolecules_id" ON "Molecule_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Molecule_has_submolecules_has_submolecules_id" ON "Molecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Molecule_has_submolecules_Molecule_id" ON "Molecule_has_submolecules" ("Molecule_id");
 CREATE TABLE "Molecule_has_atoms" (
 	"Molecule_id" TEXT,
 	has_atoms_id TEXT,
@@ -5597,7 +5766,7 @@ CREATE TABLE "Molecule_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Molecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_Molecule_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("Molecule_id");CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_Molecule_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("Molecule_id");
 CREATE TABLE "Molecule_pka_ionization_constant" (
 	"Molecule_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5630,7 +5799,7 @@ CREATE TABLE "NaturalProduct_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("NaturalProduct_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_NaturalProduct_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("NaturalProduct_id");
+);CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_NaturalProduct_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "NaturalProduct_pka_ionization_constant" (
 	"NaturalProduct_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5669,7 +5838,7 @@ CREATE TABLE "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("AminoAcidSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("AminoAcidSequenceInterval_id");CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("AminoAcidSequenceInterval_id");
 CREATE TABLE "AminoAcidSequenceInterval_pka_ionization_constant" (
 	"AminoAcidSequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5682,20 +5851,20 @@ CREATE TABLE "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("NucleotideSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("NucleotideSequenceInterval_id");
+);CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("NucleotideSequenceInterval_id");CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "NucleotideSequenceInterval_pka_ionization_constant" (
 	"NucleotideSequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NucleotideSequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id)
-);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "NucleotideSequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_pka_ionization_constant" ("NucleotideSequenceInterval_id");
+);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_pka_ionization_constant" ("NucleotideSequenceInterval_id");CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "NucleotideSequenceInterval_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "DNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"DNASequenceInterval_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("DNASequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_DNASequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "DNASequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_DNASequenceInterval_has_major_microspecies_at_pH7_3_DNASequenceInterval_id" ON "DNASequenceInterval_has_major_microspecies_at_pH7_3" ("DNASequenceInterval_id");
+);CREATE INDEX "ix_DNASequenceInterval_has_major_microspecies_at_pH7_3_DNASequenceInterval_id" ON "DNASequenceInterval_has_major_microspecies_at_pH7_3" ("DNASequenceInterval_id");CREATE INDEX "ix_DNASequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "DNASequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "DNASequenceInterval_pka_ionization_constant" (
 	"DNASequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5714,7 +5883,7 @@ CREATE TABLE "RNASequenceInterval_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("RNASequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id)
-);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "RNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_RNASequenceInterval_id" ON "RNASequenceInterval_pka_ionization_constant" ("RNASequenceInterval_id");
+);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_RNASequenceInterval_id" ON "RNASequenceInterval_pka_ionization_constant" ("RNASequenceInterval_id");CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "RNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "FunctionalGroup_has_major_microspecies_at_pH7_3" (
 	"FunctionalGroup_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5727,7 +5896,7 @@ CREATE TABLE "FunctionalGroup_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("FunctionalGroup_id", pka_ionization_constant),
 	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id)
-);CREATE INDEX "ix_FunctionalGroup_pka_ionization_constant_FunctionalGroup_id" ON "FunctionalGroup_pka_ionization_constant" ("FunctionalGroup_id");CREATE INDEX "ix_FunctionalGroup_pka_ionization_constant_pka_ionization_constant" ON "FunctionalGroup_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_FunctionalGroup_pka_ionization_constant_pka_ionization_constant" ON "FunctionalGroup_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_FunctionalGroup_pka_ionization_constant_FunctionalGroup_id" ON "FunctionalGroup_pka_ionization_constant" ("FunctionalGroup_id");
 CREATE TABLE "MolecularSpecies_has_submolecules" (
 	"MolecularSpecies_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5741,7 +5910,7 @@ CREATE TABLE "MolecularSpecies_has_atoms" (
 	PRIMARY KEY ("MolecularSpecies_id", has_atoms_id),
 	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MolecularSpecies_has_atoms_has_atoms_id" ON "MolecularSpecies_has_atoms" (has_atoms_id);CREATE INDEX "ix_MolecularSpecies_has_atoms_MolecularSpecies_id" ON "MolecularSpecies_has_atoms" ("MolecularSpecies_id");
+);CREATE INDEX "ix_MolecularSpecies_has_atoms_MolecularSpecies_id" ON "MolecularSpecies_has_atoms" ("MolecularSpecies_id");CREATE INDEX "ix_MolecularSpecies_has_atoms_has_atoms_id" ON "MolecularSpecies_has_atoms" (has_atoms_id);
 CREATE TABLE "MolecularSpecies_has_major_microspecies_at_pH7_3" (
 	"MolecularSpecies_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5754,7 +5923,7 @@ CREATE TABLE "MolecularSpecies_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MolecularSpecies_id", pka_ionization_constant),
 	FOREIGN KEY("MolecularSpecies_id") REFERENCES "MolecularSpecies" (id)
-);CREATE INDEX "ix_MolecularSpecies_pka_ionization_constant_pka_ionization_constant" ON "MolecularSpecies_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MolecularSpecies_pka_ionization_constant_MolecularSpecies_id" ON "MolecularSpecies_pka_ionization_constant" ("MolecularSpecies_id");
+);CREATE INDEX "ix_MolecularSpecies_pka_ionization_constant_MolecularSpecies_id" ON "MolecularSpecies_pka_ionization_constant" ("MolecularSpecies_id");CREATE INDEX "ix_MolecularSpecies_pka_ionization_constant_pka_ionization_constant" ON "MolecularSpecies_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "NonSpeciesMolecule_has_submolecules" (
 	"NonSpeciesMolecule_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5768,27 +5937,27 @@ CREATE TABLE "NonSpeciesMolecule_has_atoms" (
 	PRIMARY KEY ("NonSpeciesMolecule_id", has_atoms_id),
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_NonSpeciesMolecule_has_atoms_has_atoms_id" ON "NonSpeciesMolecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_NonSpeciesMolecule_has_atoms_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_atoms" ("NonSpeciesMolecule_id");
+);CREATE INDEX "ix_NonSpeciesMolecule_has_atoms_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_atoms" ("NonSpeciesMolecule_id");CREATE INDEX "ix_NonSpeciesMolecule_has_atoms_has_atoms_id" ON "NonSpeciesMolecule_has_atoms" (has_atoms_id);
 CREATE TABLE "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" (
 	"NonSpeciesMolecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("NonSpeciesMolecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_NonSpeciesMolecule_has_major_microspecies_at_pH7_3_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" ("NonSpeciesMolecule_id");CREATE INDEX "ix_NonSpeciesMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_NonSpeciesMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_NonSpeciesMolecule_has_major_microspecies_at_pH7_3_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_major_microspecies_at_pH7_3" ("NonSpeciesMolecule_id");
 CREATE TABLE "NonSpeciesMolecule_pka_ionization_constant" (
 	"NonSpeciesMolecule_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NonSpeciesMolecule_id", pka_ionization_constant),
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id)
-);CREATE INDEX "ix_NonSpeciesMolecule_pka_ionization_constant_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_pka_ionization_constant" ("NonSpeciesMolecule_id");CREATE INDEX "ix_NonSpeciesMolecule_pka_ionization_constant_pka_ionization_constant" ON "NonSpeciesMolecule_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_NonSpeciesMolecule_pka_ionization_constant_pka_ionization_constant" ON "NonSpeciesMolecule_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NonSpeciesMolecule_pka_ionization_constant_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_pka_ionization_constant" ("NonSpeciesMolecule_id");
 CREATE TABLE "MoleculeByChargeState_has_submolecules" (
 	"MoleculeByChargeState_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("MoleculeByChargeState_id", has_submolecules_id),
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_MoleculeByChargeState_has_submolecules_has_submolecules_id" ON "MoleculeByChargeState_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_MoleculeByChargeState_has_submolecules_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_submolecules" ("MoleculeByChargeState_id");
+);CREATE INDEX "ix_MoleculeByChargeState_has_submolecules_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_submolecules" ("MoleculeByChargeState_id");CREATE INDEX "ix_MoleculeByChargeState_has_submolecules_has_submolecules_id" ON "MoleculeByChargeState_has_submolecules" (has_submolecules_id);
 CREATE TABLE "MoleculeByChargeState_has_atoms" (
 	"MoleculeByChargeState_id" TEXT,
 	has_atoms_id TEXT,
@@ -5822,7 +5991,7 @@ CREATE TABLE "PolyatomicIon_has_atoms" (
 	PRIMARY KEY ("PolyatomicIon_id", has_atoms_id),
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_PolyatomicIon_has_atoms_has_atoms_id" ON "PolyatomicIon_has_atoms" (has_atoms_id);CREATE INDEX "ix_PolyatomicIon_has_atoms_PolyatomicIon_id" ON "PolyatomicIon_has_atoms" ("PolyatomicIon_id");
+);CREATE INDEX "ix_PolyatomicIon_has_atoms_PolyatomicIon_id" ON "PolyatomicIon_has_atoms" ("PolyatomicIon_id");CREATE INDEX "ix_PolyatomicIon_has_atoms_has_atoms_id" ON "PolyatomicIon_has_atoms" (has_atoms_id);
 CREATE TABLE "PolyatomicIon_has_major_microspecies_at_pH7_3" (
 	"PolyatomicIon_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -5842,7 +6011,7 @@ CREATE TABLE "MolecularCation_has_submolecules" (
 	PRIMARY KEY ("MolecularCation_id", has_submolecules_id),
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_MolecularCation_has_submolecules_has_submolecules_id" ON "MolecularCation_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_MolecularCation_has_submolecules_MolecularCation_id" ON "MolecularCation_has_submolecules" ("MolecularCation_id");
+);CREATE INDEX "ix_MolecularCation_has_submolecules_MolecularCation_id" ON "MolecularCation_has_submolecules" ("MolecularCation_id");CREATE INDEX "ix_MolecularCation_has_submolecules_has_submolecules_id" ON "MolecularCation_has_submolecules" (has_submolecules_id);
 CREATE TABLE "MolecularCation_has_atoms" (
 	"MolecularCation_id" TEXT,
 	has_atoms_id TEXT,
@@ -5862,7 +6031,7 @@ CREATE TABLE "MolecularCation_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MolecularCation_id", pka_ionization_constant),
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id)
-);CREATE INDEX "ix_MolecularCation_pka_ionization_constant_MolecularCation_id" ON "MolecularCation_pka_ionization_constant" ("MolecularCation_id");CREATE INDEX "ix_MolecularCation_pka_ionization_constant_pka_ionization_constant" ON "MolecularCation_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_MolecularCation_pka_ionization_constant_pka_ionization_constant" ON "MolecularCation_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MolecularCation_pka_ionization_constant_MolecularCation_id" ON "MolecularCation_pka_ionization_constant" ("MolecularCation_id");
 CREATE TABLE "MolecularAnion_has_submolecules" (
 	"MolecularAnion_id" TEXT,
 	has_submolecules_id TEXT,
@@ -5876,14 +6045,14 @@ CREATE TABLE "MolecularAnion_has_atoms" (
 	PRIMARY KEY ("MolecularAnion_id", has_atoms_id),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MolecularAnion_has_atoms_has_atoms_id" ON "MolecularAnion_has_atoms" (has_atoms_id);CREATE INDEX "ix_MolecularAnion_has_atoms_MolecularAnion_id" ON "MolecularAnion_has_atoms" ("MolecularAnion_id");
+);CREATE INDEX "ix_MolecularAnion_has_atoms_MolecularAnion_id" ON "MolecularAnion_has_atoms" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_has_atoms_has_atoms_id" ON "MolecularAnion_has_atoms" (has_atoms_id);
 CREATE TABLE "MolecularAnion_has_major_microspecies_at_pH7_3" (
 	"MolecularAnion_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("MolecularAnion_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_MolecularAnion_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("MolecularAnion_id");
+);CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_MolecularAnion_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "MolecularAnion_pka_ionization_constant" (
 	"MolecularAnion_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -5896,7 +6065,7 @@ CREATE TABLE "NetUnchargedMolecule_has_submolecules" (
 	PRIMARY KEY ("NetUnchargedMolecule_id", has_submolecules_id),
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_has_submolecules_id" ON "NetUnchargedMolecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_submolecules" ("NetUnchargedMolecule_id");
+);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_submolecules" ("NetUnchargedMolecule_id");CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_has_submolecules_id" ON "NetUnchargedMolecule_has_submolecules" (has_submolecules_id);
 CREATE TABLE "NetUnchargedMolecule_has_atoms" (
 	"NetUnchargedMolecule_id" TEXT,
 	has_atoms_id TEXT,
@@ -5916,14 +6085,14 @@ CREATE TABLE "NetUnchargedMolecule_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NetUnchargedMolecule_id", pka_ionization_constant),
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id)
-);CREATE INDEX "ix_NetUnchargedMolecule_pka_ionization_constant_pka_ionization_constant" ON "NetUnchargedMolecule_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NetUnchargedMolecule_pka_ionization_constant_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_pka_ionization_constant" ("NetUnchargedMolecule_id");
+);CREATE INDEX "ix_NetUnchargedMolecule_pka_ionization_constant_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_pka_ionization_constant" ("NetUnchargedMolecule_id");CREATE INDEX "ix_NetUnchargedMolecule_pka_ionization_constant_pka_ionization_constant" ON "NetUnchargedMolecule_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Zwitterion_has_submolecules" (
 	"Zwitterion_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Zwitterion_id", has_submolecules_id),
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Zwitterion_has_submolecules_has_submolecules_id" ON "Zwitterion_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Zwitterion_has_submolecules_Zwitterion_id" ON "Zwitterion_has_submolecules" ("Zwitterion_id");
+);CREATE INDEX "ix_Zwitterion_has_submolecules_Zwitterion_id" ON "Zwitterion_has_submolecules" ("Zwitterion_id");CREATE INDEX "ix_Zwitterion_has_submolecules_has_submolecules_id" ON "Zwitterion_has_submolecules" (has_submolecules_id);
 CREATE TABLE "Zwitterion_has_atoms" (
 	"Zwitterion_id" TEXT,
 	has_atoms_id TEXT,
@@ -5970,27 +6139,27 @@ CREATE TABLE "NeutralMolecule_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NeutralMolecule_id", pka_ionization_constant),
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id)
-);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_NeutralMolecule_id" ON "NeutralMolecule_pka_ionization_constant" ("NeutralMolecule_id");CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_pka_ionization_constant" ON "NeutralMolecule_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_pka_ionization_constant" ON "NeutralMolecule_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_NeutralMolecule_id" ON "NeutralMolecule_pka_ionization_constant" ("NeutralMolecule_id");
 CREATE TABLE "Atom_has_major_microspecies_at_pH7_3" (
 	"Atom_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Atom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_Atom_id" ON "Atom_has_major_microspecies_at_pH7_3" ("Atom_id");CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Atom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Atom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_Atom_id" ON "Atom_has_major_microspecies_at_pH7_3" ("Atom_id");
 CREATE TABLE "Atom_pka_ionization_constant" (
 	"Atom_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Atom_id", pka_ionization_constant),
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Atom_pka_ionization_constant_pka_ionization_constant" ON "Atom_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Atom_pka_ionization_constant_Atom_id" ON "Atom_pka_ionization_constant" ("Atom_id");
+);CREATE INDEX "ix_Atom_pka_ionization_constant_Atom_id" ON "Atom_pka_ionization_constant" ("Atom_id");CREATE INDEX "ix_Atom_pka_ionization_constant_pka_ionization_constant" ON "Atom_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "ChemicalElement_has_major_microspecies_at_pH7_3" (
 	"ChemicalElement_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("ChemicalElement_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalElement" (id)
-);CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_ChemicalElement_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("ChemicalElement_id");
+);CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_ChemicalElement_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("ChemicalElement_id");CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "ChemicalElement_pka_ionization_constant" (
 	"ChemicalElement_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6003,7 +6172,7 @@ CREATE TABLE "UnchargedAtom_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("UnchargedAtom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_UnchargedAtom_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("UnchargedAtom_id");CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_UnchargedAtom_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("UnchargedAtom_id");
 CREATE TABLE "UnchargedAtom_pka_ionization_constant" (
 	"UnchargedAtom_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6016,7 +6185,7 @@ CREATE TABLE "Nuclide_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Nuclide_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Nuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Nuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Nuclide_has_major_microspecies_at_pH7_3_Nuclide_id" ON "Nuclide_has_major_microspecies_at_pH7_3" ("Nuclide_id");
+);CREATE INDEX "ix_Nuclide_has_major_microspecies_at_pH7_3_Nuclide_id" ON "Nuclide_has_major_microspecies_at_pH7_3" ("Nuclide_id");CREATE INDEX "ix_Nuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Nuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Nuclide_pka_ionization_constant" (
 	"Nuclide_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6029,13 +6198,13 @@ CREATE TABLE "Radionuclide_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Radionuclide_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_Radionuclide_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("Radionuclide_id");CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_Radionuclide_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("Radionuclide_id");
 CREATE TABLE "Radionuclide_pka_ionization_constant" (
 	"Radionuclide_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Radionuclide_id", pka_ionization_constant),
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id)
-);CREATE INDEX "ix_Radionuclide_pka_ionization_constant_pka_ionization_constant" ON "Radionuclide_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Radionuclide_pka_ionization_constant_Radionuclide_id" ON "Radionuclide_pka_ionization_constant" ("Radionuclide_id");
+);CREATE INDEX "ix_Radionuclide_pka_ionization_constant_Radionuclide_id" ON "Radionuclide_pka_ionization_constant" ("Radionuclide_id");CREATE INDEX "ix_Radionuclide_pka_ionization_constant_pka_ionization_constant" ON "Radionuclide_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "AtomIonicForm_has_major_microspecies_at_pH7_3" (
 	"AtomIonicForm_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6048,7 +6217,7 @@ CREATE TABLE "AtomIonicForm_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("AtomIonicForm_id", pka_ionization_constant),
 	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id)
-);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_pka_ionization_constant" ON "AtomIonicForm_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_AtomIonicForm_id" ON "AtomIonicForm_pka_ionization_constant" ("AtomIonicForm_id");
+);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_AtomIonicForm_id" ON "AtomIonicForm_pka_ionization_constant" ("AtomIonicForm_id");CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_pka_ionization_constant" ON "AtomIonicForm_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"PartiallySpecifiedAtom_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6061,7 +6230,7 @@ CREATE TABLE "PartiallySpecifiedAtom_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PartiallySpecifiedAtom_id", pka_ionization_constant),
 	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id)
-);CREATE INDEX "ix_PartiallySpecifiedAtom_pka_ionization_constant_pka_ionization_constant" ON "PartiallySpecifiedAtom_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PartiallySpecifiedAtom_pka_ionization_constant_PartiallySpecifiedAtom_id" ON "PartiallySpecifiedAtom_pka_ionization_constant" ("PartiallySpecifiedAtom_id");
+);CREATE INDEX "ix_PartiallySpecifiedAtom_pka_ionization_constant_PartiallySpecifiedAtom_id" ON "PartiallySpecifiedAtom_pka_ionization_constant" ("PartiallySpecifiedAtom_id");CREATE INDEX "ix_PartiallySpecifiedAtom_pka_ionization_constant_pka_ionization_constant" ON "PartiallySpecifiedAtom_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	"FullySpecifiedAtom_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6101,20 +6270,20 @@ CREATE TABLE "Ester_has_atoms" (
 	PRIMARY KEY ("Ester_id", has_atoms_id),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Ester_has_atoms_has_atoms_id" ON "Ester_has_atoms" (has_atoms_id);CREATE INDEX "ix_Ester_has_atoms_Ester_id" ON "Ester_has_atoms" ("Ester_id");
+);CREATE INDEX "ix_Ester_has_atoms_Ester_id" ON "Ester_has_atoms" ("Ester_id");CREATE INDEX "ix_Ester_has_atoms_has_atoms_id" ON "Ester_has_atoms" (has_atoms_id);
 CREATE TABLE "Ester_has_major_microspecies_at_pH7_3" (
 	"Ester_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Ester_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Ester_has_major_microspecies_at_pH7_3_Ester_id" ON "Ester_has_major_microspecies_at_pH7_3" ("Ester_id");CREATE INDEX "ix_Ester_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Ester_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Ester_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Ester_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Ester_has_major_microspecies_at_pH7_3_Ester_id" ON "Ester_has_major_microspecies_at_pH7_3" ("Ester_id");
 CREATE TABLE "Ester_pka_ionization_constant" (
 	"Ester_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Ester_id", pka_ionization_constant),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id)
-);CREATE INDEX "ix_Ester_pka_ionization_constant_pka_ionization_constant" ON "Ester_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Ester_pka_ionization_constant_Ester_id" ON "Ester_pka_ionization_constant" ("Ester_id");
+);CREATE INDEX "ix_Ester_pka_ionization_constant_Ester_id" ON "Ester_pka_ionization_constant" ("Ester_id");CREATE INDEX "ix_Ester_pka_ionization_constant_pka_ionization_constant" ON "Ester_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Stereoisomer_has_submolecules" (
 	"Stereoisomer_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6148,14 +6317,14 @@ CREATE TABLE "Enantiomer_has_submolecules" (
 	PRIMARY KEY ("Enantiomer_id", has_submolecules_id),
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Enantiomer_has_submolecules_has_submolecules_id" ON "Enantiomer_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Enantiomer_has_submolecules_Enantiomer_id" ON "Enantiomer_has_submolecules" ("Enantiomer_id");
+);CREATE INDEX "ix_Enantiomer_has_submolecules_Enantiomer_id" ON "Enantiomer_has_submolecules" ("Enantiomer_id");CREATE INDEX "ix_Enantiomer_has_submolecules_has_submolecules_id" ON "Enantiomer_has_submolecules" (has_submolecules_id);
 CREATE TABLE "Enantiomer_has_atoms" (
 	"Enantiomer_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Enantiomer_id", has_atoms_id),
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Enantiomer_has_atoms_has_atoms_id" ON "Enantiomer_has_atoms" (has_atoms_id);CREATE INDEX "ix_Enantiomer_has_atoms_Enantiomer_id" ON "Enantiomer_has_atoms" ("Enantiomer_id");
+);CREATE INDEX "ix_Enantiomer_has_atoms_Enantiomer_id" ON "Enantiomer_has_atoms" ("Enantiomer_id");CREATE INDEX "ix_Enantiomer_has_atoms_has_atoms_id" ON "Enantiomer_has_atoms" (has_atoms_id);
 CREATE TABLE "Enantiomer_has_major_microspecies_at_pH7_3" (
 	"Enantiomer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6168,28 +6337,28 @@ CREATE TABLE "Enantiomer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Enantiomer_id", pka_ionization_constant),
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id)
-);CREATE INDEX "ix_Enantiomer_pka_ionization_constant_pka_ionization_constant" ON "Enantiomer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Enantiomer_pka_ionization_constant_Enantiomer_id" ON "Enantiomer_pka_ionization_constant" ("Enantiomer_id");
+);CREATE INDEX "ix_Enantiomer_pka_ionization_constant_Enantiomer_id" ON "Enantiomer_pka_ionization_constant" ("Enantiomer_id");CREATE INDEX "ix_Enantiomer_pka_ionization_constant_pka_ionization_constant" ON "Enantiomer_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Allotrope_has_submolecules" (
 	"Allotrope_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Allotrope_id", has_submolecules_id),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Allotrope_has_submolecules_Allotrope_id" ON "Allotrope_has_submolecules" ("Allotrope_id");CREATE INDEX "ix_Allotrope_has_submolecules_has_submolecules_id" ON "Allotrope_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Allotrope_has_submolecules_has_submolecules_id" ON "Allotrope_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Allotrope_has_submolecules_Allotrope_id" ON "Allotrope_has_submolecules" ("Allotrope_id");
 CREATE TABLE "Allotrope_has_atoms" (
 	"Allotrope_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Allotrope_id", has_atoms_id),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Allotrope_has_atoms_has_atoms_id" ON "Allotrope_has_atoms" (has_atoms_id);CREATE INDEX "ix_Allotrope_has_atoms_Allotrope_id" ON "Allotrope_has_atoms" ("Allotrope_id");
+);CREATE INDEX "ix_Allotrope_has_atoms_Allotrope_id" ON "Allotrope_has_atoms" ("Allotrope_id");CREATE INDEX "ix_Allotrope_has_atoms_has_atoms_id" ON "Allotrope_has_atoms" (has_atoms_id);
 CREATE TABLE "Allotrope_has_major_microspecies_at_pH7_3" (
 	"Allotrope_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Allotrope_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Allotrope_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Allotrope_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Allotrope_has_major_microspecies_at_pH7_3_Allotrope_id" ON "Allotrope_has_major_microspecies_at_pH7_3" ("Allotrope_id");
+);CREATE INDEX "ix_Allotrope_has_major_microspecies_at_pH7_3_Allotrope_id" ON "Allotrope_has_major_microspecies_at_pH7_3" ("Allotrope_id");CREATE INDEX "ix_Allotrope_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Allotrope_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Allotrope_pka_ionization_constant" (
 	"Allotrope_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6229,6 +6398,7 @@ CREATE TABLE "Isobar" (
 	pka_ionic_strength FLOAT,
 	pka_solvent TEXT,
 	pka_pressure FLOAT,
+	classified_by TEXT,
 	id TEXT NOT NULL,
 	type TEXT,
 	has_nuclear_parts_id INTEGER,
@@ -6238,6 +6408,7 @@ CREATE TABLE "Isobar" (
 	FOREIGN KEY(has_element) REFERENCES "ChemicalElement" (id),
 	FOREIGN KEY(isobar_of) REFERENCES "ChemicalEntity" (id),
 	FOREIGN KEY(decay_product) REFERENCES "Isotope" (id),
+	FOREIGN KEY(classified_by) REFERENCES "ChemicalGroupingClass" (id),
 	FOREIGN KEY(has_nuclear_parts_id) REFERENCES "SubatomicParticleOccurrence" (id),
 	FOREIGN KEY(has_chemical_role_id) REFERENCES "ChemicalRole" (id),
 	FOREIGN KEY(owl_subclass_of_id) REFERENCES "OwlClass" (id)
@@ -6321,7 +6492,7 @@ CREATE TABLE "MonomericPolymericGroupingClass_subtype_of" (
 	PRIMARY KEY ("MonomericPolymericGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("MonomericPolymericGroupingClass_id") REFERENCES "MonomericPolymericGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_MonomericPolymericGroupingClass_subtype_of_MonomericPolymericGroupingClass_id" ON "MonomericPolymericGroupingClass_subtype_of" ("MonomericPolymericGroupingClass_id");CREATE INDEX "ix_MonomericPolymericGroupingClass_subtype_of_subtype_of_id" ON "MonomericPolymericGroupingClass_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_MonomericPolymericGroupingClass_subtype_of_subtype_of_id" ON "MonomericPolymericGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_MonomericPolymericGroupingClass_subtype_of_MonomericPolymericGroupingClass_id" ON "MonomericPolymericGroupingClass_subtype_of" ("MonomericPolymericGroupingClass_id");
 CREATE TABLE "MonomolecularPolymer_has_submolecules" (
 	"MonomolecularPolymer_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6335,20 +6506,20 @@ CREATE TABLE "MonomolecularPolymer_has_atoms" (
 	PRIMARY KEY ("MonomolecularPolymer_id", has_atoms_id),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_has_atoms_has_atoms_id" ON "MonomolecularPolymer_has_atoms" (has_atoms_id);CREATE INDEX "ix_MonomolecularPolymer_has_atoms_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_atoms" ("MonomolecularPolymer_id");
+);CREATE INDEX "ix_MonomolecularPolymer_has_atoms_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_atoms" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_has_atoms_has_atoms_id" ON "MonomolecularPolymer_has_atoms" (has_atoms_id);
 CREATE TABLE "MonomolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"MonomolecularPolymer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("MonomolecularPolymer_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("MonomolecularPolymer_id");
 CREATE TABLE "MonomolecularPolymer_pka_ionization_constant" (
 	"MonomolecularPolymer_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MonomolecularPolymer_id", pka_ionization_constant),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_MonomolecularPolymer_id" ON "MonomolecularPolymer_pka_ionization_constant" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "MonomolecularPolymer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "MonomolecularPolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_MonomolecularPolymer_id" ON "MonomolecularPolymer_pka_ionization_constant" ("MonomolecularPolymer_id");
 CREATE TABLE "SupramolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"SupramolecularPolymer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6361,7 +6532,7 @@ CREATE TABLE "SupramolecularPolymer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("SupramolecularPolymer_id", pka_ionization_constant),
 	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id)
-);CREATE INDEX "ix_SupramolecularPolymer_pka_ionization_constant_SupramolecularPolymer_id" ON "SupramolecularPolymer_pka_ionization_constant" ("SupramolecularPolymer_id");CREATE INDEX "ix_SupramolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "SupramolecularPolymer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_SupramolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "SupramolecularPolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_SupramolecularPolymer_pka_ionization_constant_SupramolecularPolymer_id" ON "SupramolecularPolymer_pka_ionization_constant" ("SupramolecularPolymer_id");
 CREATE TABLE "Copolymer_polymer_of" (
 	"Copolymer_id" TEXT,
 	polymer_of_id TEXT,
@@ -6375,27 +6546,27 @@ CREATE TABLE "Copolymer_has_submolecules" (
 	PRIMARY KEY ("Copolymer_id", has_submolecules_id),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Copolymer_has_submolecules_Copolymer_id" ON "Copolymer_has_submolecules" ("Copolymer_id");CREATE INDEX "ix_Copolymer_has_submolecules_has_submolecules_id" ON "Copolymer_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Copolymer_has_submolecules_has_submolecules_id" ON "Copolymer_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Copolymer_has_submolecules_Copolymer_id" ON "Copolymer_has_submolecules" ("Copolymer_id");
 CREATE TABLE "Copolymer_has_atoms" (
 	"Copolymer_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Copolymer_id", has_atoms_id),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Copolymer_has_atoms_has_atoms_id" ON "Copolymer_has_atoms" (has_atoms_id);CREATE INDEX "ix_Copolymer_has_atoms_Copolymer_id" ON "Copolymer_has_atoms" ("Copolymer_id");
+);CREATE INDEX "ix_Copolymer_has_atoms_Copolymer_id" ON "Copolymer_has_atoms" ("Copolymer_id");CREATE INDEX "ix_Copolymer_has_atoms_has_atoms_id" ON "Copolymer_has_atoms" (has_atoms_id);
 CREATE TABLE "Copolymer_has_major_microspecies_at_pH7_3" (
 	"Copolymer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Copolymer_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Copolymer_has_major_microspecies_at_pH7_3_Copolymer_id" ON "Copolymer_has_major_microspecies_at_pH7_3" ("Copolymer_id");CREATE INDEX "ix_Copolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Copolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Copolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Copolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Copolymer_has_major_microspecies_at_pH7_3_Copolymer_id" ON "Copolymer_has_major_microspecies_at_pH7_3" ("Copolymer_id");
 CREATE TABLE "Copolymer_pka_ionization_constant" (
 	"Copolymer_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Copolymer_id", pka_ionization_constant),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id)
-);CREATE INDEX "ix_Copolymer_pka_ionization_constant_pka_ionization_constant" ON "Copolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Copolymer_pka_ionization_constant_Copolymer_id" ON "Copolymer_pka_ionization_constant" ("Copolymer_id");
+);CREATE INDEX "ix_Copolymer_pka_ionization_constant_Copolymer_id" ON "Copolymer_pka_ionization_constant" ("Copolymer_id");CREATE INDEX "ix_Copolymer_pka_ionization_constant_pka_ionization_constant" ON "Copolymer_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Homopolymer_has_submolecules" (
 	"Homopolymer_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6409,7 +6580,7 @@ CREATE TABLE "Homopolymer_has_atoms" (
 	PRIMARY KEY ("Homopolymer_id", has_atoms_id),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Homopolymer_has_atoms_Homopolymer_id" ON "Homopolymer_has_atoms" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_has_atoms_has_atoms_id" ON "Homopolymer_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Homopolymer_has_atoms_has_atoms_id" ON "Homopolymer_has_atoms" (has_atoms_id);CREATE INDEX "ix_Homopolymer_has_atoms_Homopolymer_id" ON "Homopolymer_has_atoms" ("Homopolymer_id");
 CREATE TABLE "Homopolymer_has_major_microspecies_at_pH7_3" (
 	"Homopolymer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6422,46 +6593,46 @@ CREATE TABLE "Homopolymer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Homopolymer_id", pka_ionization_constant),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id)
-);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_Homopolymer_id" ON "Homopolymer_pka_ionization_constant" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_pka_ionization_constant_pka_ionization_constant" ON "Homopolymer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_pka_ionization_constant" ON "Homopolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_Homopolymer_id" ON "Homopolymer_pka_ionization_constant" ("Homopolymer_id");
 CREATE TABLE "Isotope_has_major_microspecies_at_pH7_3" (
 	"Isotope_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Isotope_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Isotope_has_major_microspecies_at_pH7_3_Isotope_id" ON "Isotope_has_major_microspecies_at_pH7_3" ("Isotope_id");CREATE INDEX "ix_Isotope_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Isotope_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Isotope_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Isotope_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Isotope_has_major_microspecies_at_pH7_3_Isotope_id" ON "Isotope_has_major_microspecies_at_pH7_3" ("Isotope_id");
 CREATE TABLE "Isotope_pka_ionization_constant" (
 	"Isotope_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Isotope_id", pka_ionization_constant),
 	FOREIGN KEY("Isotope_id") REFERENCES "Isotope" (id)
-);CREATE INDEX "ix_Isotope_pka_ionization_constant_pka_ionization_constant" ON "Isotope_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Isotope_pka_ionization_constant_Isotope_id" ON "Isotope_pka_ionization_constant" ("Isotope_id");
+);CREATE INDEX "ix_Isotope_pka_ionization_constant_Isotope_id" ON "Isotope_pka_ionization_constant" ("Isotope_id");CREATE INDEX "ix_Isotope_pka_ionization_constant_pka_ionization_constant" ON "Isotope_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MonoatomicIon_has_major_microspecies_at_pH7_3" (
 	"MonoatomicIon_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("MonoatomicIon_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MonoatomicIon_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonoatomicIon_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MonoatomicIon_has_major_microspecies_at_pH7_3_MonoatomicIon_id" ON "MonoatomicIon_has_major_microspecies_at_pH7_3" ("MonoatomicIon_id");
+);CREATE INDEX "ix_MonoatomicIon_has_major_microspecies_at_pH7_3_MonoatomicIon_id" ON "MonoatomicIon_has_major_microspecies_at_pH7_3" ("MonoatomicIon_id");CREATE INDEX "ix_MonoatomicIon_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonoatomicIon_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "MonoatomicIon_pka_ionization_constant" (
 	"MonoatomicIon_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MonoatomicIon_id", pka_ionization_constant),
 	FOREIGN KEY("MonoatomicIon_id") REFERENCES "MonoatomicIon" (id)
-);CREATE INDEX "ix_MonoatomicIon_pka_ionization_constant_MonoatomicIon_id" ON "MonoatomicIon_pka_ionization_constant" ("MonoatomicIon_id");CREATE INDEX "ix_MonoatomicIon_pka_ionization_constant_pka_ionization_constant" ON "MonoatomicIon_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_MonoatomicIon_pka_ionization_constant_pka_ionization_constant" ON "MonoatomicIon_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MonoatomicIon_pka_ionization_constant_MonoatomicIon_id" ON "MonoatomicIon_pka_ionization_constant" ("MonoatomicIon_id");
 CREATE TABLE "AtomAnion_has_major_microspecies_at_pH7_3" (
 	"AtomAnion_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("AtomAnion_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_AtomAnion_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("AtomAnion_id");CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_AtomAnion_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("AtomAnion_id");
 CREATE TABLE "AtomAnion_pka_ionization_constant" (
 	"AtomAnion_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("AtomAnion_id", pka_ionization_constant),
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id)
-);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_pka_ionization_constant" ON "AtomAnion_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_AtomAnion_id" ON "AtomAnion_pka_ionization_constant" ("AtomAnion_id");
+);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_AtomAnion_id" ON "AtomAnion_pka_ionization_constant" ("AtomAnion_id");CREATE INDEX "ix_AtomAnion_pka_ionization_constant_pka_ionization_constant" ON "AtomAnion_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "AtomCation_has_major_microspecies_at_pH7_3" (
 	"AtomCation_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6481,13 +6652,13 @@ CREATE TABLE "RacemicMixture_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("RacemicMixture_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_RacemicMixture_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("RacemicMixture_id");CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_RacemicMixture_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("RacemicMixture_id");
 CREATE TABLE "RacemicMixture_pka_ionization_constant" (
 	"RacemicMixture_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("RacemicMixture_id", pka_ionization_constant),
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id)
-);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_pka_ionization_constant" ON "RacemicMixture_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_RacemicMixture_id" ON "RacemicMixture_pka_ionization_constant" ("RacemicMixture_id");
+);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_RacemicMixture_id" ON "RacemicMixture_pka_ionization_constant" ("RacemicMixture_id");CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_pka_ionization_constant" ON "RacemicMixture_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "AtomicBond" (
 	id INTEGER NOT NULL,
 	subject TEXT,
@@ -6538,14 +6709,14 @@ CREATE TABLE "Macromolecule_has_bonds" (
 	PRIMARY KEY ("Macromolecule_id", has_bonds_id),
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Macromolecule_has_bonds_Macromolecule_id" ON "Macromolecule_has_bonds" ("Macromolecule_id");CREATE INDEX "ix_Macromolecule_has_bonds_has_bonds_id" ON "Macromolecule_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_Macromolecule_has_bonds_has_bonds_id" ON "Macromolecule_has_bonds" (has_bonds_id);CREATE INDEX "ix_Macromolecule_has_bonds_Macromolecule_id" ON "Macromolecule_has_bonds" ("Macromolecule_id");
 CREATE TABLE "Peptide_has_bonds" (
 	"Peptide_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("Peptide_id", has_bonds_id),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Peptide_has_bonds_has_bonds_id" ON "Peptide_has_bonds" (has_bonds_id);CREATE INDEX "ix_Peptide_has_bonds_Peptide_id" ON "Peptide_has_bonds" ("Peptide_id");
+);CREATE INDEX "ix_Peptide_has_bonds_Peptide_id" ON "Peptide_has_bonds" ("Peptide_id");CREATE INDEX "ix_Peptide_has_bonds_has_bonds_id" ON "Peptide_has_bonds" (has_bonds_id);
 CREATE TABLE "Protein_has_bonds" (
 	"Protein_id" TEXT,
 	has_bonds_id INTEGER,
@@ -6559,7 +6730,7 @@ CREATE TABLE "Glycan_has_bonds" (
 	PRIMARY KEY ("Glycan_id", has_bonds_id),
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Glycan_has_bonds_has_bonds_id" ON "Glycan_has_bonds" (has_bonds_id);CREATE INDEX "ix_Glycan_has_bonds_Glycan_id" ON "Glycan_has_bonds" ("Glycan_id");
+);CREATE INDEX "ix_Glycan_has_bonds_Glycan_id" ON "Glycan_has_bonds" ("Glycan_id");CREATE INDEX "ix_Glycan_has_bonds_has_bonds_id" ON "Glycan_has_bonds" (has_bonds_id);
 CREATE TABLE "MonomolecularPolymer_has_bonds" (
 	"MonomolecularPolymer_id" TEXT,
 	has_bonds_id INTEGER,
@@ -6594,7 +6765,7 @@ CREATE TABLE "NaturalProduct_has_bonds" (
 	PRIMARY KEY ("NaturalProduct_id", has_bonds_id),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_NaturalProduct_has_bonds_NaturalProduct_id" ON "NaturalProduct_has_bonds" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_has_bonds_has_bonds_id" ON "NaturalProduct_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_NaturalProduct_has_bonds_has_bonds_id" ON "NaturalProduct_has_bonds" (has_bonds_id);CREATE INDEX "ix_NaturalProduct_has_bonds_NaturalProduct_id" ON "NaturalProduct_has_bonds" ("NaturalProduct_id");
 CREATE TABLE "MolecularSpecies_has_bonds" (
 	"MolecularSpecies_id" TEXT,
 	has_bonds_id INTEGER,
@@ -6622,14 +6793,14 @@ CREATE TABLE "PolyatomicIon_has_bonds" (
 	PRIMARY KEY ("PolyatomicIon_id", has_bonds_id),
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_PolyatomicIon_has_bonds_PolyatomicIon_id" ON "PolyatomicIon_has_bonds" ("PolyatomicIon_id");CREATE INDEX "ix_PolyatomicIon_has_bonds_has_bonds_id" ON "PolyatomicIon_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_PolyatomicIon_has_bonds_has_bonds_id" ON "PolyatomicIon_has_bonds" (has_bonds_id);CREATE INDEX "ix_PolyatomicIon_has_bonds_PolyatomicIon_id" ON "PolyatomicIon_has_bonds" ("PolyatomicIon_id");
 CREATE TABLE "MolecularCation_has_bonds" (
 	"MolecularCation_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("MolecularCation_id", has_bonds_id),
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_MolecularCation_has_bonds_MolecularCation_id" ON "MolecularCation_has_bonds" ("MolecularCation_id");CREATE INDEX "ix_MolecularCation_has_bonds_has_bonds_id" ON "MolecularCation_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_MolecularCation_has_bonds_has_bonds_id" ON "MolecularCation_has_bonds" (has_bonds_id);CREATE INDEX "ix_MolecularCation_has_bonds_MolecularCation_id" ON "MolecularCation_has_bonds" ("MolecularCation_id");
 CREATE TABLE "MolecularAnion_has_bonds" (
 	"MolecularAnion_id" TEXT,
 	has_bonds_id INTEGER,
@@ -6657,14 +6828,14 @@ CREATE TABLE "NeutralMolecule_has_bonds" (
 	PRIMARY KEY ("NeutralMolecule_id", has_bonds_id),
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_NeutralMolecule_has_bonds_NeutralMolecule_id" ON "NeutralMolecule_has_bonds" ("NeutralMolecule_id");CREATE INDEX "ix_NeutralMolecule_has_bonds_has_bonds_id" ON "NeutralMolecule_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_NeutralMolecule_has_bonds_has_bonds_id" ON "NeutralMolecule_has_bonds" (has_bonds_id);CREATE INDEX "ix_NeutralMolecule_has_bonds_NeutralMolecule_id" ON "NeutralMolecule_has_bonds" ("NeutralMolecule_id");
 CREATE TABLE "Ester_has_bonds" (
 	"Ester_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("Ester_id", has_bonds_id),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Ester_has_bonds_has_bonds_id" ON "Ester_has_bonds" (has_bonds_id);CREATE INDEX "ix_Ester_has_bonds_Ester_id" ON "Ester_has_bonds" ("Ester_id");
+);CREATE INDEX "ix_Ester_has_bonds_Ester_id" ON "Ester_has_bonds" ("Ester_id");CREATE INDEX "ix_Ester_has_bonds_has_bonds_id" ON "Ester_has_bonds" (has_bonds_id);
 CREATE TABLE "Stereoisomer_has_bonds" (
 	"Stereoisomer_id" TEXT,
 	has_bonds_id INTEGER,
@@ -6678,7 +6849,7 @@ CREATE TABLE "Enantiomer_has_bonds" (
 	PRIMARY KEY ("Enantiomer_id", has_bonds_id),
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Enantiomer_has_bonds_has_bonds_id" ON "Enantiomer_has_bonds" (has_bonds_id);CREATE INDEX "ix_Enantiomer_has_bonds_Enantiomer_id" ON "Enantiomer_has_bonds" ("Enantiomer_id");
+);CREATE INDEX "ix_Enantiomer_has_bonds_Enantiomer_id" ON "Enantiomer_has_bonds" ("Enantiomer_id");CREATE INDEX "ix_Enantiomer_has_bonds_has_bonds_id" ON "Enantiomer_has_bonds" (has_bonds_id);
 CREATE TABLE "Allotrope_has_bonds" (
 	"Allotrope_id" TEXT,
 	has_bonds_id INTEGER,

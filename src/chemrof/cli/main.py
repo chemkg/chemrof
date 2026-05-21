@@ -4,11 +4,17 @@ from __future__ import annotations
 
 import json
 from enum import Enum
+from pathlib import Path
 from typing import Optional
 
 import typer
 import yaml
 
+from chemrof.converter.enrichers.chemont import (
+    ChemOntEnricher,
+    build_chemont_duckdb,
+    build_chemont_parquet,
+)
 from chemrof.converter.smiles import SmilesConverter
 from chemrof.converter.enrichers.base import get_enricher, list_enrichers
 
@@ -38,6 +44,9 @@ Pass a comma-separated list of source names. Available sources:
   pubchem   -- Look up the compound in PubChem by InChIKey.
                Fills in the preferred IUPAC name and PubChem CID.
 
+  chemont   -- Look up ClassyFire/ChemOnt labels by InChIKey from a
+               local DuckDB, Parquet, or TSV source and fills classified_by.
+
   chebi     -- (stub) Will resolve CHEBI identifiers via OLS.
 
   wikidata  -- (stub) Will resolve Wikidata QIDs via SPARQL.
@@ -59,6 +68,16 @@ def from_smiles(
         "-e",
         help=_ENRICHER_HELP,
     ),
+    chemont_source: Optional[Path] = typer.Option(
+        None,
+        "--chemont-source",
+        help="Local ChemOnt labels source: indexed DuckDB, Parquet, or Zenodo TSV/ZST.",
+    ),
+    chemont_dictionary: Optional[Path] = typer.Option(
+        None,
+        "--chemont-dictionary",
+        help="Local ChemOnt dictionary TSV/Parquet, required unless bundled in the DuckDB.",
+    ),
 ):
     """Convert SMILES to chemrof data.
 
@@ -79,7 +98,15 @@ def from_smiles(
     if enrichers:
         for name in enrichers.split(","):
             name = name.strip()
-            enricher_instances.append(get_enricher(name))
+            if name == "chemont":
+                enricher_instances.append(
+                    ChemOntEnricher(
+                        source=chemont_source,
+                        dictionary_source=chemont_dictionary,
+                    )
+                )
+            else:
+                enricher_instances.append(get_enricher(name))
 
     converter = SmilesConverter(enrichers=enricher_instances)
 
@@ -100,3 +127,52 @@ def from_smiles(
         typer.echo(json.dumps(output, indent=2))
     else:
         typer.echo(yaml.dump(output, default_flow_style=False, sort_keys=False).rstrip())
+
+
+class ChemOntStoreFormat(str, Enum):
+    duckdb = "duckdb"
+    parquet = "parquet"
+
+
+@app.command()
+def prepare_chemont(
+    enriched_tsv: Path = typer.Argument(
+        help="Zenodo classyfire_dedup_inchikey_smiles.enriched.tsv.zst or TSV file.",
+    ),
+    dictionary_tsv: Path = typer.Argument(
+        help="Zenodo chemont_dictionary.tsv file.",
+    ),
+    output: Path = typer.Argument(
+        help="Output DuckDB file or Parquet directory.",
+    ),
+    format: ChemOntStoreFormat = typer.Option(
+        ChemOntStoreFormat.duckdb,
+        "--format",
+        "-f",
+        help="Storage format to create.",
+    ),
+    overwrite: bool = typer.Option(
+        False,
+        "--overwrite",
+        help="Replace an existing output file.",
+    ),
+):
+    """Prepare the ClassyFire/ChemOnt Zenodo table for fast local lookups."""
+    if format == ChemOntStoreFormat.duckdb:
+        path = build_chemont_duckdb(
+            enriched_tsv,
+            dictionary_tsv,
+            output,
+            overwrite=overwrite,
+        )
+        typer.echo(str(path))
+        return
+
+    labels_path, dictionary_path = build_chemont_parquet(
+        enriched_tsv,
+        dictionary_tsv,
+        output,
+        overwrite=overwrite,
+    )
+    typer.echo(str(labels_path))
+    typer.echo(str(dictionary_path))

@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-11T10:01:53
+# Generation date: 2026-05-21T12:21:59
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -69,6 +69,7 @@ BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 CHEBI = CurieNamespace('CHEBI', 'http://purl.obolibrary.org/obo/CHEBI_')
 CHEMBL_COMPOUND = CurieNamespace('CHEMBL_COMPOUND', 'http://identifiers.org/chembl.compound/')
 CHEMINF = CurieNamespace('CHEMINF', 'http://semanticscience.org/resource/CHEMINF_')
+CHEMONTID = CurieNamespace('CHEMONTID', 'http://purl.obolibrary.org/obo/CHEMONTID_')
 COB = CurieNamespace('COB', 'http://purl.obolibrary.org/obo/COB_')
 DRUGBANK = CurieNamespace('DRUGBANK', 'http://identifiers.org/drugbank/')
 EC = CurieNamespace('EC', 'https://enzyme.expasy.org/EC/')
@@ -689,6 +690,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     pka_ionic_strength: Optional[float] = None
     pka_solvent: Optional[str] = None
     pka_pressure: Optional[float] = None
+    classified_by: Optional[Union[str, ChemicalGroupingClassId]] = None
     owl_subclass_of: Optional[Union[dict, "OwlClass"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -761,6 +763,9 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.pka_pressure is not None and not isinstance(self.pka_pressure, float):
             self.pka_pressure = float(self.pka_pressure)
+
+        if self.classified_by is not None and not isinstance(self.classified_by, ChemicalGroupingClassId):
+            self.classified_by = ChemicalGroupingClassId(self.classified_by)
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
@@ -5333,7 +5338,7 @@ slots.inchi_sublayer_in_main_layer = Slot(uri=CHEMROF.inchi_sublayer_in_main_lay
 
 slots.inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_sublayer, name="inchi_chemical_sublayer", curie=CHEMROF.curie('inchi_chemical_sublayer'),
                    model_uri=CHEMROF.inchi_chemical_sublayer, domain=None, range=Optional[str],
-                   pattern=re.compile(r'^[A-Z0-9\.]+$'))
+                   pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
 slots.inchi_atom_connections_sublayer = Slot(uri=CHEMROF.inchi_atom_connections_sublayer, name="inchi_atom_connections_sublayer", curie=CHEMROF.curie('inchi_atom_connections_sublayer'),
                    model_uri=CHEMROF.inchi_atom_connections_sublayer, domain=None, range=Optional[str],
@@ -5690,7 +5695,10 @@ slots.atomOccurrence__coordination_number = Slot(uri=CHEMROF.coordination_number
 
 slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_sublayer, name="ChemicalEntity_inchi_chemical_sublayer", curie=CHEMROF.curie('inchi_chemical_sublayer'),
                    model_uri=CHEMROF.ChemicalEntity_inchi_chemical_sublayer, domain=ChemicalEntity, range=Optional[str],
-                   pattern=re.compile(r'^[A-Z0-9\.]+$'))
+                   pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
+
+slots.ChemicalEntity_classified_by = Slot(uri=CHEMROF.classified_by, name="ChemicalEntity_classified_by", curie=CHEMROF.curie('classified_by'),
+                   model_uri=CHEMROF.ChemicalEntity_classified_by, domain=ChemicalEntity, range=Optional[Union[str, ChemicalGroupingClassId]])
 
 slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.GroupingClass_subtype_of, domain=GroupingClass, range=Optional[Union[Union[str, GroupingClassId], list[Union[str, GroupingClassId]]]])
