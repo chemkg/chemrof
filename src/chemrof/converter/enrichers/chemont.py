@@ -9,14 +9,42 @@ from pathlib import Path
 from typing import Any
 
 import duckdb
+import httpx
 
 from chemrof.converter.enrichers.base import EnrichmentContext
 
 CHEMONT_SOURCE_ENV = "CHEMROF_CHEMONT_SOURCE"
 CHEMONT_DICTIONARY_ENV = "CHEMROF_CHEMONT_DICTIONARY"
 
+ZENODO_RECORD_ID = "20200447"
+ZENODO_LABELS_FILE = "classyfire_dedup_inchikey_smiles.enriched.tsv.zst"
+ZENODO_DICTIONARY_FILE = "chemont_dictionary.tsv"
+ZENODO_FILES_URL = f"https://zenodo.org/api/records/{ZENODO_RECORD_ID}/files"
+
 LABELS_TABLE = "chemont_labels"
 DICTIONARY_TABLE = "chemont_dictionary"
+
+
+def download_chemont_zenodo(
+    download_dir: str | Path,
+    *,
+    overwrite: bool = False,
+) -> tuple[Path, Path]:
+    """Download the ChemOnt Zenodo files needed to build a local lookup store."""
+    download_dir = Path(download_dir)
+    download_dir.mkdir(parents=True, exist_ok=True)
+
+    labels_path = download_dir / ZENODO_LABELS_FILE
+    dictionary_path = download_dir / ZENODO_DICTIONARY_FILE
+
+    _download_file(_zenodo_file_url(ZENODO_LABELS_FILE), labels_path, overwrite=overwrite)
+    _download_file(
+        _zenodo_file_url(ZENODO_DICTIONARY_FILE),
+        dictionary_path,
+        overwrite=overwrite,
+    )
+
+    return labels_path, dictionary_path
 
 
 def build_chemont_duckdb(
@@ -258,6 +286,40 @@ def _prepare_output(path: Path, *, overwrite: bool) -> None:
         if not overwrite:
             raise FileExistsError(f"{path} already exists")
         path.unlink()
+
+
+def _download_file(url: str, path: Path, *, overwrite: bool) -> Path:
+    if path.exists() and not overwrite:
+        return path
+
+    _prepare_output(path, overwrite=True)
+    temp_path = path.with_name(f"{path.name}.tmp")
+    if temp_path.exists():
+        temp_path.unlink()
+
+    timeout = httpx.Timeout(30.0, read=None)
+    try:
+        with httpx.stream(
+            "GET",
+            url,
+            follow_redirects=True,
+            timeout=timeout,
+        ) as response:
+            response.raise_for_status()
+            with temp_path.open("wb") as stream:
+                for chunk in response.iter_bytes():
+                    if chunk:
+                        stream.write(chunk)
+        temp_path.replace(path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
+
+    return path
+
+
+def _zenodo_file_url(filename: str) -> str:
+    return f"{ZENODO_FILES_URL}/{filename}/content"
 
 
 def _source_relation(path: str | Path) -> str:

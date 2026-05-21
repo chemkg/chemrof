@@ -6,10 +6,12 @@ from typer.testing import CliRunner
 
 from chemrof.cli.main import app
 from chemrof.converter.enrichers.base import EnrichmentContext
+from chemrof.converter.enrichers import chemont
 from chemrof.converter.enrichers.chemont import (
     ChemOntEnricher,
     build_chemont_duckdb,
     build_chemont_parquet,
+    download_chemont_zenodo,
 )
 
 
@@ -134,3 +136,65 @@ def test_cli_prepare_chemont_builds_duckdb(tmp_path):
 
     assert result.exit_code == 0, result.output
     assert db_path.exists()
+
+
+def test_download_chemont_zenodo_downloads_expected_files(tmp_path, monkeypatch):
+    downloaded = []
+
+    def fake_download(url, path, *, overwrite):
+        downloaded.append((url, path.name, overwrite))
+        path.write_text(path.name)
+        return path
+
+    monkeypatch.setattr(chemont, "_download_file", fake_download)
+
+    labels_path, dictionary_path = download_chemont_zenodo(tmp_path, overwrite=True)
+
+    assert labels_path.name == chemont.ZENODO_LABELS_FILE
+    assert dictionary_path.name == chemont.ZENODO_DICTIONARY_FILE
+    assert downloaded == [
+        (
+            f"{chemont.ZENODO_FILES_URL}/{chemont.ZENODO_LABELS_FILE}/content",
+            chemont.ZENODO_LABELS_FILE,
+            True,
+        ),
+        (
+            f"{chemont.ZENODO_FILES_URL}/{chemont.ZENODO_DICTIONARY_FILE}/content",
+            chemont.ZENODO_DICTIONARY_FILE,
+            True,
+        ),
+    ]
+
+
+def test_cli_prepare_chemont_from_zenodo_builds_duckdb(
+    tmp_path,
+    monkeypatch,
+):
+    labels, dictionary = _write_chemont_inputs(tmp_path)
+    download_dir = tmp_path / "downloads"
+    db_path = tmp_path / "from-zenodo.duckdb"
+    calls = []
+
+    def fake_download_zenodo(path, *, overwrite):
+        calls.append((path, overwrite))
+        path.mkdir(parents=True, exist_ok=True)
+        return labels, dictionary
+
+    monkeypatch.setattr(
+        "chemrof.cli.main.download_chemont_zenodo",
+        fake_download_zenodo,
+    )
+
+    result = CliRunner().invoke(
+        app,
+        [
+            "prepare-chemont-from-zenodo",
+            str(db_path),
+            "--download-dir",
+            str(download_dir),
+        ],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert db_path.exists()
+    assert calls == [(download_dir, False)]
