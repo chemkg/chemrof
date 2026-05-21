@@ -62,45 +62,57 @@ def build_chemont_duckdb(
     """
     output_db = Path(output_db)
     _prepare_output(output_db, overwrite=overwrite)
+    temp_db = output_db.with_name(f".{output_db.name}.tmp")
+    _prepare_output(temp_db, overwrite=True)
 
-    con = duckdb.connect(str(output_db))
     try:
-        con.execute(
-            f"""
-            CREATE TABLE {LABELS_TABLE} AS
-            SELECT
-              inchikey,
-              cid,
-              zinc_id,
-              smiles,
-              chemont_tree_json,
-              chemont_other_json
-            FROM {_source_relation(enriched_tsv)}
-            """
-        )
-        con.execute(
-            f"CREATE INDEX {LABELS_TABLE}_inchikey_idx ON {LABELS_TABLE}(inchikey)"
-        )
-        con.execute(
-            f"""
-            CREATE TABLE {DICTIONARY_TABLE} AS
-            SELECT
-              CAST(numeric_id AS INTEGER) AS numeric_id,
-              chemont_id,
-              name,
-              CAST(parent_numeric_id AS INTEGER) AS parent_numeric_id,
-              parent_name
-            FROM {_source_relation(dictionary_tsv)}
-            """
-        )
-        con.execute(
-            f"CREATE UNIQUE INDEX {DICTIONARY_TABLE}_numeric_id_idx "
-            f"ON {DICTIONARY_TABLE}(numeric_id)"
-        )
-    finally:
-        con.close()
+        con = duckdb.connect(str(temp_db))
+        try:
+            con.execute(
+                f"""
+                CREATE TABLE {LABELS_TABLE} AS
+                SELECT
+                  inchikey,
+                  cid,
+                  zinc_id,
+                  smiles,
+                  chemont_tree_json,
+                  chemont_other_json
+                FROM {_source_relation(enriched_tsv)}
+                """
+            )
+            con.execute(
+                f"CREATE INDEX {LABELS_TABLE}_inchikey_idx ON {LABELS_TABLE}(inchikey)"
+            )
+            con.execute(
+                f"""
+                CREATE TABLE {DICTIONARY_TABLE} AS
+                SELECT
+                  CAST(numeric_id AS INTEGER) AS numeric_id,
+                  chemont_id,
+                  name,
+                  {_parent_numeric_id_expression()} AS parent_numeric_id,
+                  parent_name
+                FROM {_source_relation(dictionary_tsv)}
+                """
+            )
+            con.execute(
+                f"CREATE UNIQUE INDEX {DICTIONARY_TABLE}_numeric_id_idx "
+                f"ON {DICTIONARY_TABLE}(numeric_id)"
+            )
+        finally:
+            con.close()
+        temp_db.replace(output_db)
+    except Exception:
+        if temp_db.exists():
+            temp_db.unlink()
+        raise
 
     return output_db
+
+
+def _parent_numeric_id_expression() -> str:
+    return "TRY_CAST(NULLIF(parent_numeric_id, 'null') AS INTEGER)"
 
 
 def build_chemont_parquet(
@@ -143,7 +155,7 @@ def build_chemont_parquet(
                 CAST(numeric_id AS INTEGER) AS numeric_id,
                 chemont_id,
                 name,
-                CAST(parent_numeric_id AS INTEGER) AS parent_numeric_id,
+                {_parent_numeric_id_expression()} AS parent_numeric_id,
                 parent_name
               FROM {_source_relation(dictionary_tsv)}
             )
@@ -364,7 +376,7 @@ def _load_dictionary_tsv(path: Path) -> dict[int, dict[str, Any]]:
                 "chemont_id": row["chemont_id"],
                 "name": row["name"],
                 "parent_numeric_id": _optional_int(row.get("parent_numeric_id")),
-                "parent_name": row.get("parent_name") or None,
+                "parent_name": _optional_str(row.get("parent_name")),
             }
             for row in reader
             if row.get("numeric_id")
@@ -395,4 +407,8 @@ def _chemont_id(numeric_id: int) -> str:
 
 
 def _optional_int(value: Any) -> int | None:
-    return int(value) if value not in (None, "") else None
+    return int(value) if value not in (None, "", "null") else None
+
+
+def _optional_str(value: Any) -> str | None:
+    return value if value not in (None, "", "null") else None

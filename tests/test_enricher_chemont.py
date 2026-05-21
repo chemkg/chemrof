@@ -56,7 +56,13 @@ def _write_chemont_inputs(tmp_path):
             ]
         )
         + "\n"
-        + "\t".join(["2450", "CHEMONTID:0002450", "Alcohols", "323", "Organooxygen compounds"])
+        + "\t".join(
+            ["9999999", "CHEMONTID:9999999", "Chemical entities", "null", "null"]
+        )
+        + "\n"
+        + "\t".join(
+            ["2450", "CHEMONTID:0002450", "Alcohols", "323", "Organooxygen compounds"]
+        )
         + "\n"
     )
     return labels, dictionary
