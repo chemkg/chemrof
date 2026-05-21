@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-21T12:21:59
+# Generation date: 2026-05-21T16:20:14
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -690,7 +690,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     pka_ionic_strength: Optional[float] = None
     pka_solvent: Optional[str] = None
     pka_pressure: Optional[float] = None
-    classified_by: Optional[Union[str, ChemicalGroupingClassId]] = None
+    classified_by: Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]] = empty_list()
     owl_subclass_of: Optional[Union[dict, "OwlClass"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -764,8 +764,9 @@ class ChemicalEntity(PhysicochemicalEntity):
         if self.pka_pressure is not None and not isinstance(self.pka_pressure, float):
             self.pka_pressure = float(self.pka_pressure)
 
-        if self.classified_by is not None and not isinstance(self.classified_by, ChemicalGroupingClassId):
-            self.classified_by = ChemicalGroupingClassId(self.classified_by)
+        if not isinstance(self.classified_by, list):
+            self.classified_by = [self.classified_by] if self.classified_by is not None else []
+        self.classified_by = [v if isinstance(v, ChemicalGroupingClassId) else ChemicalGroupingClassId(v) for v in self.classified_by]
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
@@ -5698,7 +5699,7 @@ slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_s
                    pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
 slots.ChemicalEntity_classified_by = Slot(uri=CHEMROF.classified_by, name="ChemicalEntity_classified_by", curie=CHEMROF.curie('classified_by'),
-                   model_uri=CHEMROF.ChemicalEntity_classified_by, domain=ChemicalEntity, range=Optional[Union[str, ChemicalGroupingClassId]])
+                   model_uri=CHEMROF.ChemicalEntity_classified_by, domain=ChemicalEntity, range=Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]])
 
 slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.GroupingClass_subtype_of, domain=GroupingClass, range=Optional[Union[Union[str, GroupingClassId], list[Union[str, GroupingClassId]]]])

@@ -16,6 +16,13 @@ from chemrof.converter.enrichers.chemont import (
 
 
 ETHANOL_INCHIKEY = "LFQSCWFLJHTTHZ-UHFFFAOYSA-N"
+ETHANOL_CHEMONT_TREE = [
+    "CHEMONTID:0000000",
+    "CHEMONTID:0004707",
+    "CHEMONTID:0000323",
+    "CHEMONTID:0001661",
+    "CHEMONTID:0002450",
+]
 
 
 def _write_chemont_inputs(tmp_path):
@@ -38,7 +45,7 @@ def _write_chemont_inputs(tmp_path):
                 "702",
                 "",
                 "CCO",
-                "[0,4707,323,1661,2450]",
+                "[0,4707,323,1661,2450,2450]",
                 "{}",
             ]
         )
@@ -77,7 +84,7 @@ def test_chemont_enricher_from_indexed_duckdb(tmp_path):
     ctx = EnrichmentContext(mol=None, inchikey=ETHANOL_INCHIKEY, smiles="CCO", inchi="")
     result = enricher.enrich(obj, ctx)
 
-    assert result["classified_by"] == "CHEMONTID:0002450"
+    assert result["classified_by"] == ETHANOL_CHEMONT_TREE
 
 
 def test_chemont_enricher_from_parquet_directory(tmp_path):
@@ -90,7 +97,7 @@ def test_chemont_enricher_from_parquet_directory(tmp_path):
     ctx = EnrichmentContext(mol=None, inchikey=ETHANOL_INCHIKEY, smiles="CCO", inchi="")
     result = enricher.enrich(obj, ctx)
 
-    assert result["classified_by"] == "CHEMONTID:0002450"
+    assert result["classified_by"] == ETHANOL_CHEMONT_TREE
 
 
 def test_chemont_enricher_no_match_leaves_object_unchanged(tmp_path):
@@ -123,7 +130,7 @@ def test_cli_from_smiles_can_use_chemont_source(tmp_path):
 
     assert result.exit_code == 0, result.output
     data = json.loads(result.output)
-    assert data["classified_by"] == "CHEMONTID:0002450"
+    assert data["classified_by"] == ETHANOL_CHEMONT_TREE
 
 
 def test_cli_prepare_chemont_builds_duckdb(tmp_path):

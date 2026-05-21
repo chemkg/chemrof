@@ -170,7 +170,7 @@ def build_chemont_parquet(
 
 
 class ChemOntEnricher:
-    """Add the most specific ClassyFire/ChemOnt class as ``classified_by``."""
+    """Add ClassyFire/ChemOnt tree classes as ``classified_by``."""
 
     name = "chemont"
 
@@ -203,18 +203,20 @@ class ChemOntEnricher:
         if not context.inchikey:
             return obj
 
-        numeric_id = self._lookup_direct_parent(context.inchikey)
-        if numeric_id is None:
+        numeric_ids = self._lookup_tree_classes(context.inchikey)
+        if not numeric_ids:
             return obj
 
-        obj["classified_by"] = self._classification_curie(numeric_id)
+        obj["classified_by"] = [
+            self._classification_curie(numeric_id) for numeric_id in numeric_ids
+        ]
         return obj
 
-    def _lookup_direct_parent(self, inchikey: str) -> int | None:
+    def _lookup_tree_classes(self, inchikey: str) -> list[int]:
         row = self._fetch_label_row(inchikey)
         if not row:
-            return None
-        return _deepest_tree_class(row[0])
+            return []
+        return _tree_classes(row[0])
 
     def _fetch_label_row(self, inchikey: str) -> tuple[Any, ...] | None:
         con = (
@@ -392,14 +394,20 @@ def _dictionary_row_from_tuple(row: tuple[Any, ...]) -> dict[str, Any]:
     }
 
 
-def _deepest_tree_class(tree_json: Any) -> int | None:
+def _tree_classes(tree_json: Any) -> list[int]:
     if tree_json is None:
-        return None
+        return []
     tree = json.loads(tree_json) if isinstance(tree_json, str) else tree_json
-    for value in reversed(tree):
-        if value is not None:
-            return int(value)
-    return None
+    classes = []
+    seen = set()
+    for value in tree:
+        if value is None:
+            continue
+        numeric_id = int(value)
+        if numeric_id not in seen:
+            classes.append(numeric_id)
+            seen.add(numeric_id)
+    return classes
 
 
 def _chemont_id(numeric_id: int) -> str:
