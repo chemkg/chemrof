@@ -14,6 +14,7 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
   RO: http://purl.obolibrary.org/obo/RO_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  CHEMONTID: http://purl.obolibrary.org/obo/CHEMONTID_
   chebi.property: http://purl.obolibrary.org/obo/chebi/
   CHEMINF: http://semanticscience.org/resource/CHEMINF_
   RXNO: http://purl.obolibrary.org/obo/RXNO_
@@ -83,6 +84,8 @@ classes:
   ChemicalEntity:
     is_a: PhysicochemicalEntity
     class_uri: CHEBI:24431
+    annotations:
+      owl.template: SubClassOf({{id}} chemrof:{{this.class_name}})
     aliases:
       - specific chemical entity
       - chemical
@@ -119,10 +122,14 @@ classes:
       - pka_ionic_strength
       - pka_solvent
       - pka_pressure
+      - classified_by
     slot_usage:
       inchi_chemical_sublayer:
         required: false
         recommended: true
+      classified_by:
+        range: ChemicalGroupingClass
+        multivalued: true
     unique_keys:
       smiles_string:
         unique_key_slots:
@@ -173,6 +180,8 @@ classes:
     mixin: true
     description: instances of this class mixin are OWL Classes
     class_uri: owl:Class
+    annotations:
+      owl: Class
     close_mappings:
       - skos:Concept
     exact_mappings:
@@ -1781,9 +1790,13 @@ slots:
     title: chemical to chemical relationship
   chemical_property:
     abstract: true
+    annotations:
+      owl: Annotation
     title: chemical property
   information_property:
     abstract: true
+    annotations:
+      owl: Annotation
     title: information property
   in_periodic_table_group:
     range: PeriodicTableGroup
@@ -1902,6 +1915,8 @@ slots:
   has_element:
     is_a: alternate_form_of
     range: ChemicalElement
+    annotations:
+      owl: AnnotationAssertion
     title: has element
   allotropic_analog_of:
     is_a: alternate_form_of
@@ -2936,6 +2951,8 @@ slots:
     aliases:
       - is a
     mixin: true
+    annotations:
+      owl: SubClassOf
     description: 'Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see ''owl class''), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)'
     domain: OwlClass
     range: OwlClass
@@ -2984,10 +3001,11 @@ slots:
     is_a: chemical_to_chemical_relationship
     mixins:
       - owl_subclass_of
+    slot_uri: rdfs:subClassOf
     description: A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class
     domain: OwlClass
     range: OwlClass
-    exact_mappings:
+    close_mappings:
       - rdf:type
     examples:
       - description: glucose classified by monosaccharide

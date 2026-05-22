@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-31T08:48:10
+# Generation date: 2026-05-22T09:58:45
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -69,6 +69,7 @@ BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 CHEBI = CurieNamespace('CHEBI', 'http://purl.obolibrary.org/obo/CHEBI_')
 CHEMBL_COMPOUND = CurieNamespace('CHEMBL_COMPOUND', 'http://identifiers.org/chembl.compound/')
 CHEMINF = CurieNamespace('CHEMINF', 'http://semanticscience.org/resource/CHEMINF_')
+CHEMONTID = CurieNamespace('CHEMONTID', 'http://purl.obolibrary.org/obo/CHEMONTID_')
 COB = CurieNamespace('COB', 'http://purl.obolibrary.org/obo/COB_')
 DRUGBANK = CurieNamespace('DRUGBANK', 'http://identifiers.org/drugbank/')
 EC = CurieNamespace('EC', 'https://enzyme.expasy.org/EC/')
@@ -680,6 +681,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     inchi_stereochemical_type_sublayer: Optional[str] = None
     inchi_isotopic_layer: Optional[str] = None
     smiles_string: Optional[str] = None
+    cxsmiles_string: Optional[str] = None
     empirical_formula: Optional[str] = None
     has_major_microspecies_at_pH7_3: Optional[Union[str, ChemicalEntityId]] = None
     molecular_mass: Optional[float] = None
@@ -689,6 +691,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     pka_ionic_strength: Optional[float] = None
     pka_solvent: Optional[str] = None
     pka_pressure: Optional[float] = None
+    classified_by: Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]] = empty_list()
     owl_subclass_of: Optional[Union[dict, "OwlClass"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -734,6 +737,9 @@ class ChemicalEntity(PhysicochemicalEntity):
         if self.smiles_string is not None and not isinstance(self.smiles_string, str):
             self.smiles_string = str(self.smiles_string)
 
+        if self.cxsmiles_string is not None and not isinstance(self.cxsmiles_string, str):
+            self.cxsmiles_string = str(self.cxsmiles_string)
+
         if self.empirical_formula is not None and not isinstance(self.empirical_formula, str):
             self.empirical_formula = str(self.empirical_formula)
 
@@ -761,6 +767,10 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.pka_pressure is not None and not isinstance(self.pka_pressure, float):
             self.pka_pressure = float(self.pka_pressure)
+
+        if not isinstance(self.classified_by, list):
+            self.classified_by = [self.classified_by] if self.classified_by is not None else []
+        self.classified_by = [v if isinstance(v, ChemicalGroupingClassId) else ChemicalGroupingClassId(v) for v in self.classified_by]
 
         if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, OwlClass):
             self.owl_subclass_of = OwlClass(**as_dict(self.owl_subclass_of))
@@ -897,6 +907,7 @@ class ChemicalGroupingClass(PhysicochemicalEntityGroupingClass):
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
     smarts_string: Optional[str] = None
     markush_string: Optional[str] = None
+    cxsmiles_string: Optional[str] = None
     subtype_of: Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]] = empty_list()
     classifies: Optional[Union[str, ChemicalEntityId]] = None
 
@@ -914,6 +925,9 @@ class ChemicalGroupingClass(PhysicochemicalEntityGroupingClass):
 
         if self.markush_string is not None and not isinstance(self.markush_string, str):
             self.markush_string = str(self.markush_string)
+
+        if self.cxsmiles_string is not None and not isinstance(self.cxsmiles_string, str):
+            self.cxsmiles_string = str(self.cxsmiles_string)
 
         if not isinstance(self.subtype_of, list):
             self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
@@ -3119,8 +3133,6 @@ class MonoatomicIon(AtomIonicForm):
 
     id: Union[str, MonoatomicIonId] = None
     has_element: Optional[Union[str, ChemicalElementId]] = None
-    owl_subclass_of: Optional[Union[str, URIorCURIE]] = None
-    elemental_charge: Optional[int] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3130,12 +3142,6 @@ class MonoatomicIon(AtomIonicForm):
 
         if self.has_element is not None and not isinstance(self.has_element, ChemicalElementId):
             self.has_element = ChemicalElementId(self.has_element)
-
-        if self.owl_subclass_of is not None and not isinstance(self.owl_subclass_of, URIorCURIE):
-            self.owl_subclass_of = URIorCURIE(self.owl_subclass_of)
-
-        if self.elemental_charge is not None and not isinstance(self.elemental_charge, int):
-            self.elemental_charge = int(self.elemental_charge)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -5311,6 +5317,9 @@ slots.curly_smiles_string = Slot(uri=CHEMROF.curly_smiles_string, name="curly_sm
 slots.isomeric_smiles_string = Slot(uri=CHEMROF.isomeric_smiles_string, name="isomeric_smiles_string", curie=CHEMROF.curie('isomeric_smiles_string'),
                    model_uri=CHEMROF.isomeric_smiles_string, domain=ChemicalEntity, range=Optional[str])
 
+slots.cxsmiles_string = Slot(uri=CHEMROF.cxsmiles_string, name="cxsmiles_string", curie=CHEMROF.curie('cxsmiles_string'),
+                   model_uri=CHEMROF.cxsmiles_string, domain=ChemicalEntity, range=Optional[str])
+
 slots.extended_smiles_string = Slot(uri=CHEMROF.extended_smiles_string, name="extended_smiles_string", curie=CHEMROF.curie('extended_smiles_string'),
                    model_uri=CHEMROF.extended_smiles_string, domain=ChemicalEntity, range=Optional[str])
 
@@ -5456,7 +5465,7 @@ slots.has_major_microspecies_at_pH7_3 = Slot(uri=CHEMROF.has_major_microspecies_
 slots.major_microspecies_at_pH7_3_of = Slot(uri=CHEMROF.major_microspecies_at_pH7_3_of, name="major_microspecies_at_pH7_3_of", curie=CHEMROF.curie('major_microspecies_at_pH7_3_of'),
                    model_uri=CHEMROF.major_microspecies_at_pH7_3_of, domain=ChemicalEntity, range=Optional[Union[Union[str, ChemicalEntityId], list[Union[str, ChemicalEntityId]]]])
 
-slots.classified_by = Slot(uri=CHEMROF.classified_by, name="classified_by", curie=CHEMROF.curie('classified_by'),
+slots.classified_by = Slot(uri=RDFS.subClassOf, name="classified_by", curie=RDFS.curie('subClassOf'),
                    model_uri=CHEMROF.classified_by, domain=None, range=Optional[Union[dict, "OwlClass"]])
 
 slots.classifies = Slot(uri=CHEMROF.classifies, name="classifies", curie=CHEMROF.curie('classifies'),
@@ -5703,6 +5712,9 @@ slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_s
                    model_uri=CHEMROF.ChemicalEntity_inchi_chemical_sublayer, domain=ChemicalEntity, range=Optional[str],
                    pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
+slots.ChemicalEntity_classified_by = Slot(uri=RDFS.subClassOf, name="ChemicalEntity_classified_by", curie=RDFS.curie('subClassOf'),
+                   model_uri=CHEMROF.ChemicalEntity_classified_by, domain=ChemicalEntity, range=Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]])
+
 slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),
                    model_uri=CHEMROF.GroupingClass_subtype_of, domain=GroupingClass, range=Optional[Union[Union[str, GroupingClassId], list[Union[str, GroupingClassId]]]])
 
@@ -5882,15 +5894,6 @@ slots.ChemicalElement_has_major_microspecies_at_pH7_3 = Slot(uri=CHEMROF.has_maj
 
 slots.AtomIonicForm_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="AtomIonicForm_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
                    model_uri=CHEMROF.AtomIonicForm_elemental_charge, domain=AtomIonicForm, range=Optional[int], mappings = [CHEMINF["000120"]])
-
-slots.MonoatomicIon_owl_subclass_of = Slot(uri=CHEMROF.owl_subclass_of, name="MonoatomicIon_owl_subclass_of", curie=CHEMROF.curie('owl_subclass_of'),
-                   model_uri=CHEMROF.MonoatomicIon_owl_subclass_of, domain=MonoatomicIon, range=Optional[Union[str, URIorCURIE]])
-
-slots.MonoatomicIon_has_element = Slot(uri=CHEMROF.has_element, name="MonoatomicIon_has_element", curie=CHEMROF.curie('has_element'),
-                   model_uri=CHEMROF.MonoatomicIon_has_element, domain=MonoatomicIon, range=Optional[Union[str, ChemicalElementId]])
-
-slots.MonoatomicIon_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="MonoatomicIon_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
-                   model_uri=CHEMROF.MonoatomicIon_elemental_charge, domain=MonoatomicIon, range=Optional[int], mappings = [CHEMINF["000120"]])
 
 slots.AtomAnion_elemental_charge = Slot(uri=CHEMROF.elemental_charge, name="AtomAnion_elemental_charge", curie=CHEMROF.curie('elemental_charge'),
                    model_uri=CHEMROF.AtomAnion_elemental_charge, domain=AtomAnion, range=Optional[int], mappings = [CHEMINF["000120"]])

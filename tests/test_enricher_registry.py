@@ -8,6 +8,7 @@ from chemrof.converter.enrichers.base import get_enricher, list_enrichers
 
 def test_list_enrichers():
     names = list_enrichers()
+    assert "chemont" in names
     assert "pubchem" in names
     assert "chebi" in names
     assert "wikidata" in names

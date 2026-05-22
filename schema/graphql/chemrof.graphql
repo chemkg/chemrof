@@ -212,6 +212,7 @@ type AcidAnionGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     conjugateBaseOf: DomainEntity
@@ -226,6 +227,7 @@ type AcidBaseConflationClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     conjugateBaseOf: DomainEntity
@@ -250,6 +252,7 @@ type Allotrope
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -259,6 +262,7 @@ type Allotrope
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -289,6 +293,7 @@ type AminoAcidSequenceInterval
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -298,6 +303,7 @@ type AminoAcidSequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: AminoAcidSequenceString
@@ -326,6 +332,7 @@ interface Atom
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -335,6 +342,7 @@ interface Atom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -361,6 +369,7 @@ type AtomAnion implements AnionState
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -370,13 +379,14 @@ type AtomAnion implements AnionState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
     hasElement: ChemicalElement
-    owlSubclassOf: String
     elementalCharge: Int
   }
 
@@ -398,6 +408,7 @@ type AtomCation implements CationState
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -407,13 +418,14 @@ type AtomCation implements CationState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
     hasElement: ChemicalElement
-    owlSubclassOf: String
     elementalCharge: Int
   }
 
@@ -424,6 +436,7 @@ type AtomGroupingByPeriodicTableBlock
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
     inPeriodicTableBlock: PeriodicTableBlockEnum
@@ -436,6 +449,7 @@ type AtomGroupingByPeriodicTableGroup
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
     inPeriodicTableGroup: PeriodicTableGroup
@@ -448,6 +462,7 @@ interface AtomGroupingByPeriodicTablePlacement
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -459,6 +474,7 @@ type AtomGroupingByProperty
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -470,6 +486,7 @@ type AtomGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Atom
   }
@@ -506,6 +523,7 @@ interface AtomIonicForm
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -515,6 +533,7 @@ interface AtomIonicForm
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -575,6 +594,7 @@ type ChemicalElement
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     molecularMass: Float
     waterSolubility: Float
@@ -583,6 +603,7 @@ type ChemicalElement
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     name: String
@@ -620,6 +641,7 @@ type ChemicalEntity implements OwlClass
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -629,6 +651,7 @@ type ChemicalEntity implements OwlClass
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
   }
 
@@ -654,6 +677,7 @@ type ChemicalGroup
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -663,6 +687,7 @@ type ChemicalGroup
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -674,6 +699,7 @@ type ChemicalGroupingByCharge
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     classifies: ChemicalEntity
     subtypeOf: [MoleculeGroupingClass]
     hasChargeState: String
@@ -687,6 +713,7 @@ type ChemicalGroupingClass implements OwlClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [ChemicalGroupingClass]
     classifies: ChemicalEntity
   }
@@ -713,6 +740,7 @@ interface ChemicalMixture
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -722,6 +750,7 @@ interface ChemicalMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -755,6 +784,7 @@ type ChemicalSalt
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -764,6 +794,7 @@ type ChemicalSalt
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -778,6 +809,7 @@ type ChemicalSaltByAnion
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasCationicComponent: String
     classifies: ChemicalSalt
@@ -791,6 +823,7 @@ type ChemicalSaltByCation
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasAnionicComponent: String
     classifies: ChemicalSalt
@@ -804,6 +837,7 @@ type ChemicalSaltGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     hasAnionicComponent: String
     hasCationicComponent: String
@@ -853,6 +887,7 @@ type Copolymer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -862,6 +897,7 @@ type Copolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -894,6 +930,7 @@ type DNASequenceInterval
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -903,6 +940,7 @@ type DNASequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -938,6 +976,7 @@ type Enantiomer
     inchiStereochemicalDoubleBondSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -947,6 +986,7 @@ type Enantiomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1010,6 +1050,7 @@ type Ester
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1019,6 +1060,7 @@ type Ester
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1053,6 +1095,7 @@ type FullySpecifiedAtom
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1062,6 +1105,7 @@ type FullySpecifiedAtom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1090,6 +1134,7 @@ type FunctionalGroup
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1099,6 +1144,7 @@ type FunctionalGroup
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     isSubstitutentGroupFrom: Molecule
@@ -1111,6 +1157,7 @@ type GeneralAcidBaseGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     conjugateBaseOf: DomainEntity
@@ -1124,6 +1171,7 @@ type GeneralizedMolecularStructureClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
@@ -1146,6 +1194,7 @@ type Glycan
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1155,6 +1204,7 @@ type Glycan
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1180,6 +1230,7 @@ interface GroupingClassForAcidsOrBases
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     conjugateBaseOf: DomainEntity
@@ -1204,6 +1255,7 @@ type Homopolymer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1213,6 +1265,7 @@ type Homopolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1245,6 +1298,7 @@ type ImpreciseChemicalMixture
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1254,6 +1308,7 @@ type ImpreciseChemicalMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -1291,6 +1346,7 @@ type Isobar
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1300,6 +1356,7 @@ type Isobar
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1357,6 +1414,7 @@ type Isotope
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1366,6 +1424,7 @@ type Isotope
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -1405,6 +1464,7 @@ type Macromolecule
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1414,6 +1474,7 @@ type Macromolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1476,6 +1537,7 @@ type Moiety
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1485,6 +1547,7 @@ type Moiety
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1507,6 +1570,7 @@ type MolecularAnion implements AnionState
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1516,6 +1580,7 @@ type MolecularAnion implements AnionState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1551,6 +1616,7 @@ type MolecularCation implements CationState
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1560,6 +1626,7 @@ type MolecularCation implements CationState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1595,6 +1662,7 @@ type MolecularComplex
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1604,6 +1672,7 @@ type MolecularComplex
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -1627,6 +1696,7 @@ type MolecularComponent
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1636,6 +1706,7 @@ type MolecularComponent
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1647,6 +1718,7 @@ type MolecularComponentGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MolecularComponentGroupingClass]
     classifies: MolecularComponent
   }
@@ -1657,6 +1729,7 @@ type MolecularDerivativeGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     derivativeOf: DomainEntity
     name: String
@@ -1681,6 +1754,7 @@ type MolecularSpecies
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1690,6 +1764,7 @@ type MolecularSpecies
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1718,6 +1793,7 @@ type MolecularSubsequence
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1727,6 +1803,7 @@ type MolecularSubsequence
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1749,6 +1826,7 @@ type Molecule implements FullyCovalentlyBonded
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1758,6 +1836,7 @@ type Molecule implements FullyCovalentlyBonded
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1786,6 +1865,7 @@ interface MoleculeByChargeState
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1795,6 +1875,7 @@ interface MoleculeByChargeState
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -1816,6 +1897,7 @@ type MoleculeGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
   }
@@ -1827,6 +1909,7 @@ type MoleculeGroupingClassDefinedByAdditionOfAGroup
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasGroup: [ChemicalGroup]
@@ -1840,6 +1923,7 @@ type MoleculeGroupingClassDefinedByComponents
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasPart: ChemicalEntityOrGrouping
@@ -1871,6 +1955,7 @@ type MonoatomicIon implements Charged
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1880,14 +1965,15 @@ type MonoatomicIon implements Charged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
+    owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
     name: String
     hasNuclearParts: SubatomicParticleOccurrence
     hasPart: SubatomicParticle
-    hasElement: ChemicalElement
-    owlSubclassOf: String
     elementalCharge: Int
+    hasElement: ChemicalElement
   }
 
 type Monomer
@@ -1908,6 +1994,7 @@ type Monomer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1917,6 +2004,7 @@ type Monomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -1928,6 +2016,7 @@ type MonomericPolymericGroupingClass
     id: String!
     smartsString: ChemicalEncoding
     markushString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     subtypeOf: [MoleculeGroupingClass]
     classifies: Molecule
     hasRepeatUnit: ChemicalEntity
@@ -1951,6 +2040,7 @@ type MonomolecularPolymer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -1960,6 +2050,7 @@ type MonomolecularPolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2002,6 +2093,7 @@ type NaturalProduct
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2011,6 +2103,7 @@ type NaturalProduct
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2040,6 +2133,7 @@ type NetUnchargedMolecule implements Uncharged
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2049,6 +2143,7 @@ type NetUnchargedMolecule implements Uncharged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2082,6 +2177,7 @@ type NeutralMolecule
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2091,6 +2187,7 @@ type NeutralMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2124,6 +2221,7 @@ type NonSpeciesMolecule
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2133,6 +2231,7 @@ type NonSpeciesMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2161,6 +2260,7 @@ type NucleotideSequenceInterval
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2170,6 +2270,7 @@ type NucleotideSequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -2193,6 +2294,7 @@ type Nuclide
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2202,6 +2304,7 @@ type Nuclide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2241,6 +2344,7 @@ interface PartiallySpecifiedAtom
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2250,6 +2354,7 @@ interface PartiallySpecifiedAtom
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2276,6 +2381,7 @@ type Peptide
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2285,6 +2391,7 @@ type Peptide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2333,6 +2440,7 @@ interface PolyatomicEntity
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2342,6 +2450,7 @@ interface PolyatomicEntity
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -2364,6 +2473,7 @@ type PolyatomicIon implements Charged
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2373,6 +2483,7 @@ type PolyatomicIon implements Charged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2408,6 +2519,7 @@ type PolymerPart
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2417,6 +2529,7 @@ type PolymerPart
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
   }
@@ -2447,6 +2560,7 @@ type PreciseChemicalMixture implements WeaklyBonded
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2456,6 +2570,7 @@ type PreciseChemicalMixture implements WeaklyBonded
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -2490,6 +2605,7 @@ type Protein
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2499,6 +2615,7 @@ type Protein
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2526,6 +2643,7 @@ type RacemicMixture
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2535,6 +2653,7 @@ type RacemicMixture
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -2562,6 +2681,7 @@ type Radionuclide
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2571,6 +2691,7 @@ type Radionuclide
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2636,6 +2757,7 @@ type RNASequenceInterval
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2645,6 +2767,7 @@ type RNASequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: DNASequenceString
@@ -2668,6 +2791,7 @@ interface SequenceInterval
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2677,6 +2801,7 @@ interface SequenceInterval
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasSequenceRepresentation: SequenceString
@@ -2700,6 +2825,7 @@ type SmallMolecule
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2709,6 +2835,7 @@ type SmallMolecule
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2770,6 +2897,7 @@ type Stereoisomer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2779,6 +2907,7 @@ type Stereoisomer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]
@@ -2823,6 +2952,7 @@ type SupramolecularPolymer
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2832,6 +2962,7 @@ type SupramolecularPolymer
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     ph: Float
@@ -2870,6 +3001,7 @@ type UnchargedAtom implements Uncharged
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2879,6 +3011,7 @@ type UnchargedAtom implements Uncharged
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     atomicNumber: Count
     symbol: String
@@ -2917,6 +3050,7 @@ type Zwitterion
     inchiStereochemicalTypeSublayer: String
     inchiIsotopicLayer: String
     smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
@@ -2926,6 +3060,7 @@ type Zwitterion
     pkaIonicStrength: Float
     pkaSolvent: String
     pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
     owlSubclassOf: OwlClass
     inchiAtomConnectionsSublayer: String
     hasAtomOccurrences: [AtomOccurrence]

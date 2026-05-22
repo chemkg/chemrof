@@ -42,15 +42,15 @@ chemrof:AcidAnionGroupingClass a owl:Class ;
     rdfs:label "AcidAnionGroupingClass" ;
     dcterms:title "acid anion grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "ate$" ] ) ] ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "ate$" ] ) ] ;
             owl:onProperty chemrof:name ],
         chemrof:GroupingClassForAcidsOrBases ;
     skos:definition "A molecule grouping class that groups the different ion forms of the base of an acid" ;
@@ -86,10 +86,10 @@ chemrof:AtomGroupingByPeriodicTableGroup a owl:Class ;
             owl:allValuesFrom xsd:int ;
             owl:onProperty chemrof:in_periodic_table_group ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:in_periodic_table_group ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:in_periodic_table_group ],
         chemrof:AtomGroupingByPeriodicTablePlacement ;
     skos:definition "Example: p-block atom" ;
@@ -114,28 +114,28 @@ chemrof:ChemicalGroupingByCharge a owl:Class ;
     rdfs:label "ChemicalGroupingByCharge" ;
     dcterms:title "chemical grouping by charge" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:charge_agnostic_entity ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_charge_state ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:charge_agnostic_entity ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:charge_agnostic_entity ],
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty chemrof:has_charge_state ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom chemrof:ChemicalEntity ;
             owl:onProperty chemrof:charge_agnostic_entity ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:MoleculeGroupingClass ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_charge_state ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:charge_agnostic_entity ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_charge_state ],
         chemrof:ChemicalGroupingClass ;
     skos:definition "A grouping class that refines a charge-neutral entity" ;
@@ -145,14 +145,8 @@ chemrof:ChemicalSaltByAnion a owl:Class ;
     rdfs:label "ChemicalSaltByAnion" ;
     dcterms:title "chemical salt by anion" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:has_anionic_component ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_anionic_component ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_anionic_component ],
+            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:name ],
@@ -160,8 +154,14 @@ chemrof:ChemicalSaltByAnion a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_anionic_component ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:has_anionic_component ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:name ],
+            owl:onProperty chemrof:has_anionic_component ],
         chemrof:ChemicalSaltGroupingClass ;
     skos:definition "A grouping class for a chemical salt named by anion" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -170,23 +170,23 @@ chemrof:ChemicalSaltByCation a owl:Class ;
     rdfs:label "ChemicalSaltByCation" ;
     dcterms:title "chemical salt by cation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_cationic_component ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:name ],
         chemrof:ChemicalSaltGroupingClass ;
     skos:definition "A grouping class for a chemical salt named by cation" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -201,10 +201,10 @@ chemrof:ChiralityCenter a owl:Class ;
 chemrof:Collection a owl:Class ;
     rdfs:label "Collection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom chemrof:DomainEntity ;
             owl:onProperty chemrof:entities ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:DomainEntity ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:entities ],
         linkml:ClassDefinition ;
     skos:definition "This utility class serves to collect a set of domain entities, and to be the top level object in tree-based representations such as JSON." ;
@@ -235,32 +235,32 @@ chemrof:MolecularDerivativeGroupingClass a owl:Class ;
     rdfs:label "MolecularDerivativeGroupingClass" ;
     dcterms:title "molecular derivative grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:derivative_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Molecule ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:name ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:derivative_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:DomainEntity ;
             owl:onProperty chemrof:derivative_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Molecule ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:derivative_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:derivative_of ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:name ],
         chemrof:MoleculeGroupingClass ;
     skos:definition "A grouping class defined as a derivative of another molecule or molecular grouping class" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -269,6 +269,12 @@ chemrof:MoleculeGroupingClassDefinedByAdditionOfAGroup a owl:Class ;
     rdfs:label "MoleculeGroupingClassDefinedByAdditionOfAGroup" ;
     dcterms:title "molecule grouping class defined by addition of a group" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_group ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:derivative_of ],
+        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:PolyatomicEntity ;
             owl:onProperty chemrof:derivative_of ],
         [ a owl:Restriction ;
@@ -278,13 +284,7 @@ chemrof:MoleculeGroupingClassDefinedByAdditionOfAGroup a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:derivative_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:derivative_of ],
-        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalGroup ;
-            owl:onProperty chemrof:has_group ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_group ],
         chemrof:MoleculeGroupingClass ;
     skos:definition "A grouping class defined in terms of a derivative of a molecule and the addition of a group" ;
@@ -294,13 +294,13 @@ chemrof:MoleculeGroupingClassDefinedByComponents a owl:Class ;
     rdfs:label "MoleculeGroupingClassDefinedByComponents" ;
     dcterms:title "molecule grouping class defined by components" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntityOrGrouping ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom chemrof:ChemicalEntityOrGrouping ;
             owl:onProperty chemrof:has_part ],
         chemrof:MoleculeGroupingClass ;
     skos:definition "A grouping class defined as an exhaustive list of components" ;
@@ -340,29 +340,69 @@ chemrof:StandardInchiObject a owl:Class ;
     dcterms:title "standard inchi object" ;
     rdfs:seeAlso Wikipedia:International_Chemical_Identifier ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_version_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[A-Za-z0-9\\.]+$" ] ) ] ;
             owl:onProperty chemrof:inchi_chemical_sublayer ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:inchi_version_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[ih].*" ] ) ] ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
+            owl:onProperty chemrof:inchi_proton_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
                     owl:withRestrictions ( [ xsd:pattern "^h.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_charge_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^p[\\-]\\d+" ] ) ] ;
+            owl:onProperty chemrof:inchi_proton_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^1S$" ] ) ] ;
+            owl:onProperty chemrof:inchi_version_string ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
@@ -370,85 +410,45 @@ chemrof:StandardInchiObject a owl:Class ;
                     owl:withRestrictions ( [ xsd:pattern "^s.*" ] ) ] ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[ih].*" ] ) ] ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
-        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
                     owl:withRestrictions ( [ xsd:pattern "^q.*" ] ) ] ;
             owl:onProperty chemrof:inchi_charge_sublayer ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[A-Za-z0-9\\.]+$" ] ) ] ;
-            owl:onProperty chemrof:inchi_chemical_sublayer ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^1S$" ] ) ] ;
-            owl:onProperty chemrof:inchi_version_string ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_chemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^p[\\-]\\d+" ] ) ] ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:inchi_version_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:inchi_charge_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_chemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:inchi_proton_sublayer ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_version_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_chemical_sublayer ],
         chemrof:InchiObject ;
     skos:inScheme <https://w3id.org/chemrof> .
 
@@ -456,6 +456,9 @@ chemrof:TanimotoSimilarity a owl:Class ;
     rdfs:label "TanimotoSimilarity" ;
     dcterms:title "tanimoto similarity" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:score ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:score ],
         [ a owl:Restriction ;
@@ -465,9 +468,6 @@ chemrof:TanimotoSimilarity a owl:Class ;
                                 owl:withRestrictions ( [ xsd:minInclusive 1e+00 ] ) ] [ a rdfs:Datatype ;
                                 owl:onDatatype xsd:float ;
                                 owl:withRestrictions ( [ xsd:maxInclusive 1e+00 ] ) ] ) ] ;
-            owl:onProperty chemrof:score ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:score ],
         chemrof:MoleculePairwiseSimilarity ;
     skos:altLabel "Jaccard similarity",
@@ -540,10 +540,11 @@ chemrof:epimer_of a owl:DatatypeProperty ;
 
 chemrof:extended_smiles_string a owl:DatatypeProperty ;
     rdfs:label "extended_smiles_string" ;
-    dcterms:title "extended smiles string" ;
+    dcterms:title "extended smiles string (Deprecated)" ;
     rdfs:subPropertyOf chemrof:smiles_string ;
-    skos:altLabel "CXSMILES" ;
-    skos:inScheme <https://w3id.org/chemrof> .
+    skos:altLabel "extended SMILES" ;
+    skos:inScheme <https://w3id.org/chemrof> ;
+    skos:note "This slot was previously used for CXSMILES, but the primary name was too broad." .
 
 chemrof:functional_isomer_of a owl:DatatypeProperty ;
     rdfs:label "functional_isomer_of" ;
@@ -1125,12 +1126,6 @@ chemrof:MaterialGroupingClass a owl:Class ;
     rdfs:label "MaterialGroupingClass" ;
     dcterms:title "material grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MaterialGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
@@ -1139,6 +1134,12 @@ chemrof:MaterialGroupingClass a owl:Class ;
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Material ;
             owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:MaterialGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
         chemrof:PhysicochemicalEntityGroupingClass ;
     skos:definition "A grouping class that classifies materials" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1147,20 +1148,20 @@ chemrof:MolecularComponentGroupingClass a owl:Class ;
     rdfs:label "MolecularComponentGroupingClass" ;
     dcterms:title "molecular component grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:MolecularComponentGroupingClass ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
+            owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:MolecularComponent ;
             owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:subtype_of ],
         chemrof:ChemicalGroupingClass ;
     skos:definition "A grouping class that classifies molecular components. Example: inorganic anion group" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1170,28 +1171,28 @@ chemrof:MoleculePairwiseSimilarity a owl:Class ;
     dcterms:title "molecule pairwise similarity" ;
     rdfs:seeAlso Wikipedia:Chemical_similarity ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Molecule ;
-            owl:onProperty chemrof:left_molecule ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:left_molecule ],
+            owl:onProperty chemrof:score ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Molecule ;
+            owl:onProperty chemrof:left_molecule ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:right_molecule ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:score ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:score ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:left_molecule ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:right_molecule ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:left_molecule ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:right_molecule ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -1204,32 +1205,32 @@ chemrof:PolymerRepeatUnit a owl:Class ;
     dcterms:title "polymer repeat unit" ;
     rdfs:seeAlso Wikipedia:Repeat_unit ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:degree_of_polymerization ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:mass ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Molecule ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:repetition_of ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:degree_of_polymerization ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:mass ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:int ;
             owl:onProperty chemrof:degree_of_polymerization ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:repetition_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:degree_of_polymerization ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:mass ],
+            owl:onProperty chemrof:degree_of_polymerization ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:mass ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:repetition_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:repetition_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:mass ],
         chemrof:ChemicalRelationship ;
     skos:definition "An abstract part of a polymer that is all instances of a repeated monomer of a single type" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1238,20 +1239,20 @@ chemrof:ReactionGroupingClass a owl:Class ;
     rdfs:label "ReactionGroupingClass" ;
     dcterms:title "reaction grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ReactionGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
+            owl:allValuesFrom chemrof:ReactionGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Reaction ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classifies ],
         chemrof:GroupingClass ;
     skos:definition "A grouping class for reactions, for example, dehalogenase; breaking of covalent bond" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1259,17 +1260,6 @@ chemrof:ReactionGroupingClass a owl:Class ;
 chemrof:classification_relationship a owl:DatatypeProperty ;
     rdfs:label "classification_relationship" ;
     dcterms:title "classification relationship" ;
-    skos:inScheme <https://w3id.org/chemrof> .
-
-chemrof:classified_by a owl:ObjectProperty ;
-    rdfs:label "classified_by" ;
-    dcterms:title "classified by" ;
-    rdfs:domain chemrof:OwlClass ;
-    rdfs:range chemrof:OwlClass ;
-    rdfs:subPropertyOf chemrof:chemical_to_chemical_relationship,
-        chemrof:owl_subclass_of ;
-    skos:definition "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class" ;
-    skos:exactMatch rdf:type ;
     skos:inScheme <https://w3id.org/chemrof> .
 
 chemrof:diastereoisomers_of a owl:DatatypeProperty ;
@@ -1756,13 +1746,13 @@ chemrof:AminoAcidSequenceInterval a owl:Class ;
     rdfs:label "AminoAcidSequenceInterval" ;
     dcterms:title "amino acid sequence interval" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_sequence_representation ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_sequence_representation ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_sequence_representation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_sequence_representation ],
         chemrof:SequenceInterval ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1771,19 +1761,19 @@ chemrof:AtomAnion a owl:Class ;
     rdfs:label "AtomAnion" ;
     dcterms:title "atom anion" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:AnionState ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:integer ;
                     owl:withRestrictions ( [ xsd:maxInclusive -1 ] ) ] ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:AnionState ],
         chemrof:MonoatomicIon ;
     skos:definition "A monoatomic ion that is negative" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1792,18 +1782,18 @@ chemrof:AtomCation a owl:Class ;
     rdfs:label "AtomCation" ;
     dcterms:title "atom cation" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
             owl:onProperty linkml:mixins ;
             owl:someValuesFrom chemrof:CationState ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:integer ;
                     owl:withRestrictions ( [ xsd:minInclusive 1 ] ) ] ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:elemental_charge ],
         chemrof:MonoatomicIon ;
     skos:definition "A monoatomic ion that is positive, e.g Cu(2+)" ;
@@ -1819,20 +1809,20 @@ chemrof:AtomGroupingClass a owl:Class ;
     rdfs:label "AtomGroupingClass" ;
     dcterms:title "atom grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Atom ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom chemrof:MoleculeGroupingClass ;
             owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Atom ;
+            owl:onProperty chemrof:classifies ],
         chemrof:ChemicalGroupingClass ;
     skos:definition "A grouping class that classifies atoms. For example, metal atom" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -1841,89 +1831,89 @@ chemrof:AtomicBond a owl:Class ;
     rdfs:label "AtomicBond" ;
     dcterms:title "atomic bond" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:bond_length_in_angstroms ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:torsional_angle ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:bond_energy ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
             owl:onProperty chemrof:bond_order ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:bond_angle ],
-        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:AtomOccurrence ;
             owl:onProperty chemrof:object ],
         [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:OwlClass ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:bond_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AtomOccurrence ;
-            owl:onProperty chemrof:subject ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:bond_length ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:bond_angle ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:object ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:torsional_angle ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:bond_energy ],
+            owl:onProperty chemrof:bond_length ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:BondTypeEnum ;
             owl:onProperty chemrof:bond_type ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:torsional_angle ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:bond_type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:bond_length ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:object ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:bond_order ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:bond_length_in_angstroms ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:bond_angle ],
+        [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:OwlClass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:AtomOccurrence ;
+            owl:onProperty chemrof:subject ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:torsional_angle ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:subject ],
+            owl:onProperty chemrof:bond_energy ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:subject ],
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:bond_length ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:bond_energy ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:bond_length_in_angstroms ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:bond_length ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:bond_length_in_angstroms ],
+            owl:onProperty chemrof:bond_angle ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:bond_length ],
+            owl:onProperty chemrof:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:bond_length_in_angstroms ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:bond_length_in_angstroms ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:bond_order ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:bond_angle ],
+            owl:onProperty chemrof:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:bond_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:bond_energy ],
         chemrof:ChemicalRelationship ;
     skos:altLabel "bond",
         "chemical bond" ;
@@ -1990,41 +1980,41 @@ chemrof:ChemicalSaltGroupingClass a owl:Class ;
     rdfs:label "ChemicalSaltGroupingClass" ;
     dcterms:title "chemical salt grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:has_cationic_component ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_anionic_component ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:classifies ],
+            owl:onProperty chemrof:has_anionic_component ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalSalt ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_anionic_component ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_cationic_component ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_anionic_component ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:name ],
         chemrof:MoleculeGroupingClass ;
     skos:definition "A grouping class for a chemical salt" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -2068,19 +2058,19 @@ chemrof:Concentration a owl:Class ;
     rdfs:label "Concentration" ;
     dcterms:title "concentration" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ConcentrationUnitEnum ;
-            owl:onProperty chemrof:unit ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:unit ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:value ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty chemrof:unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ConcentrationUnitEnum ;
+            owl:onProperty chemrof:unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:value ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
@@ -2237,21 +2227,21 @@ chemrof:Ester a owl:Class ;
     dcterms:title "ester" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_parent_alcohol ],
+            owl:onProperty chemrof:has_parent_acid ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_parent_acid ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:MoleculeByChargeState ;
             owl:onProperty chemrof:has_parent_acid ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_parent_acid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntity ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_parent_alcohol ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_parent_acid ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_parent_alcohol ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalEntity ;
             owl:onProperty chemrof:has_parent_alcohol ],
         chemrof:Molecule ;
     skos:definition "An ester is a chemical compound derived from an acid (organic or inorganic) in which at least one –OH hydroxyl group is replaced by an –O– alkyl (alkoxy) group" ;
@@ -2274,17 +2264,17 @@ chemrof:FullySpecifiedAtom a owl:Class ;
             owl:allValuesFrom xsd:integer ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:int ;
             owl:onProperty chemrof:neutron_number ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:neutron_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:elemental_charge ],
         chemrof:Atom ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
@@ -2296,10 +2286,10 @@ chemrof:FunctionalGroup a owl:Class ;
     rdfs:label "FunctionalGroup" ;
     dcterms:title "functional group" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:is_substitutent_group_from ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:is_substitutent_group_from ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Molecule ;
@@ -2461,14 +2451,38 @@ chemrof:Isobar a owl:Class ;
     rdfs:label "Isobar" ;
     dcterms:title "isobar" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:decay_energy ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:isobar_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:mode_of_formation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:half_life ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:mode_of_formation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:decay_product ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_element ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:decay_product ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:decay_energy ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:int ;
+            owl:onProperty chemrof:half_life ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_product ],
+            owl:onProperty chemrof:half_life ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_element ],
@@ -2476,62 +2490,38 @@ chemrof:Isobar a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:isobar_of ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalElement ;
-            owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_mode ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:mode_of_formation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:int ;
-            owl:onProperty chemrof:half_life ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:decay_energy ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:nucleon_number ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:int ;
+            owl:onProperty chemrof:nucleon_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:nucleon_number ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:decay_mode ],
+            owl:onProperty chemrof:mode_of_formation ],
         [ a owl:Restriction ;
             owl:allValuesFrom owl:Thing ;
             owl:onProperty chemrof:isobar_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:half_life ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:mode_of_formation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:nucleon_number ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Isotope ;
-            owl:onProperty chemrof:decay_product ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:nucleon_number ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:int ;
-            owl:onProperty chemrof:nucleon_number ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:isobar_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_energy ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:decay_mode ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:mode_of_formation ],
+            owl:onProperty chemrof:decay_mode ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:half_life ],
+            owl:allValuesFrom chemrof:Isotope ;
+            owl:onProperty chemrof:decay_product ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalElement ;
+            owl:onProperty chemrof:has_element ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:decay_mode ],
         chemrof:Nuclide ;
     skos:definition "Isobars are atoms (nuclides) of different chemical elements that have the same number of nucleons." ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -2610,13 +2600,13 @@ chemrof:Nanomaterial a owl:Class ;
     dcterms:source Wikipedia:Nanomaterials ;
     dcterms:title "nanomaterial" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_morphological_category ],
-        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:NanostructureMorphologyEnum ;
             owl:onProperty chemrof:has_morphological_category ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_morphological_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_morphological_category ],
         chemrof:Material ;
     skos:definition "A material of which a single unit is sized (in at least one dimension) between 1 and 100 nm" ;
@@ -2673,58 +2663,58 @@ chemrof:ProportionalPart a owl:Class ;
     dcterms:title "proportional part" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:concentration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:maximum_percentage ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:concentration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:maximum_percentage ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:IngredientRole ;
+            owl:onProperty chemrof:has_ingredient_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Concentration ;
+            owl:onProperty chemrof:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:composed_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:minimal_percentage ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:minimal_percentage ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:minimal_percentage ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_ingredient_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:IngredientRoleEnum ;
+            owl:onProperty chemrof:has_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_ingredient_role ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalEntity ;
             owl:onProperty chemrof:composed_of ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:concentration ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Concentration ;
-            owl:onProperty chemrof:concentration ],
+            owl:onProperty chemrof:maximum_percentage ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:composed_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_role ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:maximum_percentage ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:maximum_percentage ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:minimal_percentage ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_role ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:minimal_percentage ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:composed_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:IngredientRoleEnum ;
-            owl:onProperty chemrof:has_role ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:concentration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_ingredient_role ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:minimal_percentage ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:maximum_percentage ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:IngredientRole ;
-            owl:onProperty chemrof:has_ingredient_role ],
         chemrof:ChemicalRelationship ;
     skos:definition "A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration." ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -2747,42 +2737,42 @@ chemrof:RacemicMixture a owl:Class ;
     dcterms:title "racemic mixture" ;
     rdfs:seeAlso <https://github.com/ebi-chebi/ChEBI/issues/3245> ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:IUPAC_name ],
+        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Enantiomer ;
             owl:onProperty chemrof:has_left_enantiomer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:chirality_agnostic_form ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_right_enantiomer ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:chirality_agnostic_form ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_left_enantiomer ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:IUPAC_name ],
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:has_right_enantiomer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:IUPAC_name ],
+            owl:onProperty chemrof:has_right_enantiomer ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:chirality_agnostic_form ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Enantiomer ;
-            owl:onProperty chemrof:has_right_enantiomer ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:chirality_agnostic_form ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:IUPAC_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
                     owl:withRestrictions ( [ xsd:pattern "^rac-" ] ) ] ;
             owl:onProperty chemrof:IUPAC_name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty chemrof:has_left_enantiomer ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom chemrof:Enantiomer ;
             owl:onProperty chemrof:has_right_enantiomer ],
         chemrof:PreciseChemicalMixture ;
     skos:altLabel "racemate",
@@ -2794,7 +2784,15 @@ chemrof:RacemicMixture a owl:Class ;
         goldbook:R05025,
         wdeschema:E47 ;
     skos:inScheme <https://w3id.org/chemrof> ;
-    chemrof:owl "EquivalentClasses, IntersectionOf" .
+    chemrof:owl.template """EquivalentClasses(
+  {{id}}
+  ObjectIntersectionOf(
+    chemrof:RacemicMixture
+    {% if has_left_enantiomer %}ObjectSomeValuesFrom(chemrof:has_left_enantiomer {{has_left_enantiomer}}){% endif %}
+    {% if has_right_enantiomer %}ObjectSomeValuesFrom(chemrof:has_right_enantiomer {{has_right_enantiomer}}){% endif %}
+    {% if chirality_agnostic_form %}ObjectSomeValuesFrom(chemrof:chirality_agnostic_form {{chirality_agnostic_form}}){% endif %}
+  )
+)""" .
 
 chemrof:Radionuclide a owl:Class ;
     rdfs:label "Radionuclide" ;
@@ -2858,25 +2856,25 @@ chemrof:SubatomicParticleOccurrence a owl:Class ;
     rdfs:label "SubatomicParticleOccurrence" ;
     dcterms:title "subatomic particle occurrence" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty chemrof:Count ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:occurrence_of ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:Count ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:occurrence_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:SubatomicParticle ;
-            owl:onProperty chemrof:occurrence_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:Count ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:Count ],
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:occurrence_of ],
         [ a owl:Restriction ;
             owl:onProperty linkml:mixins ;
             owl:someValuesFrom chemrof:OwlClass ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom chemrof:SubatomicParticle ;
             owl:onProperty chemrof:occurrence_of ],
         chemrof:ChemicalRelationship ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -2885,23 +2883,23 @@ chemrof:SupramolecularPolymer a owl:Class ;
     rdfs:label "SupramolecularPolymer" ;
     dcterms:title "supramolecular polymer" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:polymer_of ],
+        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Macromolecule ;
             owl:onProperty chemrof:polymer_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_repeat_unit ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalEntity ;
             owl:onProperty chemrof:has_repeat_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:polymer_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_repeat_unit ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:polymer_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_repeat_unit ],
         chemrof:MolecularComplex ;
     skos:definition "polymeric arrays of monomeric units that are connected by reversible and highly directional secondary interactions–that is, non-covalent bonds" ;
     skos:exactMatch Wikipedia:Supramolecular_polymer ;
@@ -3091,8 +3089,20 @@ chemrof:ChemicalSalt a owl:Class ;
     rdfs:seeAlso <https://github.com/MaastrichtU-IDS/semanticscience/issues/96>,
         <https://www.drugs.com/article/pharmaceutical-salts.html> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom chemrof:AnionState ;
             owl:onProperty chemrof:has_anionic_component ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_cationic_component ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:CationState ;
+            owl:onProperty chemrof:has_cationic_component ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_cationic_component ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( [ a rdfs:Datatype ;
@@ -3103,24 +3113,12 @@ chemrof:ChemicalSalt a owl:Class ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_anionic_component ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:CationState ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_cationic_component ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AnionState ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_anionic_component ],
         chemrof:PreciseChemicalMixture ;
     skos:definition "a chemical compound consisting of an ionic assembly of cations and anions." ;
@@ -3154,31 +3152,31 @@ chemrof:GroupingClass a owl:Class ;
     rdfs:label "GroupingClass" ;
     dcterms:title "grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:GroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:onProperty linkml:mixins ;
             owl:someValuesFrom chemrof:OwlClass ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
+            owl:allValuesFrom chemrof:GroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:id ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty chemrof:id ],
         linkml:ClassDefinition ;
     skos:definition "Instances of this class represent generic  concepts that can be used to group more specific concepts, or to classify entities" ;
@@ -3188,23 +3186,23 @@ chemrof:GroupingClassForAcidsOrBases a owl:Class ;
     rdfs:label "GroupingClassForAcidsOrBases" ;
     dcterms:title "grouping class for acids or bases" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:conjugate_acid_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:conjugate_base_of ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom owl:Thing ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:conjugate_acid_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom owl:Thing ;
             owl:onProperty chemrof:conjugate_acid_of ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:conjugate_acid_of ],
+            owl:onProperty chemrof:conjugate_base_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom owl:Thing ;
+            owl:onProperty chemrof:conjugate_base_of ],
         chemrof:MoleculeGroupingClass ;
     skos:inScheme <https://w3id.org/chemrof> .
 
@@ -3213,28 +3211,28 @@ chemrof:ImpreciseChemicalMixture a owl:Class ;
     dcterms:title "imprecise chemical mixture" ;
     rdfs:seeAlso <https://jcheminf.biomedcentral.com/articles/10.1186/s13321-019-0357-4> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ProportionalPart ;
-            owl:onProperty chemrof:has_proportional_parts ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_mixfile_location ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_proportional_parts ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_mixfile_location ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty chemrof:has_mixfile_location ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_mixfile_location ],
+            owl:onProperty chemrof:has_minchi_representation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_minchi_representation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ProportionalPart ;
+            owl:onProperty chemrof:has_proportional_parts ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:has_minchi_representation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_minchi_representation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_mixfile_location ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_minchi_representation ],
         chemrof:ChemicalMixture ;
     skos:altLabel "portion of matter" ;
@@ -3261,16 +3259,16 @@ chemrof:PhysicochemicalEntityGroupingClass a owl:Class ;
     rdfs:label "PhysicochemicalEntityGroupingClass" ;
     dcterms:title "physicochemical entity grouping class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom chemrof:PhysicochemicalEntityGroupingClass ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:PhysicochemicalEntityGroupingClass ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:PhysicochemicalEntity ;
@@ -3291,13 +3289,13 @@ chemrof:Stereoisomer a owl:Class ;
     rdfs:label "Stereoisomer" ;
     dcterms:title "stereoisomer" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:isomeric_smiles_string ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:isomeric_smiles_string ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:isomeric_smiles_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:isomeric_smiles_string ],
         chemrof:Molecule ;
     skos:exactMatch SIO:010775,
@@ -3404,6 +3402,17 @@ chemrof:chirality_agnostic_form a owl:ObjectProperty ;
     rdfs:label "chirality_agnostic_form" ;
     dcterms:title "chirality agnostic form" ;
     rdfs:range chemrof:Molecule ;
+    skos:inScheme <https://w3id.org/chemrof> .
+
+chemrof:classified_by a owl:ObjectProperty ;
+    rdfs:label "classified_by" ;
+    dcterms:title "classified by" ;
+    rdfs:domain chemrof:OwlClass ;
+    rdfs:range chemrof:OwlClass ;
+    rdfs:subPropertyOf chemrof:chemical_to_chemical_relationship,
+        chemrof:owl_subclass_of ;
+    skos:closeMatch rdf:type ;
+    skos:definition "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class" ;
     skos:inScheme <https://w3id.org/chemrof> .
 
 chemrof:composed_of a owl:ObjectProperty ;
@@ -4029,18 +4038,18 @@ chemrof:Allotrope a owl:Class ;
     dcterms:title "allotrope" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_bonding_structure ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:allotropic_analog_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalElement ;
             owl:onProperty chemrof:allotropic_analog_of ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty chemrof:has_bonding_structure ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
             owl:onProperty chemrof:allotropic_analog_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty chemrof:has_bonding_structure ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
@@ -4065,10 +4074,10 @@ chemrof:AtomIonicForm a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:integer ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:elemental_charge ],
         chemrof:PartiallySpecifiedAtom ;
     skos:altLabel "atom ionic species" ;
@@ -4119,32 +4128,14 @@ chemrof:MonoatomicIon a owl:Class ;
     rdfs:label "MonoatomicIon" ;
     dcterms:title "monoatomic ion" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalElement ;
             owl:onProperty chemrof:has_element ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:elemental_charge ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_element ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
             owl:onProperty linkml:mixins ;
             owl:someValuesFrom chemrof:Charged ],
@@ -4154,14 +4145,31 @@ chemrof:MonoatomicIon a owl:Class ;
     skos:inScheme <https://w3id.org/chemrof> ;
     skos:mappingRelation CHEBI:24867,
         COB:0000042 ;
-    skos:note "this is mass-number neutral, so there can be no mass associated with a monatomic ion instance" .
+    skos:note "this is mass-number neutral, so there can be no mass associated with a monatomic ion instance" ;
+    chemrof:owl.template """EquivalentClasses(
+  {{id}}
+  ObjectIntersectionOf(
+    chemrof:MonoatomicIon
+    {% if has_element %}ObjectSomeValuesFrom(chemrof:has_element chemrof:{{has_element}}){% endif %}
+    {% if elemental_charge is not none %}DataHasValue(chemrof:elemental_charge "{{elemental_charge}}"^^xsd:integer){% endif %}
+  )
+)""" .
 
 chemrof:MonomolecularPolymer a owl:Class ;
     rdfs:label "MonomolecularPolymer" ;
     dcterms:title "monomolecular polymer" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:is_branched ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:polymer_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_repeat_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_branched ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:polymer_architecture_type ],
@@ -4169,32 +4177,23 @@ chemrof:MonomolecularPolymer a owl:Class ;
             owl:allValuesFrom chemrof:Macromolecule ;
             owl:onProperty chemrof:polymer_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_branched ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:polymer_architecture_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:polymer_architecture_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_branched ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_repeat_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_repeat_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:polymer_architecture_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:polymer_of ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_repeat_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:is_branched ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_repeat_unit ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:polymer_architecture_type ],
         chemrof:Macromolecule ;
     skos:altLabel "oligo or polymer",
         "polymer" ;
@@ -4219,10 +4218,10 @@ chemrof:NucleotideSequenceInterval a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_sequence_representation ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_sequence_representation ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_sequence_representation ],
         chemrof:SequenceInterval ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -4231,26 +4230,26 @@ chemrof:PolyatomicIon a owl:Class ;
     rdfs:label "PolyatomicIon" ;
     dcterms:title "polyatomic ion" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:conjugate_acid_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:conjugate_acid_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom owl:Thing ;
+            owl:onProperty chemrof:conjugate_base_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:conjugate_base_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:conjugate_base_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom owl:Thing ;
+            owl:onProperty chemrof:conjugate_acid_of ],
+        [ a owl:Restriction ;
             owl:onProperty linkml:mixins ;
             owl:someValuesFrom chemrof:Charged ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:conjugate_acid_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:conjugate_acid_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom owl:Thing ;
-            owl:onProperty chemrof:conjugate_base_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom owl:Thing ;
-            owl:onProperty chemrof:conjugate_acid_of ],
         chemrof:MoleculeByChargeState ;
     skos:altLabel "polyatomic ion species" ;
     skos:definition "A molecule that has a net charge. For example, nitrate is a molecular and ionic species; its formula is (NO3-)." ;
@@ -4266,19 +4265,19 @@ chemrof:ReactionParticipant a owl:Class ;
     rdfs:label "ReactionParticipant" ;
     dcterms:title "reaction participant" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:stoichiometry ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:participant ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:stoichiometry ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalEntity ;
             owl:onProperty chemrof:participant ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty chemrof:stoichiometry ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:participant ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -4291,13 +4290,13 @@ chemrof:SequenceInterval a owl:Class ;
     rdfs:label "SequenceInterval" ;
     dcterms:title "sequence interval" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:has_sequence_representation ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_sequence_representation ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_sequence_representation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_sequence_representation ],
         chemrof:MolecularComponent ;
     skos:definition "a chain of connected monomers in a linear polymer - for example, a sub-region of an amino acid or nucleotide sequence." ;
@@ -4308,13 +4307,13 @@ chemrof:SubatomicParticle a owl:Class ;
     rdfs:label "SubatomicParticle" ;
     dcterms:title "subatomic particle" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:subatomic_particle_type ],
-        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:SubatomicParticleEnum ;
             owl:onProperty chemrof:subatomic_particle_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:subatomic_particle_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:subatomic_particle_type ],
         chemrof:PhysicochemicalEntity ;
     skos:definition "A chemical entity below the granularity of an atom." ;
@@ -4351,58 +4350,6 @@ chemrof:Charged a owl:Class ;
     skos:definition "Applies to entities that are charged, either positive or negative" ;
     skos:inScheme <https://w3id.org/chemrof> .
 
-chemrof:ChemicalGroupingClass a owl:Class ;
-    rdfs:label "ChemicalGroupingClass" ;
-    dcterms:title "chemical grouping class" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:OwlClass ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:markush_string ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:smarts_string ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:smarts_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:markush_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:smarts_string ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalGroupingClass ;
-            owl:onProperty chemrof:subtype_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:markush_string ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:subtype_of ],
-        chemrof:PhysicochemicalEntityGroupingClass ;
-    skos:definition "Instances of this class represent generic chemical concepts that can be used to group more specific concepts, or to classify entities. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" ;
-    skos:inScheme <https://w3id.org/chemrof> .
-
 <https://w3id.org/chemrof/ClassificationLevelEnum#Subspecies> a owl:Class ;
     rdfs:label "Subspecies" ;
     rdfs:subClassOf chemrof:ClassificationLevelEnum,
@@ -4423,22 +4370,22 @@ chemrof:Material a owl:Class ;
     dcterms:title "material" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_repeat_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_repeat_unit ],
+            owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_part ],
+            owl:onProperty chemrof:has_repeat_unit ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_part ],
+            owl:onProperty chemrof:has_repeat_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_repeat_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_repeat_unit ],
+            owl:onProperty chemrof:has_part ],
         chemrof:PhysicochemicalEntity ;
     skos:definition "A substance composed of repeated chemical units that has a specific arrangement of atoms or molecules." ;
     skos:editorialNote "this is intentionally placed outside the chemical entity hierarchy as the concept encompasses more than the chemical structure." ;
@@ -4448,13 +4395,13 @@ chemrof:Nuclide a owl:Class ;
     rdfs:label "Nuclide" ;
     dcterms:title "nuclide" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:energy_level ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:energy_level ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:energy_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:energy_level ],
         chemrof:PartiallySpecifiedAtom ;
     skos:altLabel "nuclear species",
@@ -4510,70 +4457,138 @@ chemrof:has_submolecules a owl:ObjectProperty ;
     skos:definition "Relation between a molecule and the molecules it is made from." ;
     skos:inScheme <https://w3id.org/chemrof> .
 
+chemrof:ChemicalGroupingClass a owl:Class ;
+    rdfs:label "ChemicalGroupingClass" ;
+    dcterms:title "chemical grouping class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:markush_string ],
+        [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:OwlClass ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:smarts_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:smarts_string ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:markush_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:cxsmiles_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classifies ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:smarts_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:cxsmiles_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:cxsmiles_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:markush_string ],
+        chemrof:PhysicochemicalEntityGroupingClass ;
+    skos:definition "Instances of this class represent generic chemical concepts that can be used to group more specific concepts, or to classify entities. For example \"amino acid\" is a grouping for \"serine\", \"leucine\" etc; ester is a grouping for nitroglycerin; alkane is a grouping for pentane, butane, methane, etc" ;
+    skos:inScheme <https://w3id.org/chemrof> .
+
 chemrof:Enantiomer a owl:Class ;
     rdfs:label "Enantiomer" ;
     dcterms:title "enantiomer" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:relative_configuration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:absolute_configuration ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:optical_configuration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:enantiomer_form_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:relative_configuration ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:absolute_configuration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:absolute_configuration ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:enantiomer_form_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:optical_configuration ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:relative_configuration ],
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:relative_configuration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:enantiomer_form_of ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:relative_configuration ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+            owl:onProperty chemrof:enantiomer_form_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:relative_configuration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:absolute_configuration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:optical_configuration ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:optical_configuration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:absolute_configuration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         chemrof:Stereoisomer ;
     skos:definition "one of two stereoisomers of a chiral molecule that are mirror images. Example: R-thalidomide" ;
     skos:exactMatch SIO:010777 ;
     skos:inScheme <https://w3id.org/chemrof> ;
     skos:note "key= (enantiomer form of, absolute configuration)",
         "key= (enantiomer form of, inchi tetrahedral stereochemical sublayer)" ;
-    chemrof:owl "EquivalentClasses, IntersectionOf" .
+    chemrof:owl.template """EquivalentClasses(
+  {{id}}
+  ObjectIntersectionOf(
+    chemrof:Enantiomer
+    {% if enantiomer_form_of %}ObjectSomeValuesFrom(chemrof:enantiomer_form_of {{enantiomer_form_of}}){% endif %}
+    {% if absolute_configuration %}DataHasValue(chemrof:absolute_configuration "{{absolute_configuration}}"){% endif %}
+  )
+)""" .
 
 chemrof:IUPAC_name a owl:DatatypeProperty ;
     rdfs:label "IUPAC_name" ;
@@ -4589,22 +4604,22 @@ chemrof:IngredientRole a owl:Class ;
     rdfs:label "IngredientRole" ;
     dcterms:title "ingredient role" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:role_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:source_element ],
+        [ a owl:Restriction ;
             owl:allValuesFrom chemrof:IngredientRoleTypeEnum ;
             owl:onProperty chemrof:role_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:source_element ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalElement ;
             owl:onProperty chemrof:source_element ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:source_element ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:role_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:source_element ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:role_type ],
         chemrof:ChemicalRole ;
     skos:definition "A role that a chemical entity plays as an ingredient in a mixture, such as carbon source, buffer, or solvent." ;
@@ -4633,15 +4648,15 @@ chemrof:PolyatomicEntity a owl:Class ;
     rdfs:label "PolyatomicEntity" ;
     dcterms:title "polyatomic entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:inchi_atom_connections_sublayer ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
             owl:onProperty chemrof:inchi_atom_connections_sublayer ],
         chemrof:ChemicalEntity ;
     skos:definition "Any chemical entity consisting of more than one atom." ;
@@ -4652,133 +4667,133 @@ chemrof:Reaction a owl:Class ;
     dcterms:title "reaction" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:has_rinchi_representation ],
+            owl:onProperty chemrof:right_participants ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:reaction_rate_coefficient ],
+            owl:onProperty chemrof:direction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_reaction_smiles_representation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:reaction_rate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ReactionParticipant ;
+            owl:onProperty chemrof:right_participants ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:reaction_rate ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:reaction_center ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:reaction_type ],
+            owl:onProperty chemrof:is_diastereoselective ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_rinchi_representation ],
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_diastereoselective ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:is_diastereoselective ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_rinchi_representation ],
+            owl:onProperty chemrof:reaction_rate_coefficient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:reaction_rate ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:is_stereo ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:description ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:reaction_center ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ReactionParticipant ;
-            owl:onProperty chemrof:left_participants ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:reaction_center ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:reaction_center ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_stereo ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:is_transport ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:is_fully_characterized ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:is_balanced ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_reaction_smiles_representation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_balanced ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:direction ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_fully_characterized ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:is_fully_characterized ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_diastereoselective ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:right_participants ],
+            owl:onProperty chemrof:is_balanced ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:reaction_rate_coefficient ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:is_transport ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:reaction_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:is_stereo ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_fully_characterized ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:reaction_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_diastereoselective ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ReactionParticipant ;
-            owl:onProperty chemrof:right_participants ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_transport ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:is_balanced ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:reaction_center ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:reaction_rate ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_reaction_smiles_representation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty chemrof:reaction_rate_coefficient ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:reaction_rate ],
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:reaction_rate_coefficient ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:direction ],
+            owl:onProperty chemrof:has_rinchi_representation ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:has_reaction_smiles_representation ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:description ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_fully_characterized ],
+            owl:allValuesFrom chemrof:ReactionParticipant ;
+            owl:onProperty chemrof:left_participants ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:left_participants ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_balanced ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_balanced ],
+            owl:onProperty chemrof:has_rinchi_representation ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ReactionTypeEnum ;
             owl:onProperty chemrof:reaction_type ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty chemrof:is_transport ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_rinchi_representation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:has_reaction_smiles_representation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:direction ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:left_participants ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:is_transport ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_reaction_smiles_representation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:is_stereo ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_stereo ],
+            owl:onProperty chemrof:reaction_type ],
         chemrof:DomainEntity ;
     skos:definition "Reaction" ;
     skos:exactMatch BFO:0000015,
@@ -4801,6 +4816,18 @@ chemrof:carboydrate_representation a owl:DatatypeProperty ;
 chemrof:chemical_to_chemical_relationship a owl:DatatypeProperty ;
     rdfs:label "chemical_to_chemical_relationship" ;
     dcterms:title "chemical to chemical relationship" ;
+    skos:inScheme <https://w3id.org/chemrof> .
+
+chemrof:cxsmiles_string a owl:DatatypeProperty ;
+    rdfs:label "cxsmiles_string" ;
+    dcterms:title "CXSMILES string" ;
+    rdfs:seeAlso <https://docs.chemaxon.com/latest/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.html> ;
+    rdfs:subPropertyOf chemrof:smiles_string ;
+    skos:altLabel "CXSMILES",
+        "ChemAxon extended SMILES",
+        "extended SMILES" ;
+    skos:definition "A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry." ;
+    skos:exactMatch wd:P10718 ;
     skos:inScheme <https://w3id.org/chemrof> .
 
 chemrof:decay_energy a owl:DatatypeProperty ;
@@ -4888,6 +4915,19 @@ chemrof:occurrence_of a owl:ObjectProperty ;
     rdfs:range chemrof:Atom ;
     skos:inScheme <https://w3id.org/chemrof> .
 
+chemrof:owl_subclass_of a owl:ObjectProperty ;
+    rdfs:label "owl_subclass_of" ;
+    dcterms:title "owl subclass of" ;
+    rdfs:domain chemrof:OwlClass ;
+    rdfs:range chemrof:OwlClass ;
+    rdfs:subPropertyOf chemrof:classification_relationship ;
+    skos:altLabel "is a" ;
+    skos:definition "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)" ;
+    skos:exactMatch rdfs:subClassOf ;
+    skos:inScheme <https://w3id.org/chemrof> ;
+    skos:narrowMatch bo:family ;
+    chemrof:owl "SubClassOf" .
+
 chemrof:score a owl:DatatypeProperty ;
     rdfs:label "score" ;
     dcterms:title "score" ;
@@ -4918,8 +4958,17 @@ chemrof:DomainEntity a owl:Class ;
     rdfs:label "DomainEntity" ;
     dcterms:title "domain entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty chemrof:type ],
@@ -4927,23 +4976,14 @@ chemrof:DomainEntity a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 1 ;
             owl:onProperty chemrof:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:id ],
+            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
         linkml:ClassDefinition ;
     skos:definition "A discrete, specific named entity in the domain of chemistry." ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -4970,76 +5010,68 @@ chemrof:has_major_microspecies_at_pH7_3 a owl:ObjectProperty ;
     skos:definition "Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)" ;
     skos:inScheme <https://w3id.org/chemrof> .
 
-chemrof:smiles_string a owl:DatatypeProperty ;
-    rdfs:label "smiles_string" ;
-    dcterms:title "smiles string" ;
-    rdfs:subPropertyOf chemrof:chemical_formula ;
-    skos:definition "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol." ;
-    skos:exactMatch CHEMINF:000018 ;
-    skos:inScheme <https://w3id.org/chemrof> ;
-    skos:note "a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see “Limitations of molecular graph representations” section), such as organometallic compounds and ionic salts." ;
-    chemrof:owl "AnnotationAssertion" .
+xsd:anyURI a rdfs:Datatype .
 
 chemrof:AtomOccurrence a owl:Class ;
     rdfs:label "AtomOccurrence" ;
     dcterms:title "atom occurrence" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:OwlClass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty chemrof:valence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:coordination_number ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:formal_charge ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:occurrence_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:coordination_number ],
-        [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:OwlClass ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:valence ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:oxidation_number ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:oxidation_number ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:valence ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
             owl:onProperty chemrof:formal_charge ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:formal_charge ],
+            owl:onProperty chemrof:oxidation_number ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:integer ;
             owl:onProperty chemrof:coordination_number ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty chemrof:occurrence_of ],
+            owl:onProperty chemrof:formal_charge ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:valence ],
+            owl:onProperty chemrof:formal_charge ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:occurrence_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:oxidation_number ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Atom ;
             owl:onProperty chemrof:occurrence_of ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:oxidation_number ],
+            owl:minCardinality 1 ;
+            owl:onProperty chemrof:occurrence_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:valence ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:coordination_number ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:coordination_number ],
+            owl:onProperty chemrof:name ],
         chemrof:ChemicalRelationship ;
     skos:definition "An occurrence of an atom in the context of a particular molecule. For example, one of two occurrences of oxygen in nitrate" ;
     skos:inScheme <https://w3id.org/chemrof> .
@@ -5100,9 +5132,18 @@ chemrof:conjugate_base_of a owl:DatatypeProperty ;
 chemrof:information_property a owl:DatatypeProperty ;
     rdfs:label "information_property" ;
     dcterms:title "information property" ;
-    skos:inScheme <https://w3id.org/chemrof> .
+    skos:inScheme <https://w3id.org/chemrof> ;
+    chemrof:owl "Annotation" .
 
-xsd:anyURI a rdfs:Datatype .
+chemrof:smiles_string a owl:DatatypeProperty ;
+    rdfs:label "smiles_string" ;
+    dcterms:title "smiles string" ;
+    rdfs:subPropertyOf chemrof:chemical_formula ;
+    skos:definition "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol." ;
+    skos:exactMatch CHEMINF:000018 ;
+    skos:inScheme <https://w3id.org/chemrof> ;
+    skos:note "a problematic set of structures to describe using SMILES notation is those which cannot be easily described using molecular graphs (see “Limitations of molecular graph representations” section), such as organometallic compounds and ionic salts." ;
+    chemrof:owl "AnnotationAssertion" .
 
 chemrof:ElementFamilyEnum a owl:Class ;
     rdfs:label "ElementFamilyEnum" ;
@@ -5125,10 +5166,10 @@ chemrof:Macromolecule a owl:Class ;
     rdfs:label "Macromolecule" ;
     dcterms:title "macromolecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:has_submolecules ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Molecule ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:has_submolecules ],
         chemrof:Molecule ;
     skos:definition "A large molecule, such as a polymer, lipid, or macrocycle" ;
@@ -5140,38 +5181,38 @@ chemrof:MoleculeByChargeState a owl:Class ;
     rdfs:label "MoleculeByChargeState" ;
     dcterms:title "molecule by charge state" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:MoleculeByChargeState ;
-            owl:onProperty chemrof:acid_form_of ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty chemrof:acidity ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:acidity ],
+            owl:allValuesFrom chemrof:BronstedAcidBaseRoleEnum ;
+            owl:onProperty chemrof:bronsted_acid_base_role ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:hard_or_soft ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:acidity ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:bronsted_acid_base_role ],
+            owl:allValuesFrom chemrof:MoleculeByChargeState ;
+            owl:onProperty chemrof:acid_form_of ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:acid_form_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:hard_or_soft ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:BronstedAcidBaseRoleEnum ;
-            owl:onProperty chemrof:bronsted_acid_base_role ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:bronsted_acid_base_role ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:HardOrSoftEnum ;
             owl:onProperty chemrof:hard_or_soft ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:acidity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:hard_or_soft ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:acidity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:bronsted_acid_base_role ],
         chemrof:Molecule ;
     skos:altLabel "chargeomer" ;
     skos:definition "A molecule that has a charge state specified" ;
@@ -5184,16 +5225,16 @@ chemrof:MoleculeGroupingClass a owl:Class ;
             owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:classifies ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:subtype_of ],
+            owl:onProperty chemrof:classifies ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:MoleculeGroupingClass ;
+            owl:onProperty chemrof:subtype_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:subtype_of ],
         chemrof:ChemicalGroupingClass ;
     skos:definition "A grouping class that classifies molecules. Example: carbohydrate, monosaccharide, amino acid, polyacrylamide" ;
@@ -5234,7 +5275,8 @@ chemrof:has_element a owl:ObjectProperty ;
     dcterms:title "has element" ;
     rdfs:range chemrof:ChemicalElement ;
     rdfs:subPropertyOf chemrof:alternate_form_of ;
-    skos:inScheme <https://w3id.org/chemrof> .
+    skos:inScheme <https://w3id.org/chemrof> ;
+    chemrof:owl "AnnotationAssertion" .
 
 chemrof:has_sequence_representation a owl:DatatypeProperty ;
     rdfs:label "has_sequence_representation" ;
@@ -5314,85 +5356,16 @@ chemrof:inchi_sublayer a owl:DatatypeProperty ;
     rdfs:subPropertyOf chemrof:inchi_component ;
     skos:inScheme <https://w3id.org/chemrof> .
 
-chemrof:owl_subclass_of a owl:ObjectProperty ;
-    rdfs:label "owl_subclass_of" ;
-    dcterms:title "owl subclass of" ;
-    rdfs:domain chemrof:OwlClass ;
-    rdfs:range chemrof:OwlClass ;
-    rdfs:subPropertyOf chemrof:classification_relationship ;
-    skos:altLabel "is a" ;
-    skos:definition "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)" ;
-    skos:exactMatch rdfs:subClassOf ;
-    skos:inScheme <https://w3id.org/chemrof> ;
-    skos:narrowMatch bo:family .
-
 chemrof:ChemicalElement a owl:Class ;
     rdfs:label "ChemicalElement" ;
     dcterms:title "chemical element" ;
     rdfs:seeAlso Wikipedia:Chemical_element ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:mass ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:boiling_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_stereocenter ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:in_periodic_table_block ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:standard_atomic_weight ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:monoisotopic_mass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:electron_configuration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:in_periodic_table_block ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:monoisotopic_mass ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:boiling_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:electron_configuration ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:boiling_point_in_celcius ],
+            owl:onProperty chemrof:melting_point_in_celcius ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:in_periodic_table_group ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:monoisotopic_mass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Stereocenter ;
-            owl:onProperty chemrof:has_stereocenter ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:int ;
-            owl:onProperty chemrof:in_periodic_table_group ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:standard_atomic_weight ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:electron_configuration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:standard_atomic_weight ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
@@ -5400,34 +5373,91 @@ chemrof:ChemicalElement a owl:Class ;
             owl:onProperty chemrof:symbol ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:melting_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:mass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:melting_point_in_celcius ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:symbol ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:mass ],
+            owl:onProperty chemrof:in_periodic_table_block ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:in_periodic_table_block ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:melting_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:electron_configuration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:monoisotopic_mass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:electron_configuration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:boiling_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:boiling_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:electron_configuration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_stereocenter ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:standard_atomic_weight ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:standard_atomic_weight ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:mass ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:PeriodicTableBlockEnum ;
             owl:onProperty chemrof:in_periodic_table_block ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:symbol ],
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:boiling_point_in_celcius ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:monoisotopic_mass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:int ;
             owl:onProperty chemrof:in_periodic_table_group ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalElement ;
             owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:melting_point_in_celcius ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:mass ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:symbol ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:standard_atomic_weight ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:in_periodic_table_group ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Stereocenter ;
+            owl:onProperty chemrof:has_stereocenter ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:monoisotopic_mass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:mass ],
         chemrof:PartiallySpecifiedAtom ;
     owl:hasKey ( chemrof:atomic_number ),
         ( chemrof:atomic_number ) ;
@@ -5525,50 +5555,50 @@ chemrof:Atom a owl:Class ;
     rdfs:label "Atom" ;
     dcterms:title "atom" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:SubatomicParticleOccurrence ;
-            owl:onProperty chemrof:has_nuclear_parts ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:symbol ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_nuclear_parts ],
+            owl:onProperty chemrof:symbol ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:atomic_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:atomic_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:int ;
             owl:onProperty chemrof:atomic_number ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:symbol ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_nuclear_parts ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:SubatomicParticleOccurrence ;
+            owl:onProperty chemrof:has_nuclear_parts ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:SubatomicParticle ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:symbol ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:name ],
+            owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_part ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:atomic_number ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:atomic_number ],
+            owl:onProperty chemrof:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_nuclear_parts ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:symbol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_part ],
         chemrof:ChemicalEntity ;
     skos:altLabel "atomic species",
         "chemical species of an element" ;
@@ -5657,7 +5687,8 @@ chemrof:OwlClass a owl:Class ;
     skos:definition "instances of this class mixin are OWL Classes" ;
     skos:exactMatch owl:Class,
         wd:Q24017414 ;
-    skos:inScheme <https://w3id.org/chemrof> .
+    skos:inScheme <https://w3id.org/chemrof> ;
+    chemrof:owl "Class" .
 
 chemrof:has_part a owl:DatatypeProperty ;
     rdfs:label "has_part" ;
@@ -5673,77 +5704,77 @@ chemrof:Isotope a owl:Class ;
     rdfs:label "Isotope" ;
     dcterms:title "isotope" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_element ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:decay_mode ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:decay_energy ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_energy ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:int ;
-            owl:onProperty chemrof:half_life ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:half_life ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:neutron_number ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Isotope ;
-            owl:onProperty chemrof:isotope_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:neutron_number ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:mode_of_formation ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:half_life ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_product ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:isotope_of ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:decay_product ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:decay_mode ],
+            owl:onProperty chemrof:decay_product ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Isotope ;
+            owl:onProperty chemrof:decay_product ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:mode_of_formation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:int ;
+            owl:onProperty chemrof:half_life ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:decay_energy ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_element ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Isotope ;
+            owl:onProperty chemrof:isotope_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:int ;
+            owl:onProperty chemrof:neutron_number ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:mode_of_formation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:neutron_number ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_element ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:decay_mode ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:isotope_of ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:decay_energy ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:ChemicalElement ;
             owl:onProperty chemrof:has_element ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:int ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:decay_energy ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:neutron_number ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Isotope ;
-            owl:onProperty chemrof:decay_product ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:mode_of_formation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:isotope_of ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:mode_of_formation ],
+            owl:onProperty chemrof:decay_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:half_life ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:isotope_of ],
+            owl:onProperty chemrof:decay_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:decay_mode ],
         chemrof:Nuclide ;
     skos:definition "A specific subtype of an atom with a specified neutron number" ;
     skos:exactMatch wd:Q25276 ;
@@ -5760,7 +5791,8 @@ chemrof:molecular_property a owl:DatatypeProperty ;
 chemrof:chemical_property a owl:DatatypeProperty ;
     rdfs:label "chemical_property" ;
     dcterms:title "chemical property" ;
-    skos:inScheme <https://w3id.org/chemrof> .
+    skos:inScheme <https://w3id.org/chemrof> ;
+    chemrof:owl "Annotation" .
 
 chemrof:subtype_of a owl:ObjectProperty ;
     rdfs:label "subtype_of" ;
@@ -5811,16 +5843,6 @@ chemrof:classifies a owl:DatatypeProperty ;
     owl:inverseOf chemrof:classified_by ;
     skos:inScheme <https://w3id.org/chemrof> .
 
-chemrof:name a owl:DatatypeProperty ;
-    rdfs:label "name" ;
-    dcterms:title "name" ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf chemrof:information_property ;
-    skos:closeMatch bo:symbol ;
-    skos:definition "name of chemical entity. E.g. nickel, carbon-16" ;
-    skos:inScheme <https://w3id.org/chemrof> ;
-    chemrof:owl "AnnotationAssertion" .
-
 chemrof:elemental_charge a owl:DatatypeProperty ;
     rdfs:label "elemental_charge" ;
     dcterms:title "elemental charge" ;
@@ -5831,28 +5853,197 @@ chemrof:elemental_charge a owl:DatatypeProperty ;
     skos:inScheme <https://w3id.org/chemrof> ;
     skos:mappingRelation CHEMINF:000120 .
 
+chemrof:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    dcterms:title "name" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf chemrof:information_property ;
+    skos:closeMatch bo:symbol ;
+    skos:definition "name of chemical entity. E.g. nickel, carbon-16" ;
+    skos:inScheme <https://w3id.org/chemrof> ;
+    chemrof:owl "AnnotationAssertion" .
+
 chemrof:ChemicalEntity a owl:Class ;
     rdfs:label "ChemicalEntity" ;
     dcterms:title "chemical entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:IUPAC_name ],
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:pka_temperature ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty chemrof:pka_ionic_strength ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
             owl:onProperty chemrof:is_radical ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:inchi_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:molecular_mass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:water_solubility ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_chemical_role ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:pka_ionization_constant ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:IUPAC_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:smiles_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalEntity ;
+            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:empirical_formula ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:pka_pressure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:cxsmiles_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalGroupingClass ;
+            owl:onProperty chemrof:classified_by ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:pka_temperature ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_proton_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:molecular_mass ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:cxsmiles_string ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:pka_solvent ],
+        [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:OwlClass ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:pka_ionization_constant ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:water_solubility ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_chemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_chemical_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_proton_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:pka_pressure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:is_radical ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:pka_pressure ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty chemrof:water_solubility ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:pka_solvent ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty chemrof:pka_ionic_strength ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:pka_temperature ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:ChemicalRole ;
+            owl:onProperty chemrof:has_chemical_role ],
+        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^s.*" ] ) ] ;
+                    owl:withRestrictions ( [ xsd:pattern "^[ih].*" ] ) ] ;
+            owl:onProperty chemrof:inchi_isotopic_layer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:smiles_string ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:molecular_mass ],
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_chemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty chemrof:pka_ionic_strength ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_charge_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:classified_by ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^h.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:inchi_string ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
@@ -5861,152 +6052,24 @@ chemrof:ChemicalEntity a owl:Class ;
             owl:onProperty chemrof:inchi_atom_connections_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:pka_pressure ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:IUPAC_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_chemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_chemical_role ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:empirical_formula ],
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^q.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty chemrof:is_radical ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:pka_temperature ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:molecular_mass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:inchi_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+                    owl:withRestrictions ( [ xsd:pattern "^s.*" ] ) ] ;
             owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^h.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:pka_temperature ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty chemrof:smiles_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_chemical_role ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:water_solubility ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[ih].*" ] ) ] ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:empirical_formula ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+            owl:onProperty chemrof:cxsmiles_string ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:water_solubility ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:IUPAC_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:smiles_string ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:pka_ionization_constant ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:pka_solvent ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^p[\\-]\\d+" ] ) ] ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_radical ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:pka_ionization_constant ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:pka_solvent ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:smiles_string ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_chemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_isotopic_layer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:pka_ionic_strength ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalRole ;
-            owl:onProperty chemrof:has_chemical_role ],
-        [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:OwlClass ],
+            owl:onProperty chemrof:inchi_charge_sublayer ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
@@ -6014,51 +6077,35 @@ chemrof:ChemicalEntity a owl:Class ;
             owl:onProperty chemrof:inchi_chemical_sublayer ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:pka_ionic_strength ],
+            owl:onProperty chemrof:empirical_formula ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty chemrof:pka_temperature ],
+            owl:onProperty chemrof:molecular_mass ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_proton_sublayer ],
+            owl:onProperty chemrof:IUPAC_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:is_radical ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:pka_solvent ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_string ],
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^p[\\-]\\d+" ] ) ] ;
+            owl:onProperty chemrof:inchi_proton_sublayer ],
         [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:ChemicalEntity ;
-            owl:onProperty chemrof:has_major_microspecies_at_pH7_3 ],
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^q.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_charge_sublayer ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:empirical_formula ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:pka_pressure ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:pka_pressure ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:pka_ionic_strength ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty chemrof:molecular_mass ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty chemrof:IUPAC_name ],
         chemrof:PhysicochemicalEntity ;
     owl:hasKey ( chemrof:smiles_string ) ;
     skos:altLabel "chemical",
@@ -6074,19 +6121,39 @@ chemrof:ChemicalEntity a owl:Class ;
         CHEMINF:000000,
         OntoRxn:ChemSpecies ;
     skos:note "Does not encompass chemical grouping classes, such as \"amino acid\". Use the class ChemicalGrouping for this.",
-        "In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]" .
+        "In common chemical usage generic and specific chemical names (such as radical or hydroxide ion) or chemical formulae refer either to a chemical species or to a molecular entity[https://goldbook.iupac.org/terms/view/CT01038]" ;
+    chemrof:owl.template "SubClassOf({{id}} chemrof:{{this.class_name}})" .
 
 chemrof:Molecule a owl:Class ;
     rdfs:label "Molecule" ;
     dcterms:title "molecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:AtomicBond ;
+            owl:onProperty chemrof:has_bonds ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:is_organic ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty chemrof:has_submolecules ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:integer ;
-                    owl:withRestrictions ( [ xsd:minInclusive 1 ] ) ] ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_bonds ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:has_atoms ],
+        [ a owl:Restriction ;
+            owl:onProperty linkml:mixins ;
+            owl:someValuesFrom chemrof:FullyCovalentlyBonded ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:has_part ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:Atom ;
+            owl:onProperty chemrof:has_atoms ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:is_organic ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:boolean ;
             owl:onProperty chemrof:is_organic ],
@@ -6098,34 +6165,13 @@ chemrof:Molecule a owl:Class ;
             owl:onProperty chemrof:has_atom_occurrences ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_atoms ],
+            owl:onProperty chemrof:has_atom_occurrences ],
         [ a owl:Restriction ;
             owl:allValuesFrom chemrof:Molecule ;
             owl:onProperty chemrof:has_submolecules ],
         [ a owl:Restriction ;
-            owl:onProperty linkml:mixins ;
-            owl:someValuesFrom chemrof:FullyCovalentlyBonded ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:AtomicBond ;
-            owl:onProperty chemrof:has_bonds ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:is_organic ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty chemrof:has_part ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:is_organic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:Atom ;
-            owl:onProperty chemrof:has_atoms ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_atom_occurrences ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:has_bonds ],
         chemrof:PolyatomicEntity ;
     skos:altLabel "molecular entity",
         "monomolecular entity" ;
@@ -6205,111 +6251,29 @@ Aspects of this have been cribbed from various sources including CHEBI, SIO, Wik
 For full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).""" .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Enantiomer ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Enantiomer .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MoleculeByChargeState ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MoleculeByChargeState .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularSpecies ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularSpecies .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Radionuclide ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Radionuclide .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:RacemicMixture ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:RacemicMixture .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularComplex ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularComplex .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Nanomaterial ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Nanomaterial .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Atom ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Atom .
-
-[] a owl:Restriction ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:FullyCovalentlyBonded .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PolyatomicEntity ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PolyatomicEntity .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularCation ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularCation .
-
-[] a owl:Restriction ;
     rdfs:subClassOf chemrof:Isotope ;
     owl:onProperty chemrof:type ;
     owl:someValuesFrom chemrof:Isotope .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Reaction ;
+    rdfs:subClassOf chemrof:NucleotideSequenceInterval ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Reaction .
+    owl:someValuesFrom chemrof:NucleotideSequenceInterval .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Copolymer ;
+    rdfs:subClassOf chemrof:MolecularAnion ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Copolymer .
+    owl:someValuesFrom chemrof:MolecularAnion .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:intersectionOf ( [ a rdfs:Datatype ;
-                                owl:onDatatype xsd:integer ;
-                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] [ a rdfs:Datatype ;
-                                owl:onDatatype xsd:integer ;
-                                owl:withRestrictions ( [ xsd:maxInclusive 0 ] ) ] ) ] ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:Uncharged .
+    rdfs:subClassOf chemrof:SubatomicParticle ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:SubatomicParticle .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:NetUnchargedMolecule ;
+    rdfs:subClassOf chemrof:FullySpecifiedAtom ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:NetUnchargedMolecule .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:AtomCation ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:AtomCation .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:UnchargedAtom ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:UnchargedAtom .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:ChemicalEntity ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:ChemicalEntity .
+    owl:someValuesFrom chemrof:FullySpecifiedAtom .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:AminoAcidSequenceInterval ;
@@ -6317,23 +6281,23 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:AminoAcidSequenceInterval .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:SequenceInterval ;
+    rdfs:subClassOf chemrof:Glycan ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:SequenceInterval .
+    owl:someValuesFrom chemrof:Glycan .
 
 [] a owl:Restriction ;
     owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:State .
+    owl:someValuesFrom chemrof:ChemicalEntityOrGrouping .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MonomolecularPolymer ;
+    rdfs:subClassOf chemrof:MolecularComplex ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MonomolecularPolymer .
+    owl:someValuesFrom chemrof:MolecularComplex .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:ChemicalSalt ;
+    rdfs:subClassOf chemrof:NonSpeciesMolecule ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:ChemicalSalt .
+    owl:someValuesFrom chemrof:NonSpeciesMolecule .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:Protein ;
@@ -6341,134 +6305,28 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:Protein .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:SupramolecularPolymer ;
+    rdfs:subClassOf chemrof:UnchargedAtom ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:SupramolecularPolymer .
+    owl:someValuesFrom chemrof:UnchargedAtom .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Zwitterion ;
+    rdfs:subClassOf chemrof:Nuclide ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Zwitterion .
+    owl:someValuesFrom chemrof:Nuclide .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom chemrof:OwlClass ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:owl_subclass_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:owl_subclass_of ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:OwlClass .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^h.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_atom_connections_sublayer ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:EntityWithConnectivitySpecificied .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^s.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:EntityWithStereochemistrySpecified .
+    rdfs:subClassOf chemrof:Radionuclide ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Radionuclide .
 
 [] a owl:Restriction ;
     owl:onProperty linkml:mixins ;
     owl:someValuesFrom chemrof:Charged .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Peptide ;
+    rdfs:subClassOf chemrof:PartiallySpecifiedAtom ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Peptide .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Isobar ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Isobar .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PolymerPart ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PolymerPart .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:SmallMolecule ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:SmallMolecule .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:inchi_charge_sublayer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^q.*" ] ) ] ;
-            owl:onProperty chemrof:inchi_charge_sublayer ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:EntityWithChargeSpecified .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Homopolymer ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Homopolymer .
+    owl:someValuesFrom chemrof:PartiallySpecifiedAtom .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:AtomIonicForm ;
@@ -6476,9 +6334,61 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:AtomIonicForm .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularSubsequence ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:Connectivity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:IsomeraseReaction ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularSubsequence .
+    owl:someValuesFrom chemrof:IsomeraseReaction .
+
+[] a owl:Restriction ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:WeaklyBonded .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:NetUnchargedMolecule ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:NetUnchargedMolecule .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:MonoatomicIon ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:MonoatomicIon .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:FunctionalGroup ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:FunctionalGroup .
+
+[] a owl:Restriction ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:SpecificityMixin .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:SupramolecularPolymer ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:SupramolecularPolymer .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:MolecularSpecies ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:MolecularSpecies .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_charge_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^q.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_charge_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_charge_sublayer ] ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:EntityWithChargeSpecified .
 
 [] a owl:Restriction ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -6496,34 +6406,97 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:EntityWithIsotopeSpecified .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:IsomeraseReaction ;
+    rdfs:subClassOf chemrof:ImpreciseChemicalMixture ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:IsomeraseReaction .
+    owl:someValuesFrom chemrof:ImpreciseChemicalMixture .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:RNASequenceInterval ;
+    rdfs:subClassOf chemrof:MolecularComponent ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:RNASequenceInterval .
+    owl:someValuesFrom chemrof:MolecularComponent .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:SubatomicParticle ;
+    rdfs:subClassOf chemrof:Homopolymer ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:SubatomicParticle .
+    owl:someValuesFrom chemrof:Homopolymer .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Nuclide ;
+    rdfs:subClassOf chemrof:Zwitterion ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Nuclide .
+    owl:someValuesFrom chemrof:Zwitterion .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:ChemicalMixture ;
+    rdfs:subClassOf chemrof:MoleculeByChargeState ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:ChemicalMixture .
+    owl:someValuesFrom chemrof:MoleculeByChargeState .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:NonSpeciesMolecule ;
+    rdfs:subClassOf chemrof:Moiety ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:NonSpeciesMolecule .
+    owl:someValuesFrom chemrof:Moiety .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Enantiomer ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Enantiomer .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:PreciseChemicalMixture ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:PreciseChemicalMixture .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Atom ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Atom .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:DomainEntity ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:DomainEntity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:AtomAnion ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:AtomAnion .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:ChemicalEntity ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:ChemicalEntity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:PhysicochemicalEntity ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:PhysicochemicalEntity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:PolyatomicEntity ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:PolyatomicEntity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:AtomCation ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:AtomCation .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Isobar ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Isobar .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:owl_subclass_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:owl_subclass_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom chemrof:OwlClass ;
+            owl:onProperty chemrof:owl_subclass_of ] ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:OwlClass .
 
 [] a owl:Restriction ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -6541,44 +6514,9 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:EntityWithAtomsEnumerated .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:DomainEntity ;
+    rdfs:subClassOf chemrof:Nanomaterial ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:DomainEntity .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:FullySpecifiedAtom ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:FullySpecifiedAtom .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Material ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Material .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:DNASequenceInterval ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:DNASequenceInterval .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Ester ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Ester .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PreciseChemicalMixture ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PreciseChemicalMixture .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MonoatomicIon ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MonoatomicIon .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Monomer ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Monomer .
+    owl:someValuesFrom chemrof:Nanomaterial .
 
 [] a owl:Restriction ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -6587,27 +6525,18 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
                     owl:withRestrictions ( [ xsd:maxInclusive -1 ] ) ] ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty chemrof:elemental_charge ] ;
     owl:onProperty linkml:mixins ;
     owl:someValuesFrom chemrof:AnionState .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularAnion ;
+    rdfs:subClassOf chemrof:Monomer ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularAnion .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:FunctionalGroup ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:FunctionalGroup .
-
-[] a owl:Restriction ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:ChemicalEntityOrGrouping .
+    owl:someValuesFrom chemrof:Monomer .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:Allotrope ;
@@ -6615,47 +6544,14 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:Allotrope .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Moiety ;
+    rdfs:subClassOf chemrof:Ester ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Moiety .
+    owl:someValuesFrom chemrof:Ester .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Macromolecule ;
+    rdfs:subClassOf chemrof:Copolymer ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Macromolecule .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:AtomAnion ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:AtomAnion .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:NeutralMolecule ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:NeutralMolecule .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Stereoisomer ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Stereoisomer .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PolyatomicIon ;
-    owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PolyatomicIon .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty chemrof:elemental_charge ] ;
-    owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:ChargeState .
+    owl:someValuesFrom chemrof:Copolymer .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:NaturalProduct ;
@@ -6663,22 +6559,44 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:NaturalProduct .
 
 [] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^h.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_hydrogen_connections_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^c.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_atom_connections_sublayer ] ;
     owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:Connectivity .
+    owl:someValuesFrom chemrof:EntityWithConnectivitySpecificied .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Glycan ;
+    rdfs:subClassOf chemrof:ChemicalMixture ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Glycan .
+    owl:someValuesFrom chemrof:ChemicalMixture .
 
 [] a owl:Restriction ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:integer ;
                     owl:withRestrictions ( [ xsd:minInclusive 1 ] ) ] ;
-            owl:onProperty chemrof:elemental_charge ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty chemrof:elemental_charge ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -6687,9 +6605,97 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:CationState .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:Mineral ;
+    rdfs:subClassOf chemrof:ChemicalElement ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:Mineral .
+    owl:someValuesFrom chemrof:ChemicalElement .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:MonomolecularPolymer ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:MonomolecularPolymer .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[tm].*" ] ) ] ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:inchi_tetrahedral_stereochemical_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^s.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_stereochemical_type_sublayer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^b.*" ] ) ] ;
+            owl:onProperty chemrof:inchi_stereochemical_double_bond_sublayer ] ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:EntityWithStereochemistrySpecified .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:integer ;
+                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:integer ;
+                                owl:withRestrictions ( [ xsd:maxInclusive 0 ] ) ] ) ] ;
+            owl:onProperty chemrof:elemental_charge ] ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:Uncharged .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Reaction ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Reaction .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty chemrof:elemental_charge ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty chemrof:elemental_charge ] ;
+    owl:onProperty linkml:mixins ;
+    owl:someValuesFrom chemrof:ChargeState .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:PolymerPart ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:PolymerPart .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Peptide ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Peptide .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:Molecule ;
@@ -6697,27 +6703,67 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:Molecule .
 
 [] a owl:Restriction ;
+    rdfs:subClassOf chemrof:SequenceInterval ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:SequenceInterval .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Stereoisomer ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Stereoisomer .
+
+[] a owl:Restriction ;
     owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:SpecificityMixin .
+    owl:someValuesFrom chemrof:FullyCovalentlyBonded .
 
 [] a owl:Restriction ;
     owl:onProperty linkml:mixins ;
-    owl:someValuesFrom chemrof:WeaklyBonded .
+    owl:someValuesFrom chemrof:State .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:NucleotideSequenceInterval ;
+    rdfs:subClassOf chemrof:PolyatomicIon ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:NucleotideSequenceInterval .
+    owl:someValuesFrom chemrof:PolyatomicIon .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PartiallySpecifiedAtom ;
+    rdfs:subClassOf chemrof:SmallMolecule ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PartiallySpecifiedAtom .
+    owl:someValuesFrom chemrof:SmallMolecule .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:MolecularComponent ;
+    rdfs:subClassOf chemrof:NeutralMolecule ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:MolecularComponent .
+    owl:someValuesFrom chemrof:NeutralMolecule .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Macromolecule ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Macromolecule .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Mineral ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Mineral .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:MolecularSubsequence ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:MolecularSubsequence .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:Material ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:Material .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:ChemicalSalt ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:ChemicalSalt .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf chemrof:DNASequenceInterval ;
+    owl:onProperty chemrof:type ;
+    owl:someValuesFrom chemrof:DNASequenceInterval .
 
 [] a owl:Restriction ;
     rdfs:subClassOf chemrof:ChemicalGroup ;
@@ -6725,17 +6771,17 @@ For full context/motivation see the [GitHub repo](https://github.com/chemkg/chem
     owl:someValuesFrom chemrof:ChemicalGroup .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:PhysicochemicalEntity ;
+    rdfs:subClassOf chemrof:RNASequenceInterval ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:PhysicochemicalEntity .
+    owl:someValuesFrom chemrof:RNASequenceInterval .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:ChemicalElement ;
+    rdfs:subClassOf chemrof:MolecularCation ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:ChemicalElement .
+    owl:someValuesFrom chemrof:MolecularCation .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf chemrof:ImpreciseChemicalMixture ;
+    rdfs:subClassOf chemrof:RacemicMixture ;
     owl:onProperty chemrof:type ;
-    owl:someValuesFrom chemrof:ImpreciseChemicalMixture .
+    owl:someValuesFrom chemrof:RacemicMixture .
 

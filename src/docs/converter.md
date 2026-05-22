@@ -1,9 +1,10 @@
-# SMILES Converter
+# Chemical Converter
 
-The `chemrof` CLI converts SMILES strings into chemrof-compliant data records.
-Given a SMILES like `CCO` (ethanol) or `[Ca+2]` (calcium ion), it parses the
-structure with RDKit, determines the correct chemrof type, and fills in
-structural properties automatically.
+The `chemrof` CLI converts SMILES or InChI strings into chemrof-compliant data
+records. Given an input like `CCO` (ethanol), `[Ca+2]` (calcium ion), or
+`InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3`, it parses the structure with RDKit,
+determines the correct chemrof type, and fills in structural properties
+automatically.
 
 ## Quick start
 
@@ -12,16 +13,19 @@ structural properties automatically.
 uv sync
 
 # Convert a SMILES to YAML
-chemrof from-smiles "CCO"
+chemrof convert "CCO"
 
 # Multiple molecules, JSON output
-chemrof from-smiles "CCO" "c1ccccc1" "[Ca+2]" --format json
+chemrof convert "CCO" "c1ccccc1" "[Ca+2]" --format json
 
 # OWL output (OWL Functional Syntax)
-chemrof from-smiles "CCO" "[Ca+2]" --format owl
+chemrof convert "CCO" "[Ca+2]" --format owl
 
 # Pull names from PubChem
-chemrof from-smiles "CCO" --enrichers pubchem
+chemrof convert "CCO" --enrichers pubchem
+
+# Add ChemOnt/ClassyFire classifications from a local DuckDB store
+chemrof convert "CCO" --enrichers chemont --chemont-source chemont.duckdb
 ```
 
 ## What it produces
@@ -41,6 +45,7 @@ For each SMILES, the converter outputs a dict with these slots:
 | `is_organic` | Contains carbon | `true` |
 | `elemental_charge` | For ions only | `2` |
 | `has_element` | For monoatomic ions | `Ca` |
+| `classified_by` | ChemOnt enricher | `CHEMONTID:0000286` |
 
 ## Auto-classification
 
@@ -61,7 +66,7 @@ By default, the converter fills in only what RDKit can compute from the
 structure. To pull additional data from external databases, use `--enrichers`:
 
 ```bash
-chemrof from-smiles "CCO" --enrichers pubchem
+chemrof convert "CCO" --enrichers pubchem
 ```
 
 This adds a PubChem lookup by InChIKey, filling in the preferred IUPAC name
@@ -72,13 +77,81 @@ and a PubChem CID cross-reference.
 | Name | Status | What it does |
 |------|--------|-------------|
 | `pubchem` | Working | Looks up the compound in PubChem by InChIKey. Fills `name` (IUPAC preferred) and `pubchem_cid`. |
+| `chemont` | Working | Looks up the compound in a local ChemOnt/ClassyFire store by InChIKey. Fills `classified_by` with the ordered ChemOnt path. |
 | `chebi` | Stub | Will resolve CHEBI identifiers via the OLS API. |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL. |
 
 Multiple enrichers run in sequence:
 
 ```bash
-chemrof from-smiles "CCO" --enrichers pubchem,chebi
+chemrof convert "CCO" --enrichers pubchem,chemont --chemont-source chemont.duckdb
+```
+
+### ChemOnt classification examples
+
+Prepare a local DuckDB lookup store directly from the Zenodo release:
+
+```bash
+chemrof prepare-chemont-from-zenodo chemont.duckdb
+```
+
+Use a temporary download directory by default, or keep the downloaded files:
+
+```bash
+chemrof prepare-chemont-from-zenodo chemont.duckdb \
+  --download-dir /tmp/chemrof-chemont-downloads \
+  --overwrite
+```
+
+Classify a molecule with ChemOnt:
+
+```bash
+chemrof convert CCO --enrichers chemont --chemont-source chemont.duckdb
+```
+
+The result includes a list of ChemOnt classes:
+
+```yaml
+classified_by:
+- CHEMONTID:0000000
+- CHEMONTID:0004603
+- CHEMONTID:0000323
+- CHEMONTID:0000129
+- CHEMONTID:0000286
+```
+
+Set the source as an environment variable to avoid repeating the option:
+
+```bash
+export CHEMROF_CHEMONT_SOURCE="$PWD/chemont.duckdb"
+chemrof convert CCO --enrichers chemont
+```
+
+ChemOnt classifications also work in OWL output. Each `classified_by` value is
+emitted as a `SubClassOf` axiom:
+
+```bash
+chemrof convert CCO --enrichers chemont --chemont-source chemont.duckdb --format owl
+```
+
+```text
+SubClassOf(<http://identifiers.org/inchikey/LFQSCWFLJHTTHZ-UHFFFAOYSA-N> CHEMONTID:0000286)
+```
+
+For scan-heavy workflows, prepare Parquet instead of DuckDB:
+
+```bash
+chemrof prepare-chemont-from-zenodo chemont-parquet --format parquet
+chemrof convert CCO --enrichers chemont --chemont-source chemont-parquet
+```
+
+To use files that were downloaded separately:
+
+```bash
+chemrof prepare-chemont \
+  /tmp/chemrof-chemont-downloads/classyfire_dedup_inchikey_smiles.enriched.tsv.zst \
+  /tmp/chemrof-chemont-downloads/chemont_dictionary.tsv \
+  chemont.duckdb
 ```
 
 ### Writing a custom enricher
@@ -106,9 +179,9 @@ data source accepts.
 To use a custom enricher programmatically:
 
 ```python
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter
 
-converter = SmilesConverter(enrichers=[MyEnricher()])
+converter = ChemConverter(enrichers=[MyEnricher()])
 result = converter.convert("CCO")
 ```
 
@@ -128,10 +201,10 @@ AnnotationAssertion(chemrof:smiles_string chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFA
 The Python API equivalent:
 
 ```python
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter
 from chemrof.converter.owl_output import dicts_to_owl
 
-converter = SmilesConverter()
+converter = ChemConverter()
 objs = [converter.convert(s) for s in ["CCO", "[Ca+2]"]]
 print(dicts_to_owl(objs))
 ```
@@ -141,9 +214,9 @@ print(dicts_to_owl(objs))
 The converter is also usable as a library:
 
 ```python
-from chemrof.converter.smiles import SmilesConverter
+from chemrof.converter.convert import ChemConverter
 
-converter = SmilesConverter()
+converter = ChemConverter()
 result = converter.convert("CCO")
 # result is a plain dict with chemrof slots
 print(result["type"])           # chemrof:SmallMolecule

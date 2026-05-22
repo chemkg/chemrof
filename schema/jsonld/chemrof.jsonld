@@ -30,6 +30,10 @@
       "prefix_reference": "http://purl.obolibrary.org/obo/CHEBI_"
     },
     {
+      "prefix_prefix": "CHEMONTID",
+      "prefix_reference": "http://purl.obolibrary.org/obo/CHEMONTID_"
+    },
+    {
       "prefix_prefix": "chebi.property",
       "prefix_reference": "http://purl.obolibrary.org/obo/chebi/"
     },
@@ -1338,6 +1342,13 @@
     {
       "name": "chemical_property",
       "definition_uri": "https://w3id.org/chemrof/chemical_property",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "Annotation",
+          "@type": "Annotation"
+        }
+      ],
       "title": "chemical property",
       "from_schema": "https://w3id.org/chemrof",
       "abstract": true,
@@ -1348,6 +1359,13 @@
     {
       "name": "information_property",
       "definition_uri": "https://w3id.org/chemrof/information_property",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "Annotation",
+          "@type": "Annotation"
+        }
+      ],
       "title": "information property",
       "from_schema": "https://w3id.org/chemrof",
       "abstract": true,
@@ -1677,6 +1695,13 @@
     {
       "name": "has_element",
       "definition_uri": "https://w3id.org/chemrof/has_element",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "AnnotationAssertion",
+          "@type": "Annotation"
+        }
+      ],
       "title": "has element",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "alternate_form_of",
@@ -3665,12 +3690,52 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "cxsmiles_string",
+      "definition_uri": "https://w3id.org/chemrof/cxsmiles_string",
+      "description": "A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.",
+      "title": "CXSMILES string",
+      "examples": [
+        {
+          "value": "[H][C@@](COC([*])=O)(COP(O)(=O)O[C@H]1[C@H](O)[C@@H](O)[C@H](O)[C@@H](OP(O)(O)=O)[C@H]1O)OC([*])=O |$;;;;;_R1;;;;;;;;;;;;;;;;;;;;;;;;;_R2$|",
+          "description": "CXSMILES for 1-phosphatidyl-1D-myo-inositol 3-phosphate (R1,R2)",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://docs.chemaxon.com/latest/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.html"
+      ],
+      "aliases": [
+        "CXSMILES",
+        "ChemAxon extended SMILES",
+        "extended SMILES"
+      ],
+      "exact_mappings": [
+        "http://www.wikidata.org/entity/P10718"
+      ],
+      "is_a": "smiles_string",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/cxsmiles_string",
+      "owner": "ChemicalGroupingClass",
+      "domain_of": [
+        "ChemicalEntity",
+        "ChemicalGroupingClass"
+      ],
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "extended_smiles_string",
       "definition_uri": "https://w3id.org/chemrof/extended_smiles_string",
-      "title": "extended smiles string",
+      "title": "extended smiles string (Deprecated)",
+      "deprecated": "Use cxsmiles_string instead.",
+      "comments": [
+        "This slot was previously used for CXSMILES, but the primary name was too broad."
+      ],
       "from_schema": "https://w3id.org/chemrof",
+      "deprecated_element_has_exact_replacement": "cxsmiles_string",
       "aliases": [
-        "CXSMILES"
+        "extended SMILES"
       ],
       "is_a": "smiles_string",
       "domain": "ChemicalEntity",
@@ -4413,6 +4478,13 @@
     {
       "name": "owl_subclass_of",
       "definition_uri": "https://w3id.org/chemrof/owl_subclass_of",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "SubClassOf",
+          "@type": "Annotation"
+        }
+      ],
       "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)",
       "title": "owl subclass of",
       "from_schema": "https://w3id.org/chemrof",
@@ -4429,10 +4501,9 @@
       "mixin": true,
       "domain": "OwlClass",
       "slot_uri": "https://w3id.org/chemrof/owl_subclass_of",
-      "owner": "MonoatomicIon",
+      "owner": "OwlClass",
       "domain_of": [
-        "OwlClass",
-        "MonoatomicIon"
+        "OwlClass"
       ],
       "range": "OwlClass",
       "inlined": true,
@@ -4533,7 +4604,10 @@
         }
       ],
       "from_schema": "https://w3id.org/chemrof",
-      "exact_mappings": [
+      "mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+      ],
+      "close_mappings": [
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
       ],
       "is_a": "chemical_to_chemical_relationship",
@@ -4541,8 +4615,11 @@
         "owl_subclass_of"
       ],
       "domain": "OwlClass",
-      "slot_uri": "https://w3id.org/chemrof/classified_by",
+      "slot_uri": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
       "owner": "classified_by",
+      "domain_of": [
+        "ChemicalEntity"
+      ],
       "inverse": "classifies",
       "range": "OwlClass",
       "inlined": true,
@@ -5577,6 +5654,41 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "ChemicalEntity_classified_by",
+      "definition_uri": "https://w3id.org/chemrof/classified_by",
+      "description": "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class",
+      "title": "classified by",
+      "examples": [
+        {
+          "description": "glucose classified by monosaccharide",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+      ],
+      "close_mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "is_a": "classified_by",
+      "mixins": [
+        "owl_subclass_of"
+      ],
+      "domain": "ChemicalEntity",
+      "slot_uri": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "alias": "classified_by",
+      "owner": "ChemicalEntity",
+      "domain_of": [
+        "ChemicalEntity"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classified_by",
+      "range": "ChemicalGroupingClass",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "GroupingClass_subtype_of",
       "definition_uri": "https://w3id.org/chemrof/subtype_of",
       "description": "A subtype_of relationship holds between C and P if C is a more specialized form of P. Here C and P denotes instances of OWL classes, where C and P both function as grouping class",
@@ -6583,7 +6695,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_part",
       "range": "string",
-      "minimum_value": 1,
+      "minimum_cardinality": 1,
       "@type": "SlotDefinition"
     },
     {
@@ -6989,96 +7101,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "MonoatomicIon_owl_subclass_of",
-      "definition_uri": "https://w3id.org/chemrof/owl_subclass_of",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "EquivalentClasses, IntersectionOf",
-          "@type": "Annotation"
-        }
-      ],
-      "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)",
-      "title": "owl subclass of",
-      "from_schema": "https://w3id.org/chemrof",
-      "aliases": [
-        "is a"
-      ],
-      "exact_mappings": [
-        "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-      ],
-      "narrow_mappings": [
-        "http://www.blueobelisk.org/dict/terminologyfamily"
-      ],
-      "is_a": "owl_subclass_of",
-      "mixin": true,
-      "domain": "MonoatomicIon",
-      "slot_uri": "https://w3id.org/chemrof/owl_subclass_of",
-      "alias": "owl_subclass_of",
-      "owner": "MonoatomicIon",
-      "domain_of": [
-        "MonoatomicIon"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "owl_subclass_of",
-      "range": "uriorcurie",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "MonoatomicIon_has_element",
-      "definition_uri": "https://w3id.org/chemrof/has_element",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "EquivalentClasses, IntersectionOf, ObjectSomeValuesFrom",
-          "@type": "Annotation"
-        }
-      ],
-      "title": "has element",
-      "from_schema": "https://w3id.org/chemrof",
-      "is_a": "has_element",
-      "domain": "MonoatomicIon",
-      "slot_uri": "https://w3id.org/chemrof/has_element",
-      "alias": "has_element",
-      "owner": "MonoatomicIon",
-      "domain_of": [
-        "MonoatomicIon"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "has_element",
-      "range": "ChemicalElement",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "MonoatomicIon_elemental_charge",
-      "definition_uri": "https://w3id.org/chemrof/elemental_charge",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "EquivalentClasses, IntersectionOf, DataHasValue",
-          "@type": "Annotation"
-        }
-      ],
-      "description": "number of protons minus number of electrons",
-      "title": "elemental charge",
-      "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
-        "http://semanticscience.org/resource/CHEMINF_000120"
-      ],
-      "is_a": "AtomIonicForm_elemental_charge",
-      "domain": "MonoatomicIon",
-      "slot_uri": "https://w3id.org/chemrof/elemental_charge",
-      "alias": "elemental_charge",
-      "owner": "MonoatomicIon",
-      "domain_of": [
-        "MonoatomicIon"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "elemental_charge",
-      "range": "integer",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "AtomAnion_elemental_charge",
       "definition_uri": "https://w3id.org/chemrof/elemental_charge",
       "description": "number of protons minus number of electrons",
@@ -7087,7 +7109,7 @@
       "mappings": [
         "http://semanticscience.org/resource/CHEMINF_000120"
       ],
-      "is_a": "MonoatomicIon_elemental_charge",
+      "is_a": "AnionState_elemental_charge",
       "domain": "AtomAnion",
       "slot_uri": "https://w3id.org/chemrof/elemental_charge",
       "alias": "elemental_charge",
@@ -7110,7 +7132,7 @@
       "mappings": [
         "http://semanticscience.org/resource/CHEMINF_000120"
       ],
-      "is_a": "MonoatomicIon_elemental_charge",
+      "is_a": "CationState_elemental_charge",
       "domain": "AtomCation",
       "slot_uri": "https://w3id.org/chemrof/elemental_charge",
       "alias": "elemental_charge",
@@ -7321,13 +7343,6 @@
     {
       "name": "Enantiomer_absolute_configuration",
       "definition_uri": "https://w3id.org/chemrof/absolute_configuration",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "DataHasValue",
-          "@type": "Annotation"
-        }
-      ],
       "title": "absolute configuration",
       "from_schema": "https://w3id.org/chemrof",
       "see_also": [
@@ -7349,13 +7364,6 @@
     {
       "name": "Enantiomer_enantiomer_form_of",
       "definition_uri": "https://w3id.org/chemrof/enantiomer_form_of",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "ObjectSomeValuesFrom",
-          "@type": "Annotation"
-        }
-      ],
       "description": "Example:  R-thalidomide is the enantiomer form of 2-(2,6-dioxopiperidin-3-yl)-1H-isoindole-1,3(2H)-dione",
       "title": "enantiomer form of",
       "from_schema": "https://w3id.org/chemrof",
@@ -7431,13 +7439,6 @@
     {
       "name": "RacemicMixture_has_left_enantiomer",
       "definition_uri": "https://w3id.org/chemrof/has_left_enantiomer",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "ObjectSomeValuesFrom",
-          "@type": "Annotation"
-        }
-      ],
       "title": "has left enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "has_left_enantiomer",
@@ -7472,13 +7473,6 @@
     {
       "name": "RacemicMixture_has_right_enantiomer",
       "definition_uri": "https://w3id.org/chemrof/has_right_enantiomer",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "ObjectSomeValuesFrom",
-          "@type": "Annotation"
-        }
-      ],
       "title": "has right enantiomer",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "has_right_enantiomer",
@@ -7513,13 +7507,6 @@
     {
       "name": "RacemicMixture_chirality_agnostic_form",
       "definition_uri": "https://w3id.org/chemrof/chirality_agnostic_form",
-      "annotations": [
-        {
-          "tag": "owl",
-          "value": "ObjectSomeValuesFrom",
-          "@type": "Annotation"
-        }
-      ],
       "title": "chirality agnostic form",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "chirality_agnostic_form",
@@ -8134,6 +8121,13 @@
         "comptox"
       ],
       "definition_uri": "https://w3id.org/chemrof/ChemicalEntity",
+      "annotations": [
+        {
+          "tag": "owl.template",
+          "value": "SubClassOf({{id}} chemrof:{{this.class_name}})",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A discrete structure that is one or more atoms that can be described by a chemical formula.",
       "title": "chemical entity",
       "comments": [
@@ -8180,6 +8174,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -8189,6 +8184,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of"
       ],
       "slot_usage": {},
@@ -8233,6 +8229,13 @@
     {
       "name": "OwlClass",
       "definition_uri": "https://w3id.org/chemrof/OwlClass",
+      "annotations": [
+        {
+          "tag": "owl",
+          "value": "Class",
+          "@type": "Annotation"
+        }
+      ],
       "description": "instances of this class mixin are OWL Classes",
       "title": "owl class",
       "from_schema": "https://w3id.org/chemrof",
@@ -8313,6 +8316,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "ChemicalGroupingClass_subtype_of",
         "ChemicalGroupingClass_classifies"
       ],
@@ -8390,6 +8394,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "ChemicalGroupingClass_classifies",
         "ChemicalGroupingByCharge_subtype_of",
         "ChemicalGroupingByCharge_has_charge_state",
@@ -8422,6 +8427,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies"
       ],
@@ -8442,6 +8448,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MolecularComponentGroupingClass_subtype_of",
         "MolecularComponentGroupingClass_classifies"
       ],
@@ -8471,6 +8478,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "derivative_of",
         "MolecularDerivativeGroupingClass_name",
@@ -8508,6 +8516,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "MoleculeGroupingClassDefinedByComponents_has_part"
@@ -8538,6 +8547,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "MoleculeGroupingClassDefinedByAdditionOfAGroup_has_group",
@@ -8569,6 +8579,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "has_anionic_component",
         "has_cationic_component",
@@ -8602,6 +8613,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "has_anionic_component",
         "ChemicalSaltGroupingClass_classifies",
@@ -8638,6 +8650,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "has_cationic_component",
         "ChemicalSaltGroupingClass_classifies",
@@ -8670,6 +8683,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies"
       ],
@@ -8696,6 +8710,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "has_repeat_unit"
@@ -8717,6 +8732,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "conjugate_base_of",
@@ -8748,6 +8764,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "conjugate_base_of",
@@ -8780,6 +8797,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "conjugate_base_of",
@@ -8808,6 +8826,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "MoleculeGroupingClass_subtype_of",
         "MoleculeGroupingClass_classifies",
         "conjugate_base_of",
@@ -8830,6 +8849,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "AtomGroupingClass_subtype_of",
         "AtomGroupingClass_classifies"
       ],
@@ -8850,6 +8870,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "AtomGroupingClass_subtype_of",
         "AtomGroupingClass_classifies"
       ],
@@ -8870,6 +8891,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "AtomGroupingClass_subtype_of",
         "AtomGroupingClass_classifies",
         "in_periodic_table_group"
@@ -8894,6 +8916,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "AtomGroupingClass_subtype_of",
         "AtomGroupingClass_classifies",
         "in_periodic_table_block"
@@ -8918,6 +8941,7 @@
         "id",
         "smarts_string",
         "markush_string",
+        "cxsmiles_string",
         "AtomGroupingClass_subtype_of",
         "AtomGroupingClass_classifies"
       ],
@@ -9193,6 +9217,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9202,6 +9227,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9233,6 +9259,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9242,6 +9269,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9285,6 +9313,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9294,6 +9323,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9345,6 +9375,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9354,6 +9385,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph"
@@ -9385,6 +9417,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9394,6 +9427,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9435,6 +9469,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9444,6 +9479,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9499,6 +9535,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9508,6 +9545,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9552,6 +9590,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9561,6 +9600,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9605,6 +9645,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9614,6 +9655,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph",
@@ -9662,6 +9704,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9671,6 +9714,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9719,6 +9763,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9728,6 +9773,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -9773,6 +9819,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9782,6 +9829,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9812,6 +9860,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9821,6 +9870,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9854,6 +9904,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9863,6 +9914,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9893,6 +9945,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9902,6 +9955,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9937,6 +9991,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9946,6 +10001,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -9981,6 +10037,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -9990,6 +10047,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph"
@@ -10032,6 +10090,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10041,6 +10100,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph"
@@ -10088,6 +10148,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10097,6 +10158,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph",
@@ -10162,6 +10224,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10171,6 +10234,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10210,6 +10274,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10219,6 +10284,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10265,6 +10331,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10274,6 +10341,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer"
       ],
@@ -10309,6 +10377,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10318,6 +10387,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "has_sequence_representation"
@@ -10349,6 +10419,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10358,6 +10429,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "AminoAcidSequenceInterval_has_sequence_representation"
@@ -10389,6 +10461,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10398,6 +10471,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -10429,6 +10503,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10438,6 +10513,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -10469,6 +10545,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10478,6 +10555,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "NucleotideSequenceInterval_has_sequence_representation"
@@ -10509,6 +10587,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10518,6 +10597,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "FunctionalGroup_is_substitutent_group_from"
@@ -10550,6 +10630,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10559,6 +10640,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10596,6 +10678,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10605,6 +10688,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10646,6 +10730,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10655,6 +10740,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10702,6 +10788,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10711,6 +10798,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10758,6 +10846,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10767,6 +10856,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10817,6 +10907,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10826,6 +10917,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10876,6 +10968,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10885,6 +10978,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10927,6 +11021,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10936,6 +11031,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -10978,6 +11074,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -10987,6 +11084,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -11045,6 +11143,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11054,6 +11153,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11110,6 +11210,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "molecular_mass",
         "water_solubility",
@@ -11118,6 +11219,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "name",
@@ -11188,6 +11290,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11197,6 +11300,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11243,6 +11347,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11252,6 +11357,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11298,6 +11404,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11307,6 +11414,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11367,6 +11475,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11376,6 +11485,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11431,6 +11541,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11440,6 +11551,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11498,6 +11610,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11507,6 +11620,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11522,6 +11636,13 @@
     {
       "name": "MonoatomicIon",
       "definition_uri": "https://w3id.org/chemrof/MonoatomicIon",
+      "annotations": [
+        {
+          "tag": "owl.template",
+          "value": "EquivalentClasses(\n  {{id}}\n  ObjectIntersectionOf(\n    chemrof:MonoatomicIon\n    {% if has_element %}ObjectSomeValuesFrom(chemrof:has_element chemrof:{{has_element}}){% endif %}\n    {% if elemental_charge is not none %}DataHasValue(chemrof:elemental_charge \"{{elemental_charge}}\"^^xsd:integer){% endif %}\n  )\n)",
+          "@type": "Annotation"
+        }
+      ],
       "description": "An atom type that has a charge",
       "title": "monoatomic ion",
       "comments": [
@@ -11556,6 +11677,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11565,14 +11687,15 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
+        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "MonoatomicIon_has_element",
-        "MonoatomicIon_owl_subclass_of",
-        "MonoatomicIon_elemental_charge"
+        "AtomIonicForm_elemental_charge",
+        "has_element"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/MonoatomicIon",
@@ -11605,6 +11728,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11614,13 +11738,14 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
+        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "MonoatomicIon_has_element",
-        "MonoatomicIon_owl_subclass_of",
+        "has_element",
         "AtomAnion_elemental_charge"
       ],
       "slot_usage": {},
@@ -11664,6 +11789,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11673,13 +11799,14 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
+        "owl_subclass_of",
         "atomic_number",
         "symbol",
         "name",
         "has_nuclear_parts",
         "Atom_has_part",
-        "MonoatomicIon_has_element",
-        "MonoatomicIon_owl_subclass_of",
+        "has_element",
         "AtomCation_elemental_charge"
       ],
       "slot_usage": {},
@@ -11714,6 +11841,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11723,6 +11851,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -11772,6 +11901,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -11781,6 +11911,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "atomic_number",
         "symbol",
@@ -12349,6 +12480,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12358,6 +12490,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph",
@@ -12400,6 +12533,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12409,6 +12543,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -12451,6 +12586,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12460,6 +12596,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -12479,8 +12616,8 @@
       "definition_uri": "https://w3id.org/chemrof/Enantiomer",
       "annotations": [
         {
-          "tag": "owl",
-          "value": "EquivalentClasses, IntersectionOf",
+          "tag": "owl.template",
+          "value": "EquivalentClasses(\n  {{id}}\n  ObjectIntersectionOf(\n    chemrof:Enantiomer\n    {% if enantiomer_form_of %}ObjectSomeValuesFrom(chemrof:enantiomer_form_of {{enantiomer_form_of}}){% endif %}\n    {% if absolute_configuration %}DataHasValue(chemrof:absolute_configuration \"{{absolute_configuration}}\"){% endif %}\n  )\n)",
           "@type": "Annotation"
         }
       ],
@@ -12510,6 +12647,7 @@
         "inchi_stereochemical_double_bond_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12519,6 +12657,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -12545,8 +12684,8 @@
       "definition_uri": "https://w3id.org/chemrof/RacemicMixture",
       "annotations": [
         {
-          "tag": "owl",
-          "value": "EquivalentClasses, IntersectionOf",
+          "tag": "owl.template",
+          "value": "EquivalentClasses(\n  {{id}}\n  ObjectIntersectionOf(\n    chemrof:RacemicMixture\n    {% if has_left_enantiomer %}ObjectSomeValuesFrom(chemrof:has_left_enantiomer {{has_left_enantiomer}}){% endif %}\n    {% if has_right_enantiomer %}ObjectSomeValuesFrom(chemrof:has_right_enantiomer {{has_right_enantiomer}}){% endif %}\n    {% if chirality_agnostic_form %}ObjectSomeValuesFrom(chemrof:chirality_agnostic_form {{chirality_agnostic_form}}){% endif %}\n  )\n)",
           "@type": "Annotation"
         }
       ],
@@ -12590,6 +12729,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12599,6 +12739,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "ph",
@@ -12649,6 +12790,7 @@
         "inchi_stereochemical_type_sublayer",
         "inchi_isotopic_layer",
         "smiles_string",
+        "cxsmiles_string",
         "empirical_formula",
         "has_major_microspecies_at_pH7_3",
         "molecular_mass",
@@ -12658,6 +12800,7 @@
         "pka_ionic_strength",
         "pka_solvent",
         "pka_pressure",
+        "ChemicalEntity_classified_by",
         "owl_subclass_of",
         "PolyatomicEntity_inchi_atom_connections_sublayer",
         "Molecule_has_atom_occurrences",
@@ -12968,9 +13111,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2026-03-31T08:47:36",
-  "source_file_size": 126631,
-  "generation_date": "2026-03-31T08:48:05",
+  "source_file_date": "2026-05-22T09:55:20",
+  "source_file_size": 128800,
+  "generation_date": "2026-05-22T09:58:40",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",

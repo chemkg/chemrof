@@ -92,7 +92,7 @@ Add stereochemistry awareness after existing charge-based classification:
 ```python
 def classify_entity(mol) -> str:
     # ... existing charge-based logic for ions ...
-    
+
     # Stereochemistry detection (multi-atom neutral/charged molecules)
     chiral_centers = FindMolChiralCenters(mol, includeUnassigned=True)
     if chiral_centers:
@@ -100,7 +100,7 @@ def classify_entity(mol) -> str:
         if all_assigned:
             return "Enantiomer"   # specific stereoisomer
         # else: unassigned stereocenters = chirality-agnostic, keep current type
-    
+
     # ... existing fallthrough to SmallMolecule/MolecularCation/etc ...
 ```
 
@@ -132,7 +132,7 @@ Takes a single converted entity + target classes, returns a list of interlinked 
 ```python
 def autochain(entity: dict, target_classes: set[str], mol: Chem.Mol) -> list[dict]:
     """Generate dependent entities for target classes.
-    
+
     Returns a list of chemrof dicts including the original entity
     and all generated dependents, with relationship slots populated.
     """
@@ -152,14 +152,14 @@ Input: any form (agnostic SMILES, specific enantiomer, or racemic InChI).
 3. **Build entity dicts**:
 
    a. **Agnostic form** — `SmallMolecule` type, stereo-free InChI, no `/t`/`/s` layers.
-   
+
    b. **R-enantiomer** — `Enantiomer` type, with:
       - `enantiomer_form_of` → agnostic form ID
       - `absolute_configuration` → `"(R)"`
       - Full stereo InChI with `/t.../m1/s1`
-   
+
    c. **S-enantiomer** — `Enantiomer` type, same pattern with `"(S)"` and `/m0/s1`.
-   
+
    d. **RacemicMixture** — with:
       - `has_left_enantiomer` → S-enantiomer ID
       - `has_right_enantiomer` → R-enantiomer ID
@@ -196,13 +196,13 @@ def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     sv = SchemaView(schema_path)
     dumper = OWLDumper()
     dumper.schemaview = sv
-    
+
     for obj in objs:
         class_name = obj["type"].replace("chemrof:", "")
         # Load as linkml instance
         instance = load_instance(obj, class_name, sv)
         dumper.transform(instance, sv.schema)
-    
+
     return dumper.ontology.save_to_string(output_type)
 ```
 

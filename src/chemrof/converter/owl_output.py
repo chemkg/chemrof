@@ -1,42 +1,29 @@
-"""Convert chemrof dicts to OWL ontology via linkml-data2owl.
+"""Convert chemrof dicts to OWL ontology via linkml-owl.
 
-Uses the OWLDumper from linkml-owl with the annotated chemrof schema
-to generate proper OWL axioms including EquivalentClasses for types
-that have owl.template annotations (MonoatomicIon, Enantiomer,
-RacemicMixture).
+Each chemical entity is adapted to a minimal LinkML instance, then handed to
+``linkml_owl.dumpers.OWLDumper``. The OWL interpretation is defined by
+annotations in ``chemrof.yaml``.
 
 >>> from chemrof.converter.convert import ChemConverter
 >>> obj = ChemConverter().convert("CCO")
 >>> owl = dicts_to_owl([obj])
 >>> "CCO" in owl
 True
+>>> "SubClassOf" in owl
+True
 """
 
 from __future__ import annotations
 
+import logging
+from contextlib import contextmanager
 from functools import lru_cache
 from pathlib import Path
 
-from linkml_runtime.utils.schemaview import SchemaView
 from linkml_owl.dumpers.owl_dumper import OWLDumper
-
-import chemrof.schema.chemrof as chemrof_module
+from linkml_runtime.utils.schemaview import SchemaView
 
 _SCHEMA_PATH = Path(__file__).resolve().parent.parent / "schema" / "chemrof.yaml"
-
-# Map converter entity type names to generated Python classes
-_CLASS_MAP = {
-    "SmallMolecule": chemrof_module.SmallMolecule,
-    "AtomCation": chemrof_module.AtomCation,
-    "AtomAnion": chemrof_module.AtomAnion,
-    "MonoatomicIon": chemrof_module.MonoatomicIon,
-    "MolecularCation": chemrof_module.MolecularCation,
-    "MolecularAnion": chemrof_module.MolecularAnion,
-    "UnchargedAtom": chemrof_module.UnchargedAtom,
-    "Enantiomer": chemrof_module.Enantiomer,
-    "RacemicMixture": chemrof_module.RacemicMixture,
-    "ChemicalSalt": chemrof_module.ChemicalSalt,
-}
 
 
 @lru_cache(maxsize=1)
@@ -44,50 +31,83 @@ def _get_schemaview() -> SchemaView:
     return SchemaView(str(_SCHEMA_PATH))
 
 
-def _dict_to_instance(obj: dict):
-    """Convert a chemrof dict to a linkml runtime instance."""
-    import dataclasses
+@lru_cache(maxsize=None)
+def _instance_class(class_name: str):
+    """Create a tiny object class that looks like a LinkML runtime class."""
 
-    type_name = obj.get("type", "chemrof:SmallMolecule").replace("chemrof:", "")
-    cls = _CLASS_MAP.get(type_name)
-    if cls is None:
-        cls = chemrof_module.SmallMolecule
+    return type(class_name, (), {"class_name": class_name})
 
+
+def _raw_id(value) -> str | None:
+    """Extract a CURIE/ID string from a scalar or inlined object."""
+    if isinstance(value, dict):
+        return value.get("id")
+    return str(value) if value is not None else None
+
+
+def _class_name(obj: dict) -> str:
+    """Return the LinkML class name for a converter object."""
+    typ = obj.get("type")
+    if typ:
+        return str(typ).split(":")[-1]
+    return "SmallMolecule"
+
+
+def _is_empty(value) -> bool:
+    return value is None or value == [] or value == {}
+
+
+def _normalize_value(value):
+    """Normalize inlined references to identifiers before linkml-owl sees them."""
+    if isinstance(value, list):
+        return [_normalize_value(v) for v in value if not _is_empty(v)]
+    if isinstance(value, dict):
+        raw_id = _raw_id(value)
+        if raw_id:
+            return raw_id
+    return value
+
+
+def _to_linkml_instance(obj: dict):
+    """Adapt a converter dict to the minimal object protocol used by OWLDumper."""
     sv = _get_schemaview()
-    valid_slots = {s.name for s in sv.class_induced_slots(type_name)}
-    field_names = {f.name for f in dataclasses.fields(cls)}
-
-    # Build kwargs for all fields the class accepts
-    kwargs = {}
+    class_name = _class_name(obj)
+    slot_names = {slot.name for slot in sv.class_induced_slots(class_name)}
+    instance = _instance_class(class_name)()
     for key, value in obj.items():
-        if key == "type":
+        if key == "type" or key not in slot_names or _is_empty(value):
             continue
-        if key in field_names and key in valid_slots:
-            kwargs[key] = value
-        elif key in ("id", "name") and key in field_names:
-            kwargs[key] = value
+        setattr(instance, key, _normalize_value(value))
+    return instance
 
-    return cls(**kwargs)
+
+@contextmanager
+def _suppress_namespace_warnings():
+    """Avoid leaking LinkML namespace remapping warnings into CLI OWL output."""
+    logger = logging.getLogger("linkml_runtime.Namespaces")
+    old_level = logger.level
+    logger.setLevel(logging.ERROR)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
 
 
 def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     """Convert chemrof dicts to an OWL ontology string.
 
-    Uses linkml-owl OWLDumper with schema annotations to produce
-    EquivalentClasses axioms for annotated types and SubClassOf +
-    AnnotationAssertions for others.
+    Uses linkml-owl OWLDumper with schema annotations to produce OWL axioms,
+    including ChemOnt ``classified_by`` values as ``SubClassOf`` axioms.
 
     Args:
-        objs: List of chemrof dicts (from ChemConverter).
+        objs: List of chemrof dicts from the converter.
         output_type: ``"ofn"`` (OWL Functional Syntax) or ``"owl"`` (RDF/XML).
 
     Returns:
         OWL string in the requested format.
     """
     sv = _get_schemaview()
+    elements = [_to_linkml_instance(obj) for obj in objs]
     dumper = OWLDumper()
-    dumper.schemaview = sv
-
-    instances = [_dict_to_instance(obj) for obj in objs]
-    ont = dumper.to_ontology_document(instances, sv.schema)
-    return ont.save_to_string(output_type)
+    with _suppress_namespace_warnings():
+        return dumper.dumps(elements, schemaview=sv, output_type=output_type)

@@ -41,11 +41,13 @@ class Enricher(Protocol):
 
 def _build_registry() -> dict[str, type]:
     """Lazily import enricher classes to avoid circular imports."""
+    from chemrof.converter.enrichers.chemont import ChemOntEnricher
     from chemrof.converter.enrichers.pubchem import PubChemEnricher
     from chemrof.converter.enrichers.chebi import ChebiEnricher
     from chemrof.converter.enrichers.wikidata import WikidataEnricher
 
     return {
+        "chemont": ChemOntEnricher,
         "pubchem": PubChemEnricher,
         "chebi": ChebiEnricher,
         "wikidata": WikidataEnricher,
