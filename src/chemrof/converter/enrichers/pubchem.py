@@ -54,9 +54,10 @@ class PubChemEnricher:
         for prop in compound.get("props", []):
             urn = prop.get("urn", {})
             if urn.get("label") == "IUPAC Name" and urn.get("name") == "Preferred":
-                name = prop.get("value", {}).get("sval")
-                if name:
-                    obj["name"] = name
+                iupac = prop.get("value", {}).get("sval")
+                if iupac:
+                    obj["name"] = iupac
+                    obj["IUPAC_name"] = iupac
                 break
 
         return obj

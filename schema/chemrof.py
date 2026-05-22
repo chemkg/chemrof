@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-21T19:02:22
+# Generation date: 2026-05-22T09:58:45
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -681,6 +681,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     inchi_stereochemical_type_sublayer: Optional[str] = None
     inchi_isotopic_layer: Optional[str] = None
     smiles_string: Optional[str] = None
+    cxsmiles_string: Optional[str] = None
     empirical_formula: Optional[str] = None
     has_major_microspecies_at_pH7_3: Optional[Union[str, ChemicalEntityId]] = None
     molecular_mass: Optional[float] = None
@@ -735,6 +736,9 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.smiles_string is not None and not isinstance(self.smiles_string, str):
             self.smiles_string = str(self.smiles_string)
+
+        if self.cxsmiles_string is not None and not isinstance(self.cxsmiles_string, str):
+            self.cxsmiles_string = str(self.cxsmiles_string)
 
         if self.empirical_formula is not None and not isinstance(self.empirical_formula, str):
             self.empirical_formula = str(self.empirical_formula)
@@ -903,6 +907,7 @@ class ChemicalGroupingClass(PhysicochemicalEntityGroupingClass):
     owl_subclass_of: Optional[Union[dict, OwlClass]] = None
     smarts_string: Optional[str] = None
     markush_string: Optional[str] = None
+    cxsmiles_string: Optional[str] = None
     subtype_of: Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]] = empty_list()
     classifies: Optional[Union[str, ChemicalEntityId]] = None
 
@@ -920,6 +925,9 @@ class ChemicalGroupingClass(PhysicochemicalEntityGroupingClass):
 
         if self.markush_string is not None and not isinstance(self.markush_string, str):
             self.markush_string = str(self.markush_string)
+
+        if self.cxsmiles_string is not None and not isinstance(self.cxsmiles_string, str):
+            self.cxsmiles_string = str(self.cxsmiles_string)
 
         if not isinstance(self.subtype_of, list):
             self.subtype_of = [self.subtype_of] if self.subtype_of is not None else []
@@ -2075,8 +2083,8 @@ class Molecule(PolyatomicEntity):
     has_bonds: Optional[Union[Union[dict, "AtomicBond"], list[Union[dict, "AtomicBond"]]]] = empty_list()
     has_submolecules: Optional[Union[Union[str, MoleculeId], list[Union[str, MoleculeId]]]] = empty_list()
     has_atoms: Optional[Union[Union[str, AtomId], list[Union[str, AtomId]]]] = empty_list()
-    is_organic: Optional[Union[bool, Bool]] = None
     has_part: Optional[str] = None
+    is_organic: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2098,11 +2106,11 @@ class Molecule(PolyatomicEntity):
             self.has_atoms = [self.has_atoms] if self.has_atoms is not None else []
         self.has_atoms = [v if isinstance(v, AtomId) else AtomId(v) for v in self.has_atoms]
 
-        if self.is_organic is not None and not isinstance(self.is_organic, Bool):
-            self.is_organic = Bool(self.is_organic)
-
         if self.has_part is not None and not isinstance(self.has_part, str):
             self.has_part = str(self.has_part)
+
+        if self.is_organic is not None and not isinstance(self.is_organic, Bool):
+            self.is_organic = Bool(self.is_organic)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3763,10 +3771,10 @@ class Enantiomer(Stereoisomer):
     id: Union[str, EnantiomerId] = None
     inchi_tetrahedral_stereochemical_sublayer: str = None
     inchi_stereochemical_type_sublayer: str = None
+    enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
+    absolute_configuration: Optional[str] = None
     relative_configuration: Optional[str] = None
     optical_configuration: Optional[str] = None
-    absolute_configuration: Optional[str] = None
-    enantiomer_form_of: Optional[Union[str, MoleculeId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3784,14 +3792,17 @@ class Enantiomer(Stereoisomer):
         if not isinstance(self.inchi_stereochemical_type_sublayer, str):
             self.inchi_stereochemical_type_sublayer = str(self.inchi_stereochemical_type_sublayer)
 
+        if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, MoleculeId):
+            self.enantiomer_form_of = MoleculeId(self.enantiomer_form_of)
+
+        if self.absolute_configuration is not None and not isinstance(self.absolute_configuration, str):
+            self.absolute_configuration = str(self.absolute_configuration)
+
         if self.relative_configuration is not None and not isinstance(self.relative_configuration, str):
             self.relative_configuration = str(self.relative_configuration)
 
         if self.optical_configuration is not None and not isinstance(self.optical_configuration, str):
             self.optical_configuration = str(self.optical_configuration)
-
-        if self.absolute_configuration is not None and not isinstance(self.absolute_configuration, str):
-            self.absolute_configuration = str(self.absolute_configuration)
 
         if self.enantiomer_form_of is not None and not isinstance(self.enantiomer_form_of, MoleculeId):
             self.enantiomer_form_of = MoleculeId(self.enantiomer_form_of)
@@ -5305,6 +5316,9 @@ slots.curly_smiles_string = Slot(uri=CHEMROF.curly_smiles_string, name="curly_sm
 
 slots.isomeric_smiles_string = Slot(uri=CHEMROF.isomeric_smiles_string, name="isomeric_smiles_string", curie=CHEMROF.curie('isomeric_smiles_string'),
                    model_uri=CHEMROF.isomeric_smiles_string, domain=ChemicalEntity, range=Optional[str])
+
+slots.cxsmiles_string = Slot(uri=CHEMROF.cxsmiles_string, name="cxsmiles_string", curie=CHEMROF.curie('cxsmiles_string'),
+                   model_uri=CHEMROF.cxsmiles_string, domain=ChemicalEntity, range=Optional[str])
 
 slots.extended_smiles_string = Slot(uri=CHEMROF.extended_smiles_string, name="extended_smiles_string", curie=CHEMROF.curie('extended_smiles_string'),
                    model_uri=CHEMROF.extended_smiles_string, domain=ChemicalEntity, range=Optional[str])

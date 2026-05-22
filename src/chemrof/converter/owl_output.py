@@ -1,14 +1,13 @@
-"""Convert chemrof dicts to OWL ontology axioms with linkml-owl.
+"""Convert chemrof dicts to OWL ontology via linkml-owl.
 
 Each chemical entity is adapted to a minimal LinkML instance, then handed to
 ``linkml_owl.dumpers.OWLDumper``. The OWL interpretation is defined by
 annotations in ``chemrof.yaml``.
 
->>> from chemrof.converter.smiles import SmilesConverter
->>> converter = SmilesConverter()
->>> obj = converter.convert("CCO")
+>>> from chemrof.converter.convert import ChemConverter
+>>> obj = ChemConverter().convert("CCO")
 >>> owl = dicts_to_owl([obj])
->>> "LFQSCWFLJHTTHZ" in owl
+>>> "CCO" in owl
 True
 >>> "SubClassOf" in owl
 True
@@ -25,13 +24,6 @@ from linkml_owl.dumpers.owl_dumper import OWLDumper
 from linkml_runtime.utils.schemaview import SchemaView
 
 _SCHEMA_PATH = Path(__file__).resolve().parent.parent / "schema" / "chemrof.yaml"
-
-_OWL_ANNOTATION_KEYS = (
-    "owl",
-    "owl.template",
-    "owl.fstring",
-    "owl.axiom_annotation.slots",
-)
 
 
 @lru_cache(maxsize=1)
@@ -76,17 +68,6 @@ def _normalize_value(value):
     return value
 
 
-def _has_owl_interpretation(sv: SchemaView, class_name: str, slot_name: str) -> bool:
-    """Check whether a slot has linkml-owl annotations, directly or inherited."""
-    slot = sv.induced_slot(slot_name, class_name)
-    slots = [slot]
-    slots.extend(sv.get_slot(ancestor) for ancestor in sv.slot_ancestors(slot.name))
-    for candidate in slots:
-        if candidate and any(key in candidate.annotations for key in _OWL_ANNOTATION_KEYS):
-            return True
-    return False
-
-
 def _to_linkml_instance(obj: dict):
     """Adapt a converter dict to the minimal object protocol used by OWLDumper."""
     sv = _get_schemaview()
@@ -94,10 +75,7 @@ def _to_linkml_instance(obj: dict):
     slot_names = {slot.name for slot in sv.class_induced_slots(class_name)}
     instance = _instance_class(class_name)()
     for key, value in obj.items():
-        if key not in slot_names or _is_empty(value):
-            continue
-        slot = sv.induced_slot(key, class_name)
-        if not slot.identifier and not _has_owl_interpretation(sv, class_name, key):
+        if key == "type" or key not in slot_names or _is_empty(value):
             continue
         setattr(instance, key, _normalize_value(value))
     return instance
@@ -118,15 +96,12 @@ def _suppress_namespace_warnings():
 def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     """Convert chemrof dicts to an OWL ontology string.
 
-    Each entity is emitted according to the linkml-owl annotations in
-    ``chemrof.yaml``. Chemical entities become OWL classes, ``classified_by``
-    becomes ``SubClassOf``, and annotated data slots become annotation
-    assertions.
+    Uses linkml-owl OWLDumper with schema annotations to produce OWL axioms,
+    including ChemOnt ``classified_by`` values as ``SubClassOf`` axioms.
 
     Args:
-        objs: List of chemrof dicts (from SmilesConverter.convert()).
-        output_type: Serialization format -- ``"ofn"`` (OWL Functional
-            Syntax, default) or ``"owl"`` (RDF/XML).
+        objs: List of chemrof dicts from the converter.
+        output_type: ``"ofn"`` (OWL Functional Syntax) or ``"owl"`` (RDF/XML).
 
     Returns:
         OWL string in the requested format.
