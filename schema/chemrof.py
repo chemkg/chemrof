@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-21T16:20:14
+# Generation date: 2026-05-21T17:48:16
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -5451,7 +5451,7 @@ slots.has_major_microspecies_at_pH7_3 = Slot(uri=CHEMROF.has_major_microspecies_
 slots.major_microspecies_at_pH7_3_of = Slot(uri=CHEMROF.major_microspecies_at_pH7_3_of, name="major_microspecies_at_pH7_3_of", curie=CHEMROF.curie('major_microspecies_at_pH7_3_of'),
                    model_uri=CHEMROF.major_microspecies_at_pH7_3_of, domain=ChemicalEntity, range=Optional[Union[Union[str, ChemicalEntityId], list[Union[str, ChemicalEntityId]]]])
 
-slots.classified_by = Slot(uri=CHEMROF.classified_by, name="classified_by", curie=CHEMROF.curie('classified_by'),
+slots.classified_by = Slot(uri=RDFS.subClassOf, name="classified_by", curie=RDFS.curie('subClassOf'),
                    model_uri=CHEMROF.classified_by, domain=None, range=Optional[Union[dict, "OwlClass"]])
 
 slots.classifies = Slot(uri=CHEMROF.classifies, name="classifies", curie=CHEMROF.curie('classifies'),
@@ -5698,7 +5698,7 @@ slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_s
                    model_uri=CHEMROF.ChemicalEntity_inchi_chemical_sublayer, domain=ChemicalEntity, range=Optional[str],
                    pattern=re.compile(r'^[A-Za-z0-9\.]+$'))
 
-slots.ChemicalEntity_classified_by = Slot(uri=CHEMROF.classified_by, name="ChemicalEntity_classified_by", curie=CHEMROF.curie('classified_by'),
+slots.ChemicalEntity_classified_by = Slot(uri=RDFS.subClassOf, name="ChemicalEntity_classified_by", curie=RDFS.curie('subClassOf'),
                    model_uri=CHEMROF.ChemicalEntity_classified_by, domain=ChemicalEntity, range=Optional[Union[Union[str, ChemicalGroupingClassId], list[Union[str, ChemicalGroupingClassId]]]])
 
 slots.GroupingClass_subtype_of = Slot(uri=CHEMROF.subtype_of, name="GroupingClass_subtype_of", curie=CHEMROF.curie('subtype_of'),

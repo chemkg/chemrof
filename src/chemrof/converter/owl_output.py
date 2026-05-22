@@ -85,6 +85,20 @@ def _ann_assertion(subject_iri: str, prop_iri: str, value: str) -> model.Annotat
     )
 
 
+def _as_list(value) -> list:
+    """Normalize a scalar-or-list value to a list."""
+    if value is None:
+        return []
+    return value if isinstance(value, list) else [value]
+
+
+def _raw_id(value) -> str | None:
+    """Extract a CURIE/ID string from a scalar or inlined object."""
+    if isinstance(value, dict):
+        return value.get("id")
+    return str(value) if value is not None else None
+
+
 def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     """Convert chemrof dicts to an OWL ontology string.
 
@@ -127,6 +141,17 @@ def _add_entity(ont: pyhornedowl.PyIndexedOntology, obj: dict) -> None:
         sub=model.Class(model.IRI.parse(entity_iri)),
         sup=model.Class(model.IRI.parse(type_iri)),
     ))
+
+    for classified_by in _as_list(obj.get("classified_by")):
+        raw_class_id = _raw_id(classified_by)
+        if not raw_class_id:
+            continue
+        class_iri = _resolve_id(raw_class_id)
+        ont.add_axiom(model.DeclareClass(model.Class(model.IRI.parse(class_iri))))
+        ont.add_axiom(model.SubClassOf(
+            sub=model.Class(model.IRI.parse(entity_iri)),
+            sup=model.Class(model.IRI.parse(class_iri)),
+        ))
 
     # rdfs:label
     name = obj.get("name")

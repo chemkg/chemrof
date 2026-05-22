@@ -62,6 +62,15 @@ class TestDictsToOwl:
         owl = dicts_to_owl([obj])
         assert "rdfs:label" in owl or "label" in owl
 
+    def test_classified_by_outputs_subclass_axioms(self, converter):
+        obj = converter.convert("CCO")
+        obj["classified_by"] = ["CHEMONTID:0000000", "CHEMONTID:0000286"]
+        owl = dicts_to_owl([obj])
+        assert "SubClassOf" in owl
+        assert "CHEMONTID:0000000" in owl
+        assert "CHEMONTID:0000286" in owl
+        assert "AnnotationAssertion(chemrof:classified_by" not in owl
+
 
 class TestCliOwlFormat:
     def test_cli_owl_output(self):
