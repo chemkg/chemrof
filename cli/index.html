@@ -383,6 +383,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Enrichers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chemont-setup-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChemOnt setup and usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -757,6 +772,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Enrichers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chemont-setup-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChemOnt setup and usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -868,6 +898,16 @@ into chemrof-compliant records.</p>
 <td><code>false</code></td>
 <td>Generate interlinked dependent entities</td>
 </tr>
+<tr>
+<td><code>--chemont-source</code></td>
+<td><em>(none)</em></td>
+<td>Local ChemOnt labels source for <code>--enrichers chemont</code>: DuckDB, Parquet, or TSV/ZST</td>
+</tr>
+<tr>
+<td><code>--chemont-dictionary</code></td>
+<td><em>(auto)</em></td>
+<td>ChemOnt dictionary TSV/Parquet when it is not bundled with the source</td>
+</tr>
 </tbody>
 </table>
 <h3 id="input-format-detection">Input format detection</h3>
@@ -959,6 +999,11 @@ chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"
 <td>Preferred IUPAC name and PubChem CID (via InChIKey lookup)</td>
 </tr>
 <tr>
+<td><code>chemont</code></td>
+<td>Working</td>
+<td>Ordered ChemOnt/ClassyFire tree classes in <code>classified_by</code> (via local lookup store)</td>
+</tr>
+<tr>
 <td><code>chebi</code></td>
 <td>Stub</td>
 <td>Will resolve CHEBI identifiers via OLS</td>
@@ -970,6 +1015,51 @@ chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"
 </tr>
 </tbody>
 </table>
+<h4 id="chemont-setup-and-usage">ChemOnt setup and usage</h4>
+<p>ChemOnt enrichment uses the large ClassyFire/ChemOnt Zenodo release. For
+repeated CLI lookups, prepare an indexed DuckDB store once:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Download the required Zenodo files into a temporary directory and build DuckDB</span>
+chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont.duckdb
+
+<span class="c1"># Keep the downloaded Zenodo files for reuse or inspection</span>
+chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont.duckdb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--download-dir<span class="w"> </span>/tmp/chemrof-chemont-downloads<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--overwrite
+</code></pre></div>
+<p>Then run the ChemOnt enricher against the local store:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
+</code></pre></div>
+<p>The output includes the ordered ChemOnt path in <code>classified_by</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">classified_by</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000000</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0004603</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000323</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000129</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000286</span>
+</code></pre></div>
+<p>For repeated use, set the source once:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CHEMROF_CHEMONT_SOURCE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/chemont.duckdb&quot;</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont
+</code></pre></div>
+<p>OWL output maps each <code>classified_by</code> value to a <code>SubClassOf</code> axiom:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--chemont-source<span class="w"> </span>chemont.duckdb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--format<span class="w"> </span>owl
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SubClassOf(&lt;http://identifiers.org/inchikey/LFQSCWFLJHTTHZ-UHFFFAOYSA-N&gt; CHEMONTID:0000286)
+</code></pre></div>
+<p>Parquet output is also available for scan-heavy workflows:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont-parquet<span class="w"> </span>--format<span class="w"> </span>parquet
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont-parquet
+</code></pre></div>
+<p>If the Zenodo files are already downloaded, build a local store directly:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/tmp/chemrof-chemont-downloads/classyfire_dedup_inchikey_smiles.enriched.tsv.zst<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/tmp/chemrof-chemont-downloads/chemont_dictionary.tsv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>chemont.duckdb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--overwrite
+</code></pre></div>
 <h3 id="auto-classification">Auto-classification</h3>
 <p>The converter inspects the parsed molecule and picks the most specific
 chemrof class:</p>
@@ -1030,6 +1120,13 @@ chemrof<span class="w"> </span>convert<span class="w"> </span>c1ccccc1<span clas
 
 <span class="c1"># Calcium ion with PubChem enrichment</span>
 chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+
+<span class="c1"># Build a ChemOnt lookup store from Zenodo, then classify ethanol</span>
+chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont.duckdb
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
+
+<span class="c1"># Emit ChemOnt classifications as OWL SubClassOf axioms</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb<span class="w"> </span>--format<span class="w"> </span>owl
 
 <span class="c1"># Enantiomer detection</span>
 chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;C[C@@H](N)C(=O)O&quot;</span><span class="w"> </span>--format<span class="w"> </span>json

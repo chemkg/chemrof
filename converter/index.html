@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#smiles-converter" class="md-skip">
+        <a href="#chemical-converter" class="md-skip">
           Skip to content
         </a>
       
@@ -384,6 +384,15 @@
   <a href="#available-enrichers" class="md-nav__link">
     <span class="md-ellipsis">
       Available enrichers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemont-classification-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChemOnt classification examples
     </span>
   </a>
   
@@ -724,6 +733,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemont-classification-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChemOnt classification examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#writing-a-custom-enricher" class="md-nav__link">
     <span class="md-ellipsis">
       Writing a custom enricher
@@ -774,26 +792,30 @@
   
 
 
-<h1 id="smiles-converter">SMILES Converter</h1>
-<p>The <code>chemrof</code> CLI converts SMILES strings into chemrof-compliant data records.
-Given a SMILES like <code>CCO</code> (ethanol) or <code>[Ca+2]</code> (calcium ion), it parses the
-structure with RDKit, determines the correct chemrof type, and fills in
-structural properties automatically.</p>
+<h1 id="chemical-converter">Chemical Converter</h1>
+<p>The <code>chemrof</code> CLI converts SMILES or InChI strings into chemrof-compliant data
+records. Given an input like <code>CCO</code> (ethanol), <code>[Ca+2]</code> (calcium ion), or
+<code>InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3</code>, it parses the structure with RDKit,
+determines the correct chemrof type, and fills in structural properties
+automatically.</p>
 <h2 id="quick-start">Quick start</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install (from the repo root)</span>
 uv<span class="w"> </span>sync
 
 <span class="c1"># Convert a SMILES to YAML</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span>
 
 <span class="c1"># Multiple molecules, JSON output</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span><span class="s2">&quot;c1ccccc1&quot;</span><span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span><span class="s2">&quot;c1ccccc1&quot;</span><span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>json
 
 <span class="c1"># OWL output (OWL Functional Syntax)</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span><span class="s2">&quot;[Ca+2]&quot;</span><span class="w"> </span>--format<span class="w"> </span>owl
 
 <span class="c1"># Pull names from PubChem</span>
-chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+
+<span class="c1"># Add ChemOnt/ClassyFire classifications from a local DuckDB store</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
 </code></pre></div>
 <h2 id="what-it-produces">What it produces</h2>
 <p>For each SMILES, the converter outputs a dict with these slots:</p>
@@ -861,6 +883,11 @@ chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s
 <td>For monoatomic ions</td>
 <td><code>Ca</code></td>
 </tr>
+<tr>
+<td><code>classified_by</code></td>
+<td>ChemOnt enricher</td>
+<td><code>CHEMONTID:0000286</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="auto-classification">Auto-classification</h2>
@@ -902,7 +929,7 @@ chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s
 <h2 id="enrichers">Enrichers</h2>
 <p>By default, the converter fills in only what RDKit can compute from the
 structure. To pull additional data from external databases, use <code>--enrichers</code>:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem
 </code></pre></div>
 <p>This adds a PubChem lookup by InChIKey, filling in the preferred IUPAC name
 and a PubChem CID cross-reference.</p>
@@ -922,6 +949,11 @@ and a PubChem CID cross-reference.</p>
 <td>Looks up the compound in PubChem by InChIKey. Fills <code>name</code> (IUPAC preferred) and <code>pubchem_cid</code>.</td>
 </tr>
 <tr>
+<td><code>chemont</code></td>
+<td>Working</td>
+<td>Looks up the compound in a local ChemOnt/ClassyFire store by InChIKey. Fills <code>classified_by</code> with the ordered ChemOnt path.</td>
+</tr>
+<tr>
 <td><code>chebi</code></td>
 <td>Stub</td>
 <td>Will resolve CHEBI identifiers via the OLS API.</td>
@@ -934,7 +966,47 @@ and a PubChem CID cross-reference.</p>
 </tbody>
 </table>
 <p>Multiple enrichers run in sequence:</p>
-<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>from-smiles<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chebi
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
+</code></pre></div>
+<h3 id="chemont-classification-examples">ChemOnt classification examples</h3>
+<p>Prepare a local DuckDB lookup store directly from the Zenodo release:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont.duckdb
+</code></pre></div>
+<p>Use a temporary download directory by default, or keep the downloaded files:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont.duckdb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--download-dir<span class="w"> </span>/tmp/chemrof-chemont-downloads<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--overwrite
+</code></pre></div>
+<p>Classify a molecule with ChemOnt:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
+</code></pre></div>
+<p>The result includes a list of ChemOnt classes:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">classified_by</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000000</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0004603</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000323</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000129</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMONTID:0000286</span>
+</code></pre></div>
+<p>Set the source as an environment variable to avoid repeating the option:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CHEMROF_CHEMONT_SOURCE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/chemont.duckdb&quot;</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont
+</code></pre></div>
+<p>ChemOnt classifications also work in OWL output. Each <code>classified_by</code> value is
+emitted as a <code>SubClassOf</code> axiom:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb<span class="w"> </span>--format<span class="w"> </span>owl
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SubClassOf(&lt;http://identifiers.org/inchikey/LFQSCWFLJHTTHZ-UHFFFAOYSA-N&gt; CHEMONTID:0000286)
+</code></pre></div>
+<p>For scan-heavy workflows, prepare Parquet instead of DuckDB:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont-from-zenodo<span class="w"> </span>chemont-parquet<span class="w"> </span>--format<span class="w"> </span>parquet
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont-parquet
+</code></pre></div>
+<p>To use files that were downloaded separately:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>prepare-chemont<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/tmp/chemrof-chemont-downloads/classyfire_dedup_inchikey_smiles.enriched.tsv.zst<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/tmp/chemrof-chemont-downloads/chemont_dictionary.tsv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>chemont.duckdb
 </code></pre></div>
 <h3 id="writing-a-custom-enricher">Writing a custom enricher</h3>
 <p>Enrichers follow a simple protocol. Any class with a <code>name</code> attribute and an
@@ -954,9 +1026,9 @@ and a PubChem CID cross-reference.</p>
 (InChIKey, canonical SMILES, InChI) so enrichers can use whichever key their
 data source accepts.</p>
 <p>To use a custom enricher programmatically:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
 
-<span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">(</span><span class="n">enrichers</span><span class="o">=</span><span class="p">[</span><span class="n">MyEnricher</span><span class="p">()])</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">(</span><span class="n">enrichers</span><span class="o">=</span><span class="p">[</span><span class="n">MyEnricher</span><span class="p">()])</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="owl-output">OWL output</h2>
@@ -969,18 +1041,18 @@ AnnotationAssertion(rdfs:label chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N &quo
 AnnotationAssertion(chemrof:smiles_string chemrof:INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N &quot;CCO&quot;)
 </code></pre></div>
 <p>The Python API equivalent:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.owl_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">dicts_to_owl</span>
 
-<span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">()</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">()</span>
 <span class="n">objs</span> <span class="o">=</span> <span class="p">[</span><span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;[Ca+2]&quot;</span><span class="p">]]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dicts_to_owl</span><span class="p">(</span><span class="n">objs</span><span class="p">))</span>
 </code></pre></div>
 <h2 id="python-api">Python API</h2>
 <p>The converter is also usable as a library:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.smiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmilesConverter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
 
-<span class="n">converter</span> <span class="o">=</span> <span class="n">SmilesConverter</span><span class="p">()</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ChemConverter</span><span class="p">()</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>
 <span class="c1"># result is a plain dict with chemrof slots</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>           <span class="c1"># chemrof:SmallMolecule</span>

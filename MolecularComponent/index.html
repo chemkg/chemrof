@@ -345,6 +345,17 @@
         click FunctionalGroup href "../FunctionalGroup/"
 
 
+      MolecularComponent : classified_by
+
+
+
+
+
+        MolecularComponent --&gt; "*" ChemicalGroupingClass : classified_by
+        click ChemicalGroupingClass href "../ChemicalGroupingClass/"
+
+
+
       MolecularComponent : cxsmiles_string
 
       MolecularComponent : empirical_formula
@@ -467,7 +478,7 @@
 <td><a href="../inchi_atom_connections_sublayer/">inchi_atom_connections_sublayer</a></td>
 <td>0..1 <em>recommended</em> <br/> <a href="../String/">String</a></td>
 <td>The atoms in the chemical formula (except for hydrogens) are numbered in sequ...</td>
-<td><a href="../ChemicalEntity/">ChemicalEntity</a>, <a href="../PolyatomicEntity/">PolyatomicEntity</a></td>
+<td><a href="../PolyatomicEntity/">PolyatomicEntity</a>, <a href="../ChemicalEntity/">ChemicalEntity</a></td>
 </tr>
 <tr>
 <td><a href="../IUPAC_name/">IUPAC_name</a></td>
@@ -605,6 +616,12 @@
 <td><a href="../pka_pressure/">pka_pressure</a></td>
 <td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>Pressure in atmospheres at which pKa was measured</td>
+<td><a href="../ChemicalEntity/">ChemicalEntity</a></td>
+</tr>
+<tr>
+<td><a href="../classified_by/">classified_by</a></td>
+<td>* <br/> <a href="../ChemicalGroupingClass/">ChemicalGroupingClass</a></td>
+<td>A subtype_of relationship holds between I and C if I is a specific entity of ...</td>
 <td><a href="../ChemicalEntity/">ChemicalEntity</a></td>
 </tr>
 <tr>
@@ -1188,8 +1205,35 @@
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
 <span class="w">    </span><span class="nt">unit</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">ucum_code</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">atm</span>
+<span class="w">  </span><span class="nt">classified_by</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classified_by</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A subtype_of relationship holds between I and C if I is a specific</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">entity of type C. Here I and C denotes instances of OWL classes, where I is</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">a specific class and C is a grouping class</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classified by</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glucose classified by monosaccharide</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdf:type</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemical_to_chemical_relationship</span>
+<span class="w">    </span><span class="nt">mixins</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owl_subclass_of</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OwlClass</span>
+<span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdfs:subClassOf</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classified_by</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MolecularComponent</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalGroupingClass</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">owl_subclass_of</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owl_subclass_of</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">owl</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owl</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClassOf</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Holds</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">C</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">P</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">C</span><span class="nv"> </span><span class="s">owl:subClassOf</span><span class="nv"> </span><span class="s">P.</span><span class="nv"> </span><span class="s">Note</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">model,</span>
 <span class="w">      </span><span class="s">most</span><span class="nv"> </span><span class="s">classes</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">metaclasses</span><span class="nv"> </span><span class="s">(see</span><span class="nv"> </span><span class="se">''</span><span class="s">owl</span><span class="nv"> </span><span class="s">class</span><span class="se">''</span><span class="s">),</span><span class="nv"> </span><span class="s">where</span><span class="nv"> </span><span class="s">these</span><span class="nv"> </span><span class="s">metaclasses</span><span class="nv"> </span><span class="s">may</span>
 <span class="w">      </span><span class="s">represent</span><span class="nv"> </span><span class="s">*groupings*</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">specific</span><span class="nv"> </span><span class="s">countable</span><span class="nv"> </span><span class="s">elements</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">species.</span><span class="nv"> </span><span class="s">We</span><span class="nv"> </span><span class="s">provide</span>
