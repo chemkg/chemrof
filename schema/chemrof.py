@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-21T17:48:16
+# Generation date: 2026-05-21T19:02:22
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof

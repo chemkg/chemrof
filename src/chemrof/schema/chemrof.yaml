@@ -91,6 +91,8 @@ classes:
   ChemicalEntity:
     is_a: PhysicochemicalEntity
     class_uri: CHEBI:24431
+    annotations:
+      owl.template: SubClassOf({{id}} chemrof:{{this.class_name}})
     aliases:
     - specific chemical entity
     - chemical
@@ -188,6 +190,8 @@ classes:
     mixin: true
     description: instances of this class mixin are OWL Classes
     class_uri: owl:Class
+    annotations:
+      owl: Class
     close_mappings:
     - skos:Concept
     exact_mappings:
@@ -1867,9 +1871,13 @@ slots:
     title: chemical to chemical relationship
   chemical_property:
     abstract: true
+    annotations:
+      owl: Annotation
     title: chemical property
   information_property:
     abstract: true
+    annotations:
+      owl: Annotation
     title: information property
   in_periodic_table_group:
     range: PeriodicTableGroup
@@ -1979,6 +1987,8 @@ slots:
   has_element:
     is_a: alternate_form_of
     range: ChemicalElement
+    annotations:
+      owl: Annotation
     title: has element
   allotropic_analog_of:
     is_a: alternate_form_of
@@ -2925,10 +2935,14 @@ slots:
     description: An organic molecule is a molecule composed of organic atoms (at least
       carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]
     close_mappings: SIO:010072
+    annotations:
+      owl: Annotation
     title: is organic
   is_radical:
     domain: ChemicalEntity
     range: boolean
+    annotations:
+      owl: Annotation
     title: is radical
   next_in_homologous_series_from:
     description: Next in a sequence of compounds with the same functional group and
@@ -3067,6 +3081,8 @@ slots:
     aliases:
     - is a
     mixin: true
+    annotations:
+      owl: SubClassOf
     description: 'Holds between C and P if C owl:subClassOf P. Note that in this model,
       most classes are metaclasses (see ''owl class''), where these metaclasses may
       represent *groupings* or specific countable elements or species. We provide

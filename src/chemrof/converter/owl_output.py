@@ -1,7 +1,8 @@
-"""Convert chemrof dicts to OWL ontology axioms.
+"""Convert chemrof dicts to OWL ontology axioms with linkml-owl.
 
-Each chemical entity becomes an OWL Class that is a SubClassOf its
-chemrof type, with annotation assertions for the data properties.
+Each chemical entity is adapted to a minimal LinkML instance, then handed to
+``linkml_owl.dumpers.OWLDumper``. The OWL interpretation is defined by
+annotations in ``chemrof.yaml``.
 
 >>> from chemrof.converter.smiles import SmilesConverter
 >>> converter = SmilesConverter()
@@ -15,38 +16,22 @@ True
 
 from __future__ import annotations
 
+import logging
+from contextlib import contextmanager
 from functools import lru_cache
 from pathlib import Path
 
-import pyhornedowl
-from pyhornedowl import model
+from linkml_owl.dumpers.owl_dumper import OWLDumper
 from linkml_runtime.utils.schemaview import SchemaView
 
 _SCHEMA_PATH = Path(__file__).resolve().parent.parent / "schema" / "chemrof.yaml"
 
-_CHEMROF_NS = "https://w3id.org/chemrof/"
-_RDFS_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
-
-# Slots to emit as OWL annotation assertions.
-_ANNOTATION_SLOTS = [
-    "smiles_string",
-    "inchi_string",
-    "inchi_chemical_sublayer",
-    "inchi_atom_connections_sublayer",
-    "inchi_hydrogen_connections_sublayer",
-    "inchi_charge_sublayer",
-    "inchi_proton_sublayer",
-    "inchi_stereochemical_double_bond_sublayer",
-    "inchi_tetrahedral_stereochemical_sublayer",
-    "inchi_stereochemical_type_sublayer",
-    "inchi_isotopic_layer",
-    "empirical_formula",
-    "molecular_mass",
-    "elemental_charge",
-    "has_element",
-    "is_organic",
-    "is_radical",
-]
+_OWL_ANNOTATION_KEYS = (
+    "owl",
+    "owl.template",
+    "owl.fstring",
+    "owl.axiom_annotation.slots",
+)
 
 
 @lru_cache(maxsize=1)
@@ -54,42 +39,11 @@ def _get_schemaview() -> SchemaView:
     return SchemaView(str(_SCHEMA_PATH))
 
 
-def _resolve_id(raw_id: str) -> str:
-    """Turn a chemrof ID like ``INCHIKEY:ABCDE...`` into a full IRI."""
-    sv = _get_schemaview()
-    for pfx in sv.schema.prefixes.values():
-        prefix_str = pfx.prefix_prefix + ":"
-        if raw_id.startswith(prefix_str):
-            return pfx.prefix_reference + raw_id[len(prefix_str):]
-    return _CHEMROF_NS + raw_id
+@lru_cache(maxsize=None)
+def _instance_class(class_name: str):
+    """Create a tiny object class that looks like a LinkML runtime class."""
 
-
-def _resolve_slot(slot_name: str) -> str:
-    """Turn a slot name into its full IRI via the schema."""
-    sv = _get_schemaview()
-    slot = sv.get_slot(slot_name)
-    if slot and slot.slot_uri:
-        uri = sv.get_uri(slot, expand=True)
-        if uri:
-            return str(uri)
-    return _CHEMROF_NS + slot_name
-
-
-def _ann_assertion(subject_iri: str, prop_iri: str, value: str) -> model.AnnotationAssertion:
-    """Build an AnnotationAssertion axiom."""
-    prop = model.AnnotationProperty(model.IRI.parse(prop_iri))
-    ann = model.Annotation(prop, model.SimpleLiteral(value))
-    return model.AnnotationAssertion(
-        subject=model.IRI.parse(subject_iri),
-        ann=ann,
-    )
-
-
-def _as_list(value) -> list:
-    """Normalize a scalar-or-list value to a list."""
-    if value is None:
-        return []
-    return value if isinstance(value, list) else [value]
+    return type(class_name, (), {"class_name": class_name})
 
 
 def _raw_id(value) -> str | None:
@@ -99,13 +53,75 @@ def _raw_id(value) -> str | None:
     return str(value) if value is not None else None
 
 
+def _class_name(obj: dict) -> str:
+    """Return the LinkML class name for a converter object."""
+    typ = obj.get("type")
+    if typ:
+        return str(typ).split(":")[-1]
+    return "SmallMolecule"
+
+
+def _is_empty(value) -> bool:
+    return value is None or value == [] or value == {}
+
+
+def _normalize_value(value):
+    """Normalize inlined references to identifiers before linkml-owl sees them."""
+    if isinstance(value, list):
+        return [_normalize_value(v) for v in value if not _is_empty(v)]
+    if isinstance(value, dict):
+        raw_id = _raw_id(value)
+        if raw_id:
+            return raw_id
+    return value
+
+
+def _has_owl_interpretation(sv: SchemaView, class_name: str, slot_name: str) -> bool:
+    """Check whether a slot has linkml-owl annotations, directly or inherited."""
+    slot = sv.induced_slot(slot_name, class_name)
+    slots = [slot]
+    slots.extend(sv.get_slot(ancestor) for ancestor in sv.slot_ancestors(slot.name))
+    for candidate in slots:
+        if candidate and any(key in candidate.annotations for key in _OWL_ANNOTATION_KEYS):
+            return True
+    return False
+
+
+def _to_linkml_instance(obj: dict):
+    """Adapt a converter dict to the minimal object protocol used by OWLDumper."""
+    sv = _get_schemaview()
+    class_name = _class_name(obj)
+    slot_names = {slot.name for slot in sv.class_induced_slots(class_name)}
+    instance = _instance_class(class_name)()
+    for key, value in obj.items():
+        if key not in slot_names or _is_empty(value):
+            continue
+        slot = sv.induced_slot(key, class_name)
+        if not slot.identifier and not _has_owl_interpretation(sv, class_name, key):
+            continue
+        setattr(instance, key, _normalize_value(value))
+    return instance
+
+
+@contextmanager
+def _suppress_namespace_warnings():
+    """Avoid leaking LinkML namespace remapping warnings into CLI OWL output."""
+    logger = logging.getLogger("linkml_runtime.Namespaces")
+    old_level = logger.level
+    logger.setLevel(logging.ERROR)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
+
+
 def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     """Convert chemrof dicts to an OWL ontology string.
 
-    Each entity is emitted as an OWL Class with:
-    - ``SubClassOf`` to its chemrof type (e.g. ``chemrof:SmallMolecule``)
-    - ``rdfs:label`` from the ``name`` field
-    - Annotation assertions for structural properties
+    Each entity is emitted according to the linkml-owl annotations in
+    ``chemrof.yaml``. Chemical entities become OWL classes, ``classified_by``
+    becomes ``SubClassOf``, and annotated data slots become annotation
+    assertions.
 
     Args:
         objs: List of chemrof dicts (from SmilesConverter.convert()).
@@ -115,52 +131,8 @@ def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     Returns:
         OWL string in the requested format.
     """
-    ont = pyhornedowl.PyIndexedOntology()
-
     sv = _get_schemaview()
-    for pfx in sv.schema.prefixes.values():
-        ont.add_prefix_mapping(pfx.prefix_prefix, pfx.prefix_reference)
-
-    for obj in objs:
-        _add_entity(ont, obj)
-
-    return ont.save_to_string(output_type)
-
-
-def _add_entity(ont: pyhornedowl.PyIndexedOntology, obj: dict) -> None:
-    """Add one chemrof dict as OWL axioms."""
-    raw_id = obj.get("id", "")
-    entity_iri = _resolve_id(raw_id)
-    type_name = obj.get("type", "chemrof:SmallMolecule").replace("chemrof:", "")
-    type_iri = _CHEMROF_NS + type_name
-
-    # Declaration + SubClassOf
-    ont.add_axiom(model.DeclareClass(model.Class(model.IRI.parse(entity_iri))))
-    ont.add_axiom(model.DeclareClass(model.Class(model.IRI.parse(type_iri))))
-    ont.add_axiom(model.SubClassOf(
-        sub=model.Class(model.IRI.parse(entity_iri)),
-        sup=model.Class(model.IRI.parse(type_iri)),
-    ))
-
-    for classified_by in _as_list(obj.get("classified_by")):
-        raw_class_id = _raw_id(classified_by)
-        if not raw_class_id:
-            continue
-        class_iri = _resolve_id(raw_class_id)
-        ont.add_axiom(model.DeclareClass(model.Class(model.IRI.parse(class_iri))))
-        ont.add_axiom(model.SubClassOf(
-            sub=model.Class(model.IRI.parse(entity_iri)),
-            sup=model.Class(model.IRI.parse(class_iri)),
-        ))
-
-    # rdfs:label
-    name = obj.get("name")
-    if name:
-        ont.add_axiom(_ann_assertion(entity_iri, _RDFS_LABEL, name))
-
-    # Data property annotations
-    for slot_name in _ANNOTATION_SLOTS:
-        val = obj.get(slot_name)
-        if val is not None:
-            prop_iri = _resolve_slot(slot_name)
-            ont.add_axiom(_ann_assertion(entity_iri, prop_iri, str(val)))
+    elements = [_to_linkml_instance(obj) for obj in objs]
+    dumper = OWLDumper()
+    with _suppress_namespace_warnings():
+        return dumper.dumps(elements, schemaview=sv, output_type=output_type)
