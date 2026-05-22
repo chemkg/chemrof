@@ -36,6 +36,8 @@ chemrof convert [OPTIONS] INPUTS...
 | `--enrichers`, `-e` | _(none)_ | Comma-separated list of enricher sources |
 | `--classes`, `-c` | _(none)_ | Target chemrof classes (implies `--autochain`) |
 | `--autochain` | `false` | Generate interlinked dependent entities |
+| `--chemont-source` | _(none)_ | Local ChemOnt labels source for `--enrichers chemont`: DuckDB, Parquet, or TSV/ZST |
+| `--chemont-dictionary` | _(auto)_ | ChemOnt dictionary TSV/Parquet when it is not bundled with the source |
 
 ### Input format detection
 
@@ -145,8 +147,78 @@ chemrof convert CCO --enrichers pubchem,chebi
 | Source | Status | What it adds |
 |--------|--------|-------------|
 | `pubchem` | Working | Preferred IUPAC name and PubChem CID (via InChIKey lookup) |
+| `chemont` | Working | Ordered ChemOnt/ClassyFire tree classes in `classified_by` (via local lookup store) |
 | `chebi` | Stub | Will resolve CHEBI identifiers via OLS |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL |
+
+#### ChemOnt setup and usage
+
+ChemOnt enrichment uses the large ClassyFire/ChemOnt Zenodo release. For
+repeated CLI lookups, prepare an indexed DuckDB store once:
+
+```bash
+# Download the required Zenodo files into a temporary directory and build DuckDB
+chemrof prepare-chemont-from-zenodo chemont.duckdb
+
+# Keep the downloaded Zenodo files for reuse or inspection
+chemrof prepare-chemont-from-zenodo chemont.duckdb \
+  --download-dir /tmp/chemrof-chemont-downloads \
+  --overwrite
+```
+
+Then run the ChemOnt enricher against the local store:
+
+```bash
+chemrof convert CCO --enrichers chemont --chemont-source chemont.duckdb
+```
+
+The output includes the ordered ChemOnt path in `classified_by`:
+
+```yaml
+classified_by:
+- CHEMONTID:0000000
+- CHEMONTID:0004603
+- CHEMONTID:0000323
+- CHEMONTID:0000129
+- CHEMONTID:0000286
+```
+
+For repeated use, set the source once:
+
+```bash
+export CHEMROF_CHEMONT_SOURCE="$PWD/chemont.duckdb"
+chemrof convert CCO --enrichers chemont
+```
+
+OWL output maps each `classified_by` value to a `SubClassOf` axiom:
+
+```bash
+chemrof convert CCO \
+  --enrichers chemont \
+  --chemont-source chemont.duckdb \
+  --format owl
+```
+
+```text
+SubClassOf(<http://identifiers.org/inchikey/LFQSCWFLJHTTHZ-UHFFFAOYSA-N> CHEMONTID:0000286)
+```
+
+Parquet output is also available for scan-heavy workflows:
+
+```bash
+chemrof prepare-chemont-from-zenodo chemont-parquet --format parquet
+chemrof convert CCO --enrichers chemont --chemont-source chemont-parquet
+```
+
+If the Zenodo files are already downloaded, build a local store directly:
+
+```bash
+chemrof prepare-chemont \
+  /tmp/chemrof-chemont-downloads/classyfire_dedup_inchikey_smiles.enriched.tsv.zst \
+  /tmp/chemrof-chemont-downloads/chemont_dictionary.tsv \
+  chemont.duckdb \
+  --overwrite
+```
 
 ### Auto-classification
 
@@ -183,6 +255,13 @@ chemrof convert c1ccccc1 O --format json
 
 # Calcium ion with PubChem enrichment
 chemrof convert "[Ca+2]" --enrichers pubchem
+
+# Build a ChemOnt lookup store from Zenodo, then classify ethanol
+chemrof prepare-chemont-from-zenodo chemont.duckdb
+chemrof convert CCO --enrichers chemont --chemont-source chemont.duckdb
+
+# Emit ChemOnt classifications as OWL SubClassOf axioms
+chemrof convert CCO --enrichers chemont --chemont-source chemont.duckdb --format owl
 
 # Enantiomer detection
 chemrof convert "C[C@@H](N)C(=O)O" --format json
