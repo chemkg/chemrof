@@ -212,6 +212,14 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../explanations/fluxomics/">
+<span class="md-ellipsis">
+    Fluxomics
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -332,7 +340,7 @@
 <article class="md-content__inner md-typeset">
 <h1 id="class-reaction-reaction">Class: reaction (Reaction)</h1>
 <p><em>Reaction</em></p>
-<p>URI: <a href="http://purl.obolibrary.org/obo/RXNO_0000000">RXNO:0000000</a></p>
+<p>URI: <a href="https://w3id.org/chemrof/Reaction">chemrof:Reaction</a></p>
 <pre class="mermaid"><code> classDiagram
     class Reaction
     click Reaction href "../Reaction/"
@@ -345,6 +353,28 @@
 
 
       Reaction : direction
+
+      Reaction : has_allosteric_regulation
+
+
+
+
+
+        Reaction --&gt; "*" AllostericRegulation : has_allosteric_regulation
+        click AllostericRegulation href "../AllostericRegulation/"
+
+
+
+      Reaction : has_competitive_inhibition
+
+
+
+
+
+        Reaction --&gt; "*" CompetitiveInhibition : has_competitive_inhibition
+        click CompetitiveInhibition href "../CompetitiveInhibition/"
+
+
 
       Reaction : has_reaction_smiles_representation
 
@@ -376,6 +406,17 @@
       Reaction : name
 
       Reaction : reaction_center
+
+      Reaction : reaction_mechanism
+
+
+
+
+
+        Reaction --&gt; "0..1" ReactionMechanismEnum : reaction_mechanism
+        click ReactionMechanismEnum href "../ReactionMechanismEnum/"
+
+
 
       Reaction : reaction_rate
 
@@ -512,6 +553,24 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../reaction_mechanism/">reaction_mechanism</a></td>
+<td>0..1 <br/> <a href="../ReactionMechanismEnum/">ReactionMechanismEnum</a></td>
+<td>The kinetic rate law (mechanism) used to model the rate of the reaction, e</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_allosteric_regulation/">has_allosteric_regulation</a></td>
+<td>* <br/> <a href="../AllostericRegulation/">AllostericRegulation</a></td>
+<td>Allosteric activation or inhibition of an enzyme catalyzing this reaction</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_competitive_inhibition/">has_competitive_inhibition</a></td>
+<td>* <br/> <a href="../CompetitiveInhibition/">CompetitiveInhibition</a></td>
+<td>Competitive inhibition of an enzyme catalyzing this reaction</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td></td>
@@ -591,7 +650,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>RXNO:0000000</td>
+<td>chemrof:Reaction</td>
 </tr>
 <tr>
 <td>native</td>
@@ -599,7 +658,7 @@
 </tr>
 <tr>
 <td>exact</td>
-<td>MOP:0000010, BFO:0000015</td>
+<td>RXNO:0000000, MOP:0000010, BFO:0000015</td>
 </tr>
 </tbody>
 </table>
@@ -627,6 +686,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Align with https://docs.open-reaction-database.org/en/latest/schema.html</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
 <span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RXNO:0000000</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MOP:0000010</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BFO:0000015</span>
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DomainEntity</span>
@@ -645,6 +705,9 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_rate_coefficient</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_rate</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_type</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_mechanism</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_allosteric_regulation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_competitive_inhibition</span>
 <span class="nt">slot_usage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">left_participants</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">left_participants</span>
@@ -678,7 +741,6 @@
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">string_serialization</span><span class="p">:</span><span class="w"> </span><span class="s">'{left</span><span class="nv"> </span><span class="s">participants}</span><span class="nv"> </span><span class="s">{direction}</span><span class="nv"> </span><span class="s">{right</span><span class="nv"> </span><span class="s">participants}'</span>
-<span class="nt">class_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RXNO:0000000</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -703,6 +765,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Align with https://docs.open-reaction-database.org/en/latest/schema.html</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
 <span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RXNO:0000000</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MOP:0000010</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BFO:0000015</span>
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DomainEntity</span>
@@ -915,6 +978,48 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReactionTypeEnum</span>
+<span class="w">  </span><span class="nt">reaction_mechanism</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_mechanism</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The kinetic rate law (mechanism) used to model the rate of the reaction,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">e.g. reversible or irreversible Michaelis-Menten, mass action, or a boundary/drain</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">pseudo-reaction.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction mechanism</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reaction_mechanism</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReactionMechanismEnum</span>
+<span class="w">  </span><span class="nt">has_allosteric_regulation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_allosteric_regulation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Allosteric activation or inhibition of an enzyme catalyzing this</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">reaction.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has allosteric regulation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_allosteric_regulation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AllostericRegulation</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">has_competitive_inhibition</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_competitive_inhibition</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Competitive inhibition of an enzyme catalyzing this reaction.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has competitive inhibition</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_competitive_inhibition</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CompetitiveInhibition</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">id</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
@@ -969,7 +1074,6 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DomainEntity</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uriorcurie</span>
-<span class="nt">class_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RXNO:0000000</span>
 </code></pre></div>
 </details>
 </article>

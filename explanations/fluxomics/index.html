@@ -1,0 +1,1841 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chemkg.github.io/chemrof/explanations/fluxomics/">
+      
+      
+        <link rel="prev" href="../clinical-assays/">
+      
+      
+        <link rel="next" href="../../ai-controller/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Fluxomics - CHEMROF</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fluxomics-use-cases-and-chemrof-extensions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CHEMROF" class="md-header__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CHEMROF
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fluxomics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CHEMROF" class="md-nav__button md-logo" aria-label="CHEMROF" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CHEMROF
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/chemkg/chemrof/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../motivation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motivation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SMILES Converter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    URI Encoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ontology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ontology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metaclasses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metaclasses
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Explanations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clinical-assays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clinical Assays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Fluxomics
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fluxomics
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-fluxomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What is fluxomics?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-use-cases-and-their-data-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core use cases and their data requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core use cases and their data requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-constraint-based-modeling-flux-balance-analysis-fba" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Constraint-based modeling / Flux Balance Analysis (FBA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-stable-isotope-13c-metabolic-flux-analysis-13c-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Stable-isotope ¹³C Metabolic Flux Analysis (¹³C-MFA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-isotopically-non-stationary-mfa-inst-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Isotopically non-stationary MFA (INST-MFA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-kinetic-mechanistic-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Kinetic / mechanistic modeling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-a-typology-of-fluxomics-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 A typology of fluxomics experiments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-standards-landscape-for-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Standards landscape (for alignment)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Standards landscape (for alignment)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-do-we-have-fluxml-mappings-a-crosswalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Do we have FluxML mappings? (a crosswalk)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-what-chemrof-already-provides" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. What ChEMROF already provides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gaps-relative-to-fluxomics-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Gaps relative to fluxomics use cases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-two-strategic-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Two strategic options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-concrete-extension-sketches" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Concrete extension sketches
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Concrete extension sketches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-allow-signed-fractional-stoichiometry-small-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Allow signed, fractional stoichiometry (small, in-place)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-atom-transitions-atom-mapping-using-existing-atomoccurrence" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Atom transitions (atom mapping) using existing AtomOccurrence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-isotope-labeling-vocabulary-chemistry-adjacent" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Isotope-labeling vocabulary (chemistry-adjacent)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-network-modeling-layer-companion-schema-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 Network-modeling layer (companion schema, sketch)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-sbosbml-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 SBO/SBML alignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Recommendation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-worked-example-the-biosustain-methionine-cycle-maud-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix A. Worked example: the biosustain methionine-cycle (Maud) model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Sources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-controller/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Controller Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../credits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Credits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-fluxomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What is fluxomics?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-use-cases-and-their-data-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core use cases and their data requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core use cases and their data requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-constraint-based-modeling-flux-balance-analysis-fba" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Constraint-based modeling / Flux Balance Analysis (FBA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-stable-isotope-13c-metabolic-flux-analysis-13c-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Stable-isotope ¹³C Metabolic Flux Analysis (¹³C-MFA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-isotopically-non-stationary-mfa-inst-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Isotopically non-stationary MFA (INST-MFA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-kinetic-mechanistic-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Kinetic / mechanistic modeling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-a-typology-of-fluxomics-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 A typology of fluxomics experiments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-standards-landscape-for-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Standards landscape (for alignment)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Standards landscape (for alignment)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-do-we-have-fluxml-mappings-a-crosswalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Do we have FluxML mappings? (a crosswalk)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-what-chemrof-already-provides" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. What ChEMROF already provides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gaps-relative-to-fluxomics-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Gaps relative to fluxomics use cases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-two-strategic-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Two strategic options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-concrete-extension-sketches" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Concrete extension sketches
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Concrete extension sketches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-allow-signed-fractional-stoichiometry-small-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Allow signed, fractional stoichiometry (small, in-place)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-atom-transitions-atom-mapping-using-existing-atomoccurrence" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Atom transitions (atom mapping) using existing AtomOccurrence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-isotope-labeling-vocabulary-chemistry-adjacent" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Isotope-labeling vocabulary (chemistry-adjacent)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-network-modeling-layer-companion-schema-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 Network-modeling layer (companion schema, sketch)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-sbosbml-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 SBO/SBML alignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Recommendation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-worked-example-the-biosustain-methionine-cycle-maud-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix A. Worked example: the biosustain methionine-cycle (Maud) model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Sources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="fluxomics-use-cases-and-chemrof-extensions">Fluxomics: Use Cases and ChEMROF Extensions</h1>
+<p>This document surveys <strong>fluxomics</strong> — the quantitative study of metabolic
+reaction rates (fluxes) in a biological system — and analyzes how the ChEMROF
+schema can be <em>used as-is</em> and where it could be <em>extended</em> to serve as a
+chemical-entity backbone for fluxomics data and models.</p>
+<p>It began as a scoping/explanation document. Most of it still describes
+<em>potential</em> directions, but the kinetic-modeling thread has since been partly
+<strong>implemented</strong>: ChEMROF gained reaction-mechanism, enzyme-regulation, and
+related slots, and a <code>chemrof convert-maud</code> command maps Maud kinetic models
+into ChEMROF (see Appendix A). Sections describing the isotope/atom-mapping
+and flux/experiment layers remain proposals.</p>
+<h2 id="1-what-is-fluxomics">1. What is fluxomics?</h2>
+<p>Fluxomics is the "-omics" layer concerned with <em>flux</em> — the rate at which
+metabolites are interconverted through a metabolic network, conventionally
+expressed in units such as mmol·gDW⁻¹·h⁻¹ (millimoles per gram dry weight per
+hour) for cellular systems. Unlike concentrations (metabolomics) or expression
+levels (transcriptomics/proteomics), a flux is not a pool size but a
+<em>throughput</em> through a reaction. Fluxes are not measured directly; they are
+<em>inferred</em> by combining:</p>
+<ul>
+<li>a <strong>reaction network</strong> (stoichiometry + reversibility/directionality),</li>
+<li><strong>constraints</strong> (thermodynamic, capacity, uptake/secretion bounds), and</li>
+<li><strong>experimental data</strong> (extracellular rates and/or stable-isotope labeling
+  patterns).</li>
+</ul>
+<p>The two dominant methodological families are <strong>constraint-based modeling</strong>
+(Flux Balance Analysis and relatives) and <strong>isotope-based Metabolic Flux
+Analysis</strong> (¹³C-MFA and its non-stationary variant). They impose quite
+different data requirements, and ChEMROF is differentially ready for each.</p>
+<h2 id="2-core-use-cases-and-their-data-requirements">2. Core use cases and their data requirements</h2>
+<h3 id="21-constraint-based-modeling-flux-balance-analysis-fba">2.1 Constraint-based modeling / Flux Balance Analysis (FBA)</h3>
+<p>FBA operates on a <strong>genome-scale metabolic model</strong> (GEM/GSMM). The network is
+encoded as a <strong>stoichiometric matrix <code>S</code></strong> (rows = metabolites, columns =
+reactions, entries = stoichiometric coefficients). Assuming metabolic
+steady state (<code>S·v = 0</code>), linear programming finds a flux vector <code>v</code> that
+optimizes an <strong>objective function</strong> (commonly biomass production) subject to
+<strong>flux bounds</strong> (<code>lb ≤ v ≤ ub</code>).</p>
+<p>Data requirements:</p>
+<ul>
+<li>Metabolites with <strong>compartment</strong> assignment (e.g. cytosol <code>c</code>,
+  mitochondrion <code>m</code>, extracellular <code>e</code>) and database cross-references.</li>
+<li>Reactions with <strong>signed, possibly non-integer</strong> stoichiometric coefficients,
+  <strong>reversibility/bounds</strong>, gene–protein–reaction (GPR) associations, and a
+  classification (internal / transport / exchange / biomass pseudo-reaction).</li>
+<li>An <strong>objective</strong> (which reaction(s) to maximize/minimize, and weights).</li>
+</ul>
+<p>The de-facto standard is <strong>SBML Level 3 with the Flux Balance Constraints
+(<code>fbc</code>) package</strong> (objective functions, flux bounds, charge/formula for
+balancing). Models are richly cross-referenced via <strong>MIRIAM</strong> identifiers and
+annotated with <strong>Systems Biology Ontology (SBO)</strong> terms (e.g. distinguishing
+biomass pseudo-reactions, transport reactions, exchange reactions). Reference
+resources include <strong>BiGG Models</strong>, <strong>MetaNetX</strong>, <strong>KEGG</strong>, <strong>MetaCyc/BioCyc</strong>,
+and <strong>Rhea</strong>. The <strong>FROG</strong> report (Flux variability, Reaction deletion,
+Objective, Gene deletion) is an emerging reproducibility standard for curated
+GEMs.</p>
+<h3 id="22-stable-isotope-13c-metabolic-flux-analysis-13c-mfa">2.2 Stable-isotope ¹³C Metabolic Flux Analysis (¹³C-MFA)</h3>
+<p>¹³C-MFA is considered the "gold standard" for <em>intracellular</em> flux
+quantification under metabolic (quasi-)steady state. Cells are fed a
+¹³C-labeled substrate (e.g. [1-¹³C] or [U-¹³C] glucose); the label propagates
+through the network, and the resulting <strong>labeling patterns</strong> of downstream
+metabolites (measured by MS or NMR) are fit to a model to estimate fluxes.</p>
+<p>The distinguishing data requirement beyond FBA is the <strong>atom mapping</strong> (a.k.a.
+<strong>atom transition network</strong>): for each reaction, a one-to-one correspondence
+between each substrate atom and the product atom it becomes. Carbon atom
+mappings are what let a model predict how label flows. Key concepts:</p>
+<ul>
+<li><strong>Atom mapping / atom transition</strong> — substrate-atom → product-atom
+  correspondence per reaction (e.g. encoded as mapped reaction SMILES/SMIRKS,
+  RXN files, or RInChI). Curated mappings are available from <strong>MetaCyc</strong> and
+  the open <strong>MetAMDB</strong> (~43,000 reactions).</li>
+<li><strong>Isotopomer</strong> — a specific labeling configuration of a molecule (which
+  <em>positions</em> carry the heavy isotope); for <em>n</em> carbons there are 2ⁿ
+  isotopomers.</li>
+<li><strong>Isotopologue / mass isotopomer</strong> — molecules that differ only in <em>number</em>
+  of heavy atoms (M+0, M+1, M+2, …), without regard to position; what a mass
+  spectrometer typically resolves.</li>
+<li><strong>Mass Isotopomer Distribution (MID)</strong> / <strong>Mass Distribution Vector (MDV)</strong> —
+  the fractional abundances of M+0, M+1, … normalized to sum 1; the primary
+  measurement input.</li>
+<li><strong>Elementary Metabolite Unit (EMU)</strong> framework — a decomposition that
+  reduces the isotopomer balance equations (1000s) to a much smaller EMU set
+  (100s), the computational backbone of modern simulators (INCA, 13CFLUX2,
+  OpenFLUX, mfapy, etc.).</li>
+</ul>
+<p>The dominant exchange format is <strong>FluxML</strong> — an XML language semantically
+similar to SBML but extended with atom mappings, parameter constraints
+(net/exchange fluxes), and measurement configurations.</p>
+<h3 id="23-isotopically-non-stationary-mfa-inst-mfa">2.3 Isotopically non-stationary MFA (INST-MFA)</h3>
+<p>For systems where isotopic steady state is impractical (e.g. autotrophs,
+photosynthesis), <strong>INST-MFA</strong> fits the <em>time course</em> of label incorporation.
+This adds a <strong>temporal dimension</strong> (time-series MIDs) and requires metabolite
+<strong>pool sizes</strong> (concentrations) as additional parameters, coupling fluxomics to
+metabolomics.</p>
+<h3 id="24-kinetic-mechanistic-modeling">2.4 Kinetic / mechanistic modeling</h3>
+<p>Beyond steady-state flux estimation, kinetic models express each reaction rate
+<code>v</code> as an explicit function of metabolite concentrations and <strong>kinetic
+parameters</strong> (e.g. <code>kcat</code>, <code>Km</code>, <code>Vmax</code>, rate constants). These are the bridge
+from fluxomics to dynamic simulation and parameter-estimation tools.</p>
+<h3 id="25-a-typology-of-fluxomics-experiments">2.5 A typology of fluxomics experiments</h3>
+<p>"Fluxomics" is not one experiment but a family, and the experiment <em>type</em>
+dictates which data (and therefore which schema constructs) are needed. It is
+useful to type an experiment along four orthogonal axes:</p>
+<p><strong>Axis A — inference paradigm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Tracer?</th>
+<th>Steady state</th>
+<th>Primary inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constraint-based (FBA, and pFBA/FVA/MOMA/dFBA variants)</td>
+<td>no</td>
+<td>metabolic</td>
+<td>stoichiometry, bounds, objective</td>
+</tr>
+<tr>
+<td>Stoichiometric MFA / metabolite balancing</td>
+<td>no</td>
+<td>metabolic</td>
+<td>stoichiometry + measured uptake/secretion rates</td>
+</tr>
+<tr>
+<td>Stationary ¹³C-MFA (SS-MFA)</td>
+<td>yes</td>
+<td>metabolic <strong>and</strong> isotopic</td>
+<td>atom mappings + MIDs at steady state</td>
+</tr>
+<tr>
+<td>Isotopically non-stationary MFA (INST-MFA)</td>
+<td>yes</td>
+<td>metabolic only</td>
+<td>time-series MIDs + pool sizes</td>
+</tr>
+<tr>
+<td>Dynamic MFA (DMFA)</td>
+<td>optional</td>
+<td>none</td>
+<td>time-series rates/labeling</td>
+</tr>
+<tr>
+<td>¹³C flux-ratio analysis (METAFoR)</td>
+<td>yes</td>
+<td>isotopic</td>
+<td>local labeling patterns → flux <em>ratios</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Axis B — labeling design</strong></p>
+<ul>
+<li><strong>Single-tracer</strong> vs <strong>parallel labeling experiments (PLE)</strong> — two or more
+  tracer cultures fit jointly to one model. Using complementary parallel
+  tracers is the <strong>COMPLETE-MFA</strong> approach, now regarded as the gold standard
+  for flux precision/observability.</li>
+<li><strong>Tracer positional design</strong>: positional (e.g. <code>[1-¹³C]</code>, <code>[1,2-¹³C]</code>,
+  <code>[1,6-¹³C]</code> glucose) vs uniform (<code>[U-¹³C₆]</code>).</li>
+</ul>
+<p><strong>Axis C — tracer isotope</strong> — ¹³C dominates, but ²H, ¹⁵N, ¹⁷O/¹⁸O are used,
+and combined designs exist (e.g. one-shot ¹³C/¹⁵N for simultaneous carbon and
+nitrogen flux).</p>
+<p><strong>Axis D — measurement platform</strong> — GC-MS, LC-MS/MS, tandem MS (MS/MS), and
+NMR (¹H/¹³C/¹⁵N HSQC). The platform determines whether <strong>positional
+isotopomers</strong> (NMR, MS/MS) or only <strong>mass isotopologues / MIDs</strong> (single-stage
+MS) are observed — a distinction ChEMROF can already express via
+<code>isotopomer_of</code> vs <code>isotopologue_of</code>.</p>
+<p>These axes combine: a typical study is e.g. <em>stationary ¹³C-MFA, parallel
+<code>[1,2-¹³C]</code> + <code>[U-¹³C₆]</code> glucose, GC-MS, central-carbon model</em>. A fluxomics
+schema should therefore treat "experiment type" as a small set of controlled
+vocabularies (one per axis) rather than a single flat enum, and let a
+<strong><code>FluxomicsExperiment</code></strong> carry one or more <strong><code>Tracer</code></strong> specifications plus its
+measurement platform and timepoints (sketched in §7.4).</p>
+<h2 id="3-standards-landscape-for-alignment">3. Standards landscape (for alignment)</h2>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Standard / resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constraint-based model exchange</td>
+<td>SBML L3 + <code>fbc</code> package</td>
+</tr>
+<tr>
+<td>Isotope-labeling model exchange</td>
+<td>FluxML; OpenFLUX/INCA/13CFLUX2 formats</td>
+</tr>
+<tr>
+<td>Kinetic / Bayesian model exchange</td>
+<td>SBML (kinetics); Maud (TOML)</td>
+</tr>
+<tr>
+<td>Semantic typing of model parts</td>
+<td>Systems Biology Ontology (SBO)</td>
+</tr>
+<tr>
+<td>Reaction identity &amp; balancing</td>
+<td>Rhea, RInChI, reaction SMILES/SMIRKS</td>
+</tr>
+<tr>
+<td>Atom mappings</td>
+<td>MetaCyc, MetAMDB (RXN/SMILES with atom maps)</td>
+</tr>
+<tr>
+<td>Metabolite/reaction identifiers</td>
+<td>BiGG, MetaNetX, KEGG, ChEBI, HMDB</td>
+</tr>
+<tr>
+<td>Reproducibility report</td>
+<td>FROG</td>
+</tr>
+</tbody>
+</table>
+<p>ChEMROF already lists <code>RHEA</code>, <code>KEGG.REACTION</code>, <code>MetaCyc</code>, <code>EC</code>,
+<code>MetaNetX.reaction</code>, <code>SEED</code>, <code>RetroRules</code>, <code>RXNO</code>, <code>bigg.metabolite</code>,
+<code>MetaNetX.chemical</code> etc. among its <code>id_prefixes</code>, so it is well-positioned to
+<em>cross-reference</em> these resources.</p>
+<h3 id="31-do-we-have-fluxml-mappings-a-crosswalk">3.1 Do we have FluxML mappings? (a crosswalk)</h3>
+<p>Short answer: <strong>no — there are currently no FluxML (or SBML/<code>fbc</code>/SBO)
+mappings in the schema, and FluxML is not the kind of artifact you map to
+directly.</strong> Two clarifications:</p>
+<ol>
+<li>
+<p><strong>FluxML is an exchange <em>format</em> (an XML schema), not a controlled
+   vocabulary with stable term IRIs.</strong> So there is nothing to put in a
+   LinkML <code>exact_mappings</code>/SSSOM table for FluxML the way there is for, say,
+   <code>RXNO:</code> or <code>CHEBI:</code>. What you <em>can</em> map are (a) the <strong>entity identifiers</strong>
+   that FluxML documents reference (Rhea/KEGG/BiGG/MetaNetX metabolite and
+   reaction IDs) and (b) the <strong>structural elements</strong> of a FluxML document onto
+   ChEMROF classes/slots (an element-level crosswalk).</p>
+</li>
+<li>
+<p><strong>At the identifier level we are already aligned</strong>: ChEMROF's <code>id_prefixes</code>
+   for metabolites (<code>CHEBI</code>, <code>bigg.metabolite</code>, <code>KEGG</code>, <code>MetaNetX.chemical</code>,
+   <code>HMDB</code>, …) and reactions (<code>RHEA</code>, <code>KEGG.REACTION</code>, <code>MetaCyc</code>, <code>EC</code>,
+   <code>MetaNetX.reaction</code>, <code>bigg.metabolite</code>/<code>MetaNetX.reaction</code>) cover the
+   namespaces FluxML/SBML models use, so ChEMROF can serve as the
+   chemical-identity hub for the metabolites and reactions a FluxML model names.</p>
+</li>
+</ol>
+<p>What is <strong>missing</strong> is the structural crosswalk. A proposed element-level
+mapping (to be implemented in a companion schema that imports ChEMROF):</p>
+<table>
+<thead>
+<tr>
+<th>FluxML element / concept</th>
+<th>ChEMROF equivalent</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;metabolitepool&gt;</code> (id, atoms)</td>
+<td><code>ChemicalEntity</code> (+ <code>has_atom_occurrences</code>)</td>
+<td>identifiers ✅, atom count via occurrences ✅</td>
+</tr>
+<tr>
+<td><code>&lt;reaction&gt;</code></td>
+<td><code>Reaction</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>&lt;reduct&gt;</code> / <code>&lt;rproduct&gt;</code> (educt/product, with carbon labels)</td>
+<td><code>ReactionParticipant</code> (<code>left</code>/<code>right_participants</code>)</td>
+<td>partial — see atom mapping</td>
+</tr>
+<tr>
+<td>atom-transition string (e.g. <code>A#abc + B#de -&gt; C#abcde</code>)</td>
+<td><code>AtomTransition</code> over <code>AtomOccurrence</code> (proposed §7.2)</td>
+<td>❌ not yet</td>
+</tr>
+<tr>
+<td>net / exchange (forward/back) flux, <code>&lt;constraint&gt;</code>/<code>&lt;flux&gt;</code></td>
+<td><code>MetabolicFlux</code> + bounds (proposed §7.4)</td>
+<td>❌ not yet</td>
+</tr>
+<tr>
+<td>isotopomer / cumomer / EMU labeling state</td>
+<td><code>isotopomer_of</code> / <code>isotopologue_of</code>; <code>MassIsotopomerDistribution</code> (proposed §7.3)</td>
+<td>relations ✅, distribution object ❌</td>
+</tr>
+<tr>
+<td><code>&lt;measurement&gt;</code> (MS/MS/NMR config + data)</td>
+<td><code>FluxomicsExperiment</code> measurement (proposed §7.4)</td>
+<td>❌ not yet</td>
+</tr>
+<tr>
+<td><code>&lt;configuration&gt;</code> / tracer input (<code>&lt;input&gt;</code> labeling)</td>
+<td><code>Tracer</code> (proposed §7.4)</td>
+<td>❌ not yet</td>
+</tr>
+</tbody>
+</table>
+<p>So: identifier-level mappings exist today; the <strong>structural FluxML↔ChEMROF
+crosswalk, and especially atom transitions and labeling-data objects, are the
+concrete pieces to add.</strong> Building a small FluxML↔ChEMROF round-trip converter
+(validating on one published model) would be the most direct way to prove the
+crosswalk and surface remaining gaps.</p>
+<h2 id="4-what-chemrof-already-provides">4. What ChEMROF already provides</h2>
+<p>ChEMROF is primarily a <strong>chemical-entity</strong> ontology/schema, but it already
+contains the chemistry that fluxomics models hang their data on:</p>
+<ul>
+<li><strong><code>Reaction</code></strong> (<code>RXNO:0000000</code>) with <code>left_participants</code> /
+  <code>right_participants</code> (each a <code>ReactionParticipant</code>), <code>direction</code>,
+  <code>is_balanced</code>, <code>is_transport</code>, <code>is_fully_characterized</code>, <code>reaction_center</code>,
+  and reaction-level cross-refs to RHEA/KEGG/MetaCyc/EC/MetaNetX/SEED/BiGG.</li>
+<li><strong><code>ReactionParticipant</code></strong> linking a <code>Reaction</code> to a <code>ChemicalEntity</code> with a
+  <code>stoichiometry</code> slot.</li>
+<li><strong>Kinetic slots already on <code>Reaction</code>/elsewhere</strong>: <code>reaction_rate</code> (<code>v</code>,
+  units mol·m⁻³·s⁻¹), <code>reaction_rate_coefficient</code>, plus <code>kcat</code> (turnover
+  number) and <code>michaelis_constant</code> (<code>Km</code>).</li>
+<li><strong>Reaction-structure representations</strong>: <code>has_reaction_smiles_representation</code>,
+  <code>has_reaction_smarts_representation</code>, <code>has_rinchi_representation</code>,
+  <code>has_smirks_representation</code>, <code>has_reaction_representation</code> — directly relevant
+  to encoding atom-mapped reactions.</li>
+<li><strong>Isotope machinery</strong>: <code>Isotope</code>/<code>Nuclide</code> classes, and the relations
+  <code>isotopologue_of</code> and <code>isotopomer_of</code> (alongside related nuclear-family
+  relations such as <code>isobar_of</code>, <code>isotone_of</code>, <code>isotope_of</code>), plus an
+  <code>isomeric_smiles_string</code> whose description already cites <code>[13C]</code>. This is the
+  conceptual vocabulary that ¹³C-MFA needs.</li>
+<li><strong>Per-atom individuation</strong>: <code>AtomOccurrence</code> ("one of two occurrences of
+  oxygen in nitrate") with <code>occurrence_of → Atom</code>, <code>valence</code>, <code>oxidation_number</code>,
+  etc., reached via <code>has_atom_occurrences</code>. This is the natural anchor for
+  <strong>atom mapping</strong>, because atom transitions are relations between individuated
+  substrate and product atom occurrences.</li>
+<li><strong>Concentration</strong> (<code>Concentration</code> class + <code>concentration</code> slot +
+  <code>ConcentrationUnitEnum</code>) — supports the pool-size / metabolomics coupling
+  needed by INST-MFA.</li>
+<li><strong><code>ReactionGroupingClass</code></strong> and <strong><code>ReactionTypeEnum</code></strong> for classifying
+  reactions (currently organic-synthesis flavored: oxidation, hydrolysis,
+  isomerization, …).</li>
+</ul>
+<p>In short: ChEMROF already models reactions, participants, stoichiometry,
+isotopes/isotopologues/isotopomers, per-atom occurrences, reaction-structure
+linear notations, concentrations, and basic enzyme kinetics. That is a
+surprisingly large fraction of the <em>chemistry</em> underlying fluxomics.</p>
+<h2 id="5-gaps-relative-to-fluxomics-use-cases">5. Gaps relative to fluxomics use cases</h2>
+<p>The gaps are mostly about <strong>quantitative network modeling</strong> rather than
+chemistry per se — i.e. the parts that SBML-<code>fbc</code>/FluxML add on top of a
+chemical reaction network:</p>
+<ol>
+<li>
+<p><strong>Stoichiometry is integer-only and unsigned.</strong> <code>ReactionParticipant.stoichiometry</code>
+   has <code>range: integer</code>. GEMs routinely use <strong>fractional</strong> coefficients
+   (biomass reactions, lumped reactions, cofactor ratios). Left/right is
+   captured by participant lists, but a single signed <code>float</code> coefficient is
+   the modeling convention.</p>
+</li>
+<li>
+<p><strong>No flux quantity.</strong> <code>reaction_rate</code> exists as an intrinsic kinetic rate,
+   but there is no notion of an <em>estimated/observed network flux</em> with its
+   units (mmol·gDW⁻¹·h⁻¹), confidence interval, and the <em>experiment/condition</em>
+   it pertains to. Flux is condition-specific data, not an intrinsic property
+   of a reaction.</p>
+</li>
+<li>
+<p><strong>No flux bounds / objective / FBA scaffolding.</strong> No <code>lower_bound</code>,
+   <code>upper_bound</code>, <code>reversible</code> flag, or objective-function representation.</p>
+</li>
+<li>
+<p><strong>No compartment / cellular-location model.</strong> Metabolites and reactions in
+   GEMs are compartmentalized; transport reactions move species between
+   compartments. ChEMROF has <code>is_transport: boolean</code> but no compartment entity
+   or per-participant compartment.</p>
+</li>
+<li>
+<p><strong>No first-class atom-mapping / atom-transition construct.</strong> <code>AtomOccurrence</code>
+   exists, but there is no relation asserting "substrate atom occurrence <em>X</em>
+   becomes product atom occurrence <em>Y</em> in reaction <em>R</em>." Atom-mapped reaction
+   SMILES could carry this implicitly, but a structured construct is what MFA
+   tooling consumes.</p>
+</li>
+<li>
+<p><strong>No measurement/distribution model for labeling.</strong> No <code>MassIsotopomerDistribution</code>
+   (MID/MDV vector), no per-position labeling state, no EMU construct, and no
+   way to attach measured labeling data to a metabolite in an experiment.</p>
+</li>
+<li>
+<p><strong>No experiment / dataset context, and no notion of experiment type.</strong>
+   Fluxes and MIDs are only meaningful relative to an organism, strain, growth
+   condition, tracer, timepoint, measurement platform, and the <em>kind</em> of
+   experiment (FBA vs stationary ¹³C-MFA vs INST-MFA vs parallel/COMPLETE-MFA;
+   see the typology in §2.5). ChEMROF has no such context or experiment-type
+   construct (appropriately — it is a chemistry schema), so a fluxomics
+   extension must decide what lives here vs. in a companion schema (§7.4).</p>
+</li>
+<li>
+<p><strong>GPR associations</strong> (gene/enzyme → reaction) are out of scope for a
+   chemistry schema and would belong in a companion model that <em>references</em>
+   ChEMROF reactions.</p>
+</li>
+</ol>
+<p>The worked example in Appendix A (a Bayesian <em>kinetic</em> model) surfaces three
+further gaps that matter for the kinetic/dynamic experiment type:</p>
+<ol>
+<li>
+<p><strong>No reaction rate-law / mechanism typing.</strong> Kinetic models tag each
+   reaction with a rate law (e.g. reversible vs irreversible Michaelis–Menten,
+   mass-action, a "drain"/boundary flux). ChEMROF has the <em>parameters</em> (<code>kcat</code>,
+   <code>michaelis_constant</code>) but no controlled vocabulary for the <em>mechanism</em> they
+   parameterize, and no inhibition constant (<code>Ki</code>).</p>
+</li>
+<li>
+<p><strong>No enzyme-regulation relationships.</strong> Allosteric activation/inhibition and
+    competitive inhibition (metabolite → enzyme effects) are central to kinetic
+    models. ChEMROF has <code>ChemicalRole</code>/<code>has_chemical_role</code> but nothing for
+    metabolite-on-enzyme regulatory interactions (these may belong in a
+    companion enzyme/kinetics schema).</p>
+</li>
+<li>
+<p><strong>No reaction thermodynamics.</strong> Standard Gibbs free energy of formation
+    (ΔGf°, the <code>dgf</code> priors in the example), temperature, transported charge,
+    and membrane potential drive reversibility/direction. ChEMROF has assorted
+    <code>thermophysical_property</code> slots but no ΔGf°/ΔGr° for reactions or a
+    thermodynamics-based directionality model.</p>
+</li>
+</ol>
+<h2 id="6-two-strategic-options">6. Two strategic options</h2>
+<p><strong>Option A — ChEMROF as the chemistry substrate, fluxomics in a companion
+schema (recommended).</strong> Keep ChEMROF focused on chemical entities and
+reactions, and build a thin fluxomics LinkML module that <em>imports</em> ChEMROF and
+adds the modeling/experiment layer (fluxes, bounds, objectives, compartments,
+MIDs, experiments). This mirrors how SBML-<code>fbc</code> and FluxML sit <em>on top of</em> a
+reaction network, and keeps ChEMROF from absorbing systems-biology scope. The
+companion would reuse ChEMROF <code>Reaction</code>, <code>ReactionParticipant</code>,
+<code>ChemicalEntity</code>, <code>Concentration</code>, <code>Isotope</code>, and <code>AtomOccurrence</code>.</p>
+<p><strong>Option B — Extend ChEMROF in place.</strong> Add the minimal <em>chemistry-adjacent</em>
+pieces that clearly belong here (atom transitions, signed/float stoichiometry,
+isotopologue/MID vocabulary) and leave the network-modeling layer to consumers.</p>
+<p>A pragmatic split: do the <strong>chemistry-adjacent</strong> items (Sections 7.1–7.3) in
+ChEMROF, and the <strong>modeling/experiment</strong> items (7.4–7.5) in a companion schema.</p>
+<h2 id="7-concrete-extension-sketches">7. Concrete extension sketches</h2>
+<p>These are illustrative LinkML fragments for discussion, not finished schema.</p>
+<h3 id="71-allow-signed-fractional-stoichiometry-small-in-place">7.1 Allow signed, fractional stoichiometry (small, in-place)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">slots</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stoichiometry</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span><span class="w">          </span><span class="c1"># was: integer</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">Signed stoichiometric coefficient of the participant in the reaction</span>
+<span class="w">      </span><span class="no">(negative for consumed, positive for produced, by convention), allowing</span>
+<span class="w">      </span><span class="no">fractional values as used in genome-scale biomass and lumped reactions.</span>
+</code></pre></div>
+<p>(If integer semantics are still wanted for elementary reactions, keep
+<code>stoichiometry: integer</code> and add a separate <code>stoichiometric_coefficient: float</code>
+for network modeling.)</p>
+<h3 id="72-atom-transitions-atom-mapping-using-existing-atomoccurrence">7.2 Atom transitions (atom mapping) using existing <code>AtomOccurrence</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">classes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">AtomTransition</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalRelationship</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">Asserts that a substrate atom occurrence corresponds to (becomes) a</span>
+<span class="w">      </span><span class="no">product atom occurrence within a specific reaction — the unit of an atom</span>
+<span class="w">      </span><span class="no">mapping / atom transition network used in 13C-MFA.</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reactant_atom</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AtomOccurrence</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">product_atom</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AtomOccurrence</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">slots</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">has_atom_transitions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AtomTransition</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reaction</span>
+</code></pre></div>
+<p>This lets ChEMROF represent the same information as MetAMDB / mapped reaction
+SMILES, but in a queryable structured form, while reusing <code>AtomOccurrence</code>.</p>
+<h3 id="73-isotope-labeling-vocabulary-chemistry-adjacent">7.3 Isotope-labeling vocabulary (chemistry-adjacent)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">classes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">MassIsotopomerDistribution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">The fractional abundances (summing to 1) of the mass isotopologues</span>
+<span class="w">      </span><span class="no">(M+0, M+1, M+2, …) of a chemical entity or molecular fragment; the</span>
+<span class="w">      </span><span class="no">primary measurement in 13C-MFA (a.k.a. mass distribution vector, MDV).</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">fragment_of</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">      </span><span class="nt">fractions</span><span class="p">:</span><span class="w">                 </span><span class="c1"># ordered M+0, M+1, ...</span>
+<span class="w">        </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="w">        </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">tracer</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">e.g. &quot;[U-13C6] glucose&quot;</span>
+</code></pre></div>
+<p><code>Isotopologue</code>/isotopomer relations already exist; this adds the
+<em>distribution</em> object that fluxomics measures. (<code>EMU</code> could be added later as a
+fragment construct if structured isotope simulation is in scope.)</p>
+<h3 id="74-network-modeling-layer-companion-schema-sketch">7.4 Network-modeling layer (companion schema, sketch)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">classes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Compartment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A bounded cellular space (e.g. cytosol, mitochondrion).</span>
+<span class="w">  </span><span class="nt">MetabolicFlux</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">An estimated or observed throughput through a reaction under a specific</span>
+<span class="w">      </span><span class="no">condition, with units and uncertainty.</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reaction</span><span class="p">:</span><span class="w">        </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">Reaction</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w">           </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">unit</span><span class="p">:</span><span class="w">            </span><span class="p p-Indicator">{</span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="nv">e.g. mmol/gDW/h</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">lower_bound</span><span class="p">:</span><span class="w">     </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">upper_bound</span><span class="p">:</span><span class="w">     </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">confidence_low</span><span class="p">:</span><span class="w">  </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">confidence_high</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w">       </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">GrowthCondition</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">Objective</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FBA objective (reaction coefficients to maximize/minimize).</span>
+<span class="w">  </span><span class="nt">Tracer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">A labeled substrate used in an isotope-labeling experiment, specifying</span>
+<span class="w">      </span><span class="no">which isotope sits at which atom position(s).</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">substrate</span><span class="p">:</span><span class="w">        </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">ChemicalEntity</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">isotope</span><span class="p">:</span><span class="w">          </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">Isotope</span><span class="p p-Indicator">}</span><span class="w">        </span><span class="c1"># e.g. carbon-13</span>
+<span class="w">      </span><span class="nt">labeled_positions</span><span class="p">:</span><span class="w">                        </span><span class="c1"># e.g. [1, 2] for [1,2-13C]</span>
+<span class="w">        </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">purity</span><span class="p">:</span><span class="w">           </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">}</span><span class="w">          </span><span class="c1"># fractional isotopic purity</span>
+<span class="w">  </span><span class="nt">FluxomicsExperiment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">A single fluxomics experiment, typed along the axes in section 2.5.</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">inference_paradigm</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">FluxInferenceParadigmEnum</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">tracers</span><span class="p">:</span><span class="w">            </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">Tracer</span><span class="p p-Indicator">,</span><span class="nt"> multivalued</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">}</span><span class="w">  </span><span class="c1"># &gt;1 ⇒ parallel/COMPLETE-MFA</span>
+<span class="w">      </span><span class="nt">measurement_platform</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">FluxMeasurementPlatformEnum</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">isotopic_steady_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">boolean</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">timepoints</span><span class="p">:</span><span class="w">         </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">float</span><span class="p p-Indicator">,</span><span class="nt"> multivalued</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">}</span><span class="w">   </span><span class="c1"># for INST/dynamic</span>
+<span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w">          </span><span class="p p-Indicator">{</span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="nv">GrowthCondition</span><span class="p p-Indicator">}</span>
+<span class="nt">enums</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">FluxInferenceParadigmEnum</span><span class="p">:</span><span class="w">    </span><span class="c1"># Axis A</span>
+<span class="w">    </span><span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">flux_balance_analysis</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">stoichiometric_mfa</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">stationary_13C_mfa</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">nonstationary_mfa</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w">      </span><span class="c1"># INST-MFA</span>
+<span class="w">      </span><span class="nt">dynamic_mfa</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">flux_ratio_analysis</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">FluxMeasurementPlatformEnum</span><span class="p">:</span><span class="w">  </span><span class="c1"># Axis D</span>
+<span class="w">    </span><span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">GC_MS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">LC_MS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">tandem_MS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">NMR</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+</code></pre></div>
+<p>A multivalued <code>tracers</code> slot naturally captures <strong>parallel labeling /
+COMPLETE-MFA</strong> (more than one tracer for the same model), and <code>isotope</code> +
+<code>labeled_positions</code> on <code>Tracer</code> covers Axes B and C (positional vs uniform,
+¹³C vs ¹⁵N/²H/¹⁸O). This keeps "experiment type" as a few small controlled
+vocabularies rather than one flat enum.</p>
+<h3 id="75-sbosbml-alignment">7.5 SBO/SBML alignment</h3>
+<p>Tag reaction subtypes (transport, exchange, biomass pseudo-reaction) so models
+round-trip with SBML-<code>fbc</code>. ChEMROF already has <code>is_transport</code>; an enum or SBO
+cross-reference for <code>exchange</code> / <code>biomass</code> / <code>demand</code>/<code>sink</code> reactions would
+complete the picture.</p>
+<h2 id="8-recommendation">8. Recommendation</h2>
+<ol>
+<li><strong>Adopt Option A</strong> as the overall architecture: a fluxomics LinkML module
+   that imports ChEMROF, keeping systems-biology scope out of the chemistry
+   schema.</li>
+<li><strong>In ChEMROF itself, make the small chemistry-adjacent additions</strong> that are
+   independently useful and clearly in-scope:</li>
+<li>signed/float stoichiometry (or a parallel <code>stoichiometric_coefficient</code>),</li>
+<li>an <code>AtomTransition</code> construct reusing <code>AtomOccurrence</code>,</li>
+<li>a <code>MassIsotopomerDistribution</code> class to complement the existing
+     isotopologue/isotopomer relations.</li>
+<li><strong>Validate against real examples</strong>: (a) for the isotope path, encode one
+   well-characterized pathway (e.g. glycolysis/TCA) with atom mappings and a
+   [U-¹³C]glucose tracer and round-trip a small FBA model from BiGG; (b) for the
+   kinetic path, reuse the <strong>methionine-cycle Maud model</strong> dissected in
+   Appendix A — its metabolites already carry InChIKeys and BiGG IDs, so it is a
+   ready-made test of ChEMROF as the metabolite/reaction identity provider.</li>
+<li><strong>Engage standards</strong>: align reaction typing with SBO, and ensure reaction
+   and metabolite identifiers map cleanly to BiGG/MetaNetX/Rhea so ChEMROF can
+   act as the chemical-identity hub for fluxomics datasets.</li>
+</ol>
+<h2 id="appendix-a-worked-example-the-biosustain-methionine-cycle-maud-model">Appendix A. Worked example: the biosustain methionine-cycle (Maud) model</h2>
+<p>To ground the analysis, this appendix dissects a real public model —
+<a href="https://github.com/biosustain/Methionine_model"><code>biosustain/Methionine_model</code></a>
+(<code>data/methionine</code>). It is a <strong>Maud</strong> model: Bayesian inference of a <em>kinetic</em>
+metabolic model with thermodynamic constraints (Stan/HMC under the hood). It is
+the <strong>kinetic / dynamic</strong> experiment type from §2.5 — not ¹³C-MFA — which makes
+it a useful contrast: it stresses ChEMROF's kinetics and identity features and
+needs <em>none</em> of the isotope/atom-mapping machinery.</p>
+<p>The methionine cycle is modeled in one compartment (<code>c</code>) with 10 reactions
+(<code>METAT</code>, <code>METH</code>, <code>GNMT</code>, <code>AHC</code>, <code>MS</code>, <code>BHMT</code>, <code>CBS</code>, <code>MTHFR</code>, <code>PROT</code>, plus a
+<code>met-L-source</code> drain) over 19 metabolites (methionine, ATP, S-adenosyl­methionine,
+S-adenosyl­homocysteine, homocysteine, 5-methyl-THF, …).</p>
+<p><strong>What maps cleanly onto ChEMROF today</strong></p>
+<ul>
+<li><strong>Metabolites → <code>ChemicalEntity</code>.</strong> Every metabolite is given by
+  <strong>InChIKey</strong> <em>and</em> a <strong>BiGG</strong> source URL, e.g.
+  <code>met-L → FFEARJCKVFRZRR-BYPYZUCNSA-N</code> (bigg <code>met__L</code>). ChEMROF already has
+  <code>inchi_key_string</code> and the <code>bigg.metabolite</code> prefix — this is exactly the
+  identity-hub role ChEMROF is built for, and is its clearest immediate value
+  to such a project.</li>
+<li><strong>Reactions → <code>Reaction</code> + <code>ReactionParticipant</code>.</strong> Each reaction has a
+  signed stoichiometry table; e.g. <code>METAT</code>: <code>met-L −1, atp −1, pi +1, ppi +1,
+  amet +1</code>.</li>
+<li><strong>Kinetic parameters → existing slots.</strong> Priors are specified for <code>kcat</code>
+  (per enzyme/reaction) and <code>km</code> (per metabolite/enzyme/reaction) — directly the
+  ChEMROF <code>kcat</code> and <code>michaelis_constant</code> slots.</li>
+</ul>
+<p><strong>What the example proves ChEMROF is missing</strong> (cross-referencing §5)</p>
+<table>
+<thead>
+<tr>
+<th>Maud construct (this model)</th>
+<th>ChEMROF status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stoichiometry = -1.0 / 1.0</code> (signed <strong>float</strong>)</td>
+<td>gap #1 — ChEMROF <code>stoichiometry</code> is integer</td>
+</tr>
+<tr>
+<td><code>target_type = "flux"</code> measurements with error</td>
+<td>gap #2 — no measured/estimated flux quantity</td>
+</tr>
+<tr>
+<td><code>compartment</code> + <code>metabolite_in_compartment</code> (<code>balanced</code> = internal/boundary)</td>
+<td>gap #4 — no compartment model</td>
+</tr>
+<tr>
+<td><code>mechanism = irreversible_michaelis_menten / reversible_michaelis_menten / drain</code></td>
+<td>gap #9 — no rate-law/mechanism vocabulary</td>
+</tr>
+<tr>
+<td><code>ki</code> priors; <code>allostery</code> (activation/inhibition); <code>competitive_inhibition</code></td>
+<td>gaps #9/#10 — no <code>Ki</code>, no enzyme-regulation relations</td>
+</tr>
+<tr>
+<td><code>dgf</code> (ΔGf°), <code>temperature</code>, <code>transported_charge</code>, <code>psi</code></td>
+<td>gap #11 — no reaction thermodynamics</td>
+</tr>
+<tr>
+<td><code>experiment</code> blocks with <code>is_train</code>/<code>is_test</code>, <code>enzyme_knockouts</code></td>
+<td>gap #7 — no experiment/condition context</td>
+</tr>
+<tr>
+<td><code>enzyme</code> / <code>enzyme_reaction</code> / <code>subunits</code></td>
+<td>gap #8 — GPR; out of ChEMROF scope</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two things worth emphasizing</strong></p>
+<ul>
+<li><em>No atom mappings, isotopomers, or MIDs appear anywhere in this model.</em> That
+  is not a deficiency — it confirms §2.5's claim that the <strong>experiment type
+  selects which extensions matter</strong>. A kinetic model needs mechanism/Ki/ΔGf°
+  and measured flux+concentration; the §7.2–7.3 isotope constructs are simply
+  irrelevant here.</li>
+<li><em>ChEMROF already does the part that is hardest to get right</em> — unambiguous
+  chemical identity (InChIKey, formula, charge, and the cross-refs needed to
+  later attach ΔGf° and pKa). The missing pieces are the systems-biology
+  modeling layer, which (per Option A) belongs in a companion schema that
+  imports ChEMROF and reuses <code>ChemicalEntity</code>/<code>Reaction</code>/<code>Concentration</code>.</li>
+</ul>
+<p><strong>Implemented proof of concept.</strong> This converter now exists:
+<code>chemrof convert-maud &lt;model.toml&gt;</code> (module
+<code>chemrof.converter.maud</code>) ingests a Maud kinetic model and emits a ChEMROF
+<code>Collection</code> of <code>SmallMolecule</code> records (keyed by InChIKey) plus
+<code>Reaction</code>/<code>ReactionParticipant</code> records, including the reaction mechanism and
+regulation. To support it, ChEMROF gained (in-place, per the agreed scope):</p>
+<ul>
+<li>a <code>reaction_mechanism</code> slot + <code>ReactionMechanismEnum</code>
+  (reversible/irreversible Michaelis-Menten, mass action, drain);</li>
+<li><code>AllostericRegulation</code> and <code>CompetitiveInhibition</code> classes (with an
+  <code>EnzymeModificationTypeEnum</code>), attached to <code>Reaction</code> via
+  <code>has_allosteric_regulation</code> / <code>has_competitive_inhibition</code>;</li>
+<li>an <code>inhibition_constant</code> (Ki) slot alongside <code>kcat</code>/<code>michaelis_constant</code>;</li>
+<li>float <code>stoichiometry</code> on <code>ReactionParticipant</code> (and the participant/
+  stoichiometry slots are now properly attached to that class);</li>
+<li><code>inchi_key_string</code> added to <code>ChemicalEntity</code>.</li>
+</ul>
+<p>The full <code>methionine_cycle.toml</code> round-trips and validates against the schema
+(29 entities). Bayesian priors, measured fluxes/concentrations, compartments,
+and thermodynamics (ΔGf°) remain future work for a companion modelling layer.</p>
+<h2 id="9-sources">9. Sources</h2>
+<ul>
+<li>Weitzel et al., <em>The Design of FluxML: A Universal Modeling Language for
+  ¹³C Metabolic Flux Analysis</em>, Front. Microbiol. 2019 —
+  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6543931/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6543931/</a></li>
+<li>Weitzel et al., <em>13CFLUX2 — high-performance software suite for ¹³C-MFA</em>,
+  Bioinformatics 2013 — <a href="https://academic.oup.com/bioinformatics/article/29/1/143/273014">https://academic.oup.com/bioinformatics/article/29/1/143/273014</a></li>
+<li>Antoniewicz et al., <em>Elementary Metabolite Units (EMU): a novel framework for
+  modeling isotopic distributions</em>, Metab. Eng. 2007 —
+  <a href="https://www.sciencedirect.com/science/article/abs/pii/S109671760600084X">https://www.sciencedirect.com/science/article/abs/pii/S109671760600084X</a></li>
+<li><em>EMUlator: an EMU-based isotope simulator</em> —
+  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6503117/">https://pmc.ncbi.nlm.nih.gov/articles/PMC6503117/</a></li>
+<li><em>MetAMDB: Metabolic Atom Mapping Database</em> —
+  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8878866/">https://pmc.ncbi.nlm.nih.gov/articles/PMC8878866/</a></li>
+<li><em>Comparative evaluation of atom mapping algorithms for balanced metabolic
+  reactions (Recon 3D)</em>, J. Cheminform. 2017 —
+  <a href="https://jcheminf.biomedcentral.com/articles/10.1186/s13321-017-0223-1">https://jcheminf.biomedcentral.com/articles/10.1186/s13321-017-0223-1</a></li>
+<li>Olivier &amp; Bergmann, <em>SBML Level 3 Package: Flux Balance Constraints (fbc)</em> —
+  <a href="https://pubmed.ncbi.nlm.nih.gov/26528567/">https://pubmed.ncbi.nlm.nih.gov/26528567/</a></li>
+<li><em>SBOannotator: automated assignment of Systems Biology Ontology terms</em>,
+  Bioinformatics 2023 — <a href="https://academic.oup.com/bioinformatics/article/39/7/btad437/7224245">https://academic.oup.com/bioinformatics/article/39/7/btad437/7224245</a></li>
+<li><em>Achieving Metabolic Flux Analysis for S. cerevisiae at a Genome-Scale</em> —
+  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4588810/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4588810/</a></li>
+<li>Crown &amp; Antoniewicz, <em>Integrated ¹³C-MFA of 14 parallel labeling experiments
+  in E. coli</em> (COMPLETE-MFA), Metab. Eng. 2015 —
+  <a href="https://pubmed.ncbi.nlm.nih.gov/25596508/">https://pubmed.ncbi.nlm.nih.gov/25596508/</a></li>
+<li><em>Optimal tracers for parallel labeling experiments and ¹³C-MFA: a precision
+  and synergy scoring system</em>, Metab. Eng. 2016 —
+  <a href="https://pubmed.ncbi.nlm.nih.gov/27267409/">https://pubmed.ncbi.nlm.nih.gov/27267409/</a></li>
+<li><em>One-shot ¹³C¹⁵N-MFA for simultaneous quantification of carbon and nitrogen
+  flux</em> — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9996240/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9996240/</a></li>
+<li><em>An analytic framework for estimating metabolic flux ratios from ¹³C tracer
+  experiments (METAFoR)</em> — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2430715/">https://pmc.ncbi.nlm.nih.gov/articles/PMC2430715/</a></li>
+<li><em>OpenFLUX2: ¹³C-MFA software for single and parallel labeling experiments</em> —
+  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4263107/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4263107/</a></li>
+<li><em>biosustain/Methionine_model</em> (worked example, Appendix A) —
+  <a href="https://github.com/biosustain/Methionine_model">https://github.com/biosustain/Methionine_model</a></li>
+<li><em>Maud</em> — Bayesian inference of kinetic models of metabolism (biosustain) —
+  <a href="https://github.com/biosustain/Maud">https://github.com/biosustain/Maud</a>
+</content>
+</invoke></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
