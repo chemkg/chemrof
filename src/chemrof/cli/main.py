@@ -256,6 +256,47 @@ def from_smiles(
     )
 
 
+@app.command(name="convert-maud")
+def convert_maud(
+    input: Path = typer.Argument(
+        help="A Maud kinetic-model TOML file, or a Maud config.toml that "
+        "references one via 'kinetic_model_file'.",
+    ),
+    format: OutputFormat = typer.Option(
+        OutputFormat.yaml, "--format", "-f", help="Output format (yaml or json).",
+    ),
+    output: Optional[Path] = typer.Option(
+        None, "--output", "-o", help="Write to a file instead of stdout.",
+    ),
+):
+    """Convert a Maud kinetic model (TOML) into a chemrof Collection.
+
+    Maps metabolites to SmallMolecule (keyed by InChIKey), reactions to Reaction
+    with left/right ReactionParticipants, the reaction mechanism, and any
+    allosteric / competitive-inhibition regulation. Bayesian priors and
+    experiment measurements are not part of this structural mapping.
+
+    Example:
+
+        chemrof convert-maud data/methionine/methionine_cycle.toml
+    """
+    from chemrof.converter.maud import MaudConverter
+
+    if format == OutputFormat.owl:
+        raise typer.BadParameter("convert-maud supports only yaml or json output.")
+
+    collection = MaudConverter().convert_file(input)
+    if format == OutputFormat.json:
+        text = json.dumps(collection, indent=2)
+    else:
+        text = yaml.safe_dump(collection, sort_keys=False)
+
+    if output is not None:
+        output.write_text(text)
+    else:
+        typer.echo(text)
+
+
 class ChemOntStoreFormat(str, Enum):
     duckdb = "duckdb"
     parquet = "parquet"

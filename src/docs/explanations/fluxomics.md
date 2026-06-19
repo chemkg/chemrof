@@ -5,9 +5,12 @@ reaction rates (fluxes) in a biological system — and analyzes how the ChEMROF
 schema can be *used as-is* and where it could be *extended* to serve as a
 chemical-entity backbone for fluxomics data and models.
 
-It is written as a scoping/explanation document. Nothing here changes the
-schema; it is intended to inform a future design discussion (and any
-follow-up issues/PRs).
+It began as a scoping/explanation document. Most of it still describes
+*potential* directions, but the kinetic-modeling thread has since been partly
+**implemented**: ChEMROF gained reaction-mechanism, enzyme-regulation, and
+related slots, and a `chemrof convert-maud` command maps Maud kinetic models
+into ChEMROF (see Appendix A). Sections describing the isotope/atom-mapping
+and flux/experiment layers remain proposals.
 
 ## 1. What is fluxomics?
 
@@ -558,10 +561,26 @@ S-adenosyl­homocysteine, homocysteine, 5-methyl-THF, …).
   modeling layer, which (per Option A) belongs in a companion schema that
   imports ChEMROF and reuses `ChemicalEntity`/`Reaction`/`Concentration`.
 
-A small, high-value proof of concept: write a converter that ingests this
-`methionine_cycle.toml` and emits ChEMROF `ChemicalEntity` records (keyed by
-InChIKey/BiGG) plus `Reaction`/`ReactionParticipant` records, leaving fluxes,
-kinetics, regulation, and thermodynamics to a companion `maud`-aligned module.
+**Implemented proof of concept.** This converter now exists:
+`chemrof convert-maud <model.toml>` (module
+`chemrof.converter.maud`) ingests a Maud kinetic model and emits a ChEMROF
+`Collection` of `SmallMolecule` records (keyed by InChIKey) plus
+`Reaction`/`ReactionParticipant` records, including the reaction mechanism and
+regulation. To support it, ChEMROF gained (in-place, per the agreed scope):
+
+- a `reaction_mechanism` slot + `ReactionMechanismEnum`
+  (reversible/irreversible Michaelis-Menten, mass action, drain);
+- `AllostericRegulation` and `CompetitiveInhibition` classes (with an
+  `EnzymeModificationTypeEnum`), attached to `Reaction` via
+  `has_allosteric_regulation` / `has_competitive_inhibition`;
+- an `inhibition_constant` (Ki) slot alongside `kcat`/`michaelis_constant`;
+- float `stoichiometry` on `ReactionParticipant` (and the participant/
+  stoichiometry slots are now properly attached to that class);
+- `inchi_key_string` added to `ChemicalEntity`.
+
+The full `methionine_cycle.toml` round-trips and validates against the schema
+(29 entities). Bayesian priors, measured fluxes/concentrations, compartments,
+and thermodynamics (ΔGf°) remain future work for a companion modelling layer.
 
 ## 9. Sources
 
