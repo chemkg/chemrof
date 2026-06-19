@@ -158,6 +158,7 @@ measurement platform and timepoints (sketched in §7.4).
 | --- | --- |
 | Constraint-based model exchange | SBML L3 + `fbc` package |
 | Isotope-labeling model exchange | FluxML; OpenFLUX/INCA/13CFLUX2 formats |
+| Kinetic / Bayesian model exchange | SBML (kinetics); Maud (TOML) |
 | Semantic typing of model parts | Systems Biology Ontology (SBO) |
 | Reaction identity & balancing | Rhea, RInChI, reaction SMILES/SMIRKS |
 | Atom mappings | MetaCyc, MetAMDB (RXN/SMILES with atom maps) |
@@ -297,6 +298,27 @@ chemical reaction network:
 8. **GPR associations** (gene/enzyme → reaction) are out of scope for a
    chemistry schema and would belong in a companion model that *references*
    ChEMROF reactions.
+
+The worked example in Appendix A (a Bayesian *kinetic* model) surfaces three
+further gaps that matter for the kinetic/dynamic experiment type:
+
+9. **No reaction rate-law / mechanism typing.** Kinetic models tag each
+   reaction with a rate law (e.g. reversible vs irreversible Michaelis–Menten,
+   mass-action, a "drain"/boundary flux). ChEMROF has the *parameters* (`kcat`,
+   `michaelis_constant`) but no controlled vocabulary for the *mechanism* they
+   parameterize, and no inhibition constant (`Ki`).
+
+10. **No enzyme-regulation relationships.** Allosteric activation/inhibition and
+    competitive inhibition (metabolite → enzyme effects) are central to kinetic
+    models. ChEMROF has `ChemicalRole`/`has_chemical_role` but nothing for
+    metabolite-on-enzyme regulatory interactions (these may belong in a
+    companion enzyme/kinetics schema).
+
+11. **No reaction thermodynamics.** Standard Gibbs free energy of formation
+    (ΔGf°, the `dgf` priors in the example), temperature, transported charge,
+    and membrane potential drive reversibility/direction. ChEMROF has assorted
+    `thermophysical_property` slots but no ΔGf°/ΔGr° for reactions or a
+    thermodynamics-based directionality model.
 
 ## 6. Two strategic options
 
@@ -470,14 +492,76 @@ complete the picture.
    - an `AtomTransition` construct reusing `AtomOccurrence`,
    - a `MassIsotopomerDistribution` class to complement the existing
      isotopologue/isotopomer relations.
-3. **Validate against a real example**: encode one well-characterized pathway
-   (e.g. glycolysis or the TCA cycle) with atom mappings and a [U-¹³C]glucose
-   tracer, cross-referencing Rhea/BiGG/MetaNetX, and round-trip a small FBA
-   model from BiGG to confirm the participant/stoichiometry/compartment model
-   is adequate.
+3. **Validate against real examples**: (a) for the isotope path, encode one
+   well-characterized pathway (e.g. glycolysis/TCA) with atom mappings and a
+   [U-¹³C]glucose tracer and round-trip a small FBA model from BiGG; (b) for the
+   kinetic path, reuse the **methionine-cycle Maud model** dissected in
+   Appendix A — its metabolites already carry InChIKeys and BiGG IDs, so it is a
+   ready-made test of ChEMROF as the metabolite/reaction identity provider.
 4. **Engage standards**: align reaction typing with SBO, and ensure reaction
    and metabolite identifiers map cleanly to BiGG/MetaNetX/Rhea so ChEMROF can
    act as the chemical-identity hub for fluxomics datasets.
+
+## Appendix A. Worked example: the biosustain methionine-cycle (Maud) model
+
+To ground the analysis, this appendix dissects a real public model —
+[`biosustain/Methionine_model`](https://github.com/biosustain/Methionine_model)
+(`data/methionine`). It is a **Maud** model: Bayesian inference of a *kinetic*
+metabolic model with thermodynamic constraints (Stan/HMC under the hood). It is
+the **kinetic / dynamic** experiment type from §2.5 — not ¹³C-MFA — which makes
+it a useful contrast: it stresses ChEMROF's kinetics and identity features and
+needs *none* of the isotope/atom-mapping machinery.
+
+The methionine cycle is modeled in one compartment (`c`) with 10 reactions
+(`METAT`, `METH`, `GNMT`, `AHC`, `MS`, `BHMT`, `CBS`, `MTHFR`, `PROT`, plus a
+`met-L-source` drain) over 19 metabolites (methionine, ATP, S-adenosyl­methionine,
+S-adenosyl­homocysteine, homocysteine, 5-methyl-THF, …).
+
+**What maps cleanly onto ChEMROF today**
+
+- **Metabolites → `ChemicalEntity`.** Every metabolite is given by
+  **InChIKey** *and* a **BiGG** source URL, e.g.
+  `met-L → FFEARJCKVFRZRR-BYPYZUCNSA-N` (bigg `met__L`). ChEMROF already has
+  `inchi_key_string` and the `bigg.metabolite` prefix — this is exactly the
+  identity-hub role ChEMROF is built for, and is its clearest immediate value
+  to such a project.
+- **Reactions → `Reaction` + `ReactionParticipant`.** Each reaction has a
+  signed stoichiometry table; e.g. `METAT`: `met-L −1, atp −1, pi +1, ppi +1,
+  amet +1`.
+- **Kinetic parameters → existing slots.** Priors are specified for `kcat`
+  (per enzyme/reaction) and `km` (per metabolite/enzyme/reaction) — directly the
+  ChEMROF `kcat` and `michaelis_constant` slots.
+
+**What the example proves ChEMROF is missing** (cross-referencing §5)
+
+| Maud construct (this model) | ChEMROF status |
+| --- | --- |
+| `stoichiometry = -1.0 / 1.0` (signed **float**) | gap #1 — ChEMROF `stoichiometry` is integer |
+| `target_type = "flux"` measurements with error | gap #2 — no measured/estimated flux quantity |
+| `compartment` + `metabolite_in_compartment` (`balanced` = internal/boundary) | gap #4 — no compartment model |
+| `mechanism = irreversible_michaelis_menten / reversible_michaelis_menten / drain` | gap #9 — no rate-law/mechanism vocabulary |
+| `ki` priors; `allostery` (activation/inhibition); `competitive_inhibition` | gaps #9/#10 — no `Ki`, no enzyme-regulation relations |
+| `dgf` (ΔGf°), `temperature`, `transported_charge`, `psi` | gap #11 — no reaction thermodynamics |
+| `experiment` blocks with `is_train`/`is_test`, `enzyme_knockouts` | gap #7 — no experiment/condition context |
+| `enzyme` / `enzyme_reaction` / `subunits` | gap #8 — GPR; out of ChEMROF scope |
+
+**Two things worth emphasizing**
+
+- *No atom mappings, isotopomers, or MIDs appear anywhere in this model.* That
+  is not a deficiency — it confirms §2.5's claim that the **experiment type
+  selects which extensions matter**. A kinetic model needs mechanism/Ki/ΔGf°
+  and measured flux+concentration; the §7.2–7.3 isotope constructs are simply
+  irrelevant here.
+- *ChEMROF already does the part that is hardest to get right* — unambiguous
+  chemical identity (InChIKey, formula, charge, and the cross-refs needed to
+  later attach ΔGf° and pKa). The missing pieces are the systems-biology
+  modeling layer, which (per Option A) belongs in a companion schema that
+  imports ChEMROF and reuses `ChemicalEntity`/`Reaction`/`Concentration`.
+
+A small, high-value proof of concept: write a converter that ingests this
+`methionine_cycle.toml` and emits ChEMROF `ChemicalEntity` records (keyed by
+InChIKey/BiGG) plus `Reaction`/`ReactionParticipant` records, leaving fluxes,
+kinetics, regulation, and thermodynamics to a companion `maud`-aligned module.
 
 ## 9. Sources
 
@@ -514,5 +598,9 @@ complete the picture.
   experiments (METAFoR)* — <https://pmc.ncbi.nlm.nih.gov/articles/PMC2430715/>
 - *OpenFLUX2: ¹³C-MFA software for single and parallel labeling experiments* —
   <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4263107/>
+- *biosustain/Methionine_model* (worked example, Appendix A) —
+  <https://github.com/biosustain/Methionine_model>
+- *Maud* — Bayesian inference of kinetic models of metabolism (biosustain) —
+  <https://github.com/biosustain/Maud>
 </content>
 </invoke>
