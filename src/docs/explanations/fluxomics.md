@@ -109,6 +109,49 @@ Beyond steady-state flux estimation, kinetic models express each reaction rate
 parameters** (e.g. `kcat`, `Km`, `Vmax`, rate constants). These are the bridge
 from fluxomics to dynamic simulation and parameter-estimation tools.
 
+### 2.5 A typology of fluxomics experiments
+
+"Fluxomics" is not one experiment but a family, and the experiment *type*
+dictates which data (and therefore which schema constructs) are needed. It is
+useful to type an experiment along four orthogonal axes:
+
+**Axis A — inference paradigm**
+
+| Type | Tracer? | Steady state | Primary inputs |
+| --- | --- | --- | --- |
+| Constraint-based (FBA, and pFBA/FVA/MOMA/dFBA variants) | no | metabolic | stoichiometry, bounds, objective |
+| Stoichiometric MFA / metabolite balancing | no | metabolic | stoichiometry + measured uptake/secretion rates |
+| Stationary ¹³C-MFA (SS-MFA) | yes | metabolic **and** isotopic | atom mappings + MIDs at steady state |
+| Isotopically non-stationary MFA (INST-MFA) | yes | metabolic only | time-series MIDs + pool sizes |
+| Dynamic MFA (DMFA) | optional | none | time-series rates/labeling |
+| ¹³C flux-ratio analysis (METAFoR) | yes | isotopic | local labeling patterns → flux *ratios* |
+
+**Axis B — labeling design**
+
+- **Single-tracer** vs **parallel labeling experiments (PLE)** — two or more
+  tracer cultures fit jointly to one model. Using complementary parallel
+  tracers is the **COMPLETE-MFA** approach, now regarded as the gold standard
+  for flux precision/observability.
+- **Tracer positional design**: positional (e.g. `[1-¹³C]`, `[1,2-¹³C]`,
+  `[1,6-¹³C]` glucose) vs uniform (`[U-¹³C₆]`).
+
+**Axis C — tracer isotope** — ¹³C dominates, but ²H, ¹⁵N, ¹⁷O/¹⁸O are used,
+and combined designs exist (e.g. one-shot ¹³C/¹⁵N for simultaneous carbon and
+nitrogen flux).
+
+**Axis D — measurement platform** — GC-MS, LC-MS/MS, tandem MS (MS/MS), and
+NMR (¹H/¹³C/¹⁵N HSQC). The platform determines whether **positional
+isotopomers** (NMR, MS/MS) or only **mass isotopologues / MIDs** (single-stage
+MS) are observed — a distinction ChEMROF can already express via
+`isotopomer_of` vs `isotopologue_of`.
+
+These axes combine: a typical study is e.g. *stationary ¹³C-MFA, parallel
+`[1,2-¹³C]` + `[U-¹³C₆]` glucose, GC-MS, central-carbon model*. A fluxomics
+schema should therefore treat "experiment type" as a small set of controlled
+vocabularies (one per axis) rather than a single flat enum, and let a
+**`FluxomicsExperiment`** carry one or more **`Tracer`** specifications plus its
+measurement platform and timepoints (sketched in §7.4).
+
 ## 3. Standards landscape (for alignment)
 
 | Concern | Standard / resource |
@@ -125,6 +168,47 @@ ChEMROF already lists `RHEA`, `KEGG.REACTION`, `MetaCyc`, `EC`,
 `MetaNetX.reaction`, `SEED`, `RetroRules`, `RXNO`, `bigg.metabolite`,
 `MetaNetX.chemical` etc. among its `id_prefixes`, so it is well-positioned to
 *cross-reference* these resources.
+
+### 3.1 Do we have FluxML mappings? (a crosswalk)
+
+Short answer: **no — there are currently no FluxML (or SBML/`fbc`/SBO)
+mappings in the schema, and FluxML is not the kind of artifact you map to
+directly.** Two clarifications:
+
+1. **FluxML is an exchange *format* (an XML schema), not a controlled
+   vocabulary with stable term IRIs.** So there is nothing to put in a
+   LinkML `exact_mappings`/SSSOM table for FluxML the way there is for, say,
+   `RXNO:` or `CHEBI:`. What you *can* map are (a) the **entity identifiers**
+   that FluxML documents reference (Rhea/KEGG/BiGG/MetaNetX metabolite and
+   reaction IDs) and (b) the **structural elements** of a FluxML document onto
+   ChEMROF classes/slots (an element-level crosswalk).
+
+2. **At the identifier level we are already aligned**: ChEMROF's `id_prefixes`
+   for metabolites (`CHEBI`, `bigg.metabolite`, `KEGG`, `MetaNetX.chemical`,
+   `HMDB`, …) and reactions (`RHEA`, `KEGG.REACTION`, `MetaCyc`, `EC`,
+   `MetaNetX.reaction`, `bigg.metabolite`/`MetaNetX.reaction`) cover the
+   namespaces FluxML/SBML models use, so ChEMROF can serve as the
+   chemical-identity hub for the metabolites and reactions a FluxML model names.
+
+What is **missing** is the structural crosswalk. A proposed element-level
+mapping (to be implemented in a companion schema that imports ChEMROF):
+
+| FluxML element / concept | ChEMROF equivalent | Status |
+| --- | --- | --- |
+| `<metabolitepool>` (id, atoms) | `ChemicalEntity` (+ `has_atom_occurrences`) | identifiers ✅, atom count via occurrences ✅ |
+| `<reaction>` | `Reaction` | ✅ |
+| `<reduct>` / `<rproduct>` (educt/product, with carbon labels) | `ReactionParticipant` (`left`/`right_participants`) | partial — see atom mapping |
+| atom-transition string (e.g. `A#abc + B#de -> C#abcde`) | `AtomTransition` over `AtomOccurrence` (proposed §7.2) | ❌ not yet |
+| net / exchange (forward/back) flux, `<constraint>`/`<flux>` | `MetabolicFlux` + bounds (proposed §7.4) | ❌ not yet |
+| isotopomer / cumomer / EMU labeling state | `isotopomer_of` / `isotopologue_of`; `MassIsotopomerDistribution` (proposed §7.3) | relations ✅, distribution object ❌ |
+| `<measurement>` (MS/MS/NMR config + data) | `FluxomicsExperiment` measurement (proposed §7.4) | ❌ not yet |
+| `<configuration>` / tracer input (`<input>` labeling) | `Tracer` (proposed §7.4) | ❌ not yet |
+
+So: identifier-level mappings exist today; the **structural FluxML↔ChEMROF
+crosswalk, and especially atom transitions and labeling-data objects, are the
+concrete pieces to add.** Building a small FluxML↔ChEMROF round-trip converter
+(validating on one published model) would be the most direct way to prove the
+crosswalk and surface remaining gaps.
 
 ## 4. What ChEMROF already provides
 
@@ -202,11 +286,13 @@ chemical reaction network:
    (MID/MDV vector), no per-position labeling state, no EMU construct, and no
    way to attach measured labeling data to a metabolite in an experiment.
 
-7. **No experiment / dataset context.** Fluxes and MIDs are only meaningful
-   relative to an organism, strain, growth condition, tracer, and timepoint.
-   ChEMROF has no such context class (appropriately — it is a chemistry schema),
-   so a fluxomics extension must decide what lives here vs. in a companion
-   schema.
+7. **No experiment / dataset context, and no notion of experiment type.**
+   Fluxes and MIDs are only meaningful relative to an organism, strain, growth
+   condition, tracer, timepoint, measurement platform, and the *kind* of
+   experiment (FBA vs stationary ¹³C-MFA vs INST-MFA vs parallel/COMPLETE-MFA;
+   see the typology in §2.5). ChEMROF has no such context or experiment-type
+   construct (appropriately — it is a chemistry schema), so a fluxomics
+   extension must decide what lives here vs. in a companion schema (§7.4).
 
 8. **GPR associations** (gene/enzyme → reaction) are out of scope for a
    chemistry schema and would belong in a companion model that *references*
@@ -322,7 +408,49 @@ classes:
       condition:       {range: GrowthCondition}
   Objective:
     description: FBA objective (reaction coefficients to maximize/minimize).
+  Tracer:
+    description: >-
+      A labeled substrate used in an isotope-labeling experiment, specifying
+      which isotope sits at which atom position(s).
+    attributes:
+      substrate:        {range: ChemicalEntity}
+      isotope:          {range: Isotope}        # e.g. carbon-13
+      labeled_positions:                        # e.g. [1, 2] for [1,2-13C]
+        range: integer
+        multivalued: true
+      purity:           {range: float}          # fractional isotopic purity
+  FluxomicsExperiment:
+    description: >-
+      A single fluxomics experiment, typed along the axes in section 2.5.
+    attributes:
+      inference_paradigm: {range: FluxInferenceParadigmEnum}
+      tracers:            {range: Tracer, multivalued: true}  # >1 ⇒ parallel/COMPLETE-MFA
+      measurement_platform: {range: FluxMeasurementPlatformEnum}
+      isotopic_steady_state: {range: boolean}
+      timepoints:         {range: float, multivalued: true}   # for INST/dynamic
+      condition:          {range: GrowthCondition}
+enums:
+  FluxInferenceParadigmEnum:    # Axis A
+    permissible_values:
+      flux_balance_analysis: {}
+      stoichiometric_mfa: {}
+      stationary_13C_mfa: {}
+      nonstationary_mfa: {}      # INST-MFA
+      dynamic_mfa: {}
+      flux_ratio_analysis: {}
+  FluxMeasurementPlatformEnum:  # Axis D
+    permissible_values:
+      GC_MS: {}
+      LC_MS: {}
+      tandem_MS: {}
+      NMR: {}
 ```
+
+A multivalued `tracers` slot naturally captures **parallel labeling /
+COMPLETE-MFA** (more than one tracer for the same model), and `isotope` +
+`labeled_positions` on `Tracer` covers Axes B and C (positional vs uniform,
+¹³C vs ¹⁵N/²H/¹⁸O). This keeps "experiment type" as a few small controlled
+vocabularies rather than one flat enum.
 
 ### 7.5 SBO/SBML alignment
 
@@ -374,5 +502,17 @@ complete the picture.
   Bioinformatics 2023 — <https://academic.oup.com/bioinformatics/article/39/7/btad437/7224245>
 - *Achieving Metabolic Flux Analysis for S. cerevisiae at a Genome-Scale* —
   <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4588810/>
+- Crown & Antoniewicz, *Integrated ¹³C-MFA of 14 parallel labeling experiments
+  in E. coli* (COMPLETE-MFA), Metab. Eng. 2015 —
+  <https://pubmed.ncbi.nlm.nih.gov/25596508/>
+- *Optimal tracers for parallel labeling experiments and ¹³C-MFA: a precision
+  and synergy scoring system*, Metab. Eng. 2016 —
+  <https://pubmed.ncbi.nlm.nih.gov/27267409/>
+- *One-shot ¹³C¹⁵N-MFA for simultaneous quantification of carbon and nitrogen
+  flux* — <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9996240/>
+- *An analytic framework for estimating metabolic flux ratios from ¹³C tracer
+  experiments (METAFoR)* — <https://pmc.ncbi.nlm.nih.gov/articles/PMC2430715/>
+- *OpenFLUX2: ¹³C-MFA software for single and parallel labeling experiments* —
+  <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4263107/>
 </content>
 </invoke>
