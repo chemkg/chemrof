@@ -1,0 +1,30 @@
+# Methionine adenosyltransferase (MAT / METAT), RHEA:21080
+#   L-methionine + ATP + H2O = S-adenosyl-L-methionine + phosphate + diphosphate
+# Adapted from the biosustain methionine-cycle (Maud) kinetic model, showing the
+# reaction_mechanism slot and the allosteric / competitive-inhibition regulation
+# added for kinetic fluxomics use cases. (The water co-substrate is omitted here,
+# as it is carried separately as water_stoichiometry in the source model.)
+id: RHEA:21080
+type: chemrof:Reaction
+name: methionine adenosyltransferase reaction
+reaction_mechanism: irreversible_michaelis_menten
+direction: l->r
+left_participants:
+  - participant: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N  # L-methionine
+    stoichiometry: 1.0
+  - participant: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J  # ATP
+    stoichiometry: 1.0
+right_participants:
+  - participant: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O  # S-adenosyl-L-methionine
+    stoichiometry: 1.0
+  - participant: INCHIKEY:NBIIXXVUZAFLBC-UHFFFAOYSA-L  # phosphate
+    stoichiometry: 1.0
+  - participant: INCHIKEY:XPPKVPWEQAFLFU-UHFFFAOYSA-K  # diphosphate
+    stoichiometry: 1.0
+has_allosteric_regulation:
+  - effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O     # S-adenosyl-L-methionine
+    regulated_enzyme: MAT3
+    modification_type: activation
+has_competitive_inhibition:
+  - effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O     # S-adenosyl-L-methionine
+    regulated_enzyme: MAT1

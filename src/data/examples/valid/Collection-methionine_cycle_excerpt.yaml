@@ -1,0 +1,33 @@
+# A small excerpt of the biosustain methionine-cycle (Maud) kinetic model,
+# as produced by `chemrof convert-maud`. Demonstrates the Collection tree-root
+# container holding a heterogeneous set of ChemicalEntity (SmallMolecule) and
+# Reaction instances, with reactions referencing metabolites by id.
+entities:
+  - id: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N
+    type: chemrof:SmallMolecule
+    name: methionine
+    inchi_key_string: FFEARJCKVFRZRR-BYPYZUCNSA-N
+  - id: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+    type: chemrof:SmallMolecule
+    name: adenosine triphosphate
+    inchi_key_string: ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+  - id: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+    type: chemrof:SmallMolecule
+    name: S-adenosyl-L-methionine
+    inchi_key_string: MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  - id: RHEA:21080
+    type: chemrof:Reaction
+    name: methionine adenosyltransferase reaction
+    reaction_mechanism: irreversible_michaelis_menten
+    direction: l->r
+    left_participants:
+      - participant: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N
+        stoichiometry: 1.0
+      - participant: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+        stoichiometry: 1.0
+    right_participants:
+      - participant: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+        stoichiometry: 1.0
+    has_competitive_inhibition:
+      - effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+        regulated_enzyme: MAT1

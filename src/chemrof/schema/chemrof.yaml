@@ -102,6 +102,7 @@ classes:
       - is_radical
       - has_chemical_role
       - inchi_string
+      - inchi_key_string
       - inchi_chemical_sublayer
       - inchi_atom_connections_sublayer
       - inchi_hydrogen_connections_sublayer
@@ -1574,9 +1575,9 @@ classes:
     title: polymer repeat unit
   Reaction:
     is_a: DomainEntity
-    class_uri: RXNO:0000000
     description: Reaction
     exact_mappings:
+      - RXNO:0000000
       - MOP:0000010
       - BFO:0000015
     id_prefixes:
@@ -1607,6 +1608,9 @@ classes:
       - reaction_rate_coefficient
       - reaction_rate
       - reaction_type
+      - reaction_mechanism
+      - has_allosteric_regulation
+      - has_competitive_inhibition
     slot_usage:
       left_participants:
         multivalued: true
@@ -1650,12 +1654,55 @@ classes:
   ReactionParticipant:
     is_a: ChemicalRelationship
     description: Instances of this link a reaction to a chemical entity participant
+    slots:
+      - participant
+      - stoichiometry
     slot_usage:
       participant:
         range: ChemicalEntity
       stoichiometry:
-        range: integer
+        range: float
+        description: >-
+          The stoichiometric coefficient of the participant, given as a
+          non-negative magnitude (the sign/direction is conveyed by whether
+          the participant is on the left or right side of the reaction).
+          Permits fractional values as used in genome-scale and lumped reactions.
     title: reaction participant
+  EnzymeRegulation:
+    abstract: true
+    is_a: ChemicalRelationship
+    description: >-
+      A reified relationship in which a chemical effector modulates the activity
+      of an enzyme catalyzing a reaction.
+    attributes:
+      effector:
+        range: ChemicalEntity
+        required: true
+        description: The chemical entity (typically a metabolite) that exerts the regulatory effect.
+      regulated_enzyme:
+        range: string
+        description: >-
+          Optional identifier or label of the specific enzyme (isoform) that is
+          regulated. A reaction may be catalyzed by more than one enzyme, and a
+          regulatory effect may apply to only some of them.
+    title: enzyme regulation
+  AllostericRegulation:
+    is_a: EnzymeRegulation
+    description: >-
+      Allosteric activation or inhibition of an enzyme by an effector that binds
+      at a site distinct from the catalytic (active) site.
+    attributes:
+      modification_type:
+        range: EnzymeModificationTypeEnum
+        required: true
+        description: Whether the allosteric effector activates or inhibits the enzyme.
+    title: allosteric regulation
+  CompetitiveInhibition:
+    is_a: EnzymeRegulation
+    description: >-
+      Inhibition in which the effector (inhibitor) competes with the substrate
+      for binding at the enzyme's active site.
+    title: competitive inhibition
   ProportionalPart:
     is_a: ChemicalRelationship
     description: A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration.
@@ -2484,6 +2531,27 @@ slots:
     description: Classification of the chemical reaction based on mechanistic and functional categories
     range: ReactionTypeEnum
     title: reaction type
+  reaction_mechanism:
+    description: >-
+      The kinetic rate law (mechanism) used to model the rate of the reaction,
+      e.g. reversible or irreversible Michaelis-Menten, mass action, or a
+      boundary/drain pseudo-reaction.
+    range: ReactionMechanismEnum
+    title: reaction mechanism
+  has_allosteric_regulation:
+    description: Allosteric activation or inhibition of an enzyme catalyzing this reaction.
+    range: AllostericRegulation
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    title: has allosteric regulation
+  has_competitive_inhibition:
+    description: Competitive inhibition of an enzyme catalyzing this reaction.
+    range: CompetitiveInhibition
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    title: has competitive inhibition
   kcat:
     description: The maximum number of substrate molecules converted to product per enzyme molecule per unit time, when the enzyme is saturated with substrate. It represents the maximum catalytic efficiency of an enzyme under ideal conditions.
     unit:
@@ -2497,6 +2565,15 @@ slots:
     comments:
       - A lower Km indicates higher affinity (the enzyme needs less substrate to achieve half its maximum rate
       - Km is typically expressed in units of concentration (e.g., mol/L, μM, mM)
+  inhibition_constant:
+    aliases:
+      - Ki
+    description: >-
+      the dissociation constant of the enzyme-inhibitor complex; the inhibitor
+      concentration at which enzyme activity is reduced. A lower Ki indicates a
+      more potent inhibitor.
+    comments:
+      - Ki is typically expressed in units of concentration (e.g., mol/L, μM, mM)
   has_sequence_representation:
     is_a: chemical_representation
     range: SequenceString
@@ -3415,6 +3492,29 @@ enums:
       acid: CHEBI:39141
       base: CHEBI:39142
     title: bronsted_acid_base_role_enum
+  ReactionMechanismEnum:
+    description: >-
+      The kinetic rate law (mechanism) used to model how a reaction's rate
+      depends on metabolite concentrations and kinetic parameters. These values
+      align with the mechanism types used by kinetic-modeling tools such as Maud.
+    permissible_values:
+      reversible_michaelis_menten:
+        description: A reversible (modular) Michaelis-Menten rate law, sensitive to both substrate and product concentrations and to thermodynamics.
+      irreversible_michaelis_menten:
+        description: An irreversible Michaelis-Menten rate law, treating the reaction as effectively one-directional.
+      mass_action:
+        description: Elementary mass-action kinetics, where rate is proportional to the product of reactant activities.
+      drain:
+        description: A boundary or exchange pseudo-reaction that supplies or removes a metabolite at a fitted rate, rather than a mechanistic enzyme-catalyzed step.
+    title: reaction_mechanism_enum
+  EnzymeModificationTypeEnum:
+    description: The direction of effect a regulator has on enzyme activity.
+    permissible_values:
+      activation:
+        description: The effector increases the activity of the enzyme.
+      inhibition:
+        description: The effector decreases the activity of the enzyme.
+    title: enzyme_modification_type_enum
   ReactionTypeEnum:
     description: Classification of chemical reactions based on mechanistic and functional categories
     permissible_values:
