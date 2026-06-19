@@ -53,7 +53,7 @@ than to the chemical reaction network.
 'chemrof:SmallMolecule'
 >>> coll["entities"][0]["id"]
 'INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N'
->>> rxn = [e for e in coll["entities"] if e["type"] == "RXNO:0000000"][0]
+>>> rxn = [e for e in coll["entities"] if e["type"] == "chemrof:Reaction"][0]
 >>> rxn["reaction_mechanism"]
 'irreversible_michaelis_menten'
 >>> sorted(p["participant"] for p in rxn["left_participants"])
@@ -71,11 +71,11 @@ import toml
 
 _TYPE_PREFIX = "chemrof:"
 
-# chemrof type designators (the `type` slot uses each class's class_uri where one
-# is defined, otherwise the chemrof CURIE). Reaction carries class_uri
-# RXNO:0000000; SmallMolecule has no explicit class_uri.
+# chemrof type designators. The `type` slot is a designates_type slot; its value
+# is the class's chemrof CURIE (neither SmallMolecule nor Reaction defines an
+# external class_uri, so both use the chemrof: form, idiomatic for this schema).
 _SMALL_MOLECULE_TYPE = f"{_TYPE_PREFIX}SmallMolecule"
-_REACTION_TYPE = "RXNO:0000000"
+_REACTION_TYPE = f"{_TYPE_PREFIX}Reaction"
 
 # Maud mechanism strings that map onto chemrof ReactionMechanismEnum values.
 _MECHANISMS = {

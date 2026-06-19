@@ -57,7 +57,7 @@ SAMPLE_MODEL = {
 
 def _reactions(collection):
     return {
-        e["id"]: e for e in collection["entities"] if e["type"] == "RXNO:0000000"
+        e["id"]: e for e in collection["entities"] if e["type"] == "chemrof:Reaction"
     }
 
 
@@ -149,4 +149,4 @@ class TestCli:
         result = runner.invoke(app, ["convert-maud", str(path), "--format", "json"])
         assert result.exit_code == 0
         data = json.loads(result.output)
-        assert any(e["type"] == "RXNO:0000000" for e in data["entities"])
+        assert any(e["type"] == "chemrof:Reaction" for e in data["entities"])
