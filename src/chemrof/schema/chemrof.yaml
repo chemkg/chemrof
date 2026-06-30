@@ -300,6 +300,15 @@ classes:
   FattyAcylChainLengthGroupingClass:
     is_a: FattyAcylCoAGroupingClass
     description: A fatty acyl-CoA grouping class defined by the carbon-chain-length range of the fatty acyl group, e.g. short-chain, medium-chain, long-chain, or very-long-chain fatty acyl-CoA.
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            CHEBI:37554
+            DataSomeValuesFrom(chemrof:carbon_number DatatypeRestriction(xsd:integer{% if min_carbon_number is defined and min_carbon_number is not none and min_carbon_number != '' %} xsd:minInclusive "{{min_carbon_number}}"^^xsd:integer{% endif %}{% if max_carbon_number is defined and max_carbon_number is not none and max_carbon_number != '' %} xsd:maxInclusive "{{max_carbon_number}}"^^xsd:integer{% endif %}))
+          )
+        )
     slots:
       - min_carbon_number
       - max_carbon_number
@@ -313,6 +322,15 @@ classes:
   FattyAcylSaturationGroupingClass:
     is_a: FattyAcylCoAGroupingClass
     description: A fatty acyl-CoA grouping class defined by the number of carbon-carbon double bonds in the fatty acyl chain, e.g. saturated, monounsaturated, or polyunsaturated fatty acyl-CoA.
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            CHEBI:37554
+            DataSomeValuesFrom(chemrof:carbon_carbon_double_bond_number DatatypeRestriction(xsd:integer{% if min_carbon_carbon_double_bond_number is defined and min_carbon_carbon_double_bond_number is not none and min_carbon_carbon_double_bond_number != '' %} xsd:minInclusive "{{min_carbon_carbon_double_bond_number}}"^^xsd:integer{% endif %}{% if max_carbon_carbon_double_bond_number is defined and max_carbon_carbon_double_bond_number is not none and max_carbon_carbon_double_bond_number != '' %} xsd:maxInclusive "{{max_carbon_carbon_double_bond_number}}"^^xsd:integer{% endif %}))
+          )
+        )
     slots:
       - min_carbon_carbon_double_bond_number
       - max_carbon_carbon_double_bond_number
@@ -326,6 +344,15 @@ classes:
   FattyAcylBranchingGroupingClass:
     is_a: FattyAcylCoAGroupingClass
     description: A fatty acyl-CoA grouping class defined by whether the fatty acyl chain is branched (e.g. branched-chain fatty acyl-CoA) or unbranched (linear fatty acyl-CoA).
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            CHEBI:37554
+            DataHasValue(chemrof:is_branched "{{is_branched | lower}}"^^xsd:boolean)
+          )
+        )
     slots:
       - is_branched
     defining_slots:
@@ -337,6 +364,15 @@ classes:
   FattyAcylCarbonParityGroupingClass:
     is_a: FattyAcylCoAGroupingClass
     description: A fatty acyl-CoA grouping class defined by the parity (even or odd) of the number of carbon atoms in the fatty acyl chain. Parity determines whether beta-oxidation terminates in acetyl-CoA alone or also yields propionyl-CoA.
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            CHEBI:37554
+            DataHasValue(chemrof:carbon_number_parity "{{carbon_number_parity}}")
+          )
+        )
     slots:
       - carbon_number_parity
     defining_slots:
@@ -2186,6 +2222,16 @@ slots:
     see_also:
       - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
     title: is branched
+  carbon_number:
+    range: integer
+    minimum_value: 1
+    description: The number of carbon atoms in the characteristic (e.g. fatty acyl) chain of a molecule. This is the member-level property over which chain-length grouping classes assert defining range restrictions.
+    title: carbon number
+  carbon_carbon_double_bond_number:
+    range: integer
+    minimum_value: 0
+    description: The number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of a molecule. This is the member-level property over which saturation grouping classes assert defining range restrictions.
+    title: carbon-carbon double bond number
   min_carbon_number:
     range: integer
     minimum_value: 1

@@ -94,6 +94,72 @@ class TestEquivalentClassesAxioms:
         assert "Enantiomer" in owl
 
 
+class TestFattyAcylGroupingEquivalentClasses:
+    """Fatty acyl-CoA facet grouping classes emit computable OWL definitions.
+
+    Each facet class carries an ``owl.template`` annotation that turns the
+    grouping's defining constraint values into a necessary-and-sufficient
+    ``EquivalentClasses`` axiom (genus CHEBI:37554 = fatty acyl-CoA, plus a
+    datatype/value restriction on a member-level property).
+    """
+
+    @staticmethod
+    def _axiom_for(owl: str, class_id: str) -> str:
+        for line in owl.splitlines():
+            if "EquivalentClasses" in line and class_id in line:
+                return line
+        raise AssertionError(f"no EquivalentClasses axiom for {class_id}")
+
+    def test_chain_length_range(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:33184", "type": "chemrof:FattyAcylChainLengthGroupingClass",
+             "min_carbon_number": 13, "max_carbon_number": 22},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:33184")
+        assert "CHEBI:37554" in ax
+        assert "carbon_number" in ax
+        assert 'minInclusive> "13"' in ax
+        assert 'maxInclusive> "22"' in ax
+
+    def test_chain_length_min_only_has_no_max(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:61910", "type": "chemrof:FattyAcylChainLengthGroupingClass",
+             "min_carbon_number": 23},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:61910")
+        assert 'minInclusive> "23"' in ax
+        assert "maxInclusive" not in ax
+
+    def test_saturation_exact_zero(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:231546", "type": "chemrof:FattyAcylSaturationGroupingClass",
+             "min_carbon_carbon_double_bond_number": 0,
+             "max_carbon_carbon_double_bond_number": 0},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:231546")
+        assert "carbon_carbon_double_bond_number" in ax
+        assert 'minInclusive> "0"' in ax
+        assert 'maxInclusive> "0"' in ax
+
+    def test_branching_boolean(self):
+        owl = dicts_to_owl([
+            {"id": "chemrof:LinearFattyAcylCoA", "type": "chemrof:FattyAcylBranchingGroupingClass",
+             "is_branched": False},
+        ])
+        ax = self._axiom_for(owl, "chemrof:LinearFattyAcylCoA")
+        assert "is_branched" in ax
+        assert '"false"' in ax
+
+    def test_carbon_parity_value(self):
+        owl = dicts_to_owl([
+            {"id": "chemrof:OddNumberedFattyAcylCoA", "type": "chemrof:FattyAcylCarbonParityGroupingClass",
+             "carbon_number_parity": "odd"},
+        ])
+        ax = self._axiom_for(owl, "chemrof:OddNumberedFattyAcylCoA")
+        assert "carbon_number_parity" in ax
+        assert '"odd"' in ax
+
+
 class TestCliOwlFormat:
     def test_cli_owl_output(self):
         from typer.testing import CliRunner
