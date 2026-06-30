@@ -287,6 +287,64 @@ classes:
     examples:
       - value: nucleobase
     title: molecule grouping class
+  FattyAcylCoAGroupingClass:
+    is_a: MoleculeGroupingClass
+    abstract: true
+    description: A grouping class for fatty acyl-CoA molecules, classified by a structural feature of the fatty acyl chain. Subclasses provide computable (necessary and sufficient) definitions in terms of chain length, saturation, branching, or carbon-number parity. Such groupings underpin the substrate classification of fatty acid beta-oxidation.
+    slot_usage:
+      subtype_of:
+        range: MoleculeGroupingClass
+      classifies:
+        range: Molecule
+    title: fatty acyl-CoA grouping class
+  FattyAcylChainLengthGroupingClass:
+    is_a: FattyAcylCoAGroupingClass
+    description: A fatty acyl-CoA grouping class defined by the carbon-chain-length range of the fatty acyl group, e.g. short-chain, medium-chain, long-chain, or very-long-chain fatty acyl-CoA.
+    slots:
+      - min_carbon_number
+      - max_carbon_number
+    defining_slots:
+      - min_carbon_number
+      - max_carbon_number
+    examples:
+      - value: long-chain fatty acyl-CoA
+        description: A fatty acyl-CoA whose fatty acyl chain has 13 to 22 carbons.
+    title: fatty acyl chain length grouping class
+  FattyAcylSaturationGroupingClass:
+    is_a: FattyAcylCoAGroupingClass
+    description: A fatty acyl-CoA grouping class defined by the number of carbon-carbon double bonds in the fatty acyl chain, e.g. saturated, monounsaturated, or polyunsaturated fatty acyl-CoA.
+    slots:
+      - min_carbon_carbon_double_bond_number
+      - max_carbon_carbon_double_bond_number
+    defining_slots:
+      - min_carbon_carbon_double_bond_number
+      - max_carbon_carbon_double_bond_number
+    examples:
+      - value: monounsaturated fatty acyl-CoA
+        description: A fatty acyl-CoA whose fatty acyl chain has exactly one carbon-carbon double bond.
+    title: fatty acyl saturation grouping class
+  FattyAcylBranchingGroupingClass:
+    is_a: FattyAcylCoAGroupingClass
+    description: A fatty acyl-CoA grouping class defined by whether the fatty acyl chain is branched (e.g. branched-chain fatty acyl-CoA) or unbranched (linear fatty acyl-CoA).
+    slots:
+      - is_branched
+    defining_slots:
+      - is_branched
+    examples:
+      - value: linear fatty acyl-CoA
+        description: A fatty acyl-CoA whose fatty acyl chain is unbranched.
+    title: fatty acyl branching grouping class
+  FattyAcylCarbonParityGroupingClass:
+    is_a: FattyAcylCoAGroupingClass
+    description: A fatty acyl-CoA grouping class defined by the parity (even or odd) of the number of carbon atoms in the fatty acyl chain. Parity determines whether beta-oxidation terminates in acetyl-CoA alone or also yields propionyl-CoA.
+    slots:
+      - carbon_number_parity
+    defining_slots:
+      - carbon_number_parity
+    examples:
+      - value: odd-numbered fatty acyl-CoA
+        description: A fatty acyl-CoA whose fatty acyl chain has an odd number of carbons.
+    title: fatty acyl carbon parity grouping class
   MolecularComponentGroupingClass:
     is_a: ChemicalGroupingClass
     description: 'A grouping class that classifies molecular components. Example: inorganic anion group'
@@ -2128,6 +2186,30 @@ slots:
     see_also:
       - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
     title: is branched
+  min_carbon_number:
+    range: integer
+    minimum_value: 1
+    description: The minimum number of carbon atoms in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Used as a defining constraint for chain-length grouping classes.
+    title: min carbon number
+  max_carbon_number:
+    range: integer
+    minimum_value: 1
+    description: The maximum number of carbon atoms in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Omitted when there is no upper bound. Used as a defining constraint for chain-length grouping classes.
+    title: max carbon number
+  carbon_number_parity:
+    range: CarbonNumberParityEnum
+    description: Whether members of a grouping class have an even or odd number of carbon atoms in the characteristic chain. Used as a defining constraint for carbon-parity grouping classes.
+    title: carbon number parity
+  min_carbon_carbon_double_bond_number:
+    range: integer
+    minimum_value: 0
+    description: The minimum number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Used as a defining constraint for saturation grouping classes (e.g. 1 for unsaturated, 2 for polyunsaturated).
+    title: min carbon-carbon double bond number
+  max_carbon_carbon_double_bond_number:
+    range: integer
+    minimum_value: 0
+    description: The maximum number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Omitted when there is no upper bound. Used as a defining constraint for saturation grouping classes (e.g. 0 for saturated, 1 for monounsaturated).
+    title: max carbon-carbon double bond number
   polymer_architecture_type:
     description: morphological structure of a polymer
     see_also:
@@ -3307,6 +3389,14 @@ slots:
     range: float
     title: score
 enums:
+  CarbonNumberParityEnum:
+    description: Whether a count of carbon atoms is even or odd.
+    permissible_values:
+      even:
+        description: An even number of carbon atoms.
+      odd:
+        description: An odd number of carbon atoms.
+    title: carbon number parity enum
   MoleculeClassificationEnum:
     permissible_values:
       lipid:
