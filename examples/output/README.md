@@ -264,6 +264,7 @@ description: A fatty acyl-CoA in which the fatty acyl chain contains one or more
 id: CHEBI:51006
 min_carbon_carbon_double_bond_number: 1
 name: unsaturated fatty acyl-CoA
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
 subtype_of:
 - CHEBI:37554
 
@@ -779,6 +780,7 @@ id: chemrof:MonounsaturatedFattyAcylCoA
 max_carbon_carbon_double_bond_number: 1
 min_carbon_carbon_double_bond_number: 1
 name: monounsaturated fatty acyl-CoA
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
 subtype_of:
 - CHEBI:51006
 
@@ -888,6 +890,7 @@ description: A fatty acyl-CoA results from the formal condensation of the thiol 
   for the fatty acid beta-oxidation substrate classification.
 id: CHEBI:37554
 name: fatty acyl-CoA
+smarts_string: '[#6]C(=O)SCCNC(=O)CCNC(=O)C(O)C(C)(C)COP(O)(O)=O'
 
 ```
 ## FattyAcylSaturationGroupingClass-polyunsaturated_fatty_acyl_coa
@@ -898,6 +901,7 @@ description: An unsaturated fatty acyl-CoA in which the fatty acyl chain contain
 id: chemrof:PolyunsaturatedFattyAcylCoA
 min_carbon_carbon_double_bond_number: 2
 name: polyunsaturated fatty acyl-CoA
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
 subtype_of:
 - CHEBI:51006
 
