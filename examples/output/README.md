@@ -231,6 +231,8 @@ type: chemrof:FunctionalGroup
 ## MoleculeGroupingClass-short_chain_fatty_acyl_coa
 ### Input
 ```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a short (up
+  to C5) carbon chain.
 id: CHEBI:61905
 name: short-chain fatty acyl-CoA
 subtype_of:
@@ -407,6 +409,8 @@ type: chemrof:Macromolecule
 ## MoleculeGroupingClass-odd_numbered_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA whose fatty acyl chain has an odd number of carbon atoms.
+  Beta-oxidation yields acetyl-CoA plus a terminal propionyl-CoA.
 id: chemrof:OddNumberedFattyAcylCoA
 name: odd-numbered fatty acyl-CoA
 subtype_of:
@@ -429,6 +433,8 @@ type: chemrof:Isotope
 ## MoleculeGroupingClass-branched_chain_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA whose fatty acyl chain carries one or more alkyl substituents.
+  Branched-chain fatty acyl-CoAs are processed by peroxisomal (partial) beta-oxidation.
 id: CHEBI:61912
 name: branched-chain fatty acyl-CoA
 subtype_of:
@@ -529,6 +535,8 @@ type: chemrof:MolecularCation
 ## MoleculeGroupingClass-medium_chain_fatty_acyl_coa
 ### Input
 ```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a medium-length
+  (C6 to C12) carbon chain.
 id: CHEBI:61907
 name: medium-chain fatty acyl-CoA
 subtype_of:
@@ -538,6 +546,8 @@ subtype_of:
 ## MoleculeGroupingClass-long_chain_fatty_acyl_coa
 ### Input
 ```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a long (C13
+  to C22) carbon chain.
 id: CHEBI:33184
 name: long-chain fatty acyl-CoA
 subtype_of:
@@ -576,6 +586,8 @@ type: chemrof:SubatomicParticle
 ## MoleculeGroupingClass-saturated_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA in which the fatty acyl chain contains no carbon-carbon
+  double bonds.
 id: CHEBI:231546
 name: saturated fatty acyl-CoA
 subtype_of:
@@ -741,6 +753,9 @@ type: chemrof:MonoatomicIon
 ## MoleculeGroupingClass-very_long_chain_fatty_acyl_coa
 ### Input
 ```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a chain length
+  greater than C22. Very long-chain fatty acyl-CoAs are shortened by peroxisomal (partial)
+  beta-oxidation before completion in the mitochondrion.
 id: CHEBI:61910
 name: very long-chain fatty acyl-CoA
 subtype_of:
@@ -774,6 +789,8 @@ type: chemrof:AtomCation
 ## MoleculeGroupingClass-even_numbered_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA whose fatty acyl chain has an even number of carbon
+  atoms. Complete beta-oxidation yields acetyl-CoA only.
 id: chemrof:EvenNumberedFattyAcylCoA
 name: even-numbered fatty acyl-CoA
 subtype_of:
@@ -783,6 +800,8 @@ subtype_of:
 ## MoleculeGroupingClass-linear_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA whose fatty acyl chain is unbranched. Linear fatty acyl-CoAs
+  are the canonical substrates of mitochondrial fatty acid beta-oxidation.
 id: chemrof:LinearFattyAcylCoA
 name: linear fatty acyl-CoA
 subtype_of:
@@ -817,6 +836,8 @@ type: chemrof:UnchargedAtom
 ## MoleculeGroupingClass-monounsaturated_fatty_acyl_coa
 ### Input
 ```yaml
+description: An unsaturated fatty acyl-CoA in which the fatty acyl chain contains
+  exactly one carbon-carbon double bond (e.g. oleoyl-CoA, 18:1).
 id: chemrof:MonounsaturatedFattyAcylCoA
 name: monounsaturated fatty acyl-CoA
 subtype_of:
@@ -835,6 +856,9 @@ type: chemrof:SubatomicParticle
 ## MoleculeGroupingClass-fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA results from the formal condensation of the thiol group
+  of coenzyme A with the carboxy group of a fatty acid. It is the root grouping class
+  for the fatty acid beta-oxidation substrate classification.
 id: CHEBI:37554
 name: fatty acyl-CoA
 
@@ -923,6 +947,8 @@ type: chemrof:SmallMolecule
 ## MoleculeGroupingClass-unsaturated_fatty_acyl_coa
 ### Input
 ```yaml
+description: A fatty acyl-CoA in which the fatty acyl chain contains one or more carbon-carbon
+  double bonds.
 id: CHEBI:51006
 name: unsaturated fatty acyl-CoA
 subtype_of:
@@ -1023,6 +1049,8 @@ type: chemrof:Peptide
 ## MoleculeGroupingClass-polyunsaturated_fatty_acyl_coa
 ### Input
 ```yaml
+description: An unsaturated fatty acyl-CoA in which the fatty acyl chain contains
+  two or more carbon-carbon double bonds (e.g. linolenoyl-CoA, 18:3).
 id: chemrof:PolyunsaturatedFattyAcylCoA
 name: polyunsaturated fatty acyl-CoA
 subtype_of:
