@@ -287,100 +287,80 @@ classes:
     examples:
       - value: nucleobase
     title: molecule grouping class
-  FattyAcylCoAGroupingClass:
+  GroupingBySmarts:
     is_a: MoleculeGroupingClass
-    abstract: true
-    description: A grouping class for fatty acyl-CoA molecules, classified by a structural feature of the fatty acyl chain. Subclasses provide computable (necessary and sufficient) definitions in terms of chain length, saturation, branching, or carbon-number parity. Such groupings underpin the substrate classification of fatty acid beta-oxidation.
+    description: A grouping meta-pattern whose members are the individuals of a genus class that additionally match a SMARTS substructure pattern. SMARTS matching is a computational (non-DL) criterion, so the OWL rendering asserts only the genus as a necessary superclass (SubClassOf) and carries the SMARTS as an annotation for external cheminformatics classification. Concrete groupings are supplied as data instances (genus + smarts_string), not as schema subclasses.
+    slots:
+      - genus
     slot_usage:
-      subtype_of:
-        range: MoleculeGroupingClass
       classifies:
         range: Molecule
-    title: fatty acyl-CoA grouping class
-  FattyAcylChainLengthGroupingClass:
-    is_a: FattyAcylCoAGroupingClass
-    description: A fatty acyl-CoA grouping class defined by the carbon-chain-length range of the fatty acyl group, e.g. short-chain, medium-chain, long-chain, or very-long-chain fatty acyl-CoA.
+    defining_slots:
+      - genus
+      - smarts_string
+    annotations:
+      owl.template: |-
+        SubClassOf({{id}} {{genus}})
+    examples:
+      - value: fatty acyl-CoA (genus acyl-CoA + CoA-thioester SMARTS)
+    title: grouping by SMARTS
+  GroupingByGenusAndRangeRestriction:
+    is_a: MoleculeGroupingClass
+    description: A grouping meta-pattern defined as the members of a genus class whose value for a given integer-valued data property (on_property) falls within a [min_value, max_value] range; either bound may be omitted. Renders to an OWL EquivalentClasses genus-differentia definition. Concrete groupings (e.g. long-chain fatty acyl-CoA) are supplied as data instances, not as schema subclasses.
+    slots:
+      - genus
+      - on_property
+      - min_value
+      - max_value
+    slot_usage:
+      classifies:
+        range: Molecule
+    defining_slots:
+      - genus
+      - on_property
+      - min_value
+      - max_value
     annotations:
       owl.template: |-
         EquivalentClasses(
           {{id}}
           ObjectIntersectionOf(
-            CHEBI:37554
-            DataSomeValuesFrom(chemrof:carbon_number DatatypeRestriction(xsd:integer{% if min_carbon_number is defined and min_carbon_number is not none and min_carbon_number != '' %} xsd:minInclusive "{{min_carbon_number}}"^^xsd:integer{% endif %}{% if max_carbon_number is defined and max_carbon_number is not none and max_carbon_number != '' %} xsd:maxInclusive "{{max_carbon_number}}"^^xsd:integer{% endif %}))
+            {{genus}}
+            DataSomeValuesFrom({{on_property}} DatatypeRestriction(xsd:integer{% if min_value is defined and min_value is not none and min_value != '' %} xsd:minInclusive "{{min_value}}"^^xsd:integer{% endif %}{% if max_value is defined and max_value is not none and max_value != '' %} xsd:maxInclusive "{{max_value}}"^^xsd:integer{% endif %}))
           )
         )
-    slots:
-      - min_carbon_number
-      - max_carbon_number
-    defining_slots:
-      - min_carbon_number
-      - max_carbon_number
     examples:
       - value: long-chain fatty acyl-CoA
-        description: A fatty acyl-CoA whose fatty acyl chain has 13 to 22 carbons.
-    title: fatty acyl chain length grouping class
-  FattyAcylSaturationGroupingClass:
-    is_a: FattyAcylCoAGroupingClass
-    description: A fatty acyl-CoA grouping class defined by the number of carbon-carbon double bonds in the fatty acyl chain, e.g. saturated, monounsaturated, or polyunsaturated fatty acyl-CoA.
+        description: genus fatty acyl-CoA (CHEBI:37554), on_property carbon_number, 13 to 22.
+    title: grouping by genus and range restriction
+  GroupingByGenusAndPropertyValue:
+    is_a: MoleculeGroupingClass
+    description: A grouping meta-pattern defined as the members of a genus class whose value for a given data property (on_property) equals a specified literal (value, typed by value_datatype, default xsd:string). Renders to an OWL EquivalentClasses genus-differentia definition using DataHasValue. Concrete groupings (e.g. even-numbered fatty acyl-CoA) are supplied as data instances, not as schema subclasses.
+    slots:
+      - genus
+      - on_property
+      - value
+      - value_datatype
+    slot_usage:
+      classifies:
+        range: Molecule
+    defining_slots:
+      - genus
+      - on_property
+      - value
     annotations:
       owl.template: |-
         EquivalentClasses(
           {{id}}
           ObjectIntersectionOf(
-            CHEBI:37554
-            DataSomeValuesFrom(chemrof:carbon_carbon_double_bond_number DatatypeRestriction(xsd:integer{% if min_carbon_carbon_double_bond_number is defined and min_carbon_carbon_double_bond_number is not none and min_carbon_carbon_double_bond_number != '' %} xsd:minInclusive "{{min_carbon_carbon_double_bond_number}}"^^xsd:integer{% endif %}{% if max_carbon_carbon_double_bond_number is defined and max_carbon_carbon_double_bond_number is not none and max_carbon_carbon_double_bond_number != '' %} xsd:maxInclusive "{{max_carbon_carbon_double_bond_number}}"^^xsd:integer{% endif %}))
+            {{genus}}
+            DataHasValue({{on_property}} "{{value}}"^^{% if value_datatype is defined and value_datatype is not none and value_datatype != '' %}{{value_datatype}}{% else %}xsd:string{% endif %})
           )
         )
-    slots:
-      - min_carbon_carbon_double_bond_number
-      - max_carbon_carbon_double_bond_number
-    defining_slots:
-      - min_carbon_carbon_double_bond_number
-      - max_carbon_carbon_double_bond_number
     examples:
-      - value: monounsaturated fatty acyl-CoA
-        description: A fatty acyl-CoA whose fatty acyl chain has exactly one carbon-carbon double bond.
-    title: fatty acyl saturation grouping class
-  FattyAcylBranchingGroupingClass:
-    is_a: FattyAcylCoAGroupingClass
-    description: A fatty acyl-CoA grouping class defined by whether the fatty acyl chain is branched (e.g. branched-chain fatty acyl-CoA) or unbranched (linear fatty acyl-CoA).
-    annotations:
-      owl.template: |-
-        EquivalentClasses(
-          {{id}}
-          ObjectIntersectionOf(
-            CHEBI:37554
-            DataHasValue(chemrof:is_branched "{{is_branched | lower}}"^^xsd:boolean)
-          )
-        )
-    slots:
-      - is_branched
-    defining_slots:
-      - is_branched
-    examples:
-      - value: linear fatty acyl-CoA
-        description: A fatty acyl-CoA whose fatty acyl chain is unbranched.
-    title: fatty acyl branching grouping class
-  FattyAcylCarbonParityGroupingClass:
-    is_a: FattyAcylCoAGroupingClass
-    description: A fatty acyl-CoA grouping class defined by the parity (even or odd) of the number of carbon atoms in the fatty acyl chain. Parity determines whether beta-oxidation terminates in acetyl-CoA alone or also yields propionyl-CoA.
-    annotations:
-      owl.template: |-
-        EquivalentClasses(
-          {{id}}
-          ObjectIntersectionOf(
-            CHEBI:37554
-            DataHasValue(chemrof:carbon_number_parity "{{carbon_number_parity}}")
-          )
-        )
-    slots:
-      - carbon_number_parity
-    defining_slots:
-      - carbon_number_parity
-    examples:
-      - value: odd-numbered fatty acyl-CoA
-        description: A fatty acyl-CoA whose fatty acyl chain has an odd number of carbons.
-    title: fatty acyl carbon parity grouping class
+      - value: even-numbered fatty acyl-CoA
+        description: genus fatty acyl-CoA (CHEBI:37554), on_property carbon_number_parity, value even.
+    title: grouping by genus and property value
   MolecularComponentGroupingClass:
     is_a: ChemicalGroupingClass
     description: 'A grouping class that classifies molecular components. Example: inorganic anion group'
@@ -2232,30 +2212,34 @@ slots:
     minimum_value: 0
     description: The number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of a molecule. This is the member-level property over which saturation grouping classes assert defining range restrictions.
     title: carbon-carbon double bond number
-  min_carbon_number:
-    range: integer
-    minimum_value: 1
-    description: The minimum number of carbon atoms in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Used as a defining constraint for chain-length grouping classes.
-    title: min carbon number
-  max_carbon_number:
-    range: integer
-    minimum_value: 1
-    description: The maximum number of carbon atoms in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Omitted when there is no upper bound. Used as a defining constraint for chain-length grouping classes.
-    title: max carbon number
   carbon_number_parity:
     range: CarbonNumberParityEnum
-    description: Whether members of a grouping class have an even or odd number of carbon atoms in the characteristic chain. Used as a defining constraint for carbon-parity grouping classes.
+    description: Whether a molecule has an even or odd number of carbon atoms in its characteristic (e.g. fatty acyl) chain. Member-level property targeted by carbon-parity groupings.
     title: carbon number parity
-  min_carbon_carbon_double_bond_number:
+  genus:
+    range: uriorcurie
+    description: The genus (parent class) of a genus-differentia grouping definition. Members of the grouping are asserted to be members of this class; rendered as the first conjunct of the OWL class expression.
+    title: genus
+  on_property:
+    range: uriorcurie
+    description: The data property that a differentia restriction quantifies over (e.g. chemrof:carbon_number). Used by the generic grouping meta-patterns to build an OWL property restriction.
+    title: on property
+  min_value:
     range: integer
-    minimum_value: 0
-    description: The minimum number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Used as a defining constraint for saturation grouping classes (e.g. 1 for unsaturated, 2 for polyunsaturated).
-    title: min carbon-carbon double bond number
-  max_carbon_carbon_double_bond_number:
+    description: The inclusive lower bound of a range-restriction grouping. Omit for no lower bound.
+    title: min value
+  max_value:
     range: integer
-    minimum_value: 0
-    description: The maximum number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of members of a grouping class. Omitted when there is no upper bound. Used as a defining constraint for saturation grouping classes (e.g. 0 for saturated, 1 for monounsaturated).
-    title: max carbon-carbon double bond number
+    description: The inclusive upper bound of a range-restriction grouping. Omit for no upper bound.
+    title: max value
+  value:
+    range: string
+    description: The literal value that a property-value grouping requires members to have for its on_property.
+    title: value
+  value_datatype:
+    range: uriorcurie
+    description: The XSD datatype CURIE (e.g. xsd:boolean) applied to the literal in value; defaults to xsd:string when omitted.
+    title: value datatype
   polymer_architecture_type:
     description: morphological structure of a polymer
     see_also:
