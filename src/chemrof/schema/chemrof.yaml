@@ -198,6 +198,7 @@ classes:
     slots:
       - id
       - name
+      - description
       - subtype_of
     slot_usage:
       subtype_of:
@@ -286,6 +287,80 @@ classes:
     examples:
       - value: nucleobase
     title: molecule grouping class
+  GroupingBySmarts:
+    is_a: MoleculeGroupingClass
+    description: A grouping meta-pattern whose members are the individuals of a genus class that additionally match a SMARTS substructure pattern. SMARTS matching is a computational (non-DL) criterion, so the OWL rendering asserts only the genus as a necessary superclass (SubClassOf) and carries the SMARTS as an annotation for external cheminformatics classification. Concrete groupings are supplied as data instances (genus + smarts_string), not as schema subclasses.
+    slots:
+      - genus
+    slot_usage:
+      classifies:
+        range: Molecule
+    defining_slots:
+      - genus
+      - smarts_string
+    annotations:
+      owl.template: |-
+        SubClassOf({{id}} {{genus}})
+    examples:
+      - value: fatty acyl-CoA (genus acyl-CoA + CoA-thioester SMARTS)
+    title: grouping by SMARTS
+  GroupingByGenusAndRangeRestriction:
+    is_a: MoleculeGroupingClass
+    description: A grouping meta-pattern defined as the members of a genus class whose value for a given integer-valued data property (on_property) falls within a [min_value, max_value] range; either bound may be omitted. Renders to an OWL EquivalentClasses genus-differentia definition. Concrete groupings (e.g. long-chain fatty acyl-CoA) are supplied as data instances, not as schema subclasses.
+    slots:
+      - genus
+      - on_property
+      - min_value
+      - max_value
+    slot_usage:
+      classifies:
+        range: Molecule
+    defining_slots:
+      - genus
+      - on_property
+      - min_value
+      - max_value
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            {{genus}}
+            DataSomeValuesFrom({{on_property}} DatatypeRestriction(xsd:integer{% if min_value is defined and min_value is not none and min_value != '' %} xsd:minInclusive "{{min_value}}"^^xsd:integer{% endif %}{% if max_value is defined and max_value is not none and max_value != '' %} xsd:maxInclusive "{{max_value}}"^^xsd:integer{% endif %}))
+          )
+        )
+    examples:
+      - value: long-chain fatty acyl-CoA
+        description: genus fatty acyl-CoA (CHEBI:37554), on_property carbon_number, 13 to 22.
+    title: grouping by genus and range restriction
+  GroupingByGenusAndPropertyValue:
+    is_a: MoleculeGroupingClass
+    description: A grouping meta-pattern defined as the members of a genus class whose value for a given data property (on_property) equals a specified literal (value, typed by value_datatype, default xsd:string). Renders to an OWL EquivalentClasses genus-differentia definition using DataHasValue. Concrete groupings (e.g. even-numbered fatty acyl-CoA) are supplied as data instances, not as schema subclasses.
+    slots:
+      - genus
+      - on_property
+      - value
+      - value_datatype
+    slot_usage:
+      classifies:
+        range: Molecule
+    defining_slots:
+      - genus
+      - on_property
+      - value
+    annotations:
+      owl.template: |-
+        EquivalentClasses(
+          {{id}}
+          ObjectIntersectionOf(
+            {{genus}}
+            DataHasValue({{on_property}} "{{value}}"^^{% if value_datatype is defined and value_datatype is not none and value_datatype != '' %}{{value_datatype}}{% else %}xsd:string{% endif %})
+          )
+        )
+    examples:
+      - value: even-numbered fatty acyl-CoA
+        description: genus fatty acyl-CoA (CHEBI:37554), on_property carbon_number_parity, value even.
+    title: grouping by genus and property value
   MolecularComponentGroupingClass:
     is_a: ChemicalGroupingClass
     description: 'A grouping class that classifies molecular components. Example: inorganic anion group'
@@ -2127,6 +2202,44 @@ slots:
     see_also:
       - https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)
     title: is branched
+  carbon_number:
+    range: integer
+    minimum_value: 1
+    description: The number of carbon atoms in the characteristic (e.g. fatty acyl) chain of a molecule. This is the member-level property over which chain-length grouping classes assert defining range restrictions.
+    title: carbon number
+  carbon_carbon_double_bond_number:
+    range: integer
+    minimum_value: 0
+    description: The number of carbon-carbon double bonds in the characteristic (e.g. fatty acyl) chain of a molecule. This is the member-level property over which saturation grouping classes assert defining range restrictions.
+    title: carbon-carbon double bond number
+  carbon_number_parity:
+    range: CarbonNumberParityEnum
+    description: Whether a molecule has an even or odd number of carbon atoms in its characteristic (e.g. fatty acyl) chain. Member-level property targeted by carbon-parity groupings.
+    title: carbon number parity
+  genus:
+    range: uriorcurie
+    description: The genus (parent class) of a genus-differentia grouping definition. Members of the grouping are asserted to be members of this class; rendered as the first conjunct of the OWL class expression.
+    title: genus
+  on_property:
+    range: uriorcurie
+    description: The data property that a differentia restriction quantifies over (e.g. chemrof:carbon_number). Used by the generic grouping meta-patterns to build an OWL property restriction.
+    title: on property
+  min_value:
+    range: integer
+    description: The inclusive lower bound of a range-restriction grouping. Omit for no lower bound.
+    title: min value
+  max_value:
+    range: integer
+    description: The inclusive upper bound of a range-restriction grouping. Omit for no upper bound.
+    title: max value
+  value:
+    range: string
+    description: The literal value that a property-value grouping requires members to have for its on_property.
+    title: value
+  value_datatype:
+    range: uriorcurie
+    description: The XSD datatype CURIE (e.g. xsd:boolean) applied to the literal in value; defaults to xsd:string when omitted.
+    title: value datatype
   polymer_architecture_type:
     description: morphological structure of a polymer
     see_also:
@@ -3274,7 +3387,9 @@ slots:
   reaction_center:
     title: reaction center
   description:
-    string_serialization: '{left participants} {direction} {right participants}'
+    range: string
+    description: A human-readable textual description of an entity.
+    slot_uri: dcterms:description
     title: description
   participant:
     range: ChemicalEntity
@@ -3304,6 +3419,14 @@ slots:
     range: float
     title: score
 enums:
+  CarbonNumberParityEnum:
+    description: Whether a count of carbon atoms is even or odd.
+    permissible_values:
+      even:
+        description: An even number of carbon atoms.
+      odd:
+        description: An odd number of carbon atoms.
+    title: carbon number parity enum
   MoleculeClassificationEnum:
     permissible_values:
       lipid:
