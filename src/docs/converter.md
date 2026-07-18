@@ -78,6 +78,7 @@ and a PubChem CID cross-reference.
 |------|--------|-------------|
 | `pubchem` | Working | Looks up the compound in PubChem by InChIKey. Fills `name` (IUPAC preferred) and `pubchem_cid`. |
 | `chemont` | Working | Looks up the compound in a local ChemOnt/ClassyFire store by InChIKey. Fills `classified_by` with the ordered ChemOnt path. |
+| `openclatura` | Working | Derives a systematic IUPAC name locally from the structure (no network) via [openclatura](https://github.com/lamalab-org/openclatura). Fills `IUPAC_name`. Requires the optional dependency (`pip install 'chemrof[openclatura]'`). |
 | `chebi` | Stub | Will resolve CHEBI identifiers via the OLS API. |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL. |
 
@@ -85,6 +86,31 @@ Multiple enrichers run in sequence:
 
 ```bash
 chemrof convert "CCO" --enrichers pubchem,chemont --chemont-source chemont.duckdb
+```
+
+### Local IUPAC naming (openclatura)
+
+The `openclatura` enricher derives a systematic IUPAC name straight from the
+structure, with no network lookup, so it also names compounds that are not in
+any database. Install the optional dependency first:
+
+```bash
+pip install 'chemrof[openclatura]'
+```
+
+Then request it like any other enricher:
+
+```bash
+chemrof convert "CC(=O)Nc1ccccc1" --enrichers openclatura
+```
+
+It fills `IUPAC_name` (here, `N-phenylacetamide`) and also sets `name` when
+that slot still holds a placeholder such as the empirical formula. Running it
+alongside `pubchem` gives a database-preferred name where one exists and a
+locally-derived name everywhere else:
+
+```bash
+chemrof convert "CCO" --enrichers pubchem,openclatura
 ```
 
 ### ChemOnt classification examples
