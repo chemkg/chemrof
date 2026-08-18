@@ -148,6 +148,7 @@ chemrof convert CCO --enrichers pubchem,chebi
 |--------|--------|-------------|
 | `pubchem` | Working | Preferred IUPAC name and PubChem CID (via InChIKey lookup) |
 | `chemont` | Working | Ordered ChemOnt/ClassyFire tree classes in `classified_by` (via local lookup store) |
+| `openclatura` | Working | Systematic `IUPAC_name` derived locally from the structure, no network (via [openclatura](https://github.com/lamalab-org/openclatura); needs `pip install 'chemrof[openclatura]'`) |
 | `chebi` | Stub | Will resolve CHEBI identifiers via OLS |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL |
 

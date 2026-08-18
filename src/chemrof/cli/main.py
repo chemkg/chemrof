@@ -50,6 +50,9 @@ Pass a comma-separated list of source names. Available sources:
   chemont   -- Look up ClassyFire/ChemOnt labels by InChIKey from a
                local DuckDB, Parquet, or TSV source and fills classified_by.
 
+  openclatura -- Derive a systematic IUPAC name locally from the structure
+               (no network). Fills IUPAC_name. Requires `pip install openclatura`.
+
   chebi     -- (stub) Will resolve CHEBI identifiers via OLS.
 
   wikidata  -- (stub) Will resolve Wikidata QIDs via SPARQL.
