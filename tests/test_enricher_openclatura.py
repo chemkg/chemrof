@@ -6,7 +6,7 @@ The name-application logic is exercised without importing the optional
 
 import pytest
 
-from chemrof.converter.enrichers.base import EnrichmentContext
+from chemrof.converter.enrichers.base import Enricher, EnrichmentContext
 from chemrof.converter.enrichers.openclatura import OpenclaturaEnricher
 
 
@@ -21,6 +21,10 @@ def _ctx(smiles: str = "") -> EnrichmentContext:
 
 def test_openclatura_enricher_name(enricher):
     assert enricher.name == "openclatura"
+
+
+def test_openclatura_follows_enricher_protocol(enricher):
+    assert isinstance(enricher, Enricher)
 
 
 def test_apply_name_sets_iupac_name(enricher):

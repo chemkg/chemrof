@@ -25,6 +25,7 @@ class OpenclaturaEnricher:
     """Enrich a chemrof dict with an IUPAC name derived from its SMILES."""
 
     name = "openclatura"
+    _warned_missing = False
 
     def enrich(self, obj: dict, context: EnrichmentContext) -> dict:
         smiles = context.smiles or obj.get("smiles_string", "")
@@ -43,10 +44,12 @@ class OpenclaturaEnricher:
         try:
             from openclatura import name as oc_name
         except ImportError:
-            logger.warning(
-                "openclatura is not installed; skipping. "
-                "Install it with `pip install openclatura`."
-            )
+            if not self._warned_missing:
+                logger.warning(
+                    "openclatura is not installed; skipping. "
+                    "Install it with `pip install 'chemrof[openclatura]'`."
+                )
+                self._warned_missing = True
             return None
         try:
             result = oc_name(smiles)

@@ -113,6 +113,18 @@ locally-derived name everywhere else:
 chemrof convert "CCO" --enrichers pubchem,openclatura
 ```
 
+The `IUPAC_name` slot carries an `owl: AnnotationAssertion` interpretation, so
+the enrichment flows straight through to OWL output — no extra wiring needed:
+
+```bash
+chemrof convert "CC(=O)Nc1ccccc1" --enrichers openclatura --format owl
+```
+
+```
+AnnotationAssertion(rdfs:label <.../FZERHIULMFGESH-UHFFFAOYSA-N> "N-phenylacetamide")
+AnnotationAssertion(chemrof:IUPAC_name <.../FZERHIULMFGESH-UHFFFAOYSA-N> "N-phenylacetamide")
+```
+
 ### ChemOnt classification examples
 
 Prepare a local DuckDB lookup store directly from the Zenodo release:
