@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-22T09:58:45
+# Generation date: 2026-09-16T19:17:34
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -74,8 +74,8 @@ COB = CurieNamespace('COB', 'http://purl.obolibrary.org/obo/COB_')
 DRUGBANK = CurieNamespace('DRUGBANK', 'http://identifiers.org/drugbank/')
 EC = CurieNamespace('EC', 'https://enzyme.expasy.org/EC/')
 FIX = CurieNamespace('FIX', 'http://purl.obolibrary.org/obo/FIX_')
+GLYTOUCAN = CurieNamespace('GLYTOUCAN', 'http://identifiers.org/glytoucan/')
 GO = CurieNamespace('GO', 'http://identifiers.org/go/')
-GLYTOUCAN = CurieNamespace('GlyTouCan', 'http://identifiers.org/glytoucan/')
 HMDB = CurieNamespace('HMDB', 'http://identifiers.org/hmdb/')
 INCHI = CurieNamespace('INCHI', 'http://identifiers.org/inchi/')
 INCHIKEY = CurieNamespace('INCHIKEY', 'http://identifiers.org/inchikey/')
@@ -330,6 +330,10 @@ class MolecularComponentId(PolyatomicEntityId):
     pass
 
 
+class MonosaccharideResidueId(MolecularComponentId):
+    pass
+
+
 class PolymerPartId(MolecularComponentId):
     pass
 
@@ -387,6 +391,10 @@ class ProteinId(MacromoleculeId):
 
 
 class GlycanId(MacromoleculeId):
+    pass
+
+
+class MonosaccharideId(MoleculeId):
     pass
 
 
@@ -671,6 +679,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     is_radical: Optional[Union[bool, Bool]] = None
     has_chemical_role: Optional[Union[dict, "ChemicalRole"]] = None
     inchi_string: Optional[str] = None
+    inchi_key_string: Optional[str] = None
     inchi_chemical_sublayer: Optional[str] = None
     inchi_atom_connections_sublayer: Optional[str] = None
     inchi_hydrogen_connections_sublayer: Optional[str] = None
@@ -706,6 +715,9 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.inchi_string is not None and not isinstance(self.inchi_string, str):
             self.inchi_string = str(self.inchi_string)
+
+        if self.inchi_key_string is not None and not isinstance(self.inchi_key_string, str):
+            self.inchi_key_string = str(self.inchi_key_string)
 
         if self.inchi_chemical_sublayer is not None and not isinstance(self.inchi_chemical_sublayer, str):
             self.inchi_chemical_sublayer = str(self.inchi_chemical_sublayer)
@@ -1842,6 +1854,48 @@ class MolecularComponent(PolyatomicEntity):
 
 
 @dataclass(repr=False)
+class MonosaccharideResidue(MolecularComponent):
+    """
+    A monosaccharide as it occurs within a glycan, that is, the part of the glycan contributed by one monosaccharide
+    unit after formation of its glycosidic linkages. A residue differs from the corresponding free monosaccharide by
+    the loss of water at each linkage.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["MonosaccharideResidue"]
+    class_class_curie: ClassVar[str] = "chemrof:MonosaccharideResidue"
+    class_name: ClassVar[str] = "MonosaccharideResidue"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.MonosaccharideResidue
+
+    id: Union[str, MonosaccharideResidueId] = None
+    residue_of: Optional[Union[str, MonosaccharideId]] = None
+    anomeric_configuration: Optional[Union[str, "AnomericConfigurationEnum"]] = None
+    ring_form: Optional[Union[str, "MonosaccharideRingFormEnum"]] = None
+    dl_configuration: Optional[Union[str, "DLConfigurationEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MonosaccharideResidueId):
+            self.id = MonosaccharideResidueId(self.id)
+
+        if self.residue_of is not None and not isinstance(self.residue_of, MonosaccharideId):
+            self.residue_of = MonosaccharideId(self.residue_of)
+
+        if self.anomeric_configuration is not None and not isinstance(self.anomeric_configuration, AnomericConfigurationEnum):
+            self.anomeric_configuration = AnomericConfigurationEnum(self.anomeric_configuration)
+
+        if self.ring_form is not None and not isinstance(self.ring_form, MonosaccharideRingFormEnum):
+            self.ring_form = MonosaccharideRingFormEnum(self.ring_form)
+
+        if self.dl_configuration is not None and not isinstance(self.dl_configuration, DLConfigurationEnum):
+            self.dl_configuration = DLConfigurationEnum(self.dl_configuration)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
 class PolymerPart(MolecularComponent):
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -2218,7 +2272,8 @@ class Protein(Macromolecule):
 @dataclass(repr=False)
 class Glycan(Macromolecule):
     """
-    A macromolecule consisting of a large number of monosaccharides linked glycosidically
+    A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be
+    linear or branched, and may be composed of a single kind of residue or of many.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -2228,12 +2283,97 @@ class Glycan(Macromolecule):
     class_model_uri: ClassVar[URIRef] = CHEMROF.Glycan
 
     id: Union[str, GlycanId] = None
+    has_monosaccharide_residues: Optional[Union[dict[Union[str, MonosaccharideResidueId], Union[dict, MonosaccharideResidue]], list[Union[dict, MonosaccharideResidue]]]] = empty_dict()
+    has_glycosidic_linkages: Optional[Union[Union[dict, "GlycosidicLinkage"], list[Union[dict, "GlycosidicLinkage"]]]] = empty_list()
+    has_reducing_end: Optional[Union[str, MonosaccharideResidueId]] = None
+    is_branched: Optional[Union[bool, Bool]] = None
+    carbohydrate_representation: Optional[str] = None
+    wurcs_representation: Optional[str] = None
+    glycoct_condensed: Optional[str] = None
+    iupac_condensed_representation: Optional[str] = None
+    carbbank_representation: Optional[str] = None
+    linucs_representation: Optional[str] = None
+    glycominds_linearcode_representation: Optional[str] = None
+    kegg_chemical_function_representation: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, GlycanId):
             self.id = GlycanId(self.id)
+
+        self._normalize_inlined_as_list(slot_name="has_monosaccharide_residues", slot_type=MonosaccharideResidue, key_name="id", keyed=True)
+
+        if not isinstance(self.has_glycosidic_linkages, list):
+            self.has_glycosidic_linkages = [self.has_glycosidic_linkages] if self.has_glycosidic_linkages is not None else []
+        self.has_glycosidic_linkages = [v if isinstance(v, GlycosidicLinkage) else GlycosidicLinkage(**as_dict(v)) for v in self.has_glycosidic_linkages]
+
+        if self.has_reducing_end is not None and not isinstance(self.has_reducing_end, MonosaccharideResidueId):
+            self.has_reducing_end = MonosaccharideResidueId(self.has_reducing_end)
+
+        if self.is_branched is not None and not isinstance(self.is_branched, Bool):
+            self.is_branched = Bool(self.is_branched)
+
+        if self.carbohydrate_representation is not None and not isinstance(self.carbohydrate_representation, str):
+            self.carbohydrate_representation = str(self.carbohydrate_representation)
+
+        if self.wurcs_representation is not None and not isinstance(self.wurcs_representation, str):
+            self.wurcs_representation = str(self.wurcs_representation)
+
+        if self.glycoct_condensed is not None and not isinstance(self.glycoct_condensed, str):
+            self.glycoct_condensed = str(self.glycoct_condensed)
+
+        if self.iupac_condensed_representation is not None and not isinstance(self.iupac_condensed_representation, str):
+            self.iupac_condensed_representation = str(self.iupac_condensed_representation)
+
+        if self.carbbank_representation is not None and not isinstance(self.carbbank_representation, str):
+            self.carbbank_representation = str(self.carbbank_representation)
+
+        if self.linucs_representation is not None and not isinstance(self.linucs_representation, str):
+            self.linucs_representation = str(self.linucs_representation)
+
+        if self.glycominds_linearcode_representation is not None and not isinstance(self.glycominds_linearcode_representation, str):
+            self.glycominds_linearcode_representation = str(self.glycominds_linearcode_representation)
+
+        if self.kegg_chemical_function_representation is not None and not isinstance(self.kegg_chemical_function_representation, str):
+            self.kegg_chemical_function_representation = str(self.kegg_chemical_function_representation)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Monosaccharide(Molecule):
+    """
+    A polyhydroxy aldehyde or ketone, or a compound derived from one, that cannot be hydrolysed to any simpler
+    saccharide. Monosaccharides are the units from which glycans are built.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["Monosaccharide"]
+    class_class_curie: ClassVar[str] = "chemrof:Monosaccharide"
+    class_name: ClassVar[str] = "Monosaccharide"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.Monosaccharide
+
+    id: Union[str, MonosaccharideId] = None
+    anomeric_configuration: Optional[Union[str, "AnomericConfigurationEnum"]] = None
+    ring_form: Optional[Union[str, "MonosaccharideRingFormEnum"]] = None
+    dl_configuration: Optional[Union[str, "DLConfigurationEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MonosaccharideId):
+            self.id = MonosaccharideId(self.id)
+
+        if self.anomeric_configuration is not None and not isinstance(self.anomeric_configuration, AnomericConfigurationEnum):
+            self.anomeric_configuration = AnomericConfigurationEnum(self.anomeric_configuration)
+
+        if self.ring_form is not None and not isinstance(self.ring_form, MonosaccharideRingFormEnum):
+            self.ring_form = MonosaccharideRingFormEnum(self.ring_form)
+
+        if self.dl_configuration is not None and not isinstance(self.dl_configuration, DLConfigurationEnum):
+            self.dl_configuration = DLConfigurationEnum(self.dl_configuration)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_class_curie)
@@ -3343,6 +3483,57 @@ class ChemicalRelationship(YAMLRoot):
 
 
 @dataclass(repr=False)
+class GlycosidicLinkage(ChemicalRelationship):
+    """
+    A reified covalent linkage between the anomeric carbon of one monosaccharide residue and a hydroxyl (or other)
+    group of a second residue, formed with loss of water. Example: the beta(1->4) linkage joining galactose to
+    N-acetylglucosamine in N-acetyllactosamine.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["GlycosidicLinkage"]
+    class_class_curie: ClassVar[str] = "chemrof:GlycosidicLinkage"
+    class_name: ClassVar[str] = "GlycosidicLinkage"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.GlycosidicLinkage
+
+    subject: Union[str, MonosaccharideResidueId] = None
+    object: Union[str, MonosaccharideResidueId] = None
+    donor_position: int = None
+    anomeric_configuration: Union[str, "AnomericConfigurationEnum"] = None
+    acceptor_position: Optional[int] = None
+    is_n_glycosidic: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.subject):
+            self.MissingRequiredField("subject")
+        if not isinstance(self.subject, MonosaccharideResidueId):
+            self.subject = MonosaccharideResidueId(self.subject)
+
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, MonosaccharideResidueId):
+            self.object = MonosaccharideResidueId(self.object)
+
+        if self._is_empty(self.donor_position):
+            self.MissingRequiredField("donor_position")
+        if not isinstance(self.donor_position, int):
+            self.donor_position = int(self.donor_position)
+
+        if self._is_empty(self.anomeric_configuration):
+            self.MissingRequiredField("anomeric_configuration")
+        if not isinstance(self.anomeric_configuration, AnomericConfigurationEnum):
+            self.anomeric_configuration = AnomericConfigurationEnum(self.anomeric_configuration)
+
+        if self.acceptor_position is not None and not isinstance(self.acceptor_position, int):
+            self.acceptor_position = int(self.acceptor_position)
+
+        if self.is_n_glycosidic is not None and not isinstance(self.is_n_glycosidic, Bool):
+            self.is_n_glycosidic = Bool(self.is_n_glycosidic)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class Concentration(YAMLRoot):
     """
     A measurement of the amount of a substance in a given volume or mass.
@@ -3928,8 +4119,8 @@ class Reaction(DomainEntity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = RXNO["0000000"]
-    class_class_curie: ClassVar[str] = "RXNO:0000000"
+    class_class_uri: ClassVar[URIRef] = CHEMROF["Reaction"]
+    class_class_curie: ClassVar[str] = "chemrof:Reaction"
     class_name: ClassVar[str] = "Reaction"
     class_model_uri: ClassVar[URIRef] = CHEMROF.Reaction
 
@@ -3948,6 +4139,9 @@ class Reaction(DomainEntity):
     reaction_rate_coefficient: Optional[float] = None
     reaction_rate: Optional[float] = None
     reaction_type: Optional[Union[str, "ReactionTypeEnum"]] = None
+    reaction_mechanism: Optional[Union[str, "ReactionMechanismEnum"]] = None
+    has_allosteric_regulation: Optional[Union[Union[dict, "AllostericRegulation"], list[Union[dict, "AllostericRegulation"]]]] = empty_list()
+    has_competitive_inhibition: Optional[Union[Union[dict, "CompetitiveInhibition"], list[Union[dict, "CompetitiveInhibition"]]]] = empty_list()
     description: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -4000,6 +4194,17 @@ class Reaction(DomainEntity):
         if self.reaction_type is not None and not isinstance(self.reaction_type, ReactionTypeEnum):
             self.reaction_type = ReactionTypeEnum(self.reaction_type)
 
+        if self.reaction_mechanism is not None and not isinstance(self.reaction_mechanism, ReactionMechanismEnum):
+            self.reaction_mechanism = ReactionMechanismEnum(self.reaction_mechanism)
+
+        if not isinstance(self.has_allosteric_regulation, list):
+            self.has_allosteric_regulation = [self.has_allosteric_regulation] if self.has_allosteric_regulation is not None else []
+        self.has_allosteric_regulation = [v if isinstance(v, AllostericRegulation) else AllostericRegulation(**as_dict(v)) for v in self.has_allosteric_regulation]
+
+        if not isinstance(self.has_competitive_inhibition, list):
+            self.has_competitive_inhibition = [self.has_competitive_inhibition] if self.has_competitive_inhibition is not None else []
+        self.has_competitive_inhibition = [v if isinstance(v, CompetitiveInhibition) else CompetitiveInhibition(**as_dict(v)) for v in self.has_competitive_inhibition]
+
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
@@ -4044,17 +4249,83 @@ class ReactionParticipant(ChemicalRelationship):
     class_model_uri: ClassVar[URIRef] = CHEMROF.ReactionParticipant
 
     participant: Optional[Union[str, ChemicalEntityId]] = None
-    stoichiometry: Optional[int] = None
+    stoichiometry: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.participant is not None and not isinstance(self.participant, ChemicalEntityId):
             self.participant = ChemicalEntityId(self.participant)
 
-        if self.stoichiometry is not None and not isinstance(self.stoichiometry, int):
-            self.stoichiometry = int(self.stoichiometry)
+        if self.stoichiometry is not None and not isinstance(self.stoichiometry, float):
+            self.stoichiometry = float(self.stoichiometry)
 
         super().__post_init__(**kwargs)
 
+
+@dataclass(repr=False)
+class EnzymeRegulation(ChemicalRelationship):
+    """
+    A reified relationship in which a chemical effector modulates the activity of an enzyme catalyzing a reaction.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["EnzymeRegulation"]
+    class_class_curie: ClassVar[str] = "chemrof:EnzymeRegulation"
+    class_name: ClassVar[str] = "EnzymeRegulation"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.EnzymeRegulation
+
+    effector: Union[str, ChemicalEntityId] = None
+    regulated_enzyme: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.effector):
+            self.MissingRequiredField("effector")
+        if not isinstance(self.effector, ChemicalEntityId):
+            self.effector = ChemicalEntityId(self.effector)
+
+        if self.regulated_enzyme is not None and not isinstance(self.regulated_enzyme, str):
+            self.regulated_enzyme = str(self.regulated_enzyme)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class AllostericRegulation(EnzymeRegulation):
+    """
+    Allosteric activation or inhibition of an enzyme by an effector that binds at a site distinct from the catalytic
+    (active) site.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["AllostericRegulation"]
+    class_class_curie: ClassVar[str] = "chemrof:AllostericRegulation"
+    class_name: ClassVar[str] = "AllostericRegulation"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.AllostericRegulation
+
+    effector: Union[str, ChemicalEntityId] = None
+    modification_type: Union[str, "EnzymeModificationTypeEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.modification_type):
+            self.MissingRequiredField("modification_type")
+        if not isinstance(self.modification_type, EnzymeModificationTypeEnum):
+            self.modification_type = EnzymeModificationTypeEnum(self.modification_type)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class CompetitiveInhibition(EnzymeRegulation):
+    """
+    Inhibition in which the effector (inhibitor) competes with the substrate for binding at the enzyme's active site.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMROF["CompetitiveInhibition"]
+    class_class_curie: ClassVar[str] = "chemrof:CompetitiveInhibition"
+    class_name: ClassVar[str] = "CompetitiveInhibition"
+    class_model_uri: ClassVar[URIRef] = CHEMROF.CompetitiveInhibition
+
+    effector: Union[str, ChemicalEntityId] = None
 
 @dataclass(repr=False)
 class ProportionalPart(ChemicalRelationship):
@@ -4581,6 +4852,9 @@ class BondTypeEnum(EnumDefinitionImpl):
     hydrogen = PermissibleValue(
         text="hydrogen",
         meaning=GC["HydrogenBond"])
+    glycosidic = PermissibleValue(
+        text="glycosidic",
+        description="""A covalent bond joining the anomeric carbon of a saccharide to another group, typically the hydroxyl oxygen of a second saccharide. See the GlycosidicLinkage class for a representation that also captures the linkage positions and anomeric configuration.""")
     ionic = PermissibleValue(text="ionic")
     polycentric = PermissibleValue(text="polycentric")
     sigma = PermissibleValue(text="sigma")
@@ -4597,6 +4871,73 @@ class BondTypeEnum(EnumDefinitionImpl):
             PermissibleValue(text="salt bridge"))
         setattr(cls, "polar covalent",
             PermissibleValue(text="polar covalent"))
+
+class AnomericConfigurationEnum(EnumDefinitionImpl):
+    """
+    The configuration at the anomeric centre of a cyclic monosaccharide, assigned by comparing the anomeric centre
+    with the anomeric reference atom of the parent sugar.
+    """
+    alpha = PermissibleValue(
+        text="alpha",
+        description="""The exocyclic oxygen at the anomeric centre is formally cis, in the Fischer projection, to the oxygen attached to the anomeric reference atom.""")
+    beta = PermissibleValue(
+        text="beta",
+        description="""The exocyclic oxygen at the anomeric centre is formally trans, in the Fischer projection, to the oxygen attached to the anomeric reference atom.""")
+    open_chain = PermissibleValue(
+        text="open_chain",
+        description="The sugar is in its acyclic form, so it has no anomeric centre.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="""The configuration is not known, or is deliberately left unspecified, as for a structure determined by a method that does not resolve it.""")
+
+    _defn = EnumDefinition(
+        name="AnomericConfigurationEnum",
+        description="""The configuration at the anomeric centre of a cyclic monosaccharide, assigned by comparing the anomeric centre with the anomeric reference atom of the parent sugar.""",
+    )
+
+class MonosaccharideRingFormEnum(EnumDefinitionImpl):
+    """
+    The size of the cyclic hemiacetal or hemiketal ring adopted by a monosaccharide, or the absence of such a ring.
+    """
+    pyranose = PermissibleValue(
+        text="pyranose",
+        description="""A six-membered ring, comprising five carbon atoms and one oxygen atom, named by analogy with pyran.""")
+    furanose = PermissibleValue(
+        text="furanose",
+        description="""A five-membered ring, comprising four carbon atoms and one oxygen atom, named by analogy with furan.""")
+    septanose = PermissibleValue(
+        text="septanose",
+        description="A seven-membered ring, comprising six carbon atoms and one oxygen atom. These are rare.")
+    open_chain = PermissibleValue(
+        text="open_chain",
+        description="The acyclic aldehyde or ketone form.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="The ring form is not known, or is deliberately left unspecified.")
+
+    _defn = EnumDefinition(
+        name="MonosaccharideRingFormEnum",
+        description="""The size of the cyclic hemiacetal or hemiketal ring adopted by a monosaccharide, or the absence of such a ring.""",
+    )
+
+class DLConfigurationEnum(EnumDefinitionImpl):
+    """
+    The D/L configurational assignment of a sugar or amino acid, made by reference to glyceraldehyde.
+    """
+    D = PermissibleValue(
+        text="D",
+        description="""The reference stereocentre has the same configuration as D-glyceraldehyde. Most naturally occurring sugars, including glucose and galactose, are D.""")
+    L = PermissibleValue(
+        text="L",
+        description="""The reference stereocentre has the same configuration as L-glyceraldehyde. Fucose and rhamnose are the common L sugars.""")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="The configuration is not known, or is deliberately left unspecified.")
+
+    _defn = EnumDefinition(
+        name="DLConfigurationEnum",
+        description="The D/L configurational assignment of a sugar or amino acid, made by reference to glyceraldehyde.",
+    )
 
 class HardOrSoftEnum(EnumDefinitionImpl):
 
@@ -4619,6 +4960,45 @@ class BronstedAcidBaseRoleEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="BronstedAcidBaseRoleEnum",
+    )
+
+class ReactionMechanismEnum(EnumDefinitionImpl):
+    """
+    The kinetic rate law (mechanism) used to model how a reaction's rate depends on metabolite concentrations and
+    kinetic parameters. These values align with the mechanism types used by kinetic-modeling tools such as Maud.
+    """
+    reversible_michaelis_menten = PermissibleValue(
+        text="reversible_michaelis_menten",
+        description="""A reversible (modular) Michaelis-Menten rate law, sensitive to both substrate and product concentrations and to thermodynamics.""")
+    irreversible_michaelis_menten = PermissibleValue(
+        text="irreversible_michaelis_menten",
+        description="""An irreversible Michaelis-Menten rate law, treating the reaction as effectively one-directional.""")
+    mass_action = PermissibleValue(
+        text="mass_action",
+        description="""Elementary mass-action kinetics, where rate is proportional to the product of reactant activities.""")
+    drain = PermissibleValue(
+        text="drain",
+        description="""A boundary or exchange pseudo-reaction that supplies or removes a metabolite at a fitted rate, rather than a mechanistic enzyme-catalyzed step.""")
+
+    _defn = EnumDefinition(
+        name="ReactionMechanismEnum",
+        description="""The kinetic rate law (mechanism) used to model how a reaction's rate depends on metabolite concentrations and kinetic parameters. These values align with the mechanism types used by kinetic-modeling tools such as Maud.""",
+    )
+
+class EnzymeModificationTypeEnum(EnumDefinitionImpl):
+    """
+    The direction of effect a regulator has on enzyme activity.
+    """
+    activation = PermissibleValue(
+        text="activation",
+        description="The effector increases the activity of the enzyme.")
+    inhibition = PermissibleValue(
+        text="inhibition",
+        description="The effector decreases the activity of the enzyme.")
+
+    _defn = EnumDefinition(
+        name="EnzymeModificationTypeEnum",
+        description="The direction of effect a regulator has on enzyme activity.",
     )
 
 class ReactionTypeEnum(EnumDefinitionImpl):
@@ -5235,11 +5615,23 @@ slots.reaction_rate_coefficient = Slot(uri=CHEMROF.reaction_rate_coefficient, na
 slots.reaction_type = Slot(uri=CHEMROF.reaction_type, name="reaction_type", curie=CHEMROF.curie('reaction_type'),
                    model_uri=CHEMROF.reaction_type, domain=None, range=Optional[Union[str, "ReactionTypeEnum"]])
 
+slots.reaction_mechanism = Slot(uri=CHEMROF.reaction_mechanism, name="reaction_mechanism", curie=CHEMROF.curie('reaction_mechanism'),
+                   model_uri=CHEMROF.reaction_mechanism, domain=None, range=Optional[Union[str, "ReactionMechanismEnum"]])
+
+slots.has_allosteric_regulation = Slot(uri=CHEMROF.has_allosteric_regulation, name="has_allosteric_regulation", curie=CHEMROF.curie('has_allosteric_regulation'),
+                   model_uri=CHEMROF.has_allosteric_regulation, domain=None, range=Optional[Union[Union[dict, AllostericRegulation], list[Union[dict, AllostericRegulation]]]])
+
+slots.has_competitive_inhibition = Slot(uri=CHEMROF.has_competitive_inhibition, name="has_competitive_inhibition", curie=CHEMROF.curie('has_competitive_inhibition'),
+                   model_uri=CHEMROF.has_competitive_inhibition, domain=None, range=Optional[Union[Union[dict, CompetitiveInhibition], list[Union[dict, CompetitiveInhibition]]]])
+
 slots.kcat = Slot(uri=CHEMROF.kcat, name="kcat", curie=CHEMROF.curie('kcat'),
                    model_uri=CHEMROF.kcat, domain=None, range=Optional[str])
 
 slots.michaelis_constant = Slot(uri=CHEMROF.michaelis_constant, name="michaelis_constant", curie=CHEMROF.curie('michaelis_constant'),
                    model_uri=CHEMROF.michaelis_constant, domain=None, range=Optional[str])
+
+slots.inhibition_constant = Slot(uri=CHEMROF.inhibition_constant, name="inhibition_constant", curie=CHEMROF.curie('inhibition_constant'),
+                   model_uri=CHEMROF.inhibition_constant, domain=None, range=Optional[str])
 
 slots.has_sequence_representation = Slot(uri=CHEMROF.has_sequence_representation, name="has_sequence_representation", curie=CHEMROF.curie('has_sequence_representation'),
                    model_uri=CHEMROF.has_sequence_representation, domain=ChemicalEntity, range=Optional[str])
@@ -5247,12 +5639,15 @@ slots.has_sequence_representation = Slot(uri=CHEMROF.has_sequence_representation
 slots.AZE_notation_html = Slot(uri=CHEMROF.AZE_notation_html, name="AZE_notation_html", curie=CHEMROF.curie('AZE_notation_html'),
                    model_uri=CHEMROF.AZE_notation_html, domain=ChemicalEntity, range=Optional[str])
 
+slots.carbohydrate_representation = Slot(uri=CHEMROF.carbohydrate_representation, name="carbohydrate_representation", curie=CHEMROF.curie('carbohydrate_representation'),
+                   model_uri=CHEMROF.carbohydrate_representation, domain=ChemicalEntity, range=Optional[str])
+
 slots.carboydrate_representation = Slot(uri=CHEMROF.carboydrate_representation, name="carboydrate_representation", curie=CHEMROF.curie('carboydrate_representation'),
                    model_uri=CHEMROF.carboydrate_representation, domain=ChemicalEntity, range=Optional[str])
 
 slots.wurcs_representation = Slot(uri=CHEMROF.wurcs_representation, name="wurcs_representation", curie=CHEMROF.curie('wurcs_representation'),
                    model_uri=CHEMROF.wurcs_representation, domain=ChemicalEntity, range=Optional[str],
-                   pattern=re.compile(r'^WURCS=Version/.*'))
+                   pattern=re.compile(r'^WURCS=[0-9]+\.[0-9]+/.*'))
 
 slots.carbbank_representation = Slot(uri=CHEMROF.carbbank_representation, name="carbbank_representation", curie=CHEMROF.curie('carbbank_representation'),
                    model_uri=CHEMROF.carbbank_representation, domain=ChemicalEntity, range=Optional[str])
@@ -5268,6 +5663,30 @@ slots.kegg_chemical_function_representation = Slot(uri=CHEMROF.kegg_chemical_fun
 
 slots.glycoct_condensed = Slot(uri=CHEMROF.glycoct_condensed, name="glycoct_condensed", curie=CHEMROF.curie('glycoct_condensed'),
                    model_uri=CHEMROF.glycoct_condensed, domain=ChemicalEntity, range=Optional[str])
+
+slots.iupac_condensed_representation = Slot(uri=CHEMROF.iupac_condensed_representation, name="iupac_condensed_representation", curie=CHEMROF.curie('iupac_condensed_representation'),
+                   model_uri=CHEMROF.iupac_condensed_representation, domain=ChemicalEntity, range=Optional[str])
+
+slots.anomeric_configuration = Slot(uri=CHEMROF.anomeric_configuration, name="anomeric_configuration", curie=CHEMROF.curie('anomeric_configuration'),
+                   model_uri=CHEMROF.anomeric_configuration, domain=None, range=Optional[Union[str, "AnomericConfigurationEnum"]])
+
+slots.ring_form = Slot(uri=CHEMROF.ring_form, name="ring_form", curie=CHEMROF.curie('ring_form'),
+                   model_uri=CHEMROF.ring_form, domain=None, range=Optional[Union[str, "MonosaccharideRingFormEnum"]])
+
+slots.dl_configuration = Slot(uri=CHEMROF.dl_configuration, name="dl_configuration", curie=CHEMROF.curie('dl_configuration'),
+                   model_uri=CHEMROF.dl_configuration, domain=None, range=Optional[Union[str, "DLConfigurationEnum"]])
+
+slots.residue_of = Slot(uri=CHEMROF.residue_of, name="residue_of", curie=CHEMROF.curie('residue_of'),
+                   model_uri=CHEMROF.residue_of, domain=None, range=Optional[Union[str, MonosaccharideId]])
+
+slots.has_monosaccharide_residues = Slot(uri=CHEMROF.has_monosaccharide_residues, name="has_monosaccharide_residues", curie=CHEMROF.curie('has_monosaccharide_residues'),
+                   model_uri=CHEMROF.has_monosaccharide_residues, domain=None, range=Optional[Union[dict[Union[str, MonosaccharideResidueId], Union[dict, MonosaccharideResidue]], list[Union[dict, MonosaccharideResidue]]]])
+
+slots.has_glycosidic_linkages = Slot(uri=CHEMROF.has_glycosidic_linkages, name="has_glycosidic_linkages", curie=CHEMROF.curie('has_glycosidic_linkages'),
+                   model_uri=CHEMROF.has_glycosidic_linkages, domain=None, range=Optional[Union[Union[dict, GlycosidicLinkage], list[Union[dict, GlycosidicLinkage]]]])
+
+slots.has_reducing_end = Slot(uri=CHEMROF.has_reducing_end, name="has_reducing_end", curie=CHEMROF.curie('has_reducing_end'),
+                   model_uri=CHEMROF.has_reducing_end, domain=None, range=Optional[Union[str, MonosaccharideResidueId]])
 
 slots.hashed_chemical_formula = Slot(uri=CHEMROF.hashed_chemical_formula, name="hashed_chemical_formula", curie=CHEMROF.curie('hashed_chemical_formula'),
                    model_uri=CHEMROF.hashed_chemical_formula, domain=ChemicalEntity, range=Optional[str])
@@ -5645,6 +6064,24 @@ slots.score = Slot(uri=CHEMROF.score, name="score", curie=CHEMROF.curie('score')
 slots.collection__entities = Slot(uri=CHEMROF.entities, name="collection__entities", curie=CHEMROF.curie('entities'),
                    model_uri=CHEMROF.collection__entities, domain=None, range=Optional[Union[dict[Union[str, DomainEntityId], Union[dict, DomainEntity]], list[Union[dict, DomainEntity]]]])
 
+slots.glycosidicLinkage__subject = Slot(uri=CHEMROF.subject, name="glycosidicLinkage__subject", curie=CHEMROF.curie('subject'),
+                   model_uri=CHEMROF.glycosidicLinkage__subject, domain=None, range=Union[str, MonosaccharideResidueId])
+
+slots.glycosidicLinkage__object = Slot(uri=CHEMROF.object, name="glycosidicLinkage__object", curie=CHEMROF.curie('object'),
+                   model_uri=CHEMROF.glycosidicLinkage__object, domain=None, range=Union[str, MonosaccharideResidueId])
+
+slots.glycosidicLinkage__donor_position = Slot(uri=CHEMROF.donor_position, name="glycosidicLinkage__donor_position", curie=CHEMROF.curie('donor_position'),
+                   model_uri=CHEMROF.glycosidicLinkage__donor_position, domain=None, range=int)
+
+slots.glycosidicLinkage__acceptor_position = Slot(uri=CHEMROF.acceptor_position, name="glycosidicLinkage__acceptor_position", curie=CHEMROF.curie('acceptor_position'),
+                   model_uri=CHEMROF.glycosidicLinkage__acceptor_position, domain=None, range=Optional[int])
+
+slots.glycosidicLinkage__anomeric_configuration = Slot(uri=CHEMROF.anomeric_configuration, name="glycosidicLinkage__anomeric_configuration", curie=CHEMROF.curie('anomeric_configuration'),
+                   model_uri=CHEMROF.glycosidicLinkage__anomeric_configuration, domain=None, range=Union[str, "AnomericConfigurationEnum"])
+
+slots.glycosidicLinkage__is_n_glycosidic = Slot(uri=CHEMROF.is_n_glycosidic, name="glycosidicLinkage__is_n_glycosidic", curie=CHEMROF.curie('is_n_glycosidic'),
+                   model_uri=CHEMROF.glycosidicLinkage__is_n_glycosidic, domain=None, range=Optional[Union[bool, Bool]])
+
 slots.naturalProduct__derived_from_organisms = Slot(uri=CHEMROF.derived_from_organisms, name="naturalProduct__derived_from_organisms", curie=CHEMROF.curie('derived_from_organisms'),
                    model_uri=CHEMROF.naturalProduct__derived_from_organisms, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
@@ -5707,6 +6144,15 @@ slots.atomOccurrence__formal_charge = Slot(uri=CHEMROF.formal_charge, name="atom
 
 slots.atomOccurrence__coordination_number = Slot(uri=CHEMROF.coordination_number, name="atomOccurrence__coordination_number", curie=CHEMROF.curie('coordination_number'),
                    model_uri=CHEMROF.atomOccurrence__coordination_number, domain=None, range=Optional[int])
+
+slots.enzymeRegulation__effector = Slot(uri=CHEMROF.effector, name="enzymeRegulation__effector", curie=CHEMROF.curie('effector'),
+                   model_uri=CHEMROF.enzymeRegulation__effector, domain=None, range=Union[str, ChemicalEntityId])
+
+slots.enzymeRegulation__regulated_enzyme = Slot(uri=CHEMROF.regulated_enzyme, name="enzymeRegulation__regulated_enzyme", curie=CHEMROF.curie('regulated_enzyme'),
+                   model_uri=CHEMROF.enzymeRegulation__regulated_enzyme, domain=None, range=Optional[str])
+
+slots.allostericRegulation__modification_type = Slot(uri=CHEMROF.modification_type, name="allostericRegulation__modification_type", curie=CHEMROF.curie('modification_type'),
+                   model_uri=CHEMROF.allostericRegulation__modification_type, domain=None, range=Union[str, "EnzymeModificationTypeEnum"])
 
 slots.ChemicalEntity_inchi_chemical_sublayer = Slot(uri=CHEMROF.inchi_chemical_sublayer, name="ChemicalEntity_inchi_chemical_sublayer", curie=CHEMROF.curie('inchi_chemical_sublayer'),
                    model_uri=CHEMROF.ChemicalEntity_inchi_chemical_sublayer, domain=ChemicalEntity, range=Optional[str],
@@ -6005,7 +6451,7 @@ slots.ReactionParticipant_participant = Slot(uri=CHEMROF.participant, name="Reac
                    model_uri=CHEMROF.ReactionParticipant_participant, domain=ReactionParticipant, range=Optional[Union[str, ChemicalEntityId]])
 
 slots.ReactionParticipant_stoichiometry = Slot(uri=CHEMROF.stoichiometry, name="ReactionParticipant_stoichiometry", curie=CHEMROF.curie('stoichiometry'),
-                   model_uri=CHEMROF.ReactionParticipant_stoichiometry, domain=ReactionParticipant, range=Optional[int])
+                   model_uri=CHEMROF.ReactionParticipant_stoichiometry, domain=ReactionParticipant, range=Optional[float])
 
 slots.ProportionalPart_has_role = Slot(uri=CHEMROF.has_role, name="ProportionalPart_has_role", curie=CHEMROF.curie('has_role'),
                    model_uri=CHEMROF.ProportionalPart_has_role, domain=ProportionalPart, range=Optional[Union[str, "IngredientRoleEnum"]])

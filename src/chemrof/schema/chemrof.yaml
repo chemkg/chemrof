@@ -654,17 +654,113 @@ classes:
     is_a: Macromolecule
     aliases:
       - polysaccharides
-    description: A macromolecule consisting of a large number of monosaccharides linked glycosidically
+      - oligosaccharide
+    description: A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be linear or branched, and may be composed of a single kind of residue or of many.
     comments:
       - Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans
+      - A glycan differs from other polymers modelled here in that it is frequently branched, so has_monosaccharide_residues plus has_glycosidic_linkages (a node and edge list) is used in preference to the linear sequence representation used for peptides and nucleic acids
+      - This class is placed under Macromolecule to sit alongside Peptide and Protein, but note that short oligosaccharides such as the Lewis X trisaccharide are conventionally glycans while not being macromolecules. Whether to relax the parent of this class is under discussion
+      - The ChEBI mappings are narrow rather than exact because this class subsumes both polysaccharide (CHEBI:18154) and oligosaccharide (CHEBI:50699), and ChEBI has no single term covering exactly that union
+    slots:
+      - has_monosaccharide_residues
+      - has_glycosidic_linkages
+      - has_reducing_end
+      - is_branched
+      - carbohydrate_representation
+      - wurcs_representation
+      - glycoct_condensed
+      - iupac_condensed_representation
+      - carbbank_representation
+      - linucs_representation
+      - glycominds_linearcode_representation
+      - kegg_chemical_function_representation
     id_prefixes:
       - KEGG.GLYCAN
-      - GlyTouCan
+      - GLYTOUCAN
       - glycosciencesdb
+    narrow_mappings:
+      - CHEBI:18154
+      - CHEBI:50699
     examples:
       - value: https://www.glycoepitope.jp/epitopes/EP0311
         description: GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)
     title: glycan
+  Monosaccharide:
+    is_a: Molecule
+    aliases:
+      - simple sugar
+    description: A polyhydroxy aldehyde or ketone, or a compound derived from one, that cannot be hydrolysed to any simpler saccharide. Monosaccharides are the units from which glycans are built.
+    comments:
+      - In aqueous solution most monosaccharides exist predominantly as cyclic hemiacetals rather than in the open-chain form, and the cyclic forms are what participate in glycosidic linkages
+    slots:
+      - anomeric_configuration
+      - ring_form
+      - dl_configuration
+    exact_mappings:
+      - CHEBI:35381
+    id_prefixes:
+      - CHEBI
+      - PUBCHEM.COMPOUND
+    examples:
+      - value: alpha-D-glucopyranose
+      - value: N-acetyl-D-glucosamine
+      - value: L-fucose
+    title: monosaccharide
+  MonosaccharideResidue:
+    is_a: MolecularComponent
+    aliases:
+      - sugar residue
+      - glycosyl residue
+    description: A monosaccharide as it occurs within a glycan, that is, the part of the glycan contributed by one monosaccharide unit after formation of its glycosidic linkages. A residue differs from the corresponding free monosaccharide by the loss of water at each linkage.
+    comments:
+      - Residues are the nodes of the graph representation of a glycan; the edges are instances of GlycosidicLinkage
+    slots:
+      - residue_of
+      - anomeric_configuration
+      - ring_form
+      - dl_configuration
+    examples:
+      - value: the Fuc residue of the Lewis X trisaccharide
+    title: monosaccharide residue
+  GlycosidicLinkage:
+    is_a: ChemicalRelationship
+    aliases:
+      - glycosidic bond
+    description: 'A reified covalent linkage between the anomeric carbon of one monosaccharide residue and a hydroxyl (or other) group of a second residue, formed with loss of water. Example: the beta(1->4) linkage joining galactose to N-acetylglucosamine in N-acetyllactosamine.'
+    comments:
+      - The subject is the donor residue, which contributes its anomeric carbon; the object is the acceptor residue. The direction matters, and reversing it describes a different molecule
+      - The customary written form of a linkage, for example b1-4, combines the anomeric_configuration of the donor (b), the donor_position (1) and the acceptor_position (4)
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/06n07.html
+    attributes:
+      subject:
+        range: MonosaccharideResidue
+        description: The donor residue, which contributes its anomeric carbon to the linkage.
+        required: true
+      object:
+        range: MonosaccharideResidue
+        description: The acceptor residue, which contributes the hydroxyl or other group to the linkage.
+        required: true
+      donor_position:
+        range: integer
+        description: The carbon number of the anomeric carbon of the donor residue. This is 1 for aldoses and 2 for ketoses such as the sialic acids.
+        minimum_value: 1
+        required: true
+      acceptor_position:
+        range: integer
+        description: The carbon number on the acceptor residue to which the donor is attached. A value here is absent for a linkage to a non-carbon position, and ambiguous linkages are left unspecified.
+        minimum_value: 1
+      anomeric_configuration:
+        range: AnomericConfigurationEnum
+        description: The configuration at the anomeric carbon of the donor residue, as locked in by the linkage.
+        required: true
+      is_n_glycosidic:
+        range: boolean
+        description: True where the linkage is to a nitrogen atom rather than to an oxygen atom, as in the GlcNAc-Asn linkage of N-linked glycoproteins.
+    examples:
+      - value: Gal b1-4 GlcNAc
+        description: The linkage of N-acetyllactosamine
+    title: glycosidic linkage
   MonomolecularPolymer:
     is_a: Macromolecule
     aliases:
@@ -2582,38 +2678,117 @@ slots:
     is_a: chemical_representation
     description: E.g. <super>12</super>/<sub>6</sub>C
     title: AZE notation html
+  carbohydrate_representation:
+    abstract: true
+    is_a: chemical_representation
+    description: A line or graph notation that encodes the structure of a carbohydrate (glycan), minimally its monosaccharide composition and the glycosidic linkages connecting them. Unlike general-purpose notations such as SMILES, these formats make the monosaccharide residue and the linkage first-class syntactic elements.
+    domain: ChemicalEntity
+    range: ChemicalEncoding
+    title: carbohydrate representation
   carboydrate_representation:
     abstract: true
     is_a: chemical_representation
-    title: carboydrate representation
+    deprecated: Use carbohydrate_representation instead.
+    deprecated_element_has_exact_replacement: carbohydrate_representation
+    comments:
+      - The original name of this slot contained a typo ("carboydrate"). It is retained as a deprecated alias for backwards compatibility with downstream code generated from earlier versions of this schema.
+    title: carboydrate representation (Deprecated)
   wurcs_representation:
     aliases:
       - WURCS
-    is_a: carboydrate_representation
-    pattern: ^WURCS=Version/.*
+      - Web3 Unique Representation of Carbohydrate Structures
+    is_a: carbohydrate_representation
+    description: 'A linear notation that encodes a glycan as a count of unique residues, residues and linkages, followed by a list of unique residue skeleton codes, the sequence in which they occur, and the linkages between them. Aligned so that one structure has one string, which is what allows GlyTouCan to mint a stable accession per structure.'
+    pattern: ^WURCS=[0-9]+\.[0-9]+/.*
+    comments:
+      - The segment following WURCS= is the version number of the format, for example 2.0. An earlier revision of this schema used the pattern ^WURCS=Version/.* which read the placeholder in the format specification as a literal, and so matched no real WURCS string
+    examples:
+      - value: WURCS=2.0/3,3,2/[u2122h_2*NCC/3=O][a1221m-1a_1-5][a2112h-1b_1-5]/1-2-3/a3-b1_a4-c1
+        description: Lewis X trisaccharide, GlyTouCan G39995KJ
+    see_also:
+      - https://doi.org/10.1093/bioinformatics/btv220
     title: wurcs representation
   carbbank_representation:
-    is_a: carboydrate_representation
+    is_a: carbohydrate_representation
     description: 'The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation.'
     title: carbbank representation
   linucs_representation:
-    is_a: carboydrate_representation
+    is_a: carbohydrate_representation
     description: A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.
     see_also:
       - https://github.com/biopragmatics/bioregistry/issues/537
     title: linucs representation
   glycominds_linearcode_representation:
-    is_a: carboydrate_representation
+    is_a: carbohydrate_representation
     description: "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by “a” or “b” for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures)."
     title: glycominds linearcode representation
   kegg_chemical_function_representation:
-    is_a: carboydrate_representation
+    is_a: carbohydrate_representation
     description: A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names.
     title: kegg chemical function representation
   glycoct_condensed:
-    is_a: carboydrate_representation
+    is_a: carbohydrate_representation
     description: This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.
     title: glycoct condensed
+  iupac_condensed_representation:
+    aliases:
+      - IUPAC condensed
+    is_a: carbohydrate_representation
+    description: The condensed form of the IUPAC nomenclature for carbohydrates, in which each monosaccharide is written using its three-letter abbreviation and each glycosidic linkage is written in parentheses as an anomeric descriptor followed by the two carbon positions joined. Branches are written in square brackets. This is the notation most commonly used in the glycobiology literature.
+    examples:
+      - value: Gal(b1-4)[Fuc(a1-3)]GlcNAc
+        description: Lewis X trisaccharide
+    see_also:
+      - https://www.ncbi.nlm.nih.gov/glycans/snfg.html
+    title: IUPAC condensed representation
+  anomeric_configuration:
+    range: AnomericConfigurationEnum
+    description: The configuration at the anomeric centre of a cyclic monosaccharide or monosaccharide residue, relative to the anomeric reference atom.
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/06n07.html
+    title: anomeric configuration
+  ring_form:
+    range: MonosaccharideRingFormEnum
+    description: The size of the cyclic hemiacetal ring adopted by a monosaccharide, or the absence of such a ring.
+    title: ring form
+  dl_configuration:
+    range: DLConfigurationEnum
+    aliases:
+      - D/L configuration
+      - absolute configuration
+    description: The D/L configurational assignment of a monosaccharide, determined by the configuration at the highest-numbered stereocentre.
+    comments:
+      - Distinct from the absolute_configuration slot, which carries a free-text Cahn-Ingold-Prelog (R/S) descriptor and applies per stereocentre. A single sugar has one D/L assignment but an R/S descriptor at each of its stereocentres
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/03.html
+    title: D/L configuration
+  residue_of:
+    range: Monosaccharide
+    description: Relates a monosaccharide residue, as it occurs within a glycan, to the free monosaccharide from which it is formally derived by loss of water.
+    title: residue of
+  has_monosaccharide_residues:
+    is_a: has_part
+    range: MonosaccharideResidue
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: Relates a glycan to the monosaccharide residues that constitute it. Together with has_glycosidic_linkages this forms a graph representation of the glycan, in which residues are the nodes and linkages are the edges.
+    title: has monosaccharide residues
+  has_glycosidic_linkages:
+    range: GlycosidicLinkage
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: Relates a glycan to the glycosidic linkages connecting its monosaccharide residues. These are the edges of the graph whose nodes are given by has_monosaccharide_residues.
+    title: has glycosidic linkages
+  has_reducing_end:
+    range: MonosaccharideResidue
+    description: The monosaccharide residue of a glycan whose anomeric carbon is not involved in a glycosidic linkage, and which therefore retains the free (reducing) hemiacetal. By convention this residue is drawn or written at the right-hand end of the glycan.
+    comments:
+      - A cyclic glycan, or one whose reducing end is substituted (for example a glycoconjugate attached to a protein or lipid), has no free reducing end.
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/38.html
+    title: has reducing end
   hashed_chemical_formula:
     abstract: true
     is_a: chemical_representation
@@ -3474,6 +3649,8 @@ enums:
         meaning: gc:Quadruple
       hydrogen:
         meaning: gc:HydrogenBond
+      glycosidic:
+        description: A covalent bond joining the anomeric carbon of a saccharide to another group, typically the hydroxyl oxygen of a second saccharide. See the GlycosidicLinkage class for a representation that also captures the linkage positions and anomeric configuration.
       ionic: null
       polycentric: null
       metal-metal: null
@@ -3481,6 +3658,58 @@ enums:
       polar covalent: null
       sigma: null
     title: bond_type_enum
+  AnomericConfigurationEnum:
+    description: The configuration at the anomeric centre of a cyclic monosaccharide, assigned by comparing the anomeric centre with the anomeric reference atom of the parent sugar.
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/06n07.html
+    permissible_values:
+      alpha:
+        description: The exocyclic oxygen at the anomeric centre is formally cis, in the Fischer projection, to the oxygen attached to the anomeric reference atom.
+        aliases:
+          - a
+      beta:
+        description: The exocyclic oxygen at the anomeric centre is formally trans, in the Fischer projection, to the oxygen attached to the anomeric reference atom.
+        aliases:
+          - b
+      open_chain:
+        description: The sugar is in its acyclic form, so it has no anomeric centre.
+      unknown:
+        description: The configuration is not known, or is deliberately left unspecified, as for a structure determined by a method that does not resolve it.
+        aliases:
+          - x
+    title: anomeric_configuration_enum
+  MonosaccharideRingFormEnum:
+    description: The size of the cyclic hemiacetal or hemiketal ring adopted by a monosaccharide, or the absence of such a ring.
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/04.html
+    permissible_values:
+      pyranose:
+        description: A six-membered ring, comprising five carbon atoms and one oxygen atom, named by analogy with pyran.
+      furanose:
+        description: A five-membered ring, comprising four carbon atoms and one oxygen atom, named by analogy with furan.
+      septanose:
+        description: A seven-membered ring, comprising six carbon atoms and one oxygen atom. These are rare.
+      open_chain:
+        description: The acyclic aldehyde or ketone form.
+        aliases:
+          - acyclic
+      unknown:
+        description: The ring form is not known, or is deliberately left unspecified.
+    title: monosaccharide_ring_form_enum
+  DLConfigurationEnum:
+    description: The D/L configurational assignment of a sugar or amino acid, made by reference to glyceraldehyde.
+    comments:
+      - For a monosaccharide the assignment is made from the configuration at the highest-numbered stereocentre, that is, the one furthest from the carbonyl carbon
+    see_also:
+      - https://iupac.qmul.ac.uk/2carb/03.html
+    permissible_values:
+      D:
+        description: The reference stereocentre has the same configuration as D-glyceraldehyde. Most naturally occurring sugars, including glucose and galactose, are D.
+      L:
+        description: The reference stereocentre has the same configuration as L-glyceraldehyde. Fucose and rhamnose are the common L sugars.
+      unknown:
+        description: The configuration is not known, or is deliberately left unspecified.
+    title: dl_configuration_enum
   HardOrSoftEnum:
     permissible_values:
       hard: null

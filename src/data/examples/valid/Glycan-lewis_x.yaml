@@ -1,0 +1,58 @@
+# The Lewis X trisaccharide (CD15 antigen), Gal(b1-4)[Fuc(a1-3)]GlcNAc.
+#
+# This example exercises the graph representation of a glycan: the three
+# monosaccharide residues are the nodes (has_monosaccharide_residues) and the two
+# glycosidic linkages are the directed edges (has_glycosidic_linkages). Both
+# linkages point at the GlcNAc residue, which is what makes this glycan branched
+# and is why a purely linear sequence representation would not capture it.
+#
+# The accession, WURCS and IUPAC strings are those recorded for G39995KJ in
+# GlyTouCan; formula and mass are from PubChem CID 3035680.
+id: GLYTOUCAN:G39995KJ
+name: Lewis X trisaccharide
+type: chemrof:Glycan
+IUPAC_name: beta-D-Galp-(1->4)[alpha-L-Fucp-(1->3)]-D-GlcNAc
+empirical_formula: C20H35NO15
+inchi_chemical_sublayer: C20H35NO15
+molecular_mass: 529.49
+is_organic: true
+is_branched: true
+wurcs_representation: WURCS=2.0/3,3,2/[u2122h_2*NCC/3=O][a1221m-1a_1-5][a2112h-1b_1-5]/1-2-3/a3-b1_a4-c1
+iupac_condensed_representation: Gal(b1-4)[Fuc(a1-3)]GlcNAc
+has_monosaccharide_residues:
+  - id: chemrof:lewis_x.GlcNAc
+    name: GlcNAc
+    type: chemrof:MonosaccharideResidue
+    residue_of: CHEBI:506227
+    anomeric_configuration: unknown
+    ring_form: pyranose
+    dl_configuration: D
+  - id: chemrof:lewis_x.Fuc
+    name: Fuc
+    type: chemrof:MonosaccharideResidue
+    residue_of: CHEBI:42548
+    anomeric_configuration: alpha
+    ring_form: pyranose
+    dl_configuration: L
+  - id: chemrof:lewis_x.Gal
+    name: Gal
+    type: chemrof:MonosaccharideResidue
+    residue_of: CHEBI:27667
+    anomeric_configuration: beta
+    ring_form: pyranose
+    dl_configuration: D
+# The GlcNAc anomeric carbon is not engaged in a linkage, so it carries the free
+# hemiacetal and is the reducing end. Its anomeric configuration is therefore
+# unknown rather than alpha or beta, since it mutarotates in solution.
+has_reducing_end: chemrof:lewis_x.GlcNAc
+has_glycosidic_linkages:
+  - subject: chemrof:lewis_x.Fuc
+    object: chemrof:lewis_x.GlcNAc
+    donor_position: 1
+    acceptor_position: 3
+    anomeric_configuration: alpha
+  - subject: chemrof:lewis_x.Gal
+    object: chemrof:lewis_x.GlcNAc
+    donor_position: 1
+    acceptor_position: 4
+    anomeric_configuration: beta

@@ -30,6 +30,14 @@ message AcidBaseConflationClass
   domainEntity conjugateBaseOf = 0
   domainEntity conjugateAcidOf = 0
  }
+// Allosteric activation or inhibition of an enzyme by an effector that binds at a site distinct from the catalytic (active) site.
+message AllostericRegulation
+ {
+  owlClass owlSubclassOf = 0
+  chemicalEntity effector = 0
+  string regulatedEnzyme = 0
+  enzymeModificationTypeEnum modificationType = 0
+ }
 // A molecule consisting of atoms of the same element
 message Allotrope
  {
@@ -40,6 +48,7 @@ message Allotrope
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -80,6 +89,7 @@ message AminoAcidSequenceInterval
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -113,6 +123,7 @@ message AtomAnion
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -152,6 +163,7 @@ message AtomCation
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -273,6 +285,7 @@ message ChemicalElement
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -319,6 +332,7 @@ message ChemicalGroup
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -371,6 +385,7 @@ message ChemicalSalt
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -450,6 +465,13 @@ message Collection
  {
  repeated  domainEntity entities = 0
  }
+// Inhibition in which the effector (inhibitor) competes with the substrate for binding at the enzyme's active site.
+message CompetitiveInhibition
+ {
+  owlClass owlSubclassOf = 0
+  chemicalEntity effector = 0
+  string regulatedEnzyme = 0
+ }
 // A measurement of the amount of a substance in a given volume or mass.
 message Concentration
  {
@@ -466,6 +488,7 @@ message Copolymer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -508,6 +531,7 @@ message DNASequenceInterval
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -549,6 +573,7 @@ message Enantiomer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -593,6 +618,7 @@ message Ester
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -633,6 +659,7 @@ message FullySpecifiedAtom
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -672,6 +699,7 @@ message FunctionalGroup
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -722,7 +750,7 @@ message GeneralizedMolecularStructureClass
  repeated  moleculeGroupingClass subtypeOf = 0
   molecule classifies = 0
  }
-// A macromolecule consisting of a large number of monosaccharides linked glycosidically
+// A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be linear or branched, and may be composed of a single kind of residue or of many.
 message Glycan
  {
   string id = 0
@@ -732,6 +760,7 @@ message Glycan
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -760,6 +789,29 @@ message Glycan
   string hasPart = 0
   boolean isOrganic = 0
  repeated  molecule hasSubmolecules = 0
+ repeated  monosaccharideResidue hasMonosaccharideResidues = 0
+ repeated  glycosidicLinkage hasGlycosidicLinkages = 0
+  monosaccharideResidue hasReducingEnd = 0
+  boolean isBranched = 0
+  chemicalEncoding carbohydrateRepresentation = 0
+  chemicalEncoding wurcsRepresentation = 0
+  chemicalEncoding glycoctCondensed = 0
+  chemicalEncoding iupacCondensedRepresentation = 0
+  chemicalEncoding carbbankRepresentation = 0
+  chemicalEncoding linucsRepresentation = 0
+  chemicalEncoding glycomindsLinearcodeRepresentation = 0
+  chemicalEncoding keggChemicalFunctionRepresentation = 0
+ }
+// A reified covalent linkage between the anomeric carbon of one monosaccharide residue and a hydroxyl (or other) group of a second residue, formed with loss of water. Example: the beta(1->4) linkage joining galactose to N-acetylglucosamine in N-acetyllactosamine.
+message GlycosidicLinkage
+ {
+  owlClass owlSubclassOf = 0
+  monosaccharideResidue subject = 0
+  monosaccharideResidue object = 0
+  integer donorPosition = 0
+  integer acceptorPosition = 0
+  anomericConfigurationEnum anomericConfiguration = 0
+  boolean isNGlycosidic = 0
  }
 // a polymer with a single type of repeating unit
 message Homopolymer
@@ -771,6 +823,7 @@ message Homopolymer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -814,6 +867,7 @@ message ImpreciseChemicalMixture
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -857,6 +911,7 @@ message Isobar
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -914,6 +969,9 @@ message IsomeraseReaction
   float reactionRateCoefficient = 0
   float reactionRate = 0
   reactionTypeEnum reactionType = 0
+  reactionMechanismEnum reactionMechanism = 0
+ repeated  allostericRegulation hasAllostericRegulation = 0
+ repeated  competitiveInhibition hasCompetitiveInhibition = 0
   string description = 0
  }
 // A specific subtype of an atom with a specified neutron number
@@ -925,6 +983,7 @@ message Isotope
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -972,6 +1031,7 @@ message Macromolecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1044,6 +1104,7 @@ message Moiety
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1077,6 +1138,7 @@ message MolecularAnion
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1123,6 +1185,7 @@ message MolecularCation
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1169,6 +1232,7 @@ message MolecularComplex
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1203,6 +1267,7 @@ message MolecularComponent
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1261,6 +1326,7 @@ message MolecularSpecies
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1299,6 +1365,7 @@ message MolecularSubsequence
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1332,6 +1399,7 @@ message Molecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1416,6 +1484,7 @@ message MonoatomicIon
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -1455,6 +1524,7 @@ message Monomer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1500,6 +1570,7 @@ message MonomolecularPolymer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1533,6 +1604,87 @@ message MonomolecularPolymer
   boolean isBranched = 0
   string polymerArchitectureType = 0
  }
+// A polyhydroxy aldehyde or ketone, or a compound derived from one, that cannot be hydrolysed to any simpler saccharide. Monosaccharides are the units from which glycans are built.
+message Monosaccharide
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string iUPACName = 0
+  boolean isRadical = 0
+  chemicalRole hasChemicalRole = 0
+  chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
+  string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
+  chemicalEncoding cxsmilesString = 0
+  chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
+ repeated  chemicalGroupingClass classifiedBy = 0
+  owlClass owlSubclassOf = 0
+  string inchiAtomConnectionsSublayer = 0
+ repeated  atomOccurrence hasAtomOccurrences = 0
+ repeated  atomicBond hasBonds = 0
+ repeated  molecule hasSubmolecules = 0
+ repeated  atom hasAtoms = 0
+  string hasPart = 0
+  boolean isOrganic = 0
+  anomericConfigurationEnum anomericConfiguration = 0
+  monosaccharideRingFormEnum ringForm = 0
+  dLConfigurationEnum dlConfiguration = 0
+ }
+// A monosaccharide as it occurs within a glycan, that is, the part of the glycan contributed by one monosaccharide unit after formation of its glycosidic linkages. A residue differs from the corresponding free monosaccharide by the loss of water at each linkage.
+message MonosaccharideResidue
+ {
+  string id = 0
+  string name = 0
+  uriorcurie type = 0
+  string iUPACName = 0
+  boolean isRadical = 0
+  chemicalRole hasChemicalRole = 0
+  chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
+  string inchiChemicalSublayer = 0
+  string inchiHydrogenConnectionsSublayer = 0
+  string inchiChargeSublayer = 0
+  string inchiProtonSublayer = 0
+  string inchiStereochemicalDoubleBondSublayer = 0
+  string inchiTetrahedralStereochemicalSublayer = 0
+  string inchiStereochemicalTypeSublayer = 0
+  string inchiIsotopicLayer = 0
+  chemicalEncoding smilesString = 0
+  chemicalEncoding cxsmilesString = 0
+  chemicalEncoding empiricalFormula = 0
+  chemicalEntity hasMajorMicrospeciesAtPH73 = 0
+  float molecularMass = 0
+  float waterSolubility = 0
+ repeated  float pkaIonizationConstant = 0
+  float pkaTemperature = 0
+  float pkaIonicStrength = 0
+  string pkaSolvent = 0
+  float pkaPressure = 0
+ repeated  chemicalGroupingClass classifiedBy = 0
+  owlClass owlSubclassOf = 0
+  string inchiAtomConnectionsSublayer = 0
+  monosaccharide residueOf = 0
+  anomericConfigurationEnum anomericConfiguration = 0
+  monosaccharideRingFormEnum ringForm = 0
+  dLConfigurationEnum dlConfiguration = 0
+ }
 // A material of which a single unit is sized (in at least one dimension) between 1 and 100 nm
 message Nanomaterial
  {
@@ -1552,6 +1704,7 @@ message NaturalProduct
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1592,6 +1745,7 @@ message NetUnchargedMolecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1636,6 +1790,7 @@ message NeutralMolecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1680,6 +1835,7 @@ message NonSpeciesMolecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1718,6 +1874,7 @@ message NucleotideSequenceInterval
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1751,6 +1908,7 @@ message Nuclide
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -1796,6 +1954,7 @@ message Peptide
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1835,6 +1994,7 @@ message PolyatomicIon
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1880,6 +2040,7 @@ message PolymerPart
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1932,6 +2093,7 @@ message Protein
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -1970,6 +2132,7 @@ message RacemicMixture
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -2007,6 +2170,7 @@ message Radionuclide
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -2056,6 +2220,9 @@ message Reaction
   float reactionRateCoefficient = 0
   float reactionRate = 0
   reactionTypeEnum reactionType = 0
+  reactionMechanismEnum reactionMechanism = 0
+ repeated  allostericRegulation hasAllostericRegulation = 0
+ repeated  competitiveInhibition hasCompetitiveInhibition = 0
   string description = 0
  }
 // A grouping class for reactions, for example, dehalogenase; breaking of covalent bond
@@ -2072,7 +2239,7 @@ message ReactionParticipant
  {
   owlClass owlSubclassOf = 0
   chemicalEntity participant = 0
-  integer stoichiometry = 0
+  float stoichiometry = 0
  }
 message RNASequenceInterval
  {
@@ -2083,6 +2250,7 @@ message RNASequenceInterval
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -2117,6 +2285,7 @@ message SmallMolecule
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -2175,6 +2344,7 @@ message Stereoisomer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -2229,6 +2399,7 @@ message SupramolecularPolymer
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0
@@ -2271,6 +2442,7 @@ message UnchargedAtom
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiAtomConnectionsSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
@@ -2317,6 +2489,7 @@ message Zwitterion
   boolean isRadical = 0
   chemicalRole hasChemicalRole = 0
   chemicalEncoding inchiString = 0
+  chemicalEncoding inchiKeyString = 0
   string inchiChemicalSublayer = 0
   string inchiHydrogenConnectionsSublayer = 0
   string inchiChargeSublayer = 0

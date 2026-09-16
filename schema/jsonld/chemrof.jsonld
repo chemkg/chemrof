@@ -944,6 +944,10 @@
           "meaning": "gc:HydrogenBond"
         },
         {
+          "text": "glycosidic",
+          "description": "A covalent bond joining the anomeric carbon of a saccharide to another group, typically the hydroxyl oxygen of a second saccharide. See the GlycosidicLinkage class for a representation that also captures the linkage positions and anomeric configuration."
+        },
+        {
           "text": "ionic"
         },
         {
@@ -960,6 +964,105 @@
         },
         {
           "text": "sigma"
+        }
+      ]
+    },
+    {
+      "name": "AnomericConfigurationEnum",
+      "definition_uri": "https://w3id.org/chemrof/AnomericConfigurationEnum",
+      "description": "The configuration at the anomeric centre of a cyclic monosaccharide, assigned by comparing the anomeric centre with the anomeric reference atom of the parent sugar.",
+      "title": "anomeric_configuration_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/06n07.html"
+      ],
+      "permissible_values": [
+        {
+          "text": "alpha",
+          "description": "The exocyclic oxygen at the anomeric centre is formally cis, in the Fischer projection, to the oxygen attached to the anomeric reference atom.",
+          "aliases": [
+            "a"
+          ]
+        },
+        {
+          "text": "beta",
+          "description": "The exocyclic oxygen at the anomeric centre is formally trans, in the Fischer projection, to the oxygen attached to the anomeric reference atom.",
+          "aliases": [
+            "b"
+          ]
+        },
+        {
+          "text": "open_chain",
+          "description": "The sugar is in its acyclic form, so it has no anomeric centre."
+        },
+        {
+          "text": "unknown",
+          "description": "The configuration is not known, or is deliberately left unspecified, as for a structure determined by a method that does not resolve it.",
+          "aliases": [
+            "x"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MonosaccharideRingFormEnum",
+      "definition_uri": "https://w3id.org/chemrof/MonosaccharideRingFormEnum",
+      "description": "The size of the cyclic hemiacetal or hemiketal ring adopted by a monosaccharide, or the absence of such a ring.",
+      "title": "monosaccharide_ring_form_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/04.html"
+      ],
+      "permissible_values": [
+        {
+          "text": "pyranose",
+          "description": "A six-membered ring, comprising five carbon atoms and one oxygen atom, named by analogy with pyran."
+        },
+        {
+          "text": "furanose",
+          "description": "A five-membered ring, comprising four carbon atoms and one oxygen atom, named by analogy with furan."
+        },
+        {
+          "text": "septanose",
+          "description": "A seven-membered ring, comprising six carbon atoms and one oxygen atom. These are rare."
+        },
+        {
+          "text": "open_chain",
+          "description": "The acyclic aldehyde or ketone form.",
+          "aliases": [
+            "acyclic"
+          ]
+        },
+        {
+          "text": "unknown",
+          "description": "The ring form is not known, or is deliberately left unspecified."
+        }
+      ]
+    },
+    {
+      "name": "DLConfigurationEnum",
+      "definition_uri": "https://w3id.org/chemrof/DLConfigurationEnum",
+      "description": "The D/L configurational assignment of a sugar or amino acid, made by reference to glyceraldehyde.",
+      "title": "dl_configuration_enum",
+      "comments": [
+        "For a monosaccharide the assignment is made from the configuration at the highest-numbered stereocentre, that is, the one furthest from the carbonyl carbon"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/03.html"
+      ],
+      "permissible_values": [
+        {
+          "text": "D",
+          "description": "The reference stereocentre has the same configuration as D-glyceraldehyde. Most naturally occurring sugars, including glucose and galactose, are D."
+        },
+        {
+          "text": "L",
+          "description": "The reference stereocentre has the same configuration as L-glyceraldehyde. Fucose and rhamnose are the common L sugars."
+        },
+        {
+          "text": "unknown",
+          "description": "The configuration is not known, or is deliberately left unspecified."
         }
       ]
     },
@@ -993,6 +1096,48 @@
         {
           "text": "base",
           "description": "CHEBI:39142"
+        }
+      ]
+    },
+    {
+      "name": "ReactionMechanismEnum",
+      "definition_uri": "https://w3id.org/chemrof/ReactionMechanismEnum",
+      "description": "The kinetic rate law (mechanism) used to model how a reaction's rate depends on metabolite concentrations and kinetic parameters. These values align with the mechanism types used by kinetic-modeling tools such as Maud.",
+      "title": "reaction_mechanism_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "reversible_michaelis_menten",
+          "description": "A reversible (modular) Michaelis-Menten rate law, sensitive to both substrate and product concentrations and to thermodynamics."
+        },
+        {
+          "text": "irreversible_michaelis_menten",
+          "description": "An irreversible Michaelis-Menten rate law, treating the reaction as effectively one-directional."
+        },
+        {
+          "text": "mass_action",
+          "description": "Elementary mass-action kinetics, where rate is proportional to the product of reactant activities."
+        },
+        {
+          "text": "drain",
+          "description": "A boundary or exchange pseudo-reaction that supplies or removes a metabolite at a fitted rate, rather than a mechanistic enzyme-catalyzed step."
+        }
+      ]
+    },
+    {
+      "name": "EnzymeModificationTypeEnum",
+      "definition_uri": "https://w3id.org/chemrof/EnzymeModificationTypeEnum",
+      "description": "The direction of effect a regulator has on enzyme activity.",
+      "title": "enzyme_modification_type_enum",
+      "from_schema": "https://w3id.org/chemrof",
+      "permissible_values": [
+        {
+          "text": "activation",
+          "description": "The effector increases the activity of the enzyme."
+        },
+        {
+          "text": "inhibition",
+          "description": "The effector decreases the activity of the enzyme."
         }
       ]
     },
@@ -2155,6 +2300,7 @@
       "slot_uri": "https://w3id.org/chemrof/is_branched",
       "owner": "MonomolecularPolymer",
       "domain_of": [
+        "Glycan",
         "MonomolecularPolymer"
       ],
       "range": "boolean",
@@ -3206,6 +3352,54 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "reaction_mechanism",
+      "definition_uri": "https://w3id.org/chemrof/reaction_mechanism",
+      "description": "The kinetic rate law (mechanism) used to model the rate of the reaction, e.g. reversible or irreversible Michaelis-Menten, mass action, or a boundary/drain pseudo-reaction.",
+      "title": "reaction mechanism",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/reaction_mechanism",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "ReactionMechanismEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_allosteric_regulation",
+      "definition_uri": "https://w3id.org/chemrof/has_allosteric_regulation",
+      "description": "Allosteric activation or inhibition of an enzyme catalyzing this reaction.",
+      "title": "has allosteric regulation",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_allosteric_regulation",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "AllostericRegulation",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_competitive_inhibition",
+      "definition_uri": "https://w3id.org/chemrof/has_competitive_inhibition",
+      "description": "Competitive inhibition of an enzyme catalyzing this reaction.",
+      "title": "has competitive inhibition",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_competitive_inhibition",
+      "owner": "Reaction",
+      "domain_of": [
+        "Reaction"
+      ],
+      "range": "CompetitiveInhibition",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "kcat",
       "definition_uri": "https://w3id.org/chemrof/kcat",
       "description": "The maximum number of substrate molecules converted to product per enzyme molecule per unit time, when the enzyme is saturated with substrate. It represents the maximum catalytic efficiency of an enzyme under ideal conditions.",
@@ -3238,6 +3432,21 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "inhibition_constant",
+      "definition_uri": "https://w3id.org/chemrof/inhibition_constant",
+      "description": "the dissociation constant of the enzyme-inhibitor complex; the inhibitor concentration at which enzyme activity is reduced. A lower Ki indicates a more potent inhibitor.",
+      "comments": [
+        "Ki is typically expressed in units of concentration (e.g., mol/L, \u03bcM, mM)"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "Ki"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/inhibition_constant",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "has_sequence_representation",
       "definition_uri": "https://w3id.org/chemrof/has_sequence_representation",
       "title": "has sequence representation",
@@ -3266,10 +3475,32 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "carbohydrate_representation",
+      "definition_uri": "https://w3id.org/chemrof/carbohydrate_representation",
+      "description": "A line or graph notation that encodes the structure of a carbohydrate (glycan), minimally its monosaccharide composition and the glycosidic linkages connecting them. Unlike general-purpose notations such as SMILES, these formats make the monosaccharide residue and the linkage first-class syntactic elements.",
+      "title": "carbohydrate representation",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "chemical_representation",
+      "abstract": true,
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/carbohydrate_representation",
+      "owner": "carbohydrate_representation",
+      "domain_of": [
+        "Glycan"
+      ],
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "carboydrate_representation",
       "definition_uri": "https://w3id.org/chemrof/carboydrate_representation",
-      "title": "carboydrate representation",
+      "title": "carboydrate representation (Deprecated)",
+      "deprecated": "Use carbohydrate_representation instead.",
+      "comments": [
+        "The original name of this slot contained a typo (\"carboydrate\"). It is retained as a deprecated alias for backwards compatibility with downstream code generated from earlier versions of this schema."
+      ],
       "from_schema": "https://w3id.org/chemrof",
+      "deprecated_element_has_exact_replacement": "carbohydrate_representation",
       "is_a": "chemical_representation",
       "abstract": true,
       "domain": "ChemicalEntity",
@@ -3281,17 +3512,35 @@
     {
       "name": "wurcs_representation",
       "definition_uri": "https://w3id.org/chemrof/wurcs_representation",
+      "description": "A linear notation that encodes a glycan as a count of unique residues, residues and linkages, followed by a list of unique residue skeleton codes, the sequence in which they occur, and the linkages between them. Aligned so that one structure has one string, which is what allows GlyTouCan to mint a stable accession per structure.",
       "title": "wurcs representation",
-      "from_schema": "https://w3id.org/chemrof",
-      "aliases": [
-        "WURCS"
+      "comments": [
+        "The segment following WURCS= is the version number of the format, for example 2.0. An earlier revision of this schema used the pattern ^WURCS=Version/.* which read the placeholder in the format specification as a literal, and so matched no real WURCS string"
       ],
-      "is_a": "carboydrate_representation",
+      "examples": [
+        {
+          "value": "WURCS=2.0/3,3,2/[u2122h_2*NCC/3=O][a1221m-1a_1-5][a2112h-1b_1-5]/1-2-3/a3-b1_a4-c1",
+          "description": "Lewis X trisaccharide, GlyTouCan G39995KJ",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://doi.org/10.1093/bioinformatics/btv220"
+      ],
+      "aliases": [
+        "WURCS",
+        "Web3 Unique Representation of Carbohydrate Structures"
+      ],
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/wurcs_representation",
-      "owner": "wurcs_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
-      "pattern": "^WURCS=Version/.*",
+      "pattern": "^WURCS=[0-9]+\\.[0-9]+/.*",
       "@type": "SlotDefinition"
     },
     {
@@ -3300,10 +3549,13 @@
       "description": "The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation.",
       "title": "carbbank representation",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "carboydrate_representation",
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/carbbank_representation",
-      "owner": "carbbank_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3316,10 +3568,13 @@
       "see_also": [
         "https://github.com/biopragmatics/bioregistry/issues/537"
       ],
-      "is_a": "carboydrate_representation",
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/linucs_representation",
-      "owner": "linucs_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3329,10 +3584,13 @@
       "description": "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by \u201ca\u201d or \u201cb\u201d for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures).",
       "title": "glycominds linearcode representation",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "carboydrate_representation",
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/glycominds_linearcode_representation",
-      "owner": "glycominds_linearcode_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3342,10 +3600,13 @@
       "description": "A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names.",
       "title": "kegg chemical function representation",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "carboydrate_representation",
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/kegg_chemical_function_representation",
-      "owner": "kegg_chemical_function_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -3355,11 +3616,170 @@
       "description": "This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.",
       "title": "glycoct condensed",
       "from_schema": "https://w3id.org/chemrof",
-      "is_a": "carboydrate_representation",
+      "is_a": "carbohydrate_representation",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/glycoct_condensed",
-      "owner": "glycoct_condensed",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
       "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "iupac_condensed_representation",
+      "definition_uri": "https://w3id.org/chemrof/iupac_condensed_representation",
+      "description": "The condensed form of the IUPAC nomenclature for carbohydrates, in which each monosaccharide is written using its three-letter abbreviation and each glycosidic linkage is written in parentheses as an anomeric descriptor followed by the two carbon positions joined. Branches are written in square brackets. This is the notation most commonly used in the glycobiology literature.",
+      "title": "IUPAC condensed representation",
+      "examples": [
+        {
+          "value": "Gal(b1-4)[Fuc(a1-3)]GlcNAc",
+          "description": "Lewis X trisaccharide",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://www.ncbi.nlm.nih.gov/glycans/snfg.html"
+      ],
+      "aliases": [
+        "IUPAC condensed"
+      ],
+      "is_a": "carbohydrate_representation",
+      "domain": "ChemicalEntity",
+      "slot_uri": "https://w3id.org/chemrof/iupac_condensed_representation",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
+      "range": "ChemicalEncoding",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "anomeric_configuration",
+      "definition_uri": "https://w3id.org/chemrof/anomeric_configuration",
+      "description": "The configuration at the anomeric centre of a cyclic monosaccharide or monosaccharide residue, relative to the anomeric reference atom.",
+      "title": "anomeric configuration",
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/06n07.html"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/anomeric_configuration",
+      "owner": "MonosaccharideResidue",
+      "domain_of": [
+        "Monosaccharide",
+        "MonosaccharideResidue"
+      ],
+      "range": "AnomericConfigurationEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ring_form",
+      "definition_uri": "https://w3id.org/chemrof/ring_form",
+      "description": "The size of the cyclic hemiacetal ring adopted by a monosaccharide, or the absence of such a ring.",
+      "title": "ring form",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/ring_form",
+      "owner": "MonosaccharideResidue",
+      "domain_of": [
+        "Monosaccharide",
+        "MonosaccharideResidue"
+      ],
+      "range": "MonosaccharideRingFormEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dl_configuration",
+      "definition_uri": "https://w3id.org/chemrof/dl_configuration",
+      "description": "The D/L configurational assignment of a monosaccharide, determined by the configuration at the highest-numbered stereocentre.",
+      "title": "D/L configuration",
+      "comments": [
+        "Distinct from the absolute_configuration slot, which carries a free-text Cahn-Ingold-Prelog (R/S) descriptor and applies per stereocentre. A single sugar has one D/L assignment but an R/S descriptor at each of its stereocentres"
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/03.html"
+      ],
+      "aliases": [
+        "D/L configuration",
+        "absolute configuration"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/dl_configuration",
+      "owner": "MonosaccharideResidue",
+      "domain_of": [
+        "Monosaccharide",
+        "MonosaccharideResidue"
+      ],
+      "range": "DLConfigurationEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "residue_of",
+      "definition_uri": "https://w3id.org/chemrof/residue_of",
+      "description": "Relates a monosaccharide residue, as it occurs within a glycan, to the free monosaccharide from which it is formally derived by loss of water.",
+      "title": "residue of",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/residue_of",
+      "owner": "MonosaccharideResidue",
+      "domain_of": [
+        "MonosaccharideResidue"
+      ],
+      "range": "Monosaccharide",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_monosaccharide_residues",
+      "definition_uri": "https://w3id.org/chemrof/has_monosaccharide_residues",
+      "description": "Relates a glycan to the monosaccharide residues that constitute it. Together with has_glycosidic_linkages this forms a graph representation of the glycan, in which residues are the nodes and linkages are the edges.",
+      "title": "has monosaccharide residues",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "has_part",
+      "slot_uri": "https://w3id.org/chemrof/has_monosaccharide_residues",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
+      "range": "MonosaccharideResidue",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_glycosidic_linkages",
+      "definition_uri": "https://w3id.org/chemrof/has_glycosidic_linkages",
+      "description": "Relates a glycan to the glycosidic linkages connecting its monosaccharide residues. These are the edges of the graph whose nodes are given by has_monosaccharide_residues.",
+      "title": "has glycosidic linkages",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/has_glycosidic_linkages",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
+      "range": "GlycosidicLinkage",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_reducing_end",
+      "definition_uri": "https://w3id.org/chemrof/has_reducing_end",
+      "description": "The monosaccharide residue of a glycan whose anomeric carbon is not involved in a glycosidic linkage, and which therefore retains the free (reducing) hemiacetal. By convention this residue is drawn or written at the right-hand end of the glycan.",
+      "title": "has reducing end",
+      "comments": [
+        "A cyclic glycan, or one whose reducing end is substituted (for example a glycoconjugate attached to a protein or lipid), has no free reducing end."
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/38.html"
+      ],
+      "slot_uri": "https://w3id.org/chemrof/has_reducing_end",
+      "owner": "Glycan",
+      "domain_of": [
+        "Glycan"
+      ],
+      "range": "MonosaccharideResidue",
       "@type": "SlotDefinition"
     },
     {
@@ -3576,7 +3996,10 @@
       "is_a": "hashed_chemical_formula",
       "domain": "ChemicalEntity",
       "slot_uri": "https://w3id.org/chemrof/inchi_key_string",
-      "owner": "inchi_key_string",
+      "owner": "ChemicalEntity",
+      "domain_of": [
+        "ChemicalEntity"
+      ],
       "range": "ChemicalEncoding",
       "@type": "SlotDefinition"
     },
@@ -5206,6 +5629,10 @@
       "title": "participant",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/participant",
+      "owner": "ReactionParticipant",
+      "domain_of": [
+        "ReactionParticipant"
+      ],
       "range": "ChemicalEntity",
       "@type": "SlotDefinition"
     },
@@ -5215,6 +5642,10 @@
       "title": "stoichiometry",
       "from_schema": "https://w3id.org/chemrof",
       "slot_uri": "https://w3id.org/chemrof/stoichiometry",
+      "owner": "ReactionParticipant",
+      "domain_of": [
+        "ReactionParticipant"
+      ],
       "range": "integer",
       "@type": "SlotDefinition"
     },
@@ -5310,6 +5741,90 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__subject",
+      "description": "The donor residue, which contributes its anomeric carbon to the linkage.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/subject",
+      "alias": "subject",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "MonosaccharideResidue",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__object",
+      "description": "The acceptor residue, which contributes the hydroxyl or other group to the linkage.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/object",
+      "alias": "object",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "MonosaccharideResidue",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__donor_position",
+      "description": "The carbon number of the anomeric carbon of the donor residue. This is 1 for aldoses and 2 for ketoses such as the sialic acids.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/donor_position",
+      "alias": "donor_position",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "integer",
+      "required": true,
+      "minimum_value": 1,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__acceptor_position",
+      "description": "The carbon number on the acceptor residue to which the donor is attached. A value here is absent for a linkage to a non-carbon position, and ambiguous linkages are left unspecified.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/acceptor_position",
+      "alias": "acceptor_position",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "integer",
+      "minimum_value": 1,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__anomeric_configuration",
+      "description": "The configuration at the anomeric carbon of the donor residue, as locked in by the linkage.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/anomeric_configuration",
+      "alias": "anomeric_configuration",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "AnomericConfigurationEnum",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "glycosidicLinkage__is_n_glycosidic",
+      "description": "True where the linkage is to a nitrogen atom rather than to an oxygen atom, as in the GlcNAc-Asn linkage of N-linked glycoproteins.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/is_n_glycosidic",
+      "alias": "is_n_glycosidic",
+      "owner": "GlycosidicLinkage",
+      "domain_of": [
+        "GlycosidicLinkage"
+      ],
+      "range": "boolean",
       "@type": "SlotDefinition"
     },
     {
@@ -5610,6 +6125,47 @@
         "AtomOccurrence"
       ],
       "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "enzymeRegulation__effector",
+      "description": "The chemical entity (typically a metabolite) that exerts the regulatory effect.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/effector",
+      "alias": "effector",
+      "owner": "EnzymeRegulation",
+      "domain_of": [
+        "EnzymeRegulation"
+      ],
+      "range": "ChemicalEntity",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "enzymeRegulation__regulated_enzyme",
+      "description": "Optional identifier or label of the specific enzyme (isoform) that is regulated. A reaction may be catalyzed by more than one enzyme, and a regulatory effect may apply to only some of them.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/regulated_enzyme",
+      "alias": "regulated_enzyme",
+      "owner": "EnzymeRegulation",
+      "domain_of": [
+        "EnzymeRegulation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "allostericRegulation__modification_type",
+      "description": "Whether the allosteric effector activates or inhibits the enzyme.",
+      "from_schema": "https://w3id.org/chemrof",
+      "slot_uri": "https://w3id.org/chemrof/modification_type",
+      "alias": "modification_type",
+      "owner": "AllostericRegulation",
+      "domain_of": [
+        "AllostericRegulation"
+      ],
+      "range": "EnzymeModificationTypeEnum",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -7878,6 +8434,7 @@
     {
       "name": "ReactionParticipant_stoichiometry",
       "definition_uri": "https://w3id.org/chemrof/stoichiometry",
+      "description": "The stoichiometric coefficient of the participant, given as a non-negative magnitude (the sign/direction is conveyed by whether the participant is on the left or right side of the reaction). Permits fractional values as used in genome-scale and lumped reactions.",
       "title": "stoichiometry",
       "from_schema": "https://w3id.org/chemrof",
       "is_a": "stoichiometry",
@@ -7890,7 +8447,7 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "stoichiometry",
-      "range": "integer",
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
@@ -8164,6 +8721,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -9208,6 +9766,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9250,6 +9809,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9304,6 +9864,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9366,6 +9927,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9408,6 +9970,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9460,6 +10023,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9497,14 +10061,17 @@
       "name": "Glycan",
       "id_prefixes": [
         "KEGG.GLYCAN",
-        "GlyTouCan",
+        "GLYTOUCAN",
         "glycosciencesdb"
       ],
       "definition_uri": "https://w3id.org/chemrof/Glycan",
-      "description": "A macromolecule consisting of a large number of monosaccharides linked glycosidically",
+      "description": "A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be linear or branched, and may be composed of a single kind of residue or of many.",
       "title": "glycan",
       "comments": [
-        "Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans"
+        "Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans",
+        "A glycan differs from other polymers modelled here in that it is frequently branched, so has_monosaccharide_residues plus has_glycosidic_linkages (a node and edge list) is used in preference to the linear sequence representation used for peptides and nucleic acids",
+        "This class is placed under Macromolecule to sit alongside Peptide and Protein, but note that short oligosaccharides such as the Lewis X trisaccharide are conventionally glycans while not being macromolecules. Whether to relax the parent of this class is under discussion",
+        "The ChEBI mappings are narrow rather than exact because this class subsumes both polysaccharide (CHEBI:18154) and oligosaccharide (CHEBI:50699), and ChEBI has no single term covering exactly that union"
       ],
       "examples": [
         {
@@ -9515,7 +10082,12 @@
       ],
       "from_schema": "https://w3id.org/chemrof",
       "aliases": [
-        "polysaccharides"
+        "polysaccharides",
+        "oligosaccharide"
+      ],
+      "narrow_mappings": [
+        "CHEBI:18154",
+        "CHEBI:50699"
       ],
       "is_a": "Macromolecule",
       "slots": [
@@ -9526,6 +10098,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9553,10 +10126,242 @@
         "has_atoms",
         "Molecule_has_part",
         "is_organic",
-        "Macromolecule_has_submolecules"
+        "Macromolecule_has_submolecules",
+        "has_monosaccharide_residues",
+        "has_glycosidic_linkages",
+        "has_reducing_end",
+        "is_branched",
+        "carbohydrate_representation",
+        "wurcs_representation",
+        "glycoct_condensed",
+        "iupac_condensed_representation",
+        "carbbank_representation",
+        "linucs_representation",
+        "glycominds_linearcode_representation",
+        "kegg_chemical_function_representation"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/Glycan",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Monosaccharide",
+      "id_prefixes": [
+        "CHEBI",
+        "PUBCHEM.COMPOUND"
+      ],
+      "definition_uri": "https://w3id.org/chemrof/Monosaccharide",
+      "description": "A polyhydroxy aldehyde or ketone, or a compound derived from one, that cannot be hydrolysed to any simpler saccharide. Monosaccharides are the units from which glycans are built.",
+      "title": "monosaccharide",
+      "comments": [
+        "In aqueous solution most monosaccharides exist predominantly as cyclic hemiacetals rather than in the open-chain form, and the cyclic forms are what participate in glycosidic linkages"
+      ],
+      "examples": [
+        {
+          "value": "alpha-D-glucopyranose",
+          "@type": "Example"
+        },
+        {
+          "value": "N-acetyl-D-glucosamine",
+          "@type": "Example"
+        },
+        {
+          "value": "L-fucose",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "simple sugar"
+      ],
+      "exact_mappings": [
+        "CHEBI:35381"
+      ],
+      "is_a": "Molecule",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "IUPAC_name",
+        "is_radical",
+        "has_chemical_role",
+        "inchi_string",
+        "inchi_key_string",
+        "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
+        "smiles_string",
+        "cxsmiles_string",
+        "empirical_formula",
+        "has_major_microspecies_at_pH7_3",
+        "molecular_mass",
+        "water_solubility",
+        "pka_ionization_constant",
+        "pka_temperature",
+        "pka_ionic_strength",
+        "pka_solvent",
+        "pka_pressure",
+        "ChemicalEntity_classified_by",
+        "owl_subclass_of",
+        "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "Molecule_has_atom_occurrences",
+        "Molecule_has_bonds",
+        "has_submolecules",
+        "has_atoms",
+        "Molecule_has_part",
+        "is_organic",
+        "anomeric_configuration",
+        "ring_form",
+        "dl_configuration"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/Monosaccharide",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MonosaccharideResidue",
+      "definition_uri": "https://w3id.org/chemrof/MonosaccharideResidue",
+      "description": "A monosaccharide as it occurs within a glycan, that is, the part of the glycan contributed by one monosaccharide unit after formation of its glycosidic linkages. A residue differs from the corresponding free monosaccharide by the loss of water at each linkage.",
+      "title": "monosaccharide residue",
+      "comments": [
+        "Residues are the nodes of the graph representation of a glycan; the edges are instances of GlycosidicLinkage"
+      ],
+      "examples": [
+        {
+          "value": "the Fuc residue of the Lewis X trisaccharide",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "aliases": [
+        "sugar residue",
+        "glycosyl residue"
+      ],
+      "is_a": "MolecularComponent",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "IUPAC_name",
+        "is_radical",
+        "has_chemical_role",
+        "inchi_string",
+        "inchi_key_string",
+        "ChemicalEntity_inchi_chemical_sublayer",
+        "inchi_hydrogen_connections_sublayer",
+        "inchi_charge_sublayer",
+        "inchi_proton_sublayer",
+        "inchi_stereochemical_double_bond_sublayer",
+        "inchi_tetrahedral_stereochemical_sublayer",
+        "inchi_stereochemical_type_sublayer",
+        "inchi_isotopic_layer",
+        "smiles_string",
+        "cxsmiles_string",
+        "empirical_formula",
+        "has_major_microspecies_at_pH7_3",
+        "molecular_mass",
+        "water_solubility",
+        "pka_ionization_constant",
+        "pka_temperature",
+        "pka_ionic_strength",
+        "pka_solvent",
+        "pka_pressure",
+        "ChemicalEntity_classified_by",
+        "owl_subclass_of",
+        "PolyatomicEntity_inchi_atom_connections_sublayer",
+        "residue_of",
+        "anomeric_configuration",
+        "ring_form",
+        "dl_configuration"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/MonosaccharideResidue",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "GlycosidicLinkage",
+      "definition_uri": "https://w3id.org/chemrof/GlycosidicLinkage",
+      "description": "A reified covalent linkage between the anomeric carbon of one monosaccharide residue and a hydroxyl (or other) group of a second residue, formed with loss of water. Example: the beta(1->4) linkage joining galactose to N-acetylglucosamine in N-acetyllactosamine.",
+      "title": "glycosidic linkage",
+      "comments": [
+        "The subject is the donor residue, which contributes its anomeric carbon; the object is the acceptor residue. The direction matters, and reversing it describes a different molecule",
+        "The customary written form of a linkage, for example b1-4, combines the anomeric_configuration of the donor (b), the donor_position (1) and the acceptor_position (4)"
+      ],
+      "examples": [
+        {
+          "value": "Gal b1-4 GlcNAc",
+          "description": "The linkage of N-acetyllactosamine",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/chemrof",
+      "see_also": [
+        "https://iupac.qmul.ac.uk/2carb/06n07.html"
+      ],
+      "aliases": [
+        "glycosidic bond"
+      ],
+      "is_a": "ChemicalRelationship",
+      "slots": [
+        "owl_subclass_of",
+        "glycosidicLinkage__subject",
+        "glycosidicLinkage__object",
+        "glycosidicLinkage__donor_position",
+        "glycosidicLinkage__acceptor_position",
+        "glycosidicLinkage__anomeric_configuration",
+        "glycosidicLinkage__is_n_glycosidic"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject",
+          "description": "The donor residue, which contributes its anomeric carbon to the linkage.",
+          "range": "MonosaccharideResidue",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "object",
+          "description": "The acceptor residue, which contributes the hydroxyl or other group to the linkage.",
+          "range": "MonosaccharideResidue",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "donor_position",
+          "description": "The carbon number of the anomeric carbon of the donor residue. This is 1 for aldoses and 2 for ketoses such as the sialic acids.",
+          "range": "integer",
+          "required": true,
+          "minimum_value": 1,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "acceptor_position",
+          "description": "The carbon number on the acceptor residue to which the donor is attached. A value here is absent for a linkage to a non-carbon position, and ambiguous linkages are left unspecified.",
+          "range": "integer",
+          "minimum_value": 1,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "anomeric_configuration",
+          "description": "The configuration at the anomeric carbon of the donor residue, as locked in by the linkage.",
+          "range": "AnomericConfigurationEnum",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "is_n_glycosidic",
+          "description": "True where the linkage is to a nitrogen atom rather than to an oxygen atom, as in the GlcNAc-Asn linkage of N-linked glycoproteins.",
+          "range": "boolean",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/chemrof/GlycosidicLinkage",
       "@type": "ClassDefinition"
     },
     {
@@ -9581,6 +10386,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9636,6 +10442,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9695,6 +10502,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9754,6 +10562,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9810,6 +10619,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9851,6 +10661,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9895,6 +10706,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9936,6 +10748,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -9982,6 +10795,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10028,6 +10842,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10081,6 +10896,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10139,6 +10955,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10215,6 +11032,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10265,6 +11083,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10322,6 +11141,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10368,6 +11188,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10410,6 +11231,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10452,6 +11274,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10494,6 +11317,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10536,6 +11360,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10578,6 +11403,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10621,6 +11447,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10669,6 +11496,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10721,6 +11549,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10779,6 +11608,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10837,6 +11667,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10898,6 +11729,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -10959,6 +11791,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -11012,6 +11845,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -11065,6 +11899,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -11133,6 +11968,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11200,6 +12036,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11280,6 +12117,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11337,6 +12175,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11394,6 +12233,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11465,6 +12305,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11531,6 +12372,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11600,6 +12442,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11667,6 +12510,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11718,6 +12562,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11779,6 +12624,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11831,6 +12677,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -11891,6 +12738,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_atom_connections_sublayer",
         "inchi_hydrogen_connections_sublayer",
@@ -12471,6 +13319,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12524,6 +13373,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12577,6 +13427,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12640,6 +13491,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12720,6 +13572,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12781,6 +13634,7 @@
         "is_radical",
         "has_chemical_role",
         "inchi_string",
+        "inchi_key_string",
         "ChemicalEntity_inchi_chemical_sublayer",
         "inchi_hydrogen_connections_sublayer",
         "inchi_charge_sublayer",
@@ -12859,10 +13713,8 @@
         "Align with https://docs.open-reaction-database.org/en/latest/schema.html"
       ],
       "from_schema": "https://w3id.org/chemrof",
-      "mappings": [
-        "RXNO:0000000"
-      ],
       "exact_mappings": [
+        "RXNO:0000000",
         "MOP:0000010",
         "BFO:0000015"
       ],
@@ -12885,10 +13737,13 @@
         "reaction_rate_coefficient",
         "reaction_rate",
         "reaction_type",
+        "reaction_mechanism",
+        "has_allosteric_regulation",
+        "has_competitive_inhibition",
         "Reaction_description"
       ],
       "slot_usage": {},
-      "class_uri": "http://purl.obolibrary.org/obo/RXNO_0000000",
+      "class_uri": "https://w3id.org/chemrof/Reaction",
       "@type": "ClassDefinition"
     },
     {
@@ -12924,6 +13779,9 @@
         "reaction_rate_coefficient",
         "reaction_rate",
         "reaction_type",
+        "reaction_mechanism",
+        "has_allosteric_regulation",
+        "has_competitive_inhibition",
         "Reaction_description"
       ],
       "slot_usage": {},
@@ -12944,6 +13802,80 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/chemrof/ReactionParticipant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "EnzymeRegulation",
+      "definition_uri": "https://w3id.org/chemrof/EnzymeRegulation",
+      "description": "A reified relationship in which a chemical effector modulates the activity of an enzyme catalyzing a reaction.",
+      "title": "enzyme regulation",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "ChemicalRelationship",
+      "abstract": true,
+      "slots": [
+        "owl_subclass_of",
+        "enzymeRegulation__effector",
+        "enzymeRegulation__regulated_enzyme"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "effector",
+          "description": "The chemical entity (typically a metabolite) that exerts the regulatory effect.",
+          "range": "ChemicalEntity",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "regulated_enzyme",
+          "description": "Optional identifier or label of the specific enzyme (isoform) that is regulated. A reaction may be catalyzed by more than one enzyme, and a regulatory effect may apply to only some of them.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/chemrof/EnzymeRegulation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AllostericRegulation",
+      "definition_uri": "https://w3id.org/chemrof/AllostericRegulation",
+      "description": "Allosteric activation or inhibition of an enzyme by an effector that binds at a site distinct from the catalytic (active) site.",
+      "title": "allosteric regulation",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "EnzymeRegulation",
+      "slots": [
+        "owl_subclass_of",
+        "enzymeRegulation__effector",
+        "enzymeRegulation__regulated_enzyme",
+        "allostericRegulation__modification_type"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "modification_type",
+          "description": "Whether the allosteric effector activates or inhibits the enzyme.",
+          "range": "EnzymeModificationTypeEnum",
+          "required": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/chemrof/AllostericRegulation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CompetitiveInhibition",
+      "definition_uri": "https://w3id.org/chemrof/CompetitiveInhibition",
+      "description": "Inhibition in which the effector (inhibitor) competes with the substrate for binding at the enzyme's active site.",
+      "title": "competitive inhibition",
+      "from_schema": "https://w3id.org/chemrof",
+      "is_a": "EnzymeRegulation",
+      "slots": [
+        "owl_subclass_of",
+        "enzymeRegulation__effector",
+        "enzymeRegulation__regulated_enzyme"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/chemrof/CompetitiveInhibition",
       "@type": "ClassDefinition"
     },
     {
@@ -13111,9 +14043,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "chemrof.yaml",
-  "source_file_date": "2026-05-22T09:55:20",
-  "source_file_size": 128800,
-  "generation_date": "2026-05-22T09:58:40",
+  "source_file_date": "2026-09-16T19:17:17",
+  "source_file_size": 146614,
+  "generation_date": "2026-09-16T19:17:26",
   "@type": "SchemaDefinition",
   "@context": [
     "schema/jsonld/chemrof.context.jsonld",
