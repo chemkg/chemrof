@@ -474,6 +474,35 @@ symbol: Cl
 type: chemrof:AtomAnion
 
 ```
+## Reaction-methionine_adenosyltransferase
+### Input
+```yaml
+direction: l->r
+has_allosteric_regulation:
+- effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  modification_type: activation
+  regulated_enzyme: MAT3
+has_competitive_inhibition:
+- effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  regulated_enzyme: MAT1
+id: RHEA:21080
+left_participants:
+- participant: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N
+  stoichiometry: 1.0
+- participant: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+  stoichiometry: 1.0
+name: methionine adenosyltransferase reaction
+reaction_mechanism: irreversible_michaelis_menten
+right_participants:
+- participant: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  stoichiometry: 1.0
+- participant: INCHIKEY:NBIIXXVUZAFLBC-UHFFFAOYSA-L
+  stoichiometry: 1.0
+- participant: INCHIKEY:XPPKVPWEQAFLFU-UHFFFAOYSA-K
+  stoichiometry: 1.0
+type: chemrof:Reaction
+
+```
 ## ImpreciseChemicalMixture-wolfes_vitamin_mix
 ### Input
 ```yaml
@@ -668,6 +697,40 @@ name: glucose
 type: chemrof:SmallMolecule
 
 ```
+## Collection-methionine_cycle_excerpt
+### Input
+```yaml
+entities:
+- id: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N
+  inchi_key_string: FFEARJCKVFRZRR-BYPYZUCNSA-N
+  name: methionine
+  type: chemrof:SmallMolecule
+- id: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+  inchi_key_string: ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+  name: adenosine triphosphate
+  type: chemrof:SmallMolecule
+- id: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  inchi_key_string: MEFKEPWMEQBLKI-AIRLBKTGSA-O
+  name: S-adenosyl-L-methionine
+  type: chemrof:SmallMolecule
+- direction: l->r
+  has_competitive_inhibition:
+  - effector: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+    regulated_enzyme: MAT1
+  id: RHEA:21080
+  left_participants:
+  - participant: INCHIKEY:FFEARJCKVFRZRR-BYPYZUCNSA-N
+    stoichiometry: 1.0
+  - participant: INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J
+    stoichiometry: 1.0
+  name: methionine adenosyltransferase reaction
+  reaction_mechanism: irreversible_michaelis_menten
+  right_participants:
+  - participant: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
+    stoichiometry: 1.0
+  type: chemrof:Reaction
+
+```
 ## Molecule-dioxygen
 ### Input
 ```yaml
@@ -768,6 +831,15 @@ pka_solvent: water
 pka_temperature: 25.0
 smiles_string: OC(=O)CC(O)(C(=O)O)CC(=O)O
 type: chemrof:Molecule
+
+```
+## MoleculeGroupingClass-phosphatidylinositol_3_phosphate_r1_r2
+### Input
+```yaml
+cxsmiles_string: '[H][C@@](COC([*])=O)(COP(O)(=O)O[C@H]1[C@H](O)[C@@H](O)[C@H](O)[C@@H](OP(O)(O)=O)[C@H]1O)OC([*])=O
+  |$;;;;;_R1;;;;;;;;;;;;;;;;;;;;;;;;;_R2$|'
+id: wd:Q46220488
+name: 1-phosphatidyl-1D-myo-inositol 3-phosphate (R1,R2)
 
 ```
 ## SmallMolecule-glucose-with-solubility
