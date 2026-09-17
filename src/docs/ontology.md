@@ -10,22 +10,29 @@ data model, and to use this to help advance the development of CHEBI.
 
 ## Download OWL
 
-See the [ontology](https://github.com/chemkg/chemrof/blob/master/ontology) folder on github
+The [ontology](https://github.com/chemkg/chemrof/tree/main/ontology)
+folder on GitHub holds a proof-of-concept ontology generated in 2022
+from the exemplar [database](database.md). It is a frozen snapshot: the
+pipeline that produced it has been retired (see below).
 
 ## OWL generation
 
-See
-[Makefile.etl](https://github.com/cmungall/chem-schema/tree/master/Makefile.etl)
-for specific details.
+The basic idea is to transform instance data (where for example
+`carbon` is an instance of the ChemicalElement class, and `carbon-12`
+is an instance of the sibling Isotope class) into OWL classes, and to
+use reasoning to classify.
 
-The basic idea is to transform the turtle instance data (where for
-example `carbon` is an instance of the ChemicalElement class, and
-`carbon-12` is an instance of the sibling Isotope class) into classes,
-and to use reasoning to classify.
+This is done with [linkml-owl](https://linkml.io/linkml-owl): the
+`chemrof convert` command produces instances from SMILES and can emit
+them as OWL with `--format owl` (see the [CLI reference](cli.md)).
+Classes carrying an `owl.template` annotation in the schema
+(MonoatomicIon, Enantiomer, RacemicMixture) become `EquivalentClasses`
+axioms; other classes produce annotation assertions.
 
-Currently this is done via SPARQL construct (see [owlgen folder](https://github.com/cmungall/chem-schema/tree/master/sparql/owlgen))
-
-Conversion to use [linkml-owl](https://linkml.io/linkml-owl) is in progress.
+An earlier pipeline (2021–2024) reached the same result with SPARQL
+CONSTRUCT queries run over an ETL'd instance database. It was retired
+in September 2026 and can be found in git history (`etl.mk`,
+`sparql/owlgen/`).
 
 ## Example
 
@@ -40,7 +47,7 @@ chem:MonoatomicIon/Mn/+4       rdf:type        chem:MonoatomicIon ;
         ns1:inchi_string        "InChI=1S/Mn/q+4"^^xsd:string .
 ```
 
-This is translated to class-level ([via this query](https://github.com/cmungall/chem-schema/blob/master/sparql/owlgen/gen-MonoatomicIon.rq)):
+This is translated to class-level (via the `owl.template` annotation on MonoatomicIon):
 
 ```turtle
 chem:MonoatomicIon/Mn/+4
@@ -80,5 +87,3 @@ Using LinkML as the modeling system provides some advantages. Rather
 than a collection of denormalized tables, the inputs to the OWL
 generation are objects/instances/rows conforming to a full object
 model/schema, allowing for both rigorous modeling and powerful programmatic transformations.
-
-Conversion to use [linkml-owl](https://linkml.io/linkml-owl) is in progress.
