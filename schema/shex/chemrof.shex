@@ -80,6 +80,16 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<AllostericRegulation> CLOSED {
+    (  $<AllostericRegulation_tes> (  &<EnzymeRegulation_tes> ;
+          rdf:type [ <EnzymeRegulation> ] ? ;
+          <modification_type> [ <https://w3id.org/chemrof/EnzymeModificationTypeEnum#activation>
+             <https://w3id.org/chemrof/EnzymeModificationTypeEnum#inhibition> ]
+       ) ;
+       rdf:type [ <AllostericRegulation> ] ?
+    )
+}
+
 <Allotrope> CLOSED {
     (  $<Allotrope_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
@@ -206,9 +216,10 @@ linkml:Sparqlpath xsd:string
           <subject> @<AtomOccurrence> ? ;
           <object> @<AtomOccurrence> ? ;
           <bond_type> [ gc:NormalBond gc:AromaticBond gc:Single gc:Double gc:Triple gc:Quadruple gc:HydrogenBond
-             <https://w3id.org/chemrof/BondTypeEnum#ionic> <https://w3id.org/chemrof/BondTypeEnum#polycentric>
-             <https://w3id.org/chemrof/BondTypeEnum#metal-metal> <https://w3id.org/chemrof/BondTypeEnum#salt%20bridge>
-             <https://w3id.org/chemrof/BondTypeEnum#polar%20covalent> <https://w3id.org/chemrof/BondTypeEnum#sigma> ] ? ;
+             <https://w3id.org/chemrof/BondTypeEnum#glycosidic> <https://w3id.org/chemrof/BondTypeEnum#ionic>
+             <https://w3id.org/chemrof/BondTypeEnum#polycentric> <https://w3id.org/chemrof/BondTypeEnum#metal-metal>
+             <https://w3id.org/chemrof/BondTypeEnum#salt%20bridge> <https://w3id.org/chemrof/BondTypeEnum#polar%20covalent>
+             <https://w3id.org/chemrof/BondTypeEnum#sigma> ] ? ;
           <bond_order> @linkml:Integer ? ;
           <bond_length> @linkml:Float ? ;
           <bond_energy> @linkml:Float ? ;
@@ -324,6 +335,7 @@ linkml:Sparqlpath xsd:string
           <is_radical> @linkml:Boolean ? ;
           <http://purl.obolibrary.org/obo/RO_0000087> @<ChemicalRole> ? ;
           <inchi_string> @<ChemicalEncoding> ? ;
+          <inchi_key_string> @<ChemicalEncoding> ? ;
           <inchi_chemical_sublayer> @linkml:String ? ;
           <inchi_atom_connections_sublayer> @linkml:String ? ;
           <inchi_hydrogen_connections_sublayer> @linkml:String ? ;
@@ -336,6 +348,7 @@ linkml:Sparqlpath xsd:string
           <smiles_string> @<ChemicalEncoding> ? ;
           <cxsmiles_string> @<ChemicalEncoding> ? ;
           <empirical_formula> @<ChemicalEncoding> ? ;
+          <molecular_formula> @<ChemicalEncoding> ? ;
           <has_major_microspecies_at_pH7_3> @<ChemicalEntity> ? ;
           <molecular_mass> @linkml:Float ? ;
           <water_solubility> @linkml:Float ? ;
@@ -418,8 +431,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <ChemicalRelationship>  (
-    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalSimilarity> OR @<PolymerRepeatUnit> OR @<ProportionalPart> OR
-    @<ReactionParticipant> OR @<SubatomicParticleOccurrence>
+    @<AtomOccurrence> OR @<AtomicBond> OR @<ChemicalSimilarity> OR @<EnzymeRegulation> OR @<GlycosidicLinkage> OR
+    @<PolymerRepeatUnit> OR @<ProportionalPart> OR @<ReactionParticipant> OR @<SubatomicParticleOccurrence>
 )
 
 <ChemicalRelationship_struct> {
@@ -504,6 +517,14 @@ linkml:Sparqlpath xsd:string
 <Collection> CLOSED {
     (  $<Collection_tes> <entities> @<DomainEntity> * ;
        rdf:type [ <Collection> ] ?
+    )
+}
+
+<CompetitiveInhibition> CLOSED {
+    (  $<CompetitiveInhibition_tes> (  &<EnzymeRegulation_tes> ;
+          rdf:type [ <EnzymeRegulation> ] ?
+       ) ;
+       rdf:type [ <CompetitiveInhibition> ] ?
     )
 }
 
@@ -631,6 +652,20 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<EnzymeRegulation>  (
+    @<AllostericRegulation> OR @<CompetitiveInhibition>
+)
+
+<EnzymeRegulation_struct> {
+    (  $<EnzymeRegulation_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          <effector> @<ChemicalEntity> ;
+          <regulated_enzyme> @linkml:String ?
+       ) ;
+       rdf:type [ <EnzymeRegulation> ] ?
+    )
+}
+
 <Ester> CLOSED {
     (  $<Ester_tes> (  &<Molecule_tes> ;
           rdf:type [ <Molecule> ] ? ;
@@ -688,9 +723,37 @@ linkml:Sparqlpath xsd:string
 
 <Glycan> CLOSED {
     (  $<Glycan_tes> (  &<Macromolecule_tes> ;
-          rdf:type [ <Macromolecule> ] ?
+          rdf:type [ <Macromolecule> ] ? ;
+          <has_monosaccharide_residues> @<MonosaccharideResidue> * ;
+          <has_glycosidic_linkages> @<GlycosidicLinkage> * ;
+          <has_reducing_end> @<MonosaccharideResidue> ? ;
+          <is_branched> @linkml:Boolean ? ;
+          <wurcs_representation> @<ChemicalEncoding> ? ;
+          <glycoct_condensed> @<ChemicalEncoding> ? ;
+          <iupac_condensed_representation> @<ChemicalEncoding> ? ;
+          <carbbank_representation> @<ChemicalEncoding> ? ;
+          <linucs_representation> @<ChemicalEncoding> ? ;
+          <glycominds_linearcode_representation> @<ChemicalEncoding> ? ;
+          <kegg_chemical_function_representation> @<ChemicalEncoding> ?
        ) ;
        rdf:type [ <Glycan> ]
+    )
+}
+
+<GlycosidicLinkage> CLOSED {
+    (  $<GlycosidicLinkage_tes> (  &<ChemicalRelationship_tes> ;
+          rdf:type [ <ChemicalRelationship> ] ? ;
+          <subject> @<MonosaccharideResidue> ;
+          <object> @<MonosaccharideResidue> ;
+          <donor_position> @linkml:Integer ;
+          <acceptor_position> @linkml:Integer ? ;
+          <anomeric_configuration> [ <https://w3id.org/chemrof/AnomericConfigurationEnum#alpha>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#beta>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#open_chain>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#unknown> ] ;
+          <is_n_glycosidic> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <GlycosidicLinkage> ] ?
     )
 }
 
@@ -794,7 +857,7 @@ linkml:Sparqlpath xsd:string
 
 <IsomeraseReaction> CLOSED {
     (  $<IsomeraseReaction_tes> (  &<Reaction_tes> ;
-          rdf:type [ <http://purl.obolibrary.org/obo/RXNO_0000000> ] ?
+          rdf:type [ <Reaction> ] ?
        ) ;
        rdf:type [ <IsomeraseReaction> ]
     )
@@ -918,7 +981,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <MolecularComponent> ]
        )
-    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<PolymerPart> OR @<SequenceInterval>
+    } OR @<ChemicalGroup> OR @<FunctionalGroup> OR @<Moiety> OR @<MonosaccharideResidue> OR @<PolymerPart> OR @<SequenceInterval>
 )
 
 <MolecularComponentGroupingClass> CLOSED {
@@ -973,8 +1036,8 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Molecule> ]
        )
-    } OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<MoleculeByChargeState> OR @<NaturalProduct> OR
-    @<NonSpeciesMolecule> OR @<SmallMolecule> OR @<Stereoisomer>
+    } OR @<Allotrope> OR @<Ester> OR @<Macromolecule> OR @<MolecularSpecies> OR @<MoleculeByChargeState> OR @<Monosaccharide> OR
+    @<NaturalProduct> OR @<NonSpeciesMolecule> OR @<SmallMolecule> OR @<Stereoisomer>
 )
 
 <MoleculeByChargeState>  (
@@ -1084,6 +1147,45 @@ linkml:Sparqlpath xsd:string
        )
     } OR @<Copolymer> OR @<Homopolymer>
 )
+
+<Monosaccharide> CLOSED {
+    (  $<Monosaccharide_tes> (  &<Molecule_tes> ;
+          rdf:type [ <Molecule> ] ? ;
+          <anomeric_configuration> [ <https://w3id.org/chemrof/AnomericConfigurationEnum#alpha>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#beta>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#open_chain>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#unknown> ] ? ;
+          <ring_form> [ <https://w3id.org/chemrof/MonosaccharideRingFormEnum#pyranose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#furanose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#septanose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#open_chain>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#unknown> ] ? ;
+          <dl_configuration> [ <https://w3id.org/chemrof/DLConfigurationEnum#D> <https://w3id.org/chemrof/DLConfigurationEnum#L>
+             <https://w3id.org/chemrof/DLConfigurationEnum#unknown> ] ?
+       ) ;
+       rdf:type [ <Monosaccharide> ]
+    )
+}
+
+<MonosaccharideResidue> CLOSED {
+    (  $<MonosaccharideResidue_tes> (  &<MolecularComponent_tes> ;
+          rdf:type [ <MolecularComponent> ] ? ;
+          <residue_of> @<Monosaccharide> ? ;
+          <anomeric_configuration> [ <https://w3id.org/chemrof/AnomericConfigurationEnum#alpha>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#beta>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#open_chain>
+             <https://w3id.org/chemrof/AnomericConfigurationEnum#unknown> ] ? ;
+          <ring_form> [ <https://w3id.org/chemrof/MonosaccharideRingFormEnum#pyranose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#furanose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#septanose>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#open_chain>
+             <https://w3id.org/chemrof/MonosaccharideRingFormEnum#unknown> ] ? ;
+          <dl_configuration> [ <https://w3id.org/chemrof/DLConfigurationEnum#D> <https://w3id.org/chemrof/DLConfigurationEnum#L>
+             <https://w3id.org/chemrof/DLConfigurationEnum#unknown> ] ?
+       ) ;
+       rdf:type [ <MonosaccharideResidue> ]
+    )
+}
 
 <Nanomaterial> CLOSED {
     (  $<Nanomaterial_tes> (  &<Material_tes> ;
@@ -1365,9 +1467,15 @@ linkml:Sparqlpath xsd:string
                 <https://w3id.org/chemrof/ReactionTypeEnum#aromatic_heterocycle_formation>
                 <https://w3id.org/chemrof/ReactionTypeEnum#protection> <https://w3id.org/chemrof/ReactionTypeEnum#deprotection>
                 <https://w3id.org/chemrof/ReactionTypeEnum#resolution> ] ? ;
+             <reaction_mechanism> [ <https://w3id.org/chemrof/ReactionMechanismEnum#reversible_michaelis_menten>
+                <https://w3id.org/chemrof/ReactionMechanismEnum#irreversible_michaelis_menten>
+                <https://w3id.org/chemrof/ReactionMechanismEnum#mass_action> <https://w3id.org/chemrof/ReactionMechanismEnum#drain>
+                ] ? ;
+             <has_allosteric_regulation> @<AllostericRegulation> * ;
+             <has_competitive_inhibition> @<CompetitiveInhibition> * ;
              <description> @linkml:String ?
           ) ;
-          rdf:type [ <http://purl.obolibrary.org/obo/RXNO_0000000> ]
+          rdf:type [ <Reaction> ]
        )
     } OR @<IsomeraseReaction>
 )
@@ -1386,7 +1494,7 @@ linkml:Sparqlpath xsd:string
     (  $<ReactionParticipant_tes> (  &<ChemicalRelationship_tes> ;
           rdf:type [ <ChemicalRelationship> ] ? ;
           <participant> @<ChemicalEntity> ? ;
-          <stoichiometry> @linkml:Integer ?
+          <stoichiometry> @linkml:Float ?
        ) ;
        rdf:type [ <ReactionParticipant> ] ?
     )
