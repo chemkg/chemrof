@@ -115,6 +115,7 @@ classes:
       - smiles_string
       - cxsmiles_string
       - empirical_formula
+      - molecular_formula
       - has_major_microspecies_at_pH7_3
       - molecular_mass
       - water_solubility
@@ -2816,15 +2817,31 @@ slots:
     aliases:
       - chemical_formula
       - Hill notation
-    description: A chemical formula where numbers denote atom count. E.g. C6H12O6  for glucose
-    mappings:
+    description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
+    comments:
+      - Distinct from empirical_formula, which reduces the same counts to their smallest whole-number ratio. The two coincide only where the counts share no common factor, so citric acid is C6H8O7 either way while glucose is C6H12O6 molecularly but CH2O empirically
+      - Not every chemical entity has one. A polymer of indeterminate length has a repeat unit and an empirical formula but no single molecular formula
+    exact_mappings:
       - CHEMINF:000042
+    examples:
+      - value: C6H12O6
+        description: glucose
+      - value: C8H10N4O2
+        description: caffeine, whose empirical formula is C4H5N2O
     title: molecular formula
   empirical_formula:
     is_a: chemical_formula
-    exact_mappings:
+    close_mappings:
       - CHEMINF:000042
     description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+    comments:
+      - Distinct from molecular_formula, which gives the actual atom counts rather than their smallest whole-number ratio
+      - The mapping to CHEMINF:000042 is close rather than exact because that term denotes the molecular formula. CHEMINF has no term for the empirical formula
+    examples:
+      - value: CH2O
+        description: glucose, whose atom counts 6:12:6 reduce to 1:2:1
+      - value: O
+        description: dioxygen, whose molecular formula is O2
     title: empirical formula
     annotations:
       owl: AnnotationAssertion

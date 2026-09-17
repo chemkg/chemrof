@@ -1,5 +1,5 @@
 # Auto generated from chemrof.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-16T19:17:34
+# Generation date: 2026-09-17T03:06:53
 # Schema: chemrof
 #
 # id: https://w3id.org/chemrof
@@ -692,6 +692,7 @@ class ChemicalEntity(PhysicochemicalEntity):
     smiles_string: Optional[str] = None
     cxsmiles_string: Optional[str] = None
     empirical_formula: Optional[str] = None
+    molecular_formula: Optional[str] = None
     has_major_microspecies_at_pH7_3: Optional[Union[str, ChemicalEntityId]] = None
     molecular_mass: Optional[float] = None
     water_solubility: Optional[float] = None
@@ -754,6 +755,9 @@ class ChemicalEntity(PhysicochemicalEntity):
 
         if self.empirical_formula is not None and not isinstance(self.empirical_formula, str):
             self.empirical_formula = str(self.empirical_formula)
+
+        if self.molecular_formula is not None and not isinstance(self.molecular_formula, str):
+            self.molecular_formula = str(self.molecular_formula)
 
         if self.has_major_microspecies_at_pH7_3 is not None and not isinstance(self.has_major_microspecies_at_pH7_3, ChemicalEntityId):
             self.has_major_microspecies_at_pH7_3 = ChemicalEntityId(self.has_major_microspecies_at_pH7_3)
@@ -5698,7 +5702,7 @@ slots.chebi_formula = Slot(uri=CHEMROF.chebi_formula, name="chebi_formula", curi
                    model_uri=CHEMROF.chebi_formula, domain=ChemicalEntity, range=Optional[str])
 
 slots.molecular_formula = Slot(uri=CHEMROF.molecular_formula, name="molecular_formula", curie=CHEMROF.curie('molecular_formula'),
-                   model_uri=CHEMROF.molecular_formula, domain=ChemicalEntity, range=Optional[str], mappings = [CHEMINF["000042"]])
+                   model_uri=CHEMROF.molecular_formula, domain=ChemicalEntity, range=Optional[str])
 
 slots.empirical_formula = Slot(uri=CHEMROF.empirical_formula, name="empirical_formula", curie=CHEMROF.curie('empirical_formula'),
                    model_uri=CHEMROF.empirical_formula, domain=ChemicalEntity, range=Optional[str])

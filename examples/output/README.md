@@ -13,6 +13,7 @@ name: 1-phosphatidyl-1D-myo-inositol 3-phosphate (R1,R2)
 IUPAC_name: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal
 empirical_formula: CH2O
 id: CHEBI:17234
+molecular_formula: C6H12O6
 molecular_mass: 180.16
 name: glucose
 smiles_string: C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O
@@ -133,6 +134,7 @@ inchi_chemical_sublayer: C8H15NO6
 inchi_key_string: OVRNDRQMDRJTHS-RTRLPJTCSA-N
 inchi_string: InChI=1S/C8H15NO6/c1-3(11)9-5-7(13)6(12)4(2-10)15-8(5)14/h4-8,10,12-14H,2H2,1H3,(H,9,11)/t4-,5-,6-,7-,8?/m1/s1
 is_organic: true
+molecular_formula: C8H15NO6
 molecular_mass: 221.209
 name: N-acetyl-D-glucosamine
 ring_form: pyranose
@@ -143,7 +145,7 @@ type: chemrof:Monosaccharide
 ## NaturalProduct-caffeine
 ### Input
 ```yaml
-empirical_formula: C8H10N4O2
+empirical_formula: C4H5N2O
 has_atoms:
 - C
 - C
@@ -171,6 +173,7 @@ has_atoms:
 - O
 id: CHEBI:27732
 is_organic: true
+molecular_formula: C8H10N4O2
 name: caffeine
 pka_ionization_constant:
 - 10.4
@@ -281,8 +284,9 @@ type: chemrof:Protein
 ### Input
 ```yaml
 IUPAC_name: acetic acid
-empirical_formula: C2H4O2
+empirical_formula: CH2O
 id: CHEBI:15365
+molecular_formula: C2H4O2
 molecular_mass: 60.05
 name: acetic acid
 pka_ionization_constant:
@@ -405,7 +409,7 @@ type: chemrof:ImpreciseChemicalMixture
 ## Macromolecule-polyethylene
 ### Input
 ```yaml
-empirical_formula: C2H4
+empirical_formula: CH2
 has_submolecules:
 - ethylene
 id: CHEBI:60034
@@ -550,7 +554,7 @@ type: chemrof:SubatomicParticle
 ## Ester-ethyl_acetate
 ### Input
 ```yaml
-empirical_formula: C4H8O2
+empirical_formula: C2H4O
 has_atoms:
 - C
 - C
@@ -568,6 +572,7 @@ has_atoms:
 - O
 id: CHEBI:27750
 is_organic: true
+molecular_formula: C4H8O2
 name: ethyl acetate
 smiles_string: CC(=O)OCC
 type: chemrof:Ester
@@ -596,6 +601,7 @@ inchi_chemical_sublayer: C6H12O6
 inchi_key_string: WQZGKKKJIJFFOK-DVKNGEFBSA-N
 inchi_string: InChI=1S/C6H12O6/c7-1-2-3(8)4(9)5(10)6(11)12-2/h2-11H,1H2/t2-,3-,4+,5-,6+/m1/s1
 is_organic: true
+molecular_formula: C6H12O6
 molecular_mass: 180.156
 name: alpha-D-glucopyranose
 ring_form: pyranose
@@ -662,7 +668,7 @@ entities:
 ## Molecule-dioxygen
 ### Input
 ```yaml
-empirical_formula: O2
+empirical_formula: O
 has_atom_occurrences:
 - name: dioxygen-o1
   occurrence_of: O
@@ -678,6 +684,7 @@ has_bonds:
   subject: dioxygen-o1
 id: CHEBI:15379
 is_organic: false
+molecular_formula: O2
 name: dioxygen
 smiles_string: O=O
 type: chemrof:Molecule
@@ -766,6 +773,7 @@ inchi_chemical_sublayer: C20H35NO15
 is_branched: true
 is_organic: true
 iupac_condensed_representation: Gal(b1-4)[Fuc(a1-3)]GlcNAc
+molecular_formula: C20H35NO15
 molecular_mass: 529.49
 name: Lewis X trisaccharide
 type: chemrof:Glycan

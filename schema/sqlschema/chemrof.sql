@@ -26,6 +26,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -284,6 +285,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -314,6 +316,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -344,6 +347,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -373,6 +377,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -403,6 +408,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -433,6 +439,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -473,6 +480,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -506,6 +514,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -538,6 +547,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -583,6 +593,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -614,6 +625,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -647,6 +659,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -681,6 +694,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -709,6 +723,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -737,6 +752,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -765,6 +781,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -793,6 +810,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -821,6 +839,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -850,6 +869,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -879,6 +899,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -910,6 +931,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -940,6 +962,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -970,6 +993,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -998,6 +1022,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1027,6 +1052,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1056,6 +1082,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1085,6 +1112,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1114,6 +1142,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1143,6 +1172,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1171,6 +1201,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1201,6 +1232,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1231,6 +1263,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1262,6 +1295,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1295,6 +1329,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1329,6 +1364,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1363,6 +1399,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1395,6 +1432,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1427,6 +1465,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1459,6 +1498,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1492,6 +1532,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1526,6 +1567,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1559,6 +1601,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1592,6 +1635,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1625,6 +1669,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1666,6 +1711,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1707,6 +1753,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1740,6 +1787,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1774,6 +1822,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1808,6 +1857,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1842,6 +1892,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1874,6 +1925,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -1908,6 +1960,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2055,6 +2108,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2085,6 +2139,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2116,6 +2171,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2151,6 +2207,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2183,6 +2240,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -2213,6 +2271,7 @@
 --     * Slot: smiles_string Description: A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.
 --     * Slot: cxsmiles_string Description: A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.
 --     * Slot: empirical_formula Description: A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose
+--     * Slot: molecular_formula Description: A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose
 --     * Slot: molecular_mass Description: The sum of the relative atomic masses of the constituent atoms of a molecule.
 --     * Slot: water_solubility Description: The maximum amount of a substance that can dissolve in water at 25°C, expressed in grams per liter (g/L).
 --     * Slot: pka_temperature Description: Temperature in Celsius at which pKa was measured. Default is 25°C if not specified.
@@ -3265,6 +3324,7 @@ CREATE TABLE "Glycan" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3302,6 +3362,7 @@ CREATE TABLE "MonosaccharideResidue" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3720,6 +3781,7 @@ CREATE TABLE "ChemicalEntity" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3821,6 +3883,7 @@ CREATE TABLE "PolyatomicEntity" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3855,6 +3918,7 @@ CREATE TABLE "SmallMolecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3889,6 +3953,7 @@ CREATE TABLE "Macromolecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3922,6 +3987,7 @@ CREATE TABLE "MolecularComplex" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3956,6 +4022,7 @@ CREATE TABLE "Peptide" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -3990,6 +4057,7 @@ CREATE TABLE "Protein" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4027,6 +4095,7 @@ CREATE TABLE "Monosaccharide" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4059,6 +4128,7 @@ CREATE TABLE "MolecularComponent" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4091,6 +4161,7 @@ CREATE TABLE "PolymerPart" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4123,6 +4194,7 @@ CREATE TABLE "Monomer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4155,6 +4227,7 @@ CREATE TABLE "MolecularSubsequence" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4187,6 +4260,7 @@ CREATE TABLE "ChemicalGroup" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4220,6 +4294,7 @@ CREATE TABLE "ChemicalMixture" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4253,6 +4328,7 @@ CREATE TABLE "PreciseChemicalMixture" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4288,6 +4364,7 @@ CREATE TABLE "ImpreciseChemicalMixture" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4322,6 +4399,7 @@ CREATE TABLE "Molecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4356,6 +4434,7 @@ CREATE TABLE "NaturalProduct" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4388,6 +4467,7 @@ CREATE TABLE "Moiety" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4421,6 +4501,7 @@ CREATE TABLE "SequenceInterval" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4454,6 +4535,7 @@ CREATE TABLE "AminoAcidSequenceInterval" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4487,6 +4569,7 @@ CREATE TABLE "NucleotideSequenceInterval" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4520,6 +4603,7 @@ CREATE TABLE "DNASequenceInterval" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4553,6 +4637,7 @@ CREATE TABLE "RNASequenceInterval" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4585,6 +4670,7 @@ CREATE TABLE "FunctionalGroup" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4619,6 +4705,7 @@ CREATE TABLE "MolecularSpecies" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4653,6 +4740,7 @@ CREATE TABLE "NonSpeciesMolecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4688,6 +4776,7 @@ CREATE TABLE "MoleculeByChargeState" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4725,6 +4814,7 @@ CREATE TABLE "PolyatomicIon" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4765,6 +4855,7 @@ CREATE TABLE "MolecularCation" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4805,6 +4896,7 @@ CREATE TABLE "MolecularAnion" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4843,6 +4935,7 @@ CREATE TABLE "NetUnchargedMolecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4879,6 +4972,7 @@ CREATE TABLE "Zwitterion" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4915,6 +5009,7 @@ CREATE TABLE "NeutralMolecule" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4952,6 +5047,7 @@ CREATE TABLE "Atom" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -4992,6 +5088,7 @@ CREATE TABLE "ChemicalElement" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5033,6 +5130,7 @@ CREATE TABLE "UnchargedAtom" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5072,6 +5170,7 @@ CREATE TABLE "Nuclide" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5111,6 +5210,7 @@ CREATE TABLE "Radionuclide" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5150,6 +5250,7 @@ CREATE TABLE "AtomIonicForm" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5188,6 +5289,7 @@ CREATE TABLE "PartiallySpecifiedAtom" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5228,6 +5330,7 @@ CREATE TABLE "FullySpecifiedAtom" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5263,6 +5366,7 @@ CREATE TABLE "ChemicalSalt" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5297,6 +5401,7 @@ CREATE TABLE "Ester" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5332,6 +5437,7 @@ CREATE TABLE "Stereoisomer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5366,6 +5472,7 @@ CREATE TABLE "Allotrope" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5408,7 +5515,7 @@ CREATE TABLE "ReactionGroupingClass_subtype_of" (
 	PRIMARY KEY ("ReactionGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("ReactionGroupingClass_id") REFERENCES "ReactionGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "ReactionGroupingClass" (id)
-);CREATE INDEX "ix_ReactionGroupingClass_subtype_of_subtype_of_id" ON "ReactionGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_ReactionGroupingClass_subtype_of_ReactionGroupingClass_id" ON "ReactionGroupingClass_subtype_of" ("ReactionGroupingClass_id");
+);CREATE INDEX "ix_ReactionGroupingClass_subtype_of_ReactionGroupingClass_id" ON "ReactionGroupingClass_subtype_of" ("ReactionGroupingClass_id");CREATE INDEX "ix_ReactionGroupingClass_subtype_of_subtype_of_id" ON "ReactionGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "MaterialGroupingClass_subtype_of" (
 	"MaterialGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -5443,14 +5550,14 @@ CREATE TABLE "MoleculeGroupingClassDefinedByComponents_subtype_of" (
 	PRIMARY KEY ("MoleculeGroupingClassDefinedByComponents_id", subtype_of_id),
 	FOREIGN KEY("MoleculeGroupingClassDefinedByComponents_id") REFERENCES "MoleculeGroupingClassDefinedByComponents" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_MoleculeGroupingClassDefinedByComponents_subtype_of_subtype_of_id" ON "MoleculeGroupingClassDefinedByComponents_subtype_of" (subtype_of_id);CREATE INDEX "ix_MoleculeGroupingClassDefinedByComponents_subtype_of_MoleculeGroupingClassDefinedByComponents_id" ON "MoleculeGroupingClassDefinedByComponents_subtype_of" ("MoleculeGroupingClassDefinedByComponents_id");
+);CREATE INDEX "ix_MoleculeGroupingClassDefinedByComponents_subtype_of_MoleculeGroupingClassDefinedByComponents_id" ON "MoleculeGroupingClassDefinedByComponents_subtype_of" ("MoleculeGroupingClassDefinedByComponents_id");CREATE INDEX "ix_MoleculeGroupingClassDefinedByComponents_subtype_of_subtype_of_id" ON "MoleculeGroupingClassDefinedByComponents_subtype_of" (subtype_of_id);
 CREATE TABLE "MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of" (
 	"MoleculeGroupingClassDefinedByAdditionOfAGroup_id" TEXT,
 	subtype_of_id TEXT,
 	PRIMARY KEY ("MoleculeGroupingClassDefinedByAdditionOfAGroup_id", subtype_of_id),
 	FOREIGN KEY("MoleculeGroupingClassDefinedByAdditionOfAGroup_id") REFERENCES "MoleculeGroupingClassDefinedByAdditionOfAGroup" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of_subtype_of_id" ON "MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of" (subtype_of_id);CREATE INDEX "ix_MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of_MoleculeGroupingClassDefinedByAdditionOfAGroup_id" ON "MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of" ("MoleculeGroupingClassDefinedByAdditionOfAGroup_id");
+);CREATE INDEX "ix_MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of_MoleculeGroupingClassDefinedByAdditionOfAGroup_id" ON "MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of" ("MoleculeGroupingClassDefinedByAdditionOfAGroup_id");CREATE INDEX "ix_MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of_subtype_of_id" ON "MoleculeGroupingClassDefinedByAdditionOfAGroup_subtype_of" (subtype_of_id);
 CREATE TABLE "ChemicalSaltGroupingClass_subtype_of" (
 	"ChemicalSaltGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -5478,7 +5585,7 @@ CREATE TABLE "GeneralizedMolecularStructureClass_subtype_of" (
 	PRIMARY KEY ("GeneralizedMolecularStructureClass_id", subtype_of_id),
 	FOREIGN KEY("GeneralizedMolecularStructureClass_id") REFERENCES "GeneralizedMolecularStructureClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_subtype_of_id" ON "GeneralizedMolecularStructureClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_GeneralizedMolecularStructureClass_id" ON "GeneralizedMolecularStructureClass_subtype_of" ("GeneralizedMolecularStructureClass_id");
+);CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_GeneralizedMolecularStructureClass_id" ON "GeneralizedMolecularStructureClass_subtype_of" ("GeneralizedMolecularStructureClass_id");CREATE INDEX "ix_GeneralizedMolecularStructureClass_subtype_of_subtype_of_id" ON "GeneralizedMolecularStructureClass_subtype_of" (subtype_of_id);
 CREATE TABLE "AtomGroupingClass_subtype_of" (
 	"AtomGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -5499,7 +5606,7 @@ CREATE TABLE "AtomGroupingByPeriodicTableGroup_subtype_of" (
 	PRIMARY KEY ("AtomGroupingByPeriodicTableGroup_id", subtype_of_id),
 	FOREIGN KEY("AtomGroupingByPeriodicTableGroup_id") REFERENCES "AtomGroupingByPeriodicTableGroup" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AtomGroupingByPeriodicTableGroup_subtype_of_subtype_of_id" ON "AtomGroupingByPeriodicTableGroup_subtype_of" (subtype_of_id);CREATE INDEX "ix_AtomGroupingByPeriodicTableGroup_subtype_of_AtomGroupingByPeriodicTableGroup_id" ON "AtomGroupingByPeriodicTableGroup_subtype_of" ("AtomGroupingByPeriodicTableGroup_id");
+);CREATE INDEX "ix_AtomGroupingByPeriodicTableGroup_subtype_of_AtomGroupingByPeriodicTableGroup_id" ON "AtomGroupingByPeriodicTableGroup_subtype_of" ("AtomGroupingByPeriodicTableGroup_id");CREATE INDEX "ix_AtomGroupingByPeriodicTableGroup_subtype_of_subtype_of_id" ON "AtomGroupingByPeriodicTableGroup_subtype_of" (subtype_of_id);
 CREATE TABLE "AtomGroupingByPeriodicTableBlock_subtype_of" (
 	"AtomGroupingByPeriodicTableBlock_id" TEXT,
 	subtype_of_id TEXT,
@@ -5513,14 +5620,14 @@ CREATE TABLE "AtomGroupingByProperty_subtype_of" (
 	PRIMARY KEY ("AtomGroupingByProperty_id", subtype_of_id),
 	FOREIGN KEY("AtomGroupingByProperty_id") REFERENCES "AtomGroupingByProperty" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_AtomGroupingByProperty_id" ON "AtomGroupingByProperty_subtype_of" ("AtomGroupingByProperty_id");CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_subtype_of_id" ON "AtomGroupingByProperty_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_subtype_of_id" ON "AtomGroupingByProperty_subtype_of" (subtype_of_id);CREATE INDEX "ix_AtomGroupingByProperty_subtype_of_AtomGroupingByProperty_id" ON "AtomGroupingByProperty_subtype_of" ("AtomGroupingByProperty_id");
 CREATE TABLE "Glycan_classified_by" (
 	"Glycan_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Glycan_id", classified_by_id),
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Glycan_classified_by_classified_by_id" ON "Glycan_classified_by" (classified_by_id);CREATE INDEX "ix_Glycan_classified_by_Glycan_id" ON "Glycan_classified_by" ("Glycan_id");
+);CREATE INDEX "ix_Glycan_classified_by_Glycan_id" ON "Glycan_classified_by" ("Glycan_id");CREATE INDEX "ix_Glycan_classified_by_classified_by_id" ON "Glycan_classified_by" (classified_by_id);
 CREATE TABLE "MonosaccharideResidue_classified_by" (
 	"MonosaccharideResidue_id" TEXT,
 	classified_by_id TEXT,
@@ -5587,6 +5694,7 @@ CREATE TABLE "MonomolecularPolymer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5624,6 +5732,7 @@ CREATE TABLE "SupramolecularPolymer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5663,6 +5772,7 @@ CREATE TABLE "Copolymer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5702,6 +5812,7 @@ CREATE TABLE "Homopolymer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5749,6 +5860,7 @@ CREATE TABLE "Isotope" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5792,6 +5904,7 @@ CREATE TABLE "MonoatomicIon" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5833,6 +5946,7 @@ CREATE TABLE "AtomAnion" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5874,6 +5988,7 @@ CREATE TABLE "AtomCation" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -5979,6 +6094,7 @@ CREATE TABLE "Enantiomer" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -6046,7 +6162,7 @@ CREATE TABLE "ChemicalEntity_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("ChemicalEntity_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_ChemicalEntity_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("ChemicalEntity_id");
+);CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_ChemicalEntity_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("ChemicalEntity_id");CREATE INDEX "ix_ChemicalEntity_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalEntity_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "ChemicalEntity_pka_ionization_constant" (
 	"ChemicalEntity_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6059,7 +6175,7 @@ CREATE TABLE "ChemicalEntity_classified_by" (
 	PRIMARY KEY ("ChemicalEntity_id", classified_by_id),
 	FOREIGN KEY("ChemicalEntity_id") REFERENCES "ChemicalEntity" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_ChemicalEntity_classified_by_ChemicalEntity_id" ON "ChemicalEntity_classified_by" ("ChemicalEntity_id");CREATE INDEX "ix_ChemicalEntity_classified_by_classified_by_id" ON "ChemicalEntity_classified_by" (classified_by_id);
+);CREATE INDEX "ix_ChemicalEntity_classified_by_classified_by_id" ON "ChemicalEntity_classified_by" (classified_by_id);CREATE INDEX "ix_ChemicalEntity_classified_by_ChemicalEntity_id" ON "ChemicalEntity_classified_by" ("ChemicalEntity_id");
 CREATE TABLE "MolecularDerivativeGroupingClass_subtype_of" (
 	"MolecularDerivativeGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -6073,14 +6189,14 @@ CREATE TABLE "GroupingClassForAcidsOrBases_subtype_of" (
 	PRIMARY KEY ("GroupingClassForAcidsOrBases_id", subtype_of_id),
 	FOREIGN KEY("GroupingClassForAcidsOrBases_id") REFERENCES "GroupingClassForAcidsOrBases" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_GroupingClassForAcidsOrBases_subtype_of_GroupingClassForAcidsOrBases_id" ON "GroupingClassForAcidsOrBases_subtype_of" ("GroupingClassForAcidsOrBases_id");CREATE INDEX "ix_GroupingClassForAcidsOrBases_subtype_of_subtype_of_id" ON "GroupingClassForAcidsOrBases_subtype_of" (subtype_of_id);
+);CREATE INDEX "ix_GroupingClassForAcidsOrBases_subtype_of_subtype_of_id" ON "GroupingClassForAcidsOrBases_subtype_of" (subtype_of_id);CREATE INDEX "ix_GroupingClassForAcidsOrBases_subtype_of_GroupingClassForAcidsOrBases_id" ON "GroupingClassForAcidsOrBases_subtype_of" ("GroupingClassForAcidsOrBases_id");
 CREATE TABLE "AcidAnionGroupingClass_subtype_of" (
 	"AcidAnionGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
 	PRIMARY KEY ("AcidAnionGroupingClass_id", subtype_of_id),
 	FOREIGN KEY("AcidAnionGroupingClass_id") REFERENCES "AcidAnionGroupingClass" (id),
 	FOREIGN KEY(subtype_of_id) REFERENCES "MoleculeGroupingClass" (id)
-);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_subtype_of_id" ON "AcidAnionGroupingClass_subtype_of" (subtype_of_id);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_AcidAnionGroupingClass_id" ON "AcidAnionGroupingClass_subtype_of" ("AcidAnionGroupingClass_id");
+);CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_AcidAnionGroupingClass_id" ON "AcidAnionGroupingClass_subtype_of" ("AcidAnionGroupingClass_id");CREATE INDEX "ix_AcidAnionGroupingClass_subtype_of_subtype_of_id" ON "AcidAnionGroupingClass_subtype_of" (subtype_of_id);
 CREATE TABLE "GeneralAcidBaseGroupingClass_subtype_of" (
 	"GeneralAcidBaseGroupingClass_id" TEXT,
 	subtype_of_id TEXT,
@@ -6107,35 +6223,35 @@ CREATE TABLE "PolyatomicEntity_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PolyatomicEntity_id", pka_ionization_constant),
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id)
-);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_PolyatomicEntity_id" ON "PolyatomicEntity_pka_ionization_constant" ("PolyatomicEntity_id");CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicEntity_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicEntity_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PolyatomicEntity_pka_ionization_constant_PolyatomicEntity_id" ON "PolyatomicEntity_pka_ionization_constant" ("PolyatomicEntity_id");
 CREATE TABLE "PolyatomicEntity_classified_by" (
 	"PolyatomicEntity_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("PolyatomicEntity_id", classified_by_id),
 	FOREIGN KEY("PolyatomicEntity_id") REFERENCES "PolyatomicEntity" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_PolyatomicEntity_classified_by_PolyatomicEntity_id" ON "PolyatomicEntity_classified_by" ("PolyatomicEntity_id");CREATE INDEX "ix_PolyatomicEntity_classified_by_classified_by_id" ON "PolyatomicEntity_classified_by" (classified_by_id);
+);CREATE INDEX "ix_PolyatomicEntity_classified_by_classified_by_id" ON "PolyatomicEntity_classified_by" (classified_by_id);CREATE INDEX "ix_PolyatomicEntity_classified_by_PolyatomicEntity_id" ON "PolyatomicEntity_classified_by" ("PolyatomicEntity_id");
 CREATE TABLE "SmallMolecule_has_submolecules" (
 	"SmallMolecule_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("SmallMolecule_id", has_submolecules_id),
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_SmallMolecule_has_submolecules_has_submolecules_id" ON "SmallMolecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_SmallMolecule_has_submolecules_SmallMolecule_id" ON "SmallMolecule_has_submolecules" ("SmallMolecule_id");
+);CREATE INDEX "ix_SmallMolecule_has_submolecules_SmallMolecule_id" ON "SmallMolecule_has_submolecules" ("SmallMolecule_id");CREATE INDEX "ix_SmallMolecule_has_submolecules_has_submolecules_id" ON "SmallMolecule_has_submolecules" (has_submolecules_id);
 CREATE TABLE "SmallMolecule_has_atoms" (
 	"SmallMolecule_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("SmallMolecule_id", has_atoms_id),
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_SmallMolecule_has_atoms_has_atoms_id" ON "SmallMolecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_SmallMolecule_has_atoms_SmallMolecule_id" ON "SmallMolecule_has_atoms" ("SmallMolecule_id");
+);CREATE INDEX "ix_SmallMolecule_has_atoms_SmallMolecule_id" ON "SmallMolecule_has_atoms" ("SmallMolecule_id");CREATE INDEX "ix_SmallMolecule_has_atoms_has_atoms_id" ON "SmallMolecule_has_atoms" (has_atoms_id);
 CREATE TABLE "SmallMolecule_has_major_microspecies_at_pH7_3" (
 	"SmallMolecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("SmallMolecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("SmallMolecule_id") REFERENCES "SmallMolecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_SmallMolecule_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("SmallMolecule_id");CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_SmallMolecule_has_major_microspecies_at_pH7_3_SmallMolecule_id" ON "SmallMolecule_has_major_microspecies_at_pH7_3" ("SmallMolecule_id");
 CREATE TABLE "SmallMolecule_pka_ionization_constant" (
 	"SmallMolecule_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6155,14 +6271,14 @@ CREATE TABLE "Macromolecule_has_submolecules" (
 	PRIMARY KEY ("Macromolecule_id", has_submolecules_id),
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Macromolecule_has_submolecules_Macromolecule_id" ON "Macromolecule_has_submolecules" ("Macromolecule_id");CREATE INDEX "ix_Macromolecule_has_submolecules_has_submolecules_id" ON "Macromolecule_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Macromolecule_has_submolecules_has_submolecules_id" ON "Macromolecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Macromolecule_has_submolecules_Macromolecule_id" ON "Macromolecule_has_submolecules" ("Macromolecule_id");
 CREATE TABLE "Macromolecule_has_atoms" (
 	"Macromolecule_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Macromolecule_id", has_atoms_id),
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Macromolecule_has_atoms_Macromolecule_id" ON "Macromolecule_has_atoms" ("Macromolecule_id");CREATE INDEX "ix_Macromolecule_has_atoms_has_atoms_id" ON "Macromolecule_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Macromolecule_has_atoms_has_atoms_id" ON "Macromolecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_Macromolecule_has_atoms_Macromolecule_id" ON "Macromolecule_has_atoms" ("Macromolecule_id");
 CREATE TABLE "Macromolecule_has_major_microspecies_at_pH7_3" (
 	"Macromolecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6216,27 +6332,27 @@ CREATE TABLE "Peptide_has_atoms" (
 	PRIMARY KEY ("Peptide_id", has_atoms_id),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Peptide_has_atoms_Peptide_id" ON "Peptide_has_atoms" ("Peptide_id");CREATE INDEX "ix_Peptide_has_atoms_has_atoms_id" ON "Peptide_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Peptide_has_atoms_has_atoms_id" ON "Peptide_has_atoms" (has_atoms_id);CREATE INDEX "ix_Peptide_has_atoms_Peptide_id" ON "Peptide_has_atoms" ("Peptide_id");
 CREATE TABLE "Peptide_has_major_microspecies_at_pH7_3" (
 	"Peptide_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Peptide_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Peptide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Peptide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Peptide_has_major_microspecies_at_pH7_3_Peptide_id" ON "Peptide_has_major_microspecies_at_pH7_3" ("Peptide_id");
+);CREATE INDEX "ix_Peptide_has_major_microspecies_at_pH7_3_Peptide_id" ON "Peptide_has_major_microspecies_at_pH7_3" ("Peptide_id");CREATE INDEX "ix_Peptide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Peptide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Peptide_pka_ionization_constant" (
 	"Peptide_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Peptide_id", pka_ionization_constant),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id)
-);CREATE INDEX "ix_Peptide_pka_ionization_constant_Peptide_id" ON "Peptide_pka_ionization_constant" ("Peptide_id");CREATE INDEX "ix_Peptide_pka_ionization_constant_pka_ionization_constant" ON "Peptide_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Peptide_pka_ionization_constant_pka_ionization_constant" ON "Peptide_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Peptide_pka_ionization_constant_Peptide_id" ON "Peptide_pka_ionization_constant" ("Peptide_id");
 CREATE TABLE "Peptide_classified_by" (
 	"Peptide_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Peptide_id", classified_by_id),
 	FOREIGN KEY("Peptide_id") REFERENCES "Peptide" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Peptide_classified_by_Peptide_id" ON "Peptide_classified_by" ("Peptide_id");CREATE INDEX "ix_Peptide_classified_by_classified_by_id" ON "Peptide_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Peptide_classified_by_classified_by_id" ON "Peptide_classified_by" (classified_by_id);CREATE INDEX "ix_Peptide_classified_by_Peptide_id" ON "Peptide_classified_by" ("Peptide_id");
 CREATE TABLE "Protein_has_submolecules" (
 	"Protein_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6250,7 +6366,7 @@ CREATE TABLE "Protein_has_atoms" (
 	PRIMARY KEY ("Protein_id", has_atoms_id),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Protein_has_atoms_Protein_id" ON "Protein_has_atoms" ("Protein_id");CREATE INDEX "ix_Protein_has_atoms_has_atoms_id" ON "Protein_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Protein_has_atoms_has_atoms_id" ON "Protein_has_atoms" (has_atoms_id);CREATE INDEX "ix_Protein_has_atoms_Protein_id" ON "Protein_has_atoms" ("Protein_id");
 CREATE TABLE "Protein_has_major_microspecies_at_pH7_3" (
 	"Protein_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6291,21 +6407,21 @@ CREATE TABLE "Glycan_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Glycan_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Glycan_id") REFERENCES "Glycan" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Glycan_has_major_microspecies_at_pH7_3_Glycan_id" ON "Glycan_has_major_microspecies_at_pH7_3" ("Glycan_id");CREATE INDEX "ix_Glycan_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Glycan_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Glycan_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Glycan_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Glycan_has_major_microspecies_at_pH7_3_Glycan_id" ON "Glycan_has_major_microspecies_at_pH7_3" ("Glycan_id");
 CREATE TABLE "Monosaccharide_has_submolecules" (
 	"Monosaccharide_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Monosaccharide_id", has_submolecules_id),
 	FOREIGN KEY("Monosaccharide_id") REFERENCES "Monosaccharide" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Monosaccharide_has_submolecules_Monosaccharide_id" ON "Monosaccharide_has_submolecules" ("Monosaccharide_id");CREATE INDEX "ix_Monosaccharide_has_submolecules_has_submolecules_id" ON "Monosaccharide_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Monosaccharide_has_submolecules_has_submolecules_id" ON "Monosaccharide_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Monosaccharide_has_submolecules_Monosaccharide_id" ON "Monosaccharide_has_submolecules" ("Monosaccharide_id");
 CREATE TABLE "Monosaccharide_has_atoms" (
 	"Monosaccharide_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Monosaccharide_id", has_atoms_id),
 	FOREIGN KEY("Monosaccharide_id") REFERENCES "Monosaccharide" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Monosaccharide_has_atoms_Monosaccharide_id" ON "Monosaccharide_has_atoms" ("Monosaccharide_id");CREATE INDEX "ix_Monosaccharide_has_atoms_has_atoms_id" ON "Monosaccharide_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Monosaccharide_has_atoms_has_atoms_id" ON "Monosaccharide_has_atoms" (has_atoms_id);CREATE INDEX "ix_Monosaccharide_has_atoms_Monosaccharide_id" ON "Monosaccharide_has_atoms" ("Monosaccharide_id");
 CREATE TABLE "Monosaccharide_has_major_microspecies_at_pH7_3" (
 	"Monosaccharide_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6359,20 +6475,20 @@ CREATE TABLE "PolymerPart_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PolymerPart_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_PolymerPart_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("PolymerPart_id");CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PolymerPart_has_major_microspecies_at_pH7_3_PolymerPart_id" ON "PolymerPart_has_major_microspecies_at_pH7_3" ("PolymerPart_id");
 CREATE TABLE "PolymerPart_pka_ionization_constant" (
 	"PolymerPart_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PolymerPart_id", pka_ionization_constant),
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id)
-);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_PolymerPart_id" ON "PolymerPart_pka_ionization_constant" ("PolymerPart_id");CREATE INDEX "ix_PolymerPart_pka_ionization_constant_pka_ionization_constant" ON "PolymerPart_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_pka_ionization_constant" ON "PolymerPart_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PolymerPart_pka_ionization_constant_PolymerPart_id" ON "PolymerPart_pka_ionization_constant" ("PolymerPart_id");
 CREATE TABLE "PolymerPart_classified_by" (
 	"PolymerPart_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("PolymerPart_id", classified_by_id),
 	FOREIGN KEY("PolymerPart_id") REFERENCES "PolymerPart" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_PolymerPart_classified_by_classified_by_id" ON "PolymerPart_classified_by" (classified_by_id);CREATE INDEX "ix_PolymerPart_classified_by_PolymerPart_id" ON "PolymerPart_classified_by" ("PolymerPart_id");
+);CREATE INDEX "ix_PolymerPart_classified_by_PolymerPart_id" ON "PolymerPart_classified_by" ("PolymerPart_id");CREATE INDEX "ix_PolymerPart_classified_by_classified_by_id" ON "PolymerPart_classified_by" (classified_by_id);
 CREATE TABLE "Monomer_has_major_microspecies_at_pH7_3" (
 	"Monomer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6385,14 +6501,14 @@ CREATE TABLE "Monomer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Monomer_id", pka_ionization_constant),
 	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id)
-);CREATE INDEX "ix_Monomer_pka_ionization_constant_Monomer_id" ON "Monomer_pka_ionization_constant" ("Monomer_id");CREATE INDEX "ix_Monomer_pka_ionization_constant_pka_ionization_constant" ON "Monomer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Monomer_pka_ionization_constant_pka_ionization_constant" ON "Monomer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Monomer_pka_ionization_constant_Monomer_id" ON "Monomer_pka_ionization_constant" ("Monomer_id");
 CREATE TABLE "Monomer_classified_by" (
 	"Monomer_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Monomer_id", classified_by_id),
 	FOREIGN KEY("Monomer_id") REFERENCES "Monomer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Monomer_classified_by_Monomer_id" ON "Monomer_classified_by" ("Monomer_id");CREATE INDEX "ix_Monomer_classified_by_classified_by_id" ON "Monomer_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Monomer_classified_by_classified_by_id" ON "Monomer_classified_by" (classified_by_id);CREATE INDEX "ix_Monomer_classified_by_Monomer_id" ON "Monomer_classified_by" ("Monomer_id");
 CREATE TABLE "MolecularSubsequence_has_major_microspecies_at_pH7_3" (
 	"MolecularSubsequence_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6405,7 +6521,7 @@ CREATE TABLE "MolecularSubsequence_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MolecularSubsequence_id", pka_ionization_constant),
 	FOREIGN KEY("MolecularSubsequence_id") REFERENCES "MolecularSubsequence" (id)
-);CREATE INDEX "ix_MolecularSubsequence_pka_ionization_constant_pka_ionization_constant" ON "MolecularSubsequence_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MolecularSubsequence_pka_ionization_constant_MolecularSubsequence_id" ON "MolecularSubsequence_pka_ionization_constant" ("MolecularSubsequence_id");
+);CREATE INDEX "ix_MolecularSubsequence_pka_ionization_constant_MolecularSubsequence_id" ON "MolecularSubsequence_pka_ionization_constant" ("MolecularSubsequence_id");CREATE INDEX "ix_MolecularSubsequence_pka_ionization_constant_pka_ionization_constant" ON "MolecularSubsequence_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MolecularSubsequence_classified_by" (
 	"MolecularSubsequence_id" TEXT,
 	classified_by_id TEXT,
@@ -6419,13 +6535,13 @@ CREATE TABLE "ChemicalGroup_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("ChemicalGroup_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_ChemicalGroup_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalGroup_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_ChemicalGroup_has_major_microspecies_at_pH7_3_ChemicalGroup_id" ON "ChemicalGroup_has_major_microspecies_at_pH7_3" ("ChemicalGroup_id");
+);CREATE INDEX "ix_ChemicalGroup_has_major_microspecies_at_pH7_3_ChemicalGroup_id" ON "ChemicalGroup_has_major_microspecies_at_pH7_3" ("ChemicalGroup_id");CREATE INDEX "ix_ChemicalGroup_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalGroup_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "ChemicalGroup_pka_ionization_constant" (
 	"ChemicalGroup_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("ChemicalGroup_id", pka_ionization_constant),
 	FOREIGN KEY("ChemicalGroup_id") REFERENCES "ChemicalGroup" (id)
-);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_pka_ionization_constant" ON "ChemicalGroup_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_ChemicalGroup_id" ON "ChemicalGroup_pka_ionization_constant" ("ChemicalGroup_id");
+);CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_ChemicalGroup_id" ON "ChemicalGroup_pka_ionization_constant" ("ChemicalGroup_id");CREATE INDEX "ix_ChemicalGroup_pka_ionization_constant_pka_ionization_constant" ON "ChemicalGroup_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "ChemicalGroup_classified_by" (
 	"ChemicalGroup_id" TEXT,
 	classified_by_id TEXT,
@@ -6459,7 +6575,7 @@ CREATE TABLE "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PreciseChemicalMixture_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PreciseChemicalMixture_id") REFERENCES "PreciseChemicalMixture" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_PreciseChemicalMixture_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("PreciseChemicalMixture_id");
+);CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_PreciseChemicalMixture_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("PreciseChemicalMixture_id");CREATE INDEX "ix_PreciseChemicalMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PreciseChemicalMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "PreciseChemicalMixture_pka_ionization_constant" (
 	"PreciseChemicalMixture_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6485,7 +6601,7 @@ CREATE TABLE "ImpreciseChemicalMixture_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("ImpreciseChemicalMixture_id", pka_ionization_constant),
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id)
-);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_pka_ionization_constant" ON "ImpreciseChemicalMixture_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_pka_ionization_constant" ("ImpreciseChemicalMixture_id");
+);CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_pka_ionization_constant" ("ImpreciseChemicalMixture_id");CREATE INDEX "ix_ImpreciseChemicalMixture_pka_ionization_constant_pka_ionization_constant" ON "ImpreciseChemicalMixture_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "ImpreciseChemicalMixture_classified_by" (
 	"ImpreciseChemicalMixture_id" TEXT,
 	classified_by_id TEXT,
@@ -6499,21 +6615,21 @@ CREATE TABLE "Molecule_has_submolecules" (
 	PRIMARY KEY ("Molecule_id", has_submolecules_id),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Molecule_has_submolecules_has_submolecules_id" ON "Molecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Molecule_has_submolecules_Molecule_id" ON "Molecule_has_submolecules" ("Molecule_id");
+);CREATE INDEX "ix_Molecule_has_submolecules_Molecule_id" ON "Molecule_has_submolecules" ("Molecule_id");CREATE INDEX "ix_Molecule_has_submolecules_has_submolecules_id" ON "Molecule_has_submolecules" (has_submolecules_id);
 CREATE TABLE "Molecule_has_atoms" (
 	"Molecule_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Molecule_id", has_atoms_id),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Molecule_has_atoms_Molecule_id" ON "Molecule_has_atoms" ("Molecule_id");CREATE INDEX "ix_Molecule_has_atoms_has_atoms_id" ON "Molecule_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Molecule_has_atoms_has_atoms_id" ON "Molecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_Molecule_has_atoms_Molecule_id" ON "Molecule_has_atoms" ("Molecule_id");
 CREATE TABLE "Molecule_has_major_microspecies_at_pH7_3" (
 	"Molecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Molecule_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_Molecule_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("Molecule_id");
+);CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_Molecule_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("Molecule_id");CREATE INDEX "ix_Molecule_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Molecule_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Molecule_pka_ionization_constant" (
 	"Molecule_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6526,20 +6642,20 @@ CREATE TABLE "Molecule_classified_by" (
 	PRIMARY KEY ("Molecule_id", classified_by_id),
 	FOREIGN KEY("Molecule_id") REFERENCES "Molecule" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Molecule_classified_by_classified_by_id" ON "Molecule_classified_by" (classified_by_id);CREATE INDEX "ix_Molecule_classified_by_Molecule_id" ON "Molecule_classified_by" ("Molecule_id");
+);CREATE INDEX "ix_Molecule_classified_by_Molecule_id" ON "Molecule_classified_by" ("Molecule_id");CREATE INDEX "ix_Molecule_classified_by_classified_by_id" ON "Molecule_classified_by" (classified_by_id);
 CREATE TABLE "NaturalProduct_derived_from_organisms" (
 	"NaturalProduct_id" TEXT,
 	derived_from_organisms TEXT,
 	PRIMARY KEY ("NaturalProduct_id", derived_from_organisms),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id)
-);CREATE INDEX "ix_NaturalProduct_derived_from_organisms_derived_from_organisms" ON "NaturalProduct_derived_from_organisms" (derived_from_organisms);CREATE INDEX "ix_NaturalProduct_derived_from_organisms_NaturalProduct_id" ON "NaturalProduct_derived_from_organisms" ("NaturalProduct_id");
+);CREATE INDEX "ix_NaturalProduct_derived_from_organisms_NaturalProduct_id" ON "NaturalProduct_derived_from_organisms" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_derived_from_organisms_derived_from_organisms" ON "NaturalProduct_derived_from_organisms" (derived_from_organisms);
 CREATE TABLE "NaturalProduct_has_submolecules" (
 	"NaturalProduct_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("NaturalProduct_id", has_submolecules_id),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_NaturalProduct_has_submolecules_NaturalProduct_id" ON "NaturalProduct_has_submolecules" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_has_submolecules_has_submolecules_id" ON "NaturalProduct_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_NaturalProduct_has_submolecules_has_submolecules_id" ON "NaturalProduct_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_NaturalProduct_has_submolecules_NaturalProduct_id" ON "NaturalProduct_has_submolecules" ("NaturalProduct_id");
 CREATE TABLE "NaturalProduct_has_atoms" (
 	"NaturalProduct_id" TEXT,
 	has_atoms_id TEXT,
@@ -6553,20 +6669,20 @@ CREATE TABLE "NaturalProduct_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("NaturalProduct_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_NaturalProduct_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("NaturalProduct_id");
+);CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_NaturalProduct_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NaturalProduct_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "NaturalProduct_pka_ionization_constant" (
 	"NaturalProduct_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NaturalProduct_id", pka_ionization_constant),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id)
-);CREATE INDEX "ix_NaturalProduct_pka_ionization_constant_NaturalProduct_id" ON "NaturalProduct_pka_ionization_constant" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_pka_ionization_constant_pka_ionization_constant" ON "NaturalProduct_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_NaturalProduct_pka_ionization_constant_pka_ionization_constant" ON "NaturalProduct_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NaturalProduct_pka_ionization_constant_NaturalProduct_id" ON "NaturalProduct_pka_ionization_constant" ("NaturalProduct_id");
 CREATE TABLE "NaturalProduct_classified_by" (
 	"NaturalProduct_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("NaturalProduct_id", classified_by_id),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_NaturalProduct_classified_by_NaturalProduct_id" ON "NaturalProduct_classified_by" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_classified_by_classified_by_id" ON "NaturalProduct_classified_by" (classified_by_id);
+);CREATE INDEX "ix_NaturalProduct_classified_by_classified_by_id" ON "NaturalProduct_classified_by" (classified_by_id);CREATE INDEX "ix_NaturalProduct_classified_by_NaturalProduct_id" ON "NaturalProduct_classified_by" ("NaturalProduct_id");
 CREATE TABLE "Moiety_has_major_microspecies_at_pH7_3" (
 	"Moiety_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6579,14 +6695,14 @@ CREATE TABLE "Moiety_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Moiety_id", pka_ionization_constant),
 	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id)
-);CREATE INDEX "ix_Moiety_pka_ionization_constant_pka_ionization_constant" ON "Moiety_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Moiety_pka_ionization_constant_Moiety_id" ON "Moiety_pka_ionization_constant" ("Moiety_id");
+);CREATE INDEX "ix_Moiety_pka_ionization_constant_Moiety_id" ON "Moiety_pka_ionization_constant" ("Moiety_id");CREATE INDEX "ix_Moiety_pka_ionization_constant_pka_ionization_constant" ON "Moiety_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Moiety_classified_by" (
 	"Moiety_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Moiety_id", classified_by_id),
 	FOREIGN KEY("Moiety_id") REFERENCES "Moiety" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Moiety_classified_by_Moiety_id" ON "Moiety_classified_by" ("Moiety_id");CREATE INDEX "ix_Moiety_classified_by_classified_by_id" ON "Moiety_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Moiety_classified_by_classified_by_id" ON "Moiety_classified_by" (classified_by_id);CREATE INDEX "ix_Moiety_classified_by_Moiety_id" ON "Moiety_classified_by" ("Moiety_id");
 CREATE TABLE "SequenceInterval_has_major_microspecies_at_pH7_3" (
 	"SequenceInterval_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6599,7 +6715,7 @@ CREATE TABLE "SequenceInterval_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("SequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("SequenceInterval_id") REFERENCES "SequenceInterval" (id)
-);CREATE INDEX "ix_SequenceInterval_pka_ionization_constant_SequenceInterval_id" ON "SequenceInterval_pka_ionization_constant" ("SequenceInterval_id");CREATE INDEX "ix_SequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "SequenceInterval_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_SequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "SequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_SequenceInterval_pka_ionization_constant_SequenceInterval_id" ON "SequenceInterval_pka_ionization_constant" ("SequenceInterval_id");
 CREATE TABLE "SequenceInterval_classified_by" (
 	"SequenceInterval_id" TEXT,
 	classified_by_id TEXT,
@@ -6613,7 +6729,7 @@ CREATE TABLE "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("AminoAcidSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("AminoAcidSequenceInterval_id");
+);CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("AminoAcidSequenceInterval_id");CREATE INDEX "ix_AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AminoAcidSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "AminoAcidSequenceInterval_pka_ionization_constant" (
 	"AminoAcidSequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6626,20 +6742,20 @@ CREATE TABLE "AminoAcidSequenceInterval_classified_by" (
 	PRIMARY KEY ("AminoAcidSequenceInterval_id", classified_by_id),
 	FOREIGN KEY("AminoAcidSequenceInterval_id") REFERENCES "AminoAcidSequenceInterval" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_AminoAcidSequenceInterval_classified_by_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_classified_by" ("AminoAcidSequenceInterval_id");CREATE INDEX "ix_AminoAcidSequenceInterval_classified_by_classified_by_id" ON "AminoAcidSequenceInterval_classified_by" (classified_by_id);
+);CREATE INDEX "ix_AminoAcidSequenceInterval_classified_by_classified_by_id" ON "AminoAcidSequenceInterval_classified_by" (classified_by_id);CREATE INDEX "ix_AminoAcidSequenceInterval_classified_by_AminoAcidSequenceInterval_id" ON "AminoAcidSequenceInterval_classified_by" ("AminoAcidSequenceInterval_id");
 CREATE TABLE "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" (
 	"NucleotideSequenceInterval_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("NucleotideSequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("NucleotideSequenceInterval_id");
+);CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("NucleotideSequenceInterval_id");CREATE INDEX "ix_NucleotideSequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "NucleotideSequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "NucleotideSequenceInterval_pka_ionization_constant" (
 	"NucleotideSequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NucleotideSequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("NucleotideSequenceInterval_id") REFERENCES "NucleotideSequenceInterval" (id)
-);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_pka_ionization_constant" ("NucleotideSequenceInterval_id");CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "NucleotideSequenceInterval_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "NucleotideSequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NucleotideSequenceInterval_pka_ionization_constant_NucleotideSequenceInterval_id" ON "NucleotideSequenceInterval_pka_ionization_constant" ("NucleotideSequenceInterval_id");
 CREATE TABLE "NucleotideSequenceInterval_classified_by" (
 	"NucleotideSequenceInterval_id" TEXT,
 	classified_by_id TEXT,
@@ -6659,41 +6775,41 @@ CREATE TABLE "DNASequenceInterval_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("DNASequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id)
-);CREATE INDEX "ix_DNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "DNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_DNASequenceInterval_pka_ionization_constant_DNASequenceInterval_id" ON "DNASequenceInterval_pka_ionization_constant" ("DNASequenceInterval_id");
+);CREATE INDEX "ix_DNASequenceInterval_pka_ionization_constant_DNASequenceInterval_id" ON "DNASequenceInterval_pka_ionization_constant" ("DNASequenceInterval_id");CREATE INDEX "ix_DNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "DNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "DNASequenceInterval_classified_by" (
 	"DNASequenceInterval_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("DNASequenceInterval_id", classified_by_id),
 	FOREIGN KEY("DNASequenceInterval_id") REFERENCES "DNASequenceInterval" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_DNASequenceInterval_classified_by_DNASequenceInterval_id" ON "DNASequenceInterval_classified_by" ("DNASequenceInterval_id");CREATE INDEX "ix_DNASequenceInterval_classified_by_classified_by_id" ON "DNASequenceInterval_classified_by" (classified_by_id);
+);CREATE INDEX "ix_DNASequenceInterval_classified_by_classified_by_id" ON "DNASequenceInterval_classified_by" (classified_by_id);CREATE INDEX "ix_DNASequenceInterval_classified_by_DNASequenceInterval_id" ON "DNASequenceInterval_classified_by" ("DNASequenceInterval_id");
 CREATE TABLE "RNASequenceInterval_has_major_microspecies_at_pH7_3" (
 	"RNASequenceInterval_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("RNASequenceInterval_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_RNASequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RNASequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_RNASequenceInterval_has_major_microspecies_at_pH7_3_RNASequenceInterval_id" ON "RNASequenceInterval_has_major_microspecies_at_pH7_3" ("RNASequenceInterval_id");
+);CREATE INDEX "ix_RNASequenceInterval_has_major_microspecies_at_pH7_3_RNASequenceInterval_id" ON "RNASequenceInterval_has_major_microspecies_at_pH7_3" ("RNASequenceInterval_id");CREATE INDEX "ix_RNASequenceInterval_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RNASequenceInterval_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "RNASequenceInterval_pka_ionization_constant" (
 	"RNASequenceInterval_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("RNASequenceInterval_id", pka_ionization_constant),
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id)
-);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "RNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_RNASequenceInterval_id" ON "RNASequenceInterval_pka_ionization_constant" ("RNASequenceInterval_id");
+);CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_RNASequenceInterval_id" ON "RNASequenceInterval_pka_ionization_constant" ("RNASequenceInterval_id");CREATE INDEX "ix_RNASequenceInterval_pka_ionization_constant_pka_ionization_constant" ON "RNASequenceInterval_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "RNASequenceInterval_classified_by" (
 	"RNASequenceInterval_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("RNASequenceInterval_id", classified_by_id),
 	FOREIGN KEY("RNASequenceInterval_id") REFERENCES "RNASequenceInterval" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_RNASequenceInterval_classified_by_classified_by_id" ON "RNASequenceInterval_classified_by" (classified_by_id);CREATE INDEX "ix_RNASequenceInterval_classified_by_RNASequenceInterval_id" ON "RNASequenceInterval_classified_by" ("RNASequenceInterval_id");
+);CREATE INDEX "ix_RNASequenceInterval_classified_by_RNASequenceInterval_id" ON "RNASequenceInterval_classified_by" ("RNASequenceInterval_id");CREATE INDEX "ix_RNASequenceInterval_classified_by_classified_by_id" ON "RNASequenceInterval_classified_by" (classified_by_id);
 CREATE TABLE "FunctionalGroup_has_major_microspecies_at_pH7_3" (
 	"FunctionalGroup_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("FunctionalGroup_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_FunctionalGroup_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "FunctionalGroup_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_FunctionalGroup_has_major_microspecies_at_pH7_3_FunctionalGroup_id" ON "FunctionalGroup_has_major_microspecies_at_pH7_3" ("FunctionalGroup_id");
+);CREATE INDEX "ix_FunctionalGroup_has_major_microspecies_at_pH7_3_FunctionalGroup_id" ON "FunctionalGroup_has_major_microspecies_at_pH7_3" ("FunctionalGroup_id");CREATE INDEX "ix_FunctionalGroup_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "FunctionalGroup_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "FunctionalGroup_pka_ionization_constant" (
 	"FunctionalGroup_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6706,7 +6822,7 @@ CREATE TABLE "FunctionalGroup_classified_by" (
 	PRIMARY KEY ("FunctionalGroup_id", classified_by_id),
 	FOREIGN KEY("FunctionalGroup_id") REFERENCES "FunctionalGroup" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_FunctionalGroup_classified_by_FunctionalGroup_id" ON "FunctionalGroup_classified_by" ("FunctionalGroup_id");CREATE INDEX "ix_FunctionalGroup_classified_by_classified_by_id" ON "FunctionalGroup_classified_by" (classified_by_id);
+);CREATE INDEX "ix_FunctionalGroup_classified_by_classified_by_id" ON "FunctionalGroup_classified_by" (classified_by_id);CREATE INDEX "ix_FunctionalGroup_classified_by_FunctionalGroup_id" ON "FunctionalGroup_classified_by" ("FunctionalGroup_id");
 CREATE TABLE "MolecularSpecies_has_submolecules" (
 	"MolecularSpecies_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6774,7 +6890,7 @@ CREATE TABLE "NonSpeciesMolecule_classified_by" (
 	PRIMARY KEY ("NonSpeciesMolecule_id", classified_by_id),
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_NonSpeciesMolecule_classified_by_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_classified_by" ("NonSpeciesMolecule_id");CREATE INDEX "ix_NonSpeciesMolecule_classified_by_classified_by_id" ON "NonSpeciesMolecule_classified_by" (classified_by_id);
+);CREATE INDEX "ix_NonSpeciesMolecule_classified_by_classified_by_id" ON "NonSpeciesMolecule_classified_by" (classified_by_id);CREATE INDEX "ix_NonSpeciesMolecule_classified_by_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_classified_by" ("NonSpeciesMolecule_id");
 CREATE TABLE "MoleculeByChargeState_has_submolecules" (
 	"MoleculeByChargeState_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6788,7 +6904,7 @@ CREATE TABLE "MoleculeByChargeState_has_atoms" (
 	PRIMARY KEY ("MoleculeByChargeState_id", has_atoms_id),
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MoleculeByChargeState_has_atoms_has_atoms_id" ON "MoleculeByChargeState_has_atoms" (has_atoms_id);CREATE INDEX "ix_MoleculeByChargeState_has_atoms_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_atoms" ("MoleculeByChargeState_id");
+);CREATE INDEX "ix_MoleculeByChargeState_has_atoms_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_atoms" ("MoleculeByChargeState_id");CREATE INDEX "ix_MoleculeByChargeState_has_atoms_has_atoms_id" ON "MoleculeByChargeState_has_atoms" (has_atoms_id);
 CREATE TABLE "MoleculeByChargeState_has_major_microspecies_at_pH7_3" (
 	"MoleculeByChargeState_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6801,7 +6917,7 @@ CREATE TABLE "MoleculeByChargeState_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MoleculeByChargeState_id", pka_ionization_constant),
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id)
-);CREATE INDEX "ix_MoleculeByChargeState_pka_ionization_constant_pka_ionization_constant" ON "MoleculeByChargeState_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MoleculeByChargeState_pka_ionization_constant_MoleculeByChargeState_id" ON "MoleculeByChargeState_pka_ionization_constant" ("MoleculeByChargeState_id");
+);CREATE INDEX "ix_MoleculeByChargeState_pka_ionization_constant_MoleculeByChargeState_id" ON "MoleculeByChargeState_pka_ionization_constant" ("MoleculeByChargeState_id");CREATE INDEX "ix_MoleculeByChargeState_pka_ionization_constant_pka_ionization_constant" ON "MoleculeByChargeState_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MoleculeByChargeState_classified_by" (
 	"MoleculeByChargeState_id" TEXT,
 	classified_by_id TEXT,
@@ -6815,7 +6931,7 @@ CREATE TABLE "PolyatomicIon_has_submolecules" (
 	PRIMARY KEY ("PolyatomicIon_id", has_submolecules_id),
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_PolyatomicIon_has_submolecules_has_submolecules_id" ON "PolyatomicIon_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_PolyatomicIon_has_submolecules_PolyatomicIon_id" ON "PolyatomicIon_has_submolecules" ("PolyatomicIon_id");
+);CREATE INDEX "ix_PolyatomicIon_has_submolecules_PolyatomicIon_id" ON "PolyatomicIon_has_submolecules" ("PolyatomicIon_id");CREATE INDEX "ix_PolyatomicIon_has_submolecules_has_submolecules_id" ON "PolyatomicIon_has_submolecules" (has_submolecules_id);
 CREATE TABLE "PolyatomicIon_has_atoms" (
 	"PolyatomicIon_id" TEXT,
 	has_atoms_id TEXT,
@@ -6829,13 +6945,13 @@ CREATE TABLE "PolyatomicIon_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PolyatomicIon_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PolyatomicIon_has_major_microspecies_at_pH7_3_PolyatomicIon_id" ON "PolyatomicIon_has_major_microspecies_at_pH7_3" ("PolyatomicIon_id");CREATE INDEX "ix_PolyatomicIon_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolyatomicIon_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_PolyatomicIon_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PolyatomicIon_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PolyatomicIon_has_major_microspecies_at_pH7_3_PolyatomicIon_id" ON "PolyatomicIon_has_major_microspecies_at_pH7_3" ("PolyatomicIon_id");
 CREATE TABLE "PolyatomicIon_pka_ionization_constant" (
 	"PolyatomicIon_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("PolyatomicIon_id", pka_ionization_constant),
 	FOREIGN KEY("PolyatomicIon_id") REFERENCES "PolyatomicIon" (id)
-);CREATE INDEX "ix_PolyatomicIon_pka_ionization_constant_PolyatomicIon_id" ON "PolyatomicIon_pka_ionization_constant" ("PolyatomicIon_id");CREATE INDEX "ix_PolyatomicIon_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicIon_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_PolyatomicIon_pka_ionization_constant_pka_ionization_constant" ON "PolyatomicIon_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_PolyatomicIon_pka_ionization_constant_PolyatomicIon_id" ON "PolyatomicIon_pka_ionization_constant" ("PolyatomicIon_id");
 CREATE TABLE "PolyatomicIon_classified_by" (
 	"PolyatomicIon_id" TEXT,
 	classified_by_id TEXT,
@@ -6856,7 +6972,7 @@ CREATE TABLE "MolecularCation_has_atoms" (
 	PRIMARY KEY ("MolecularCation_id", has_atoms_id),
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MolecularCation_has_atoms_has_atoms_id" ON "MolecularCation_has_atoms" (has_atoms_id);CREATE INDEX "ix_MolecularCation_has_atoms_MolecularCation_id" ON "MolecularCation_has_atoms" ("MolecularCation_id");
+);CREATE INDEX "ix_MolecularCation_has_atoms_MolecularCation_id" ON "MolecularCation_has_atoms" ("MolecularCation_id");CREATE INDEX "ix_MolecularCation_has_atoms_has_atoms_id" ON "MolecularCation_has_atoms" (has_atoms_id);
 CREATE TABLE "MolecularCation_has_major_microspecies_at_pH7_3" (
 	"MolecularCation_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6890,41 +7006,41 @@ CREATE TABLE "MolecularAnion_has_atoms" (
 	PRIMARY KEY ("MolecularAnion_id", has_atoms_id),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_MolecularAnion_has_atoms_MolecularAnion_id" ON "MolecularAnion_has_atoms" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_has_atoms_has_atoms_id" ON "MolecularAnion_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_MolecularAnion_has_atoms_has_atoms_id" ON "MolecularAnion_has_atoms" (has_atoms_id);CREATE INDEX "ix_MolecularAnion_has_atoms_MolecularAnion_id" ON "MolecularAnion_has_atoms" ("MolecularAnion_id");
 CREATE TABLE "MolecularAnion_has_major_microspecies_at_pH7_3" (
 	"MolecularAnion_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("MolecularAnion_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_MolecularAnion_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MolecularAnion_has_major_microspecies_at_pH7_3_MolecularAnion_id" ON "MolecularAnion_has_major_microspecies_at_pH7_3" ("MolecularAnion_id");
 CREATE TABLE "MolecularAnion_pka_ionization_constant" (
 	"MolecularAnion_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MolecularAnion_id", pka_ionization_constant),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id)
-);CREATE INDEX "ix_MolecularAnion_pka_ionization_constant_MolecularAnion_id" ON "MolecularAnion_pka_ionization_constant" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_pka_ionization_constant_pka_ionization_constant" ON "MolecularAnion_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_MolecularAnion_pka_ionization_constant_pka_ionization_constant" ON "MolecularAnion_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MolecularAnion_pka_ionization_constant_MolecularAnion_id" ON "MolecularAnion_pka_ionization_constant" ("MolecularAnion_id");
 CREATE TABLE "MolecularAnion_classified_by" (
 	"MolecularAnion_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("MolecularAnion_id", classified_by_id),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_MolecularAnion_classified_by_MolecularAnion_id" ON "MolecularAnion_classified_by" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_classified_by_classified_by_id" ON "MolecularAnion_classified_by" (classified_by_id);
+);CREATE INDEX "ix_MolecularAnion_classified_by_classified_by_id" ON "MolecularAnion_classified_by" (classified_by_id);CREATE INDEX "ix_MolecularAnion_classified_by_MolecularAnion_id" ON "MolecularAnion_classified_by" ("MolecularAnion_id");
 CREATE TABLE "NetUnchargedMolecule_has_submolecules" (
 	"NetUnchargedMolecule_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("NetUnchargedMolecule_id", has_submolecules_id),
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_has_submolecules_id" ON "NetUnchargedMolecule_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_submolecules" ("NetUnchargedMolecule_id");
+);CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_submolecules" ("NetUnchargedMolecule_id");CREATE INDEX "ix_NetUnchargedMolecule_has_submolecules_has_submolecules_id" ON "NetUnchargedMolecule_has_submolecules" (has_submolecules_id);
 CREATE TABLE "NetUnchargedMolecule_has_atoms" (
 	"NetUnchargedMolecule_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("NetUnchargedMolecule_id", has_atoms_id),
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_NetUnchargedMolecule_has_atoms_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_atoms" ("NetUnchargedMolecule_id");CREATE INDEX "ix_NetUnchargedMolecule_has_atoms_has_atoms_id" ON "NetUnchargedMolecule_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_NetUnchargedMolecule_has_atoms_has_atoms_id" ON "NetUnchargedMolecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_NetUnchargedMolecule_has_atoms_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_has_atoms" ("NetUnchargedMolecule_id");
 CREATE TABLE "NetUnchargedMolecule_has_major_microspecies_at_pH7_3" (
 	"NetUnchargedMolecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -6944,28 +7060,28 @@ CREATE TABLE "NetUnchargedMolecule_classified_by" (
 	PRIMARY KEY ("NetUnchargedMolecule_id", classified_by_id),
 	FOREIGN KEY("NetUnchargedMolecule_id") REFERENCES "NetUnchargedMolecule" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_NetUnchargedMolecule_classified_by_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_classified_by" ("NetUnchargedMolecule_id");CREATE INDEX "ix_NetUnchargedMolecule_classified_by_classified_by_id" ON "NetUnchargedMolecule_classified_by" (classified_by_id);
+);CREATE INDEX "ix_NetUnchargedMolecule_classified_by_classified_by_id" ON "NetUnchargedMolecule_classified_by" (classified_by_id);CREATE INDEX "ix_NetUnchargedMolecule_classified_by_NetUnchargedMolecule_id" ON "NetUnchargedMolecule_classified_by" ("NetUnchargedMolecule_id");
 CREATE TABLE "Zwitterion_has_submolecules" (
 	"Zwitterion_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Zwitterion_id", has_submolecules_id),
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Zwitterion_has_submolecules_Zwitterion_id" ON "Zwitterion_has_submolecules" ("Zwitterion_id");CREATE INDEX "ix_Zwitterion_has_submolecules_has_submolecules_id" ON "Zwitterion_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Zwitterion_has_submolecules_has_submolecules_id" ON "Zwitterion_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Zwitterion_has_submolecules_Zwitterion_id" ON "Zwitterion_has_submolecules" ("Zwitterion_id");
 CREATE TABLE "Zwitterion_has_atoms" (
 	"Zwitterion_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Zwitterion_id", has_atoms_id),
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Zwitterion_has_atoms_Zwitterion_id" ON "Zwitterion_has_atoms" ("Zwitterion_id");CREATE INDEX "ix_Zwitterion_has_atoms_has_atoms_id" ON "Zwitterion_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Zwitterion_has_atoms_has_atoms_id" ON "Zwitterion_has_atoms" (has_atoms_id);CREATE INDEX "ix_Zwitterion_has_atoms_Zwitterion_id" ON "Zwitterion_has_atoms" ("Zwitterion_id");
 CREATE TABLE "Zwitterion_has_major_microspecies_at_pH7_3" (
 	"Zwitterion_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Zwitterion_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Zwitterion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Zwitterion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Zwitterion_has_major_microspecies_at_pH7_3_Zwitterion_id" ON "Zwitterion_has_major_microspecies_at_pH7_3" ("Zwitterion_id");
+);CREATE INDEX "ix_Zwitterion_has_major_microspecies_at_pH7_3_Zwitterion_id" ON "Zwitterion_has_major_microspecies_at_pH7_3" ("Zwitterion_id");CREATE INDEX "ix_Zwitterion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Zwitterion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Zwitterion_pka_ionization_constant" (
 	"Zwitterion_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -6978,7 +7094,7 @@ CREATE TABLE "Zwitterion_classified_by" (
 	PRIMARY KEY ("Zwitterion_id", classified_by_id),
 	FOREIGN KEY("Zwitterion_id") REFERENCES "Zwitterion" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Zwitterion_classified_by_classified_by_id" ON "Zwitterion_classified_by" (classified_by_id);CREATE INDEX "ix_Zwitterion_classified_by_Zwitterion_id" ON "Zwitterion_classified_by" ("Zwitterion_id");
+);CREATE INDEX "ix_Zwitterion_classified_by_Zwitterion_id" ON "Zwitterion_classified_by" ("Zwitterion_id");CREATE INDEX "ix_Zwitterion_classified_by_classified_by_id" ON "Zwitterion_classified_by" (classified_by_id);
 CREATE TABLE "NeutralMolecule_has_submolecules" (
 	"NeutralMolecule_id" TEXT,
 	has_submolecules_id TEXT,
@@ -6992,7 +7108,7 @@ CREATE TABLE "NeutralMolecule_has_atoms" (
 	PRIMARY KEY ("NeutralMolecule_id", has_atoms_id),
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_NeutralMolecule_has_atoms_has_atoms_id" ON "NeutralMolecule_has_atoms" (has_atoms_id);CREATE INDEX "ix_NeutralMolecule_has_atoms_NeutralMolecule_id" ON "NeutralMolecule_has_atoms" ("NeutralMolecule_id");
+);CREATE INDEX "ix_NeutralMolecule_has_atoms_NeutralMolecule_id" ON "NeutralMolecule_has_atoms" ("NeutralMolecule_id");CREATE INDEX "ix_NeutralMolecule_has_atoms_has_atoms_id" ON "NeutralMolecule_has_atoms" (has_atoms_id);
 CREATE TABLE "NeutralMolecule_has_major_microspecies_at_pH7_3" (
 	"NeutralMolecule_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7005,7 +7121,7 @@ CREATE TABLE "NeutralMolecule_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("NeutralMolecule_id", pka_ionization_constant),
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id)
-);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_pka_ionization_constant" ON "NeutralMolecule_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_NeutralMolecule_id" ON "NeutralMolecule_pka_ionization_constant" ("NeutralMolecule_id");
+);CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_NeutralMolecule_id" ON "NeutralMolecule_pka_ionization_constant" ("NeutralMolecule_id");CREATE INDEX "ix_NeutralMolecule_pka_ionization_constant_pka_ionization_constant" ON "NeutralMolecule_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "NeutralMolecule_classified_by" (
 	"NeutralMolecule_id" TEXT,
 	classified_by_id TEXT,
@@ -7019,27 +7135,27 @@ CREATE TABLE "Atom_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Atom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Atom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_Atom_id" ON "Atom_has_major_microspecies_at_pH7_3" ("Atom_id");
+);CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_Atom_id" ON "Atom_has_major_microspecies_at_pH7_3" ("Atom_id");CREATE INDEX "ix_Atom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Atom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Atom_pka_ionization_constant" (
 	"Atom_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Atom_id", pka_ionization_constant),
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Atom_pka_ionization_constant_Atom_id" ON "Atom_pka_ionization_constant" ("Atom_id");CREATE INDEX "ix_Atom_pka_ionization_constant_pka_ionization_constant" ON "Atom_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Atom_pka_ionization_constant_pka_ionization_constant" ON "Atom_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Atom_pka_ionization_constant_Atom_id" ON "Atom_pka_ionization_constant" ("Atom_id");
 CREATE TABLE "Atom_classified_by" (
 	"Atom_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Atom_id", classified_by_id),
 	FOREIGN KEY("Atom_id") REFERENCES "Atom" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Atom_classified_by_Atom_id" ON "Atom_classified_by" ("Atom_id");CREATE INDEX "ix_Atom_classified_by_classified_by_id" ON "Atom_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Atom_classified_by_classified_by_id" ON "Atom_classified_by" (classified_by_id);CREATE INDEX "ix_Atom_classified_by_Atom_id" ON "Atom_classified_by" ("Atom_id");
 CREATE TABLE "ChemicalElement_has_major_microspecies_at_pH7_3" (
 	"ChemicalElement_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("ChemicalElement_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("ChemicalElement_id") REFERENCES "ChemicalElement" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalElement" (id)
-);CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_ChemicalElement_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("ChemicalElement_id");CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_ChemicalElement_has_major_microspecies_at_pH7_3_ChemicalElement_id" ON "ChemicalElement_has_major_microspecies_at_pH7_3" ("ChemicalElement_id");
 CREATE TABLE "ChemicalElement_pka_ionization_constant" (
 	"ChemicalElement_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -7059,20 +7175,20 @@ CREATE TABLE "UnchargedAtom_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("UnchargedAtom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_UnchargedAtom_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("UnchargedAtom_id");CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_UnchargedAtom_has_major_microspecies_at_pH7_3_UnchargedAtom_id" ON "UnchargedAtom_has_major_microspecies_at_pH7_3" ("UnchargedAtom_id");
 CREATE TABLE "UnchargedAtom_pka_ionization_constant" (
 	"UnchargedAtom_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("UnchargedAtom_id", pka_ionization_constant),
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id)
-);CREATE INDEX "ix_UnchargedAtom_pka_ionization_constant_pka_ionization_constant" ON "UnchargedAtom_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_UnchargedAtom_pka_ionization_constant_UnchargedAtom_id" ON "UnchargedAtom_pka_ionization_constant" ("UnchargedAtom_id");
+);CREATE INDEX "ix_UnchargedAtom_pka_ionization_constant_UnchargedAtom_id" ON "UnchargedAtom_pka_ionization_constant" ("UnchargedAtom_id");CREATE INDEX "ix_UnchargedAtom_pka_ionization_constant_pka_ionization_constant" ON "UnchargedAtom_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "UnchargedAtom_classified_by" (
 	"UnchargedAtom_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("UnchargedAtom_id", classified_by_id),
 	FOREIGN KEY("UnchargedAtom_id") REFERENCES "UnchargedAtom" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_UnchargedAtom_classified_by_classified_by_id" ON "UnchargedAtom_classified_by" (classified_by_id);CREATE INDEX "ix_UnchargedAtom_classified_by_UnchargedAtom_id" ON "UnchargedAtom_classified_by" ("UnchargedAtom_id");
+);CREATE INDEX "ix_UnchargedAtom_classified_by_UnchargedAtom_id" ON "UnchargedAtom_classified_by" ("UnchargedAtom_id");CREATE INDEX "ix_UnchargedAtom_classified_by_classified_by_id" ON "UnchargedAtom_classified_by" (classified_by_id);
 CREATE TABLE "Nuclide_has_major_microspecies_at_pH7_3" (
 	"Nuclide_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7085,21 +7201,21 @@ CREATE TABLE "Nuclide_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Nuclide_id", pka_ionization_constant),
 	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id)
-);CREATE INDEX "ix_Nuclide_pka_ionization_constant_pka_ionization_constant" ON "Nuclide_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Nuclide_pka_ionization_constant_Nuclide_id" ON "Nuclide_pka_ionization_constant" ("Nuclide_id");
+);CREATE INDEX "ix_Nuclide_pka_ionization_constant_Nuclide_id" ON "Nuclide_pka_ionization_constant" ("Nuclide_id");CREATE INDEX "ix_Nuclide_pka_ionization_constant_pka_ionization_constant" ON "Nuclide_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Nuclide_classified_by" (
 	"Nuclide_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Nuclide_id", classified_by_id),
 	FOREIGN KEY("Nuclide_id") REFERENCES "Nuclide" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Nuclide_classified_by_classified_by_id" ON "Nuclide_classified_by" (classified_by_id);CREATE INDEX "ix_Nuclide_classified_by_Nuclide_id" ON "Nuclide_classified_by" ("Nuclide_id");
+);CREATE INDEX "ix_Nuclide_classified_by_Nuclide_id" ON "Nuclide_classified_by" ("Nuclide_id");CREATE INDEX "ix_Nuclide_classified_by_classified_by_id" ON "Nuclide_classified_by" (classified_by_id);
 CREATE TABLE "Radionuclide_has_major_microspecies_at_pH7_3" (
 	"Radionuclide_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
 	PRIMARY KEY ("Radionuclide_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_Radionuclide_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("Radionuclide_id");CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Radionuclide_has_major_microspecies_at_pH7_3_Radionuclide_id" ON "Radionuclide_has_major_microspecies_at_pH7_3" ("Radionuclide_id");
 CREATE TABLE "Radionuclide_pka_ionization_constant" (
 	"Radionuclide_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -7112,7 +7228,7 @@ CREATE TABLE "Radionuclide_classified_by" (
 	PRIMARY KEY ("Radionuclide_id", classified_by_id),
 	FOREIGN KEY("Radionuclide_id") REFERENCES "Radionuclide" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Radionuclide_classified_by_Radionuclide_id" ON "Radionuclide_classified_by" ("Radionuclide_id");CREATE INDEX "ix_Radionuclide_classified_by_classified_by_id" ON "Radionuclide_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Radionuclide_classified_by_classified_by_id" ON "Radionuclide_classified_by" (classified_by_id);CREATE INDEX "ix_Radionuclide_classified_by_Radionuclide_id" ON "Radionuclide_classified_by" ("Radionuclide_id");
 CREATE TABLE "AtomIonicForm_has_major_microspecies_at_pH7_3" (
 	"AtomIonicForm_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7125,7 +7241,7 @@ CREATE TABLE "AtomIonicForm_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("AtomIonicForm_id", pka_ionization_constant),
 	FOREIGN KEY("AtomIonicForm_id") REFERENCES "AtomIonicForm" (id)
-);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_pka_ionization_constant" ON "AtomIonicForm_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_AtomIonicForm_id" ON "AtomIonicForm_pka_ionization_constant" ("AtomIonicForm_id");
+);CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_AtomIonicForm_id" ON "AtomIonicForm_pka_ionization_constant" ("AtomIonicForm_id");CREATE INDEX "ix_AtomIonicForm_pka_ionization_constant_pka_ionization_constant" ON "AtomIonicForm_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "AtomIonicForm_classified_by" (
 	"AtomIonicForm_id" TEXT,
 	classified_by_id TEXT,
@@ -7139,7 +7255,7 @@ CREATE TABLE "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("PartiallySpecifiedAtom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("PartiallySpecifiedAtom_id") REFERENCES "PartiallySpecifiedAtom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3_PartiallySpecifiedAtom_id" ON "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" ("PartiallySpecifiedAtom_id");
+);CREATE INDEX "ix_PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3_PartiallySpecifiedAtom_id" ON "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" ("PartiallySpecifiedAtom_id");CREATE INDEX "ix_PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "PartiallySpecifiedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "PartiallySpecifiedAtom_pka_ionization_constant" (
 	"PartiallySpecifiedAtom_id" TEXT,
 	pka_ionization_constant FLOAT,
@@ -7159,13 +7275,13 @@ CREATE TABLE "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("FullySpecifiedAtom_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_FullySpecifiedAtom_has_major_microspecies_at_pH7_3_FullySpecifiedAtom_id" ON "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" ("FullySpecifiedAtom_id");CREATE INDEX "ix_FullySpecifiedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_FullySpecifiedAtom_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_FullySpecifiedAtom_has_major_microspecies_at_pH7_3_FullySpecifiedAtom_id" ON "FullySpecifiedAtom_has_major_microspecies_at_pH7_3" ("FullySpecifiedAtom_id");
 CREATE TABLE "FullySpecifiedAtom_pka_ionization_constant" (
 	"FullySpecifiedAtom_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("FullySpecifiedAtom_id", pka_ionization_constant),
 	FOREIGN KEY("FullySpecifiedAtom_id") REFERENCES "FullySpecifiedAtom" (id)
-);CREATE INDEX "ix_FullySpecifiedAtom_pka_ionization_constant_FullySpecifiedAtom_id" ON "FullySpecifiedAtom_pka_ionization_constant" ("FullySpecifiedAtom_id");CREATE INDEX "ix_FullySpecifiedAtom_pka_ionization_constant_pka_ionization_constant" ON "FullySpecifiedAtom_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_FullySpecifiedAtom_pka_ionization_constant_pka_ionization_constant" ON "FullySpecifiedAtom_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_FullySpecifiedAtom_pka_ionization_constant_FullySpecifiedAtom_id" ON "FullySpecifiedAtom_pka_ionization_constant" ("FullySpecifiedAtom_id");
 CREATE TABLE "FullySpecifiedAtom_classified_by" (
 	"FullySpecifiedAtom_id" TEXT,
 	classified_by_id TEXT,
@@ -7206,7 +7322,7 @@ CREATE TABLE "Ester_has_atoms" (
 	PRIMARY KEY ("Ester_id", has_atoms_id),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Ester_has_atoms_Ester_id" ON "Ester_has_atoms" ("Ester_id");CREATE INDEX "ix_Ester_has_atoms_has_atoms_id" ON "Ester_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Ester_has_atoms_has_atoms_id" ON "Ester_has_atoms" (has_atoms_id);CREATE INDEX "ix_Ester_has_atoms_Ester_id" ON "Ester_has_atoms" ("Ester_id");
 CREATE TABLE "Ester_has_major_microspecies_at_pH7_3" (
 	"Ester_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7247,34 +7363,34 @@ CREATE TABLE "Stereoisomer_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Stereoisomer_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Stereoisomer_has_major_microspecies_at_pH7_3_Stereoisomer_id" ON "Stereoisomer_has_major_microspecies_at_pH7_3" ("Stereoisomer_id");CREATE INDEX "ix_Stereoisomer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Stereoisomer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_Stereoisomer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Stereoisomer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Stereoisomer_has_major_microspecies_at_pH7_3_Stereoisomer_id" ON "Stereoisomer_has_major_microspecies_at_pH7_3" ("Stereoisomer_id");
 CREATE TABLE "Stereoisomer_pka_ionization_constant" (
 	"Stereoisomer_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Stereoisomer_id", pka_ionization_constant),
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id)
-);CREATE INDEX "ix_Stereoisomer_pka_ionization_constant_pka_ionization_constant" ON "Stereoisomer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Stereoisomer_pka_ionization_constant_Stereoisomer_id" ON "Stereoisomer_pka_ionization_constant" ("Stereoisomer_id");
+);CREATE INDEX "ix_Stereoisomer_pka_ionization_constant_Stereoisomer_id" ON "Stereoisomer_pka_ionization_constant" ("Stereoisomer_id");CREATE INDEX "ix_Stereoisomer_pka_ionization_constant_pka_ionization_constant" ON "Stereoisomer_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "Stereoisomer_classified_by" (
 	"Stereoisomer_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Stereoisomer_id", classified_by_id),
 	FOREIGN KEY("Stereoisomer_id") REFERENCES "Stereoisomer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Stereoisomer_classified_by_Stereoisomer_id" ON "Stereoisomer_classified_by" ("Stereoisomer_id");CREATE INDEX "ix_Stereoisomer_classified_by_classified_by_id" ON "Stereoisomer_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Stereoisomer_classified_by_classified_by_id" ON "Stereoisomer_classified_by" (classified_by_id);CREATE INDEX "ix_Stereoisomer_classified_by_Stereoisomer_id" ON "Stereoisomer_classified_by" ("Stereoisomer_id");
 CREATE TABLE "Allotrope_has_submolecules" (
 	"Allotrope_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Allotrope_id", has_submolecules_id),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Allotrope_has_submolecules_Allotrope_id" ON "Allotrope_has_submolecules" ("Allotrope_id");CREATE INDEX "ix_Allotrope_has_submolecules_has_submolecules_id" ON "Allotrope_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Allotrope_has_submolecules_has_submolecules_id" ON "Allotrope_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Allotrope_has_submolecules_Allotrope_id" ON "Allotrope_has_submolecules" ("Allotrope_id");
 CREATE TABLE "Allotrope_has_atoms" (
 	"Allotrope_id" TEXT,
 	has_atoms_id TEXT,
 	PRIMARY KEY ("Allotrope_id", has_atoms_id),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Allotrope_has_atoms_Allotrope_id" ON "Allotrope_has_atoms" ("Allotrope_id");CREATE INDEX "ix_Allotrope_has_atoms_has_atoms_id" ON "Allotrope_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Allotrope_has_atoms_has_atoms_id" ON "Allotrope_has_atoms" (has_atoms_id);CREATE INDEX "ix_Allotrope_has_atoms_Allotrope_id" ON "Allotrope_has_atoms" ("Allotrope_id");
 CREATE TABLE "Allotrope_has_major_microspecies_at_pH7_3" (
 	"Allotrope_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7294,7 +7410,7 @@ CREATE TABLE "Allotrope_classified_by" (
 	PRIMARY KEY ("Allotrope_id", classified_by_id),
 	FOREIGN KEY("Allotrope_id") REFERENCES "Allotrope" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Allotrope_classified_by_classified_by_id" ON "Allotrope_classified_by" (classified_by_id);CREATE INDEX "ix_Allotrope_classified_by_Allotrope_id" ON "Allotrope_classified_by" ("Allotrope_id");
+);CREATE INDEX "ix_Allotrope_classified_by_Allotrope_id" ON "Allotrope_classified_by" ("Allotrope_id");CREATE INDEX "ix_Allotrope_classified_by_classified_by_id" ON "Allotrope_classified_by" (classified_by_id);
 CREATE TABLE "Isobar" (
 	has_element TEXT,
 	nucleon_number INTEGER,
@@ -7325,6 +7441,7 @@ CREATE TABLE "Isobar" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -7426,6 +7543,7 @@ CREATE TABLE "RacemicMixture" (
 	smiles_string TEXT,
 	cxsmiles_string TEXT,
 	empirical_formula TEXT,
+	molecular_formula TEXT,
 	molecular_mass FLOAT,
 	water_solubility FLOAT,
 	pka_temperature FLOAT,
@@ -7486,20 +7604,20 @@ CREATE TABLE "MonomolecularPolymer_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("MonomolecularPolymer_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_MonomolecularPolymer_has_major_microspecies_at_pH7_3_MonomolecularPolymer_id" ON "MonomolecularPolymer_has_major_microspecies_at_pH7_3" ("MonomolecularPolymer_id");
 CREATE TABLE "MonomolecularPolymer_pka_ionization_constant" (
 	"MonomolecularPolymer_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("MonomolecularPolymer_id", pka_ionization_constant),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "MonomolecularPolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_MonomolecularPolymer_id" ON "MonomolecularPolymer_pka_ionization_constant" ("MonomolecularPolymer_id");
+);CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_MonomolecularPolymer_id" ON "MonomolecularPolymer_pka_ionization_constant" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_pka_ionization_constant_pka_ionization_constant" ON "MonomolecularPolymer_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "MonomolecularPolymer_classified_by" (
 	"MonomolecularPolymer_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("MonomolecularPolymer_id", classified_by_id),
 	FOREIGN KEY("MonomolecularPolymer_id") REFERENCES "MonomolecularPolymer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_MonomolecularPolymer_classified_by_classified_by_id" ON "MonomolecularPolymer_classified_by" (classified_by_id);CREATE INDEX "ix_MonomolecularPolymer_classified_by_MonomolecularPolymer_id" ON "MonomolecularPolymer_classified_by" ("MonomolecularPolymer_id");
+);CREATE INDEX "ix_MonomolecularPolymer_classified_by_MonomolecularPolymer_id" ON "MonomolecularPolymer_classified_by" ("MonomolecularPolymer_id");CREATE INDEX "ix_MonomolecularPolymer_classified_by_classified_by_id" ON "MonomolecularPolymer_classified_by" (classified_by_id);
 CREATE TABLE "SupramolecularPolymer_has_major_microspecies_at_pH7_3" (
 	"SupramolecularPolymer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7519,7 +7637,7 @@ CREATE TABLE "SupramolecularPolymer_classified_by" (
 	PRIMARY KEY ("SupramolecularPolymer_id", classified_by_id),
 	FOREIGN KEY("SupramolecularPolymer_id") REFERENCES "SupramolecularPolymer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_SupramolecularPolymer_classified_by_classified_by_id" ON "SupramolecularPolymer_classified_by" (classified_by_id);CREATE INDEX "ix_SupramolecularPolymer_classified_by_SupramolecularPolymer_id" ON "SupramolecularPolymer_classified_by" ("SupramolecularPolymer_id");
+);CREATE INDEX "ix_SupramolecularPolymer_classified_by_SupramolecularPolymer_id" ON "SupramolecularPolymer_classified_by" ("SupramolecularPolymer_id");CREATE INDEX "ix_SupramolecularPolymer_classified_by_classified_by_id" ON "SupramolecularPolymer_classified_by" (classified_by_id);
 CREATE TABLE "Copolymer_polymer_of" (
 	"Copolymer_id" TEXT,
 	polymer_of_id TEXT,
@@ -7533,7 +7651,7 @@ CREATE TABLE "Copolymer_has_submolecules" (
 	PRIMARY KEY ("Copolymer_id", has_submolecules_id),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Copolymer_has_submolecules_has_submolecules_id" ON "Copolymer_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Copolymer_has_submolecules_Copolymer_id" ON "Copolymer_has_submolecules" ("Copolymer_id");
+);CREATE INDEX "ix_Copolymer_has_submolecules_Copolymer_id" ON "Copolymer_has_submolecules" ("Copolymer_id");CREATE INDEX "ix_Copolymer_has_submolecules_has_submolecules_id" ON "Copolymer_has_submolecules" (has_submolecules_id);
 CREATE TABLE "Copolymer_has_atoms" (
 	"Copolymer_id" TEXT,
 	has_atoms_id TEXT,
@@ -7553,21 +7671,21 @@ CREATE TABLE "Copolymer_pka_ionization_constant" (
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Copolymer_id", pka_ionization_constant),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id)
-);CREATE INDEX "ix_Copolymer_pka_ionization_constant_Copolymer_id" ON "Copolymer_pka_ionization_constant" ("Copolymer_id");CREATE INDEX "ix_Copolymer_pka_ionization_constant_pka_ionization_constant" ON "Copolymer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Copolymer_pka_ionization_constant_pka_ionization_constant" ON "Copolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Copolymer_pka_ionization_constant_Copolymer_id" ON "Copolymer_pka_ionization_constant" ("Copolymer_id");
 CREATE TABLE "Copolymer_classified_by" (
 	"Copolymer_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Copolymer_id", classified_by_id),
 	FOREIGN KEY("Copolymer_id") REFERENCES "Copolymer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Copolymer_classified_by_Copolymer_id" ON "Copolymer_classified_by" ("Copolymer_id");CREATE INDEX "ix_Copolymer_classified_by_classified_by_id" ON "Copolymer_classified_by" (classified_by_id);
+);CREATE INDEX "ix_Copolymer_classified_by_classified_by_id" ON "Copolymer_classified_by" (classified_by_id);CREATE INDEX "ix_Copolymer_classified_by_Copolymer_id" ON "Copolymer_classified_by" ("Copolymer_id");
 CREATE TABLE "Homopolymer_has_submolecules" (
 	"Homopolymer_id" TEXT,
 	has_submolecules_id TEXT,
 	PRIMARY KEY ("Homopolymer_id", has_submolecules_id),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id),
 	FOREIGN KEY(has_submolecules_id) REFERENCES "Molecule" (id)
-);CREATE INDEX "ix_Homopolymer_has_submolecules_Homopolymer_id" ON "Homopolymer_has_submolecules" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_has_submolecules_has_submolecules_id" ON "Homopolymer_has_submolecules" (has_submolecules_id);
+);CREATE INDEX "ix_Homopolymer_has_submolecules_has_submolecules_id" ON "Homopolymer_has_submolecules" (has_submolecules_id);CREATE INDEX "ix_Homopolymer_has_submolecules_Homopolymer_id" ON "Homopolymer_has_submolecules" ("Homopolymer_id");
 CREATE TABLE "Homopolymer_has_atoms" (
 	"Homopolymer_id" TEXT,
 	has_atoms_id TEXT,
@@ -7581,20 +7699,20 @@ CREATE TABLE "Homopolymer_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("Homopolymer_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_Homopolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Homopolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_Homopolymer_has_major_microspecies_at_pH7_3_Homopolymer_id" ON "Homopolymer_has_major_microspecies_at_pH7_3" ("Homopolymer_id");
+);CREATE INDEX "ix_Homopolymer_has_major_microspecies_at_pH7_3_Homopolymer_id" ON "Homopolymer_has_major_microspecies_at_pH7_3" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "Homopolymer_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "Homopolymer_pka_ionization_constant" (
 	"Homopolymer_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("Homopolymer_id", pka_ionization_constant),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id)
-);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_Homopolymer_id" ON "Homopolymer_pka_ionization_constant" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_pka_ionization_constant_pka_ionization_constant" ON "Homopolymer_pka_ionization_constant" (pka_ionization_constant);
+);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_pka_ionization_constant" ON "Homopolymer_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_Homopolymer_pka_ionization_constant_Homopolymer_id" ON "Homopolymer_pka_ionization_constant" ("Homopolymer_id");
 CREATE TABLE "Homopolymer_classified_by" (
 	"Homopolymer_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("Homopolymer_id", classified_by_id),
 	FOREIGN KEY("Homopolymer_id") REFERENCES "Homopolymer" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_Homopolymer_classified_by_classified_by_id" ON "Homopolymer_classified_by" (classified_by_id);CREATE INDEX "ix_Homopolymer_classified_by_Homopolymer_id" ON "Homopolymer_classified_by" ("Homopolymer_id");
+);CREATE INDEX "ix_Homopolymer_classified_by_Homopolymer_id" ON "Homopolymer_classified_by" ("Homopolymer_id");CREATE INDEX "ix_Homopolymer_classified_by_classified_by_id" ON "Homopolymer_classified_by" (classified_by_id);
 CREATE TABLE "Isotope_has_major_microspecies_at_pH7_3" (
 	"Isotope_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7641,13 +7759,13 @@ CREATE TABLE "AtomAnion_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("AtomAnion_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_AtomAnion_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("AtomAnion_id");
+);CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_AtomAnion_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("AtomAnion_id");CREATE INDEX "ix_AtomAnion_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "AtomAnion_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
 CREATE TABLE "AtomAnion_pka_ionization_constant" (
 	"AtomAnion_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("AtomAnion_id", pka_ionization_constant),
 	FOREIGN KEY("AtomAnion_id") REFERENCES "AtomAnion" (id)
-);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_pka_ionization_constant" ON "AtomAnion_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_AtomAnion_id" ON "AtomAnion_pka_ionization_constant" ("AtomAnion_id");
+);CREATE INDEX "ix_AtomAnion_pka_ionization_constant_AtomAnion_id" ON "AtomAnion_pka_ionization_constant" ("AtomAnion_id");CREATE INDEX "ix_AtomAnion_pka_ionization_constant_pka_ionization_constant" ON "AtomAnion_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "AtomAnion_classified_by" (
 	"AtomAnion_id" TEXT,
 	classified_by_id TEXT,
@@ -7688,7 +7806,7 @@ CREATE TABLE "Enantiomer_has_atoms" (
 	PRIMARY KEY ("Enantiomer_id", has_atoms_id),
 	FOREIGN KEY("Enantiomer_id") REFERENCES "Enantiomer" (id),
 	FOREIGN KEY(has_atoms_id) REFERENCES "Atom" (id)
-);CREATE INDEX "ix_Enantiomer_has_atoms_Enantiomer_id" ON "Enantiomer_has_atoms" ("Enantiomer_id");CREATE INDEX "ix_Enantiomer_has_atoms_has_atoms_id" ON "Enantiomer_has_atoms" (has_atoms_id);
+);CREATE INDEX "ix_Enantiomer_has_atoms_has_atoms_id" ON "Enantiomer_has_atoms" (has_atoms_id);CREATE INDEX "ix_Enantiomer_has_atoms_Enantiomer_id" ON "Enantiomer_has_atoms" ("Enantiomer_id");
 CREATE TABLE "Enantiomer_has_major_microspecies_at_pH7_3" (
 	"Enantiomer_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7736,7 +7854,7 @@ CREATE TABLE "IsomeraseReaction_right_participants" (
 	PRIMARY KEY ("IsomeraseReaction_id", right_participants_id),
 	FOREIGN KEY("IsomeraseReaction_id") REFERENCES "IsomeraseReaction" (id),
 	FOREIGN KEY(right_participants_id) REFERENCES "ReactionParticipant" (id)
-);CREATE INDEX "ix_IsomeraseReaction_right_participants_right_participants_id" ON "IsomeraseReaction_right_participants" (right_participants_id);CREATE INDEX "ix_IsomeraseReaction_right_participants_IsomeraseReaction_id" ON "IsomeraseReaction_right_participants" ("IsomeraseReaction_id");
+);CREATE INDEX "ix_IsomeraseReaction_right_participants_IsomeraseReaction_id" ON "IsomeraseReaction_right_participants" ("IsomeraseReaction_id");CREATE INDEX "ix_IsomeraseReaction_right_participants_right_participants_id" ON "IsomeraseReaction_right_participants" (right_participants_id);
 CREATE TABLE "AtomicBond" (
 	id INTEGER NOT NULL,
 	subject TEXT,
@@ -7760,7 +7878,7 @@ CREATE TABLE "ImpreciseChemicalMixture_has_proportional_parts" (
 	PRIMARY KEY ("ImpreciseChemicalMixture_id", has_proportional_parts_id),
 	FOREIGN KEY("ImpreciseChemicalMixture_id") REFERENCES "ImpreciseChemicalMixture" (id),
 	FOREIGN KEY(has_proportional_parts_id) REFERENCES "ProportionalPart" (id)
-);CREATE INDEX "ix_ImpreciseChemicalMixture_has_proportional_parts_has_proportional_parts_id" ON "ImpreciseChemicalMixture_has_proportional_parts" (has_proportional_parts_id);CREATE INDEX "ix_ImpreciseChemicalMixture_has_proportional_parts_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_has_proportional_parts" ("ImpreciseChemicalMixture_id");
+);CREATE INDEX "ix_ImpreciseChemicalMixture_has_proportional_parts_ImpreciseChemicalMixture_id" ON "ImpreciseChemicalMixture_has_proportional_parts" ("ImpreciseChemicalMixture_id");CREATE INDEX "ix_ImpreciseChemicalMixture_has_proportional_parts_has_proportional_parts_id" ON "ImpreciseChemicalMixture_has_proportional_parts" (has_proportional_parts_id);
 CREATE TABLE "Isobar_has_major_microspecies_at_pH7_3" (
 	"Isobar_id" TEXT,
 	"has_major_microspecies_at_pH7_3_id" TEXT,
@@ -7787,20 +7905,20 @@ CREATE TABLE "RacemicMixture_has_major_microspecies_at_pH7_3" (
 	PRIMARY KEY ("RacemicMixture_id", "has_major_microspecies_at_pH7_3_id"),
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id),
 	FOREIGN KEY("has_major_microspecies_at_pH7_3_id") REFERENCES "ChemicalEntity" (id)
-);CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_RacemicMixture_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("RacemicMixture_id");CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");
+);CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_has_major_microspecies_at_pH7_3_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("has_major_microspecies_at_pH7_3_id");CREATE INDEX "ix_RacemicMixture_has_major_microspecies_at_pH7_3_RacemicMixture_id" ON "RacemicMixture_has_major_microspecies_at_pH7_3" ("RacemicMixture_id");
 CREATE TABLE "RacemicMixture_pka_ionization_constant" (
 	"RacemicMixture_id" TEXT,
 	pka_ionization_constant FLOAT,
 	PRIMARY KEY ("RacemicMixture_id", pka_ionization_constant),
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id)
-);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_pka_ionization_constant" ON "RacemicMixture_pka_ionization_constant" (pka_ionization_constant);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_RacemicMixture_id" ON "RacemicMixture_pka_ionization_constant" ("RacemicMixture_id");
+);CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_RacemicMixture_id" ON "RacemicMixture_pka_ionization_constant" ("RacemicMixture_id");CREATE INDEX "ix_RacemicMixture_pka_ionization_constant_pka_ionization_constant" ON "RacemicMixture_pka_ionization_constant" (pka_ionization_constant);
 CREATE TABLE "RacemicMixture_classified_by" (
 	"RacemicMixture_id" TEXT,
 	classified_by_id TEXT,
 	PRIMARY KEY ("RacemicMixture_id", classified_by_id),
 	FOREIGN KEY("RacemicMixture_id") REFERENCES "RacemicMixture" (id),
 	FOREIGN KEY(classified_by_id) REFERENCES "ChemicalGroupingClass" (id)
-);CREATE INDEX "ix_RacemicMixture_classified_by_classified_by_id" ON "RacemicMixture_classified_by" (classified_by_id);CREATE INDEX "ix_RacemicMixture_classified_by_RacemicMixture_id" ON "RacemicMixture_classified_by" ("RacemicMixture_id");
+);CREATE INDEX "ix_RacemicMixture_classified_by_RacemicMixture_id" ON "RacemicMixture_classified_by" ("RacemicMixture_id");CREATE INDEX "ix_RacemicMixture_classified_by_classified_by_id" ON "RacemicMixture_classified_by" (classified_by_id);
 CREATE TABLE "SmallMolecule_has_bonds" (
 	"SmallMolecule_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7814,7 +7932,7 @@ CREATE TABLE "Macromolecule_has_bonds" (
 	PRIMARY KEY ("Macromolecule_id", has_bonds_id),
 	FOREIGN KEY("Macromolecule_id") REFERENCES "Macromolecule" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Macromolecule_has_bonds_has_bonds_id" ON "Macromolecule_has_bonds" (has_bonds_id);CREATE INDEX "ix_Macromolecule_has_bonds_Macromolecule_id" ON "Macromolecule_has_bonds" ("Macromolecule_id");
+);CREATE INDEX "ix_Macromolecule_has_bonds_Macromolecule_id" ON "Macromolecule_has_bonds" ("Macromolecule_id");CREATE INDEX "ix_Macromolecule_has_bonds_has_bonds_id" ON "Macromolecule_has_bonds" (has_bonds_id);
 CREATE TABLE "Peptide_has_bonds" (
 	"Peptide_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7828,7 +7946,7 @@ CREATE TABLE "Protein_has_bonds" (
 	PRIMARY KEY ("Protein_id", has_bonds_id),
 	FOREIGN KEY("Protein_id") REFERENCES "Protein" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Protein_has_bonds_has_bonds_id" ON "Protein_has_bonds" (has_bonds_id);CREATE INDEX "ix_Protein_has_bonds_Protein_id" ON "Protein_has_bonds" ("Protein_id");
+);CREATE INDEX "ix_Protein_has_bonds_Protein_id" ON "Protein_has_bonds" ("Protein_id");CREATE INDEX "ix_Protein_has_bonds_has_bonds_id" ON "Protein_has_bonds" (has_bonds_id);
 CREATE TABLE "Glycan_has_bonds" (
 	"Glycan_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7842,7 +7960,7 @@ CREATE TABLE "Monosaccharide_has_bonds" (
 	PRIMARY KEY ("Monosaccharide_id", has_bonds_id),
 	FOREIGN KEY("Monosaccharide_id") REFERENCES "Monosaccharide" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Monosaccharide_has_bonds_has_bonds_id" ON "Monosaccharide_has_bonds" (has_bonds_id);CREATE INDEX "ix_Monosaccharide_has_bonds_Monosaccharide_id" ON "Monosaccharide_has_bonds" ("Monosaccharide_id");
+);CREATE INDEX "ix_Monosaccharide_has_bonds_Monosaccharide_id" ON "Monosaccharide_has_bonds" ("Monosaccharide_id");CREATE INDEX "ix_Monosaccharide_has_bonds_has_bonds_id" ON "Monosaccharide_has_bonds" (has_bonds_id);
 CREATE TABLE "MonomolecularPolymer_has_bonds" (
 	"MonomolecularPolymer_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7877,7 +7995,7 @@ CREATE TABLE "NaturalProduct_has_bonds" (
 	PRIMARY KEY ("NaturalProduct_id", has_bonds_id),
 	FOREIGN KEY("NaturalProduct_id") REFERENCES "NaturalProduct" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_NaturalProduct_has_bonds_has_bonds_id" ON "NaturalProduct_has_bonds" (has_bonds_id);CREATE INDEX "ix_NaturalProduct_has_bonds_NaturalProduct_id" ON "NaturalProduct_has_bonds" ("NaturalProduct_id");
+);CREATE INDEX "ix_NaturalProduct_has_bonds_NaturalProduct_id" ON "NaturalProduct_has_bonds" ("NaturalProduct_id");CREATE INDEX "ix_NaturalProduct_has_bonds_has_bonds_id" ON "NaturalProduct_has_bonds" (has_bonds_id);
 CREATE TABLE "MolecularSpecies_has_bonds" (
 	"MolecularSpecies_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7891,14 +8009,14 @@ CREATE TABLE "NonSpeciesMolecule_has_bonds" (
 	PRIMARY KEY ("NonSpeciesMolecule_id", has_bonds_id),
 	FOREIGN KEY("NonSpeciesMolecule_id") REFERENCES "NonSpeciesMolecule" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_NonSpeciesMolecule_has_bonds_has_bonds_id" ON "NonSpeciesMolecule_has_bonds" (has_bonds_id);CREATE INDEX "ix_NonSpeciesMolecule_has_bonds_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_bonds" ("NonSpeciesMolecule_id");
+);CREATE INDEX "ix_NonSpeciesMolecule_has_bonds_NonSpeciesMolecule_id" ON "NonSpeciesMolecule_has_bonds" ("NonSpeciesMolecule_id");CREATE INDEX "ix_NonSpeciesMolecule_has_bonds_has_bonds_id" ON "NonSpeciesMolecule_has_bonds" (has_bonds_id);
 CREATE TABLE "MoleculeByChargeState_has_bonds" (
 	"MoleculeByChargeState_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("MoleculeByChargeState_id", has_bonds_id),
 	FOREIGN KEY("MoleculeByChargeState_id") REFERENCES "MoleculeByChargeState" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_MoleculeByChargeState_has_bonds_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_bonds" ("MoleculeByChargeState_id");CREATE INDEX "ix_MoleculeByChargeState_has_bonds_has_bonds_id" ON "MoleculeByChargeState_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_MoleculeByChargeState_has_bonds_has_bonds_id" ON "MoleculeByChargeState_has_bonds" (has_bonds_id);CREATE INDEX "ix_MoleculeByChargeState_has_bonds_MoleculeByChargeState_id" ON "MoleculeByChargeState_has_bonds" ("MoleculeByChargeState_id");
 CREATE TABLE "PolyatomicIon_has_bonds" (
 	"PolyatomicIon_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7912,14 +8030,14 @@ CREATE TABLE "MolecularCation_has_bonds" (
 	PRIMARY KEY ("MolecularCation_id", has_bonds_id),
 	FOREIGN KEY("MolecularCation_id") REFERENCES "MolecularCation" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_MolecularCation_has_bonds_MolecularCation_id" ON "MolecularCation_has_bonds" ("MolecularCation_id");CREATE INDEX "ix_MolecularCation_has_bonds_has_bonds_id" ON "MolecularCation_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_MolecularCation_has_bonds_has_bonds_id" ON "MolecularCation_has_bonds" (has_bonds_id);CREATE INDEX "ix_MolecularCation_has_bonds_MolecularCation_id" ON "MolecularCation_has_bonds" ("MolecularCation_id");
 CREATE TABLE "MolecularAnion_has_bonds" (
 	"MolecularAnion_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("MolecularAnion_id", has_bonds_id),
 	FOREIGN KEY("MolecularAnion_id") REFERENCES "MolecularAnion" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_MolecularAnion_has_bonds_has_bonds_id" ON "MolecularAnion_has_bonds" (has_bonds_id);CREATE INDEX "ix_MolecularAnion_has_bonds_MolecularAnion_id" ON "MolecularAnion_has_bonds" ("MolecularAnion_id");
+);CREATE INDEX "ix_MolecularAnion_has_bonds_MolecularAnion_id" ON "MolecularAnion_has_bonds" ("MolecularAnion_id");CREATE INDEX "ix_MolecularAnion_has_bonds_has_bonds_id" ON "MolecularAnion_has_bonds" (has_bonds_id);
 CREATE TABLE "NetUnchargedMolecule_has_bonds" (
 	"NetUnchargedMolecule_id" TEXT,
 	has_bonds_id INTEGER,
@@ -7940,14 +8058,14 @@ CREATE TABLE "NeutralMolecule_has_bonds" (
 	PRIMARY KEY ("NeutralMolecule_id", has_bonds_id),
 	FOREIGN KEY("NeutralMolecule_id") REFERENCES "NeutralMolecule" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_NeutralMolecule_has_bonds_NeutralMolecule_id" ON "NeutralMolecule_has_bonds" ("NeutralMolecule_id");CREATE INDEX "ix_NeutralMolecule_has_bonds_has_bonds_id" ON "NeutralMolecule_has_bonds" (has_bonds_id);
+);CREATE INDEX "ix_NeutralMolecule_has_bonds_has_bonds_id" ON "NeutralMolecule_has_bonds" (has_bonds_id);CREATE INDEX "ix_NeutralMolecule_has_bonds_NeutralMolecule_id" ON "NeutralMolecule_has_bonds" ("NeutralMolecule_id");
 CREATE TABLE "Ester_has_bonds" (
 	"Ester_id" TEXT,
 	has_bonds_id INTEGER,
 	PRIMARY KEY ("Ester_id", has_bonds_id),
 	FOREIGN KEY("Ester_id") REFERENCES "Ester" (id),
 	FOREIGN KEY(has_bonds_id) REFERENCES "AtomicBond" (id)
-);CREATE INDEX "ix_Ester_has_bonds_has_bonds_id" ON "Ester_has_bonds" (has_bonds_id);CREATE INDEX "ix_Ester_has_bonds_Ester_id" ON "Ester_has_bonds" ("Ester_id");
+);CREATE INDEX "ix_Ester_has_bonds_Ester_id" ON "Ester_has_bonds" ("Ester_id");CREATE INDEX "ix_Ester_has_bonds_has_bonds_id" ON "Ester_has_bonds" (has_bonds_id);
 CREATE TABLE "Stereoisomer_has_bonds" (
 	"Stereoisomer_id" TEXT,
 	has_bonds_id INTEGER,
