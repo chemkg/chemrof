@@ -13,7 +13,17 @@ r['src_can']=r.src_smiles.map(can); r['tgt_can']=r.tgt_smiles.map(can)
 r=r.dropna(subset=['src_can','tgt_can'])
 # skip polymers / R-groups / wildcard atoms: can't be protonated meaningfully
 r=r[~r.src_can.str.contains(r'\*') & ~r.tgt_can.str.contains(r'\*')]
-r['split']=r.tgt.map(lambda x: 'test' if int(hashlib.md5(x.encode()).hexdigest(),16)%5==0 else 'train')
+# Split by target ID so every protonation form of a compound lands together.
+# train (80%): rules may be written from it and its failures read.
+# The original 20% test split had its aggregate score checked ~5 times while the
+# first rule set was developed, but its failures were never read. From
+# 2026-09-30 it is halved: dev drives accept/reject decisions, sealed is
+# scored only via `evalr.py --unseal` (each use is logged).
+def split(tgt):
+    if int(hashlib.md5(tgt.encode()).hexdigest(), 16) % 5:
+        return 'train'
+    return 'sealed' if int(hashlib.sha1(('sealed:' + tgt).encode()).hexdigest(), 16) % 2 else 'dev'
+r['split']=r.tgt.map(split)
 r['identity']=r.src==r.tgt
 print(n0,len(r)); print(r.groupby(['split','identity']).size()); print(r.origin.value_counts())
 r.to_csv('data/bench.tsv',sep='\t',index=False)
