@@ -371,6 +371,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#atoms-and-isotopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atoms and isotopes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Atoms and isotopes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chebi-ids-for-atoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      CHEBI ids for atoms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siblings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#enrichers" class="md-nav__link">
     <span class="md-ellipsis">
       Enrichers
@@ -737,6 +770,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#atoms-and-isotopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atoms and isotopes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Atoms and isotopes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chebi-ids-for-atoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      CHEBI ids for atoms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siblings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#enrichers" class="md-nav__link">
     <span class="md-ellipsis">
       Enrichers
@@ -878,7 +944,7 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 </tr>
 <tr>
 <td><code>inchi_chemical_sublayer</code></td>
-<td>Parsed from InChI</td>
+<td>Parsed from InChI (other sublayers keep their layer letter: <code>c1-2-3</code>, <code>q+2</code>, <code>p-1</code>)</td>
 <td><code>C2H6O</code></td>
 </tr>
 <tr>
@@ -893,7 +959,7 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 </tr>
 <tr>
 <td><code>is_organic</code></td>
-<td>Contains carbon</td>
+<td>Contains carbon (molecules only)</td>
 <td><code>true</code></td>
 </tr>
 <tr>
@@ -902,8 +968,18 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 <td><code>2</code></td>
 </tr>
 <tr>
+<td><code>atomic_number</code>, <code>symbol</code></td>
+<td>For single atoms</td>
+<td><code>20</code>, <code>Ca</code></td>
+</tr>
+<tr>
+<td><code>neutron_number</code></td>
+<td>For isotope-labelled atoms</td>
+<td><code>7</code></td>
+</tr>
+<tr>
 <td><code>has_element</code></td>
-<td>For monoatomic ions</td>
+<td>For monoatomic ions and isotopes</td>
 <td><code>Ca</code></td>
 </tr>
 <tr>
@@ -936,6 +1012,14 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 <td><code>UnchargedAtom</code></td>
 </tr>
 <tr>
+<td>Single atom, neutral, mass number given (e.g. <code>[13C]</code>)</td>
+<td><code>Isotope</code></td>
+</tr>
+<tr>
+<td>Single atom, charged, mass number given (e.g. <code>[13C+]</code>)</td>
+<td><code>FullySpecifiedAtom</code></td>
+</tr>
+<tr>
 <td>Multi-atom, net positive (e.g. <code>[NH4+]</code>)</td>
 <td><code>MolecularCation</code></td>
 </tr>
@@ -949,6 +1033,60 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 </tr>
 </tbody>
 </table>
+<h2 id="atoms-and-isotopes">Atoms and isotopes</h2>
+<p>A single atom is described by <code>atomic_number</code> and <code>symbol</code>, plus
+<code>elemental_charge</code> for ions and <code>neutron_number</code> for isotope-labelled atoms:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe+3]&quot;</span><span class="w"> </span><span class="s2">&quot;[13C]&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INCHIKEY:VTLYFUHAOXGGBS-UHFFFAOYSA-N</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fe+3</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemrof:AtomCation</span>
+<span class="nt">atomic_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26</span>
+<span class="nt">symbol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fe</span>
+<span class="nt">elemental_charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">has_element</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fe</span>
+<span class="c1"># ...</span>
+<span class="nn">---</span>
+<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INCHIKEY:OKTJSMMVPCPJKN-OUBTZVSYSA-N</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">13C</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemrof:Isotope</span>
+<span class="nt">atomic_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="nt">symbol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span>
+<span class="nt">neutron_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="nt">has_element</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<p><code>is_organic</code> and <code>is_radical</code> are not set on bare atoms: the first describes
+carbon compounds, and the second would only echo RDKit's open-valence count
+(nonzero for <code>[C]</code>, zero for <code>[Fe]</code>).</p>
+<h3 id="chebi-ids-for-atoms">CHEBI ids for atoms</h3>
+<p><code>--enrichers chebi</code> swaps the InChIKey id for the CHEBI id and names the entity
+after its ChEBI class (<code>iron(3+)</code>, <code>carbon-13 atom</code>). It works offline, from
+<code>src/chemrof/converter/data/atomic_species.tsv</code>: every ChEBI class that is a
+single atom — 118 neutral atoms, the monoatomic ions and the isotope-labelled
+forms. Because the <code>id</code> changes, links between entities (a salt to its ions, an
+enantiomer to its parent) are rewritten to match.</p>
+<p>ChEBI stores no atomic numbers; the table is built from the standard InChI that
+each of these classes carries (<code>InChI=1S/Fe/q+3</code>, <code>InChI=1S/C/i1+1</code>), read back
+through RDKit. To rebuild it from a newer ChEBI release:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>chebi.obo<span class="w"> </span>http://purl.obolibrary.org/obo/chebi.obo
+python<span class="w"> </span>scripts/build_atomic_species.py<span class="w"> </span>chebi.obo
+</code></pre></div>
+<h2 id="siblings">Siblings</h2>
+<p><code>--siblings</code> generates the family of the input: every species of an element
+(from an atom, ion or isotope), or every stereoisomer of a molecule with its
+mirror-image pairs grouped as racemic mixtures. See
+<a href="../cli/#siblings">the CLI reference</a> for details and examples.</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe]&quot;</span><span class="w"> </span>--siblings<span class="w"> </span>--enrichers<span class="w"> </span>chebi
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(O)C(C)O&quot;</span><span class="w"> </span>--siblings
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.convert</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChemConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_input</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemrof.converter.siblings</span><span class="w"> </span><span class="kn">import</span> <span class="n">siblings</span>
+
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s2">&quot;CC(O)C(C)O&quot;</span><span class="p">)</span>
+<span class="n">family</span> <span class="o">=</span> <span class="n">siblings</span><span class="p">(</span><span class="n">ChemConverter</span><span class="p">()</span><span class="o">.</span><span class="n">convert_parsed</span><span class="p">(</span><span class="n">parsed</span><span class="p">),</span> <span class="n">parsed</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="enrichers">Enrichers</h2>
 <p>By default, the converter fills in only what RDKit can compute from the
 structure. To pull additional data from external databases, use <code>--enrichers</code>:</p>
@@ -978,8 +1116,8 @@ and a PubChem CID cross-reference.</p>
 </tr>
 <tr>
 <td><code>chebi</code></td>
-<td>Stub</td>
-<td>Will resolve CHEBI identifiers via the OLS API.</td>
+<td>Working (atoms)</td>
+<td>Resolves atoms, monoatomic ions and isotopes to their CHEBI class, offline. Replaces <code>id</code> with the CHEBI id and sets <code>name</code>. Other entities are left unchanged.</td>
 </tr>
 <tr>
 <td><code>wikidata</code></td>

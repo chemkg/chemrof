@@ -377,6 +377,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siblings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enrichers" class="md-nav__link">
     <span class="md-ellipsis">
       Enrichers
@@ -789,6 +798,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siblings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enrichers" class="md-nav__link">
     <span class="md-ellipsis">
       Enrichers
@@ -922,6 +940,16 @@ into chemrof-compliant records.</p>
 <td>Generate interlinked dependent entities</td>
 </tr>
 <tr>
+<td><code>--siblings</code></td>
+<td><code>false</code></td>
+<td>Also generate the input's siblings: every species of an element, or every stereoisomer of a molecule (cannot be combined with <code>--classes</code>/<code>--autochain</code>)</td>
+</tr>
+<tr>
+<td><code>--max-siblings</code></td>
+<td><code>64</code></td>
+<td>With <code>--siblings</code>, the most stereoisomers to generate for one molecule</td>
+</tr>
+<tr>
 <td><code>--chemont-source</code></td>
 <td><em>(none)</em></td>
 <td>Local ChemOnt labels source for <code>--enrichers chemont</code>: DuckDB, Parquet, or TSV/ZST</td>
@@ -1000,12 +1028,45 @@ chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&
 <div class="highlight"><pre><span></span><code><span class="c1"># 2-hydroxypyridine / 2-pyridinone tautomers</span>
 chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;Oc1ccccn1&quot;</span><span class="w"> </span>--classes<span class="w"> </span>Tautomer<span class="w"> </span>--format<span class="w"> </span>json
 </code></pre></div>
-<p>v1 limitation: autochain only supports single-stereocenter molecules.</p>
+<p>v1 limitation: autochain only supports single-stereocenter molecules. For more
+than one stereocenter use <code>--siblings</code>, below.</p>
+<h3 id="siblings">Siblings</h3>
+<p><code>--siblings</code> generates the other members of the input's family. Any member
+of the family gives the whole family.</p>
+<p><strong>Atoms</strong> — every species of the element: the neutral atom, the naturally
+occurring isotopes, and the monoatomic ions and isotope-labelled forms that
+ChEBI has a class for.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Starting from an element, an ion or an isotope gives the same family</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe]&quot;</span><span class="w"> </span>--siblings
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe+3]&quot;</span><span class="w"> </span>--siblings
+
+<span class="c1"># ... with CHEBI ids where ChEBI has a class</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe]&quot;</span><span class="w"> </span>--siblings<span class="w"> </span>--enrichers<span class="w"> </span>chebi<span class="w"> </span>--format<span class="w"> </span>json
+</code></pre></div>
+<p>The family of iron includes <code>Fe</code> (<code>UnchargedAtom</code>), <code>54Fe</code>/<code>56Fe</code>/<code>57Fe</code>/<code>58Fe</code>
+(<code>Isotope</code>), <code>Fe+2</code>/<code>Fe+3</code> (<code>AtomCation</code>) and <code>57Fe+2</code>/<code>57Fe+3</code>
+(<code>FullySpecifiedAtom</code>). The ions and labelled forms come from ChEBI, so a charge
+state ChEBI lacks (say <code>Fe+7</code>) is not generated unless it is the input itself.</p>
+<p><strong>Molecules</strong> — the stereo-agnostic parent plus every stereoisomer of it.
+Chiral stereoisomers are <code>Enantiomer</code>s (linked to the parent by
+<code>enantiomer_form_of</code>); achiral ones — meso forms, cis/trans isomers — are
+<code>Stereoisomer</code>s. Each pair of mirror images is grouped in a <code>RacemicMixture</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># R,R / S,S pair, its racemate, and the meso form</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(O)C(C)O&quot;</span><span class="w"> </span>--siblings
+
+<span class="c1"># Four centers give 16 isomers; cap the output</span>
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;OCC(O)C(O)C(O)C=O&quot;</span><span class="w"> </span>--siblings<span class="w"> </span>--max-siblings<span class="w"> </span><span class="m">8</span>
+</code></pre></div>
+<p><code>2^n</code> isomers are possible for <code>n</code> stereo elements, so output is capped at
+<code>--max-siblings</code> (a warning says when that truncates). Salts and molecules
+without stereo elements have no siblings and are returned as is, with a warning.
+For one stereocenter the output is the same graph as <code>--classes RacemicMixture</code>.</p>
 <h3 id="enrichers">Enrichers</h3>
 <p>Enrichers pull additional data from external databases after RDKit
 computes the structural properties. Pass a comma-separated list:</p>
 <div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem
-chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chebi
+chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"> </span>--enrichers<span class="w"> </span>pubchem
+chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;[Fe+3]&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>chebi
 </code></pre></div>
 <table>
 <thead>
@@ -1028,8 +1089,8 @@ chemrof<span class="w"> </span>convert<span class="w"> </span>CCO<span class="w"
 </tr>
 <tr>
 <td><code>chebi</code></td>
-<td>Stub</td>
-<td>Will resolve CHEBI identifiers via OLS</td>
+<td>Working (atoms)</td>
+<td>For atoms, monoatomic ions and isotopes: replaces <code>id</code> with the CHEBI id and sets <code>name</code> (offline, from a bundled table). Other entities are left unchanged</td>
 </tr>
 <tr>
 <td><code>wikidata</code></td>
@@ -1105,6 +1166,14 @@ chemrof class:</p>
 <tr>
 <td>Single atom, neutral (e.g. <code>[He]</code>)</td>
 <td><code>UnchargedAtom</code></td>
+</tr>
+<tr>
+<td>Single atom, neutral, mass number given (e.g. <code>[13C]</code>)</td>
+<td><code>Isotope</code></td>
+</tr>
+<tr>
+<td>Single atom, charged, mass number given (e.g. <code>[13C+]</code>)</td>
+<td><code>FullySpecifiedAtom</code></td>
 </tr>
 <tr>
 <td>Multi-fragment salt (e.g. <code>[Na+].[Cl-]</code>)</td>
