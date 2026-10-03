@@ -353,13 +353,17 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-glycan-glycan">Class: glycan (Glycan)</h1>
-<p><em>A macromolecule consisting of a large number of monosaccharides linked glycosidically</em></p>
+<p><em>A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be linear or branched, and may be composed of a single kind of residue or of many.</em></p>
 <p>URI: <a href="https://w3id.org/chemrof/Glycan">chemrof:Glycan</a></p>
 <pre class="mermaid"><code> classDiagram
     class Glycan
     click Glycan href "../Glycan/"
       Macromolecule &lt;|-- Glycan
         click Macromolecule href "../Macromolecule/"
+
+      Glycan : carbbank_representation
+
+      Glycan : carbohydrate_representation
 
       Glycan : classified_by
 
@@ -375,6 +379,10 @@
       Glycan : cxsmiles_string
 
       Glycan : empirical_formula
+
+      Glycan : glycoct_condensed
+
+      Glycan : glycominds_linearcode_representation
 
       Glycan : has_atom_occurrences
 
@@ -420,6 +428,17 @@
 
 
 
+      Glycan : has_glycosidic_linkages
+
+
+
+
+
+        Glycan --&gt; "*" GlycosidicLinkage : has_glycosidic_linkages
+        click GlycosidicLinkage href "../GlycosidicLinkage/"
+
+
+
       Glycan : has_major_microspecies_at_pH7_3
 
 
@@ -431,7 +450,29 @@
 
 
 
+      Glycan : has_monosaccharide_residues
+
+
+
+
+
+        Glycan --&gt; "*" MonosaccharideResidue : has_monosaccharide_residues
+        click MonosaccharideResidue href "../MonosaccharideResidue/"
+
+
+
       Glycan : has_part
+
+      Glycan : has_reducing_end
+
+
+
+
+
+        Glycan --&gt; "0..1" MonosaccharideResidue : has_reducing_end
+        click MonosaccharideResidue href "../MonosaccharideResidue/"
+
+
 
       Glycan : has_submolecules
 
@@ -468,11 +509,21 @@
 
       Glycan : inchi_tetrahedral_stereochemical_sublayer
 
+      Glycan : is_branched
+
       Glycan : is_organic
 
       Glycan : is_radical
 
+      Glycan : iupac_condensed_representation
+
       Glycan : IUPAC_name
+
+      Glycan : kegg_chemical_function_representation
+
+      Glycan : linucs_representation
+
+      Glycan : molecular_formula
 
       Glycan : molecular_mass
 
@@ -504,6 +555,8 @@
       Glycan : type
 
       Glycan : water_solubility
+
+      Glycan : wurcs_representation
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -539,6 +592,78 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../has_monosaccharide_residues/">has_monosaccharide_residues</a></td>
+<td>* <br/> <a href="../MonosaccharideResidue/">MonosaccharideResidue</a></td>
+<td>Relates a glycan to the monosaccharide residues that constitute it</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_glycosidic_linkages/">has_glycosidic_linkages</a></td>
+<td>* <br/> <a href="../GlycosidicLinkage/">GlycosidicLinkage</a></td>
+<td>Relates a glycan to the glycosidic linkages connecting its monosaccharide res...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_reducing_end/">has_reducing_end</a></td>
+<td>0..1 <br/> <a href="../MonosaccharideResidue/">MonosaccharideResidue</a></td>
+<td>The monosaccharide residue of a glycan whose anomeric carbon is not involved ...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../is_branched/">is_branched</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../carbohydrate_representation/">carbohydrate_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A line or graph notation that encodes the structure of a carbohydrate (glycan...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../wurcs_representation/">wurcs_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A linear notation that encodes a glycan as a count of unique residues, residu...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../glycoct_condensed/">glycoct_condensed</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>This is a multiline format used by GlycomeDB, among others, and uses a graph ...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../iupac_condensed_representation/">iupac_condensed_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>The condensed form of the IUPAC nomenclature for carbohydrates, in which each...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../carbbank_representation/">carbbank_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>The carbohydrate structure format used by the Complex Carbohydrate Structure ...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../linucs_representation/">linucs_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A unique linear notation proposed and used by GLYCOSCIENCES</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../glycominds_linearcode_representation/">glycominds_linearcode_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A linear notation proposed by GlycoMinds, Ltd</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../kegg_chemical_function_representation/">kegg_chemical_function_representation</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A multiline format used by the KEGG GLYCAN database and represents glycans as...</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../has_atom_occurrences/">has_atom_occurrences</a></td>
 <td>2..* <br/> <a href="../AtomOccurrence/">AtomOccurrence</a></td>
@@ -678,6 +803,12 @@
 <td><a href="../ChemicalEntity/">ChemicalEntity</a></td>
 </tr>
 <tr>
+<td><a href="../molecular_formula/">molecular_formula</a></td>
+<td>0..1 <br/> <a href="../ChemicalEncoding/">ChemicalEncoding</a></td>
+<td>A chemical formula where numbers denote atom count</td>
+<td><a href="../ChemicalEntity/">ChemicalEntity</a></td>
+</tr>
+<tr>
 <td><a href="../has_major_microspecies_at_pH7_3/">has_major_microspecies_at_pH7_3</a></td>
 <td>* <br/> <a href="../ChemicalEntity/">ChemicalEntity</a></td>
 <td>Links different variants of the same chemical in different protonation states...</td>
@@ -760,6 +891,7 @@
 <h2 id="aliases">Aliases</h2>
 <ul>
 <li>polysaccharides</li>
+<li>oligosaccharide</li>
 </ul>
 <h2 id="examples">Examples</h2>
 <table>
@@ -777,6 +909,9 @@
 <h2 id="comments">Comments</h2>
 <ul>
 <li>Glycans composed of a single type of monosaccharide residue (homopolysaccharide, synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an', e.g. mannans, fructans, xylans, arabinans</li>
+<li>A glycan differs from other polymers modelled here in that it is frequently branched, so has_monosaccharide_residues plus has_glycosidic_linkages (a node and edge list) is used in preference to the linear sequence representation used for peptides and nucleic acids</li>
+<li>This class is placed under Macromolecule to sit alongside Peptide and Protein, but note that short oligosaccharides such as the Lewis X trisaccharide are conventionally glycans while not being macromolecules. Whether to relax the parent of this class is under discussion</li>
+<li>The ChEBI mappings are narrow rather than exact because this class subsumes both polysaccharide (CHEBI:18154) and oligosaccharide (CHEBI:50699), and ChEBI has no single term covering exactly that union</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="valid-id-prefixes">Valid ID Prefixes</h3>
@@ -786,7 +921,7 @@
 <p>KEGG.GLYCAN</p>
 </li>
 <li>
-<p>GlyTouCan</p>
+<p>GLYTOUCAN</p>
 </li>
 <li>
 <p>glycosciencesdb</p>
@@ -813,6 +948,10 @@
 <td>native</td>
 <td>chemrof:Glycan</td>
 </tr>
+<tr>
+<td>narrow</td>
+<td>CHEBI:18154, CHEBI:50699</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -822,22 +961,51 @@
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
 <span class="nt">id_prefixes</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KEGG.GLYCAN</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GlyTouCan</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GLYTOUCAN</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycosciencesdb</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A macromolecule consisting of a large number of monosaccharides linked</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">glycosidically</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A molecule consisting of monosaccharide residues joined to one another</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">by glycosidic linkages. Glycans may be linear or branched, and may be composed of</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a single kind of residue or of many.</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycan</span>
 <span class="nt">comments</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycans composed of a single type of monosaccharide residue (homopolysaccharide,</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an',</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">e.g. mannans, fructans, xylans, arabinans</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A glycan differs from other polymers modelled here in that it is frequently branched,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">so has_monosaccharide_residues plus has_glycosidic_linkages (a node and edge list)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">is used in preference to the linear sequence representation used for peptides and</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">nucleic acids</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This class is placed under Macromolecule to sit alongside Peptide and Protein, but</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">note that short oligosaccharides such as the Lewis X trisaccharide are conventionally</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">glycans while not being macromolecules. Whether to relax the parent of this class</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">is under discussion</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The ChEBI mappings are narrow rather than exact because this class subsumes both</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">polysaccharide (CHEBI:18154) and oligosaccharide (CHEBI:50699), and ChEBI has no</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">single term covering exactly that union</span>
 <span class="nt">examples</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.glycoepitope.jp/epitopes/EP0311</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
 <span class="nt">aliases</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polysaccharides</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oligosaccharide</span>
+<span class="nt">narrow_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEBI:18154</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEBI:50699</span>
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Macromolecule</span>
+<span class="nt">slots</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_monosaccharide_residues</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_glycosidic_linkages</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_reducing_end</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">is_branched</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wurcs_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycoct_condensed</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iupac_condensed_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbbank_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linucs_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycominds_linearcode_representation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kegg_chemical_function_representation</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -845,23 +1013,268 @@
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
 <span class="nt">id_prefixes</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KEGG.GLYCAN</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GlyTouCan</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GLYTOUCAN</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycosciencesdb</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A macromolecule consisting of a large number of monosaccharides linked</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">glycosidically</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A molecule consisting of monosaccharide residues joined to one another</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">by glycosidic linkages. Glycans may be linear or branched, and may be composed of</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a single kind of residue or of many.</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycan</span>
 <span class="nt">comments</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycans composed of a single type of monosaccharide residue (homopolysaccharide,</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">synonym homoglycan) are named by replacing the ending '-ose' of the sugar by '-an',</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">e.g. mannans, fructans, xylans, arabinans</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A glycan differs from other polymers modelled here in that it is frequently branched,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">so has_monosaccharide_residues plus has_glycosidic_linkages (a node and edge list)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">is used in preference to the linear sequence representation used for peptides and</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">nucleic acids</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This class is placed under Macromolecule to sit alongside Peptide and Protein, but</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">note that short oligosaccharides such as the Lewis X trisaccharide are conventionally</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">glycans while not being macromolecules. Whether to relax the parent of this class</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">is under discussion</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The ChEBI mappings are narrow rather than exact because this class subsumes both</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">polysaccharide (CHEBI:18154) and oligosaccharide (CHEBI:50699), and ChEBI has no</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">single term covering exactly that union</span>
 <span class="nt">examples</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.glycoepitope.jp/epitopes/EP0311</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GalNAc(b1-4)[Neu5Ac(a2-3)]Gal(b1)</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
 <span class="nt">aliases</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polysaccharides</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oligosaccharide</span>
+<span class="nt">narrow_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEBI:18154</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEBI:50699</span>
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Macromolecule</span>
 <span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">has_monosaccharide_residues</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_monosaccharide_residues</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relates a glycan to the monosaccharide residues that constitute it.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Together with has_glycosidic_linkages this forms a graph representation of the</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">glycan, in which residues are the nodes and linkages are the edges.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has monosaccharide residues</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_part</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_monosaccharide_residues</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MonosaccharideResidue</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">has_glycosidic_linkages</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_glycosidic_linkages</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relates a glycan to the glycosidic linkages connecting its monosaccharide</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">residues. These are the edges of the graph whose nodes are given by has_monosaccharide_residues.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has glycosidic linkages</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_glycosidic_linkages</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GlycosidicLinkage</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">has_reducing_end</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_reducing_end</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The monosaccharide residue of a glycan whose anomeric carbon is not</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">involved in a glycosidic linkage, and which therefore retains the free (reducing)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">hemiacetal. By convention this residue is drawn or written at the right-hand</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">end of the glycan.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has reducing end</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A cyclic glycan, or one whose reducing end is substituted (for example a glycoconjugate</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">attached to a protein or lipid), has no free reducing end.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://iupac.qmul.ac.uk/2carb/38.html</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_reducing_end</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MonosaccharideResidue</span>
+<span class="w">  </span><span class="nt">is_branched</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">is_branched</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">is branched</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Branching_(polymer_chemistry)</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">is_branched</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MonomolecularPolymer</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
+<span class="w">  </span><span class="nt">carbohydrate_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A line or graph notation that encodes the structure of a carbohydrate</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(glycan), minimally its monosaccharide composition and the glycosidic linkages</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">connecting them. Unlike general-purpose notations such as SMILES, these formats</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">make the monosaccharide residue and the linkage first-class syntactic elements.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate representation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemical_representation</span>
+<span class="w">    </span><span class="nt">abstract</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">wurcs_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wurcs_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A linear notation that encodes a glycan as a count of unique residues,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">residues and linkages, followed by a list of unique residue skeleton codes,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the sequence in which they occur, and the linkages between them. Aligned so</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">that one structure has one string, which is what allows GlyTouCan to mint a</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">stable accession per structure.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wurcs representation</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The segment following WURCS= is the version number of the format, for example</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">2.0. An earlier revision of this schema used the pattern ^WURCS=Version/.* which</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">read the placeholder in the format specification as a literal, and so matched</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">no real WURCS string</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WURCS=2.0/3,3,2/[u2122h_2*NCC/3=O][a1221m-1a_1-5][a2112h-1b_1-5]/1-2-3/a3-b1_a4-c1</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lewis X trisaccharide, GlyTouCan G39995KJ</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.1093/bioinformatics/btv220</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WURCS</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Web3 Unique Representation of Carbohydrate Structures</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wurcs_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^WURCS=[0-9]+\.[0-9]+/.*</span>
+<span class="w">  </span><span class="nt">glycoct_condensed</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycoct_condensed</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This is a multiline format used by GlycomeDB, among others, and uses</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">a graph notation to represent glycans, similar to KCF. Monosaccharides are specified</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">more strictly to be able to map the monosaccharides between different representations.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Substituents, such as N-acetyl, are specified as separate nodes from their basetypes</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and are linked together in the edge section. If newlines are removed, this format</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">can be made linear.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycoct condensed</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycoct_condensed</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">iupac_condensed_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iupac_condensed_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The condensed form of the IUPAC nomenclature for carbohydrates, in</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">which each monosaccharide is written using its three-letter abbreviation and</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">each glycosidic linkage is written in parentheses as an anomeric descriptor</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">followed by the two carbon positions joined. Branches are written in square</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">brackets. This is the notation most commonly used in the glycobiology literature.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IUPAC condensed representation</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gal(b1-4)[Fuc(a1-3)]GlcNAc</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lewis X trisaccharide</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.ncbi.nlm.nih.gov/glycans/snfg.html</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IUPAC condensed</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iupac_condensed_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">carbbank_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbbank_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">carbohydrate</span><span class="nv"> </span><span class="s">structure</span><span class="nv"> </span><span class="s">format</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Complex</span><span class="nv"> </span><span class="s">Carbohydrate</span>
+<span class="w">      </span><span class="s">Structure</span><span class="nv"> </span><span class="s">Database</span><span class="nv"> </span><span class="s">(CCSD)</span><span class="nv"> </span><span class="s">originally</span><span class="nv"> </span><span class="s">developed</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">University</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Georgia.</span>
+<span class="w">      </span><span class="s">This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">2D</span><span class="nv"> </span><span class="s">structure</span><span class="nv"> </span><span class="s">where</span><span class="nv"> </span><span class="s">bars</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">hyphens</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">indicate</span><span class="nv"> </span><span class="s">linkages,</span>
+<span class="w">      </span><span class="s">and</span><span class="nv"> </span><span class="s">monosaccharides</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">specified</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">following</span><span class="nv"> </span><span class="s">order,</span><span class="nv"> </span><span class="s">separated</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">hyphens:</span>
+<span class="w">      </span><span class="s">anomer</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">symbol</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">monosaccharide</span><span class="nv"> </span><span class="s">abbreviation.'</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbbank representation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbbank_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">linucs_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linucs_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A unique linear notation proposed and used by GLYCOSCIENCES.de, with</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the reducing end specified on the left. Monosaccharides, written according to</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is specified and separated by hyphens. Glycosidic linkages are also surrounded</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">by hyphens, and carbon numbers of the linkages are separated by the plus sign.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Branches are indicated by curly brackets.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linucs representation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/biopragmatics/bioregistry/issues/537</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linucs_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">glycominds_linearcode_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycominds_linearcode_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A linear notation proposed by GlycoMinds, Ltd., where monosaccharides</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">are indicated by a one- or two-letter code, linkages are indicated by “a” or</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">“b” for anomers and a single number for the carbon number linkage on the reducing</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">end, and branches are indicated by parentheses. This format is the most compact</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">among existing formats, and several databases use a modified form of this format</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">to accommodate additional codes and varying carbohydrate structures (such as</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">ambiguous structures).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycominds linearcode representation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glycominds_linearcode_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">kegg_chemical_function_representation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kegg_chemical_function_representation</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A multiline format used by the KEGG GLYCAN database and represents</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">glycans as graphs. Monosaccharides are represented as nodes, and glycosidic</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">linkages are represented as edges. Each node is given a unique number, and x-</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and y- coordinates are specified such that the glycan structure can be drawn</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">on a 2D plane. Edge information uses the node numbers to specify anomeric and</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">carbon number information. Monosaccharide names are specified as text, and no</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">particular rules are specified to represent these names.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kegg chemical function representation</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbohydrate_representation</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kegg_chemical_function_representation</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
 <span class="w">  </span><span class="nt">has_atom_occurrences</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_atom_occurrences</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An individuated atom in the context of a chemical structure.</span>
@@ -1309,13 +1722,54 @@
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A chemical formula where numbers denote relative proportion of atoms.</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">E.g. CH2O for glucose</span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">empirical formula</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinct from molecular_formula, which gives the actual atom counts rather than</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">their smallest whole-number ratio</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The mapping to CHEMINF:000042 is close rather than exact because that term denotes</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the molecular formula. CHEMINF has no term for the empirical formula</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CH2O</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glucose, whose atom counts 6:12:6 reduce to 1:2:1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dioxygen, whose molecular formula is O2</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
-<span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMINF:000042</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemical_formula</span>
 <span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">empirical_formula</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEncoding</span>
+<span class="w">  </span><span class="nt">molecular_formula</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">molecular_formula</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A chemical formula where numbers denote atom count. E.g. C6H12O6</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for glucose</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">molecular formula</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinct from empirical_formula, which reduces the same counts to their smallest</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">whole-number ratio. The two coincide only where the counts share no common factor,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">so citric acid is C6H8O7 either way while glucose is C6H12O6 molecularly but</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">CH2O empirically</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Not every chemical entity has one. A polymer of indeterminate length has a repeat</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">unit and an empirical formula but no single molecular formula</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C6H12O6</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glucose</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C8H10N4O2</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caffeine, whose empirical formula is C4H5N2O</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/chemrof</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemical_formula</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hill notation</span>
+<span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CHEMINF:000042</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemical_formula</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">molecular_formula</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glycan</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChemicalEntity</span>
