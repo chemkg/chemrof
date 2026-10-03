@@ -20,6 +20,7 @@ from chemrof.converter.enrichers.chemont import (
     download_chemont_zenodo,
 )
 from chemrof.converter.parse import parse_input
+from chemrof.converter.siblings import DEFAULT_MAX_SIBLINGS
 
 app = typer.Typer(
     name="chemrof",
@@ -51,9 +52,12 @@ Pass a comma-separated list of source names. Available sources:
                local DuckDB, Parquet, or TSV source and fills classified_by.
 
   openclatura -- Derive a systematic IUPAC name locally from the structure
-               (no network). Fills IUPAC_name. Requires `pip install openclatura`.
+               (no network). Fills IUPAC_name. Requires
+               `pip install 'chemrof[openclatura]'`.
 
-  chebi     -- (stub) Will resolve CHEBI identifiers via OLS.
+  chebi     -- Resolve atoms, monoatomic ions and isotopes to CHEBI ids
+               (offline, from a bundled table). Replaces id and name.
+               Other entity types are left unchanged.
 
   wikidata  -- (stub) Will resolve Wikidata QIDs via SPARQL.
 
@@ -70,6 +74,16 @@ forms and links them via tautomer_of.
 Example: --classes RacemicMixture"""
 
 
+_SIBLINGS_HELP = """Also generate the input's siblings.
+
+For an atom (neutral, ion or isotope): every species of that element -- neutral
+atom, naturally occurring isotopes, and the ions and isotopes known to ChEBI.
+For a molecule with stereo elements: the stereo-agnostic parent and all
+stereoisomers (Enantiomer when chiral, Stereoisomer otherwise), with each
+mirror-image pair grouped as a RacemicMixture. Cannot be combined with
+--classes or --autochain."""
+
+
 def _do_convert(
     inputs: list[str],
     format: OutputFormat,
@@ -78,8 +92,12 @@ def _do_convert(
     autochain: bool,
     chemont_source: Optional[Path] = None,
     chemont_dictionary: Optional[Path] = None,
+    siblings: bool = False,
+    max_siblings: int = DEFAULT_MAX_SIBLINGS,
 ) -> None:
     """Shared implementation for convert and from-smiles commands."""
+    if siblings and (classes or autochain):
+        raise typer.BadParameter("--siblings cannot be combined with --classes or --autochain")
     enricher_instances = []
     if enrichers:
         for name in enrichers.split(","):
@@ -114,6 +132,12 @@ def _do_convert(
 
         result = converter.convert_parsed(parsed)
 
+        if siblings:
+            from chemrof.converter.siblings import siblings as make_siblings
+
+            all_results.extend(make_siblings(result, parsed.mol, max_siblings))
+            continue
+
         # Salt input auto-triggers autochain
         if result.get("type") == "chemrof:ChemicalSalt":
             target_classes.add("ChemicalSalt")
@@ -129,10 +153,12 @@ def _do_convert(
 
     # Run enrichers on all entities (including autochain-generated ones)
     if enricher_instances:
-        from chemrof.converter.enrichers.base import EnrichmentContext
+        from chemrof.converter.enrichers.base import EnrichmentContext, rewrite_references
 
+        id_remap: dict[str, str] = {}
         for i, obj in enumerate(all_results):
-            inchikey = obj.get("id", "").replace("INCHIKEY:", "")
+            old_id = obj.get("id", "")
+            inchikey = old_id.replace("INCHIKEY:", "")
             context = EnrichmentContext(
                 mol=None,
                 inchikey=inchikey if obj.get("id", "").startswith("INCHIKEY:") else "",
@@ -142,6 +168,11 @@ def _do_convert(
             for enricher in enricher_instances:
                 obj = enricher.enrich(obj, context)
             all_results[i] = obj
+            if obj.get("id") != old_id:
+                id_remap[old_id] = obj["id"]
+
+        # An enricher may have replaced ids (e.g. InChIKey -> CHEBI); keep links intact
+        rewrite_references(all_results, id_remap)
 
         # Update RacemicMixture names from agnostic form's enriched name
         for obj in all_results:
@@ -188,6 +219,13 @@ def convert(
     autochain: bool = typer.Option(
         False, "--autochain", help="Generate interlinked dependent entities.",
     ),
+    siblings: bool = typer.Option(False, "--siblings", help=_SIBLINGS_HELP),
+    max_siblings: int = typer.Option(
+        DEFAULT_MAX_SIBLINGS,
+        "--max-siblings",
+        min=1,
+        help="With --siblings, the most stereoisomers to generate for one molecule.",
+    ),
     chemont_source: Optional[Path] = typer.Option(
         None,
         "--chemont-source",
@@ -213,6 +251,10 @@ def convert(
         chemrof convert "CC(N)C(=O)O" --classes RacemicMixture
 
         chemrof convert "[Ca+2]" --enrichers pubchem
+
+        chemrof convert "[Fe]" --siblings --enrichers chebi
+
+        chemrof convert "CC(O)C(C)O" --siblings
     """
     _do_convert(
         inputs,
@@ -222,6 +264,8 @@ def convert(
         autochain,
         chemont_source=chemont_source,
         chemont_dictionary=chemont_dictionary,
+        siblings=siblings,
+        max_siblings=max_siblings,
     )
 
 

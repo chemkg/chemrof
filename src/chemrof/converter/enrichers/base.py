@@ -72,3 +72,26 @@ def get_enricher(name: str) -> Enricher:
     if name not in registry:
         raise KeyError(f"Unknown enricher: {name!r}. Available: {list(registry)}")
     return registry[name]()
+
+
+def rewrite_references(objs: list[dict], remap: dict[str, str]) -> None:
+    """Replace ids in ``remap`` wherever other entities refer to them (in place).
+
+    Enrichers may change an entity's ``id``; this keeps slots such as
+    ``enantiomer_form_of`` or ``has_cationic_component`` pointing at it.
+
+    >>> objs = [{"id": "B", "has_cationic_component": "A"}, {"id": "C", "tautomer_of": ["A", "B"]}]
+    >>> rewrite_references(objs, {"A": "CHEBI:1"})
+    >>> objs[0]["has_cationic_component"], objs[1]["tautomer_of"]
+    ('CHEBI:1', ['CHEBI:1', 'B'])
+    """
+    if not remap:
+        return
+    for obj in objs:
+        for key, value in obj.items():
+            if key == "id":
+                continue
+            if isinstance(value, str):
+                obj[key] = remap.get(value, value)
+            elif isinstance(value, list):
+                obj[key] = [remap.get(v, v) if isinstance(v, str) else v for v in value]
