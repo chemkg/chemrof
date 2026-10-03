@@ -1611,6 +1611,7 @@ classes:
       - reaction_mechanism
       - has_allosteric_regulation
       - has_competitive_inhibition
+      - has_thermodynamic_estimate
     slot_usage:
       left_participants:
         multivalued: true
@@ -1703,6 +1704,90 @@ classes:
       Inhibition in which the effector (inhibitor) competes with the substrate
       for binding at the enzyme's active site.
     title: competitive inhibition
+  ThermodynamicEstimate:
+    is_a: ChemicalRelationship
+    description: >-
+      A reified thermodynamic quantity for a reaction, bundled with the aqueous
+      conditions it holds at, its uncertainty, and the method and source it came
+      from. Transformed ("primed") quantities are only interpretable together
+      with pH, ionic strength, pMg and temperature, because the transform
+      aggregates each reactant's microspecies into a single pseudoisomer group at
+      those conditions. A reaction may therefore carry several estimates, one per
+      condition set.
+    see_also:
+      - https://equilibrator.readthedocs.io/
+    attributes:
+      quantity_type:
+        range: ThermodynamicQuantityTypeEnum
+        required: true
+        description: Which thermodynamic quantity this estimate reports.
+      value:
+        range: float
+        required: true
+        description: The numeric value of the estimate, in the stated unit.
+      standard_error:
+        range: float
+        description: >-
+          One standard deviation of the estimate, in the same unit as value.
+        comments:
+          - >-
+            For component contribution estimates this is the square root of the
+            corresponding diagonal element of the covariance matrix. Errors are
+            correlated between reactions, so they must not be combined as if
+            independent when summing over a pathway.
+          - Omit rather than guess when the source reports no uncertainty.
+      unit:
+        range: ThermodynamicUnitEnum
+        description: >-
+          The unit of value. Expected for energy-valued and potential-valued
+          quantities, and omitted for dimensionless ones such as the
+          reversibility index.
+      p_h:
+        range: float
+        minimum_value: 0.0
+        maximum_value: 14.0
+        description: The pH at which this estimate holds.
+      ionic_strength:
+        range: float
+        description: Ionic strength at which this estimate holds.
+        unit:
+          ucum_code: "mol/L"
+      p_mg:
+        range: float
+        description: >-
+          The negative logarithm of the free magnesium ion activity. Affects any
+          reactant that forms magnesium complexes, notably nucleotides and
+          polyphosphates.
+      temperature:
+        range: float
+        description: Temperature at which this estimate holds.
+        unit:
+          ucum_code: "K"
+      electrical_potential_difference:
+        range: float
+        description: >-
+          Membrane potential across the compartment boundary, for transport
+          reactions. The sign convention is that of the source.
+        unit:
+          ucum_code: "V"
+      estimation_method:
+        range: ThermodynamicEstimationMethodEnum
+        description: How the value was arrived at.
+      source:
+        range: string
+        description: >-
+          The tool, database or publication the estimate came from, including a
+          version where available.
+        examples:
+          - value: eQuilibrator 3.0
+      unresolved_participants:
+        range: ChemicalEntity
+        multivalued: true
+        description: >-
+          Reaction participants that could not be resolved to a structure, and so
+          contributed neither a group decomposition nor a microspecies ladder. An
+          estimate that lists any of these should be treated as unreliable.
+    title: thermodynamic estimate
   ProportionalPart:
     is_a: ChemicalRelationship
     description: A part of a complex mixture that is of uniform composition. Each part specifies a chemical entity, its role in the mixture, and its concentration.
@@ -2527,6 +2612,15 @@ slots:
       - reaction rate constant
     range: float
     title: reaction rate coefficient
+  has_thermodynamic_estimate:
+    description: >-
+      Links a reaction to a measured or estimated thermodynamic quantity together
+      with the conditions under which it holds.
+    range: ThermodynamicEstimate
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    title: has thermodynamic estimate
   reaction_type:
     description: Classification of the chemical reaction based on mechanistic and functional categories
     range: ReactionTypeEnum
@@ -3304,6 +3398,84 @@ slots:
     range: float
     title: score
 enums:
+  ThermodynamicQuantityTypeEnum:
+    description: >-
+      Thermodynamic quantities that can be reported for a reaction. Transformed
+      ("primed") quantities follow the biochemical convention in which hydrogen
+      ions and water are not balanced in the reaction and their contributions are
+      absorbed into a Legendre transform, so a primed value is meaningful only
+      alongside the conditions recorded with it.
+    permissible_values:
+      standard_gibbs_free_energy_change:
+        description: >-
+          The untransformed chemical standard Gibbs free energy change, with every
+          species at a definite protonation state and unit activity. Protons must
+          be balanced for this quantity to be defined. Written dG0.
+      standard_transformed_gibbs_free_energy_change:
+        description: >-
+          The standard transformed Gibbs free energy change at the recorded pH,
+          ionic strength, pMg and temperature, with all reactants at 1 M.
+          Written dG'0.
+      physiological_transformed_gibbs_free_energy_change:
+        description: >-
+          As the standard transformed quantity, but with aqueous reactants at
+          1 mM and gaseous reactants at 1 mbar, which is closer to intracellular
+          conditions. Written dGm'0.
+      standard_transformed_reduction_potential:
+        description: >-
+          The standard transformed reduction potential of a half reaction.
+          Written E'0.
+      ln_reversibility_index:
+        description: >-
+          The natural logarithm of the reversibility index, a dimensionless
+          measure of how far a reaction can be driven from equilibrium within
+          physiological concentration bounds.
+      ln_equilibrium_constant:
+        description: >-
+          The natural logarithm of the apparent (transformed) equilibrium
+          constant.
+    title: thermodynamic_quantity_type_enum
+  ThermodynamicEstimationMethodEnum:
+    description: How a thermodynamic quantity was determined.
+    permissible_values:
+      measured:
+        description: Taken directly from experimental measurement.
+      component_contribution:
+        description: >-
+          The component contribution method, which uses reactant contribution
+          where measured data exist and group contribution elsewhere, projecting
+          onto orthogonal subspaces so that estimates remain thermodynamically
+          consistent around cycles.
+        see_also:
+          - https://doi.org/10.1371/journal.pcbi.1003098
+      reactant_contribution:
+        description: >-
+          Derived from measured formation energies of the reactants themselves.
+      group_contribution:
+        description: >-
+          Derived by decomposing each reactant into functional groups and summing
+          group energies. Broad coverage, lower accuracy.
+      quantum_chemical:
+        description: Computed from first principles, for example by density functional theory.
+      inferred:
+        description: Inferred from related reactions by some other means.
+    title: thermodynamic_estimation_method_enum
+  ThermodynamicUnitEnum:
+    description: >-
+      Units for expressing molar energies and electrical potentials in
+      thermodynamic estimates.
+    permissible_values:
+      kJ/mol:
+        description: Kilojoules per mole
+      J/mol:
+        description: Joules per mole
+      kcal/mol:
+        description: Kilocalories per mole
+      V:
+        description: Volts, for reduction potentials
+      mV:
+        description: Millivolts, for reduction potentials
+    title: thermodynamic_unit_enum
   MoleculeClassificationEnum:
     permissible_values:
       lipid:

@@ -12,7 +12,12 @@ import typer
 import yaml
 
 from chemrof.converter.convert import ChemConverter
-from chemrof.converter.enrichers.base import get_enricher
+from chemrof.converter.enrichers.base import (
+    ReactionEnrichmentContext,
+    get_enricher,
+    get_reaction_enricher,
+    list_reaction_enrichers,
+)
 from chemrof.converter.enrichers.chemont import (
     ChemOntEnricher,
     build_chemont_duckdb,
@@ -293,6 +298,111 @@ def convert_maud(
 
     if output is not None:
         output.write_text(text)
+    else:
+        typer.echo(text)
+
+
+_REACTION_ENRICHER_HELP = """Reaction-level enrichment sources.
+
+Pass a comma-separated list. Available sources:
+
+  equilibrator -- Estimate standard and physiological transformed Gibbs free
+                  energies with eQuilibrator's component contribution method,
+                  and fill is_balanced. Needs the optional 'thermo' extra, and
+                  downloads a large compound cache on first use.
+
+Example: --enrichers equilibrator"""
+
+
+@app.command(name="enrich-reactions")
+def enrich_reactions(
+    input: Path = typer.Argument(
+        help="A chemrof YAML or JSON file: a Collection, a list of entities, "
+        "or a single Reaction.",
+    ),
+    enrichers: str = typer.Option(
+        "equilibrator", "--enrichers", "-e", help=_REACTION_ENRICHER_HELP,
+    ),
+    p_h: float = typer.Option(
+        7.5, "--p-h", help="pH to estimate at.",
+    ),
+    ionic_strength: float = typer.Option(
+        0.25, "--ionic-strength", help="Ionic strength in mol/L.",
+    ),
+    p_mg: float = typer.Option(
+        3.0,
+        "--p-mg",
+        help="Negative log of free Mg2+ activity. Use 14 for a magnesium-free "
+        "solution.",
+    ),
+    temperature: float = typer.Option(
+        298.15, "--temperature", help="Temperature in kelvin.",
+    ),
+    reversibility_index: bool = typer.Option(
+        False,
+        "--reversibility-index",
+        help="Also estimate the reversibility index.",
+    ),
+    format: OutputFormat = typer.Option(
+        OutputFormat.yaml, "--format", "-f", help="Output format (yaml or json).",
+    ),
+    output: Optional[Path] = typer.Option(
+        None, "--output", "-o", help="Write to a file instead of stdout.",
+    ),
+):
+    """Add thermodynamic estimates to the reactions in a chemrof document.
+
+    Reactions must be written without balancing protons: the transformed
+    ("primed") quantities absorb the proton contribution into the conditions, so
+    an explicit H+ participant would be counted twice. Participants are resolved
+    by their chemrof id -- an INCHIKEY: id is matched ignoring its protonation
+    block, since eQuilibrator holds one compound per pseudoisomer group.
+
+    Examples:
+
+        chemrof enrich-reactions src/data/examples/valid/Collection-methionine_cycle_excerpt.yaml
+
+        chemrof enrich-reactions reactions.yaml --p-h 7.0 --p-mg 14 --ionic-strength 0.1
+    """
+    if format == OutputFormat.owl:
+        raise typer.BadParameter("enrich-reactions supports only yaml or json output.")
+
+    from chemrof.converter.enrich_reactions import count_estimates, enrich_document
+
+    names = [name.strip() for name in enrichers.split(",") if name.strip()]
+    instances = []
+    for name in names:
+        kwargs = {}
+        if name == "equilibrator":
+            kwargs["include_reversibility_index"] = reversibility_index
+        try:
+            instances.append(get_reaction_enricher(name, **kwargs))
+        except KeyError:
+            raise typer.BadParameter(
+                f"Unknown reaction enricher {name!r}. "
+                f"Available: {list_reaction_enrichers()}"
+            ) from None
+
+    document = yaml.safe_load(input.read_text())
+    context = ReactionEnrichmentContext(
+        p_h=p_h,
+        ionic_strength=ionic_strength,
+        p_mg=p_mg,
+        temperature=temperature,
+    )
+    document = enrich_document(document, instances, context)
+
+    if format == OutputFormat.json:
+        text = json.dumps(document, indent=2)
+    else:
+        text = yaml.safe_dump(document, sort_keys=False)
+
+    if output is not None:
+        output.write_text(text)
+        typer.echo(
+            f"Wrote {output} with {count_estimates(document)} thermodynamic estimate(s).",
+            err=True,
+        )
     else:
         typer.echo(text)
 

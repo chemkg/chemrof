@@ -236,6 +236,78 @@ chemrof class:
 | Multi-atom, negative (e.g. `CC([O-])=O`) | `MolecularAnion` |
 | Multi-atom, neutral (e.g. `CCO`) | `SmallMolecule` |
 
+### `chemrof enrich-reactions`
+
+Adds thermodynamic estimates to the reactions in a ChEMROF document, using
+[eQuilibrator](https://equilibrator.readthedocs.io/)'s component contribution
+method.
+
+```bash
+chemrof enrich-reactions reactions.yaml
+```
+
+The input may be a `Collection` with an `entities` list, a bare list of entities,
+or a single `Reaction`. Non-reaction entities are left untouched, but they are
+used as participant records, so a document that carries both molecules and
+reactions resolves more participants than one with reactions alone.
+
+Requires the optional `thermo` extra, and the first run downloads a compound
+cache of several gigabytes:
+
+```bash
+pip install 'chemrof[thermo]'
+```
+
+| Option | Default | Meaning |
+|--------|---------|---------|
+| `--enrichers` | `equilibrator` | Comma-separated reaction enrichment sources |
+| `--p-h` | `7.5` | pH to estimate at |
+| `--ionic-strength` | `0.25` | Ionic strength in mol/L |
+| `--p-mg` | `3.0` | Negative log of free Mg²⁺ activity; use `14` for magnesium-free |
+| `--temperature` | `298.15` | Temperature in kelvin |
+| `--reversibility-index` | off | Also estimate the reversibility index |
+| `--format` | `yaml` | `yaml` or `json` |
+| `--output` | stdout | Write to a file instead |
+
+The defaults match eQuilibrator's own, which are its *physiological* defaults.
+
+Each reaction gains `is_balanced` and one `has_thermodynamic_estimate` entry per
+quantity, carrying the conditions it was computed at:
+
+```yaml
+is_balanced: true
+has_thermodynamic_estimate:
+- quantity_type: standard_transformed_gibbs_free_energy_change
+  value: -29.641753
+  standard_error: 0.304278
+  unit: kJ/mol
+  p_h: 7.5
+  ionic_strength: 0.25
+  p_mg: 3.0
+  temperature: 298.15
+  estimation_method: component_contribution
+  source: eQuilibrator (equilibrator-api 0.8.1)
+```
+
+Estimates are **appended**, so re-running at different conditions builds up a set
+rather than overwriting the previous one.
+
+#### Write reactions without balancing protons
+
+Transformed ("primed") quantities absorb the proton contribution into the pH, so
+an explicit `H+` participant would count it twice. Write ATP hydrolysis as
+`ATP + H2O = ADP + phosphate`, with no proton. The balance check ignores hydrogen
+accordingly.
+
+An `INCHIKEY:` participant is matched ignoring the final block of the key, which
+encodes protonation state — eQuilibrator holds one compound per pseudoisomer
+group, so `CHEBI:30616` and `INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J` give identical
+results.
+
+See [Reaction Thermodynamics](explanations/thermodynamics.md) for the reasoning
+behind this, the quantities available, and the cases where the enricher declines
+to produce a number.
+
 ### `chemrof from-smiles` (deprecated)
 
 Hidden alias for `chemrof convert`. Still works for backwards compatibility

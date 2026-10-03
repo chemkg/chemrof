@@ -1,8 +1,15 @@
-"""Enricher protocol and context for the SMILES-to-chemrof pipeline."""
+"""Enricher protocols and contexts for the chemrof conversion pipeline.
+
+Two families of enricher live here. Compound enrichers take a single chemical
+entity plus an :class:`EnrichmentContext` built from an RDKit parse. Reaction
+enrichers take a chemrof reaction plus a :class:`ReactionEnrichmentContext`,
+which carries the aqueous conditions the enrichment applies at and whatever is
+known about the reaction's participants.
+"""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Protocol, runtime_checkable
 
 
@@ -70,3 +77,92 @@ def get_enricher(name: str) -> Enricher:
     if name not in registry:
         raise KeyError(f"Unknown enricher: {name!r}. Available: {list(registry)}")
     return registry[name]()
+
+
+# --- Reaction-level enrichment ---
+
+#: Conditions assumed when none are given. These match the defaults that
+#: eQuilibrator's ComponentContribution applies, which are its *physiological*
+#: defaults rather than the module-level ``default_pH``/``default_pMg``
+#: constants, and are close to typical intracellular conditions.
+DEFAULT_P_H = 7.5
+DEFAULT_IONIC_STRENGTH = 0.25
+DEFAULT_P_MG = 3.0
+DEFAULT_TEMPERATURE = 298.15
+
+
+@dataclass
+class ReactionEnrichmentContext:
+    """Conditions and participant lookups for reaction-level enrichers.
+
+    Transformed ("primed") thermodynamic quantities are only defined relative to
+    a set of aqueous conditions, so the conditions travel with the request rather
+    than being hard-coded by each enricher.
+
+    Attributes:
+        p_h: The pH to compute at.
+        ionic_strength: Ionic strength in mol/L.
+        p_mg: Negative log of free Mg2+ activity. Raise towards 14 to model a
+            magnesium-free solution.
+        temperature: Temperature in kelvin.
+        participants: Optional map of chemrof entity id to the chemrof dict for
+            that entity. Lets an enricher fall back on ``inchi_string`` when an
+            identifier cannot be resolved in an external registry.
+        identifier_overrides: Optional map of chemrof entity id to the external
+            identifier to look it up by, for participants whose chemrof id is not
+            resolvable on its own.
+    """
+
+    p_h: float = DEFAULT_P_H
+    ionic_strength: float = DEFAULT_IONIC_STRENGTH
+    p_mg: float = DEFAULT_P_MG
+    temperature: float = DEFAULT_TEMPERATURE
+    participants: dict[str, dict] = field(default_factory=dict)
+    identifier_overrides: dict[str, str] = field(default_factory=dict)
+
+
+@runtime_checkable
+class ReactionEnricher(Protocol):
+    """Protocol for reaction enricher plugins.
+
+    Each reaction enricher takes a chemrof reaction dict and a
+    :class:`ReactionEnrichmentContext`, adds or modifies slots, and returns the
+    dict.
+    """
+
+    name: str
+
+    def enrich(self, obj: dict, context: ReactionEnrichmentContext) -> dict: ...
+
+
+def _build_reaction_registry() -> dict[str, type]:
+    """Lazily import reaction enricher classes to avoid circular imports."""
+    from chemrof.converter.enrichers.equilibrator import EquilibratorEnricher
+
+    return {
+        "equilibrator": EquilibratorEnricher,
+    }
+
+
+def list_reaction_enrichers() -> list[str]:
+    """Return names of all registered reaction enrichers.
+
+    >>> list_reaction_enrichers()
+    ['equilibrator']
+    """
+    return list(_build_reaction_registry().keys())
+
+
+def get_reaction_enricher(name: str, **kwargs: Any) -> ReactionEnricher:
+    """Instantiate a reaction enricher by name.
+
+    >>> e = get_reaction_enricher("equilibrator")
+    >>> e.name
+    'equilibrator'
+    """
+    registry = _build_reaction_registry()
+    if name not in registry:
+        raise KeyError(
+            f"Unknown reaction enricher: {name!r}. Available: {list(registry)}"
+        )
+    return registry[name](**kwargs)
