@@ -2,10 +2,14 @@
 
 InChI format: InChI=1S/<formula>/c<connections>/h<hydrogens>/q<charge>/p<proton>/...
 
+Each sublayer value keeps its one-letter layer prefix (``c1-2-3``, ``q+2``),
+because that is what the schema patterns (``^c.*``, ``^q.*``, ``^p[\-]\d+``,
+``^[tm].*`` ...) match against. Only the leading formula layer has no prefix.
+
 Reference: https://www.inchi-trust.org/technical-faq/
 
 >>> parse_inchi_sublayers("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
-{'inchi_chemical_sublayer': 'C2H6O', 'inchi_atom_connections_sublayer': '1-2-3', 'inchi_hydrogen_connections_sublayer': '3H,2H2,1H3'}
+{'inchi_chemical_sublayer': 'C2H6O', 'inchi_atom_connections_sublayer': 'c1-2-3', 'inchi_hydrogen_connections_sublayer': 'h3H,2H2,1H3'}
 """
 
 from __future__ import annotations
@@ -32,7 +36,7 @@ def parse_inchi_sublayers(inchi: str) -> dict[str, str]:
     Returns empty dict for invalid or empty input.
 
     >>> parse_inchi_sublayers("InChI=1S/Ca/q+2")
-    {'inchi_chemical_sublayer': 'Ca', 'inchi_charge_sublayer': '+2'}
+    {'inchi_chemical_sublayer': 'Ca', 'inchi_charge_sublayer': 'q+2'}
 
     >>> parse_inchi_sublayers("")
     {}
@@ -53,14 +57,12 @@ def parse_inchi_sublayers(inchi: str) -> dict[str, str]:
     # First layer is always the chemical formula (no prefix letter)
     result["inchi_chemical_sublayer"] = layers[0]
 
-    # Remaining layers have single-letter prefixes
+    # Remaining layers have single-letter prefixes, which are kept in the value
     for layer in layers[1:]:
         if not layer:
             continue
-        prefix = layer[0]
-        value = layer[1:]
-        slot = _LAYER_MAP.get(prefix)
+        slot = _LAYER_MAP.get(layer[0])
         if slot:
-            result[slot] = value
+            result[slot] = layer
 
     return result
