@@ -1,5 +1,13 @@
 # metamodel_version: 1.7.0
 # version: 0.0.1
+enum AnomericConfigurationEnum
+  {
+    alpha
+    beta
+    open_chain
+    unknown
+  }
+
 enum BondTypeEnum
   {
     covalent
@@ -9,6 +17,7 @@ enum BondTypeEnum
     triple
     quadruple
     hydrogen
+    glycosidic
     ionic
     polycentric
     metal__HYPHEN_MINUS__metal
@@ -52,6 +61,13 @@ enum ConcentrationUnitEnum
     ppb
   }
 
+enum DLConfigurationEnum
+  {
+    D
+    L
+    unknown
+  }
+
 enum ElementFamilyEnum
   {
     Alkali_Earth
@@ -70,6 +86,12 @@ enum ElementMetallicClassification
     Metallic
     Non__HYPHEN_MINUS__Metallic
     Semi__HYPHEN_MINUS__Metallic
+  }
+
+enum EnzymeModificationTypeEnum
+  {
+    activation
+    inhibition
   }
 
 enum HardOrSoftEnum
@@ -112,6 +134,15 @@ enum MoleculeClassificationEnum
     ester
   }
 
+enum MonosaccharideRingFormEnum
+  {
+    pyranose
+    furanose
+    septanose
+    open_chain
+    unknown
+  }
+
 enum NanostructureMorphologyEnum
   {
     nanotube
@@ -133,6 +164,14 @@ enum PeriodicTableBlockEnum
     d__HYPHEN_MINUS__block
     f__HYPHEN_MINUS__block
     g__HYPHEN_MINUS__block
+  }
+
+enum ReactionMechanismEnum
+  {
+    reversible_michaelis_menten
+    irreversible_michaelis_menten
+    mass_action
+    drain
   }
 
 enum ReactionTypeEnum
@@ -234,6 +273,14 @@ type AcidBaseConflationClass
     conjugateAcidOf: DomainEntity
   }
 
+type AllostericRegulation
+  {
+    owlSubclassOf: OwlClass
+    effector: ChemicalEntity!
+    regulatedEnzyme: String
+    modificationType: EnzymeModificationTypeEnum!
+  }
+
 type Allotrope
   {
     id: String!
@@ -243,6 +290,7 @@ type Allotrope
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -254,6 +302,7 @@ type Allotrope
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -284,6 +333,7 @@ type AminoAcidSequenceInterval
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -295,6 +345,7 @@ type AminoAcidSequenceInterval
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -322,6 +373,7 @@ interface Atom
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -334,6 +386,7 @@ interface Atom
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -359,6 +412,7 @@ type AtomAnion implements AnionState
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -371,6 +425,7 @@ type AtomAnion implements AnionState
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -398,6 +453,7 @@ type AtomCation implements CationState
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -410,6 +466,7 @@ type AtomCation implements CationState
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -513,6 +570,7 @@ interface AtomIonicForm
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -525,6 +583,7 @@ interface AtomIonicForm
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -584,6 +643,7 @@ type ChemicalElement
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -596,6 +656,7 @@ type ChemicalElement
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     molecularMass: Float
     waterSolubility: Float
     pkaIonizationConstant: [Float]
@@ -631,6 +692,7 @@ type ChemicalEntity implements OwlClass
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -643,6 +705,7 @@ type ChemicalEntity implements OwlClass
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -668,6 +731,7 @@ type ChemicalGroup
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -679,6 +743,7 @@ type ChemicalGroup
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -731,6 +796,7 @@ interface ChemicalMixture
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -742,6 +808,7 @@ interface ChemicalMixture
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -775,6 +842,7 @@ type ChemicalSalt
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -786,6 +854,7 @@ type ChemicalSalt
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -859,6 +928,13 @@ type Collection
     entities: [DomainEntity]
   }
 
+type CompetitiveInhibition
+  {
+    owlSubclassOf: OwlClass
+    effector: ChemicalEntity!
+    regulatedEnzyme: String
+  }
+
 type Concentration
   {
     value: Float!
@@ -878,6 +954,7 @@ type Copolymer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -889,6 +966,7 @@ type Copolymer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -921,6 +999,7 @@ type DNASequenceInterval
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -932,6 +1011,7 @@ type DNASequenceInterval
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -969,6 +1049,7 @@ type Enantiomer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -978,6 +1059,7 @@ type Enantiomer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1032,6 +1114,13 @@ interface EntityWithStereochemistrySpecified
     inchiStereochemicalTypeSublayer: String
   }
 
+interface EnzymeRegulation
+  {
+    owlSubclassOf: OwlClass
+    effector: ChemicalEntity!
+    regulatedEnzyme: String
+  }
+
 type Ester
   {
     id: String!
@@ -1041,6 +1130,7 @@ type Ester
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1052,6 +1142,7 @@ type Ester
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1085,6 +1176,7 @@ type FullySpecifiedAtom
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -1097,6 +1189,7 @@ type FullySpecifiedAtom
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1125,6 +1218,7 @@ type FunctionalGroup
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1136,6 +1230,7 @@ type FunctionalGroup
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1185,6 +1280,7 @@ type Glycan
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1196,6 +1292,7 @@ type Glycan
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1213,6 +1310,29 @@ type Glycan
     hasPart: String
     isOrganic: Boolean
     hasSubmolecules: [Molecule]
+    hasMonosaccharideResidues: [MonosaccharideResidue]
+    hasGlycosidicLinkages: [GlycosidicLinkage]
+    hasReducingEnd: MonosaccharideResidue
+    isBranched: Boolean
+    carbohydrateRepresentation: ChemicalEncoding
+    wurcsRepresentation: ChemicalEncoding
+    glycoctCondensed: ChemicalEncoding
+    iupacCondensedRepresentation: ChemicalEncoding
+    carbbankRepresentation: ChemicalEncoding
+    linucsRepresentation: ChemicalEncoding
+    glycomindsLinearcodeRepresentation: ChemicalEncoding
+    keggChemicalFunctionRepresentation: ChemicalEncoding
+  }
+
+type GlycosidicLinkage
+  {
+    owlSubclassOf: OwlClass
+    subject: MonosaccharideResidue!
+    object: MonosaccharideResidue!
+    donorPosition: Int!
+    acceptorPosition: Int
+    anomericConfiguration: AnomericConfigurationEnum!
+    isNGlycosidic: Boolean
   }
 
 type GroupingClass implements OwlClass
@@ -1246,6 +1366,7 @@ type Homopolymer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1257,6 +1378,7 @@ type Homopolymer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1289,6 +1411,7 @@ type ImpreciseChemicalMixture
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1300,6 +1423,7 @@ type ImpreciseChemicalMixture
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1336,6 +1460,7 @@ type Isobar
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -1348,6 +1473,7 @@ type Isobar
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1393,6 +1519,9 @@ type IsomeraseReaction
     reactionRateCoefficient: Float
     reactionRate: Float
     reactionType: ReactionTypeEnum
+    reactionMechanism: ReactionMechanismEnum
+    hasAllostericRegulation: [AllostericRegulation]
+    hasCompetitiveInhibition: [CompetitiveInhibition]
     description: String
   }
 
@@ -1404,6 +1533,7 @@ type Isotope
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -1416,6 +1546,7 @@ type Isotope
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1455,6 +1586,7 @@ type Macromolecule
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1466,6 +1598,7 @@ type Macromolecule
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1528,6 +1661,7 @@ type Moiety
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1539,6 +1673,7 @@ type Moiety
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1561,6 +1696,7 @@ type MolecularAnion implements AnionState
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1572,6 +1708,7 @@ type MolecularAnion implements AnionState
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1607,6 +1744,7 @@ type MolecularCation implements CationState
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1618,6 +1756,7 @@ type MolecularCation implements CationState
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1653,6 +1792,7 @@ type MolecularComplex
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1664,6 +1804,7 @@ type MolecularComplex
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1687,6 +1828,7 @@ type MolecularComponent
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1698,6 +1840,7 @@ type MolecularComponent
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1745,6 +1888,7 @@ type MolecularSpecies
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1756,6 +1900,7 @@ type MolecularSpecies
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1784,6 +1929,7 @@ type MolecularSubsequence
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1795,6 +1941,7 @@ type MolecularSubsequence
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1817,6 +1964,7 @@ type Molecule implements FullyCovalentlyBonded
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1828,6 +1976,7 @@ type Molecule implements FullyCovalentlyBonded
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1856,6 +2005,7 @@ interface MoleculeByChargeState
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1867,6 +2017,7 @@ interface MoleculeByChargeState
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1945,6 +2096,7 @@ type MonoatomicIon implements Charged
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -1957,6 +2109,7 @@ type MonoatomicIon implements Charged
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -1985,6 +2138,7 @@ type Monomer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -1996,6 +2150,7 @@ type Monomer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2031,6 +2186,7 @@ type MonomolecularPolymer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2042,6 +2198,7 @@ type MonomolecularPolymer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2065,6 +2222,89 @@ type MonomolecularPolymer
     polymerArchitectureType: String
   }
 
+type Monosaccharide
+  {
+    id: String!
+    name: String
+    type: String
+    iUPACName: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
+    empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    hasAtomOccurrences: [AtomOccurrence]
+    hasBonds: [AtomicBond]
+    hasSubmolecules: [Molecule]
+    hasAtoms: [Atom]
+    hasPart: String
+    isOrganic: Boolean
+    anomericConfiguration: AnomericConfigurationEnum
+    ringForm: MonosaccharideRingFormEnum
+    dlConfiguration: DLConfigurationEnum
+  }
+
+type MonosaccharideResidue
+  {
+    id: String!
+    name: String
+    type: String
+    iUPACName: String
+    isRadical: Boolean
+    hasChemicalRole: ChemicalRole
+    inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
+    inchiChemicalSublayer: String
+    inchiHydrogenConnectionsSublayer: String
+    inchiChargeSublayer: String
+    inchiProtonSublayer: String
+    inchiStereochemicalDoubleBondSublayer: String
+    inchiTetrahedralStereochemicalSublayer: String
+    inchiStereochemicalTypeSublayer: String
+    inchiIsotopicLayer: String
+    smilesString: ChemicalEncoding
+    cxsmilesString: ChemicalEncoding
+    empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
+    hasMajorMicrospeciesAtPH73: ChemicalEntity
+    molecularMass: Float
+    waterSolubility: Float
+    pkaIonizationConstant: [Float]
+    pkaTemperature: Float
+    pkaIonicStrength: Float
+    pkaSolvent: String
+    pkaPressure: Float
+    classifiedBy: [ChemicalGroupingClass]
+    owlSubclassOf: OwlClass
+    inchiAtomConnectionsSublayer: String
+    residueOf: Monosaccharide
+    anomericConfiguration: AnomericConfigurationEnum
+    ringForm: MonosaccharideRingFormEnum
+    dlConfiguration: DLConfigurationEnum
+  }
+
 type Nanomaterial
   {
     id: String!
@@ -2084,6 +2324,7 @@ type NaturalProduct
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2095,6 +2336,7 @@ type NaturalProduct
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2124,6 +2366,7 @@ type NetUnchargedMolecule implements Uncharged
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2135,6 +2378,7 @@ type NetUnchargedMolecule implements Uncharged
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2168,6 +2412,7 @@ type NeutralMolecule
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2179,6 +2424,7 @@ type NeutralMolecule
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2212,6 +2458,7 @@ type NonSpeciesMolecule
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2223,6 +2470,7 @@ type NonSpeciesMolecule
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2251,6 +2499,7 @@ type NucleotideSequenceInterval
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2262,6 +2511,7 @@ type NucleotideSequenceInterval
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2284,6 +2534,7 @@ type Nuclide
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -2296,6 +2547,7 @@ type Nuclide
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2334,6 +2586,7 @@ interface PartiallySpecifiedAtom
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -2346,6 +2599,7 @@ interface PartiallySpecifiedAtom
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2372,6 +2626,7 @@ type Peptide
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2383,6 +2638,7 @@ type Peptide
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2431,6 +2687,7 @@ interface PolyatomicEntity
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2442,6 +2699,7 @@ interface PolyatomicEntity
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2464,6 +2722,7 @@ type PolyatomicIon implements Charged
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2475,6 +2734,7 @@ type PolyatomicIon implements Charged
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2510,6 +2770,7 @@ type PolymerPart
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2521,6 +2782,7 @@ type PolymerPart
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2551,6 +2813,7 @@ type PreciseChemicalMixture implements WeaklyBonded
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2562,6 +2825,7 @@ type PreciseChemicalMixture implements WeaklyBonded
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2596,6 +2860,7 @@ type Protein
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2607,6 +2872,7 @@ type Protein
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2634,6 +2900,7 @@ type RacemicMixture
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2645,6 +2912,7 @@ type RacemicMixture
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2671,6 +2939,7 @@ type Radionuclide
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -2683,6 +2952,7 @@ type Radionuclide
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2720,6 +2990,9 @@ type Reaction
     reactionRateCoefficient: Float
     reactionRate: Float
     reactionType: ReactionTypeEnum
+    reactionMechanism: ReactionMechanismEnum
+    hasAllostericRegulation: [AllostericRegulation]
+    hasCompetitiveInhibition: [CompetitiveInhibition]
     description: String
   }
 
@@ -2736,7 +3009,7 @@ type ReactionParticipant
   {
     owlSubclassOf: OwlClass
     participant: ChemicalEntity
-    stoichiometry: Int
+    stoichiometry: Float
   }
 
 type RNASequenceInterval
@@ -2748,6 +3021,7 @@ type RNASequenceInterval
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2759,6 +3033,7 @@ type RNASequenceInterval
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2782,6 +3057,7 @@ interface SequenceInterval
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2793,6 +3069,7 @@ interface SequenceInterval
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2816,6 +3093,7 @@ type SmallMolecule
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2827,6 +3105,7 @@ type SmallMolecule
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2888,6 +3167,7 @@ type Stereoisomer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2899,6 +3179,7 @@ type Stereoisomer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2943,6 +3224,7 @@ type SupramolecularPolymer
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -2954,6 +3236,7 @@ type SupramolecularPolymer
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -2991,6 +3274,7 @@ type UnchargedAtom implements Uncharged
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiAtomConnectionsSublayer: String
     inchiHydrogenConnectionsSublayer: String
@@ -3003,6 +3287,7 @@ type UnchargedAtom implements Uncharged
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
@@ -3041,6 +3326,7 @@ type Zwitterion
     isRadical: Boolean
     hasChemicalRole: ChemicalRole
     inchiString: ChemicalEncoding
+    inchiKeyString: ChemicalEncoding
     inchiChemicalSublayer: String
     inchiHydrogenConnectionsSublayer: String
     inchiChargeSublayer: String
@@ -3052,6 +3338,7 @@ type Zwitterion
     smilesString: ChemicalEncoding
     cxsmilesString: ChemicalEncoding
     empiricalFormula: ChemicalEncoding
+    molecularFormula: ChemicalEncoding
     hasMajorMicrospeciesAtPH73: ChemicalEntity
     molecularMass: Float
     waterSolubility: Float
