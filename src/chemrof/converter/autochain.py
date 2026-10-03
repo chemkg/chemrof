@@ -28,6 +28,7 @@ from rdkit.Chem import (
 )
 from rdkit.Chem.MolStandardize import rdMolStandardize
 
+from chemrof.converter.atoms import atom_fields, is_single_atom
 from chemrof.converter.classify import classify_entity
 from chemrof.converter.inchi import parse_inchi_sublayers
 
@@ -98,10 +99,15 @@ def _mol_to_entity(mol: Chem.Mol, entity_type: str) -> dict:
     formula = rdMolDescriptors.CalcMolFormula(mol)
     mass = Descriptors.ExactMolWt(mol)
     has_carbon = any(atom.GetAtomicNum() == 6 for atom in mol.GetAtoms())
+    single_atom = is_single_atom(mol)
+
+    name = formula
+    if single_atom and mol.GetAtomWithIdx(0).GetIsotope():
+        name = f"{mol.GetAtomWithIdx(0).GetIsotope()}{formula}"
 
     obj: dict = {
         "id": f"INCHIKEY:{inchikey}" if inchikey else f"smiles:{canonical}",
-        "name": formula,
+        "name": name,
         "type": f"{_TYPE_PREFIX}{entity_type}",
         "smiles_string": canonical,
         "inchi_string": inchi_str,
@@ -112,7 +118,9 @@ def _mol_to_entity(mol: Chem.Mol, entity_type: str) -> dict:
     sublayers = parse_inchi_sublayers(inchi_str)
     obj.update(sublayers)
 
-    if has_carbon:
+    if single_atom:
+        obj.update(atom_fields(mol))
+    elif has_carbon:
         obj["is_organic"] = True
 
     return obj
@@ -184,8 +192,6 @@ def _build_salt_graph(entity: dict, mol: Chem.Mol) -> list[dict]:
         frag_charge = sum(a.GetFormalCharge() for a in frag.GetAtoms())
         frag_type = classify_entity(frag)
         comp = _mol_to_entity(frag, frag_type)
-        if frag_type in ("AtomCation", "AtomAnion", "UnchargedAtom"):
-            comp["has_element"] = frag.GetAtomWithIdx(0).GetSymbol()
         if frag_charge > 0:
             comp["elemental_charge"] = frag_charge
             if cation_id is None:
