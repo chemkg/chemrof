@@ -150,3 +150,9 @@ def test_parallel_matches_serial():
 def test_structure_without_inchi_gets_an_iri_safe_id():
     graph = saturate(["[NH3]->[Co+3]"], generators=[])
     assert graph[0]["id"].startswith("chemrof:smiles-")
+
+
+def test_racemate_of_structure_without_inchi_has_iri_safe_id():
+    graph = saturate(["N[C@@H](C)C(=O)O->[Co+3]"])
+    assert not any(e["id"].startswith("smiles:") or "rac-smiles:" in e["id"] for e in graph)
+    assert any(e["id"].startswith("chemrof:rac-smiles-") for e in graph)
