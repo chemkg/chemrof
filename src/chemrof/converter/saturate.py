@@ -30,6 +30,7 @@ Generators:
 
 from __future__ import annotations
 
+import hashlib
 import logging
 from collections import deque
 from dataclasses import dataclass, field
@@ -140,9 +141,16 @@ def is_zwitterion(mol: Chem.Mol) -> bool:
 
 
 def _assign_id(entity: dict, mol: Chem.Mol) -> None:
-    """Re-key a zwitterion so it does not collide with its uncharged form."""
+    """Re-key a zwitterion so it does not collide with its uncharged form.
+
+    Also replaces the converter's ``smiles:<SMILES>`` fallback (no InChI, e.g.
+    dative bonds to a metal), which is not a usable IRI, by a hash of the SMILES.
+    """
     eid = entity.get("id", "")
-    if eid.startswith("INCHIKEY:") and is_zwitterion(mol):
+    if eid.startswith("smiles:"):
+        digest = hashlib.sha1(eid.removeprefix("smiles:").encode()).hexdigest()[:16]
+        entity["id"] = f"chemrof:smiles-{digest}"
+    elif eid.startswith("INCHIKEY:") and is_zwitterion(mol):
         entity["id"] = f"chemrof:zwitterion-{eid.removeprefix('INCHIKEY:')}"
 
 

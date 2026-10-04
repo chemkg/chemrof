@@ -145,3 +145,8 @@ def test_parallel_matches_serial():
     serial = saturate([dict(s) for s in seeds])
     parallel = saturate_parallel([dict(s) for s in seeds], workers=2, chunk_size=1)
     assert sorted(serial, key=lambda e: e["id"]) == sorted(parallel, key=lambda e: e["id"])
+
+
+def test_structure_without_inchi_gets_an_iri_safe_id():
+    graph = saturate(["[NH3]->[Co+3]"], generators=[])
+    assert graph[0]["id"].startswith("chemrof:smiles-")
