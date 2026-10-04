@@ -156,3 +156,13 @@ def test_racemate_of_structure_without_inchi_has_iri_safe_id():
     graph = saturate(["N[C@@H](C)C(=O)O->[Co+3]"])
     assert not any(e["id"].startswith("smiles:") or "rac-smiles:" in e["id"] for e in graph)
     assert any(e["id"].startswith("chemrof:rac-smiles-") for e in graph)
+
+
+def test_seed_name_survives_parallel_merge():
+    from chemrof.converter.saturate import saturate_parallel
+
+    # D-alanine's chunk generates L-alanine (unnamed) before L-alanine's own chunk
+    seeds = [{"structure": "N[C@H](C)C(O)=O"}, {"structure": "N[C@@H](C)C(O)=O", "name": "L-alanine", "id": "CHEBI:16977"}]
+    graph = {e["id"]: e for e in saturate_parallel(seeds, workers=2, chunk_size=1)}
+    assert graph["CHEBI:16977"]["name"] == "L-alanine"
+    assert any(e["name"] == "L-alanine zwitterion" for e in graph.values())

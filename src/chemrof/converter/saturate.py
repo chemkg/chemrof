@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import re
 from collections import deque
 from dataclasses import dataclass, field
 from typing import Callable, Iterable
@@ -64,6 +65,7 @@ _LIST_SLOTS = {"tautomer_of", "has_major_microspecies_at_pH7_3"}
 _STEREO_TYPES = {"Enantiomer", "Stereoisomer"}
 _KEEP_TYPES = _STEREO_TYPES | {"RacemicMixture", "ChemicalSalt"}
 _ION_TYPES = {"MolecularCation", "MolecularAnion"}
+_RAC_FORMULA = re.compile(r"rac-(?:[A-Z][a-z]?\d*)+(?:[+-]\d*)?")
 
 
 @dataclass
@@ -183,11 +185,22 @@ def _merge(into: dict, other: dict) -> None:
     """
     if _type(other) in _STEREO_TYPES and _type(into) not in _STEREO_TYPES:
         into["type"] = other["type"]
+    if _is_placeholder_name(into) and not _is_placeholder_name(other):
+        into["name"] = other["name"]  # e.g. a seed's name over a formula
     for key, value in other.items():
         if key not in into:
             into[key] = value
         elif key in _LIST_SLOTS:
             into[key] = list(dict.fromkeys([*into[key], *value]))
+
+
+def _is_placeholder_name(entity: dict) -> bool:
+    """True if the name is missing or just the formula the converter defaults to."""
+    name = entity.get("name")
+    if not name or name == entity.get("empirical_formula"):
+        return True
+    # a racemate is generated as rac-<formula of its parent>
+    return _type(entity) == "RacemicMixture" and bool(_RAC_FORMULA.fullmatch(name))
 
 
 def _type(entity: dict) -> str:
