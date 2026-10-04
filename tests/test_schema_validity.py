@@ -48,8 +48,8 @@ def test_converter_output_is_valid(validator, smiles):
 
 # These graphs are not yet schema-valid for reasons unrelated to atoms or InChI
 # layers: ChemicalSalt has no has_cationic_component / has_anionic_component /
-# elemental_charge slots, and SmallMolecule has no tautomer_of slot. strict=True
-# makes them fail loudly once the schema catches up, so the marker gets removed.
+# elemental_charge slots. strict=True makes them fail loudly once the schema
+# catches up, so the marker gets removed.
 @pytest.mark.parametrize(
     "smiles, classes",
     [
@@ -58,10 +58,7 @@ def test_converter_output_is_valid(validator, smiles):
             "[Na+].[Cl-]", {"ChemicalSalt"},
             marks=pytest.mark.xfail(strict=True, reason="schema: ChemicalSalt lacks component slots"),
         ),
-        pytest.param(
-            "Oc1ccccn1", {"Tautomer"},
-            marks=pytest.mark.xfail(strict=True, reason="schema: SmallMolecule lacks tautomer_of"),
-        ),
+        ("Oc1ccccn1", {"Tautomer"}),
     ],
 )
 def test_autochain_output_is_valid(validator, smiles, classes):
@@ -78,4 +75,15 @@ def test_siblings_output_is_valid(validator, smiles):
     family = siblings(entity, parsed.mol)
     assert len(family) > 1
     for obj in family:
+        assert problems(validator, obj) == [], obj["id"]
+
+
+@pytest.mark.parametrize(
+    "smiles",
+    ["N[C@@H](C)C(O)=O", "OC(=O)CC(O)(CC(O)=O)C(O)=O", "NCCCC[C@H](N)C(O)=O", "CC(O)C(C)O", "CC(O)=O"],
+)
+def test_saturate_output_is_valid(validator, smiles):
+    from chemrof.converter.saturate import saturate
+
+    for obj in saturate([smiles]):
         assert problems(validator, obj) == [], obj["id"]
