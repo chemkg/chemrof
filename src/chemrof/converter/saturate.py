@@ -493,7 +493,9 @@ def saturate(
             continue
         _assign_id(entity, Chem.MolFromSmiles(entity["smiles_string"]))
         if "id" in extra:
-            given_ids[entity["id"]] = extra.pop("id")
+            # seeds sharing a structure (ChEBI has some) are one entity: the first
+            # seed's id and name win
+            given_ids.setdefault(entity["id"], extra.pop("id"))
         entity.update(extra)
         stats.seeds += 1
         if graph.add(entity):
@@ -580,7 +582,8 @@ def saturate_parallel(
                     graph.entities[entity["id"]] = entity
                 else:
                     _merge(existing, entity)
-            given_ids.update(chunk_ids)
+            for key, seed_id in chunk_ids.items():
+                given_ids.setdefault(key, seed_id)
             stats.seeds += chunk_stats.seeds
             stats.processed += chunk_stats.processed
             stats.rounds = max(stats.rounds, chunk_stats.rounds)

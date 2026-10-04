@@ -166,3 +166,12 @@ def test_seed_name_survives_parallel_merge():
     graph = {e["id"]: e for e in saturate_parallel(seeds, workers=2, chunk_size=1)}
     assert graph["CHEBI:16977"]["name"] == "L-alanine"
     assert any(e["name"] == "L-alanine zwitterion" for e in graph.values())
+
+
+def test_seeds_sharing_a_structure_keep_the_first_id_and_name():
+    seeds = [
+        {"structure": "CCO", "name": "ethanol", "id": "CHEBI:16236"},
+        {"structure": "OCC", "name": "ethyl alcohol", "id": "CHEBI:99999"},
+    ]
+    (entity,) = saturate(seeds)
+    assert (entity["id"], entity["name"]) == ("CHEBI:16236", "ethanol")

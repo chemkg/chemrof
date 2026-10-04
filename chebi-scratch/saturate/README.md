@@ -16,7 +16,11 @@ chemrof saturate seeds_3star.tsv -w 4 -f json -o chebi3_saturated.json     # ~20
 python chebi-scratch/saturate/compare_chebi.py chebi3_saturated.json chebi
 ```
 
-`-f owl` writes OWL instead (`--workers` also parallelises the OWL export).
+`-f owl` writes OWL instead (`--workers` also parallelises the OWL export):
+the run above with `-f owl` takes ~36 min and writes a 949 MB OWL
+Functional Syntax file (5.9M lines). Parsing all of it in one go with
+pyhornedowl needs more than 14 GB of RAM; each chunk is parsed by linkml-owl
+during export, and a 200k-axiom slice of the merged file parses cleanly.
 
 ## Results (ChEBI flat files of October 2026)
 
@@ -28,7 +32,7 @@ R-group structures). Default generators (`stereo,salt,protonation`),
 | | |
 |---|---|
 | entities | 454,007 |
-| seeds (after merging duplicate structures) | 45,523 |
+| seeds (447 ChEBI entries share a structure with another; the first one's id and name are kept) | 45,523 |
 | generated, already in ChEBI (by InChIKey) | 2,542 |
 | generated, not in ChEBI | 279,353 |
 | racemates (not compared) | 126,589 |
