@@ -195,7 +195,9 @@ def _run_enrichers(all_results: list[dict], enricher_instances: list) -> None:
                 obj["name"] = f"rac-{agnostic['name']}"
 
 
-def _emit(all_results: list[dict], format: OutputFormat, output: Optional[Path] = None) -> None:
+def _emit(
+    all_results: list[dict], format: OutputFormat, output: Optional[Path] = None, workers: int = 1
+) -> None:
     """Write entities as YAML, JSON or OWL to *output* (stdout if None)."""
 
     def write(text: str) -> None:
@@ -205,9 +207,12 @@ def _emit(all_results: list[dict], format: OutputFormat, output: Optional[Path] 
             output.write_text(text + "\n")
 
     if format == OutputFormat.owl:
-        from chemrof.converter.owl_output import dicts_to_owl
+        from chemrof.converter.owl_output import dicts_to_owl, dicts_to_owl_parallel
 
-        write(dicts_to_owl(all_results))
+        if workers > 1:
+            write(dicts_to_owl_parallel(all_results, workers))
+        else:
+            write(dicts_to_owl(all_results))
         return
 
     data = all_results if len(all_results) > 1 else all_results[0]
@@ -490,7 +495,7 @@ def saturate(
         raise typer.BadParameter("no parseable seed structures")
 
     _run_enrichers(results, _build_enrichers(enrichers, chemont_source, chemont_dictionary))
-    _emit(results, format, output)
+    _emit(results, format, output, workers)
     typer.echo(
         f"{stats.seeds} seeds -> {len(results)} entities in {stats.rounds} rounds"
         + (f"; {len(stats.failed)} seeds unparseable" if stats.failed else "")

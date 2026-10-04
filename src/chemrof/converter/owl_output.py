@@ -111,3 +111,45 @@ def dicts_to_owl(objs: list[dict], output_type: str = "ofn") -> str:
     dumper = OWLDumper()
     with _suppress_namespace_warnings():
         return dumper.dumps(elements, schemaview=sv, output_type=output_type)
+
+
+def _chunk_to_owl(objs: list[dict]) -> str:
+    from rdkit import RDLogger
+
+    RDLogger.DisableLog("rdApp.*")
+    return dicts_to_owl(objs)
+
+
+def dicts_to_owl_parallel(objs: list[dict], workers: int, chunk_size: int = 2000) -> str:
+    """:func:`dicts_to_owl` for large inputs: chunks dumped in *workers* processes.
+
+    Each chunk is dumped to OWL Functional Syntax on its own, then the axioms
+    are merged under one ``Ontology(...)``, dropping repeats (e.g. the same
+    declaration from two chunks). Relies on the dumper writing one axiom per
+    line, which holds for the single-line literals the converter produces.
+
+    >>> from chemrof.converter.convert import ChemConverter
+    >>> objs = [ChemConverter().convert(s) for s in ("CCO", "CC(O)=O", "CCN")]
+    >>> merged = dicts_to_owl_parallel(objs, workers=2, chunk_size=2)
+    >>> sorted(merged.splitlines()) == sorted(dicts_to_owl(objs).splitlines())
+    True
+    """
+    from multiprocessing import Pool
+
+    chunks = [objs[i : i + chunk_size] for i in range(0, len(objs), chunk_size)]
+    if workers <= 1 or len(chunks) <= 1:
+        return dicts_to_owl(objs)
+    header: list[str] = []
+    axioms: dict[str, None] = {}  # ordered set
+    with Pool(workers) as pool:
+        for text in pool.imap(_chunk_to_owl, chunks):
+            head, _, body = text.partition("Ontology(")
+            if not header:
+                header = head.splitlines()
+            body = body.rstrip().removesuffix(")")
+            for line in body.splitlines():
+                if line.strip():
+                    axioms.setdefault("    " + line.strip(), None)
+    lines = list(axioms)
+    lines[0] = "Ontology(" + lines[0]  # as the dumper writes it
+    return "\n".join([*header, *lines, ")"])
