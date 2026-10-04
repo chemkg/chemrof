@@ -241,6 +241,20 @@ name: fluoride
 type: chemrof:AtomAnion
 
 ```
+## GroupingByGenusAndRangeRestriction-very_long_chain_fatty_acyl_coa
+### Input
+```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a chain length
+  greater than C22.
+genus: CHEBI:37554
+id: CHEBI:61910
+min_value: 23
+name: very long-chain fatty acyl-CoA
+on_property: chemrof:carbon_number
+subtype_of:
+- chemrof:LinearFattyAcylCoA
+
+```
 ## FunctionalGroup-hydroxyl
 ### Input
 ```yaml
@@ -270,6 +284,34 @@ subatomic_particle_type: electron
 type: chemrof:SubatomicParticle
 
 ```
+## GroupingBySmarts-fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA results from the formal condensation of the thiol group
+  of coenzyme A with the carboxy group of a fatty acid. It is the genus for the fatty
+  acid beta-oxidation substrate classification; membership is recognised structurally
+  by the coenzyme A thioester substructure.
+genus: CHEBI:17984
+id: CHEBI:37554
+name: fatty acyl-CoA
+smarts_string: '[#6]C(=O)SCCNC(=O)CCNC(=O)C(O)C(C)(C)COP(O)(O)=O'
+
+```
+## GroupingByGenusAndRangeRestriction-saturated_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA in which the fatty acyl chain contains no carbon-carbon
+  double bonds.
+genus: CHEBI:37554
+id: CHEBI:231546
+max_value: 0
+min_value: 0
+name: saturated fatty acyl-CoA
+on_property: chemrof:carbon_carbon_double_bond_number
+subtype_of:
+- CHEBI:37554
+
+```
 ## Protein-insulin
 ### Input
 ```yaml
@@ -278,6 +320,21 @@ id: UniProtKB:P01308
 is_organic: true
 name: insulin
 type: chemrof:Protein
+
+```
+## GroupingByGenusAndRangeRestriction-short_chain_fatty_acyl_coa
+### Input
+```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a short (up
+  to C5) carbon chain.
+genus: CHEBI:37554
+id: CHEBI:61905
+max_value: 5
+min_value: 2
+name: short-chain fatty acyl-CoA
+on_property: chemrof:carbon_number
+subtype_of:
+- chemrof:LinearFattyAcylCoA
 
 ```
 ## SmallMolecule-acetic-acid-with-pka
@@ -431,6 +488,22 @@ symbol: H
 type: chemrof:Isotope
 
 ```
+## GroupingByGenusAndRangeRestriction-monounsaturated_fatty_acyl_coa
+### Input
+```yaml
+description: An unsaturated fatty acyl-CoA in which the fatty acyl chain contains
+  exactly one carbon-carbon double bond (e.g. oleoyl-CoA, 18:1).
+genus: CHEBI:37554
+id: chemrof:MonounsaturatedFattyAcylCoA
+max_value: 1
+min_value: 1
+name: monounsaturated fatty acyl-CoA
+on_property: chemrof:carbon_carbon_double_bond_number
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
+subtype_of:
+- CHEBI:51006
+
+```
 ## Isotope-protium
 ### Input
 ```yaml
@@ -442,6 +515,36 @@ name: protium atom
 neutron_number: 0
 symbol: H
 type: chemrof:Isotope
+
+```
+## GroupingByGenusAndPropertyValue-branched_chain_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA whose fatty acyl chain carries one or more alkyl substituents.
+  Processed by peroxisomal (partial) beta-oxidation.
+genus: CHEBI:37554
+id: CHEBI:61912
+name: branched-chain fatty acyl-CoA
+on_property: chemrof:is_branched
+subtype_of:
+- CHEBI:37554
+value: 'true'
+value_datatype: xsd:boolean
+
+```
+## GroupingByGenusAndRangeRestriction-long_chain_fatty_acyl_coa
+### Input
+```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a long (C13
+  to C22) carbon chain.
+genus: CHEBI:37554
+id: CHEBI:33184
+max_value: 22
+min_value: 13
+name: long-chain fatty acyl-CoA
+on_property: chemrof:carbon_number
+subtype_of:
+- chemrof:LinearFattyAcylCoA
 
 ```
 ## AtomCation-helium2
@@ -549,6 +652,21 @@ id: CHEBI:24636
 name: proton
 subatomic_particle_type: proton
 type: chemrof:SubatomicParticle
+
+```
+## GroupingByGenusAndRangeRestriction-unsaturated_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA in which the fatty acyl chain contains one or more carbon-carbon
+  double bonds.
+genus: CHEBI:37554
+id: CHEBI:51006
+min_value: 1
+name: unsaturated fatty acyl-CoA
+on_property: chemrof:carbon_carbon_double_bond_number
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
+subtype_of:
+- CHEBI:37554
 
 ```
 ## Ester-ethyl_acetate
@@ -663,6 +781,20 @@ entities:
   - participant: INCHIKEY:MEFKEPWMEQBLKI-AIRLBKTGSA-O
     stoichiometry: 1.0
   type: chemrof:Reaction
+
+```
+## GroupingByGenusAndPropertyValue-odd_numbered_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA whose fatty acyl chain has an odd number of carbon atoms.
+  Beta-oxidation yields acetyl-CoA plus a terminal propionyl-CoA.
+genus: CHEBI:37554
+id: chemrof:OddNumberedFattyAcylCoA
+name: odd-numbered fatty acyl-CoA
+on_property: chemrof:carbon_number_parity
+subtype_of:
+- CHEBI:37554
+value: odd
 
 ```
 ## Molecule-dioxygen
@@ -804,6 +936,35 @@ name: copper(1+)
 type: chemrof:AtomCation
 
 ```
+## GroupingByGenusAndPropertyValue-even_numbered_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA whose fatty acyl chain has an even number of carbon
+  atoms. Complete beta-oxidation yields acetyl-CoA only.
+genus: CHEBI:37554
+id: chemrof:EvenNumberedFattyAcylCoA
+name: even-numbered fatty acyl-CoA
+on_property: chemrof:carbon_number_parity
+subtype_of:
+- CHEBI:37554
+value: even
+
+```
+## GroupingByGenusAndRangeRestriction-polyunsaturated_fatty_acyl_coa
+### Input
+```yaml
+description: An unsaturated fatty acyl-CoA in which the fatty acyl chain contains
+  two or more carbon-carbon double bonds (e.g. linolenoyl-CoA, 18:3).
+genus: CHEBI:37554
+id: chemrof:PolyunsaturatedFattyAcylCoA
+min_value: 2
+name: polyunsaturated fatty acyl-CoA
+on_property: chemrof:carbon_carbon_double_bond_number
+smarts_string: '[CX3;!$(C=O)]=[CX3;!$(C=O)]'
+subtype_of:
+- CHEBI:51006
+
+```
 ## NeutralMolecule-water
 ### Input
 ```yaml
@@ -928,6 +1089,21 @@ name: carboxy group
 type: chemrof:FunctionalGroup
 
 ```
+## GroupingByGenusAndRangeRestriction-medium_chain_fatty_acyl_coa
+### Input
+```yaml
+description: A linear fatty acyl-CoA in which the fatty acyl group has a medium-length
+  (C6 to C12) carbon chain.
+genus: CHEBI:37554
+id: CHEBI:61907
+max_value: 12
+min_value: 6
+name: medium-chain fatty acyl-CoA
+on_property: chemrof:carbon_number
+subtype_of:
+- chemrof:LinearFattyAcylCoA
+
+```
 ## Collection-nitrites
 ### Input
 ```yaml
@@ -1008,5 +1184,20 @@ is_organic: true
 name: glycylglycine
 smiles_string: C(C(=O)NCC(=O)O)N
 type: chemrof:Peptide
+
+```
+## GroupingByGenusAndPropertyValue-linear_fatty_acyl_coa
+### Input
+```yaml
+description: A fatty acyl-CoA whose fatty acyl chain is unbranched. The canonical
+  substrate of mitochondrial fatty acid beta-oxidation.
+genus: CHEBI:37554
+id: chemrof:LinearFattyAcylCoA
+name: linear fatty acyl-CoA
+on_property: chemrof:is_branched
+subtype_of:
+- CHEBI:37554
+value: 'false'
+value_datatype: xsd:boolean
 
 ```
