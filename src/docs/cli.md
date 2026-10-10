@@ -283,6 +283,66 @@ chemrof class:
 | Multi-atom, negative (e.g. `CC([O-])=O`) | `MolecularAnion` |
 | Multi-atom, neutral (e.g. `CCO`) | `SmallMolecule` |
 
+### `chemrof saturate`
+
+Builds a closed, ChEBI-like graph of entities from a file of seed structures.
+Every seed, and every structure generated from it, is run through a set of
+generators, and whatever they produce is fed back in until nothing new
+appears. Entities reached by several routes are merged by id, so the output
+is one graph with each structure once.
+
+```bash
+chemrof saturate seeds.tsv -o graph.yaml
+chemrof saturate seeds.tsv -f owl -o graph.owl -w 4
+echo "OC(=O)CC(O)(CC(O)=O)C(O)=O" | chemrof saturate - -g protonation
+```
+
+The seed file has one structure (SMILES or InChI) per line, optionally
+followed by a tab and a name and a tab and an id to use instead of the
+InChIKey (e.g. a CHEBI id). Blank lines and lines starting with `#` are
+skipped.
+
+```
+N[C@@H](C)C(O)=O	L-alanine	CHEBI:16977
+OC(=O)CC(O)(CC(O)=O)C(O)=O	citric acid	CHEBI:30769
+```
+
+| Generator | Produces | Links |
+|---|---|---|
+| `stereo` | stereo-agnostic parent, stereoisomers, racemates (as `--siblings`); for an atom, its element's family | `enantiomer_form_of`, `has_left_enantiomer`, ... |
+| `salt` | a salt's cation and anion | `has_cationic_component`, `has_anionic_component` |
+| `protonation` | uncharged parent and major microspecies at pH 7.3 | `has_major_microspecies_at_pH7_3`; also `conjugate_acid_of`/`conjugate_base_of` one proton apart, `tautomer_of` for a zwitterion |
+| `tautomer` | RDKit tautomers (off by default) | `tautomer_of` |
+
+`--generators` picks a subset (default `stereo,salt,protonation`). L-alanine,
+for example, saturates to alanine, L-, D- and rac-alanine, and the zwitterion
+of each: 8 entities.
+
+The pH 7.3 forms come from a rule-based predictor (`chemrof.converter.protonation`)
+written to follow Rhea's `chebi_pH7_3_mapping.tsv`. Only the major microspecies
+is generated, not the intermediate charge states, so `conjugate_acid_of` /
+`conjugate_base_of` are asserted only when the two forms are one proton apart.
+
+**Ids.** Entities are keyed by InChIKey. Standard InChI drops the charge
+separation of a zwitterion, so a zwitterion is keyed
+`chemrof:zwitterion-<InChIKey>` to keep it apart from its uncharged form, as
+ChEBI does. A seed's own id (third column) replaces its InChIKey everywhere
+once saturation is done.
+
+**Names.** Seeds keep their names. A generated entity whose name is still its
+formula is named after a named relative: `L-alanine zwitterion`,
+`rac-lactic acid`, `(R)-lactic acid`, `citric acid(3-)`.
+
+**Large stereo families.** A molecule with more than `--max-siblings`
+stereoisomers (default 64) gets only its stereo-agnostic parent, its mirror
+image and their racemate, not a sample of the family.
+
+**Limits.** `--max-rounds` stops a given number of generations from the
+seeds; `--max-entities` stops expanding past a size. `--workers N` splits the
+seeds into chunks saturated in parallel and merged; `--max-entities` then
+applies per chunk. The run summary goes to stderr. `--enrichers` works as for
+`convert` and runs on the whole graph.
+
 ### `chemrof from-smiles` (deprecated)
 
 Hidden alias for `chemrof convert`. Still works for backwards compatibility

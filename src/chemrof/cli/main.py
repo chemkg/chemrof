@@ -20,6 +20,7 @@ from chemrof.converter.enrichers.chemont import (
     download_chemont_zenodo,
 )
 from chemrof.converter.parse import parse_input
+from chemrof.converter.saturate import DEFAULT_GENERATORS
 from chemrof.converter.siblings import DEFAULT_MAX_SIBLINGS
 
 app = typer.Typer(
@@ -94,19 +95,7 @@ def _do_convert(
     """Shared implementation for convert and from-smiles commands."""
     if siblings and (classes or autochain):
         raise typer.BadParameter("--siblings cannot be combined with --classes or --autochain")
-    enricher_instances = []
-    if enrichers:
-        for name in enrichers.split(","):
-            name = name.strip()
-            if name == "chemont":
-                enricher_instances.append(
-                    ChemOntEnricher(
-                        source=chemont_source,
-                        dictionary_source=chemont_dictionary,
-                    )
-                )
-            else:
-                enricher_instances.append(get_enricher(name))
+    enricher_instances = _build_enrichers(enrichers, chemont_source, chemont_dictionary)
 
     target_classes: set[str] = set()
     if classes:
@@ -148,54 +137,93 @@ def _do_convert(
             all_results.append(result)
 
     # Run enrichers on all entities (including autochain-generated ones)
-    if enricher_instances:
-        from chemrof.converter.enrichers.base import EnrichmentContext, rewrite_references
+    _run_enrichers(all_results, enricher_instances)
 
-        id_remap: dict[str, str] = {}
-        for i, obj in enumerate(all_results):
-            old_id = obj.get("id", "")
-            inchikey = old_id.replace("INCHIKEY:", "")
-            context = EnrichmentContext(
-                mol=None,
-                inchikey=inchikey if obj.get("id", "").startswith("INCHIKEY:") else "",
-                smiles=obj.get("smiles_string", ""),
-                inchi=obj.get("inchi_string", ""),
+    _emit(all_results, format)
+
+
+def _build_enrichers(
+    enrichers: Optional[str],
+    chemont_source: Optional[Path] = None,
+    chemont_dictionary: Optional[Path] = None,
+) -> list:
+    instances = []
+    for name in (enrichers or "").split(","):
+        name = name.strip()
+        if not name:
+            continue
+        if name == "chemont":
+            instances.append(
+                ChemOntEnricher(source=chemont_source, dictionary_source=chemont_dictionary)
             )
-            for enricher in enricher_instances:
-                obj = enricher.enrich(obj, context)
-            all_results[i] = obj
-            if obj.get("id") != old_id:
-                id_remap[old_id] = obj["id"]
+        else:
+            instances.append(get_enricher(name))
+    return instances
 
-        # An enricher may have replaced ids (e.g. InChIKey -> CHEBI); keep links intact
-        rewrite_references(all_results, id_remap)
 
-        # Update RacemicMixture names from agnostic form's enriched name
-        for obj in all_results:
-            if obj.get("type") == "chemrof:RacemicMixture":
-                agnostic_id = obj.get("chirality_agnostic_form")
-                agnostic = next(
-                    (r for r in all_results if r["id"] == agnostic_id), None
-                )
-                if agnostic and agnostic.get("name") != agnostic.get("empirical_formula"):
-                    obj["name"] = f"rac-{agnostic['name']}"
+def _run_enrichers(all_results: list[dict], enricher_instances: list) -> None:
+    """Enrich every entity in place, keeping cross-references valid."""
+    if not enricher_instances:
+        return
+    from chemrof.converter.enrichers.base import EnrichmentContext, rewrite_references
+
+    id_remap: dict[str, str] = {}
+    for i, obj in enumerate(all_results):
+        old_id = obj.get("id", "")
+        inchikey = old_id.replace("INCHIKEY:", "")
+        context = EnrichmentContext(
+            mol=None,
+            inchikey=inchikey if obj.get("id", "").startswith("INCHIKEY:") else "",
+            smiles=obj.get("smiles_string", ""),
+            inchi=obj.get("inchi_string", ""),
+        )
+        for enricher in enricher_instances:
+            obj = enricher.enrich(obj, context)
+        all_results[i] = obj
+        if obj.get("id") != old_id:
+            id_remap[old_id] = obj["id"]
+
+    # An enricher may have replaced ids (e.g. InChIKey -> CHEBI); keep links intact
+    rewrite_references(all_results, id_remap)
+
+    # Update RacemicMixture names from agnostic form's enriched name
+    by_id = {r["id"]: r for r in all_results}
+    for obj in all_results:
+        if obj.get("type") == "chemrof:RacemicMixture":
+            agnostic = by_id.get(obj.get("chirality_agnostic_form"))
+            if agnostic and agnostic.get("name") != agnostic.get("empirical_formula"):
+                obj["name"] = f"rac-{agnostic['name']}"
+
+
+def _emit(
+    all_results: list[dict], format: OutputFormat, output: Optional[Path] = None, workers: int = 1
+) -> None:
+    """Write entities as YAML, JSON or OWL to *output* (stdout if None)."""
+
+    def write(text: str) -> None:
+        if output is None:
+            typer.echo(text)
+        else:
+            output.write_text(text + "\n")
 
     if format == OutputFormat.owl:
-        from chemrof.converter.owl_output import dicts_to_owl
+        from chemrof.converter.owl_output import dicts_to_owl, dicts_to_owl_parallel
 
-        typer.echo(dicts_to_owl(all_results))
+        if workers > 1:
+            write(dicts_to_owl_parallel(all_results, workers))
+        else:
+            write(dicts_to_owl(all_results))
         return
 
-    output = all_results if len(all_results) > 1 else all_results[0]
+    data = all_results if len(all_results) > 1 else all_results[0]
 
     if format == OutputFormat.json:
-        typer.echo(json.dumps(output, indent=2))
+        write(json.dumps(data, indent=2))
+    elif isinstance(data, list):
+        # Multi-document YAML
+        write(yaml.dump_all(data, default_flow_style=False, sort_keys=False).rstrip())
     else:
-        if isinstance(output, list):
-            # Multi-document YAML
-            typer.echo(yaml.dump_all(output, default_flow_style=False, sort_keys=False).rstrip())
-        else:
-            typer.echo(yaml.dump(output, default_flow_style=False, sort_keys=False).rstrip())
+        write(yaml.dump(data, default_flow_style=False, sort_keys=False).rstrip())
 
 
 @app.command()
@@ -338,6 +366,142 @@ def convert_maud(
         output.write_text(text)
     else:
         typer.echo(text)
+
+
+def _read_seeds(path: Path) -> list[dict]:
+    """Read seed structures: one per line, ``structure[<TAB>name[<TAB>id]]``.
+
+    Blank lines and lines starting with ``#`` are skipped. ``-`` reads stdin.
+    """
+    import sys
+
+    text = sys.stdin.read() if str(path) == "-" else path.read_text()
+    seeds = []
+    for line in text.splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        fields = line.rstrip("\n").split("\t")
+        seed = {"structure": fields[0].strip()}
+        if len(fields) > 1 and fields[1].strip():
+            seed["name"] = fields[1].strip()
+        if len(fields) > 2 and fields[2].strip():
+            seed["id"] = fields[2].strip()
+        seeds.append(seed)
+    return seeds
+
+
+_GENERATORS_HELP = """Comma-separated generators to saturate under.
+
+  stereo       stereo-agnostic parent, stereoisomers and racemates of a
+               molecule; neutral atom, isotopes and ions of an element
+  salt         cationic and anionic components of a salt
+  protonation  uncharged parent and pH 7.3 major microspecies, linked by
+               has_major_microspecies_at_pH7_3 (and conjugate_acid_of /
+               conjugate_base_of or tautomer_of where one step apart)
+  tautomer     RDKit-enumerated tautomers (off by default; grows fast)"""
+
+
+@app.command()
+def saturate(
+    seeds: Path = typer.Argument(
+        help="File of seed structures, one SMILES or InChI per line, optionally "
+        "followed by a tab and a name and a tab and an id to use (e.g. CHEBI:16977). '-' for stdin.",
+    ),
+    generators: str = typer.Option(
+        ",".join(DEFAULT_GENERATORS), "--generators", "-g", help=_GENERATORS_HELP,
+    ),
+    max_entities: int = typer.Option(
+        100_000, "--max-entities", min=1, help="Stop expanding past this many entities.",
+    ),
+    max_rounds: Optional[int] = typer.Option(
+        None, "--max-rounds", min=0, help="Stop this many generations from the seeds "
+        "(default: run to fixpoint).",
+    ),
+    max_siblings: int = typer.Option(
+        DEFAULT_MAX_SIBLINGS, "--max-siblings", min=1,
+        help="The most stereoisomers to generate for one molecule.",
+    ),
+    workers: int = typer.Option(
+        1, "--workers", "-w", min=1,
+        help="Processes to use. Seeds are split into chunks saturated independently "
+        "and merged; --max-entities then applies per chunk.",
+    ),
+    format: OutputFormat = typer.Option(
+        OutputFormat.yaml, "--format", "-f", help="Output format.",
+    ),
+    output: Optional[Path] = typer.Option(
+        None, "--output", "-o", help="Write to a file instead of stdout.",
+    ),
+    enrichers: Optional[str] = typer.Option(
+        None, "--enrichers", "-e", help=_ENRICHER_HELP,
+    ),
+    chemont_source: Optional[Path] = typer.Option(
+        None, "--chemont-source", help="Local ChemOnt labels source (see convert).",
+    ),
+    chemont_dictionary: Optional[Path] = typer.Option(
+        None, "--chemont-dictionary", help="Local ChemOnt dictionary (see convert).",
+    ),
+):
+    """Generate a closed, ChEBI-like entity graph from seed structures.
+
+    Every seed, and every structure generated from it, is run through the
+    generators until no new structure appears: e.g. L-alanine yields D-alanine,
+    alanine, rac-alanine and the zwitterion of each. Structures reached by
+    several routes are merged by id (InChIKey; zwitterions, which share their
+    uncharged form's InChIKey, get chemrof:zwitterion-<InChIKey>).
+
+    Examples:
+
+        chemrof saturate seeds.tsv -o graph.yaml
+
+        chemrof saturate seeds.tsv -f owl -o graph.owl --enrichers chebi
+
+        echo "OC(=O)CC(O)(CC(O)=O)C(O)=O" | chemrof saturate - -g protonation
+    """
+    import logging
+
+    from rdkit import RDLogger
+
+    from chemrof.converter.saturate import (
+        ALL_GENERATORS,
+        SaturationStats,
+        saturate as do_saturate,
+        saturate_parallel,
+    )
+
+    RDLogger.DisableLog("rdApp.*")
+    logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
+
+    gens = [g.strip() for g in generators.split(",") if g.strip()]
+    if set(gens) - set(ALL_GENERATORS):
+        raise typer.BadParameter(f"unknown generators {sorted(set(gens) - set(ALL_GENERATORS))}; "
+                                 f"choose from {', '.join(ALL_GENERATORS)}")
+    kwargs = dict(
+        generators=gens, max_entities=max_entities, max_rounds=max_rounds, max_siblings=max_siblings
+    )
+    stats = SaturationStats()
+    seed_list = _read_seeds(seeds)
+    if workers > 1:
+        results = saturate_parallel(
+            seed_list,
+            workers,
+            stats=stats,
+            progress=lambda done, total: typer.echo(f"{done}/{total} seeds", err=True),
+            **kwargs,
+        )
+    else:
+        results = do_saturate(seed_list, stats=stats, **kwargs)
+    if not results:
+        raise typer.BadParameter("no parseable seed structures")
+
+    _run_enrichers(results, _build_enrichers(enrichers, chemont_source, chemont_dictionary))
+    _emit(results, format, output, workers)
+    typer.echo(
+        f"{stats.seeds} seeds -> {len(results)} entities in {stats.rounds} rounds"
+        + (f"; {len(stats.failed)} seeds unparseable" if stats.failed else "")
+        + ("; truncated at --max-entities" if stats.truncated else ""),
+        err=True,
+    )
 
 
 class ChemOntStoreFormat(str, Enum):
