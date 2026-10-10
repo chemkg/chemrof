@@ -98,6 +98,38 @@ examples/output: $(SCHEMA_SRC)
 schema/sssom/chemrof.sssom.tsv: src/chemrof/schema/chemrof.yaml
 	$(RUN) gen-sssom $< -o $@
 
+
+# -- DuckDB analysis databases over semsql ontology builds (see views/) --
+SEMSQL_URL = https://s3.amazonaws.com/bbop-sqlite
+DUCKDB = duckdb
+
+db/%.db:
+	mkdir -p db
+	curl -L -s $(SEMSQL_URL)/$*.db.gz | gzip -dc > $@.tmp && mv $@.tmp $@
+
+# Copy the semsql base tables into a fresh duckdb file and recreate the semsql
+# views that views/*.sql rely on. Only tables are copied because the duckdb
+# sqlite scanner cannot parse every semsql view definition.
+define semsql2duckdb
+rm -f $@
+$(DUCKDB) $@ -c "INSTALL sqlite; LOAD sqlite; ATTACH '$<' AS src (TYPE sqlite, READ_ONLY); CREATE TABLE statements AS FROM src.statements; CREATE TABLE entailed_edge AS FROM src.entailed_edge;"
+$(DUCKDB) $@ < views/semsql-core.sql
+endef
+
+database/go.ddb: db/go.db views/semsql-core.sql
+	$(semsql2duckdb)
+
+# CHEBI ids used in GO annotations (input to chebi-views.sql)
+database/go-chebi-used.csv: database/go.ddb views/go-views.sql
+	$(DUCKDB) $< < views/go-views.sql
+
+# ChEBI analysis tables and views: physiological stable forms, salts,
+# racemates, conjugate acid/base charges, ... (writes tmp/stable_xrefs.csv)
+database/chebi.ddb: db/chebi.db views/semsql-core.sql views/chebi-views.sql database/chebi_pH7_3_mapping.tsv database/go-chebi-used.csv
+	$(semsql2duckdb)
+	mkdir -p tmp
+	$(DUCKDB) $@ < views/chebi-views.sql
+
 # test docs locally.
 docserve:
 	$(RUN) mkdocs serve
