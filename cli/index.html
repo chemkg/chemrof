@@ -419,6 +419,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemrof-saturate" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof saturate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemrof-from-smiles-deprecated" class="md-nav__link">
     <span class="md-ellipsis">
       chemrof from-smiles (deprecated)
@@ -840,6 +849,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemrof-saturate" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof saturate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemrof-from-smiles-deprecated" class="md-nav__link">
     <span class="md-ellipsis">
       chemrof from-smiles (deprecated)
@@ -1197,6 +1215,77 @@ chemrof class:</p>
 </tr>
 </tbody>
 </table>
+<h3 id="chemrof-saturate"><code>chemrof saturate</code></h3>
+<p>Builds a closed, ChEBI-like graph of entities from a file of seed structures.
+Every seed, and every structure generated from it, is run through a set of
+generators, and whatever they produce is fed back in until nothing new
+appears. Entities reached by several routes are merged by id, so the output
+is one graph with each structure once.</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>saturate<span class="w"> </span>seeds.tsv<span class="w"> </span>-o<span class="w"> </span>graph.yaml
+chemrof<span class="w"> </span>saturate<span class="w"> </span>seeds.tsv<span class="w"> </span>-f<span class="w"> </span>owl<span class="w"> </span>-o<span class="w"> </span>graph.owl<span class="w"> </span>-w<span class="w"> </span><span class="m">4</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OC(=O)CC(O)(CC(O)=O)C(O)=O&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>chemrof<span class="w"> </span>saturate<span class="w"> </span>-<span class="w"> </span>-g<span class="w"> </span>protonation
+</code></pre></div>
+<p>The seed file has one structure (SMILES or InChI) per line, optionally
+followed by a tab and a name and a tab and an id to use instead of the
+InChIKey (e.g. a CHEBI id). Blank lines and lines starting with <code>#</code> are
+skipped.</p>
+<div class="highlight"><pre><span></span><code>N[C@@H](C)C(O)=O    L-alanine   CHEBI:16977
+OC(=O)CC(O)(CC(O)=O)C(O)=O  citric acid CHEBI:30769
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Generator</th>
+<th>Produces</th>
+<th>Links</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stereo</code></td>
+<td>stereo-agnostic parent, stereoisomers, racemates (as <code>--siblings</code>); for an atom, its element's family</td>
+<td><code>enantiomer_form_of</code>, <code>has_left_enantiomer</code>, ...</td>
+</tr>
+<tr>
+<td><code>salt</code></td>
+<td>a salt's cation and anion</td>
+<td><code>has_cationic_component</code>, <code>has_anionic_component</code></td>
+</tr>
+<tr>
+<td><code>protonation</code></td>
+<td>uncharged parent and major microspecies at pH 7.3</td>
+<td><code>has_major_microspecies_at_pH7_3</code>; also <code>conjugate_acid_of</code>/<code>conjugate_base_of</code> one proton apart, <code>tautomer_of</code> for a zwitterion</td>
+</tr>
+<tr>
+<td><code>tautomer</code></td>
+<td>RDKit tautomers (off by default)</td>
+<td><code>tautomer_of</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>--generators</code> picks a subset (default <code>stereo,salt,protonation</code>). L-alanine,
+for example, saturates to alanine, L-, D- and rac-alanine, and the zwitterion
+of each: 8 entities.</p>
+<p>The pH 7.3 forms come from a rule-based predictor (<code>chemrof.converter.protonation</code>)
+written to follow Rhea's <code>chebi_pH7_3_mapping.tsv</code>. Only the major microspecies
+is generated, not the intermediate charge states, so <code>conjugate_acid_of</code> /
+<code>conjugate_base_of</code> are asserted only when the two forms are one proton apart.</p>
+<p><strong>Ids.</strong> Entities are keyed by InChIKey. Standard InChI drops the charge
+separation of a zwitterion, so a zwitterion is keyed
+<code>chemrof:zwitterion-&lt;InChIKey&gt;</code> to keep it apart from its uncharged form, as
+ChEBI does. A seed's own id (third column) replaces its InChIKey everywhere
+once saturation is done.</p>
+<p><strong>Names.</strong> Seeds keep their names. A generated entity whose name is still its
+formula is named after a named relative: <code>L-alanine zwitterion</code>,
+<code>rac-lactic acid</code>, <code>(R)-lactic acid</code>, <code>citric acid(3-)</code>.</p>
+<p><strong>Large stereo families.</strong> A molecule with more than <code>--max-siblings</code>
+stereoisomers (default 64) gets only its stereo-agnostic parent, its mirror
+image and their racemate, not a sample of the family.</p>
+<p><strong>Limits.</strong> <code>--max-rounds</code> stops a given number of generations from the
+seeds; <code>--max-entities</code> stops expanding past a size. <code>--workers N</code> splits the
+seeds into chunks saturated in parallel and merged; <code>--max-entities</code> then
+applies per chunk. The run summary goes to stderr. <code>--enrichers</code> works as for
+<code>convert</code> and runs on the whole graph.</p>
 <h3 id="chemrof-from-smiles-deprecated"><code>chemrof from-smiles</code> (deprecated)</h3>
 <p>Hidden alias for <code>chemrof convert</code>. Still works for backwards compatibility
 but does not support <code>--classes</code> or <code>--autochain</code>.</p>
