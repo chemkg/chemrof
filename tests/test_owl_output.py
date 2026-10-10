@@ -62,6 +62,15 @@ class TestDictsToOwl:
         owl = dicts_to_owl([obj])
         assert "label" in owl
 
+    def test_iupac_name_annotation_assertion(self, converter):
+        """An IUPAC_name (as the openclatura enricher fills) becomes an
+        OWL AnnotationAssertion, composing enrichment with OWL generation."""
+        obj = converter.convert("CC(=O)Nc1ccccc1")
+        obj["IUPAC_name"] = "N-phenylacetamide"
+        owl = dicts_to_owl([obj])
+        assert "AnnotationAssertion(chemrof:IUPAC_name" in owl
+        assert "N-phenylacetamide" in owl
+
     def test_classified_by_outputs_subclass_axioms(self, converter):
         obj = converter.convert("CCO")
         obj["classified_by"] = ["CHEMONTID:0000000", "CHEMONTID:0000286"]

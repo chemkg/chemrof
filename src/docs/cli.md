@@ -193,6 +193,7 @@ chemrof convert "[Fe+3]" --enrichers chebi
 |--------|--------|-------------|
 | `pubchem` | Working | Preferred IUPAC name and PubChem CID (via InChIKey lookup) |
 | `chemont` | Working | Ordered ChemOnt/ClassyFire tree classes in `classified_by` (via local lookup store) |
+| `openclatura` | Working | Systematic `IUPAC_name` derived locally from the structure, no network (via [openclatura](https://github.com/lamalab-org/openclatura); needs `pip install 'chemrof[openclatura]'`) |
 | `chebi` | Working (atoms) | For atoms, monoatomic ions and isotopes: replaces `id` with the CHEBI id and sets `name` (offline, from a bundled table). Other entities are left unchanged |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL |
 
