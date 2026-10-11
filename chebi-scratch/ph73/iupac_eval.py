@@ -11,9 +11,15 @@ This checks the charge state, not which atom carries it.
 The dataset is CC BY-NC 4.0 (IUPAC), so it is downloaded into data/ (gitignored)
 and only aggregate scores are committed.
 
-    uv run --with dimorphite_dl python iupac_eval.py
+Molecules are split by InChIKey: 25% train (failures may be read), 25% dev
+(accept/reject decisions only) and 50% sealed (final score only; needs --unseal, each use is logged). Only molecules
+with no pK within 0.5 of 7.3 and a complete pKa list are scored.
+
+    uv run --with dimorphite_dl python iupac_eval.py table --split dev
+    python iupac_eval.py compare p_chemrof p_baseline --split dev
+    uv run --with dimorphite_dl python iupac_eval.py table --split sealed --unseal
 """
-import os, re, subprocess, pickle
+import argparse, datetime, hashlib, importlib, os, subprocess, sys
 import numpy as np, pandas as pd
 from rdkit import Chem, RDLogger
 from rdkit.Chem.MolStandardize import rdMolStandardize
@@ -50,9 +56,7 @@ def load():
     rows = []
     for smi, x in g.groupby('SMILES'):
         m = Chem.MolFromSmiles(smi)
-        if m is None or any(a.GetFormalCharge() for a in m.GetAtoms()) and Chem.GetFormalCharge(m) != 0:
-            continue
-        if Chem.GetFormalCharge(m) != 0 or '.' in smi:
+        if m is None or Chem.GetFormalCharge(m) != 0 or '.' in smi:
             continue
         pk = x.pka_value.to_numpy()
         q = int(((x.kind == 'base') & (x.pka_value > PH)).sum() - ((x.kind == 'acid') & (x.pka_value < PH)).sum())
@@ -61,7 +65,18 @@ def load():
                          complete=len(x) >= n_sites,
                          borderline=bool((abs(pk - PH) < BAND).any()),
                          inchikey=Chem.MolToInchiKey(m)))
-    return pd.DataFrame(rows).drop_duplicates('smiles')
+    mols = pd.DataFrame(rows).drop_duplicates('smiles')
+    # IUPAC split added 2026-10-11. Before this, the full set had been scored
+    # once, and 38 molecules where the rules and ChemAxon both disagreed with
+    # it were read to check the grader.
+    # The non-sealed half is split again into train (failures may be read) and
+    # dev (accept/reject only).
+    def split(k):
+        if int(hashlib.md5(('iupac:' + k).encode()).hexdigest(), 16) % 2:
+            return 'sealed'
+        return 'train' if int(hashlib.sha1(('iupac-train:' + k).encode()).hexdigest(), 16) % 2 else 'dev'
+    mols['split'] = [split(k) for k in mols.inchikey]
+    return mols[~mols.borderline & mols.complete]
 
 
 def charge(smi):
@@ -96,35 +111,27 @@ def score(y, p, rng, n_boot=N_BOOT):
     return f"{ok.mean():.3f} [{lo:.3f}, {hi:.3f}]"
 
 
-def main():
-    import sys
-    sys.path.insert(0, '../../src')
-    from chemrof.converter.protonation import predict_major_microspecies
-    preds = {'identity': lambda s: s, 'chemrof rules': predict_major_microspecies}
-    try:
+def predictor(name):
+    if name == 'identity':
+        return lambda s: s
+    if name == 'p_dimorphite':
         from dimorphite_dl import protonate_smiles
-        preds['Dimorphite-DL'] = lambda s: (protonate_smiles(s, ph_min=PH, ph_max=PH, precision=0.0,
-                                                             max_variants=1) or [s])[0]
-    except ImportError:
-        print('(dimorphite_dl not installed; skipping)')
-    mols = load()
-    for name, f in preds.items():
-        mols[name] = [charge(f(s)) for s in mols.smiles]
-    mols['Rhea (ChemAxon)'] = rhea_charges(mols)
-    mols.to_csv('data/iupac_scored.tsv', sep='\t', index=False)
-    rng = np.random.default_rng(0)
-    names = list(preds) + ['Rhea (ChemAxon)']
-    clear = mols[~mols.borderline]
-    for label, sub in (('all molecules with no pK within 0.5 of 7.3', clear),
-                       ('...and pKa list complete (n_pk >= ionizable groups)', clear[clear.complete])):
-        print(f"\n== {label}")
-        table(sub, names, rng)
-    # paired: rules vs Rhea on the same molecules
-    p = clear[clear.complete & clear['Rhea (ChemAxon)'].notna()]
-    d = ((p['chemrof rules'] == p.charge).astype(int) - (p['Rhea (ChemAxon)'] == p.charge).astype(int)).to_numpy()
-    lo, hi = np.percentile(d[rng.integers(0, len(d), (N_BOOT, len(d)))].mean(1), [2.5, 97.5])
-    print(f"\npaired rules - Rhea (complete, in Rhea, n={len(d)}): {d.mean():+.3f} [{lo:+.3f}, {hi:+.3f}]  "
-          f"only rules right: {(d > 0).sum()}  only Rhea right: {(d < 0).sum()}")
+        return lambda s: (protonate_smiles(s, ph_min=PH, ph_max=PH, precision=0.0, max_variants=1) or [s])[0]
+    return importlib.import_module(name).predict
+
+
+def charges(name, smiles):
+    f = predictor(name)
+    out, n_err = [], 0
+    for s in smiles:
+        try:
+            out.append(charge(f(s)))
+        except Exception:
+            out.append(None)
+            n_err = n_err + 1
+    if n_err:
+        print(f"  !! {name}: {n_err} predictions raised an exception")
+    return out
 
 
 def table(mols, names, rng):
@@ -136,6 +143,51 @@ def table(mols, names, rng):
     for n in names:
         cells = [score(d.charge, d[n], rng) if d[n].notna().all() else '-' for _, d in subsets]
         print(f"{n:16s}" + ''.join(f"{c:>26s}" for c in cells))
+    d = ((in_rhea['p_chemrof'] == in_rhea.charge).astype(int)
+         - (in_rhea['Rhea (ChemAxon)'] == in_rhea.charge).astype(int)).to_numpy()
+    lo, hi = np.percentile(d[rng.integers(0, len(d), (N_BOOT, len(d)))].mean(1), [2.5, 97.5])
+    print(f"\npaired rules - Rhea (in Rhea, n={len(d)}): {d.mean():+.3f} [{lo:+.3f}, {hi:+.3f}]  "
+          f"only rules right: {(d > 0).sum()}  only Rhea right: {(d < 0).sum()}")
+
+
+def main():
+    sys.path.insert(0, '../../src')
+    ap = argparse.ArgumentParser()
+    ap.add_argument('mode', choices=['table', 'compare'])
+    ap.add_argument('predictors', nargs='*', help='compare: candidate then baseline module')
+    ap.add_argument('--split', default='dev', choices=['train', 'dev', 'sealed'])
+    ap.add_argument('--unseal', action='store_true')
+    a = ap.parse_args()
+    if a.split == 'sealed':
+        if not a.unseal:
+            ap.error('the sealed split is for the final score only; pass --unseal')
+        with open('data/unseal.log', 'a') as f:
+            f.write(f"{datetime.datetime.now().isoformat()}\tiupac\t{a.mode} {' '.join(a.predictors)}\n")
+    mols = load()
+    mols = mols[mols.split == a.split].copy()
+    rng = np.random.default_rng(0)
+    if a.mode == 'table':
+        names = a.predictors or ['identity', 'p_dimorphite', 'p_chemrof']
+        for n in names:
+            mols[n] = charges(n, mols.smiles)
+        mols['Rhea (ChemAxon)'] = rhea_charges(mols)
+        mols.to_csv(f'data/iupac_scored_{a.split}.tsv', sep='\t', index=False)
+        print(f"IUPAC {a.split}: {len(mols)} molecules")
+        table(mols, names + ['Rhea (ChemAxon)'], rng)
+    else:
+        cand, base = a.predictors
+        y = mols.charge.to_numpy()
+        c = np.array(charges(cand, mols.smiles), dtype=float) == y
+        b = np.array(charges(base, mols.smiles), dtype=float) == y
+        d = c.astype(int) - b.astype(int)
+        lo, hi = np.percentile(d[rng.integers(0, len(d), (N_BOOT, len(d)))].mean(1), [2.5, 97.5])
+        verdict = 'ACCEPT (beyond noise)' if lo > 0 else 'REJECT (worse)' if hi < 0 else 'NO CLEAR CHANGE (within noise)'
+        print(f"IUPAC {a.split} n={len(d)}: {cand} {c.mean():.4f}  {base} {b.mean():.4f}")
+        print(f"  paired diff: {d.mean():+.4f} [{lo:+.4f}, {hi:+.4f}] -> {verdict}")
+        print(f"  molecules fixed: {(d > 0).sum()}  broken: {(d < 0).sum()}")
+        mols['cand'] = c
+        mols['base'] = b
+        mols.to_csv(f'data/iupac_compare_{a.split}.tsv', sep='\t', index=False)
 
 
 if __name__ == '__main__':

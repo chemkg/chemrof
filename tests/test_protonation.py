@@ -39,6 +39,20 @@ def can(smiles: str) -> str:
         ("acetamide", "CC(N)=O", "CC(N)=O"),
         ("1-pyrroline-2-carboxylic acid", "OC(=O)C1=NCCC1", "[O-]C(=O)C1=[NH+]CCC1"),
         ("sodium(1+) unchanged", "[Na+]", "[Na+]"),
+        # rules added by hill-climbing against measured pKa (see chebi-scratch/ph73)
+        ("4-nitropyridine not protonated", "O=[N+]([O-])c1ccncc1", "O=[N+]([O-])c1ccncc1"),
+        ("sulfinic acid", "O=S(O)c1ccccc1", "O=S([O-])c1ccccc1"),
+        ("thiophenol", "Sc1ccccc1", "[S-]c1ccccc1"),
+        ("1-methyl-2-iminopyrimidine", "CN1C=CC=NC1=N", "Cn1cccnc1=[NH2+]"),
+        ("N1-substituted adenine left neutral", "Cn1cnc2c(c1=N)ncn2C", "Cn1cnc2c(c1=N)ncn2C"),
+        ("tropolone", "O=c1cccccc1O", "O=c1cccccc1[O-]"),
+        ("1,1-dinitropropane", "CCC([N+](=O)[O-])[N+](=O)[O-]", "CC[C-]([N+](=O)[O-])[N+](=O)[O-]"),
+        ("cyclohexane-1,3-dione", "O=C1CCCC(=O)C1", "O=C1C=C([O-])CCC1"),
+        ("acetylacetone stays neutral", "CC(=O)CC(C)=O", "CC(=O)CC(C)=O"),
+        ("bis(2-chloroethyl)methylamine", "CN(CCCl)CCCl", "CN(CCCl)CCCl"),
+        ("6-azauracil", "O=c1cn[nH]c(=O)[nH]1", "O=c1cn[nH]c(=O)[n-]1"),
+        ("uracil stays neutral", "O=c1cc[nH]c(=O)[nH]1", "O=c1cc[nH]c(=O)[nH]1"),
+        ("deuterated acid does not crash", "[2H]OC(=O)C(F)(F)F", "[2H]OC(=O)C(F)(F)F"),
     ],
 )
 def test_predict(name, smiles, expected):
@@ -50,9 +64,11 @@ def test_invalid_smiles():
 
 
 def test_rule_smarts_parse():
-    for _, smarts, _ in protonation.ACIDS:
-        protonation._pat(smarts)
-    for smarts in protonation.PHOSPHORIC_KEEP + protonation.WEAK_AMINES + protonation.AMIDINES:
+    for name, smarts, _ in protonation.ACIDS:
+        # the acid loop reads match[1] as the centre atom
+        assert protonation._pat(smarts).GetNumAtoms() >= 2, name
+    for smarts in (protonation.PHOSPHORIC_KEEP + protonation.WEAK_AMINES + protonation.AMIDINES
+                   + [protonation.TROPOLONE, protonation.CYCLIC_DIKETONE, protonation.IMINO_ACID]):
         protonation._pat(smarts)
 
 

@@ -38,11 +38,13 @@ ACIDS = [
     ("phosphoric acid OH", "[OX2H1:1][PX4;!$(P[#6])](=[OX1])([OX2H1])[OX2H1]", None),
     ("phosphonic / phosphinic OH", "[OX2H1:1][PX4](=[OX1])[#6,#1]", 1),
     ("sulfonic / sulfuric OH", "[OX2H1:1][SX4](=[OX1])=[OX1]", None),
+    ("sulfinic OH", "[OX2H1:1][SX3]=[OX1]", None),
     ("thiophosphate SH", "[SX2H1:1][PX4]=[SX1,OX1]", None),
     ("thiophosphate OH", "[OX2H1:1][PX4]=[SX1]", None),
     ("arsonic OH", "[OX2H1:1][As](=[OX1])", 1),
     ("nitric acid", "[OX2H1:1][N+](=O)[O-]", None),
     ("thio / dithio acid SH", "[SX2H1:1]C=[O,S]", None),
+    ("thiophenol (benzene ring, pKa ~6.6)", "[SX2H1:1]c1ccccc1", None),
     ("tetrazole NH", "[nH:1]1nnnc1", None),
     ("acyl sulfonamide NH", "[NX3H1:1](C=O)S(=O)=O", None),
     ("flavone / isoflavone 7-OH", "[OX2H1:1]c1ccc2c(c1)occc2=O", None),
@@ -50,6 +52,10 @@ ACIDS = [
     ("o/p-nitrophenol", "[OX2H1:1]c1ccc(cc1)[N+](=O)[O-]", None),
     ("o-nitrophenol", "[OX2H1:1]c1ccccc1[N+](=O)[O-]", None),
     ("2,6-dihalophenol", "[OX2H1:1]c1c([Cl,Br,I])cccc1[Cl,Br,I]", None),
+    ("aza- / nitro-imide NH (azauracils, 5-nitrouracils)",
+     "[nH;$([nH](c=O)c=O);$([nH]1:c:[nX2,$(c[N+](=O)[O-])]:*:*:*:1),$([nH]1:c:*:[nX2,$(c[N+](=O)[O-])]:*:*:1),"
+     "$([nH]1:c:*:*:[nX2,$(c[N+](=O)[O-])]:*:1):1]c=O", None),
+    ("gem-dinitro C-H (pKa ~5)", "[CX4H1:1]([N+](=O)[O-])[N+](=O)[O-]", None),
     ("vinylogous acid (1,3-dicarbonyl enol)", "[OX2H1:1][CX3]=[CX3][CX3]=[OX1]", None),
 ]
 
@@ -69,6 +75,8 @@ WEAK_AMINES = [
     "[N:1]CC#N",
     "[N:1][CX4][NX3;!$(NC=O)]",  # aminal N-C-N
     "[N:1]CC(F)(F)",
+    # two beta electron-withdrawing groups, e.g. bis(2-chloroethyl)amines
+    "[N:1](CC[Cl,Br,$(C#N),$([N+](=O)[O-])])CC[Cl,Br,$(C#N),$([N+](=O)[O-])]",
 ]
 # Cationic bases protonated on an sp2 N (atom 0), atom 1 is the carbon
 AMIDINES = [
@@ -77,9 +85,17 @@ AMIDINES = [
     "=[CX3;!$(C=O);!$(C[OX2])]([#6,#7,#16,#1;!$([#7]C=O)])[NX3;!$(NC=O);!$(N[S,P])]",
     # formamidine
     "[NX2;+0;!$(N[#8,#7]);!$(N[S,P]);!$(NC=O);!$(N[a]):1]=[CX3H1][NX3;!$(NC=O);!$(N[S,P])]",
+    # exocyclic imine on a non-fused azine/azole ring (2-iminopyrimidine etc.);
+    # fused systems (N1-substituted adenines) are left neutral as in Rhea
+    "[NX2;+0;!$(N[#7,#8,#16]);!$(NC=O):1]=c1:[n;R1]:[a;R1]:[a;R1]:[a;R1]:[a;R1]:1",
+    "[NX2;+0;!$(N[#7,#8,#16]);!$(NC=O):1]=c1:[n;R1]:[a;R1]:[a;R1]:[a;R1]:1",
     # 4-aminopyridine-type ring N
-    "[nX2;+0;r6:1]1:c:c:c(-[NX3;H2,H1,H0;!$(NC=O);!$(NS)]):c:c:1",
+    "[nX2;+0;r6:1]1:c:c:c(-[NX3;+0;H2,H1,H0;!$(NC=O);!$(NS)]):c:c:1",
 ]
+# Cyclic 1,3-diketone (keto form, pKa ~4-5): C-H between two ring ketones
+CYCLIC_DIKETONE = "[CX4;H1,H2;R:1]([CX3;R](=[OX1])[#6])[CX3;R](=[OX1])[#6]"
+# Weak acids (pKa ~6.7) ionized only when the molecule has no other anion
+TROPOLONE = "[OX2H1:1]c1cccccc1=O"
 IMINO_ACID = "[NX2;+0;!$(N[#7,#8]):1]=[CX3]C(=O)[O-,OH]"
 
 # Species containing anything else (metals etc.) are left unchanged
@@ -136,13 +152,30 @@ def ionize(mol: Chem.Mol) -> Chem.Mol:
         # uniquify=False: equivalent OH groups on one centre share an atom set
         for match in mol.GetSubstructMatches(_pat(smarts), uniquify=False):
             site, centre = match[0], match[1]
-            if site in done or site in keep:
+            # the H may be an explicit (e.g. deuterium) atom; leave those alone
+            if site in done or site in keep or mol.GetAtomWithIdx(site).GetTotalNumHs() == 0:
                 continue
             if max_per_centre is not None and per_centre.get(centre, 0) >= max_per_centre:
                 continue
             per_centre[centre] = per_centre.get(centre, 0) + 1
             _shift(mol.GetAtomWithIdx(site), -1)
             done.add(site)
+
+    # cyclic 1,3-diketones: draw as the enolate C=C-[O-]
+    for match in mol.GetSubstructMatches(_pat(CYCLIC_DIKETONE)):
+        c_alpha, c_carbonyl, oxygen = (mol.GetAtomWithIdx(i) for i in match[:3])
+        if c_alpha.GetTotalNumHs() == 0 or oxygen.GetFormalCharge() != 0:
+            continue
+        c_alpha.SetNumExplicitHs(c_alpha.GetTotalNumHs() - 1)
+        c_alpha.SetNoImplicit(True)
+        mol.GetBondBetweenAtoms(match[0], match[1]).SetBondType(Chem.BondType.DOUBLE)
+        mol.GetBondBetweenAtoms(match[1], match[2]).SetBondType(Chem.BondType.SINGLE)
+        oxygen.SetFormalCharge(-1)
+
+    if not any(a.GetFormalCharge() < 0 for a in mol.GetAtoms()):
+        match = mol.GetSubstructMatch(_pat(TROPOLONE))
+        if match:
+            _shift(mol.GetAtomWithIdx(match[0]), -1)
 
     weak = {m[0] for s in WEAK_AMINES for m in mol.GetSubstructMatches(_pat(s))}
 

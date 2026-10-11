@@ -32,7 +32,7 @@ def _run(smi):
         m = Chem.MolFromSmiles(p) if p else None
         return Chem.MolToSmiles(m) if m else None
     except Exception:
-        return None
+        return 'ERROR'
 
 
 def predict(name, b):
@@ -40,7 +40,10 @@ def predict(name, b):
         pred = p.map(_run, b.src_can.tolist(), chunksize=200)
     idx = pickle.load(open('data/chebi_can_idx.pkl', 'rb'))
     b = b.copy()
-    b['pred'] = pred
+    n_err = sum(p == 'ERROR' for p in pred)
+    if n_err:
+        print(f"  !! {name}: {n_err} predictions raised an exception")
+    b['pred'] = [None if p == 'ERROR' else p for p in pred]
     b['ok'] = b.pred == b.tgt_can
     b['pred_id'] = [tgt if tgt in idx.get(p, ()) else (sorted(idx[p])[0] if p in idx else src)
                     for p, src, tgt in zip(b.pred, b.src, b.tgt)]
@@ -97,6 +100,8 @@ def main():
         verdict = 'ACCEPT (beyond noise)' if lo > 0 else 'REJECT (worse)' if hi < 0 else 'NO CLEAR CHANGE (within noise)'
         print(f"  paired diff, ID changed: {m:+.4f}  [{lo:+.4f}, {hi:+.4f}]  -> {verdict}")
         print(f"  rows fixed: {int((d['diff'] > 0).sum())}  rows broken: {int((d['diff'] < 0).sum())}")
+        u = r.okid[~ch].astype(int) - base.okid[~ch].astype(int)
+        print(f"  unchanged rows fixed: {int((u > 0).sum())}  broken: {int((u < 0).sum())}")
     print(f"  ({time.time() - t:.0f}s)")
 
 
