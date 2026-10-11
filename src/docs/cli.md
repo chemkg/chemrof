@@ -36,6 +36,8 @@ chemrof convert [OPTIONS] INPUTS...
 | `--enrichers`, `-e` | _(none)_ | Comma-separated list of enricher sources |
 | `--classes`, `-c` | _(none)_ | Target chemrof classes (implies `--autochain`) |
 | `--autochain` | `false` | Generate interlinked dependent entities |
+| `--siblings` | `false` | Also generate the input's siblings: every species of an element, or every stereoisomer of a molecule (cannot be combined with `--classes`/`--autochain`) |
+| `--max-siblings` | `64` | With `--siblings`, the most stereoisomers to generate for one molecule |
 | `--chemont-source` | _(none)_ | Local ChemOnt labels source for `--enrichers chemont`: DuckDB, Parquet, or TSV/ZST |
 | `--chemont-dictionary` | _(auto)_ | ChemOnt dictionary TSV/Parquet when it is not bundled with the source |
 
@@ -132,7 +134,49 @@ chemrof convert "[Ca+2].[Cl-].[Cl-]" --classes ChemicalSalt --format json
 chemrof convert "Oc1ccccn1" --classes Tautomer --format json
 ```
 
-v1 limitation: autochain only supports single-stereocenter molecules.
+v1 limitation: autochain only supports single-stereocenter molecules. For more
+than one stereocenter use `--siblings`, below.
+
+### Siblings
+
+`--siblings` generates the other members of the input's family. Any member
+of the family gives the whole family.
+
+**Atoms** — every species of the element: the neutral atom, the naturally
+occurring isotopes, and the monoatomic ions and isotope-labelled forms that
+ChEBI has a class for.
+
+```bash
+# Starting from an element, an ion or an isotope gives the same family
+chemrof convert "[Fe]" --siblings
+chemrof convert "[Fe+3]" --siblings
+
+# ... with CHEBI ids where ChEBI has a class
+chemrof convert "[Fe]" --siblings --enrichers chebi --format json
+```
+
+The family of iron includes `Fe` (`UnchargedAtom`), `54Fe`/`56Fe`/`57Fe`/`58Fe`
+(`Isotope`), `Fe+2`/`Fe+3` (`AtomCation`) and `57Fe+2`/`57Fe+3`
+(`FullySpecifiedAtom`). The ions and labelled forms come from ChEBI, so a charge
+state ChEBI lacks (say `Fe+7`) is not generated unless it is the input itself.
+
+**Molecules** — the stereo-agnostic parent plus every stereoisomer of it.
+Chiral stereoisomers are `Enantiomer`s (linked to the parent by
+`enantiomer_form_of`); achiral ones — meso forms, cis/trans isomers — are
+`Stereoisomer`s. Each pair of mirror images is grouped in a `RacemicMixture`.
+
+```bash
+# R,R / S,S pair, its racemate, and the meso form
+chemrof convert "CC(O)C(C)O" --siblings
+
+# Four centers give 16 isomers; cap the output
+chemrof convert "OCC(O)C(O)C(O)C=O" --siblings --max-siblings 8
+```
+
+`2^n` isomers are possible for `n` stereo elements, so output is capped at
+`--max-siblings` (a warning says when that truncates). Salts and molecules
+without stereo elements have no siblings and are returned as is, with a warning.
+For one stereocenter the output is the same graph as `--classes RacemicMixture`.
 
 ### Enrichers
 
@@ -141,14 +185,15 @@ computes the structural properties. Pass a comma-separated list:
 
 ```bash
 chemrof convert CCO --enrichers pubchem
-chemrof convert CCO --enrichers pubchem,chebi
+chemrof convert CCO --enrichers pubchem
+chemrof convert "[Fe+3]" --enrichers chebi
 ```
 
 | Source | Status | What it adds |
 |--------|--------|-------------|
 | `pubchem` | Working | Preferred IUPAC name and PubChem CID (via InChIKey lookup) |
 | `chemont` | Working | Ordered ChemOnt/ClassyFire tree classes in `classified_by` (via local lookup store) |
-| `chebi` | Stub | Will resolve CHEBI identifiers via OLS |
+| `chebi` | Working (atoms) | For atoms, monoatomic ions and isotopes: replaces `id` with the CHEBI id and sets `name` (offline, from a bundled table). Other entities are left unchanged |
 | `wikidata` | Stub | Will resolve Wikidata QIDs via SPARQL |
 
 #### ChemOnt setup and usage
@@ -230,6 +275,8 @@ chemrof class:
 | Single atom, positive (e.g. `[Ca+2]`) | `AtomCation` |
 | Single atom, negative (e.g. `[Cl-]`) | `AtomAnion` |
 | Single atom, neutral (e.g. `[He]`) | `UnchargedAtom` |
+| Single atom, neutral, mass number given (e.g. `[13C]`) | `Isotope` |
+| Single atom, charged, mass number given (e.g. `[13C+]`) | `FullySpecifiedAtom` |
 | Multi-fragment salt (e.g. `[Na+].[Cl-]`) | `ChemicalSalt` |
 | Multi-atom, all stereocenters assigned (e.g. `C[C@@H](N)C(=O)O`) | `Enantiomer` |
 | Multi-atom, positive (e.g. `[NH4+]`) | `MolecularCation` |
@@ -307,6 +354,65 @@ results.
 See [Reaction Thermodynamics](explanations/thermodynamics.md) for the reasoning
 behind this, the quantities available, and the cases where the enricher declines
 to produce a number.
+### `chemrof saturate`
+
+Builds a closed, ChEBI-like graph of entities from a file of seed structures.
+Every seed, and every structure generated from it, is run through a set of
+generators, and whatever they produce is fed back in until nothing new
+appears. Entities reached by several routes are merged by id, so the output
+is one graph with each structure once.
+
+```bash
+chemrof saturate seeds.tsv -o graph.yaml
+chemrof saturate seeds.tsv -f owl -o graph.owl -w 4
+echo "OC(=O)CC(O)(CC(O)=O)C(O)=O" | chemrof saturate - -g protonation
+```
+
+The seed file has one structure (SMILES or InChI) per line, optionally
+followed by a tab and a name and a tab and an id to use instead of the
+InChIKey (e.g. a CHEBI id). Blank lines and lines starting with `#` are
+skipped.
+
+```
+N[C@@H](C)C(O)=O	L-alanine	CHEBI:16977
+OC(=O)CC(O)(CC(O)=O)C(O)=O	citric acid	CHEBI:30769
+```
+
+| Generator | Produces | Links |
+|---|---|---|
+| `stereo` | stereo-agnostic parent, stereoisomers, racemates (as `--siblings`); for an atom, its element's family | `enantiomer_form_of`, `has_left_enantiomer`, ... |
+| `salt` | a salt's cation and anion | `has_cationic_component`, `has_anionic_component` |
+| `protonation` | uncharged parent and major microspecies at pH 7.3 | `has_major_microspecies_at_pH7_3`; also `conjugate_acid_of`/`conjugate_base_of` one proton apart, `tautomer_of` for a zwitterion |
+| `tautomer` | RDKit tautomers (off by default) | `tautomer_of` |
+
+`--generators` picks a subset (default `stereo,salt,protonation`). L-alanine,
+for example, saturates to alanine, L-, D- and rac-alanine, and the zwitterion
+of each: 8 entities.
+
+The pH 7.3 forms come from a rule-based predictor (`chemrof.converter.protonation`)
+written to follow Rhea's `chebi_pH7_3_mapping.tsv`. Only the major microspecies
+is generated, not the intermediate charge states, so `conjugate_acid_of` /
+`conjugate_base_of` are asserted only when the two forms are one proton apart.
+
+**Ids.** Entities are keyed by InChIKey. Standard InChI drops the charge
+separation of a zwitterion, so a zwitterion is keyed
+`chemrof:zwitterion-<InChIKey>` to keep it apart from its uncharged form, as
+ChEBI does. A seed's own id (third column) replaces its InChIKey everywhere
+once saturation is done.
+
+**Names.** Seeds keep their names. A generated entity whose name is still its
+formula is named after a named relative: `L-alanine zwitterion`,
+`rac-lactic acid`, `(R)-lactic acid`, `citric acid(3-)`.
+
+**Large stereo families.** A molecule with more than `--max-siblings`
+stereoisomers (default 64) gets only its stereo-agnostic parent, its mirror
+image and their racemate, not a sample of the family.
+
+**Limits.** `--max-rounds` stops a given number of generations from the
+seeds; `--max-entities` stops expanding past a size. `--workers N` splits the
+seeds into chunks saturated in parallel and merged; `--max-entities` then
+applies per chunk. The run summary goes to stderr. `--enrichers` works as for
+`convert` and runs on the whole graph.
 
 ### `chemrof from-smiles` (deprecated)
 

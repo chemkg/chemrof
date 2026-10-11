@@ -16,6 +16,7 @@ from __future__ import annotations
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors, inchi, FindMolChiralCenters
 
+from chemrof.converter.atoms import atom_fields, is_single_atom
 from chemrof.converter.classify import classify_entity
 from chemrof.converter.enrichers.base import Enricher, EnrichmentContext
 from chemrof.converter.inchi import parse_inchi_sublayers
@@ -25,9 +26,8 @@ from chemrof.converter.parse import ParsedInput, parse_input
 # chemrof type URI prefix
 _TYPE_PREFIX = "chemrof:"
 
-# Types where elemental_charge applies
-_ION_TYPES = {"AtomCation", "AtomAnion", "MolecularCation", "MolecularAnion"}
-_MONOATOMIC_TYPES = {"AtomCation", "AtomAnion", "UnchargedAtom"}
+# Types where elemental_charge applies (single atoms get it from atom_fields)
+_ION_TYPES = {"MolecularCation", "MolecularAnion"}
 
 
 class ChemConverter:
@@ -100,10 +100,16 @@ class ChemConverter:
 
         # Is organic (contains carbon)
         has_carbon = any(atom.GetAtomicNum() == 6 for atom in mol.GetAtoms())
+        single_atom = is_single_atom(mol)
+
+        name = formula
+        if single_atom and mol.GetAtomWithIdx(0).GetIsotope():
+            # RDKit's formula drops the mass number; keep isotopes distinguishable
+            name = f"{mol.GetAtomWithIdx(0).GetIsotope()}{formula}"
 
         obj: dict = {
             "id": f"INCHIKEY:{inchikey}" if inchikey else f"smiles:{canonical}",
-            "name": formula,
+            "name": name,
             "type": f"{_TYPE_PREFIX}{entity_type}",
             "smiles_string": canonical,
             "inchi_string": inchi_str,
@@ -119,15 +125,18 @@ class ChemConverter:
         if entity_type in _ION_TYPES:
             obj["elemental_charge"] = charge
 
-        # Monoatomic: has_element
-        if entity_type in _MONOATOMIC_TYPES:
-            obj["has_element"] = mol.GetAtomWithIdx(0).GetSymbol()
+        # Single atoms: atomic_number, symbol, charge, neutron number, has_element
+        if single_atom:
+            obj.update(atom_fields(mol))
 
-        # Boolean flags
-        if has_carbon:
-            obj["is_organic"] = True
-        if has_radical:
-            obj["is_radical"] = True
+        # Boolean flags. Not meaningful for a bare atom: "organic" is a property
+        # of carbon compounds, and RDKit's radical count for an atom is just
+        # its open valence (nonzero for [C], zero for [Fe]).
+        if not single_atom:
+            if has_carbon:
+                obj["is_organic"] = True
+            if has_radical:
+                obj["is_radical"] = True
 
         # Enantiomer-specific slots
         if entity_type == "Enantiomer":
