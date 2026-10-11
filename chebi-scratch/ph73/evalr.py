@@ -77,11 +77,11 @@ def main():
     ap.add_argument('--compare', help='baseline predictor for a paired comparison')
     ap.add_argument('--unseal', action='store_true', help='required to score the sealed split')
     a = ap.parse_args()
-    if a.split == 'sealed':
-        if not a.unseal:
-            ap.error('the sealed split is for the final score only; pass --unseal')
+    if a.split == 'sealed' and not a.unseal:
+        ap.error('the sealed split is for the final score only; pass --unseal')
+    if a.unseal and a.split in ('sealed', 'all'):
         with open('data/unseal.log', 'a') as f:
-            f.write(f"{datetime.datetime.now().isoformat()}\t{a.predictor}\t{a.compare or ''}\n")
+            f.write(f"{datetime.datetime.now().isoformat()}\t{a.predictor}\t{a.compare or ''}\t{a.split}\n")
     b = pd.read_csv('data/bench.tsv', sep='\t', dtype=str)
     b['identity'] = b.identity == 'True'
     # 'all' excludes sealed unless unsealed, so the disagreement list can't leak it
