@@ -423,6 +423,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#local-iupac-naming-openclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local IUPAC naming (openclatura)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemont-classification-examples" class="md-nav__link">
     <span class="md-ellipsis">
       ChemOnt classification examples
@@ -822,6 +831,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#local-iupac-naming-openclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local IUPAC naming (openclatura)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemont-classification-examples" class="md-nav__link">
     <span class="md-ellipsis">
       ChemOnt classification examples
@@ -1115,6 +1133,11 @@ and a PubChem CID cross-reference.</p>
 <td>Looks up the compound in a local ChemOnt/ClassyFire store by InChIKey. Fills <code>classified_by</code> with the ordered ChemOnt path.</td>
 </tr>
 <tr>
+<td><code>openclatura</code></td>
+<td>Working</td>
+<td>Derives a systematic IUPAC name locally from the structure (no network) via <a href="https://github.com/lamalab-org/openclatura">openclatura</a>. Fills <code>IUPAC_name</code>. Requires the optional dependency (<code>pip install 'chemrof[openclatura]'</code>).</td>
+</tr>
+<tr>
 <td><code>chebi</code></td>
 <td>Working (atoms)</td>
 <td>Resolves atoms, monoatomic ions and isotopes to their CHEBI class, offline. Replaces <code>id</code> with the CHEBI id and sets <code>name</code>. Other entities are left unchanged.</td>
@@ -1128,6 +1151,28 @@ and a PubChem CID cross-reference.</p>
 </table>
 <p>Multiple enrichers run in sequence:</p>
 <div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem,chemont<span class="w"> </span>--chemont-source<span class="w"> </span>chemont.duckdb
+</code></pre></div>
+<h3 id="local-iupac-naming-openclatura">Local IUPAC naming (openclatura)</h3>
+<p>The <code>openclatura</code> enricher derives a systematic IUPAC name straight from the
+structure, with no network lookup, so it also names compounds that are not in
+any database. Install the optional dependency first:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;chemrof[openclatura]&#39;</span>
+</code></pre></div>
+<p>Then request it like any other enricher:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(=O)Nc1ccccc1&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>openclatura
+</code></pre></div>
+<p>It fills <code>IUPAC_name</code> (here, <code>N-phenylacetamide</code>) and also sets <code>name</code> when
+that slot still holds a placeholder such as the empirical formula. Running it
+alongside <code>pubchem</code> gives a database-preferred name where one exists and a
+locally-derived name everywhere else:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CCO&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>pubchem,openclatura
+</code></pre></div>
+<p>The <code>IUPAC_name</code> slot carries an <code>owl: AnnotationAssertion</code> interpretation, so
+the enrichment flows straight through to OWL output — no extra wiring needed:</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>convert<span class="w"> </span><span class="s2">&quot;CC(=O)Nc1ccccc1&quot;</span><span class="w"> </span>--enrichers<span class="w"> </span>openclatura<span class="w"> </span>--format<span class="w"> </span>owl
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>AnnotationAssertion(rdfs:label &lt;.../FZERHIULMFGESH-UHFFFAOYSA-N&gt; &quot;N-phenylacetamide&quot;)
+AnnotationAssertion(chemrof:IUPAC_name &lt;.../FZERHIULMFGESH-UHFFFAOYSA-N&gt; &quot;N-phenylacetamide&quot;)
 </code></pre></div>
 <h3 id="chemont-classification-examples">ChemOnt classification examples</h3>
 <p>Prepare a local DuckDB lookup store directly from the Zenodo release:</p>
