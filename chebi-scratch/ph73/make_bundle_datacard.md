@@ -3,7 +3,8 @@
 A benchmark for predicting the major protonation state of ChEBI compounds at
 pH 7.3. It pairs each ChEBI entity with Rhea's pH 7.3 mapping and adds
 predictions from open, RDKit-only rules (`chemrof.converter.protonation`).
-Built at chemrof commit `{commit}`. Background and method:
+Built at chemrof commit `{commit}`. Version 2026-10-11 is published at
+https://doi.org/10.5281/zenodo.23324329. Background and method:
 `chebi-scratch/ph73/README.md` in chemkg/chemrof.
 
 ## Files

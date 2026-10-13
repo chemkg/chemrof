@@ -16,6 +16,12 @@ The first rule set was written against Rhea alone. Ten further rounds of
 hill-climbing used both graders under a fixed acceptance rule; see
 [`hillclimb_log.md`](hillclimb_log.md).
 
+## Data
+
+The benchmark, predictions, broken-SMILES list and the exact Rhea file used
+are published on Zenodo: [doi:10.5281/zenodo.23324329](https://doi.org/10.5281/zenodo.23324329)
+(version 2026-10-11, CC BY 4.0, built by `make_bundle.py`).
+
 ## Final scores (sealed sets, scored once)
 
 The sealed sets were scored once, at the end (`data/unseal.log`).
