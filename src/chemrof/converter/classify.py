@@ -5,6 +5,8 @@
 'SmallMolecule'
 >>> classify_entity(Chem.MolFromSmiles("[Ca+2]"))
 'AtomCation'
+>>> classify_entity(Chem.MolFromSmiles("[13C]"))
+'Isotope'
 >>> classify_entity(Chem.MolFromSmiles("C[C@@H](N)C(=O)O"))
 'Enantiomer'
 >>> classify_entity(Chem.MolFromSmiles("CC(N)C(=O)O"))
@@ -18,6 +20,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from rdkit.Chem import AddHs, FindMolChiralCenters, rdmolops
+
+from chemrof.converter.atoms import atom_class
 
 if TYPE_CHECKING:
     from rdkit.Chem import Mol
@@ -56,7 +60,8 @@ def classify_entity(mol: Mol | None) -> str:
     """Determine the chemrof class name for an RDKit mol.
 
     Classification priority:
-    1. Single-atom ions (AtomCation, AtomAnion, UnchargedAtom)
+    1. Single atoms (AtomCation, AtomAnion, UnchargedAtom, or Isotope /
+       FullySpecifiedAtom when a mass number is given)
     2. Multi-fragment salt (ChemicalSalt)
     3. Multi-atom: stereochemistry check (Enantiomer if all centers assigned)
     4. Multi-atom charge (MolecularCation, MolecularAnion)
@@ -71,11 +76,7 @@ def classify_entity(mol: Mol | None) -> str:
 
     # Single-atom entities
     if num_atoms == 1:
-        if charge > 0:
-            return "AtomCation"
-        if charge < 0:
-            return "AtomAnion"
-        return "UnchargedAtom"
+        return atom_class(mol)
 
     # Multi-fragment salt check (before other multi-atom checks)
     if _is_salt(mol):

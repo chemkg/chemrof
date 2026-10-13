@@ -151,6 +151,44 @@
             "title": "AcidBaseConflationClass",
             "type": "object"
         },
+        "AllostericRegulation": {
+            "additionalProperties": false,
+            "description": "Allosteric activation or inhibition of an enzyme by an effector that binds at a site distinct from the catalytic (active) site.",
+            "properties": {
+                "effector": {
+                    "description": "The chemical entity (typically a metabolite) that exerts the regulatory effect.",
+                    "type": "string"
+                },
+                "modification_type": {
+                    "$ref": "#/$defs/EnzymeModificationTypeEnum",
+                    "description": "Whether the allosteric effector activates or inhibits the enzyme."
+                },
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "regulated_enzyme": {
+                    "description": "Optional identifier or label of the specific enzyme (isoform) that is regulated. A reaction may be catalyzed by more than one enzyme, and a regulatory effect may apply to only some of them.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "modification_type",
+                "effector"
+            ],
+            "title": "AllostericRegulation",
+            "type": "object"
+        },
         "Allotrope": {
             "additionalProperties": false,
             "description": "A molecule consisting of atoms of the same element",
@@ -294,6 +332,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -338,6 +383,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -535,6 +587,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -572,6 +631,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -667,6 +733,17 @@
             ],
             "title": "AminoAcidSequenceInterval",
             "type": "object"
+        },
+        "AnomericConfigurationEnum": {
+            "description": "The configuration at the anomeric centre of a cyclic monosaccharide, assigned by comparing the anomeric centre with the anomeric reference atom of the parent sugar.",
+            "enum": [
+                "alpha",
+                "beta",
+                "open_chain",
+                "unknown"
+            ],
+            "title": "AnomericConfigurationEnum",
+            "type": "string"
         },
         "AtomAnion": {
             "additionalProperties": false,
@@ -801,6 +878,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -838,6 +922,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -1074,6 +1165,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -1111,6 +1209,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -1616,6 +1721,7 @@
                 "triple",
                 "quadruple",
                 "hydrogen",
+                "glycosidic",
                 "ionic",
                 "polycentric",
                 "metal-metal",
@@ -1795,6 +1901,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -1832,6 +1945,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -2031,6 +2151,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -2068,6 +2195,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -2340,6 +2474,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -2377,6 +2518,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -2812,6 +2960,9 @@
                                 "$ref": "#/$defs/Macromolecule"
                             },
                             {
+                                "$ref": "#/$defs/Monosaccharide"
+                            },
+                            {
                                 "$ref": "#/$defs/NaturalProduct"
                             },
                             {
@@ -2884,6 +3035,9 @@
                                 "$ref": "#/$defs/SupramolecularPolymer"
                             },
                             {
+                                "$ref": "#/$defs/MonosaccharideResidue"
+                            },
+                            {
                                 "$ref": "#/$defs/PolymerPart"
                             },
                             {
@@ -2922,6 +3076,39 @@
                 }
             },
             "title": "Collection",
+            "type": "object"
+        },
+        "CompetitiveInhibition": {
+            "additionalProperties": false,
+            "description": "Inhibition in which the effector (inhibitor) competes with the substrate for binding at the enzyme's active site.",
+            "properties": {
+                "effector": {
+                    "description": "The chemical entity (typically a metabolite) that exerts the regulatory effect.",
+                    "type": "string"
+                },
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "regulated_enzyme": {
+                    "description": "Optional identifier or label of the specific enzyme (isoform) that is regulated. A reaction may be catalyzed by more than one enzyme, and a regulatory effect may apply to only some of them.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "effector"
+            ],
+            "title": "CompetitiveInhibition",
             "type": "object"
         },
         "Concentration": {
@@ -3113,6 +3300,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -3163,6 +3357,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -3275,6 +3476,16 @@
             "title": "Copolymer",
             "type": "object"
         },
+        "DLConfigurationEnum": {
+            "description": "The D/L configurational assignment of a sugar or amino acid, made by reference to glyceraldehyde.",
+            "enum": [
+                "D",
+                "L",
+                "unknown"
+            ],
+            "title": "DLConfigurationEnum",
+            "type": "string"
+        },
         "DNASequenceInterval": {
             "additionalProperties": false,
             "description": "",
@@ -3377,6 +3588,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -3414,6 +3632,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -3722,6 +3947,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -3765,6 +3997,13 @@
                 },
                 "isomeric_smiles_string": {
                     "description": "A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
                     "type": [
                         "string",
                         "null"
@@ -3876,6 +4115,15 @@
             ],
             "title": "Enantiomer",
             "type": "object"
+        },
+        "EnzymeModificationTypeEnum": {
+            "description": "The direction of effect a regulator has on enzyme activity.",
+            "enum": [
+                "activation",
+                "inhibition"
+            ],
+            "title": "EnzymeModificationTypeEnum",
+            "type": "string"
         },
         "Ester": {
             "additionalProperties": false,
@@ -4020,6 +4268,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -4064,6 +4319,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -4286,6 +4548,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -4323,6 +4592,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -4528,6 +4804,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -4565,6 +4848,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -4800,9 +5090,23 @@
         },
         "Glycan": {
             "additionalProperties": false,
-            "description": "A macromolecule consisting of a large number of monosaccharides linked glycosidically",
+            "description": "A molecule consisting of monosaccharide residues joined to one another by glycosidic linkages. Glycans may be linear or branched, and may be composed of a single kind of residue or of many.",
             "properties": {
                 "IUPAC_name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "carbbank_representation": {
+                    "description": "The carbohydrate structure format used by the Complex Carbohydrate Structure Database (CCSD) originally developed at the University of Georgia. This is a 2D structure where bars and hyphens are used to indicate linkages, and monosaccharides are specified in the following order, separated by hyphens: anomer - configuration symbol - monosaccharide abbreviation.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "carbohydrate_representation": {
+                    "description": "A line or graph notation that encodes the structure of a carbohydrate (glycan), minimally its monosaccharide composition and the glycosidic linkages connecting them. Unlike general-purpose notations such as SMILES, these formats make the monosaccharide residue and the linkage first-class syntactic elements.",
                     "type": [
                         "string",
                         "null"
@@ -4827,6 +5131,20 @@
                 },
                 "empirical_formula": {
                     "description": "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "glycoct_condensed": {
+                    "description": "This is a multiline format used by GlycomeDB, among others, and uses a graph notation to represent glycans, similar to KCF. Monosaccharides are specified more strictly to be able to map the monosaccharides between different representations. Substituents, such as N-acetyl, are specified as separate nodes from their basetypes and are linked together in the edge section. If newlines are removed, this format can be made linear.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "glycominds_linearcode_representation": {
+                    "description": "A linear notation proposed by GlycoMinds, Ltd., where monosaccharides are indicated by a one- or two-letter code, linkages are indicated by \u201ca\u201d or \u201cb\u201d for anomers and a single number for the carbon number linkage on the reducing end, and branches are indicated by parentheses. This format is the most compact among existing formats, and several databases use a modified form of this format to accommodate additional codes and varying carbohydrate structures (such as ambiguous structures).",
                     "type": [
                         "string",
                         "null"
@@ -4873,6 +5191,16 @@
                         }
                     ]
                 },
+                "has_glycosidic_linkages": {
+                    "description": "Relates a glycan to the glycosidic linkages connecting its monosaccharide residues. These are the edges of the graph whose nodes are given by has_monosaccharide_residues.",
+                    "items": {
+                        "$ref": "#/$defs/GlycosidicLinkage"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "has_major_microspecies_at_pH7_3": {
                     "description": "Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)",
                     "items": {
@@ -4883,8 +5211,25 @@
                         "null"
                     ]
                 },
+                "has_monosaccharide_residues": {
+                    "description": "Relates a glycan to the monosaccharide residues that constitute it. Together with has_glycosidic_linkages this forms a graph representation of the glycan, in which residues are the nodes and linkages are the edges.",
+                    "items": {
+                        "$ref": "#/$defs/MonosaccharideResidue"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "has_part": {
                     "description": "basic parthood relations",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "has_reducing_end": {
+                    "description": "The monosaccharide residue of a glycan whose anomeric carbon is not involved in a glycosidic linkage, and which therefore retains the free (reducing) hemiacetal. By convention this residue is drawn or written at the right-hand end of the glycan.",
                     "type": [
                         "string",
                         "null"
@@ -4941,6 +5286,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -4975,6 +5327,12 @@
                         "null"
                     ]
                 },
+                "is_branched": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "is_organic": {
                     "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
                     "type": [
@@ -4985,6 +5343,34 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "iupac_condensed_representation": {
+                    "description": "The condensed form of the IUPAC nomenclature for carbohydrates, in which each monosaccharide is written using its three-letter abbreviation and each glycosidic linkage is written in parentheses as an anomeric descriptor followed by the two carbon positions joined. Branches are written in square brackets. This is the notation most commonly used in the glycobiology literature.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "kegg_chemical_function_representation": {
+                    "description": "A multiline format used by the KEGG GLYCAN database and represents glycans as graphs. Monosaccharides are represented as nodes, and glycosidic linkages are represented as edges. Each node is given a unique number, and x- and y- coordinates are specified such that the glycan structure can be drawn on a 2D plane. Edge information uses the node numbers to specify anomeric and carbon number information. Monosaccharide names are specified as text, and no particular rules are specified to represent these names.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linucs_representation": {
+                    "description": "A unique linear notation proposed and used by GLYCOSCIENCES.de, with the reducing end specified on the left. Monosaccharides, written according to CarbBank rules, are surrounded by square brackets and anomers, and stereochemistry is specified and separated by hyphens. Glycosidic linkages are also surrounded by hyphens, and carbon numbers of the linkages are separated by the plus sign. Branches are indicated by curly brackets.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -5073,12 +5459,77 @@
                         "number",
                         "null"
                     ]
+                },
+                "wurcs_representation": {
+                    "description": "A linear notation that encodes a glycan as a count of unique residues, residues and linkages, followed by a list of unique residue skeleton codes, the sequence in which they occur, and the linkages between them. Aligned so that one structure has one string, which is what allows GlyTouCan to mint a stable accession per structure.",
+                    "pattern": "^WURCS=[0-9]+\\.[0-9]+/.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "required": [
                 "id"
             ],
             "title": "Glycan",
+            "type": "object"
+        },
+        "GlycosidicLinkage": {
+            "additionalProperties": false,
+            "description": "A reified covalent linkage between the anomeric carbon of one monosaccharide residue and a hydroxyl (or other) group of a second residue, formed with loss of water. Example: the beta(1->4) linkage joining galactose to N-acetylglucosamine in N-acetyllactosamine.",
+            "properties": {
+                "acceptor_position": {
+                    "description": "The carbon number on the acceptor residue to which the donor is attached. A value here is absent for a linkage to a non-carbon position, and ambiguous linkages are left unspecified.",
+                    "minimum": 1,
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "anomeric_configuration": {
+                    "$ref": "#/$defs/AnomericConfigurationEnum",
+                    "description": "The configuration at the anomeric carbon of the donor residue, as locked in by the linkage."
+                },
+                "donor_position": {
+                    "description": "The carbon number of the anomeric carbon of the donor residue. This is 1 for aldoses and 2 for ketoses such as the sialic acids.",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "is_n_glycosidic": {
+                    "description": "True where the linkage is to a nitrogen atom rather than to an oxygen atom, as in the GlcNAc-Asn linkage of N-linked glycoproteins.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "object": {
+                    "description": "The acceptor residue, which contributes the hydroxyl or other group to the linkage.",
+                    "type": "string"
+                },
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "subject": {
+                    "description": "The donor residue, which contributes its anomeric carbon to the linkage.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "subject",
+                "object",
+                "donor_position",
+                "anomeric_configuration"
+            ],
+            "title": "GlycosidicLinkage",
             "type": "object"
         },
         "HardOrSoftEnum": {
@@ -5240,6 +5691,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -5290,6 +5748,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -5518,6 +5983,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -5555,6 +6027,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -5879,6 +6358,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -5927,6 +6413,13 @@
                     ]
                 },
                 "mode_of_formation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
                     "type": [
                         "string",
                         "null"
@@ -6050,6 +6543,26 @@
                         "null"
                     ]
                 },
+                "has_allosteric_regulation": {
+                    "description": "Allosteric activation or inhibition of an enzyme catalyzing this reaction.",
+                    "items": {
+                        "$ref": "#/$defs/AllostericRegulation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_competitive_inhibition": {
+                    "description": "Competitive inhibition of an enzyme catalyzing this reaction.",
+                    "items": {
+                        "$ref": "#/$defs/CompetitiveInhibition"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "has_reaction_smiles_representation": {
                     "type": [
                         "string",
@@ -6118,6 +6631,10 @@
                         "string",
                         "null"
                     ]
+                },
+                "reaction_mechanism": {
+                    "$ref": "#/$defs/ReactionMechanismEnum",
+                    "description": "The kinetic rate law (mechanism) used to model the rate of the reaction, e.g. reversible or irreversible Michaelis-Menten, mass action, or a boundary/drain pseudo-reaction."
                 },
                 "reaction_rate": {
                     "description": "the overall speed of a reaction, typically measured in concentration change per unit time",
@@ -6318,6 +6835,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -6366,6 +6890,13 @@
                     ]
                 },
                 "mode_of_formation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
                     "type": [
                         "string",
                         "null"
@@ -6621,6 +7152,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -6665,6 +7203,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -7000,6 +7545,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -7037,6 +7589,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -7300,6 +7859,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -7344,6 +7910,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -7607,6 +8180,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -7651,6 +8231,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -7842,6 +8429,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -7879,6 +8473,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -8079,6 +8680,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -8116,6 +8724,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -8485,6 +9100,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -8529,6 +9151,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -8720,6 +9349,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -8757,6 +9393,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -8996,6 +9639,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -9040,6 +9690,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -9493,6 +10150,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -9530,6 +10194,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -9728,6 +10399,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -9765,6 +10443,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -10078,6 +10763,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -10128,6 +10820,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -10236,6 +10935,588 @@
             ],
             "title": "MonomolecularPolymer",
             "type": "object"
+        },
+        "Monosaccharide": {
+            "additionalProperties": false,
+            "description": "A polyhydroxy aldehyde or ketone, or a compound derived from one, that cannot be hydrolysed to any simpler saccharide. Monosaccharides are the units from which glycans are built.",
+            "properties": {
+                "IUPAC_name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "anomeric_configuration": {
+                    "$ref": "#/$defs/AnomericConfigurationEnum",
+                    "description": "The configuration at the anomeric centre of a cyclic monosaccharide or monosaccharide residue, relative to the anomeric reference atom."
+                },
+                "classified_by": {
+                    "description": "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "cxsmiles_string": {
+                    "description": "A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dl_configuration": {
+                    "$ref": "#/$defs/DLConfigurationEnum",
+                    "description": "The D/L configurational assignment of a monosaccharide, determined by the configuration at the highest-numbered stereocentre."
+                },
+                "empirical_formula": {
+                    "description": "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "has_atom_occurrences": {
+                    "description": "An individuated atom in the context of a chemical structure.",
+                    "items": {
+                        "$ref": "#/$defs/AtomOccurrence"
+                    },
+                    "minItems": 2,
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_atoms": {
+                    "description": "Relation between a molecule and the atoms it contains. Note that this is a shortcut relation: for granular representations go via atom occurrences",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_bonds": {
+                    "description": "The set of all bonds connecting atoms in a molecule",
+                    "items": {
+                        "$ref": "#/$defs/AtomicBond"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_chemical_role": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ChemicalRole"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "has_major_microspecies_at_pH7_3": {
+                    "description": "Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_part": {
+                    "description": "basic parthood relations",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "has_submolecules": {
+                    "description": "Relation between a molecule and the molecules it is made from.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "inchi_atom_connections_sublayer": {
+                    "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
+                    "pattern": "^c.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_charge_sublayer": {
+                    "pattern": "^q.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_chemical_sublayer": {
+                    "description": "The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose",
+                    "pattern": "^[A-Za-z0-9\\.]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_hydrogen_connections_sublayer": {
+                    "description": "Describes how many hydrogen atoms are connected to each of the other atoms.",
+                    "pattern": "^h.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_isotopic_layer": {
+                    "pattern": "^[ih].*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_proton_sublayer": {
+                    "pattern": "^p[\\-]\\d+",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_stereochemical_double_bond_sublayer": {
+                    "pattern": "^b.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_stereochemical_type_sublayer": {
+                    "pattern": "^s.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_string": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_tetrahedral_stereochemical_sublayer": {
+                    "pattern": "^[tm].*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_organic": {
+                    "description": "An organic molecule is a molecule composed of organic atoms (at least carbon, hydrogen, and optionally oxygen, phosphorus, nitrogen, sulfur) [SIO]",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "is_radical": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_mass": {
+                    "description": "The sum of the relative atomic masses of the constituent atoms of a molecule.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "name of chemical entity. E.g. nickel, carbon-16",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "pka_ionic_strength": {
+                    "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "pka_ionization_constant": {
+                    "description": "The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "pka_pressure": {
+                    "description": "Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "pka_solvent": {
+                    "description": "Solvent system for pKa measurement. Default is water (H\u2082O) if not specified.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pka_temperature": {
+                    "description": "Temperature in Celsius at which pKa was measured. Default is 25\u00b0C if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "ring_form": {
+                    "$ref": "#/$defs/MonosaccharideRingFormEnum",
+                    "description": "The size of the cyclic hemiacetal ring adopted by a monosaccharide, or the absence of such a ring."
+                },
+                "smiles_string": {
+                    "description": "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "chemrof:Monosaccharide"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "water_solubility": {
+                    "description": "The maximum amount of a substance that can dissolve in water at 25\u00b0C, expressed in grams per liter (g/L).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Monosaccharide",
+            "type": "object"
+        },
+        "MonosaccharideResidue": {
+            "additionalProperties": false,
+            "description": "A monosaccharide as it occurs within a glycan, that is, the part of the glycan contributed by one monosaccharide unit after formation of its glycosidic linkages. A residue differs from the corresponding free monosaccharide by the loss of water at each linkage.",
+            "properties": {
+                "IUPAC_name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "anomeric_configuration": {
+                    "$ref": "#/$defs/AnomericConfigurationEnum",
+                    "description": "The configuration at the anomeric centre of a cyclic monosaccharide or monosaccharide residue, relative to the anomeric reference atom."
+                },
+                "classified_by": {
+                    "description": "A subtype_of relationship holds between I and C if I is a specific entity of type C. Here I and C denotes instances of OWL classes, where I is a specific class and C is a grouping class",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "cxsmiles_string": {
+                    "description": "A ChemAxon Extended SMILES string that appends a feature block to a SMILES string to capture annotations such as atom labels, R-groups, S-groups, coordinates, radicals, and enhanced stereochemistry.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dl_configuration": {
+                    "$ref": "#/$defs/DLConfigurationEnum",
+                    "description": "The D/L configurational assignment of a monosaccharide, determined by the configuration at the highest-numbered stereocentre."
+                },
+                "empirical_formula": {
+                    "description": "A chemical formula where numbers denote relative proportion of atoms. E.g. CH2O for glucose",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "has_chemical_role": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ChemicalRole"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "has_major_microspecies_at_pH7_3": {
+                    "description": "Links different variants of the same chemical in different protonation states, where the target of this link is the (predicited) to be most common protonation state for this chemical at a pH of 7.3. This link may point to it's source. Connects an acid to the form that is stable at physiological pH (7.3). E.g. citric acid has physiological base citrate(3-)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "inchi_atom_connections_sublayer": {
+                    "description": "The atoms in the chemical formula (except for hydrogens) are numbered in sequence; this sublayer describes which atoms are connected by bonds to which other ones.",
+                    "pattern": "^c.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_charge_sublayer": {
+                    "pattern": "^q.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_chemical_sublayer": {
+                    "description": "The part of an InChI string that represents the chemical formula, occurring after the version string. E.g. C6H12O6 for glucose",
+                    "pattern": "^[A-Za-z0-9\\.]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_hydrogen_connections_sublayer": {
+                    "description": "Describes how many hydrogen atoms are connected to each of the other atoms.",
+                    "pattern": "^h.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_isotopic_layer": {
+                    "pattern": "^[ih].*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_proton_sublayer": {
+                    "pattern": "^p[\\-]\\d+",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_stereochemical_double_bond_sublayer": {
+                    "pattern": "^b.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_stereochemical_type_sublayer": {
+                    "pattern": "^s.*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_string": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inchi_tetrahedral_stereochemical_sublayer": {
+                    "pattern": "^[tm].*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_radical": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_mass": {
+                    "description": "The sum of the relative atomic masses of the constituent atoms of a molecule.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "name of chemical entity. E.g. nickel, carbon-16",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "owl_subclass_of": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OwlClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "pka_ionic_strength": {
+                    "description": "Ionic strength of solution in mol/L at which pKa was measured. Default is 0.0 M if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "pka_ionization_constant": {
+                    "description": "The negative logarithm of the acid dissociation constant (Ka) for ionizable groups in a molecule. Multiple pKa values may exist for molecules with multiple ionizable groups.",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "pka_pressure": {
+                    "description": "Pressure in atmospheres at which pKa was measured. Default is 1 atm if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "pka_solvent": {
+                    "description": "Solvent system for pKa measurement. Default is water (H\u2082O) if not specified.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pka_temperature": {
+                    "description": "Temperature in Celsius at which pKa was measured. Default is 25\u00b0C if not specified.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "residue_of": {
+                    "description": "Relates a monosaccharide residue, as it occurs within a glycan, to the free monosaccharide from which it is formally derived by loss of water.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ring_form": {
+                    "$ref": "#/$defs/MonosaccharideRingFormEnum",
+                    "description": "The size of the cyclic hemiacetal ring adopted by a monosaccharide, or the absence of such a ring."
+                },
+                "smiles_string": {
+                    "description": "A string encoding of a molecular graph, no chiral or isotopic information. There are usually a large number of valid SMILES which represent a given structure. For example, CCO, OCC and C(O)C all specify the structure of ethanol.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "chemrof:MonosaccharideResidue"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "water_solubility": {
+                    "description": "The maximum amount of a substance that can dissolve in water at 25\u00b0C, expressed in grams per liter (g/L).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MonosaccharideResidue",
+            "type": "object"
+        },
+        "MonosaccharideRingFormEnum": {
+            "description": "The size of the cyclic hemiacetal or hemiketal ring adopted by a monosaccharide, or the absence of such a ring.",
+            "enum": [
+                "pyranose",
+                "furanose",
+                "septanose",
+                "open_chain",
+                "unknown"
+            ],
+            "title": "MonosaccharideRingFormEnum",
+            "type": "string"
         },
         "Nanomaterial": {
             "additionalProperties": false,
@@ -10442,6 +11723,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -10486,6 +11774,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -10737,6 +12032,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -10781,6 +12083,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -11032,6 +12341,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -11076,6 +12392,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -11315,6 +12638,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -11359,6 +12689,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -11557,6 +12894,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -11594,6 +12938,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -11816,6 +13167,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -11853,6 +13211,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -12129,6 +13494,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -12173,6 +13545,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -12447,6 +13826,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -12491,6 +13877,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -12682,6 +14075,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -12719,6 +14119,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -13043,6 +14450,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -13087,6 +14501,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -13285,6 +14706,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -13322,6 +14750,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -13526,6 +14961,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -13563,6 +15005,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -13796,6 +15245,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -13833,6 +15289,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -13947,6 +15410,26 @@
                         "null"
                     ]
                 },
+                "has_allosteric_regulation": {
+                    "description": "Allosteric activation or inhibition of an enzyme catalyzing this reaction.",
+                    "items": {
+                        "$ref": "#/$defs/AllostericRegulation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_competitive_inhibition": {
+                    "description": "Competitive inhibition of an enzyme catalyzing this reaction.",
+                    "items": {
+                        "$ref": "#/$defs/CompetitiveInhibition"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "has_reaction_smiles_representation": {
                     "type": [
                         "string",
@@ -14016,6 +15499,10 @@
                         "null"
                     ]
                 },
+                "reaction_mechanism": {
+                    "$ref": "#/$defs/ReactionMechanismEnum",
+                    "description": "The kinetic rate law (mechanism) used to model the rate of the reaction, e.g. reversible or irreversible Michaelis-Menten, mass action, or a boundary/drain pseudo-reaction."
+                },
                 "reaction_rate": {
                     "description": "the overall speed of a reaction, typically measured in concentration change per unit time",
                     "type": [
@@ -14045,7 +15532,7 @@
                 },
                 "type": {
                     "enum": [
-                        "RXNO:0000000"
+                        "chemrof:Reaction"
                     ],
                     "type": [
                         "string",
@@ -14101,6 +15588,17 @@
             "title": "ReactionGroupingClass",
             "type": "object"
         },
+        "ReactionMechanismEnum": {
+            "description": "The kinetic rate law (mechanism) used to model how a reaction's rate depends on metabolite concentrations and kinetic parameters. These values align with the mechanism types used by kinetic-modeling tools such as Maud.",
+            "enum": [
+                "reversible_michaelis_menten",
+                "irreversible_michaelis_menten",
+                "mass_action",
+                "drain"
+            ],
+            "title": "ReactionMechanismEnum",
+            "type": "string"
+        },
         "ReactionParticipant": {
             "additionalProperties": false,
             "description": "Instances of this link a reaction to a chemical entity participant",
@@ -14115,6 +15613,19 @@
                         }
                     ],
                     "description": "Holds between C and P if C owl:subClassOf P. Note that in this model, most classes are metaclasses (see 'owl class'), where these metaclasses may represent *groupings* or specific countable elements or species. We provide two different sub-properties of subclass of for two cases: (1) subtype_of, which connects grouping classes (e.g. alkane is_a hydrocarbon; alpha-amino-acid is_a amino-acid), (2) classified_by, which connects a specific element to a grouping class (e.g. methane is_a hydrocarbon; iron is_a metal; serine is_a amino-acid)"
+                },
+                "participant": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stoichiometry": {
+                    "description": "The stoichiometric coefficient of the participant, given as a non-negative magnitude (the sign/direction is conveyed by whether the participant is on the left or right side of the reaction). Permits fractional values as used in genome-scale and lumped reactions.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
                 }
             },
             "title": "ReactionParticipant",
@@ -14291,6 +15802,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -14335,6 +15853,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -14692,6 +16217,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -14741,6 +16273,13 @@
                 },
                 "isomeric_smiles_string": {
                     "description": "A SMILES string that distinguishes between isomeric forms. E.g. [13C] for carbon-13",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
                     "type": [
                         "string",
                         "null"
@@ -15053,6 +16592,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -15090,6 +16636,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -15348,6 +16901,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -15385,6 +16945,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -15673,6 +17240,13 @@
                         "null"
                     ]
                 },
+                "inchi_key_string": {
+                    "description": "A hashed representation of an InChi string",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "inchi_proton_sublayer": {
                     "pattern": "^p[\\-]\\d+",
                     "type": [
@@ -15717,6 +17291,13 @@
                 "is_radical": {
                     "type": [
                         "boolean",
+                        "null"
+                    ]
+                },
+                "molecular_formula": {
+                    "description": "A chemical formula where numbers denote atom count. E.g. C6H12O6 for glucose",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -15884,6 +17465,9 @@
                         "$ref": "#/$defs/Macromolecule"
                     },
                     {
+                        "$ref": "#/$defs/Monosaccharide"
+                    },
+                    {
                         "$ref": "#/$defs/NaturalProduct"
                     },
                     {
@@ -15954,6 +17538,9 @@
                     },
                     {
                         "$ref": "#/$defs/SupramolecularPolymer"
+                    },
+                    {
+                        "$ref": "#/$defs/MonosaccharideResidue"
                     },
                     {
                         "$ref": "#/$defs/PolymerPart"

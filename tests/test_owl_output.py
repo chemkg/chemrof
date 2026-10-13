@@ -62,6 +62,15 @@ class TestDictsToOwl:
         owl = dicts_to_owl([obj])
         assert "label" in owl
 
+    def test_iupac_name_annotation_assertion(self, converter):
+        """An IUPAC_name (as the openclatura enricher fills) becomes an
+        OWL AnnotationAssertion, composing enrichment with OWL generation."""
+        obj = converter.convert("CC(=O)Nc1ccccc1")
+        obj["IUPAC_name"] = "N-phenylacetamide"
+        owl = dicts_to_owl([obj])
+        assert "AnnotationAssertion(chemrof:IUPAC_name" in owl
+        assert "N-phenylacetamide" in owl
+
     def test_classified_by_outputs_subclass_axioms(self, converter):
         obj = converter.convert("CCO")
         obj["classified_by"] = ["CHEMONTID:0000000", "CHEMONTID:0000286"]
@@ -92,6 +101,90 @@ class TestEquivalentClassesAxioms:
         owl = dicts_to_owl(results)
         assert "RacemicMixture" in owl
         assert "Enantiomer" in owl
+
+
+class TestGenericGroupingEquivalentClasses:
+    """Generic grouping meta-patterns emit computable OWL definitions from data.
+
+    The schema holds only the reusable meta-patterns (GroupingBySmarts,
+    GroupingByGenusAndRangeRestriction, GroupingByGenusAndPropertyValue); each
+    carries an ``owl.template`` that turns a data instance's genus/on_property/
+    value parameters into a genus-differentia axiom. Concrete groupings (long-
+    chain fatty acyl-CoA, etc.) are data, not schema subclasses.
+    """
+
+    @staticmethod
+    def _axiom_for(owl: str, class_id: str, kind: str = "EquivalentClasses") -> str:
+        for line in owl.splitlines():
+            if kind in line and class_id in line:
+                return line
+        raise AssertionError(f"no {kind} axiom for {class_id}")
+
+    def test_range_restriction_both_bounds(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:33184", "type": "chemrof:GroupingByGenusAndRangeRestriction",
+             "genus": "CHEBI:37554", "on_property": "chemrof:carbon_number",
+             "min_value": 13, "max_value": 22},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:33184")
+        assert "CHEBI:37554" in ax
+        assert "carbon_number" in ax
+        assert 'minInclusive> "13"' in ax
+        assert 'maxInclusive> "22"' in ax
+
+    def test_range_restriction_min_only_has_no_max(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:61910", "type": "chemrof:GroupingByGenusAndRangeRestriction",
+             "genus": "CHEBI:37554", "on_property": "chemrof:carbon_number",
+             "min_value": 23},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:61910")
+        assert 'minInclusive> "23"' in ax
+        assert "maxInclusive" not in ax
+
+    def test_range_restriction_exact_zero(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:231546", "type": "chemrof:GroupingByGenusAndRangeRestriction",
+             "genus": "CHEBI:37554",
+             "on_property": "chemrof:carbon_carbon_double_bond_number",
+             "min_value": 0, "max_value": 0},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:231546")
+        assert "carbon_carbon_double_bond_number" in ax
+        assert 'minInclusive> "0"' in ax
+        assert 'maxInclusive> "0"' in ax
+
+    def test_property_value_boolean(self):
+        owl = dicts_to_owl([
+            {"id": "chemrof:LinearFattyAcylCoA", "type": "chemrof:GroupingByGenusAndPropertyValue",
+             "genus": "CHEBI:37554", "on_property": "chemrof:is_branched",
+             "value": "false", "value_datatype": "xsd:boolean"},
+        ])
+        ax = self._axiom_for(owl, "chemrof:LinearFattyAcylCoA")
+        assert "is_branched" in ax
+        assert '"false"' in ax
+        assert "boolean" in ax
+
+    def test_property_value_default_string_datatype(self):
+        owl = dicts_to_owl([
+            {"id": "chemrof:OddNumberedFattyAcylCoA", "type": "chemrof:GroupingByGenusAndPropertyValue",
+             "genus": "CHEBI:37554", "on_property": "chemrof:carbon_number_parity",
+             "value": "odd"},
+        ])
+        ax = self._axiom_for(owl, "chemrof:OddNumberedFattyAcylCoA")
+        assert "carbon_number_parity" in ax
+        assert '"odd"' in ax
+        assert "string" in ax
+
+    def test_smarts_grouping_is_subclass_of_genus(self):
+        owl = dicts_to_owl([
+            {"id": "CHEBI:37554", "type": "chemrof:GroupingBySmarts",
+             "genus": "CHEBI:17984", "smarts_string": "[#6]C(=O)S"},
+        ])
+        ax = self._axiom_for(owl, "CHEBI:37554", kind="SubClassOf")
+        assert "CHEBI:17984" in ax
+        # SMARTS is carried as an annotation, not a DL axiom
+        assert "smarts_string" in owl
 
 
 class TestCliOwlFormat:
