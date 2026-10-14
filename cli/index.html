@@ -419,6 +419,30 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemrof-enrich-reactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof enrich-reactions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="chemrof enrich-reactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-reactions-without-balancing-protons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write reactions without balancing protons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemrof-saturate" class="md-nav__link">
     <span class="md-ellipsis">
       chemrof saturate
@@ -674,6 +698,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanations/thermodynamics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reaction Thermodynamics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -845,6 +892,30 @@
       Auto-classification
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemrof-enrich-reactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      chemrof enrich-reactions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="chemrof enrich-reactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-reactions-without-balancing-protons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write reactions without balancing protons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1220,6 +1291,101 @@ chemrof class:</p>
 </tr>
 </tbody>
 </table>
+<h3 id="chemrof-enrich-reactions"><code>chemrof enrich-reactions</code></h3>
+<p>Adds thermodynamic estimates to the reactions in a ChEMROF document, using
+<a href="https://equilibrator.readthedocs.io/">eQuilibrator</a>'s component contribution
+method.</p>
+<div class="highlight"><pre><span></span><code>chemrof<span class="w"> </span>enrich-reactions<span class="w"> </span>reactions.yaml
+</code></pre></div>
+<p>The input may be a <code>Collection</code> with an <code>entities</code> list, a bare list of entities,
+or a single <code>Reaction</code>. Non-reaction entities are left untouched, but they are
+used as participant records, so a document that carries both molecules and
+reactions resolves more participants than one with reactions alone.</p>
+<p>Requires the optional <code>thermo</code> extra, and the first run downloads a compound
+cache of several gigabytes:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;chemrof[thermo]&#39;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--enrichers</code></td>
+<td><code>equilibrator</code></td>
+<td>Comma-separated reaction enrichment sources</td>
+</tr>
+<tr>
+<td><code>--p-h</code></td>
+<td><code>7.5</code></td>
+<td>pH to estimate at</td>
+</tr>
+<tr>
+<td><code>--ionic-strength</code></td>
+<td><code>0.25</code></td>
+<td>Ionic strength in mol/L</td>
+</tr>
+<tr>
+<td><code>--p-mg</code></td>
+<td><code>3.0</code></td>
+<td>Negative log of free Mg²⁺ activity; use <code>14</code> for magnesium-free</td>
+</tr>
+<tr>
+<td><code>--temperature</code></td>
+<td><code>298.15</code></td>
+<td>Temperature in kelvin</td>
+</tr>
+<tr>
+<td><code>--reversibility-index</code></td>
+<td>off</td>
+<td>Also estimate the reversibility index</td>
+</tr>
+<tr>
+<td><code>--format</code></td>
+<td><code>yaml</code></td>
+<td><code>yaml</code> or <code>json</code></td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td>stdout</td>
+<td>Write to a file instead</td>
+</tr>
+</tbody>
+</table>
+<p>The defaults match eQuilibrator's own, which are its <em>physiological</em> defaults.</p>
+<p>Each reaction gains <code>is_balanced</code> and one <code>has_thermodynamic_estimate</code> entry per
+quantity, carrying the conditions it was computed at:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">is_balanced</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">has_thermodynamic_estimate</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">quantity_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_transformed_gibbs_free_energy_change</span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-29.641753</span>
+<span class="w">  </span><span class="nt">standard_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.304278</span>
+<span class="w">  </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kJ/mol</span>
+<span class="w">  </span><span class="nt">p_h</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.5</span>
+<span class="w">  </span><span class="nt">ionic_strength</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25</span>
+<span class="w">  </span><span class="nt">p_mg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<span class="w">  </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">298.15</span>
+<span class="w">  </span><span class="nt">estimation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">component_contribution</span>
+<span class="w">  </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eQuilibrator (equilibrator-api 0.8.1)</span>
+</code></pre></div>
+<p>Estimates are <strong>appended</strong>, so re-running at different conditions builds up a set
+rather than overwriting the previous one.</p>
+<h4 id="write-reactions-without-balancing-protons">Write reactions without balancing protons</h4>
+<p>Transformed ("primed") quantities absorb the proton contribution into the pH, so
+an explicit <code>H+</code> participant would count it twice. Write ATP hydrolysis as
+<code>ATP + H2O = ADP + phosphate</code>, with no proton. The balance check ignores hydrogen
+accordingly.</p>
+<p>An <code>INCHIKEY:</code> participant is matched ignoring the final block of the key, which
+encodes protonation state — eQuilibrator holds one compound per pseudoisomer
+group, so <code>CHEBI:30616</code> and <code>INCHIKEY:ZKHQWZAMYRWXGA-KQYNXXCUSA-J</code> give identical
+results.</p>
+<p>See <a href="../explanations/thermodynamics/">Reaction Thermodynamics</a> for the reasoning
+behind this, the quantities available, and the cases where the enricher declines
+to produce a number.</p>
 <h3 id="chemrof-saturate"><code>chemrof saturate</code></h3>
 <p>Builds a closed, ChEBI-like graph of entities from a file of seed structures.
 Every seed, and every structure generated from it, is run through a set of
