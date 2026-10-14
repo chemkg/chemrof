@@ -16,11 +16,19 @@ The first rule set was written against Rhea alone. Ten further rounds of
 hill-climbing used both graders under a fixed acceptance rule; see
 [`hillclimb_log.md`](hillclimb_log.md).
 
+**Since 2026-10-14 the default rules are the clean-room set**, derived only
+from measured pKa (CC BY 4.0 data) and textbook values, because Rhea's changed
+rows are all ChemAxon output. The Rhea-fitted rules described below are kept as
+`RHEA_FITTED_RULES`. See [`cleanroom/README.md`](cleanroom/README.md); the scores
+below are for the Rhea-fitted rules.
+
 ## Data
 
 The benchmark, predictions, broken-SMILES list and the exact Rhea file used
 are published on Zenodo: [doi:10.5281/zenodo.23324329](https://doi.org/10.5281/zenodo.23324329)
-(version 2026-10-11, CC BY 4.0, built by `make_bundle.py`).
+(all versions: [doi:10.5281/zenodo.23324328](https://doi.org/10.5281/zenodo.23324328);
+CC BY 4.0, built by `make_bundle.py`). Version 2026-10-14 adds the clean-room
+predictions as the default.
 
 ## Final scores (sealed sets, scored once)
 

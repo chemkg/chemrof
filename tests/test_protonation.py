@@ -1,6 +1,7 @@
 """Tests for the pH 7.3 major microspecies rules.
 
-Expected values follow Rhea's chebi_pH7_3_mapping.tsv.
+The default rules are the clean-room set (measured pKa and textbook values);
+RHEA_FITTED_RULES follow Rhea's chebi_pH7_3_mapping.tsv more closely.
 """
 
 import doctest
@@ -9,7 +10,14 @@ import pytest
 from rdkit import Chem
 
 from chemrof.converter import protonation
-from chemrof.converter.protonation import predict_major_microspecies
+from chemrof.converter.protonation import (
+    CLEANROOM_RULES,
+    DEFAULT_RULES,
+    DROPPED,
+    PROVENANCE,
+    RHEA_FITTED_RULES,
+    predict_major_microspecies,
+)
 
 
 def can(smiles: str) -> str:
@@ -27,7 +35,8 @@ def can(smiles: str) -> str:
         ("already charged input", "[NH3+]CC([O-])=O", "[NH3+]CC([O-])=O"),
         ("phenol", "Oc1ccccc1", "Oc1ccccc1"),
         ("4-nitrophenol", "Oc1ccc(cc1)[N+]([O-])=O", "[O-]c1ccc(cc1)[N+]([O-])=O"),
-        ("apigenin", "O=c1cc(-c2ccc(O)cc2)oc2cc(O)cc(O)c12", "O=c1cc(-c2ccc(O)cc2)oc2cc([O-])cc(O)c12"),
+        ("apigenin: 7-OH pKa ~7.4, left neutral", "O=c1cc(-c2ccc(O)cc2)oc2cc(O)cc(O)c12",
+         "O=c1cc(-c2ccc(O)cc2)oc2cc(O)cc(O)c12"),
         ("phosphoric acid", "OP(O)(O)=O", "OP([O-])([O-])=O"),
         ("diphosphoric acid", "OP(=O)(O)OP(=O)(O)O", "OP(=O)([O-])OP(=O)([O-])[O-]"),
         ("phosphate monoester", "CC(O)COP(O)(O)=O", "CC(O)COP([O-])([O-])=O"),
@@ -37,14 +46,13 @@ def can(smiles: str) -> str:
         ("morpholine N stays neutral", "O=S(=O)(O)CCCN1CCOCC1", "O=S(=O)([O-])CCCN1CCOCC1"),
         ("piperazine: one N", "C1CNCCN1", "C1C[NH2+]CCN1"),
         ("acetamide", "CC(N)=O", "CC(N)=O"),
-        ("1-pyrroline-2-carboxylic acid", "OC(=O)C1=NCCC1", "[O-]C(=O)C1=[NH+]CCC1"),
+        ("1-pyrroline-2-carboxylic acid: imine not protonated", "OC(=O)C1=NCCC1", "[O-]C(=O)C1=NCCC1"),
         ("sodium(1+) unchanged", "[Na+]", "[Na+]"),
-        # rules added by hill-climbing against measured pKa (see chebi-scratch/ph73)
         ("4-nitropyridine not protonated", "O=[N+]([O-])c1ccncc1", "O=[N+]([O-])c1ccncc1"),
         ("sulfinic acid", "O=S(O)c1ccccc1", "O=S([O-])c1ccccc1"),
         ("thiophenol", "Sc1ccccc1", "[S-]c1ccccc1"),
         ("1-methyl-2-iminopyrimidine", "CN1C=CC=NC1=N", "Cn1cccnc1=[NH2+]"),
-        ("N1-substituted adenine left neutral", "Cn1cnc2c(c1=N)ncn2C", "Cn1cnc2c(c1=N)ncn2C"),
+        ("1,9-dimethyladenine: pKaH ~8.3, protonated", "Cn1cnc2c(c1=N)ncn2C", "Cn1cnc2c(ncn2C)c1=[NH2+]"),
         ("tropolone", "O=c1cccccc1O", "O=c1cccccc1[O-]"),
         ("1,1-dinitropropane", "CCC([N+](=O)[O-])[N+](=O)[O-]", "CC[C-]([N+](=O)[O-])[N+](=O)[O-]"),
         ("cyclohexane-1,3-dione", "O=C1CCCC(=O)C1", "O=C1C=C([O-])CCC1"),
@@ -59,17 +67,43 @@ def test_predict(name, smiles, expected):
     assert predict_major_microspecies(smiles) == can(expected), name
 
 
+@pytest.mark.parametrize(
+    "name,smiles,expected",
+    [
+        ("apigenin: 7-OH ionized", "O=c1cc(-c2ccc(O)cc2)oc2cc(O)cc(O)c12",
+         "O=c1cc(-c2ccc(O)cc2)oc2cc([O-])cc(O)c12"),
+        ("1,9-dimethyladenine left neutral", "Cn1cnc2c(c1=N)ncn2C", "Cn1cnc2c(c1=N)ncn2C"),
+        ("1-pyrroline-2-carboxylic acid: imine protonated", "OC(=O)C1=NCCC1", "[O-]C(=O)C1=[NH+]CCC1"),
+    ],
+)
+def test_rhea_fitted_rules(name, smiles, expected):
+    assert predict_major_microspecies(smiles, RHEA_FITTED_RULES) == can(expected), name
+
+
+def test_default_is_cleanroom():
+    assert DEFAULT_RULES is CLEANROOM_RULES
+
+
+def test_every_cleanroom_acid_rule_has_provenance():
+    for name, _, _ in CLEANROOM_RULES.acids:
+        assert name in PROVENANCE, name
+    assert not {name for name, _, _ in CLEANROOM_RULES.acids} & set(DROPPED)
+    assert CLEANROOM_RULES.imino_acid is None
+
+
 def test_invalid_smiles():
     assert predict_major_microspecies("not a smiles") is None
 
 
 def test_rule_smarts_parse():
-    for name, smarts, _ in protonation.ACIDS:
-        # the acid loop reads match[1] as the centre atom
-        assert protonation._pat(smarts).GetNumAtoms() >= 2, name
-    for smarts in (protonation.PHOSPHORIC_KEEP + protonation.WEAK_AMINES + protonation.AMIDINES
-                   + [protonation.TROPOLONE, protonation.CYCLIC_DIKETONE, protonation.IMINO_ACID]):
-        protonation._pat(smarts)
+    for rules in (CLEANROOM_RULES, RHEA_FITTED_RULES):
+        for name, smarts, _ in rules.acids:
+            # the acid loop reads match[1] as the centre atom
+            assert protonation._pat(smarts).GetNumAtoms() >= 2, name
+        others = [rules.amine, *rules.phosphoric_keep, *rules.weak_amines, *rules.amidines,
+                  rules.tropolone, rules.cyclic_diketone, rules.imino_acid]
+        for smarts in filter(None, others):
+            protonation._pat(smarts)
 
 
 def test_doctests():

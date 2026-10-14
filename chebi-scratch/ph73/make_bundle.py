@@ -1,8 +1,9 @@
 """Package the pH 7.3 benchmark and predictions for sharing (Parquet + data card).
 
 Run after:
-    evalr.py p_chemrof  --split all --unseal
-    evalr.py p_original --split all --unseal
+    evalr.py p_chemrof     --split all --unseal   # default (clean-room) rules
+    evalr.py p_rhea_fitted --split all --unseal
+    evalr.py p_original    --split all --unseal
 
     uv run --with pyarrow python make_bundle.py [VERSION]
 
@@ -12,7 +13,7 @@ deliberately left out (CC BY-NC 4.0).
 import gzip, hashlib, os, shutil, subprocess, sys, tarfile
 import pandas as pd
 
-VERSION = sys.argv[1] if len(sys.argv) > 1 else '2026-10-11'
+VERSION = sys.argv[1] if len(sys.argv) > 1 else '2026-10-14'
 OUT = f'data/release/ph73-{VERSION}'
 COMMIT = subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
 
@@ -36,7 +37,7 @@ def main():
         'smiles': b.src_can, 'rhea_ph7_3_smiles': b.tgt_can,
     })
     key = list(zip(b.src, b.tgt))
-    for name, label in (('p_chemrof', 'final'), ('p_original', 'original')):
+    for name, label in (('p_chemrof', 'default'), ('p_rhea_fitted', 'rhea_fitted'), ('p_original', 'original')):
         p = predictions(name).reindex(key)
         bench[f'pred_{label}_smiles'] = p.pred.to_numpy()
         bench[f'pred_{label}_id'] = ['CHEBI:' + x if x else '' for x in p.pred_id.fillna('')]
@@ -44,11 +45,11 @@ def main():
         bench[f'{label}_matches_rhea_id'] = (p.okid == 'True').to_numpy()
     bench.to_parquet(f'{OUT}/benchmark.parquet', index=False, compression='zstd')
 
-    d = bench[~bench.final_matches_rhea_id].copy()
+    d = bench[~bench.default_matches_rhea_id].copy()
     d['kind'] = ['rules pick another ChEBI entity' if p != c else 'rules miss the change'
-                 for p, c in zip(d.pred_final_id, d.chebi_id)]
-    d = d[['chebi_id', 'chebi_name', 'rhea_ph7_3_id', 'rhea_ph7_3_name', 'pred_final_id', 'kind', 'split',
-           'smiles', 'rhea_ph7_3_smiles', 'pred_final_smiles']]
+                 for p, c in zip(d.pred_default_id, d.chebi_id)]
+    d = d[['chebi_id', 'chebi_name', 'rhea_ph7_3_id', 'rhea_ph7_3_name', 'pred_default_id', 'kind', 'split',
+           'smiles', 'rhea_ph7_3_smiles', 'pred_default_smiles']]
     d.to_parquet(f'{OUT}/disagreements.parquet', index=False, compression='zstd')
 
     s = pd.read_csv('data/chebi_smiles.tsv', sep='\t', dtype=str, keep_default_na=False)
@@ -66,7 +67,8 @@ def main():
     with open('make_bundle_datacard.md') as f:
         card = f.read().format(version=VERSION, commit=COMMIT, **counts,
                                changed=int(bench.changed.sum()),
-                               final_id=bench[bench.changed].final_matches_rhea_id.mean(),
+                               default_id=bench[bench.changed].default_matches_rhea_id.mean(),
+                               rhea_fitted_id=bench[bench.changed].rhea_fitted_matches_rhea_id.mean(),
                                original_id=bench[bench.changed].original_matches_rhea_id.mean())
     with open(f'{OUT}/DATACARD.md', 'w') as f:
         f.write(card)

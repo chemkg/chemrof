@@ -10,7 +10,7 @@ import numpy as np, pandas as pd
 sys.path.insert(0, '.')
 import iupac_eval as ie
 
-NAMES = {'p_cleanroom': 'clean-room rules', 'p_chemrof': 'current rules', 'p_original': 'first rules (Rhea-fitted)'}
+NAMES = {'p_cleanroom': 'clean-room rules (default)', 'p_rhea_fitted': 'Rhea-fitted, hill-climbed', 'p_original': 'first rules (Rhea-fitted)'}
 
 
 def ci(ok, rng, n=2000):
@@ -40,8 +40,8 @@ def main():
     diff = (d.p_cleanroom == d.charge).astype(int) - (d.rhea == d.charge).astype(int)
     print(f'\npaired clean-room - ChemAxon (in Rhea, n={len(d)}): {ci(diff, rng)}  '
           f'only clean-room right: {(diff > 0).sum()}  only ChemAxon right: {(diff < 0).sum()}')
-    diff = (test.p_cleanroom == test.charge).astype(int) - (test.p_chemrof == test.charge).astype(int)
-    print(f'paired clean-room - current (all test, n={len(test)}): {ci(diff, rng)}  '
+    diff = (test.p_cleanroom == test.charge).astype(int) - (test.p_rhea_fitted == test.charge).astype(int)
+    print(f'paired clean-room - Rhea-fitted (all test, n={len(test)}): {ci(diff, rng)}  '
           f'fixed: {(diff > 0).sum()}  broken: {(diff < 0).sum()}')
 
 
