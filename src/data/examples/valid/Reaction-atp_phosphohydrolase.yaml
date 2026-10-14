@@ -1,0 +1,64 @@
+# ATP hydrolysis, RHEA:13065
+#   ATP + H2O = ADP + phosphate
+# Demonstrates has_thermodynamic_estimate: the same reaction carrying several
+# estimates that differ only in the conditions and reference state they apply at.
+#
+# Note that no proton appears among the participants, even though the balanced
+# chemical equation releases one. Transformed ("primed") quantities absorb the
+# proton contribution into the pH recorded on each estimate, so an explicit H+
+# participant would count it twice. is_balanced is therefore true in the sense
+# eQuilibrator checks it, which ignores hydrogen.
+#
+# Values produced by `chemrof enrich-reactions --enrichers equilibrator
+# --reversibility-index`, using equilibrator-api 0.8.1 at its default conditions.
+id: RHEA:13065
+type: chemrof:Reaction
+name: ATP phosphohydrolase reaction
+reaction_type: hydrolysis
+direction: l->r
+is_balanced: true
+left_participants:
+  - participant: CHEBI:30616      # ATP(4-)
+    stoichiometry: 1.0
+  - participant: CHEBI:15377      # water
+    stoichiometry: 1.0
+right_participants:
+  - participant: CHEBI:456216     # ADP(3-)
+    stoichiometry: 1.0
+  - participant: CHEBI:43474      # hydrogenphosphate
+    stoichiometry: 1.0
+has_thermodynamic_estimate:
+  # Standard state: all reactants at 1 M.
+  - quantity_type: standard_transformed_gibbs_free_energy_change
+    value: -29.641753
+    standard_error: 0.304278
+    unit: kJ/mol
+    p_h: 7.5
+    ionic_strength: 0.25
+    p_mg: 3.0
+    temperature: 298.15
+    estimation_method: component_contribution
+    source: eQuilibrator (equilibrator-api 0.8.1)
+  # Physiological reference state: aqueous reactants at 1 mM, which accounts for
+  # the roughly 17 kJ/mol difference from the standard value above.
+  - quantity_type: physiological_transformed_gibbs_free_energy_change
+    value: -46.756591
+    standard_error: 0.304278
+    unit: kJ/mol
+    p_h: 7.5
+    ionic_strength: 0.25
+    p_mg: 3.0
+    temperature: 298.15
+    estimation_method: component_contribution
+    source: eQuilibrator (equilibrator-api 0.8.1)
+  # Dimensionless, so no unit. Strongly negative: the reaction cannot be driven
+  # backwards within physiological concentration bounds.
+  - quantity_type: ln_reversibility_index
+    value: -12.581017
+    standard_error: 0.081873
+    p_h: 7.5
+    ionic_strength: 0.25
+    p_mg: 3.0
+    temperature: 298.15
+    estimation_method: component_contribution
+    source: eQuilibrator (equilibrator-api 0.8.1)
