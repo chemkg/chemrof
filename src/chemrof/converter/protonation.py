@@ -20,8 +20,9 @@ basic groups protonated according to Rhea's conventions at pH 7.3.
 'C1C[NH2+]CCN1'
 """
 
+from dataclasses import dataclass
 from functools import lru_cache
-from typing import Optional
+from typing import Optional, Sequence, Tuple
 
 from rdkit import Chem
 from rdkit.Chem.MolStandardize import rdMolStandardize
@@ -98,6 +99,33 @@ CYCLIC_DIKETONE = "[CX4;H1,H2;R:1]([CX3;R](=[OX1])[#6])[CX3;R](=[OX1])[#6]"
 TROPOLONE = "[OX2H1:1]c1cccccc1=O"
 IMINO_ACID = "[NX2;+0;!$(N[#7,#8]):1]=[CX3]C(=O)[O-,OH]"
 
+
+
+@dataclass(frozen=True)
+class RuleSet:
+    """The rule tables :func:`ionize` applies. Empty or None disables a step."""
+
+    acids: Sequence[Tuple[str, str, Optional[int]]]
+    phosphoric_keep: Sequence[str]
+    amine: str
+    weak_amines: Sequence[str]
+    amidines: Sequence[str]
+    cyclic_diketone: Optional[str]
+    tropolone: Optional[str]
+    imino_acid: Optional[str]
+
+
+DEFAULT_RULES = RuleSet(
+    acids=ACIDS,
+    phosphoric_keep=PHOSPHORIC_KEEP,
+    amine=AMINE,
+    weak_amines=WEAK_AMINES,
+    amidines=AMIDINES,
+    cyclic_diketone=CYCLIC_DIKETONE,
+    tropolone=TROPOLONE,
+    imino_acid=IMINO_ACID,
+)
+
 # Species containing anything else (metals etc.) are left unchanged
 NONMETALS = {1, 5, 6, 7, 8, 9, 14, 15, 16, 17, 33, 34, 35, 52, 53}
 
@@ -140,14 +168,15 @@ def _to_terminal_iminium(mol: Chem.RWMol, site: int, centre: int) -> None:
             return
 
 
-def ionize(mol: Chem.Mol) -> Chem.Mol:
-    """Apply the pH 7.3 rules to a neutral molecule."""
+def ionize(mol: Chem.Mol, rules: Optional[RuleSet] = None) -> Chem.Mol:
+    """Apply the pH 7.3 rules (default: :data:`DEFAULT_RULES`) to a neutral molecule."""
+    rules = rules or DEFAULT_RULES
     mol = Chem.RWMol(mol)
     keep = {
-        mol.GetSubstructMatch(_pat(s))[0] for s in PHOSPHORIC_KEEP if mol.HasSubstructMatch(_pat(s))
+        mol.GetSubstructMatch(_pat(s))[0] for s in rules.phosphoric_keep if mol.HasSubstructMatch(_pat(s))
     }
     done = set()
-    for _, smarts, max_per_centre in ACIDS:
+    for _, smarts, max_per_centre in rules.acids:
         per_centre = {}
         # uniquify=False: equivalent OH groups on one centre share an atom set
         for match in mol.GetSubstructMatches(_pat(smarts), uniquify=False):
@@ -162,7 +191,7 @@ def ionize(mol: Chem.Mol) -> Chem.Mol:
             done.add(site)
 
     # cyclic 1,3-diketones: draw as the enolate C=C-[O-]
-    for match in mol.GetSubstructMatches(_pat(CYCLIC_DIKETONE)):
+    for match in mol.GetSubstructMatches(_pat(rules.cyclic_diketone)) if rules.cyclic_diketone else ():
         c_alpha, c_carbonyl, oxygen = (mol.GetAtomWithIdx(i) for i in match[:3])
         if c_alpha.GetTotalNumHs() == 0 or oxygen.GetFormalCharge() != 0:
             continue
@@ -172,16 +201,16 @@ def ionize(mol: Chem.Mol) -> Chem.Mol:
         mol.GetBondBetweenAtoms(match[1], match[2]).SetBondType(Chem.BondType.SINGLE)
         oxygen.SetFormalCharge(-1)
 
-    if not any(a.GetFormalCharge() < 0 for a in mol.GetAtoms()):
-        match = mol.GetSubstructMatch(_pat(TROPOLONE))
+    if rules.tropolone and not any(a.GetFormalCharge() < 0 for a in mol.GetAtoms()):
+        match = mol.GetSubstructMatch(_pat(rules.tropolone))
         if match:
             _shift(mol.GetAtomWithIdx(match[0]), -1)
 
-    weak = {m[0] for s in WEAK_AMINES for m in mol.GetSubstructMatches(_pat(s))}
+    weak = {m[0] for s in rules.weak_amines for m in mol.GetSubstructMatches(_pat(s))}
 
     # amidines etc.: protonate the imine N, once per conjugated system
     used = set()
-    for smarts in AMIDINES:
+    for smarts in rules.amidines:
         for match in mol.GetSubstructMatches(_pat(smarts)):
             site, centre = match[0], match[1]
             atom = mol.GetAtomWithIdx(site)
@@ -193,14 +222,14 @@ def ionize(mol: Chem.Mol) -> Chem.Mol:
             used.update(n.GetIdx() for n in mol.GetAtomWithIdx(centre).GetNeighbors())
 
     # imino acids: C=N alpha to a carboxylate (1-pyrroline-2-carboxylate etc.)
-    for match in mol.GetSubstructMatches(_pat(IMINO_ACID)):
+    for match in mol.GetSubstructMatches(_pat(rules.imino_acid)) if rules.imino_acid else ():
         atom = mol.GetAtomWithIdx(match[0])
         if atom.GetFormalCharge() == 0:
             _shift(atom, +1)
 
     # amines: protonate, but only one N of a 1,2-diamine (piperazine etc.)
     charged = []
-    for match in mol.GetSubstructMatches(_pat(AMINE)):
+    for match in mol.GetSubstructMatches(_pat(rules.amine)):
         site = match[0]
         if site in weak or site in used:
             continue
@@ -213,11 +242,12 @@ def ionize(mol: Chem.Mol) -> Chem.Mol:
     return mol
 
 
-def predict_major_microspecies(smiles: str) -> Optional[str]:
+def predict_major_microspecies(smiles: str, rules: Optional[RuleSet] = None) -> Optional[str]:
     """Predict the canonical SMILES of the major microspecies at pH 7.3.
 
     Returns None if the SMILES cannot be parsed. Single atoms and
     metal-containing species are returned unchanged (canonicalised).
+    ``rules`` selects a rule set (default: :data:`DEFAULT_RULES`).
 
     >>> predict_major_microspecies("[Na+]")
     '[Na+]'
@@ -229,4 +259,4 @@ def predict_major_microspecies(smiles: str) -> Optional[str]:
         return None
     if mol.GetNumHeavyAtoms() == 1 or any(a.GetAtomicNum() not in NONMETALS for a in mol.GetAtoms()):
         return Chem.MolToSmiles(mol)
-    return Chem.MolToSmiles(ionize(_uncharger.uncharge(mol)))
+    return Chem.MolToSmiles(ionize(_uncharger.uncharge(mol), rules))
