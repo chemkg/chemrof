@@ -20,6 +20,7 @@ def main():
     ap.add_argument('--sandbox', action='store_true', help='use sandbox.zenodo.org (needs a sandbox token)')
     ap.add_argument('--metadata', default='zenodo_metadata.json')
     ap.add_argument('--new-version-of', type=int, help='deposition id of the version to supersede')
+    ap.add_argument('--draft', type=int, help='resume an existing draft deposition (e.g. after a timeout)')
     ap.add_argument('--publish', action='store_true', help='publish the deposit (permanent)')
     a = ap.parse_args()
     token = os.environ.get('ZENODO_TOKEN')
@@ -31,8 +32,17 @@ def main():
     if 'SHA256SUMS' not in files or 'DATACARD.md' not in files:
         sys.exit(f'{a.bundle} does not look like a make_bundle.py output')
 
-    with httpx.Client(headers=headers, timeout=600) as client:
-        if a.new_version_of:
+    # uploads can take minutes to be acknowledged, so no read timeout
+    with httpx.Client(headers=headers, timeout=httpx.Timeout(60, read=None, write=None)) as client:
+        if a.draft:
+            r = client.get(f'{base}/deposit/depositions/{a.draft}')
+            r.raise_for_status()
+            dep = r.json()
+            if dep['submitted']:
+                sys.exit(f'deposition {a.draft} is already published')
+            done = {f['filename'] for f in dep.get('files', [])}
+            files = [f for f in files if f not in done]
+        elif a.new_version_of:
             r = client.post(f'{base}/deposit/depositions/{a.new_version_of}/actions/newversion')
             r.raise_for_status()
             r = client.get(r.json()['links']['latest_draft'])
