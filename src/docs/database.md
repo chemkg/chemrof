@@ -7,7 +7,7 @@ However, we also include a partial (currently *very* partial) set of
 entries in the database, ETL-ed from different sources.
 
 The database can be found in the
-[database](https://github.com/cmungall/chem-schema/tree/master/database)
+[database](https://github.com/chemkg/chemrof/tree/main/database)
 directory of the GitHub repo.
 
 ## ETL
@@ -51,7 +51,7 @@ files, one file per class/table in the schema.
 
 For example:
 
- * [ChemicalElement.ttl](https://github.com/chemkg/chemrof/blob/master/database/wd/ChemicalElement.ttl) from WikiData
+ * [ChemicalElement.ttl](https://github.com/chemkg/chemrof/blob/main/database/wd/ChemicalElement.ttl) from Wikidata
 
 ## Example
 
