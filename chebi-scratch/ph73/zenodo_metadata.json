@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "upload_type": "dataset",
+    "title": "pH 7.3 major-microspecies benchmark for ChEBI (Rhea mapping, open RDKit rules)",
+    "version": "2026-10-14",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "creators": [
+      {
+        "name": "chemrof contributors",
+        "affiliation": "chemkg"
+      }
+    ],
+    "description": "<p>A benchmark for predicting the major protonation state of ChEBI compounds at pH 7.3. It pairs 113,385 ChEBI entities with Rhea's <code>chebi_pH7_3_mapping.tsv</code> (8,402 of which map to a different protonation form) and adds predictions from open, RDKit-only rules (<code>chemrof.converter.protonation</code>).</p><p><b>Version 2026-10-14</b>: the default predictions now come from <b>clean-room rules</b> derived only from measured pKa values (raw ChEMBL25/DataWarrior extracts, CC BY 4.0, doi:10.5281/zenodo.7884512) and textbook group pKas, never from Rhea's mapping, whose changed rows are computed (reportedly by ChemAxon). Predictions from the earlier Rhea-fitted rules are included for comparison. Against measured pKa on 2,152 held-out IUPAC molecules the clean-room rules score 89.5% (Rhea-fitted 89.4%); on the 217 that Rhea covers, 95.9% vs 94.5% for ChemAxon. Agreement with Rhea's changed rows is 90.2% (Rhea-fitted 91.6%).</p><p>Files: <code>benchmark.parquet</code> (mapping rows with structures, split and predictions from three rule sets); <code>disagreements.parquet</code>; <code>chebi_structures.parquet</code> (ChEBI SMILES used, with structures whose ChEBI SMILES fail to parse rebuilt from molfiles); <code>chebi_unparseable_smiles.parquet</code> (13,171 ChEBI SMILES that RDKit cannot parse, mostly a missing H on aromatic N-H); the exact Rhea file used; a data card and SHA256 checksums.</p><p>Derived from ChEBI and Rhea (both CC BY 4.0); please cite them when using this dataset.</p>",
+    "keywords": [
+      "ChEBI",
+      "Rhea",
+      "protonation",
+      "microspecies",
+      "pKa",
+      "pH 7.3",
+      "RDKit",
+      "benchmark",
+      "cheminformatics"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/chemkg/chemrof",
+        "relation": "isSupplementTo",
+        "resource_type": "software"
+      },
+      {
+        "identifier": "https://github.com/chemkg/chemrof/issues/101",
+        "relation": "isReferencedBy",
+        "resource_type": "other"
+      },
+      {
+        "identifier": "https://www.ebi.ac.uk/chebi/",
+        "relation": "isDerivedFrom",
+        "resource_type": "dataset"
+      },
+      {
+        "identifier": "https://www.rhea-db.org/",
+        "relation": "isDerivedFrom",
+        "resource_type": "dataset"
+      },
+      {
+        "identifier": "10.5281/zenodo.7884512",
+        "relation": "isDerivedFrom",
+        "resource_type": "dataset"
+      }
+    ],
+    "notes": "Version 2026-10-14 built with chemkg/chemrof chebi-scratch/ph73/make_bundle.py; see DATACARD.md for the commit. The sealed split has already been scored, so it is not a blind test set."
+  }
+}

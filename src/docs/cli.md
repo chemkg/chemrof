@@ -390,8 +390,10 @@ OC(=O)CC(O)(CC(O)=O)C(O)=O	citric acid	CHEBI:30769
 for example, saturates to alanine, L-, D- and rac-alanine, and the zwitterion
 of each: 8 entities.
 
-The pH 7.3 forms come from a rule-based predictor (`chemrof.converter.protonation`)
-written to follow Rhea's `chebi_pH7_3_mapping.tsv`. Only the major microspecies
+The pH 7.3 forms come from a rule-based predictor (`chemrof.converter.protonation`).
+Its default rules are derived from measured pKa values and textbook group pKas,
+not from Rhea's ChemAxon-computed `chebi_pH7_3_mapping.tsv`; a Rhea-fitted rule
+set (`RHEA_FITTED_RULES`) is kept for comparison. Only the major microspecies
 is generated, not the intermediate charge states, so `conjugate_acid_of` /
 `conjugate_base_of` are asserted only when the two forms are one proton apart.
 
