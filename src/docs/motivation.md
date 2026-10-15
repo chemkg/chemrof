@@ -32,6 +32,6 @@ issue](https://github.com/INCATools/dead_simple_owl_design_patterns/issues/51)
 
 For driving use case and why we need aan alternatibe to existing chebi atom / simple molecule representation see:
 
- - https://github.com/EnvironmentOntology/envo/issues/989
+ - [EnvironmentOntology/envo#989](https://github.com/EnvironmentOntology/envo/issues/989)
 
 

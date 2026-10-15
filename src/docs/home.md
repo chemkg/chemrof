@@ -31,7 +31,7 @@ they are instances, but can be later translated to OWL classes.
 The schema and overall framework uses [LinkML](https://linkml.io/linkml)
 
  * Browse the schema here: [http://chemkg.github.io/chemrof](http://chemkg.github.io/chemrof)
- * See the yaml source in the [src/schema](https://github.com/chemkg/chemrof/blob/master/src/schema) directory
+ * See the yaml source in the [src/schema](https://github.com/chemkg/chemrof/blob/main/src/chemrof/schema) directory
 
 ### Schema Organization
 
@@ -113,7 +113,7 @@ The [Enantiomer class](/Enantiomer) represents a chemical entity that has a form
       chirality_agnostic_form: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29"
       has_left_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%2913%2815%2919%2Fh1-4%2C9H%2C5-6H2%2C%28H%2C14%2C16%2C17%29%2Ft9-%2Fm0%2Fs1"
       has_right_enantiomer: "ChemicalEntity:InChI%3D1S%2FC13H10N2O4%2Fc16-10-6-5-9%2811%2817%2914-10%2915-12%2818%297-3-1-2-4-8%287%291
-   ``````
+    ```
 
 === "OWL (TBox)"
 
@@ -154,7 +154,7 @@ Note that a class "Enantiomer" does not really make sense at an OBO level where 
 
 ## Mappings
 
- - [SSSOM](https://github.com/chemkg/chemrof/tree/master/schema/sssom)
+ - [SSSOM](https://github.com/chemkg/chemrof/tree/main/src/chemrof/schema/sssom)
 
 Example mappings:
 
@@ -172,13 +172,13 @@ Example mappings:
 
 Currently the main derived artefacts of interest are:
 
- - [JSON Schema](https://github.com/chemkg/chemrof/tree/master/schema/jsonschema)
- - [ShEx](https://github.com/chemkg/chemrof/tree/master/schema/shex)
- - [SHACL](https://github.com/chemkg/chemrof/tree/master/schema/shacl)
+ - [JSON Schema](https://github.com/chemkg/chemrof/tree/main/src/chemrof/schema/jsonschema)
+ - [ShEx](https://github.com/chemkg/chemrof/tree/main/src/chemrof/schema/shex)
+ - [SHACL](https://github.com/chemkg/chemrof/tree/main/src/chemrof/schema/shacl)
 
 With care, you also see:
 
- - [OWL](https://github.com/chemkg/chemrof/tree/master/schema/owl) -- note this should be read as a meta-ontology by OBO people
+ - [OWL](https://github.com/chemkg/chemrof/tree/main/src/chemrof/schema/owl) -- note this should be read as a meta-ontology by OBO people
 
 ## Comparison with CHEBI and Wikidata
 
