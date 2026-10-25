@@ -180,7 +180,8 @@ Then request it like any other enricher:
 chemrof convert "CC(=O)Nc1ccccc1" --enrichers openclatura
 ```
 
-It fills `IUPAC_name` (here, `N-phenylacetamide`) and also sets `name` when
+It fills `IUPAC_name` (here, `N-phenylacetamide`) unless an earlier enricher
+already set it, and also sets `name` when
 that slot still holds a placeholder such as the empirical formula. Running it
 alongside `pubchem` gives a database-preferred name where one exists and a
 locally-derived name everywhere else:
@@ -200,6 +201,36 @@ chemrof convert "CC(=O)Nc1ccccc1" --enrichers openclatura --format owl
 AnnotationAssertion(rdfs:label <.../FZERHIULMFGESH-UHFFFAOYSA-N> "N-phenylacetamide")
 AnnotationAssertion(chemrof:IUPAC_name <.../FZERHIULMFGESH-UHFFFAOYSA-N> "N-phenylacetamide")
 ```
+
+### Choosing and chaining local IUPAC namers
+
+chemrof wraps three open-source SMILES-to-IUPAC generators, each as its own
+enricher. Noel O'Boyle's
+[2026 comparison](https://baoilleach.blogspot.com/2026/10/assessing-open-source-iupac-name.html)
+(about 342k structures from PubMed, round-tripped through OPSIN) found
+different trade-offs:
+
+| Enricher | Coverage | Name quality | Notes |
+|----------|----------|--------------|-------|
+| `orthonym` | Narrowest (organic compounds) | Shortest names with fewest locants; most often matches the literature name | Returns only verified Preferred IUPAC Names; needs Java |
+| `openclatura` | Broad | Close behind Orthonym on matching literature names | Pure Python; needs Python >= 3.11 |
+| `nispo` | Widest | Longest names; least often matches literature names | Pure Python |
+
+The local namers only fill `IUPAC_name` when it is still empty, so listing
+several gives a fallback chain where the first name produced wins. A good
+default is to put the higher-quality namers first and the widest-coverage one
+last:
+
+```bash
+pip install 'chemrof[orthonym,openclatura,nispo]'
+chemrof convert "[Cu+2]" --enrichers pubchem,orthonym,openclatura,nispo
+```
+
+All three tools were early in development at the time of that comparison and
+were changing quickly, so treat the comparison as a guide, not a ranking.
+Orthonym's coverage in particular reflects its default PIN-only tier (which is
+what the `orthonym` enricher uses); its developers point out that a wider
+"best effort" tier also returns non-preferred names.
 
 ### ChemOnt classification examples
 

@@ -51,6 +51,8 @@ def _build_registry() -> dict[str, type]:
     from chemrof.converter.enrichers.chemont import ChemOntEnricher
     from chemrof.converter.enrichers.pubchem import PubChemEnricher
     from chemrof.converter.enrichers.openclatura import OpenclaturaEnricher
+    from chemrof.converter.enrichers.nispo import NispoEnricher
+    from chemrof.converter.enrichers.orthonym import OrthonymEnricher
     from chemrof.converter.enrichers.chebi import ChebiEnricher
     from chemrof.converter.enrichers.wikidata import WikidataEnricher
 
@@ -58,6 +60,8 @@ def _build_registry() -> dict[str, type]:
         "chemont": ChemOntEnricher,
         "pubchem": PubChemEnricher,
         "openclatura": OpenclaturaEnricher,
+        "nispo": NispoEnricher,
+        "orthonym": OrthonymEnricher,
         "chebi": ChebiEnricher,
         "wikidata": WikidataEnricher,
     }

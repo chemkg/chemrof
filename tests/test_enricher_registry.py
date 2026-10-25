@@ -11,6 +11,8 @@ def test_list_enrichers():
     assert "chemont" in names
     assert "pubchem" in names
     assert "openclatura" in names
+    assert "nispo" in names
+    assert "orthonym" in names
     assert "chebi" in names
     assert "wikidata" in names
 
