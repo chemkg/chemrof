@@ -76,6 +76,16 @@ mkd-%:
 project: $(SOURCE_FILES)
 #	gen-project -A 'owl: {metaclasses: false, type_objects: false}' -d schema $<
 	$(RUN) gen-project ${GEN_PARGS} -d schema $<
+	$(MAKE) finalize-owl
+
+# Put the owl:Ontology header (with owl:versionInfo) at the top of the OWL
+# artefact so registries and FAIR checkers that read only the file head find it.
+# Version comes from the latest git tag, falling back to the schema's version.
+OWL_VERSION ?= $(shell git describe --tags --abbrev=0 2>/dev/null || grep '^version:' $(SCHEMA_SRC) | cut -d' ' -f2)
+finalize-owl:
+	$(RUN) python scripts/finalize_owl.py schema/owl/$(SCHEMA_NAME).owl.ttl schema/owl/$(SCHEMA_NAME).owl.ttl.tmp --version $(OWL_VERSION)
+	mv schema/owl/$(SCHEMA_NAME).owl.ttl.tmp schema/owl/$(SCHEMA_NAME).owl.ttl
+.PHONY: finalize-owl
 
 #schema/owl/$(SCHEMA_NAME).owl.ttl: $(SOURCE_FILES)
 #	$(RUN) gen-owl --no-metaclasses --no-type-objects $< > $@.tmp && mv $@.tmp $@
