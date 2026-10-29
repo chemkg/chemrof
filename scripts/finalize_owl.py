@@ -1,17 +1,18 @@
-"""Post-process the gen-owl output so the ontology header is machine-findable.
+"""Patch the ontology header of the gen-owl output.
 
-gen-owl writes the owl:Ontology block wherever rdflib's serializer puts it,
-which for chemrof is near the end of a ~330 KB file, and it records the
-version only as pav:version. Registries and FAIR checkers (e.g. SchemaScope)
-read just the head of the artefact and look for owl:versionInfo /
-owl:versionIRI, so they report the version as "not declared inside the
-artefact".
+Interim workaround for three gaps in the LinkML OWL generator (owlgen), as of
+linkml 1.12.1. Delete this script once owlgen covers them:
 
-This script:
-  * adds owl:versionInfo (and keeps pav:version) for the given version
-  * turns the dcterms:license literal into an IRI
-  * adds homepage / source repository metadata
-  * writes the ontology header block first, followed by the rest of the graph
+  * the schema `version` is emitted only as pav:version; this adds
+    owl:versionInfo, which registries and FAIR checkers look for
+  * the schema `license` is emitted as a string literal; this turns it into
+    an IRI when it is one
+  * the owl:Ontology block lands wherever the serializer puts it (byte ~220k
+    of ~360k for chemrof); this writes it first, because checkers such as
+    SchemaScope read only the head of the artefact
+
+Everything else in the header (title, description, source, see_also) comes
+from the schema's own metadata.
 
 Usage: python scripts/finalize_owl.py IN.owl.ttl OUT.owl.ttl --version 0.4.1
 """
@@ -19,12 +20,9 @@ Usage: python scripts/finalize_owl.py IN.owl.ttl OUT.owl.ttl --version 0.4.1
 import argparse
 
 from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, FOAF, OWL, RDF
+from rdflib.namespace import DCTERMS, OWL, RDF
 
 ONTOLOGY_IRI = URIRef("https://w3id.org/chemrof")
-LICENSE = URIRef("https://creativecommons.org/publicdomain/zero/1.0/")
-HOMEPAGE = URIRef("https://chemkg.github.io/chemrof")
-REPOSITORY = URIRef("https://github.com/chemkg/chemrof")
 
 
 def main() -> None:
@@ -47,10 +45,11 @@ def main() -> None:
     g.add((ont, pav_version, Literal(version)))
     g.remove((ont, OWL.versionInfo, None))
     g.add((ont, OWL.versionInfo, Literal(version)))
-    g.remove((ont, DCTERMS.license, None))
-    g.add((ont, DCTERMS.license, LICENSE))
-    g.add((ont, FOAF.homepage, HOMEPAGE))
-    g.add((ont, DCTERMS.source, REPOSITORY))
+
+    for lic in list(g.objects(ont, DCTERMS.license)):
+        if isinstance(lic, Literal) and str(lic).startswith(("http://", "https://")):
+            g.remove((ont, DCTERMS.license, lic))
+            g.add((ont, DCTERMS.license, URIRef(str(lic))))
 
     header = Graph(namespace_manager=g.namespace_manager)
     for triple in g.triples((ont, None, None)):
