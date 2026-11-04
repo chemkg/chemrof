@@ -105,4 +105,7 @@ docserve:
 gh-deploy:
 	$(RUN) mkdocs gh-deploy
 
-include etl.mk
+# Rhea's mapping of CHEBI ids to their physiological (pH 7.3) stable form,
+# rewritten with CHEBI: CURIEs and a header (input to views/chebi-views.sql)
+database/chebi_pH7_3_mapping.tsv:
+	curl -L -s https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv | perl -npe 's@@CHEBI:@;s@\t@\tCHEBI:@;s@^CHEBI:CHEBI.*@id\thas_physiological_stable_form\tsource@' > $@.tmp && mv $@.tmp $@

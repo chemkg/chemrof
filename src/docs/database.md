@@ -3,24 +3,30 @@
 This project is primarily intended to provide a standardized
 [schema](../schema/) for rigorous data modeling of chemical entities.
 
-However, we also include a partial (currently *very* partial) set of
+However, we also include a partial (*very* partial) set of exemplar
 entries in the database, ETL-ed from different sources.
 
 The database can be found in the
-[database](https://github.com/cmungall/chem-schema/tree/master/database)
+[database](https://github.com/chemkg/chemrof/tree/main/database)
 directory of the GitHub repo.
 
 ## ETL
 
-The ETL is largely driven by SPARQL CONSTRUCT queries. See the
-[sparql](https://github.com/cmungall/chem-schema/tree/master/sparql)
-folder and the Makefile.
+The files in `database/` were produced between 2021 and 2024 by a
+pipeline of SPARQL CONSTRUCT queries against Wikidata and CHEBI. That
+pipeline was retired in September 2026 (it lives on in git history as
+`etl.mk` and `sparql/`), so the files are a frozen snapshot.
 
-Note so far we have only ETL'd a very small set of datatypes for proof of principles:
+Only a very small set of types was ETL'd, as a proof of principle:
 
  - [ChemicalElement](ChemicalElement.md)
  - Isotope
  - MonoatomicIon
+
+The current route from external data into chemrof instances is the
+`chemrof convert` command, which builds instances from SMILES strings
+and can enrich them from PubChem and ChemOnt; see the
+[converter](converter.md) and [CLI](cli.md) pages.
 
 ## Identifiers
 
@@ -51,7 +57,7 @@ files, one file per class/table in the schema.
 
 For example:
 
- * [ChemicalElement.ttl](https://github.com/chemkg/chemrof/blob/master/database/wd/ChemicalElement.ttl) from WikiData
+ * [ChemicalElement.ttl](https://github.com/chemkg/chemrof/blob/main/database/wd/ChemicalElement.ttl) from WikiData
 
 ## Example
 
@@ -88,9 +94,8 @@ chem:Isotope/Mn/21 a chem:Isotope ;
 
 ## Merged Database
 
-We also provide a file
-[all-merged.owl](https://github.com/chemkg/chemrof/blob/master/database/all-merged.owl)
-that contains both the schema (as owl classes) and data (as
-instances).
+The per-source files are merged into a single
+[all.jsonld](https://github.com/chemkg/chemrof/blob/main/database/all.jsonld).
 
-This data can be transformed into a more OBO-like OWL file, see next section.
+This data can be transformed into a more OBO-like OWL file, see the
+[ontology](ontology.md) page.
