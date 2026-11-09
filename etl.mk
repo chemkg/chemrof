@@ -106,6 +106,16 @@ database/%.jsonld: database/%.ttl
 	riot --output=JSONLD --syntax=TURTLE $< > $@.tmp && mv $@.tmp $@
 
 # RHEA
-database/chebi_pH7_3_mapping.tsv:
-	curl -L -s https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv | perl -npe 's@@CHEBI:@;s@\t@\tCHEBI:@;s@^CHEBI:CHEBI.*@id\thas_physiological_stable_form\tsource@' > $@.tmp && mv $@.tmp $@
+# The pH 7.3 mapping is read from a cached copy of release 143, the last
+# release covering all of ChEBI (see external/rhea/README.md).
+RHEA_PH73_RELEASE = 143
+RHEA_PH73 = external/rhea/chebi_pH7_3_mapping-r$(RHEA_PH73_RELEASE).tsv.gz
+
+database/chebi_pH7_3_mapping.tsv: $(RHEA_PH73)
+	gzip -dc $< | perl -npe 's@@CHEBI:@;s@\t@\tCHEBI:@;s@^CHEBI:CHEBI.*@id\thas_physiological_stable_form\tsource@' > $@.tmp && mv $@.tmp $@
+
+# Snapshot the pH 7.3 mapping from a Rhea release archive (~400 MB download).
+external/rhea/chebi_pH7_3_mapping-r%.tsv.gz:
+	curl -L -s -f https://ftp.expasy.org/databases/rhea/old_releases/$*.tar.bz2 | tar -xjOf - --wildcards '*/tsv/chebi_pH7_3_mapping.tsv' | gzip -9n > $@.tmp && mv $@.tmp $@ || { rm -f $@.tmp; false; }
+.PRECIOUS: external/rhea/chebi_pH7_3_mapping-r%.tsv.gz
 

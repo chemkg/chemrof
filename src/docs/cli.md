@@ -391,7 +391,8 @@ for example, saturates to alanine, L-, D- and rac-alanine, and the zwitterion
 of each: 8 entities.
 
 The pH 7.3 forms come from a rule-based predictor (`chemrof.converter.protonation`)
-written to follow Rhea's `chebi_pH7_3_mapping.tsv`. Only the major microspecies
+written to follow Rhea's `chebi_pH7_3_mapping.tsv` (a copy of release 143, the
+last release covering all of ChEBI, is cached in `external/rhea/`). Only the major microspecies
 is generated, not the intermediate charge states, so `conjugate_acid_of` /
 `conjugate_base_of` are asserted only when the two forms are one proton apart.
 

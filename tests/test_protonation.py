@@ -1,6 +1,7 @@
 """Tests for the pH 7.3 major microspecies rules.
 
-Expected values follow Rhea's chebi_pH7_3_mapping.tsv.
+Expected values follow Rhea's chebi_pH7_3_mapping.tsv (cached copy of
+release 143 in external/rhea/).
 """
 
 import doctest
