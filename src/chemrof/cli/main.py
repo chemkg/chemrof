@@ -61,6 +61,15 @@ Pass a comma-separated list of source names. Available sources:
                (no network). Fills IUPAC_name. Requires
                `pip install 'chemrof[openclatura]'`.
 
+  orthonym  -- Derive a verified Preferred IUPAC Name locally (needs Java).
+               Requires `pip install 'chemrof[orthonym]'`.
+
+  nispo     -- Derive an IUPAC name locally; widest coverage, longer names.
+               Requires `pip install 'chemrof[nispo]'`.
+
+               The local namers only fill IUPAC_name when it is still empty,
+               so they chain: e.g. pubchem,orthonym,openclatura,nispo.
+
   chebi     -- Resolve atoms, monoatomic ions and isotopes to CHEBI ids
                (offline, from a bundled table). Replaces id and name.
                Other entity types are left unchanged.

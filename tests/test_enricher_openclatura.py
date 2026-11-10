@@ -28,7 +28,7 @@ def test_openclatura_follows_enricher_protocol(enricher):
 
 
 def test_apply_name_sets_iupac_name(enricher):
-    """IUPAC_name is always filled from the derived name."""
+    """IUPAC_name is filled from the derived name when empty."""
     obj = {"id": "INCHIKEY:LFQSCWFLJHTTHZ-UHFFFAOYSA-N", "name": "C2H6O",
            "empirical_formula": "C2H6O"}
     result = enricher._apply_name(obj, "ethanol")
