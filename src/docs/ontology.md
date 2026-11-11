@@ -10,7 +10,7 @@ data model, and to use this to help advance the development of CHEBI.
 
 ## Download OWL
 
-See the [ontology](https://github.com/chemkg/chemrof/blob/master/ontology) folder on github
+See the [ontology](https://github.com/chemkg/chemrof/tree/main/src/ontology) folder on github
 
 ## OWL generation
 
