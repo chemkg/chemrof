@@ -112,6 +112,25 @@ smiles_string: O
 type: chemrof:Molecule
 
 ```
+## GroupingBySmarts-heme_o
+### Input
+```yaml
+description: A heme that is heme a with a methyl group in place of the 17-formyl group;
+  the biosynthetic precursor of heme a and the heme of cytochrome bo3 ubiquinol oxidase.
+  The SMARTS pins every heavy atom of the iron-porphyrin skeleton and its substituents
+  by element and heavy-atom degree, so no extra or missing substituents are allowed.
+  Ring, Fe-N and C-O bonds are '~', so Kekule or aromatic, dative or charge-separated,
+  and acid or carboxylate drawings all match. Acyclic C-C bonds keep their order.
+  Iron is left unconstrained, so axial ligands are allowed and the grouping spans
+  both oxidation states. Stereochemistry is not constrained.
+genus: CHEBI:30413
+id: CHEBI:24480
+name: heme o
+smarts_string: '[#6D1]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](~[#8D1])-[#6D3]1~[#6D3](-[#6D1])~[#6D3]2~[#6D2]~[#6D3]3~[#6D3](-[#6D1])~[#6D3](-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#6D3]4~[#6D2]~[#6D3]5~[#6D3](-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#6D3](-[#6D1])~[#6D3]6~[#6D2]~[#6D3]7~[#6D3](-[#6D2]=[#6D1])~[#6D3](-[#6D1])~[#6D3]8~[#6D2]~[#6D3]~1~[#7D3]~2~[Fe](~[#7D3]~3~4)(~[#7D3]~8~7)~[#7D3]~6~5'
+subtype_of:
+- CHEBI:30413
+
+```
 ## AtomCation-sodium
 ### Input
 ```yaml
@@ -241,6 +260,51 @@ name: fluoride
 type: chemrof:AtomAnion
 
 ```
+## NetUnchargedMolecule-ferroheme_a
+### Input
+```yaml
+IUPAC_name: '[3,3''-{7-ethenyl-17-formyl-12-[(1S,4E,8E)-1-hydroxy-5,9,13-trimethyltetradeca-4,8,12-trien-1-yl]-3,8,13-trimethylporphyrin-2,18-diyl-kappa(4)N(21),N(22),N(23),N(24)}dipropanoato(2-)]iron'
+classified_by:
+- CHEBI:24479
+- CHEBI:38573
+elemental_charge: 0
+has_atom_occurrences:
+- coordination_number: 4
+  name: ferroheme_a-fe1
+  occurrence_of: Fe
+  oxidation_number: 2
+- name: ferroheme_a-n21
+  occurrence_of: N
+- name: ferroheme_a-n22
+  occurrence_of: N
+- name: ferroheme_a-n23
+  occurrence_of: N
+- name: ferroheme_a-n24
+  occurrence_of: N
+has_bonds:
+- bond_order: 1
+  object: ferroheme_a-n21
+  subject: ferroheme_a-fe1
+- bond_order: 1
+  object: ferroheme_a-n22
+  subject: ferroheme_a-fe1
+- bond_order: 1
+  object: ferroheme_a-n23
+  subject: ferroheme_a-fe1
+- bond_order: 1
+  object: ferroheme_a-n24
+  subject: ferroheme_a-fe1
+id: CHEBI:36163
+inchi_key_string: ZGGYGTCPXNDTRV-PRYGPKJJSA-L
+inchi_string: InChI=1S/C49H58N4O6.Fe/c1-9-34-31(6)39-25-45-49(46(55)18-12-17-30(5)16-11-15-29(4)14-10-13-28(2)3)33(8)40(52-45)24-44-37(27-54)36(20-22-48(58)59)43(53-44)26-42-35(19-21-47(56)57)32(7)38(51-42)23-41(34)50-39;/h9,13,15,17,23-27,46,55H,1,10-12,14,16,18-22H2,2-8H3,(H4,50,51,52,53,54,56,57,58,59);/q;+2/p-2/b29-15+,30-17+,38-23-,39-25-,40-24-,41-23-,42-26-,43-26-,44-24-,45-25-;/t46-;/m0./s1
+is_organic: true
+molecular_formula: C49H56FeN4O6
+molecular_mass: 852.854
+name: ferroheme a
+smiles_string: '[H]C(=O)C1=C(CCC(=O)O)C2=[N]3C1=Cc1c(C)c([C@@H](O)CC/C=C(\C)CC/C=C(\C)CCC=C(C)C)c4[n]1[Fe]31[N]3=C(C=c5c(C)c(CCC(=O)O)c([n]51)=C2)C(C=C)=C(C)C3=C4'
+type: chemrof:NetUnchargedMolecule
+
+```
 ## GroupingByGenusAndRangeRestriction-very_long_chain_fatty_acyl_coa
 ### Input
 ```yaml
@@ -262,6 +326,51 @@ empirical_formula: OH
 id: CHEBI:43176
 name: hydroxy group
 type: chemrof:FunctionalGroup
+
+```
+## MolecularCation-ferriheme_b
+### Input
+```yaml
+IUPAC_name: (protoporphyrinato)iron(III)
+classified_by:
+- CHEBI:26355
+- CHEBI:38574
+elemental_charge: 1
+has_atom_occurrences:
+- coordination_number: 4
+  name: ferriheme_b-fe1
+  occurrence_of: Fe
+  oxidation_number: 3
+- name: ferriheme_b-n21
+  occurrence_of: N
+- name: ferriheme_b-n22
+  occurrence_of: N
+- name: ferriheme_b-n23
+  occurrence_of: N
+- name: ferriheme_b-n24
+  occurrence_of: N
+has_bonds:
+- bond_order: 1
+  object: ferriheme_b-n21
+  subject: ferriheme_b-fe1
+- bond_order: 1
+  object: ferriheme_b-n22
+  subject: ferriheme_b-fe1
+- bond_order: 1
+  object: ferriheme_b-n23
+  subject: ferriheme_b-fe1
+- bond_order: 1
+  object: ferriheme_b-n24
+  subject: ferriheme_b-fe1
+id: CHEBI:36144
+inchi_key_string: GGIDWJQWCUJYRY-RGGAHWMASA-L
+inchi_string: InChI=1S/C34H34N4O4.Fe/c1-7-21-17(3)25-13-26-19(5)23(9-11-33(39)40)31(37-26)16-32-24(10-12-34(41)42)20(6)28(38-32)15-30-22(8-2)18(4)27(36-30)14-29(21)35-25;/h7-8,13-16H,1-2,9-12H2,3-6H3,(H4,35,36,37,38,39,40,41,42);/q;+3/p-2/b25-13-,26-13-,27-14-,28-15-,29-14-,30-15-,31-16-,32-16-;
+is_organic: true
+molecular_formula: C34H32FeN4O4
+molecular_mass: 616.499
+name: ferriheme b
+smiles_string: C=CC1=C(C)C2=Cc3c(C=C)c(C)c4[n]3[Fe+]35[N]2=C1C=c1c(C)c(CCC(=O)O)c([n]13)=CC1=[N]5C(=C4)C(C)=C1CCC(=O)O
+type: chemrof:MolecularCation
 
 ```
 ## AtomAnion-chloride
@@ -320,6 +429,73 @@ id: UniProtKB:P01308
 is_organic: true
 name: insulin
 type: chemrof:Protein
+
+```
+## NetUnchargedMolecule-ferroheme_b
+### Input
+```yaml
+IUPAC_name: (protoporphyrinato)iron(II)
+classified_by:
+- CHEBI:26355
+- CHEBI:38573
+elemental_charge: 0
+has_atom_occurrences:
+- coordination_number: 4
+  name: ferroheme_b-fe1
+  occurrence_of: Fe
+  oxidation_number: 2
+- name: ferroheme_b-n21
+  occurrence_of: N
+- name: ferroheme_b-n22
+  occurrence_of: N
+- name: ferroheme_b-n23
+  occurrence_of: N
+- name: ferroheme_b-n24
+  occurrence_of: N
+has_bonds:
+- bond_order: 1
+  object: ferroheme_b-n21
+  subject: ferroheme_b-fe1
+- bond_order: 1
+  object: ferroheme_b-n22
+  subject: ferroheme_b-fe1
+- bond_order: 1
+  object: ferroheme_b-n23
+  subject: ferroheme_b-fe1
+- bond_order: 1
+  object: ferroheme_b-n24
+  subject: ferroheme_b-fe1
+has_major_microspecies_at_pH7_3:
+- CHEBI:60344
+id: CHEBI:17627
+inchi_key_string: KABFMIBPWCXCRK-RGGAHWMASA-L
+inchi_string: InChI=1S/C34H34N4O4.Fe/c1-7-21-17(3)25-13-26-19(5)23(9-11-33(39)40)31(37-26)16-32-24(10-12-34(41)42)20(6)28(38-32)15-30-22(8-2)18(4)27(36-30)14-29(21)35-25;/h7-8,13-16H,1-2,9-12H2,3-6H3,(H4,35,36,37,38,39,40,41,42);/q;+2/p-2/b25-13-,26-13-,27-14-,28-15-,29-14-,30-15-,31-16-,32-16-;
+is_organic: true
+molecular_formula: C34H32FeN4O4
+molecular_mass: 616.499
+name: ferroheme b
+smiles_string: C=CC1=C(C)C2=Cc3c(C=C)c(C)c4[n]3[Fe-2]35[n]6c(c(C)c(CCC(=O)O)c6=CC6=[N+]3C(=C4)C(C)=C6CCC(=O)O)=CC1=[N+]25
+type: chemrof:NetUnchargedMolecule
+
+```
+## GroupingBySmarts-heme_a
+### Input
+```yaml
+description: A heme whose porphyrin carries a formyl group at position 17 and a (1S,4E,8E)-1-hydroxy-5,9,13-trimethyltetradeca-4,8,12-trien-1-yl
+  (hydroxyethylfarnesyl) chain at position 12; the heme of cytochrome c oxidase (cytochromes
+  a and a3). The oxidation-state-neutral parent of ferroheme a and ferriheme a. The
+  SMARTS pins every heavy atom of the iron-porphyrin skeleton and its substituents
+  by element and heavy-atom degree, so no extra or missing substituents are allowed.
+  Ring, Fe-N and C-O bonds are '~', so Kekule or aromatic, dative or charge-separated,
+  and acid or carboxylate drawings all match. Acyclic C-C bonds keep their order.
+  Iron is left unconstrained, so axial ligands are allowed and the grouping spans
+  both oxidation states. Stereochemistry is not constrained.
+genus: CHEBI:30413
+id: CHEBI:24479
+name: heme a
+smarts_string: '[#6D1]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](-[#6D1])=[#6D2]-[#6D2]-[#6D2]-[#6D3](~[#8D1])-[#6D3]1~[#6D3](-[#6D1])~[#6D3]2~[#6D2]~[#6D3]3~[#6D3](-[#6D2]~[#8D1])~[#6D3](-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#6D3]4~[#6D2]~[#6D3]5~[#6D3](-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#6D3](-[#6D1])~[#6D3]6~[#6D2]~[#6D3]7~[#6D3](-[#6D2]=[#6D1])~[#6D3](-[#6D1])~[#6D3]8~[#6D2]~[#6D3]~1~[#7D3]~2~[Fe](~[#7D3]~3~4)(~[#7D3]~8~7)~[#7D3]~6~5'
+subtype_of:
+- CHEBI:30413
 
 ```
 ## GroupingByGenusAndRangeRestriction-short_chain_fatty_acyl_coa
@@ -517,6 +693,34 @@ symbol: H
 type: chemrof:Isotope
 
 ```
+## MoleculeGroupingClass-ferriheme
+### Input
+```yaml
+description: Any iron(III)-porphyrin coordination complex. The differentia is the
+  +3 oxidation state of the iron. This cannot be read from a SMILES string (ChEBI
+  draws ferriheme b with a formally Fe(+1) centre), and it is not a molecule-level
+  property, so no current grouping meta-pattern can define this class. Members state
+  it on their iron AtomOccurrence via oxidation_number.
+id: CHEBI:38574
+name: ferriheme
+subtype_of:
+- CHEBI:30413
+
+```
+## MoleculeGroupingClass-ferroheme
+### Input
+```yaml
+description: Any iron(II)-porphyrin coordination complex. The differentia is the +2
+  oxidation state of the iron. This cannot be read from a SMILES string (ChEBI draws
+  ferroheme b with a formally Fe(-2) centre and ferroheme a with a neutral one), and
+  it is not a molecule-level property, so no current grouping meta-pattern can define
+  this class. Members state it on their iron AtomOccurrence via oxidation_number.
+id: CHEBI:38573
+name: ferroheme
+subtype_of:
+- CHEBI:30413
+
+```
 ## GroupingByGenusAndPropertyValue-branched_chain_fatty_acyl_coa
 ### Input
 ```yaml
@@ -530,6 +734,21 @@ subtype_of:
 - CHEBI:37554
 value: 'true'
 value_datatype: xsd:boolean
+
+```
+## GroupingBySmarts-heme
+### Input
+```yaml
+description: 'A heme is any tetrapyrrolic chelate of iron. Membership is recognised
+  structurally: an iron atom bonded to four five-membered-ring nitrogens. The SMARTS
+  does not constrain the oxidation state, formal charges or axial ligands of the iron,
+  nor how the Fe-N bonds are drawn, so it matches ferrohemes, ferrihemes, hemin and
+  hematin alike, while zinc, magnesium and cobalt tetrapyrroles, free-base porphyrins
+  and ferrocene do not match.'
+genus: CHEBI:33892
+id: CHEBI:30413
+name: heme
+smarts_string: '[Fe](~[#7;r5])(~[#7;r5])(~[#7;r5])~[#7;r5]'
 
 ```
 ## GroupingByGenusAndRangeRestriction-long_chain_fatty_acyl_coa
@@ -727,6 +946,57 @@ smiles_string: OC[C@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@@H]1O
 type: chemrof:Monosaccharide
 
 ```
+## Reaction-atp_phosphohydrolase
+### Input
+```yaml
+direction: l->r
+has_thermodynamic_estimate:
+- estimation_method: component_contribution
+  ionic_strength: 0.25
+  p_h: 7.5
+  p_mg: 3.0
+  quantity_type: standard_transformed_gibbs_free_energy_change
+  source: eQuilibrator (equilibrator-api 0.8.1)
+  standard_error: 0.304278
+  temperature: 298.15
+  unit: kJ/mol
+  value: -29.641753
+- estimation_method: component_contribution
+  ionic_strength: 0.25
+  p_h: 7.5
+  p_mg: 3.0
+  quantity_type: physiological_transformed_gibbs_free_energy_change
+  source: eQuilibrator (equilibrator-api 0.8.1)
+  standard_error: 0.304278
+  temperature: 298.15
+  unit: kJ/mol
+  value: -46.756591
+- estimation_method: component_contribution
+  ionic_strength: 0.25
+  p_h: 7.5
+  p_mg: 3.0
+  quantity_type: ln_reversibility_index
+  source: eQuilibrator (equilibrator-api 0.8.1)
+  standard_error: 0.081873
+  temperature: 298.15
+  value: -12.581017
+id: RHEA:13065
+is_balanced: true
+left_participants:
+- participant: CHEBI:30616
+  stoichiometry: 1.0
+- participant: CHEBI:15377
+  stoichiometry: 1.0
+name: ATP phosphohydrolase reaction
+reaction_type: hydrolysis
+right_participants:
+- participant: CHEBI:456216
+  stoichiometry: 1.0
+- participant: CHEBI:43474
+  stoichiometry: 1.0
+type: chemrof:Reaction
+
+```
 ## AtomCation-copper2
 ### Input
 ```yaml
@@ -797,6 +1067,52 @@ subtype_of:
 value: odd
 
 ```
+## NetUnchargedMolecule-ferroheme_c
+### Input
+```yaml
+IUPAC_name: '{3,3''-[3,7,12,17-tetramethyl-8,13-bis(1-sulfanylethyl)porphyrin-2,18-diyl-kappa(4)N(21),N(22),N(23),N(24)]dipropanoato(2-)}iron'
+classified_by:
+- CHEBI:38573
+elemental_charge: 0
+has_atom_occurrences:
+- coordination_number: 4
+  name: ferroheme_c-fe1
+  occurrence_of: Fe
+  oxidation_number: 2
+- name: ferroheme_c-n21
+  occurrence_of: N
+- name: ferroheme_c-n22
+  occurrence_of: N
+- name: ferroheme_c-n23
+  occurrence_of: N
+- name: ferroheme_c-n24
+  occurrence_of: N
+has_bonds:
+- bond_order: 1
+  object: ferroheme_c-n21
+  subject: ferroheme_c-fe1
+- bond_order: 1
+  object: ferroheme_c-n22
+  subject: ferroheme_c-fe1
+- bond_order: 1
+  object: ferroheme_c-n23
+  subject: ferroheme_c-fe1
+- bond_order: 1
+  object: ferroheme_c-n24
+  subject: ferroheme_c-fe1
+has_major_microspecies_at_pH7_3:
+- CHEBI:61717
+id: CHEBI:60562
+inchi_key_string: XSWPXBWSKQRBRZ-IDTMDVKXSA-L
+inchi_string: InChI=1S/C34H38N4O4S2.Fe/c1-15-21(7-9-31(39)40)27-14-28-22(8-10-32(41)42)16(2)24(36-28)12-29-34(20(6)44)18(4)26(38-29)13-30-33(19(5)43)17(3)25(37-30)11-23(15)35-27;/h11-14,19-20H,7-10H2,1-6H3,(H6,35,36,37,38,39,40,41,42,43,44);/q;+2/p-2/b23-11-,24-12-,25-11-,26-13-,27-14-,28-14-,29-12-,30-13-;
+is_organic: true
+molecular_formula: C34H36FeN4O4S2
+molecular_mass: 684.665
+name: ferroheme c
+smiles_string: CC1=C(CCC(=O)O)C2=[N+]3C1=Cc1c(C)c(C(C)S)c4[n]1[Fe-2]31[n]3c(c(C)c(CCC(=O)O)c3=C2)=CC2=[N+]1C(=C4)C(C)=C2C(C)S
+type: chemrof:NetUnchargedMolecule
+
+```
 ## Molecule-dioxygen
 ### Input
 ```yaml
@@ -849,6 +1165,51 @@ right_participants:
 - participant: INCHIKEY:XPPKVPWEQAFLFU-UHFFFAOYSA-K
   stoichiometry: 1.0
 type: chemrof:Reaction
+
+```
+## NetUnchargedMolecule-ferroheme_o
+### Input
+```yaml
+IUPAC_name: '[3,3''-{7-ethenyl-12-[(1S,4E,8E)-1-hydroxy-5,9,13-trimethyltetradeca-4,8,12-trien-1-yl]-3,8,13,17-tetramethylporphyrin-2,18-diyl-kappa(4)N(21),N(22),N(23),N(24)}dipropanoato(2-)]iron'
+classified_by:
+- CHEBI:24480
+- CHEBI:38573
+elemental_charge: 0
+has_atom_occurrences:
+- coordination_number: 4
+  name: ferroheme_o-fe1
+  occurrence_of: Fe
+  oxidation_number: 2
+- name: ferroheme_o-n21
+  occurrence_of: N
+- name: ferroheme_o-n22
+  occurrence_of: N
+- name: ferroheme_o-n23
+  occurrence_of: N
+- name: ferroheme_o-n24
+  occurrence_of: N
+has_bonds:
+- bond_order: 1
+  object: ferroheme_o-n21
+  subject: ferroheme_o-fe1
+- bond_order: 1
+  object: ferroheme_o-n22
+  subject: ferroheme_o-fe1
+- bond_order: 1
+  object: ferroheme_o-n23
+  subject: ferroheme_o-fe1
+- bond_order: 1
+  object: ferroheme_o-n24
+  subject: ferroheme_o-fe1
+id: CHEBI:36301
+inchi_key_string: FISPASSVCDRERW-ARQJTVBPSA-L
+inchi_string: InChI=1S/C49H60N4O5.Fe/c1-10-35-31(6)40-26-45-49(46(54)19-13-18-30(5)17-12-16-29(4)15-11-14-28(2)3)34(9)41(53-45)24-38-32(7)36(20-22-47(55)56)43(51-38)27-44-37(21-23-48(57)58)33(8)39(52-44)25-42(35)50-40;/h10,14,16,18,24-27,46,54H,1,11-13,15,17,19-23H2,2-9H3,(H4,50,51,52,53,55,56,57,58);/q;+2/p-2/b29-16+,30-18+,38-24-,39-25-,40-26-,41-24-,42-25-,43-27-,44-27-,45-26-;/t46-;/m0./s1
+is_organic: true
+molecular_formula: C49H58FeN4O5
+molecular_mass: 838.871
+name: ferroheme o
+smiles_string: C=CC1=C(C)C2=Cc3c([C@@H](O)CC/C=C(\C)CC/C=C(\C)CCC=C(C)C)c(C)c4[n]3[Fe]35[N]2=C1C=c1c(C)c(CCC(=O)O)c([n]13)=CC1=[N]5C(=C4)C(C)=C1CCC(=O)O
+type: chemrof:NetUnchargedMolecule
 
 ```
 ## MonoatomicIon-copper2
@@ -997,6 +1358,26 @@ id: CHEBI:30222
 name: neutron
 subatomic_particle_type: neutron
 type: chemrof:SubatomicParticle
+
+```
+## GroupingBySmarts-heme_b
+### Input
+```yaml
+description: A heme in which iron is chelated by protoporphyrin IX (3,8,13,17-tetramethyl-7,12-divinylporphyrin-2,18-dipropanoate);
+  the most abundant heme and the oxidation-state-neutral parent of ferroheme b and
+  ferriheme b. The SMARTS pins every heavy atom of the iron-porphyrin skeleton and
+  its substituents by element and heavy-atom degree, so no extra or missing substituents
+  are allowed. Ring, Fe-N and C-O bonds are '~', so Kekule or aromatic, dative or
+  charge-separated, and acid or carboxylate drawings all match. Acyclic C-C bonds
+  keep their order. Iron is left unconstrained, so axial ligands are allowed and the
+  grouping spans both oxidation states. Vinyl (not ethyl) at positions 7 and 12 distinguishes
+  it from mesoheme.
+genus: CHEBI:30413
+id: CHEBI:26355
+name: heme b
+smarts_string: '[#6D1]-[#6D3]1~[#6D3]2~[#6D2]~[#6D3]3~[#6D3](-[#6D1])~[#6D3](-[#6D2]=[#6D1])~[#6D3]4~[#6D2]~[#6D3]5~[#6D3](-[#6D1])~[#6D3](-[#6D2]=[#6D1])~[#6D3]6~[#6D2]~[#6D3]7~[#6D3](-[#6D1])~[#6D3](-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#6D3]8~[#6D2]~[#6D3](~[#6D3]~1-[#6D2]-[#6D2]-[#6D3](~[#8D1])~[#8D1])~[#7D3]~2~[Fe](~[#7D3]~5~6)(~[#7D3]~3~4)~[#7D3]~7~8'
+subtype_of:
+- CHEBI:30413
 
 ```
 ## PolyatomicIon-ammonium
