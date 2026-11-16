@@ -90,3 +90,5 @@ The default branch is `main`. Always target PRs to `main`.
 ## Handling GitHub issues and requests
 - Use `gh` to read and write issues/PRs
 - Sign all commits and PRs as `@dragon-ai-agent`
+- Requests to change the chemrof schema use the "Schema change request" issue form. Errors or missing terms in external resources (ChEBI, Rhea, ...) use the "Upstream change request" form.
+- Write upstream changes that KGCL can express as a `.kgcl` file under `src/data/change_requests/<resource>/` (see its README), and run `tests/test_change_requests.py` after editing one

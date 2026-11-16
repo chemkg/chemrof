@@ -1,0 +1,82 @@
+name: Upstream change request
+description: Report an error or request a new term in an external resource (ChEBI, Rhea, …), for forwarding to its maintainers.
+title: "[upstream] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when chemrof work turns up something an external resource should change, such as a missing term, a wrong classification, or wrong structure data.
+        The issue records the evidence; it is then forwarded to the resource's own tracker. See [#101](https://github.com/chemkg/chemrof/issues/101) for an example.
+
+        If the change can be written in [KGCL](https://github.com/INCATools/kgcl), also add the commands to a `.kgcl` file under `src/data/change_requests/<resource>/`.
+        CI checks that every command parses, and `runoak apply` can test it against a local copy of the ontology.
+  - type: dropdown
+    id: resource
+    attributes:
+      label: Resource
+      options:
+        - ChEBI
+        - Rhea
+        - Other (name it in the summary)
+    validations:
+      required: true
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Type of change
+      options:
+        - New term
+        - Missing or wrong classification
+        - Wrong structure or chemical data
+        - Wrong definition, name or synonym
+        - Mapping or data-table error
+        - Export or API defect
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: affected_ids
+    attributes:
+      label: Affected identifiers
+      description: Comma-separated CURIEs.
+      placeholder: "e.g. CHEBI:28599, CHEBI:38573"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is wrong or missing, in two or three sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: What you checked, with enough detail to reproduce it. Give the resource release or date, and any tool versions (for example RDKit).
+    validations:
+      required: true
+  - type: textarea
+    id: kgcl
+    attributes:
+      label: Proposed change (KGCL)
+      description: |
+        One KGCL command per line, for example `create edge CHEBI:28599 rdfs:subClassOf CHEBI:38573`.
+        For a new term, use a placeholder ID such as `CHEBI:NEW_heme_c`.
+        Leave this blank if KGCL can't express the change (for example removing an annotation value, a data-table row, or an export defect).
+      render: text
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: How the problem affects chemrof or other users of the resource.
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround in chemrof
+      description: What chemrof does in the meantime, if anything.
+  - type: input
+    id: upstream_link
+    attributes:
+      label: Upstream ticket
+      description: Link to the ticket in the resource's own tracker, once forwarded.

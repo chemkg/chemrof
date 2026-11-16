@@ -1,0 +1,83 @@
+# Changes to request from ChEBI, found while modelling hemes in chemrof.
+# Context: https://github.com/chemkg/chemrof/pull/106
+#
+# Format: one KGCL command per line; lines starting with '#' are comments.
+# New terms use placeholder IDs of the form CHEBI:NEW_<slug>.
+# ChEBI's is_a is rdfs:subClassOf. Structure annotations use the chemrof:
+# predicates of ChEBI's ontology release (chemrof:smiles_string, ...).
+#
+# Evidence gathered 2026-11-15 from the ChEBI REST API, OLS and chebi.obo,
+# with RDKit 2025.03.3.
+
+# ---------------------------------------------------------------------------
+# 1. Hemes with Fe(II) or Fe(III) that are not under ferroheme or ferriheme
+# ---------------------------------------------------------------------------
+# ChEBI defines ferroheme (CHEBI:38573) as "any iron(II)-porphyrin
+# coordination complex" and ferriheme (CHEBI:38574) as "any iron(III)-
+# porphyrin coordination complex". Every heme is a metalloporphyrin in ChEBI,
+# so any heme with a single Fe(II) or Fe(III) meets one of the definitions.
+# Of the 36 is_a descendants of heme (CHEBI:30413), the ones below meet a
+# definition but are not classified under it. For each, two independent
+# methods agree on the Fe oxidation state: RDKit CalcOxidationNumbers on the
+# ChEBI SMILES, and the charge of the Fe component of ChEBI's standard InChI.
+#
+# Not included:
+# - alpha-oxyprotohemin IX (CHEBI:22465). RDKit gives Fe(III), but the Fe
+#   component of its standard InChI has no charge, so the methods disagree.
+# - heme b (CHEBI:26355). It is the parent of ferroheme b and ferriheme b, so
+#   it should be in neither (see section 4).
+
+# Fe(II): siroheme, siroheme(8-), 12,18-didecarboxysirohaem
+create edge CHEBI:28599 rdfs:subClassOf CHEBI:38573
+create edge CHEBI:60052 rdfs:subClassOf CHEBI:38573
+create edge CHEBI:132253 rdfs:subClassOf CHEBI:38573
+
+# Fe(III): hemin, hematin, ferriheme b(1-), ferriheme a(1-)
+create edge CHEBI:50385 rdfs:subClassOf CHEBI:38574
+create edge CHEBI:36161 rdfs:subClassOf CHEBI:38574
+create edge CHEBI:55376 rdfs:subClassOf CHEBI:38574
+create edge CHEBI:60532 rdfs:subClassOf CHEBI:38574
+
+# ---------------------------------------------------------------------------
+# 2. New term: heme c
+# ---------------------------------------------------------------------------
+# Heme a, heme b and heme o each have a parent that covers both oxidation
+# states (CHEBI:24479, CHEBI:26355, CHEBI:24480). Heme c has none, so
+# ferroheme c (CHEBI:60562) sits only under ferroheme.
+create node CHEBI:NEW_heme_c 'heme c'
+add definition 'A heme in which the porphyrin carries 1-sulfanylethyl groups at positions 8 and 13. It is the parent of ferroheme c, independent of the oxidation state of the iron.' to CHEBI:NEW_heme_c
+create edge CHEBI:NEW_heme_c rdfs:subClassOf CHEBI:30413
+create edge CHEBI:60562 rdfs:subClassOf CHEBI:NEW_heme_c
+
+# ---------------------------------------------------------------------------
+# 3. ferriheme a3 (CHEBI:83281) has the wrong side chain
+# ---------------------------------------------------------------------------
+# CHEBI:83281 is classified under heme a (CHEBI:24479). Its structure,
+# formula and IUPAC name all have a saturated 1-hydroxy-5,9,13-
+# trimethyltetradecyl chain, but heme a has the (4E,8E)-trienyl
+# (hydroxyethylfarnesyl) chain. Heme a3 is chemically identical to heme a;
+# "a3" names its site in cytochrome c oxidase. So the formula has 6 H too
+# many (C49H62 instead of C49H56).
+# Proposed: give CHEBI:83281 the structure of ferriheme a (CHEBI:36183).
+# The new SMILES is taken from the ChEBI REST API (see section 4 for why not
+# from the ontology release). InChI, InChIKey, masses and the IUPAC name
+# follow from the structure. Rhea uses CHEBI:83281, so fixing it seems
+# better than merging it into CHEBI:36183.
+change annotation of CHEBI:83281 with chemrof:generalized_empirical_formula from 'C49H62FeN4O6' to 'C49H56FeN4O6'
+change annotation of CHEBI:83281 with chemrof:smiles_string from '[H]C(=O)C1=C(CCC(=O)O)C2=[N]3C1=Cc1c(C)c([C@@H](O)CCCC(C)CCCC(C)CCCC(C)C)c4[n]1[Fe+]31[N]3=C(C=c5c(C)c(CCC(=O)O)c([n]51)=C2)C(C=C)=C(C)C3=C4' to '[H]C(=O)C1=C(CCC(=O)O)C2=[N]3C1=Cc1c(C)c([C@@H](O)CC/C=C(\C)CC/C=C(\C)CCC=C(C)C)c4[n]1[Fe+]31[N]3=C(C=c5c(C)c(CCC(=O)O)c([n]51)=C2)C(C=C)=C(C)C3=C4'
+
+# ---------------------------------------------------------------------------
+# 4. Not expressible in KGCL (report in the issue text)
+# ---------------------------------------------------------------------------
+# - heme b (CHEBI:26355) is a grouping class (parent of ferroheme b and
+#   ferriheme b) but carries a full Fe(II) structure. Its InChIKey,
+#   KABFMIBPWCXCRK-RGGAHWMASA-L, is identical to that of ferroheme b
+#   (CHEBI:17627). Request: remove the structure from CHEBI:26355. KGCL has
+#   no command for deleting an annotation value.
+# - ChEBI's ontology release drops backslashes from SMILES. For ferriheme a
+#   (CHEBI:36183), chemrof:smiles_string in chebi.obo (and as served by OLS)
+#   reads CC/C=C(C)CC/C=C(C)..., while the REST API gives
+#   CC/C=C(\C)CC/C=C(\C)..., so the release loses the E/Z configuration of
+#   both double bonds. This is a defect in the release process, not in one
+#   term, so it needs its own report (compare
+#   https://github.com/chemkg/chemrof/issues/101).
