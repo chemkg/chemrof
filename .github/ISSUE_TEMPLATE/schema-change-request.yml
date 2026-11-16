@@ -1,0 +1,71 @@
+name: Schema change request
+description: Request a new class, slot, enum value or grouping pattern in the chemrof schema, or a change to an existing one.
+title: "[schema] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for changes to the chemrof LinkML schema (`src/chemrof/schema/chemrof.yaml`).
+        For an error or missing term in an external resource such as ChEBI or Rhea, use the **Upstream change request** form instead.
+
+        Before filing, check the generated docs (`make gendoc`). Because of inheritance, the element you need may already exist under a parent class.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of change
+      options:
+        - New class
+        - New slot
+        - New enum or enum value
+        - New grouping pattern
+        - Change to an existing element
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Element name
+      description: The proposed name, following the schema's conventions (CamelCase classes, snake_case slots). For a change, the existing name.
+      placeholder: "e.g. coordinate (new BondTypeEnum value)"
+    validations:
+      required: true
+  - type: input
+    id: placement
+    attributes:
+      label: Placement
+      description: The parent class (is_a), or the domain and range for a slot, or the enum for an enum value.
+      placeholder: "e.g. is_a: MoleculeGroupingClass"
+  - type: textarea
+    id: definition
+    attributes:
+      label: Definition
+      description: A one- or two-sentence definition, in the style of the schema's existing descriptions.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: What can't be represented today? Link the example, issue or pull request where you hit the gap.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example instance
+      description: A YAML instance that uses the new element, as it would appear in `src/data/examples/valid/ClassName-instanceName.yaml`.
+      render: yaml
+  - type: textarea
+    id: mappings
+    attributes:
+      label: Mappings
+      description: Equivalent or related terms in other resources (ChEBI, CHEMINF, SIO, Gainesville Core, RXNO, …), with the mapping predicate.
+      placeholder: "exact_mappings: CHEMINF:000063"
+  - type: textarea
+    id: owl
+    attributes:
+      label: OWL rendering
+      description: Optional. For a grouping pattern, the intended `owl.template` axiom.
+      render: text
