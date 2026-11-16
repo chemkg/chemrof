@@ -15,6 +15,7 @@ from pathlib import Path
 import pytest
 import yaml
 from rdkit import Chem
+from rdkit.Chem import rdMolDescriptors
 
 EXAMPLES = Path(__file__).parent.parent / "src" / "data" / "examples" / "valid"
 
@@ -92,6 +93,21 @@ def test_iron_oxidation_state_agrees_with_grouping(filename):
     expected = {"CHEBI:38573": 2, "CHEBI:38574": 3}
     asserted = [expected[c] for c in m["classified_by"] if c in expected]
     assert asserted == [fe[0]["oxidation_number"]]
+
+
+@pytest.mark.parametrize("filename", HEME_MOLECULES)
+def test_iron_oxidation_number_matches_structure(filename):
+    """The asserted Fe oxidation number is the one RDKit computes from the SMILES.
+
+    The formal charge ChEBI writes on Fe varies with how the Fe-N bonds are
+    drawn ([Fe-2], [Fe], [Fe+]); the oxidation number does not.
+    """
+    m = _load(filename)
+    mol = _mol(m["smiles_string"])
+    rdMolDescriptors.CalcOxidationNumbers(mol)
+    (fe_atom,) = [a for a in mol.GetAtoms() if a.GetSymbol() == "Fe"]
+    (fe_occ,) = [a for a in m["has_atom_occurrences"] if a["occurrence_of"] == "Fe"]
+    assert fe_atom.GetIntProp("OxidationNumber") == fe_occ["oxidation_number"]
 
 
 @pytest.mark.parametrize(
